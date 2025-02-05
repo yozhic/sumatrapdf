@@ -15,7 +15,7 @@ jobs:
 
       - name: Build
         run: |
-          .\doit.bat -build-release
+          .\doit.bat -build-pre-rel
           7z a -tzip "SumatraPDFout.zip" "./out/*"
         
       - name: Publish
