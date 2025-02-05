@@ -1,8 +1,6 @@
 name: myDaily
 on:
-  repository_dispatch:
-    types: [build-daily]
-  workflow_dispatch:
+  workflow_dispatch
 jobs:
   build:
     name: Build
