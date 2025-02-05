@@ -22,3 +22,11 @@ jobs:
           BB_SECRET: ${{ secrets.BB_SECRET }}
           BB_ACCESS: ${{ secrets.BB_ACCESS }}
         run: .\doit.bat -ci-daily
+
+      - name: Publish
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "SumatraPDF.zip"
+          tag_name: "v1.0.1"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
