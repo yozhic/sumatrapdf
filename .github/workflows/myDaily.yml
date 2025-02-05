@@ -1,0 +1,24 @@
+name: myDaily
+on:
+  repository_dispatch:
+    types: [build-daily]
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    #runs-on: SumatraBuilder
+    runs-on: windows-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+        with:
+          # needed to calc build number via git log --oneline
+          fetch-depth: 0
+
+      - name: Build
+        env:
+          R2_SECRET: ${{ secrets.R2_SECRET }}
+          R2_ACCESS: ${{ secrets.R2_ACCESS }}
+          BB_SECRET: ${{ secrets.BB_SECRET }}
+          BB_ACCESS: ${{ secrets.BB_ACCESS }}
+        run: .\doit.bat -ci-daily
