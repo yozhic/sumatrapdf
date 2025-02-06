@@ -1,0 +1,41 @@
+name: Build x86
+on:
+  workflow_dispatch
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+        with:
+          # needed to calc build number via git log --oneline
+          fetch-depth: 0
+
+      - name: Build
+        run: .\doit.bat -ci
+
+      - name: Copy Files to Root
+        shell: bash
+        run: |
+          cp "./out/final-prerel/SumatraPDF-prerel-32.exe" "SumatraPDF-prerel-32.exe"
+          cp "./out/final-prerel/SumatraPDF-prerel-32.zip" "SumatraPDF-prerel-32.zip"
+          cp "./out/final-prerel/SumatraPDF-prerel-32-install.exe" "SumatraPDF-prerel-32-install.exe"
+
+      - name: Get Last Commit Date
+        id: getdate
+        shell: bash
+        run: |
+          get_date=$(git log --pretty=format:"%cs" -1)
+          echo "last_commit_date=$get_date" >> "$GITHUB_OUTPUT"
+        
+      - name: Publish
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            SumatraPDF-prerel-32.exe
+            SumatraPDF-prerel-32.zip
+            SumatraPDF-prerel-32-install.exe
+          tag_name: "pre.x86.${{ steps.getdate.outputs.last_commit_date }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
