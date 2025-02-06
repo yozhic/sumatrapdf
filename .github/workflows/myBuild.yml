@@ -12,22 +12,20 @@ jobs:
           # needed to calc build number via git log --oneline
           fetch-depth: 0
 
-      - name: Get date
-        id: getdate
-        run: git log --pretty=format:"%cs" -1
-
-      - run: echo ${{steps.getdate.outputs}}
-
       - name: Build
-        run: .\doit.bat -build-pre-rel
+        run: |
+          .\doit.bat -build-pre-rel
+          xcopy "./out/final-prerel/SumatraPDF-prerel-64.exe" "SumatraPDF-prerel-64.exe"
+          xcopy "./out/final-prerel/SumatraPDF-prerel-64.zip" "SumatraPDF-prerel-64.zip"
+          xcopy "./out/final-prerel/SumatraPDF-prerel-64-install.exe" "SumatraPDF-prerel-64-install.exe"
         
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            "out/final-prerel/SumatraPDF-prerel-64.exe"
-            "out/final-prerel/SumatraPDF-prerel-64.zip"
-            "out/final-prerel/SumatraPDF-prerel-64-install.exe"
+            "SumatraPDF-prerel-64.exe"
+            "SumatraPDF-prerel-64.zip"
+            "SumatraPDF-prerel-64-install.exe"
           tag_name: "prerel-64"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
