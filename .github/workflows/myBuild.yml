@@ -1,4 +1,4 @@
-name: Build x64
+name: Alternate Build
 on:
   workflow_dispatch
 jobs:
@@ -12,13 +12,31 @@ jobs:
           # needed to calc build number via git log --oneline
           fetch-depth: 0
 
-      - name: Build
-        run: |
-          .\doit.bat -build-pre-rel
-          7z a -tzip "SumatraPDF-prerel-64.zip" "./out/final-prerel/SumatraPDF-prerel-64.exe"
-          7z a -tzip "SumatraPDF-prerel-64-install.zip" "./out/final-prerel/SumatraPDF-prerel-64-install.exe"
+      - name: Build x86
+        run: .\doit.bat -ci
 
-      - name: Get date
+      - name: Copy files to root
+        shell: bash
+        run: |
+          cp "./out/final-prerel/SumatraPDF-prerel-32.exe" "SumatraPDF-prerel-32.exe"
+          cp "./out/final-prerel/SumatraPDF-prerel-32.zip" "SumatraPDF-prerel-32.zip"
+          cp "./out/final-prerel/SumatraPDF-prerel-32-install.exe" "SumatraPDF-prerel-32-install.exe"
+
+      - name: Clean out
+        shell: bash
+        run: rm -r "./out"
+
+      - name: Build x64
+        run: .\doit.bat -build-pre-rel
+
+      - name: Copy files to root
+        shell: bash
+        run: |
+          cp "./out/final-prerel/SumatraPDF-prerel-64.exe" "SumatraPDF-prerel-64.exe"
+          cp "./out/final-prerel/SumatraPDF-prerel-64.zip" "SumatraPDF-prerel-64.zip"
+          cp "./out/final-prerel/SumatraPDF-prerel-64-install.exe" "SumatraPDF-prerel-64-install.exe"
+
+      - name: Get last commit date
         id: getdate
         shell: bash
         run: |
@@ -29,8 +47,12 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
+            SumatraPDF-prerel-32.exe
+            SumatraPDF-prerel-32.zip
+            SumatraPDF-prerel-32-install.exe
+            SumatraPDF-prerel-64.exe
             SumatraPDF-prerel-64.zip
-            SumatraPDF-prerel-64-install.zip
-          tag_name: "pre.x64.${{ steps.getdate.outputs.last_commit_date }}"
+            SumatraPDF-prerel-64-install.exe
+          tag_name: "pre.${{ steps.getdate.outputs.last_commit_date }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
