@@ -31,6 +31,6 @@ jobs:
           files: |
             SumatraPDF-prerel-64.zip
             SumatraPDF-prerel-64-install.zip
-          tag_name: "pre-release.x64.${{ steps.getdate.outputs.last_commit_date }}"
+          tag_name: "pre.x64.${{ steps.getdate.outputs.last_commit_date }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
