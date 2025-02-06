@@ -12,27 +12,25 @@ jobs:
           # needed to calc build number via git log --oneline
           fetch-depth: 0
 
+      - name: Build
+        run: |
+          .\doit.bat -build-pre-rel
+          7z a -tzip "SumatraPDF-prerel-64.zip" "./out/final-prerel/SumatraPDF-prerel-64.exe"
+          7z a -tzip "SumatraPDF-prerel-64-install.zip" "./out/final-prerel/SumatraPDF-prerel-64-install.exe"
+
       - name: Get date
         id: getdate
         shell: bash
         run: |
           get_date=$(git log --pretty=format:"%cs" -1)
-          echo "last_commit_date=$my_date" >> "$GITHUB_OUTPUT"
-
-      - name: Build
-        run: |
-          .\doit.bat -build-pre-rel
-          copy ".\out\final-prerel\SumatraPDF-prerel-64.exe" "SumatraPDF-prerel-64.exe"
-          copy ".\out\final-prerel\SumatraPDF-prerel-64.zip" "SumatraPDF-prerel-64.zip"
-          copy ".\out\final-prerel\SumatraPDF-prerel-64-install.exe" "SumatraPDF-prerel-64-install.exe"
+          echo "last_commit_date=$get_date" >> "$GITHUB_OUTPUT"
         
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            "SumatraPDF-prerel-64.exe"
-            "SumatraPDF-prerel-64.zip"
-            "SumatraPDF-prerel-64-install.exe"
+            SumatraPDF-prerel-64.zip
+            SumatraPDF-prerel-64-install.zip
           tag_name: "pre-release.x64.${{ steps.getdate.outputs.last_commit_date }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
