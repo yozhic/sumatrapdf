@@ -1,10 +1,9 @@
-name: myBuild
+name: Build x64
 on:
   workflow_dispatch
 jobs:
   build:
     name: Build
-    #runs-on: SumatraBuilder
     runs-on: windows-latest
     steps:
       - name: Check out source code
@@ -13,15 +12,22 @@ jobs:
           # needed to calc build number via git log --oneline
           fetch-depth: 0
 
+      - name: Get date
+        id: getdate
+        run: git log --pretty=format:"%cs" -1
+
+      - run: echo ${{steps.getdate.outputs}}
+
       - name: Build
-        run: |
-          .\doit.bat -build-pre-rel
-          7z a -tzip "SumatraPDFout.zip" "./out/*"
+        run: .\doit.bat -build-pre-rel
         
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
-          files: "SumatraPDFout.zip"
-          tag_name: "v3.6.0"
+          files: |
+            "out/final-prerel/SumatraPDF-prerel-64.exe"
+            "out/final-prerel/SumatraPDF-prerel-64.zip"
+            "out/final-prerel/SumatraPDF-prerel-64-install.exe"
+          tag_name: "prerel-64"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
