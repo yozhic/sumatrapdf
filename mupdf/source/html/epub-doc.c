@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -592,6 +592,12 @@ epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	epub_document *doc = (epub_document*)doc_;
 	epub_chapter *ch;
 	int i;
+
+	if (chapter < 0)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid chapter number: %d", chapter);
+	if (number < 0)
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid page number: %d", number);
+
 	for (i = 0, ch = doc->spine; ch; ++i, ch = ch->next)
 	{
 		if (i == chapter)
@@ -1105,7 +1111,7 @@ epub_recognize_content(fz_context *ctx, const fz_document_handler *handler, fz_s
 
 		if (fz_has_archive_entry(ctx, arch, "META-INF/container.xml") ||
 			fz_has_archive_entry(ctx, arch, "META-INF\\container.xml"))
-			ret = 100;
+			ret = 74; /* One less than the 75 that HWPX files are detected as. */
 	}
 	fz_always(ctx)
 		fz_drop_archive(ctx, arch);

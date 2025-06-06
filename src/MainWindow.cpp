@@ -245,6 +245,9 @@ int MainWindow::GetTabIdx(WindowTab* tab) const {
 
 Vec<WindowTab*> MainWindow::Tabs() const {
     Vec<WindowTab*> res;
+    if (!tabsCtrl) { // null seen in crash report
+        return res;
+    }
     int nTabs = tabsCtrl->TabCount();
     for (int i = 0; i < nTabs; i++) {
         WindowTab* tab = GetTabsUserData<WindowTab*>(tabsCtrl, i);
@@ -652,8 +655,8 @@ void UpdateControlsColors(MainWindow* win) {
 
     // logfa("retrieved doc colors in tree control: 0x%x 0x%x\n", treeTxtCol, treeBgCol);
 
-    COLORREF splitterCol = GetSysColor(COLOR_BTNFACE);
-    bool flatTreeWnd = false;
+    COLORREF splitterCol = ThemeControlBackgroundColor();
+    bool flatTreeWnd = true;
 
     {
         auto tocTreeView = win->tocTreeView;

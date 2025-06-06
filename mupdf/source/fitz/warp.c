@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2024 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -435,7 +435,7 @@ warp_core(unsigned char *d, int n, int width, int height, int stride,
 	This performs simple affine warping.
 */
 fz_pixmap *
-fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int width, int height)
+fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, fz_quad points, int width, int height)
 {
 	fz_pixmap *dst;
 
@@ -457,14 +457,14 @@ fz_warp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4], int wi
 		fz_ipoint corner[4];
 
 		/* Find the corner texture positions as fixed point */
-		corner[0].x = (int)(points[0].x * 256 + 128);
-		corner[0].y = (int)(points[0].y * 256 + 128);
-		corner[1].x = (int)(points[1].x * 256 + 128);
-		corner[1].y = (int)(points[1].y * 256 + 128);
-		corner[2].x = (int)(points[2].x * 256 + 128);
-		corner[2].y = (int)(points[2].y * 256 + 128);
-		corner[3].x = (int)(points[3].x * 256 + 128);
-		corner[3].y = (int)(points[3].y * 256 + 128);
+		corner[0].x = (int)(points.ul.x * 256 + 128);
+		corner[0].y = (int)(points.ul.y * 256 + 128);
+		corner[1].x = (int)(points.ur.x * 256 + 128);
+		corner[1].y = (int)(points.ur.y * 256 + 128);
+		corner[2].x = (int)(points.ll.x * 256 + 128);
+		corner[2].y = (int)(points.ll.y * 256 + 128);
+		corner[3].x = (int)(points.lr.x * 256 + 128);
+		corner[3].y = (int)(points.lr.y * 256 + 128);
 
 		warp_core(d, n, width, height, width * n, corner, src);
 	}
@@ -489,12 +489,12 @@ dist(fz_point a, fz_point b)
 /* Again, affine warping, but this time where the destination width/height
  * are chosen automatically. */
 fz_pixmap *
-fz_autowarp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4])
+fz_autowarp_pixmap(fz_context *ctx, fz_pixmap *src, fz_quad points)
 {
-	float w0 = dist(points[1], points[0]);
-	float w1 = dist(points[2], points[3]);
-	float h0 = dist(points[3], points[0]);
-	float h1 = dist(points[2], points[1]);
+	float w0 = dist(points.ur, points.ul);
+	float w1 = dist(points.ll, points.lr);
+	float h0 = dist(points.lr, points.ul);
+	float h1 = dist(points.ll, points.ur);
 	int w = (w0+w1+0.5)/2;
 	int h = (h0+h1+0.5)/2;
 
@@ -503,7 +503,7 @@ fz_autowarp_pixmap(fz_context *ctx, fz_pixmap *src, const fz_point points[4])
 
 /*
 	Corner detection: We shall steal the algorithm from the Dropbox
-	Document Scanner, as decribed here:
+	Document Scanner, as described here:
 
 	https://dropbox.tech/machine-learning/fast-and-accurate-document-detection-for-scanning
 
@@ -815,11 +815,12 @@ pregradcol(unsigned char *d, const int16_t *buf, int y, int w, uint32_t *max)
 
 	for (i = w; i > 0; i--)
 	{
-		int y = s0[w] - s2[w];
-		int x = *s0++ + 2 * *s1++ + *s2++;
-		uint32_t ax = x >= 0 ? x : -x;
-		uint32_t ay = y >= 0 ? y : -y;
-		uint32_t mag;
+		uint32_t ax, ay, mag;
+		int x;
+		y = s0[w] - s2[w];
+		x = *s0++ + 2 * *s1++ + *s2++;
+		ax = x >= 0 ? x : -x;
+		ay = y >= 0 ? y : -y;
 		/* x and y are now both in the range -1020..1020 */
 		/* Now we calculate slope and gradient.
 		 *   angle = atan2(y, x);
@@ -926,12 +927,12 @@ gradcol(unsigned char *d, const int16_t *buf, int y, int w, int scale)
 
 	for (i = w; i > 0; i--)
 	{
-		int y = s0[w] - s2[w];
-		int x = *s0++ + 2 * *s1++ + *s2++;
-		uint32_t ax = x >= 0 ? x : -x;
-		uint32_t ay = y >= 0 ? y : -y;
-		int angle;
-		uint32_t mag, scaled;
+		uint32_t ax, ay, mag, scaled;
+		int angle, x;
+		y = s0[w] - s2[w];
+		x = *s0++ + 2 * *s1++ + *s2++;
+		ax = x >= 0 ? x : -x;
+		ay = y >= 0 ? y : -y;
 		/* x and y are now both in the range -1020..1020 */
 		/* Now we calculate slope and gradient.
 		 *   angle = atan2(y, x);
@@ -1103,7 +1104,7 @@ nonmax(fz_context *ctx, fz_pixmap *dst, const fz_pixmap *src, int pass)
 			}
 			if (mag < q || mag < r)
 			{
-				/* Neighouring edges are stronger.
+				/* Neighbouring edges are stronger.
 				 * Lose this one. */
 				*d++ = 0;
 			}
@@ -1121,9 +1122,8 @@ nonmax(fz_context *ctx, fz_pixmap *dst, const fz_pixmap *src, int pass)
 		lastmag = mag;
 		for (x = w-2; x > 0; x--)
 		{
-			int ang = *s1++;
-			int mag = ang>>2;
-			int q, r;
+			ang = *s1++;
+			mag = ang>>2;
 			if (mag <= weak)
 			{
 				/* Not even a weak edge. We'll never keep it. */
@@ -1158,7 +1158,7 @@ nonmax(fz_context *ctx, fz_pixmap *dst, const fz_pixmap *src, int pass)
 				}
 				if (mag < q || mag < r)
 				{
-					/* Neighouring edges are stronger.
+					/* Neighbouring edges are stronger.
 					 * Lose this one. */
 					*d++ = 0;
 				}
@@ -1215,7 +1215,7 @@ nonmax(fz_context *ctx, fz_pixmap *dst, const fz_pixmap *src, int pass)
 			}
 			if (mag < q || mag < r)
 			{
-				/* Neighouring edges are stronger.
+				/* Neighbouring edges are stronger.
 				 * Lose this one. */
 				*d++ = 0;
 			}
@@ -1773,7 +1773,7 @@ score_by_area(const hough_point_t *points, const hough_route_t *route)
 	return (double_area_of_quad*4)/double_area;
 }
 
-/* The first n+1 edges of the route are filled in, as are rhe first n
+/* The first n+1 edges of the route are filled in, as are the first n
  * points.
  * 2*i   = edge number
  * 2*i+1 = point number
@@ -1856,7 +1856,7 @@ find_route(fz_context *ctx, hough_point_t *points, int num_points, hough_route_t
 #define BLOT_ANG 10
 #define BLOT_DIS 10
 static int
-make_hough(fz_context *ctx, const fz_pixmap *src, fz_point *corners)
+make_hough(fz_context *ctx, const fz_pixmap *src, fz_quad *corners)
 {
 	int w = src->w;
 	int h = src->h;
@@ -2072,22 +2072,28 @@ make_hough(fz_context *ctx, const fz_pixmap *src, fz_point *corners)
 	if (route.best_score == -1)
 		return 0;
 
-	corners[0].x = points[route.best_point[0]].x;
-	corners[0].y = points[route.best_point[0]].y;
-	corners[1].x = points[route.best_point[1]].x;
-	corners[1].y = points[route.best_point[1]].y;
-	corners[2].x = points[route.best_point[2]].x;
-	corners[2].y = points[route.best_point[2]].y;
-	corners[3].x = points[route.best_point[3]].x;
-	corners[3].y = points[route.best_point[3]].y;
+	if (corners)
+	{
+		corners->ul.x = points[route.best_point[0]].x;
+		corners->ul.y = points[route.best_point[0]].y;
+		corners->ur.x = points[route.best_point[1]].x;
+		corners->ur.y = points[route.best_point[1]].y;
+		corners->ll.x = points[route.best_point[2]].x;
+		corners->ll.y = points[route.best_point[2]].y;
+		corners->lr.x = points[route.best_point[3]].x;
+		corners->lr.y = points[route.best_point[3]].y;
+	}
 
 	/* Discard any possible matches that aren't at least 1/8 of the pixmap. */
 	{
 		fz_rect r = fz_empty_rect;
-		r = fz_include_point_in_rect(r, corners[0]);
-		r = fz_include_point_in_rect(r, corners[1]);
-		r = fz_include_point_in_rect(r, corners[2]);
-		r = fz_include_point_in_rect(r, corners[3]);
+		if (corners)
+		{
+			r = fz_include_point_in_rect(r, corners->ul);
+			r = fz_include_point_in_rect(r, corners->ur);
+			r = fz_include_point_in_rect(r, corners->ll);
+			r = fz_include_point_in_rect(r, corners->lr);
+		}
 		if ((r.x1 - r.x0) * (r.y1 - r.y0) * 8 < (src->w * src->h))
 			return 0;
 	}
@@ -2097,7 +2103,7 @@ make_hough(fz_context *ctx, const fz_pixmap *src, fz_point *corners)
 
 #define DOC_DETECT_MAXDIM 500
 int
-fz_detect_document(fz_context *ctx, fz_point *points, fz_pixmap *orig_src)
+fz_detect_document(fz_context *ctx, fz_quad *points, fz_pixmap *orig_src)
 {
 	fz_color_params p = {FZ_RI_PERCEPTUAL };
 	fz_pixmap *grey = NULL;
@@ -2146,7 +2152,6 @@ fz_detect_document(fz_context *ctx, fz_point *points, fz_pixmap *orig_src)
 	fz_var(b);
 #endif
 	fz_var(processed);
-	fz_var(found);
 
 	fz_try(ctx)
 	{
@@ -2290,15 +2295,18 @@ fz_detect_document(fz_context *ctx, fz_point *points, fz_pixmap *orig_src)
 		fz_rethrow(ctx);
 	}
 
-	if (found)
+	if (found && points)
 	{
 		float f = (1<<l2factor);
 		float r = f/2;
-		for (i = 0; i < 4; i++)
-		{
-			points[i].x = points[i].x * f + r;
-			points[i].y = points[i].y * f + r;
-		}
+		points->ul.x = points->ul.x *f + r;
+		points->ul.y = points->ul.y *f + r;
+		points->ur.x = points->ur.x *f + r;
+		points->ur.y = points->ur.y *f + r;
+		points->ll.x = points->ll.x *f + r;
+		points->ll.y = points->ll.y *f + r;
+		points->lr.x = points->lr.x *f + r;
+		points->lr.y = points->lr.y *f + r;
 	}
 
 	return found;

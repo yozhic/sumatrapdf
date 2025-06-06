@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -664,6 +664,12 @@ loop:
 		}
 	}
 
+	/* Some Fax streams appear to give up at the end. We could detect for this
+	 * with this:
+	 * if (fax->a >= fax->columns && fax->rows == fax->ridx+1)
+	 * 	goto eol;
+	 */
+
 	/* no eol check after makeup codes nor in the middle of an H code */
 	if (fax->stage == STATE_MAKEUP || fax->stage == STATE_H1 || fax->stage == STATE_H2)
 		goto loop;
@@ -728,49 +734,14 @@ eol:
 			fax->dim = 2;
 	}
 
-#if 0
-	/* if end_of_line & encoded_byte_align, EOLs are *not* optional */
-	if (fax->encoded_byte_align)
-	{
-		if (fax->end_of_line)
-			eat_bits(fax, (12 - fax->bidx) & 7);
-		else
-			eat_bits(fax, (8 - fax->bidx) & 7);
-	}
-#else
-	/* SumatraPDF: from https://bugs.ghostscript.com/show_bug.cgi?id=702896 */
-	/*
-	 *  If we're not expecting an EOL, try and align. If the alignment is invalid
-	 *  (not all zeros), skip it and turn off the alignment flag.
-	 *
-	 *  A note about how this works: when we start reading a line (in `loop` above)
-	 *  there is already logic to skip any number of leading 0 bits followed by an
-	 *  EOL. So, if we're expecting an EOL (i.e. if fax->end_of_line is set), then
-	 *  we don't have to handle anything here; we can just let that logic take care
-	 *  of it. This also allows us to handle the case where the alignment is missing
-	 *  but end_of_line is set; from source code comments in other
-	 *  PDF packages apparently acrobat/other tools will sometimes do this, and
-	 *  we've seen examples in the wild.
-	 */
-	if (fax->encoded_byte_align && ! fax->end_of_line)
-	{
-			int to_eat = (8 - fax->bidx) & 7;
-				/* This explicit check prevents us from right-shifting by
-				 * 32 bits, which is not allowed and puts us in the realm of
-				 * undefined behavior
-				*/
-				if (to_eat != 0) 
-				{
-						if (fax->word >> (32 - to_eat) == 0) 
-						{
-								eat_bits(fax, to_eat);
-						} else {
-								/* The data actually wasn't aligned */
-								fax->encoded_byte_align = 0;
-						}
-				}
-		}
-#endif
+	/* If end_of_line & encoded_byte_align - we don't know what to do here.
+	 * GS doesn't offer us any hints either. Previously, we used to do:
+	 *      eat_bits(fax, (12 - fax->bidx) & 7);
+	 * but we can't understand what we were trying to do, and it fails with
+	 * at least one file. Removing it doesn't harm anything in the cluster,
+	 * and brings us into line with gs. */
+	if (fax->encoded_byte_align && !fax->end_of_line)
+		eat_bits(fax, (8 - fax->bidx) & 7);
 
 	/* no more space in output, don't decode the next row yet */
 	if (p == fax->buffer + max)

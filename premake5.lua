@@ -2,7 +2,7 @@
 To generate Visual Studio files (in vs2019/ or vs2022/ directory), run:
 scripts\premake-regenerate-vs-projects.ps1
 
-I'm using premake5 beta1 from https://premake.github.io/download.html#v5
+I'm using premake5 beta6 from https://premake.github.io/download/
 
 Note about nasm: when providing "-I foo/bar/" flag to nasm.exe, it must be
 "foo/bar/" and not just "foo/bar".
@@ -61,6 +61,13 @@ newoption {
    description = "use clang-cl.exe instead of cl.exe"
 }
 
+-- TODO: test this option
+-- usestandardpreprocessor 'On'
+
+-- TODO: try appmanifest
+-- files { "hello.appxmanifest" }
+-- https://github.com/premake/premake-core/pull/1750/files
+
 include("premake5.files.lua")
 
 -- TODO: could fold 9 libraries used by mupdf into a single
@@ -102,9 +109,7 @@ function mixed_dbg_rel_conf()
   -- * no ltcg
   -- TODO: or arm64 ?
   filter { "configurations:Release*", "platforms:x32 or x64" }
-    flags {
-      "LinkTimeOptimization",
-    }
+    linktimeoptimization "On"
   filter {}
 end
 
@@ -130,9 +135,7 @@ function optimized_conf()
   filter {}
 
   filter { "configurations:Release*", "platforms:x32 or x64 or arm64" }
-    flags {
-      "LinkTimeOptimization",
-    }
+    linktimeoptimization "On"
   filter {}
 end
 
@@ -156,7 +159,7 @@ end
 
 function warnings_as_errors()
   filter {"configurations:not ReleaseAnalyze" and "options:not with-clang"}
-    flags { "FatalCompileWarnings" }
+    fatalwarnings { "All" }
   filter {}
 end
 
@@ -188,7 +191,7 @@ workspace "SumatraPDF"
   filter {}
 
   filter "platforms:x64_asan"
-    buildoptions { "/fsanitize=address"}
+    sanitize { "Address" }
     defines { "ASAN_BUILD=1" }
     -- disablewarnings { "4731" }
   filter {}
@@ -284,8 +287,7 @@ workspace "SumatraPDF"
     optimized_conf()
     defines { "UNRAR", "RARDLL", "SILENT" }
     -- os.hpp redefines WINVER, is there a better way?
-    disablewarnings { "4005" }
-    disablewarnings { "4100", "4201", "4211", "4244", "4389", "4456", "4459", "4701", "4702", "4706", "4709", "4731", "4996" }
+    disablewarnings { "4005", "4100", "4201", "4211", "4244", "4310", "4389", "4456", "4459", "4505", "4701", "4702", "4706", "4709", "4731", "4996" } 
     -- unrar uses exception handling in savepos.hpp but I don't want to enable it
     -- as it seems to infect the Sumatra binary as well (i.e. I see bad alloc exception
     -- being thrown)
@@ -373,7 +375,7 @@ workspace "SumatraPDF"
     filter {'platforms:x64 or x64_asan'}
       defines { "ARCH_X86_32=0", "ARCH_X86_64=1" }
     filter{}
-    disablewarnings { "4057", "4090", "4100", "4152", "4201", "4244", "4245", "4456", "4457", "4701", "4703", "4706", "4819", "4996" }
+    disablewarnings { "4057", "4090", "4100", "4152", "4201", "4244", "4245", "4456", "4457", "4701", "4703", "4706", "4819", "4996", "5287" }
     includedirs { "ext/dav1d/include/compat/msvc", "ext/dav1d", "ext/dav1d/include" }
      -- nasm.exe -I .\ext\libjpeg-turbo\simd\
     -- -I .\ext\libjpeg-turbo\win\ -f win32
@@ -465,7 +467,7 @@ workspace "SumatraPDF"
       "FT_CONFIG_MODULES_H=\"slimftmodules.h\"",
       "FT_CONFIG_OPTIONS_H=\"slimftoptions.h\"",
     }
-    disablewarnings { "4018", "4100", "4244", "4267", "4312", "4701", "4706", "4996" }
+    disablewarnings { "4018", "4100", "4101", "4244", "4267", "4312", "4701", "4706", "4996" }
     includedirs { "mupdf/scripts/freetype", "ext/freetype/include" }
     freetype_files()
 
@@ -579,14 +581,15 @@ workspace "SumatraPDF"
     -- this defines which fonts are to be excluded from being included directly
     -- we exclude the very big cjk fonts
     defines { "TOFU_NOTO", "TOFU_CJK_LANG", "TOFU_NOTO_SUMATRA" }
+    defines { "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=0", "FZ_ENABLE_BARCODE=0" }
 
     filter { "platforms:arm64" }
         defines { "ARCH_HAS_NEON=1" }
     filter {}
 
     disablewarnings {
-      "4005", "4018", "4057", "4100", "4115", "4130", "4132", "4204", "4206", "4210", "4245", "4267",
-      "4295", "4305", "4389", "4456", "4457", "4703", "4706", "4819"
+      "4005", "4018", "4057", "4100", "4115", "4130", "4132", "4200", "4204", "4206", "4210", 
+      "4245", "4267", "4295", "4305", "4389", "4456", "4457", "4703", "4706", "4819", "5286"
     }
     -- force including mupdf/scripts/openjpeg/opj_config_private.h
     -- with our build over-rides
@@ -622,7 +625,7 @@ workspace "SumatraPDF"
     language "C"
     optimized_conf()
     disablewarnings { "4206", "4702" }
-    defines { "FZ_ENABLE_SVG" }
+    defines { "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=0", "FZ_ENABLE_BARCODE=0" }
 
     filter { "platforms:arm64" }
         defines { "ARCH_HAS_NEON=1" }
@@ -928,11 +931,12 @@ workspace "MakeLZSA"
   symbols "Full"
   staticruntime  "On"
   -- https://github.com/premake/premake-core/wiki/flags
+
+  fatalwarnings { "All" }
   flags {
     "MultiProcessorCompile",
     "Maps", -- generate map file
     --"Unicode",
-    "FatalCompileWarnings"
   }
 
   defines {

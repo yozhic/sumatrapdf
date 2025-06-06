@@ -26,7 +26,6 @@ node_modules
 *.xcworkspace
 *.xcuserdatad
 user.make
-guide
 
 # Temporary and build files:
 *.class
@@ -35,6 +34,12 @@ guide
 *.so
 *.dll
 DerivedData
+.venv
+
+# PyMuPDF generated build files
+__pycache__
+platform/c++
+platform/python
 
 platform/java/local.properties
 platform/win32/*.user

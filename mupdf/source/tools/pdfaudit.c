@@ -1,4 +1,4 @@
-// Copyright (C) 2023-2024 Artifex Software, Inc.
+// Copyright (C) 2023-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -1691,7 +1691,7 @@ typedef struct
 } walk_stack_t;
 
 static void
-walk(fz_context *ctx, walk_stack_t *ws, obj_info_t *oi, pdf_obj *obj, audit_type_t type)
+walk(fz_context *ctx, walk_stack_t *ws, int n, obj_info_t *oi, pdf_obj *obj, audit_type_t type)
 {
 	int num = 0;
 	do
@@ -1699,6 +1699,8 @@ walk(fz_context *ctx, walk_stack_t *ws, obj_info_t *oi, pdf_obj *obj, audit_type
 		if (pdf_is_indirect(ctx, obj))
 		{
 			num = pdf_to_num(ctx, obj);
+			if (num < 0 || num >= n)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "object outside of xref range");
 			if (oi[num].type != AUDIT_UNKNOWN)
 				goto visited;
 			if (pdf_mark_obj(ctx, obj))
@@ -1850,12 +1852,12 @@ visited:
 }
 
 static void
-classify_by_walking(fz_context *ctx, pdf_document *doc, obj_info_t *oi)
+classify_by_walking(fz_context *ctx, pdf_document *doc, int n, obj_info_t *oi)
 {
 	walk_stack_t ws = { 0 };
 
 	fz_try(ctx)
-		walk(ctx, &ws, oi, pdf_trailer(ctx, doc), AUDIT_TRAILER);
+		walk(ctx, &ws, n, oi, pdf_trailer(ctx, doc), AUDIT_TRAILER);
 	fz_always(ctx)
 		fz_free(ctx, ws.stack);
 	fz_catch(ctx)
@@ -1947,7 +1949,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 		}
 
 		/* Walk the doc structure. */
-		classify_by_walking(ctx, pdf, oi);
+		classify_by_walking(ctx, pdf, n, oi);
 
 		/* Filter the content streams to establish operator usage */
 		filter_page_streams(ctx, pdf, &ou);
@@ -2002,7 +2004,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 				output_size(ctx, out, pdf->file_size, audit_type[i], counts[i].obj, counts[i].objstm);
 			}
 			fz_write_printf(ctx, out, "</table>\n");
-			fz_write_printf(ctx, out, "<p>NOTE: The percentanges are as percentages of the complete file. This again means that"
+			fz_write_printf(ctx, out, "<p>NOTE: The percentages are as percentages of the complete file. This again means that"
 						" the percentages in the &quot;in objstms&quot; column are misleading as the objstms are"
 						" typically compressed!</p>\n");
 		}
@@ -2039,7 +2041,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 				fz_write_printf(ctx, out, "<tr align=right><td align=left>%s<td>%,zd<td>%.2f%%</tr>\n", op_names[i], ou.len[i], 100.f * ou.len[i] / total);
 			}
 			fz_write_printf(ctx, out, "</table>\n");
-			fz_write_printf(ctx, out, "<p>NOTE: The percentanges are of the operator stream content found.</p>\n");
+			fz_write_printf(ctx, out, "<p>NOTE: The percentages are of the operator stream content found.</p>\n");
 		}
 
 	}
@@ -2079,7 +2081,7 @@ int pdfaudit_main(int argc, char **argv)
 	{
 		switch (c)
 		{
-		case 'o': outfile = fz_optarg; break;
+		case 'o': outfile = fz_optpath(fz_optarg); break;
 		case 0:
 		{
 			SWITCH(fz_optlong->opaque)
@@ -2114,21 +2116,16 @@ int pdfaudit_main(int argc, char **argv)
 
 	fz_try(ctx)
 	{
-		if (strcmp(outfile, "-") == 0)
-			out = fz_stdout(ctx);
-		else
-			out = fz_new_output_with_path(ctx, outfile, append);
+		out = fz_new_output_with_path(ctx, outfile, append);
 		while (fz_optind < argc)
 			filter_file(ctx, out, argv[fz_optind++]);
-		if (strcmp(outfile, "-") != 0)
-			fz_close_output(ctx, out);
+		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
-		if (strcmp(outfile, "-") != 0)
-			fz_drop_output(ctx, out);
+		fz_drop_output(ctx, out);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		errors++;
 	}
 	fz_drop_context(ctx);

@@ -721,14 +721,12 @@ struct CreateThumbnailData {
     RenderedBitmap* bmp = nullptr;
 
     ~CreateThumbnailData() {
-        logf("~CreateThumbnailData: deleting 0x%p filePath='%s' 0x%p\n", this, filePath, filePath);
         str::Free(filePath);
     }
 };
 
 static void CreateThumbnailFinish(CreateThumbnailData* d) {
     char* path = d->filePath;
-    logf("CreateThumbnailFinish: path: '%s', 0x%p, d: 0x%p, d->bmp: 0x%p\n", path, path, d, d->bmp);
     if (d->bmp) {
         SetThumbnail(gFileHistory.FindByPath(path), d->bmp);
     }
@@ -765,10 +763,8 @@ static void CreateThumbnailForFile(MainWindow* win, FileState* ds) {
     }
 
     auto size = Size(kThumbnailDx, kThumbnailDy);
-    char* filePath = str::Dup(win->ctrl->GetFilePath());
-    auto d = new CreateThumbnailData{filePath, nullptr};
-    logf("CreateThumbnailForFile: filePath: '%s', 0x%p, d: 0x%p\n", filePath, filePath, d);
-    // TODO: this leaks
+    auto d = new CreateThumbnailData{};
+    d->filePath = str::Dup(win->ctrl->GetFilePath());
     auto fn = NewFunc1(CreateThumbnailOnBitmapRendered, d);
     win->ctrl->CreateThumbnail(size, fn);
 }
@@ -2991,7 +2987,7 @@ static void DeleteCurrentFile(MainWindow* win) {
         return;
     }
     auto* ctrl = win->ctrl;
-    const char* path = ctrl->GetFilePath();
+    const char* path = str::DupTemp(ctrl->GetFilePath());
     // this happens e.g. for embedded documents and directories
     if (!file::Exists(path)) {
         return;
@@ -3013,7 +3009,7 @@ static void RenameCurrentFile(MainWindow* win) {
     }
 
     auto* ctrl = win->ctrl;
-    const char* srcPath = ctrl->GetFilePath();
+    const char* srcPath = str::DupTemp(ctrl->GetFilePath());
     // this happens e.g. for embedded documents and directories
     if (!file::Exists(srcPath)) {
         return;
@@ -3062,9 +3058,8 @@ static void RenameCurrentFile(MainWindow* win) {
     }
     TempStr dstFilePath = ToUtf8Temp(dstFilePathW);
     TempStr dstPathNormalized = path::NormalizeTemp(dstFilePath);
-    logf("RenameCurrentFile: '%s' => '%s'\n", srcPath, dstFilePath);
-    logf("  dstPathNormalized: '%s'\n", dstPathNormalized);
-    if (path::IsSame(dstFilePath, dstPathNormalized)) {
+    TempStr srcPathNormalized = path::NormalizeTemp(srcPath);
+    if (path::IsSame(srcPathNormalized, dstPathNormalized)) {
         return;
     }
 
@@ -3363,11 +3358,14 @@ static StrVec& CollectNextPrevFilesIfChanged(const char* path) {
     StrVec& files = gLastNextPrevFiles;
 
     char* dir = path::GetDirTemp(path);
-    if (str::Eq(dir, lastNextPrevFilesDir)) {
-        // failed files could have changed
-        RemoveFailedFiles(files);
-        return files;
+    if (lastNextPrevFilesDir) {
+        if (path::IsSame(dir, lastNextPrevFilesDir)) {
+            // failed files could have changed
+            RemoveFailedFiles(files);
+            return files;
+        }
     }
+    files.Reset();
     str::ReplaceWithCopy(&lastNextPrevFilesDir, dir);
     DirIter di{dir};
     for (DirIterEntry* de : di) {
@@ -4269,12 +4267,12 @@ static void OnFrameKeyEsc(MainWindow* win) {
         ToolbarUpdateStateForWindow(win, false);
         return;
     }
-    if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
-        CloseWindow(win, true, false);
-        return;
-    }
     if (win->presentation || win->isFullScreen) {
         ToggleFullScreen(win, win->presentation != PM_DISABLED);
+        return;
+    }
+    if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
+        CloseWindow(win, true, false);
         return;
     }
 }

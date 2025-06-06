@@ -316,13 +316,18 @@ bool DownloadSymbolsIfNeeded() {
     return InitializeDbgHelp(false);
 }
 
-#if !defined(UPLOAD_REPORT)
-void _uploadDebugReport(const char*, bool, bool) {
-    // no-op in
-}
-#else
 // like crash report, but can be triggered without a crash
 void _uploadDebugReport(const char* condStr, bool isCrash, bool captureCallstack) {
+    // in release builds ReportIf()/ReportIfQuick() will break if running under
+    // the debugger. In other builds it sends a debug report
+
+    bool shouldUpload = gIsDebugBuild || gIsPreReleaseBuild || gIsAsanBuild;
+    if (!shouldUpload) {
+        if (IsDebuggerPresent()) {
+            DebugBreak();
+        }
+        return;
+    }
     // we want to avoid submitting multiple reports for the same
     // condition. I'm too lazy to implement tracking this granularly
     // so only allow once submission in a given session
@@ -386,7 +391,6 @@ void _uploadDebugReport(const char* condStr, bool isCrash, bool captureCallstack
     loga(s);
     loga("_uploadDebugReport() finished\n");
 }
-#endif
 
 static DWORD WINAPI CrashDumpThread(LPVOID) {
     WaitForSingleObject(gDumpEvent, INFINITE);
@@ -736,7 +740,7 @@ int __cdecl _purecall() {
 static char* BuildSymbolsUrl() {
     const char* urlBase = "https://www.sumatrapdfreader.org/dl/";
     if (gIsPreReleaseBuild) {
-        const char* ver = QM(PRE_RELEASE_VER);
+        const char* ver = preReleaseVersion;
         urlBase = str::JoinTemp(urlBase, "prerel/", ver, "/SumatraPDF-prerel");
     } else {
         // assuming this is release version

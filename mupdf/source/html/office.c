@@ -1,4 +1,4 @@
-// Copyright (C) 2023-2024 Artifex Software, Inc.
+// Copyright (C) 2023-2025 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -904,8 +904,6 @@ load_shared_strings(fz_context *ctx, fz_archive *arch, fz_xml *rels, doc_info *i
 
 	fz_try(ctx)
 	{
-		fz_xml *pos;
-
 		resolved = make_absolute_path(ctx, file, ss_file);
 		xml = fz_parse_xml_archive_entry(ctx, arch, resolved, 1);
 
@@ -1165,6 +1163,7 @@ fz_office_to_html(fz_context *ctx, fz_html_font_set *set, fz_buffer *buffer_in, 
 				process_rootfile(ctx, archive, file, &info);
 				pos = fz_xml_find_next_dfs(pos, "rootfile", "media-type", "application/hwpml-package+xml");
 			}
+			fz_close_output(ctx, info.out);
 			break;
 		}
 
@@ -1196,6 +1195,8 @@ fz_office_to_html(fz_context *ctx, fz_html_font_set *set, fz_buffer *buffer_in, 
 				pos = fz_xml_find_next_dfs(pos, "Relationship", "Type", schema);
 			}
 		}
+
+		fz_close_output(ctx, info.out);
 	}
 	fz_always(ctx)
 	{

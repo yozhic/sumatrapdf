@@ -59,6 +59,14 @@ static const char* themesTxt = R"(Themes [
         LinkColor = #6B7280
         ColorizeControls = true
     ]
+    [
+        Name = Dark background Bright text
+        TextColor = #ffffff
+        BackgroundColor = #2d2d30
+        ControlBackgroundColor = #2d2d30
+        LinkColor = #9999a0
+        ColorizeControls = true
+    ]
 ]
 )";
 
@@ -200,6 +208,13 @@ COLORREF ThemeDocumentColors(COLORREF& bg) {
     }
 
     if (!gGlobalPrefs->fixedPageUI.invertColors) {
+        return text;
+    }
+
+    // if user did change those colors in advanced settings, respect them
+    bool userDidChange = text != kColBlack || bg != kColWhite;
+    if (userDidChange) {
+        std::swap(text, bg);
         return text;
     }
 
