@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
 
       - name: build-pre-rel
-        run: .\doit.bat -ci-daily
+        run: .\doit.bat -build-smoke
 
       - name: Get x64 files
         uses: actions/upload-artifact@v4
