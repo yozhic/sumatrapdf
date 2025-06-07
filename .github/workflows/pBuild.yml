@@ -12,23 +12,12 @@ jobs:
           # needed to calc build number via git log --oneline
           fetch-depth: 0
 
-      - name: Build x86 CI
-        run: .\doit.bat -ci
-
-      - name: Copy files to root
-        shell: bash
-        run: cp "./out/rel32/SumatraPDF.exe" "SumatraPDFx32CI.exe"
-
-      - name: Clean out
-        shell: bash
-        run: rm -r "./out"
-
-      - name: Build x86 PRE
+      - name: Build x86
         run: .\doit.bat -build-pre-rel
 
       - name: Copy files to root
         shell: bash
-        run: cp "./out/rel32/SumatraPDF.exe" "SumatraPDFx32PRE.exe"
+        run: cp "./out/rel32/SumatraPDF.exe" "SumatraPDFx32.exe"
 
       - name: Clean out
         shell: bash
@@ -41,6 +30,10 @@ jobs:
         shell: bash
         run: cp "./out/rel64/SumatraPDF.exe" "SumatraPDFx64.exe"
 
+      - name: Clean out
+        shell: bash
+        run: rm -r "./out"
+
       - name: Get last commit date
         id: getdate
         shell: bash
@@ -48,9 +41,9 @@ jobs:
           get_date=$(git log --pretty=format:"%cs" -1)
           echo "last_commit_date=$get_date" >> "$GITHUB_OUTPUT"
         
-      - name: Get x86 files
+      - name: Get files
         uses: actions/upload-artifact@v4
         with:
-          name: "spdf-${{ steps.getdate.outputs.last_commit_date }}"
-          path: "*.exe"
+          name: "spdf-pre-${{ steps.getdate.outputs.last_commit_date }}"
+          path: "./*.exe"
           retention-days: 1
