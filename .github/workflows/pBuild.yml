@@ -13,18 +13,18 @@ jobs:
           fetch-depth: 0
 
       - name: build-pre-rel
-        run: .\doit.bat -build-pre-rel
+        run: .\doit.bat -build-release
 
       - name: Get x64 files
         uses: actions/upload-artifact@v4
         with:
-          name: result
-          path: out/rel64
+          name: spdf-artifacts-64
+          path: out/rel64/*.exe
           retention-days: 1
 
       - name: Get x86 files
         uses: actions/upload-artifact@v4
         with:
-          name: result
-          path: out/rel32
+          name: spdf-artifacts-32
+          path: out/rel32/*.exe
           retention-days: 1
