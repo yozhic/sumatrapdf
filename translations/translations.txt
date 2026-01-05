@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-e084d516630b604cf7ef118821e2ce1a741e8523
+6d99029c4aea878485bbc20c9d3001f38a75b8e7
 :%s annotation. Ctrl+click to edit.
 am:%s մեկնաբանություն: Ctrl+քլիք՝ խմբագրելու համար:
 ar:شرح %s. مفتاح التحكم Ctrl مع النقر للتحرير.
@@ -18138,6 +18138,18 @@ tw:重新命名(&N)...
 uk:Перейменувати...
 uz:Qayta &nomlash...
 vn:Đổi &Tên
+:Recently Opened
+br:Abertos Recentemente
+cn:最近打开
+co:Aperti pocu fà
+de:Kürzlich geöffnet
+nl:Recent Geopend
+pl:Ostatnio otwarte
+pt:Abertos Recentemente
+ro:Deschis recent
+sat:ᱱᱤᱛᱚᱜ ᱠᱷᱩᱞᱟ ᱮᱱᱟ
+sk:Naposledy otvorené
+tw:最近開啟
 :Rect: x=%d y=%d dx=%d dy=%d
 am:Ուղղանկյուն` x=%d y=%d dx=%d dy=%d
 ar:المربع: x=%d y=%d dx=%d dy=%d

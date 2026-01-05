@@ -665,7 +665,11 @@ static bool ShouldSaveThumbnail(FileState* ds) {
 
     // don't create thumbnails for files that won't need them anytime soon
     Vec<FileState*> list;
-    gFileHistory.GetFrequencyOrder(list);
+    if (gGlobalPrefs->homePageSortByFrequentlyRead) {
+        gFileHistory.GetFrequencyOrder(list);
+    } else {
+        gFileHistory.GetRecentlyOpenedOrder(list);
+    }
     int idx = list.Find(ds);
     if (idx < 0 || kFileHistoryMaxFrequent * 2 <= idx) {
         return false;
@@ -2665,6 +2669,8 @@ void CloseTab(WindowTab* tab, bool quitIfLast) {
         return;
     }
     MainWindow* win = tab->win;
+    logf("CloseTab: tab: 0x%p win: 0x%p, hwndFrame: 0x%x, quitIfLast: %d\n", tab, win, win->hwndFrame, (int)quitIfLast);
+
     AbortFinding(win, true);
     ClearFindBox(win);
     RemoveNotificationsForGroup(win->hwndCanvas, kNotifPageInfo);
@@ -2713,6 +2719,8 @@ void CloseTab(WindowTab* tab, bool quitIfLast) {
 // are other windows, else the Frequently Read page is displayed
 void CloseCurrentTab(MainWindow* win, bool quitIfLast) {
     WindowTab* tab = win->CurrentTab();
+    logf("CloseCurrentTab: tab: 0x%p win: 0x%p, hwndFrame: 0x%x, quitIfLast: %d\n", tab, win, win->hwndFrame,
+         (int)quitIfLast);
     if (tab) {
         CloseTab(tab, quitIfLast);
     } else {
@@ -2751,7 +2759,8 @@ void CloseWindow(MainWindow* win, bool quitIfLast, bool forceClose) {
     if (!win) {
         return;
     }
-
+    logf("CloseWindow: win: 0x%p, hwndFrame: 0x%x, quitIfLast: %d, forceClose: %d\n", win, win->hwndFrame,
+         (int)quitIfLast, (int)forceClose);
     ReportIf(forceClose && !quitIfLast);
     if (forceClose) {
         quitIfLast = true;

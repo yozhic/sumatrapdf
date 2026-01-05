@@ -35,10 +35,8 @@
 static const char* kNotifUpdateCheckInProgress = "notifUpdateCheckInProgress";
 
 // certificate on www.sumatrapdfreader.org is not supported by win7 and win8.1
-// (doesn't have the ciphers they understand)
-// so we first try sumatra-website.onrender.com which should work
+// (doesn't have the ciphers they understand) so we have a backup on backblaze
 
-// https://kjk-files.s3.us-west-001.backblazeb2.com/software/sumatrapdf/sumpdf-prerelease-update.txt
 // clang-format off
 #if defined(PRE_RELEASE_VER) || defined(DEBUG)
 constexpr const char* kUpdateInfoURL = "https://www.sumatrapdfreader.org/updatecheck-pre-release.txt";
@@ -65,12 +63,15 @@ bool gUpdateCheckInProgress = false;
 struct UpdateInfo {
     HWND hwndParent = nullptr;
     const char* latestVer = nullptr;
+
     const char* installer64 = nullptr;
-    const char* installerArm64 = nullptr;
-    const char* installer32 = nullptr;
     const char* portable64 = nullptr;
-    const char* portableArm64 = nullptr;
+
+    const char* installer32 = nullptr;
     const char* portable32 = nullptr;
+
+    const char* installerArm64 = nullptr;
+    const char* portableArm64 = nullptr;
 
     const char* dlURL = nullptr;
     const char* installerPath = nullptr;
@@ -79,11 +80,11 @@ struct UpdateInfo {
     ~UpdateInfo() {
         str::Free(latestVer);
         str::Free(installer64);
-        str::Free(installerArm64);
-        str::Free(installer32);
         str::Free(portable64);
-        str::Free(portableArm64);
+        str::Free(installer32);
         str::Free(portable32);
+        str::Free(installerArm64);
+        str::Free(portableArm64);
         str::Free(dlURL);
         str::Free(installerPath);
     }
@@ -307,8 +308,9 @@ struct UpdateProgressData {
 struct DownloadUpdateAsyncData {
     HWND hwndForNotif = nullptr;
     UpdateInfo* updateInfo = nullptr;
+    HttpProgress httpProgress = {};
+
     DownloadUpdateAsyncData() = default;
-    HttpProgress httpProgress;
     ~DownloadUpdateAsyncData() {
         delete updateInfo;
     }
@@ -468,15 +470,13 @@ static void BuildUpdateURL(str::Str& url, const char* baseURL, UpdateCheck updat
     url = baseURL;
     url.Append("?v=");
     url.Append(UPDATE_CHECK_VERA);
-    url.Append("&os=");
     char* osVerTemp = GetWindowsVerTemp();
+    url.Append("&os=");
     url.Append(osVerTemp);
     url.Append("&64bit=");
-    if (IsProcess64()) {
-        url.Append("yes");
-    } else {
-        url.Append("no");
-    }
+    url.Append(IsProcess64() ? "yes" : "no");
+    url.Append("&arm=");
+    url.Append(IsArmBuild() ? "yes" : "no");
     const char* lang = trans::GetCurrentLangCode();
     url.Append("&lang=");
     url.Append(lang);
