@@ -1,0 +1,49 @@
+name: Private Build
+on:
+  workflow_dispatch
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+        with:
+          # needed to calc build number via git log --oneline
+          fetch-depth: 0
+
+      - name: Build x86
+        run: .\doit.bat -ci
+
+      - name: Copy files to root
+        shell: bash
+        run: cp "./out/rel32/SumatraPDF.exe" "SumatraPDFx32.exe"
+
+      - name: Clean out
+        shell: bash
+        run: rm -r "./out"
+
+      - name: Build x64
+        run: .\doit.bat -build-codeql
+
+      - name: Copy files to root
+        shell: bash
+        run: cp "./out/rel64/SumatraPDF.exe" "SumatraPDFx64.exe"
+
+      - name: Clean out
+        shell: bash
+        run: rm -r "./out"
+
+      - name: Get last commit date
+        id: getdate
+        shell: bash
+        run: |
+          get_date=$(git log --pretty=format:"%cs" -1)
+          echo "last_commit_date=$get_date" >> "$GITHUB_OUTPUT"
+        
+      - name: Get files
+        uses: actions/upload-artifact@v4
+        with:
+          name: "SumatraPDF-pre-${{ steps.getdate.outputs.last_commit_date }}"
+          path: "./*.exe"
+          retention-days: 30
