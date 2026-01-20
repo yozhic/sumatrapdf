@@ -1419,7 +1419,7 @@ Exit:
     str::Free(logFilePath);
 
     if (gInitialSessionData) {
-        FreeSessionState(gInitialSessionData);
+        FreeSessionDataVec(gInitialSessionData);
         delete gInitialSessionData;
         gInitialSessionData = nullptr;
     }
@@ -1476,7 +1476,7 @@ Exit:
     if (!gIsAsanBuild) {
         UninstallCrashHandler();
     }
-
+    DeleteAppTools();
     DestroyLogging();
     DestroyTempAllocator();
 

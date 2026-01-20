@@ -176,7 +176,7 @@ struct EditAnnotationsWindow : Wnd {
 
     void ListBoxSelectionChanged();
 
-    virtual ~EditAnnotationsWindow() override;
+    ~EditAnnotationsWindow() override;
 };
 
 #if 0
@@ -1370,7 +1370,7 @@ static void CreateMainLayout(EditAnnotationsWindow* ew) {
     {
         Button::CreateArgs args;
         args.parent = parent;
-        args.text = "Delete annotation";
+        args.text = _TRN("Delete Annotation");
         args.font = fnt;
 
         auto w = new Button();

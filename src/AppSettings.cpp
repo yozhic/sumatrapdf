@@ -313,7 +313,7 @@ Vec<SessionData*>* gInitialSessionData = nullptr;
 
 static void RememberSessionState() {
     Vec<SessionData*>* sessionState = gGlobalPrefs->sessionData;
-    FreeSessionState(sessionState);
+    FreeSessionDataVec(sessionState);
 
     if (!gGlobalPrefs->rememberOpenedFiles) {
         return;
@@ -349,15 +349,16 @@ static void RememberSessionState() {
                 ReportIf(!didFind);
                 continue;
             }
-            FileState* fs = NewDisplayState(fp);
+            FileState* fs = NewFileState(fp);
             tab->ctrl->GetDisplayState(fs);
             fs->showToc = tab->showToc;
             *fs->tocState = tab->tocState;
             TabState* ts = NewTabState(fs);
             windowState->tabStates->Append(ts);
-            DeleteDisplayState(fs);
+            DeleteFileState(fs);
         }
         if (windowState->tabStates->Size() == 0) {
+            FreeSessionData(windowState);
             continue;
         }
         windowState->tabIndex = win->GetTabIdx(win->CurrentTab()) + 1;

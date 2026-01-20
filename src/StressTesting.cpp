@@ -350,7 +350,7 @@ struct DirFileProviderAsync : TestFileProvider {
     volatile int max = 0;
     volatile bool random = false;
 
-    AtomicInt nFiles;
+    AtomicInt nFiles = 0;
 
     DirFileProviderAsync(const char* path, const char* filter, int max = 0, bool random = false) {
         startDir.SetCopy(path);
@@ -367,8 +367,8 @@ struct DirFileProviderAsync : TestFileProvider {
         return queue.Size();
     }
 
-    virtual void Restart() override {
-        nFiles.Set(0);
+    void Restart() override {
+        AtomicIntSet(&nFiles, 0);
         StartDirTraverseAsync(&queue, startDir.CStr(), true);
     }
 };
@@ -380,7 +380,7 @@ static void GetNextFileCb(char** path, StrQueue* q) {
 }
 
 TempStr DirFileProviderAsync::NextFile() {
-    if (max > 0 && nFiles.Get() >= max) {
+    if (max > 0 && AtomicIntGet(&nFiles) >= max) {
         return nullptr;
     }
 again:
@@ -396,7 +396,7 @@ again:
         if (!IsStressTestSupportedFile(path, fileFilter.Get())) {
             goto again;
         }
-        nFiles.Inc();
+        AtomicIntInc(&nFiles);
         return path;
     }
     path = queue.PopFront();
@@ -406,7 +406,7 @@ again:
     if (!IsStressTestSupportedFile(path, fileFilter.Get())) {
         goto again;
     }
-    nFiles.Inc();
+    AtomicIntInc(&nFiles);
     return path;
 }
 

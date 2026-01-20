@@ -16,15 +16,22 @@
 
 GlobalPrefs* gGlobalPrefs = nullptr;
 
-FileState* NewDisplayState(const char* filePath) {
+FileState* NewFileState(const char* filePath) {
     FileState* fs = (FileState*)DeserializeStruct(&gFileStateInfo, nullptr);
     SetFileStatePath(fs, filePath);
     return fs;
 }
 
-void DeleteDisplayState(FileState* fs) {
+void DeleteFileState(FileState* fs) {
     delete fs->thumbnail;
     FreeStruct(&gFileStateInfo, fs);
+}
+
+void DeleteFileStates(Vec<FileState*>* a) {
+    for (auto fs : *a) {
+        DeleteFileState(fs);
+    }
+    delete a;
 }
 
 Favorite* NewFavorite(int pageNo, const char* name, const char* pageLabel) {
@@ -99,13 +106,17 @@ TabState* NewTabState(FileState* fs) {
     return state;
 }
 
-void FreeSessionState(Vec<SessionData*>* sessionData) {
+void FreeSessionData(SessionData* data) {
+    FreeStruct(&gSessionDataInfo, data);
+}
+
+void FreeSessionDataVec(Vec<SessionData*>* sessionData) {
     ReportIf(!sessionData);
     if (!sessionData) {
         return;
     }
     for (SessionData* data : *sessionData) {
-        FreeStruct(&gSessionDataInfo, data);
+        FreeSessionData(data);
     }
     sessionData->Reset();
 }

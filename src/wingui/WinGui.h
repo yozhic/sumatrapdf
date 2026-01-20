@@ -84,7 +84,7 @@ struct Wnd : ILayout {
 
     Wnd();
     Wnd(HWND hwnd);
-    virtual ~Wnd() override;
+    ~Wnd() override;
     void Destroy();
 
     HWND CreateCustom(const CreateCustomArgs&);
@@ -311,18 +311,28 @@ struct ListBox : Wnd {
         HFONT font = nullptr;
     };
 
+    struct DrawItemEvent {
+        ListBox* listBox = nullptr;
+        HDC hdc = nullptr;
+        RECT itemRect{};
+        int itemIndex = -1;
+        bool selected = false;
+    };
+
     using SelectionChangedHandler = Func0;
     using DoubleClickHandler = Func0;
+    using DrawItemHandler = Func1<DrawItemEvent*>;
 
     ListBoxModel* model = nullptr;
     SelectionChangedHandler onSelectionChanged;
     DoubleClickHandler onDoubleClick;
+    DrawItemHandler onDrawItem;
 
     Size idealSize = {};
     int idealSizeLines = 0;
 
     ListBox();
-    virtual ~ListBox() override;
+    ~ListBox() override;
 
     HWND Create(const CreateArgs&);
 
