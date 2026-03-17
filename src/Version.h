@@ -1,12 +1,12 @@
-/* Copyright 2022 the SumatraPDF project authors (see AUTHORS file).
+/* Copyright 2026 the SumatraPDF project authors (see AUTHORS file).
    License: GPLv3 */
 
 // CURR_VERSION can be over-written externally
 #ifndef CURR_VERSION
-#define CURR_VERSION 3.6
+#define CURR_VERSION 3.7
 #endif
 #ifndef CURR_VERSION_COMMA
-#define CURR_VERSION_COMMA 3,6,0
+#define CURR_VERSION_COMMA 3,7,0
 #endif
 
 // this is sth. like "3.5"
@@ -51,7 +51,7 @@
 #endif
 #define CURR_VERSION_STR TEXT(CURR_VERSION_STRA)
 
-#define kCopyrightStr      "Copyright 2006-2025 all authors (GPLv3)"
+#define kCopyrightStr      "Copyright 2006-2026 all authors (GPLv3)"
 #define kPublisherStr      "Krzysztof Kowalczyk"
 
 #define kAppName        "SumatraPDF"
