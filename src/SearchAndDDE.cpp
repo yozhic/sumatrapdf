@@ -1114,15 +1114,25 @@ static const char* HandleGetFileStateCmd(HWND hwnd, const char* cmd, bool* ack, 
 
 /*
 Handle all commands as defined in Commands.h
-eg: [CmdClose]
+eg: [CmdClose] or [CmdCreateAnnotHighlight #00ff00 openEdit]
 */
 static const char* HandleCmdCommand(HWND hwnd, const char* cmd, bool* ack) {
-    AutoFreeStr cmdName;
-    const char* next = str::Parse(cmd, "[%s]", &cmdName);
+    AutoFreeStr cmdContent;
+    const char* next = str::Parse(cmd, "[%s]", &cmdContent);
     if (!next) {
         return nullptr;
     }
-    int cmdId = GetCommandIdByName(cmdName);
+    // cmdContent is the full content between [ and ]
+    // it might be just "CmdClose" or "CmdCreateAnnotHighlight #00ff00 openEdit"
+    // extract the command name (first space-delimited token)
+    char* s = cmdContent.Get();
+    char* spacePos = str::FindChar(s, ' ');
+    TempStr name = s;
+    if (spacePos) {
+        name = str::DupTemp(s, (size_t)(spacePos - s));
+    }
+
+    int cmdId = GetCommandIdByName(name);
     if (cmdId < 0) {
         return nullptr;
     }
@@ -1131,8 +1141,18 @@ static const char* HandleCmdCommand(HWND hwnd, const char* cmd, bool* ack) {
         logfa("HandleCmdCommand: not executing DDE becaues MainWindow for hwnd 0x%p not found\n", hwnd);
         return nullptr;
     }
-    logfa("HandleCmdCommand: sending %d (%s) command\n", cmdId, cmdName.Get());
-    SendMessageW(win->hwndFrame, WM_COMMAND, cmdId, 0);
+
+    // if there are arguments after the command name, create a custom command with those args
+    int idToSend = cmdId;
+    if (spacePos) {
+        CustomCommand* customCmd = CreateCommandFromDefinition(cmdContent);
+        if (customCmd) {
+            idToSend = customCmd->id;
+        }
+    }
+
+    logfa("HandleCmdCommand: sending %d (%s) command\n", idToSend, cmdContent.Get());
+    SendMessageW(win->hwndFrame, WM_COMMAND, idToSend, 0);
     *ack = true;
     return next;
 }
