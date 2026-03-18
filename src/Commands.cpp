@@ -366,6 +366,12 @@ CustomCommand::~CustomCommand() {
 }
 
 CustomCommand* CreateCustomCommand(const char* definition, int origCmdId, CommandArg* args) {
+    for (auto cmd = gFirstCustomCommand; cmd; cmd = cmd->next) {
+        if (str::Eq(definition, cmd->definition)) {
+            return cmd;
+        }
+    }
+
     // if no args we retain original command id
     // only when we have unique args we have to create a new command id
     int id = origCmdId;
