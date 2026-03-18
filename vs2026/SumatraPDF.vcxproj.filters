@@ -788,7 +788,12 @@
     <None Include="..\.gitignore" />
     <None Include="..\Claude.md" />
     <None Include="..\SECURITY.md" />
-    <None Include="..\ailog.txt" />
+    <None Include="..\cmd\build-ci-daily.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\build-ci.ts">
+      <Filter>cmd</Filter>
+    </None>
     <None Include="..\cmd\build-codeql.ts">
       <Filter>cmd</Filter>
     </None>
@@ -801,22 +806,19 @@
     <None Include="..\cmd\build-with-mingw.ts">
       <Filter>cmd</Filter>
     </None>
-    <None Include="..\cmd\build.ts">
+    <None Include="..\cmd\bun.lock">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\check-access-keys.ts">
-      <Filter>cmd</Filter>
-    </None>
-    <None Include="..\cmd\ci-build.ts">
-      <Filter>cmd</Filter>
-    </None>
-    <None Include="..\cmd\ci-daily-build.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\clang-tidy.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\clean.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\compress-docs-images.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\cppcheck.ts">
@@ -843,12 +845,6 @@
     <None Include="..\cmd\gen-settings.ts">
       <Filter>cmd</Filter>
     </None>
-    <None Include="..\cmd\gen_docs.search.html">
-      <Filter>cmd</Filter>
-    </None>
-    <None Include="..\cmd\gen_docs.search.js">
-      <Filter>cmd</Filter>
-    </None>
     <None Include="..\cmd\logview-build.ts">
       <Filter>cmd</Filter>
     </None>
@@ -856,6 +852,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\markdown-it.min.js">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\package.json">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\pdb-sizes.ts">
@@ -877,6 +876,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\trigger-codeql.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\tsconfig.json">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\update-auto-update-ver.ts">
@@ -985,6 +987,9 @@
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Submit-crash-report.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\SumatraPDF-documentation-website.md">
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\SumatraPDF-documentation.md">
