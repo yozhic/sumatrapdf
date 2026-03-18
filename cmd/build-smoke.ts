@@ -1,7 +1,7 @@
 import { existsSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { detectVisualStudio, runLogged } from "./util.ts";
-import { clearDirPreserveSettings } from "./clean.ts";
+import { detectVisualStudio, detectVisualStudio2026, runLogged } from "./util";
+import { clearDirPreserveSettings } from "./clean";
 
 function removeReleaseBuilds(): void {
   // join("out", "arm64"), join("out", "rel32"),
@@ -17,8 +17,8 @@ async function main() {
   console.log("smoke build");
   removeReleaseBuilds();
 
-  const { msbuildPath } = detectVisualStudio();
-  const sln = String.raw`vs2022\SumatraPDF.sln`;
+  const { msbuildPath } = detectVisualStudio2026();
+  const sln = String.raw`vs2026\SumatraPDF.slnx`;
   const t = `/t:SumatraPDF-dll:Rebuild;test_util:Rebuild`;
   const p = `/p:Configuration=Release;Platform=x64`;
   await runLogged(msbuildPath, [sln, t, p, `/m`]);

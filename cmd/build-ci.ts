@@ -3,25 +3,15 @@
 import { existsSync, readFileSync, writeFileSync, statSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { createHmac, createHash } from "node:crypto";
-import { detectVisualStudio, getGitLinearVersion, extractSumatraVersion, runLogged, getGitSha1 } from "./util.ts";
+import { getGitLinearVersion, extractSumatraVersion, runLogged, getGitSha1, detectVisualStudio2026 } from "./util";
 
-const sdkVersions = [
-  "10.0.26100.0",
-  "10.0.22621.0",
-  "10.0.22000.0",
-  "10.0.20348.0",
-  "10.0.19041.0",
-  "10.0.18362.0",
-  "10.0.17134.0",
-  "10.0.16299.0",
-  "10.0.15063.0",
-  "10.0.14393.0",
-];
+// const { msbuildPath, llvmPdbutilPath } = detectVisualStudio2022();
+// const slnPath = join("vs2022", "SumatraPDF.sln");
+
+const { msbuildPath, llvmPdbutilPath } = detectVisualStudio2026();
+const slnPath = join("vs2026", "SumatraPDF.slnx");
 
 const pdbFiles = ["libmupdf.pdb", "SumatraPDF-dll.pdb", "SumatraPDF.pdb"];
-
-let llvmPdbutilPath: string | undefined;
-let msbuildPath;
 
 // === Secrets ===
 
@@ -72,7 +62,6 @@ function ensureAllUploadCreds(): void {
 
 // === Version Detection ===
 
-
 // === Build Config ===
 
 function buildConfigPath(): string {
@@ -109,7 +98,6 @@ function ensureManualIsBuilt(): void {
 }
 
 // === Command Execution ===
-
 
 async function runCaptureOutput(cmd: string, args: string[], cwd?: string): Promise<Uint8Array> {
   const short = [cmd.split("\\").pop(), ...args].join(" ");
@@ -198,6 +186,7 @@ async function s3PutObject(config: S3Config, key: string, body: Uint8Array): Pro
       ...headers,
       Authorization: authorization,
     },
+    // @ts-ignore
     body: body,
   });
 
@@ -262,7 +251,6 @@ async function buildPreRelease(preRelVer: string, sha1: string, vsplatform: stri
 
   setBuildConfigPreRelease(sha1, preRelVer);
   try {
-    const slnPath = join("vs2022", "SumatraPDF.sln");
     const p = `/p:Configuration=Release;Platform=${vsplatform}`;
 
     // build and run tests (skip for ARM64)
@@ -294,7 +282,7 @@ async function buildSmoke(): Promise<void> {
 
   removeReleaseBuilds();
 
-  const { main: genDocs } = await import("./gen-docs.ts");
+  const { main: genDocs } = await import("./gen-docs");
   await genDocs();
 
   const makeLzsa = resolve(join("bin", "MakeLZSA.exe"));
@@ -302,7 +290,6 @@ async function buildSmoke(): Promise<void> {
     throw new Error(`'${makeLzsa}' doesn't exist`);
   }
 
-  const slnPath = join("vs2022", "SumatraPDF.sln");
   const t = `/t:SumatraPDF-dll:Rebuild;test_util:Rebuild`;
   const p = `/p:Configuration=Release;Platform=x64`;
   await runLogged(msbuildPath, [slnPath, t, p, `/m`]);
@@ -343,6 +330,7 @@ async function runLlvmPdbutilGzipped(exePath: string, pdbPath: string, outPath: 
   const output = await runCaptureOutput(exePath, cmdArgs);
 
   if (true) {
+    // @ts-ignore
     const gzipped = Bun.gzipSync(output);
     writeFileSync(outPath, gzipped);
     console.log(`wrote ${outPath} (${formatSize(output.length)}) (${formatSize(fileSize(outPath))})`);
@@ -414,10 +402,6 @@ async function main() {
   console.log(`gitSha1: '${sha1}'`);
   console.log(`sumatraVersion: '${sumatraVer}'`);
 
-  let res = detectVisualStudio();
-  msbuildPath = res.msbuildPath;
-  llvmPdbutilPath = res.llvmPdbutilPath;
-
   const eventType = getGitHubEventType();
   console.log(`GitHub event type: ${eventType}`);
 
@@ -426,7 +410,7 @@ async function main() {
       removeReleaseBuilds();
       // generate HTML docs
       {
-        const { main: genDocs } = await import("./gen-docs.ts");
+        const { main: genDocs } = await import("./gen-docs");
         await genDocs();
       }
       await buildPreRelease(preRelVer, sha1, "x64", join("out", "rel64"));

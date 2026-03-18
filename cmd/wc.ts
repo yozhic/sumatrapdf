@@ -53,7 +53,6 @@ async function scanDir(dir: string, results: FileLineCount[]): Promise<void> {
 async function main() {
   const results: FileLineCount[] = [];
   await scanDir("src", results);
-  await scanDir("do", results);
 
   // sort by path
   results.sort((a, b) => a.path.localeCompare(b.path));

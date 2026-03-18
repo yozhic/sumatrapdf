@@ -31,7 +31,7 @@ function findLlvmPdbUtil(): string | undefined {
   return;
 }
 
-function findVsRoot(): string {
+function findVsRootVer(ver: string): string {
   // try PATH first
   try {
     const result = Bun.spawnSync(["msbuild", "-h"], {
@@ -63,7 +63,7 @@ function findVsRoot(): string {
 
   // try known Program Files locations
   const programFiles = process.env["ProgramFiles"] ?? String.raw`C:\Program Files`;
-  const vsBase = join(programFiles, "Microsoft Visual Studio", "2022");
+  const vsBase = join(programFiles, "Microsoft Visual Studio", ver);
   for (const edition of vsEditions) {
     const vsRoot = join(vsBase, edition);
     if (existsSync(join(vsRoot, msBuildRelPath))) {
@@ -82,8 +82,17 @@ function findTool(vsRoot: string, relPath: string): string {
   return "";
 }
 
-export function detectVisualStudio(): VisualStudioInfo {
-  const vsRoot = findVsRoot();
+export function detectVisualStudio2022(): VisualStudioInfo {
+  return detectVisualStudio("2022");
+}
+
+export function detectVisualStudio2026(): VisualStudioInfo {
+  return detectVisualStudio("18");
+}
+
+export function detectVisualStudio(ver = ""): VisualStudioInfo {
+  if (!ver) ver = "2022";
+  const vsRoot = findVsRootVer(ver);
   const msbuildPath = findTool(vsRoot, msBuildRelPath);
   const clangFormatPath = findTool(vsRoot, clangFormatRelPath);
   const clangTidyPath = findTool(vsRoot, clangTidyRelPath);

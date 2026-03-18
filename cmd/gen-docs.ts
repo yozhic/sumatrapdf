@@ -1,5 +1,6 @@
 // markdown-it 14.1.0 - https://github.com/markdown-it/markdown-it (MIT license)
 // vendored in cmd/markdown-it.min.js from https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js
+// @ts-ignore
 import MarkdownIt from "./markdown-it.min.js";
 import {
   readFileSync,
