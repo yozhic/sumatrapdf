@@ -1186,7 +1186,28 @@ function mupdf_files()
     "xps-zip.c",
   })
   files_in_dir("mupdf/source/reflow", {
-    "*.c",
+    "reflow-doc.c",
+  })
+  files_in_dir("mupdf/source/tools", {
+    "muconvert.c",
+    "mudraw.c",
+    "mugrep.c",
+    "muraster.c",
+    "murun.c",
+    "mutrace.c",
+    "pdfaudit.c",
+    "pdfbake.c",
+    "pdfclean.c",
+    "pdfcreate.c",
+    "pdfextract.c",
+    "pdfinfo.c",
+    "pdfmerge.c",
+    "pdfpages.c",
+    "pdfposter.c",
+    "pdfrecolor.c",
+    "pdfshow.c",
+    "pdfsign.c",
+    "pdftrim.c"
   })
   files {
     "mupdf/include/mupdf/fitz/*.h",
@@ -1194,52 +1215,6 @@ function mupdf_files()
     "mupdf/include/mupdf/pdf/*.h",
     "mupdf/include/mupdf/*.h"
   }
-end
-
-function mudoc_files()
-  files_in_dir("mupdf/source", {
-    "cbz/mucbz.c",
-    "img/muimage.c",
-    "tiff/mutiff.c",
-    "fitz/document-all.c",
-    "fitz/document-no-run.c",
-    "fitz/svg-device.c",
-    "fitz/output-pcl.c",
-    "fitz/output-pwg.c",
-    "fitz/stream-prog.c",
-    "fitz/test-device.c",
-  })
-end
-
-function mutools_files()
-  files_in_dir("mupdf/source/tools", {
-    "mudraw.c",
-    "mutool.c",
-    "pdfclean.c",
-    "pdfextract.c",
-    "pdfinfo.c",
-    "pdfposter.c",
-    "pdfshow.c",
-  })
-end
-
-function mutool_files()
-  mudoc_files() -- TODO: could turn into a .lib
-  files_in_dir("mupdf/source/tools", {
-    "mutool.c",
-    "pdfshow.c",
-    "pdfclean.c",
-    "pdfinfo.c",
-    "pdfextract.c",
-    "pdfposter.c",
-  })
-end
-
-function mudraw_files()
-  mudoc_files()
-  files_in_dir("mupdf/source/tools", {
-    "mudraw.c",
-  })
 end
 
 function synctex_files()

@@ -61,6 +61,9 @@
     <Filter Include="mupdf\source\svg">
       <UniqueIdentifier>{40DBAEFC-2CD4-CD4E-5506-B3D3415EAD5A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mupdf\source\tools">
+      <UniqueIdentifier>{811DE1E3-6D01-A239-D661-9C8CC2648CBB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="mupdf\source\xps">
       <UniqueIdentifier>{CBEFAEFC-B7E8-CD4E-E01A-B3D3CC72AD5A}</UniqueIdentifier>
     </Filter>
@@ -1048,6 +1051,63 @@
     </ClCompile>
     <ClCompile Include="..\mupdf\source\svg\svg-run.c">
       <Filter>mupdf\source\svg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\muconvert.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\mudraw.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\mugrep.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\muraster.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\murun.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\mutrace.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfaudit.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfbake.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfclean.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfcreate.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfextract.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfinfo.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfmerge.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfpages.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfposter.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfrecolor.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfshow.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdfsign.c">
+      <Filter>mupdf\source\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\mupdf\source\tools\pdftrim.c">
+      <Filter>mupdf\source\tools</Filter>
     </ClCompile>
     <ClCompile Include="..\mupdf\source\xps\xps-common.c">
       <Filter>mupdf\source\xps</Filter>
