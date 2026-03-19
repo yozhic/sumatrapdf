@@ -143,7 +143,7 @@ async function main() {
   }
 
   // copy CSS and JS files
-  const cssJsFiles = ["notion.css", "sumatra.css", "gen_toc.js"];
+  const cssJsFiles = ["sumatra.css", "gen_toc.js"];
   for (const name of cssJsFiles) {
     const srcPath = join("docs", "www", name);
     const dstPath = join(websiteDir, "www", name);
