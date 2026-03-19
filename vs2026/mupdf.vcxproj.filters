@@ -749,6 +749,9 @@
     <ClCompile Include="..\mupdf\source\fitz\stext-para.c">
       <Filter>mupdf\source\fitz</Filter>
     </ClCompile>
+    <ClCompile Include="..\mupdf\source\fitz\stext-raft.c">
+      <Filter>mupdf\source\fitz</Filter>
+    </ClCompile>
     <ClCompile Include="..\mupdf\source\fitz\stext-search.c">
       <Filter>mupdf\source\fitz</Filter>
     </ClCompile>

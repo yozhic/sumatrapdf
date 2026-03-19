@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2025 Artifex Software, Inc.
+// Copyright (C) 2004-2026 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -122,6 +122,10 @@ typedef struct
 	fz_stext_page *page;
 	int id;
 	fz_point pen, start;
+	// maybe_bullet: True if the 'start' position recorded was done so after either some actualtext
+	// on an image, or after a glyph that's known to be used for bullets. This is used to stop us
+	// spotting an 'indented' paragraph, because it's possibly just a bulleted list.
+	int maybe_bullet;
 	fz_point lag_pen;
 	fz_matrix trm;
 	int new_obj;
@@ -152,6 +156,9 @@ typedef struct
 	int rect_max;
 	int rect_len;
 	rect_details *rects;
+
+	fz_stext_block *lazy_vectors;
+	fz_stext_block *lazy_vectors_tail;
 } fz_stext_device;
 
 const char *fz_stext_options_usage =
@@ -323,9 +330,8 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page, int type, int id)
 	}
 	else if (!page->last_block)
 	{
-		page->last_block = block;
-		if (!page->first_block)
-			page->first_block = block;
+		assert(!page->first_block);
+		page->first_block = page->last_block = block;
 	}
 	else
 	{
@@ -333,6 +339,59 @@ add_block_to_page(fz_context *ctx, fz_stext_page *page, int type, int id)
 		page->last_block = block;
 	}
 	return block;
+}
+
+static fz_stext_block *
+add_lazy_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, int id)
+{
+	fz_stext_block *block = fz_pool_alloc(ctx, page->pool, sizeof *page->first_block);
+	block->bbox = fz_empty_rect;
+	block->prev = tdev->lazy_vectors_tail;
+	block->type = FZ_STEXT_BLOCK_VECTOR;
+	block->id = id;
+
+	if (tdev->lazy_vectors == NULL)
+		tdev->lazy_vectors = block;
+	else
+		tdev->lazy_vectors_tail->next = block;
+	tdev->lazy_vectors_tail = block;
+
+	return block;
+}
+
+static void
+flush_lazy_vectors(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev)
+{
+	if (tdev->lazy_vectors == NULL)
+		return;
+
+	if (page->last_struct)
+	{
+		if (page->last_struct->last_block)
+		{
+			page->last_struct->last_block->next = tdev->lazy_vectors;
+			tdev->lazy_vectors->prev = page->last_struct->last_block;
+			page->last_struct->last_block = tdev->lazy_vectors_tail;
+		}
+		else
+		{
+			page->last_struct->first_block = tdev->lazy_vectors;
+			page->last_struct->last_block = tdev->lazy_vectors_tail;
+		}
+	}
+	else if (!page->last_block)
+	{
+		page->first_block = tdev->lazy_vectors;
+		page->last_block = tdev->lazy_vectors_tail;
+	}
+	else
+	{
+		page->last_block->next = tdev->lazy_vectors;
+		tdev->lazy_vectors->prev = page->last_block;
+		page->last_block = tdev->lazy_vectors_tail;
+	}
+
+	tdev->lazy_vectors = tdev->lazy_vectors_tail = NULL;
 }
 
 static fz_stext_block *
@@ -580,10 +639,11 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 							{
 								/* OK, we can be bold. */
 								ch->flags |= FZ_STEXT_BOLD;
+							}
+							/* Whether we have recorded this as being bold or not, still
+							 * claim we did, so we swallow the space and don't reemit it. */
 								return 1;
 							}
-							/* Ignore this and keep going */
-						}
 						else
 						{
 							ch->flags |= FZ_STEXT_BOLD;
@@ -597,6 +657,65 @@ check_for_fake_bold(fz_context *ctx, fz_stext_block *block, fz_font *font, int c
 	}
 
 	return 0;
+}
+
+static int
+plausible_bullet(int c)
+{
+	return (c == '*' ||
+		c == 0x00B7 || /* Middle Dot */
+		c == 0x2022 || /* Bullet */
+		c == 0x2023 || /* Triangular Bullet */
+		c == 0x2043 || /* Hyphen Bullet */
+		c == 0x204C || /* Back leftwards bullet */
+		c == 0x204D || /* Back rightwards bullet */
+		c == 0x2219 || /* Bullet operator */
+		c == 0x25C9 || /* Fisheye */
+		c == 0x25CB || /* White circle */
+		c == 0x25CF || /* Black circle */
+		c == 0x25D8 || /* Inverse Bullet */
+		c == 0x25E6 || /* White Bullet */
+		c == 0x2619 || /* Reversed Rotated Floral Heart Bullet / Fleuron */
+		c == 0x261a || /* Black left pointing index */
+		c == 0x261b || /* Black right pointing index */
+		c == 0x261c || /* White left pointing index */
+		c == 0x261d || /* White up pointing index */
+		c == 0x261e || /* White right pointing index */
+		c == 0x261f || /* White down pointing index */
+		c == 0x2765 || /* Rotated Heavy Heart Black Heart Bullet */
+		c == 0x2767 || /* Rotated Floral Heart Bullet / Fleuron */
+		c == 0x29BE || /* Circled White Bullet */
+		c == 0x29BF || /* Circled Bullet */
+		c == 0x2660 || /* Black Spade suit */
+		c == 0x2661 || /* White Heart suit */
+		c == 0x2662 || /* White Diamond suit */
+		c == 0x2663 || /* Black Club suit */
+		c == 0x2664 || /* White Spade suit */
+		c == 0x2665 || /* Black Heart suit */
+		c == 0x2666 || /* Black Diamond suit */
+		c == 0x2667 || /* White Clud suit */
+		c == 0x1F446 || /* WHITE UP POINTING BACKHAND INDEX */
+		c == 0x1F447 || /* WHITE DOWN POINTING BACKHAND INDEX */
+		c == 0x1F448 || /* WHITE LEFT POINTING BACKHAND INDEX */
+		c == 0x1F449 || /* WHITE RIGHT POINTING BACKHAND INDEX */
+		c == 0x1f597 || /* White down pointing left hand index */
+		c == 0x1F598 || /* SIDEWAYS WHITE LEFT POINTING INDEX */
+		c == 0x1F599 || /* SIDEWAYS WHITE RIGHT POINTING INDEX */
+		c == 0x1F59A || /* SIDEWAYS BLACK LEFT POINTING INDEX */
+		c == 0x1F59B || /* SIDEWAYS BLACK RIGHT POINTING INDEX */
+		c == 0x1F59C || /* BLACK LEFT POINTING BACKHAND INDEX */
+		c == 0x1F59D || /* BLACK RIGHT POINTING BACKHAND INDEX */
+		c == 0x1F59E || /* SIDEWAYS WHITE UP POINTING INDEX */
+		c == 0x1F59F || /* SIDEWAYS WHITE DOWN POINTING INDEX */
+		c == 0x1F5A0 || /* SIDEWAYS BLACK UP POINTING INDEX */
+		c == 0x1F5A1 || /* SIDEWAYS BLACK DOWN POINTING INDEX */
+		c == 0x1F5A2 || /* BLACK UP POINTING BACKHAND INDEX */
+		c == 0x1F5A3 || /* BLACK DOWN POINTING BACKHAND INDEX */
+		c == 0x1FBC1 || /* LEFT THIRD WHITE RIGHT POINTING INDEX */
+		c == 0x1FBC2 || /* MIDDLE THIRD WHITE RIGHT POINTING INDEX */
+		c == 0x1FBC3 || /* RIGHT THIRD WHITE RIGHT POINTING INDEX */
+		c == 0xFFFD || /* UNICODE_REPLACEMENT_CHARACTER */
+		0);
 }
 
 static void
@@ -665,17 +784,19 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		q.y = trm.f;
 	}
 
+	//printf("%g,%g \"%c\" %g,%g\n", p.x, p.y, c, q.x, q.y);
+
 	if ((dev->opts.flags & FZ_STEXT_COLLECT_STYLES) != 0)
 	{
 		if (glyph == -1)
 		{
 			if (dev->last_was_fake_bold)
-				goto move_pen_and_exit;
+				return;
 		}
 		else if (check_for_fake_bold(ctx, page->first_block, font, c, p, size, flags))
 		{
 			dev->last_was_fake_bold = 1;
-			goto move_pen_and_exit;
+			return;
 		}
 		dev->last_was_fake_bold = 0;
 	}
@@ -686,7 +807,9 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		cur_block = NULL;
 	cur_line = cur_block ? cur_block->u.t.last_line : NULL;
 
-	if (cur_line && glyph < 0)
+	/* We use glyph == -2 to indicate a no-glyph char from an actualtext. The position
+	 * is valid though, so we want to advance the pen for these. */
+	if (cur_line && glyph == -1)
 	{
 		/* Don't advance pen or break lines for no-glyph characters in a cluster */
 		add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &dev->pen, &dev->pen, bidi, dev->color, 0, flags, dev->flags);
@@ -709,8 +832,10 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		/* Largely supplanted by the check_for_fake_bold mechanism above,
 		 * but we leave this in for backward compatibility as it's cheap,
 		 * and works even when FZ_STEXT_COLLECT_STYLES is not set. */
-		dist = hypotf(q.x - dev->pen.x, q.y - dev->pen.y) / size;
-		if (dist < FAKE_BOLD_MAX_DIST && c == dev->lastchar)
+		dist = hypotf(p.x - dev->lag_pen.x, p.y - dev->lag_pen.y) / size;
+		/* This can trigger improperly for glyphs that come from actualtext
+		 * as they are frequently overlaid. Therefore rely on glyph >= 0. */
+		if (dist < FAKE_BOLD_MAX_DIST && c == dev->lastchar && glyph >= 0)
 			return;
 
 		/* Calculate how far we've moved since the last character. */
@@ -823,7 +948,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		{
 			/* Check indent to spot text-indent style paragraphs */
 			if (wmode == 0 && cur_line && dev->new_obj)
-				if ((p.x - dev->start.x) > 0.5f)
+				if ((p.x - dev->start.x) > 0.5f && !dev->maybe_bullet)
 					new_para = 1;
 			new_line = 1;
 		}
@@ -839,6 +964,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	/* Start a new block (but only at the beginning of a text object) */
 	if (new_para || !cur_block)
 	{
+		flush_lazy_vectors(ctx, page, dev);
 		cur_block = add_text_block_to_page(ctx, page, dev->id);
 		cur_line = cur_block->u.t.last_line;
 	}
@@ -851,7 +977,15 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 	{
 		cur_line = add_line_to_block(ctx, page, cur_block, &ndir, wmode, bidi);
 		dev->start = p;
+		if (glyph == -2)
+			dev->maybe_bullet = 1;
+		else
+			dev->maybe_bullet = plausible_bullet(c);
 	}
+
+	/* Henceforth treat such non-glyphs in the usual way. */
+	if (glyph == -2)
+		glyph = -1;
 
 	/* Add synthetic space */
 	if (add_space && !(dev->flags & FZ_STEXT_INHIBIT_SPACES))
@@ -859,7 +993,6 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 
 	add_char_to_line(ctx, page, cur_line, trm, font, size, c, (dev->flags & FZ_STEXT_ACCURATE_BBOXES) ? glyph : NON_ACCURATE_GLYPH, &p, &q, bidi, dev->color, 0, flags, dev->flags);
 
-move_pen_and_exit:
 	dev->lastchar = c;
 	dev->lastbidi = bidi;
 	dev->lastline = cur_line;
@@ -1058,18 +1191,36 @@ rune_index(const char *utf8, size_t idx)
 }
 
 static void
-flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, int end)
+flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, int i, int end, float adv)
 {
 	if (*actualtext == 0)
 		return;
 
-	/* SumatraPFD: https://github.com/sumatrapdfreader/sumatrapdf/issues/5280 */
 	if (!dev->last.valid)
 		return;
 
 	if (dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT))
 		if (dev->last.clipped)
 			return;
+
+	if (adv != 0)
+	{
+		const char *at = actualtext;
+		int j = i;
+
+		while (end < 0 || (end >= 0 && i < end))
+		{
+			int rune;
+			at += fz_chartorune(&rune, at);
+
+			if (rune == 0)
+				break;
+			j++;
+		}
+
+		if (j != i)
+			adv /= (j - i);
+	}
 
 	while (end < 0 || (end >= 0 && i < end))
 	{
@@ -1079,11 +1230,14 @@ flush_actualtext(fz_context *ctx, fz_stext_device *dev, const char *actualtext, 
 		if (rune == 0)
 			break;
 
+		dev->last.trm.e = dev->pen.x;
+		dev->last.trm.f = dev->pen.y;
+
 		fz_add_stext_char(ctx, dev, dev->last.font,
 			rune,
-			-1,
+			-2,
 			dev->last.trm,
-			0,
+			adv,
 			dev->last.wmode,
 			dev->last.bidi_level,
 			(i == 0) && (dev->flags & FZ_STEXT_PRESERVE_SPANS),
@@ -1219,9 +1373,16 @@ do_extract_within_actualtext(fz_context *ctx, fz_stext_device *dev, fz_text_span
 		return;
 	}
 
+	/* if this is the first text on the page, and the actual text suffix matches the entire
+	 * span text, then no font will have been set above, so set the last used font to the
+	 * span font since flush_actualtext() assumes that a font has been set.
+	 */
+	if (!dev->last.font)
+		dev->last.font = fz_keep_font(ctx, font);
+
 	/* We found a matching postfix. It seems likely that this is going to be the only
 	 * text object we get, so send any remaining actualtext now. */
-	flush_actualtext(ctx, dev, actualtext, i, i + strlen(actualtext) - (span->len - end));
+	flush_actualtext(ctx, dev, actualtext, i, i + (int)strlen(actualtext) - (span->len - end), 0);
 
 	/* Send the postfix */
 	if (end != span->len)
@@ -1342,20 +1503,31 @@ fz_stext_begin_metatext(fz_context *ctx, fz_device *dev, fz_metatext meta, const
 {
 	fz_stext_device *tdev = (fz_stext_device*)dev;
 	metatext_t *mt = find_actualtext(tdev);
+	char *new_text = NULL;
 
 	if (mt != NULL && meta == FZ_METATEXT_ACTUALTEXT)
-		flush_actualtext(ctx, tdev, mt->text, 0, -1);
+		flush_actualtext(ctx, tdev, mt->text, 0, -1, 0);
 
 	if (meta == FZ_METATEXT_ACTUALTEXT)
 		tdev->last.valid = 0;
 
+	new_text = text ? fz_strdup(ctx, text) : NULL;
+
+	fz_try(ctx)
+	{
 	mt = fz_malloc_struct(ctx, metatext_t);
 
 	mt->prev = tdev->metatext;
 	tdev->metatext = mt;
 	mt->type = meta;
-	mt->text = text ? fz_strdup(ctx, text) : NULL;
+		mt->text = new_text;
 	mt->bounds = fz_empty_rect;
+}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, new_text);
+		fz_rethrow(ctx);
+	}
 }
 
 static void
@@ -1396,30 +1568,30 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 	/* If we have a 'last' text position, send the content after that. */
 	if (tdev->last.valid)
 	{
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1, 0);
 		pop_metatext(ctx, tdev);
 		tdev->last.valid = 0;
 		return;
 	}
 
-	/* If we have collected a rectangle for content that encloses the actual text,
-	 * send the content there. */
-	if (!fz_is_empty_rect(tdev->metatext->bounds))
+	/* Unless we have collected a rectangle for content that encloses the actual text,
+	 * we can't do anything. */
+	if (fz_is_empty_rect(tdev->metatext->bounds))
 	{
-		tdev->last.trm.a = tdev->metatext->bounds.x1 - tdev->metatext->bounds.x0;
-		tdev->last.trm.b = 0;
-		tdev->last.trm.c = 0;
-		tdev->last.trm.d = tdev->metatext->bounds.y1 - tdev->metatext->bounds.y0;
-		tdev->last.trm.e = tdev->metatext->bounds.x0;
-		tdev->last.trm.f = tdev->metatext->bounds.y0;
-	}
-	else
-	{
-		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0)
-		fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
+		if ((dev->flags & (FZ_STEXT_CLIP | FZ_STEXT_CLIP_RECT)) == 0 && tdev->metatext->text[0])
+			fz_warn(ctx, "Actualtext with no position. Text may be lost or mispositioned.");
 		pop_metatext(ctx, tdev);
 		return;
 	}
+
+	/* We have a rectangle, so send the text to fill that. */
+		tdev->last.trm.a = tdev->metatext->bounds.x1 - tdev->metatext->bounds.x0;
+		tdev->last.trm.b = 0;
+		tdev->last.trm.c = 0;
+	tdev->last.trm.d = tdev->metatext->bounds.y0 - tdev->metatext->bounds.y1;
+		tdev->last.trm.e = tdev->metatext->bounds.x0;
+	tdev->last.trm.f = tdev->metatext->bounds.y1;
+	tdev->last.valid = 1;
 
 	fz_var(myfont);
 
@@ -1430,7 +1602,7 @@ fz_stext_end_metatext(fz_context *ctx, fz_device *dev)
 			myfont = fz_new_base14_font(ctx, "Helvetica");
 			tdev->last.font = myfont;
 		}
-		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1);
+		flush_actualtext(ctx, tdev, tdev->metatext->text, 0, -1, 1);
 		pop_metatext(ctx, tdev);
 	}
 	fz_always(ctx)
@@ -1467,8 +1639,17 @@ fz_stext_fill_image(fz_context *ctx, fz_device *dev, fz_image *img, fz_matrix ct
 
 	/* If the alpha is less than 50% then it's probably a watermark or effect or something. Skip it. */
 	if (alpha >= 0.5f)
-		add_image_block_to_page(ctx, tdev->page, ctm, img, tdev->id);
-
+	{
+		fz_stext_block *block;
+		flush_lazy_vectors(ctx, tdev->page, tdev);
+		block = add_image_block_to_page(ctx, tdev->page, ctm, img, tdev->id);
+		if (tdev->opts.flags & FZ_STEXT_CLIP)
+		{
+			fz_rect clip = fz_device_current_scissor(ctx, dev);
+			clip = fz_intersect_rect(clip, tdev->page->mediabox);
+			block->bbox = fz_intersect_rect(block->bbox, clip);
+		}
+	}
 }
 
 static void
@@ -1810,6 +1991,8 @@ fz_stext_close_device(fz_context *ctx, fz_device *dev)
 	if ((tdev->flags & FZ_STEXT_DEHYPHENATE) && fz_is_unicode_hyphen(tdev->lastchar) && tdev->lastline != NULL)
 		tdev->lastline->flags |= FZ_STEXT_LINE_FLAGS_JOINED;
 
+	flush_lazy_vectors(ctx, page, tdev);
+
 	fixup_bboxes_and_bidi(ctx, page->first_block);
 
 	if (tdev->opts.flags & FZ_STEXT_COLLECT_STYLES)
@@ -1899,6 +2082,10 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags |= FZ_STEXT_ACCURATE_BBOXES;
 	if (fz_has_option(ctx, string, "vectors", &val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_COLLECT_VECTORS;
+	if (fz_has_option(ctx, string, "lazy-vectors", &val) && fz_option_eq(val, "yes"))
+		opts->flags |= FZ_STEXT_LAZY_VECTORS;
+	if (fz_has_option(ctx, string, "fuzzy-vectors", &val) && fz_option_eq(val, "yes"))
+		opts->flags |= FZ_STEXT_FUZZY_VECTORS;
 	if (fz_has_option(ctx, string, "ignore-actualtext", & val) && fz_option_eq(val, "yes"))
 		opts->flags |= FZ_STEXT_IGNORE_ACTUALTEXT;
 	if (fz_has_option(ctx, string, "segment", &val) && fz_option_eq(val, "yes"))
@@ -2124,6 +2311,132 @@ add_vector(fz_context *ctx, fz_stext_page *page, fz_stext_device *tdev, fz_rect 
 			return;
 	}
 
+	/* Can we just add this one onto the previous one? */
+	/* Only if it's a small rectangle... */
+	if ((flags & FZ_STEXT_VECTOR_IS_RECTANGLE) && bbox.x1 - bbox.x0 <= 2 && bbox.y1 - bbox.y0 <= 2)
+	{
+		fz_stext_block *prev;
+		/* Find b = the previous block. */
+		if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+			b = tdev->lazy_vectors_tail;
+		else if (page->last_struct)
+			b = page->last_struct->last_block;
+		else
+			b = page->last_block;
+
+		if (b && b->type == FZ_STEXT_BLOCK_VECTOR && b->u.v.argb == argb && b->u.v.flags == flags)
+		{
+			/* Maybe we can join it? */
+			float fudge = 0.001f;
+			if (b->bbox.x0 == bbox.x0 && b->bbox.x1 == bbox.x1 && b->bbox.y1 + fudge >= bbox.y0 && b->bbox.y0 - fudge <= bbox.y1)
+			{
+				/* Stacks vertically. */
+				b->bbox.y0 = fz_min(b->bbox.y0, bbox.y0);
+				b->bbox.y1 = fz_max(b->bbox.y1, bbox.y1);
+				return;
+			}
+			else if (b->bbox.y0 == bbox.y0 && b->bbox.y1 == bbox.y1 && b->bbox.x1 + fudge >= bbox.x0 && b->bbox.x0 - fudge <= bbox.x1)
+			{
+				/* Stacks horizontally. */
+				b->bbox.x0 = fz_min(b->bbox.x0, bbox.x0);
+				b->bbox.x1 = fz_max(b->bbox.x1, bbox.x1);
+				return;
+			}
+
+			/* So, we can't add our new vector onto the previous one. But can we merge the 2 previous ones? */
+			/* The intent here is that we allow a set of vector 'blocks' to be merged together, perhaps:
+			 *    ABC
+			 * Then we allow another set to be merged together, perhaps DE:
+			 *    ABC
+			 *    DE
+			 * Then when we get another block that can't be merged into DE (perhaps F):
+			 *    ABC
+			 *    DE
+			 *    F
+			 * We'll consider ABC and DE for merging. Whatevever block that F ends up
+			 * in later (maybe FGH):
+			 *    ABC
+			 *    DE
+			 *    FGH
+			 * will be considered for merging later. We can always do this "exactly" (if the blocks
+			 * line up precisely), but to do this 'lossily', we guard it with 'FUZZY_VECTORS'.
+			 */
+			prev = b->prev;
+			while (prev && prev->type == FZ_STEXT_BLOCK_VECTOR && (prev->u.v.flags & FZ_STEXT_VECTOR_IS_RECTANGLE))
+			{
+				/* Lossless merging. */
+				if (prev->bbox.x0 == b->bbox.x0 && prev->bbox.x1 == b->bbox.x1 && prev->bbox.y1 + fudge >= b->bbox.y0 && prev->bbox.y0 - fudge <= b->bbox.y1)
+				{
+					/* Stacks exactly vertically. Very rarely hit. */
+					prev->bbox.y0 = fz_min(prev->bbox.y0, b->bbox.y0);
+					prev->bbox.y1 = fz_max(prev->bbox.y1, b->bbox.y1);
+					return;
+				}
+				else if (prev->bbox.y0 == b->bbox.y0 && prev->bbox.y1 == b->bbox.y1 && prev->bbox.x1 + fudge >= b->bbox.x0 && prev->bbox.x0 - fudge <= b->bbox.x1)
+				{
+					/* Stacks horizontally.  Very rarely hit. */
+					prev->bbox.x0 = fz_min(prev->bbox.x0, b->bbox.x0);
+					prev->bbox.x1 = fz_max(prev->bbox.x1, b->bbox.x1);
+					return;
+				}
+				if (tdev->flags & FZ_STEXT_FUZZY_VECTORS)
+				{
+					/* Be more forgiving in how we merge vectors */
+					/* We need to be careful not to merge together differently oriented borders for table cells.
+					 *        C
+					 *        |
+					 *        v
+					 *     +-----+-----+
+					 * A-> |     |     |
+					 *     +-----+-----+
+					 * B-> |     |     |
+					 *     +-----+-----+
+					 *
+					 * It'd be fine to merge borders A and B together, because it still signifies the same
+					 * edges. It would NOT be fine to merge A and C together, because we'd lose the sense
+					 * of them being borders, and just have a blob that covered the cell.
+					 * The fudge2 logic below should hopefully allow for this, as well as allowing us to
+					 * match blocks like:
+					 *    ABC
+					 *   DE FG
+					 *    HIJ
+					 *   KL MN
+					 *    OPQ
+					 */
+					float fudge2 = 2;
+					if ((fabsf(prev->bbox.x0 - b->bbox.x0) <= fudge2 || fabsf(prev->bbox.x1 - b->bbox.x1) <= fudge2) && prev->bbox.y1 + fudge >= b->bbox.y0 && prev->bbox.y0 - fudge <= b->bbox.y1)
+					{
+						/* Stacks vertically. */
+						goto join;
+					}
+					else if ((fabsf(prev->bbox.y0 - b->bbox.y0) <= fudge2 || fabsf(prev->bbox.y1 - b->bbox.y1) <= fudge2) && prev->bbox.x1 + fudge >= b->bbox.x0 && prev->bbox.x0 - fudge <= b->bbox.x1)
+					{
+						/* Stacks horizontally. */
+	join:
+						prev->bbox.x0 = fz_min(prev->bbox.x0, b->bbox.x0);
+						prev->bbox.x1 = fz_max(prev->bbox.x1, b->bbox.x1);
+						prev->bbox.y0 = fz_min(prev->bbox.y0, b->bbox.y0);
+						prev->bbox.y1 = fz_max(prev->bbox.y1, b->bbox.y1);
+						/* Unlink b (so, fiddle with b->prev, which is not necessarily prev!) */
+						b->prev->next = NULL;
+						if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+							tdev->lazy_vectors_tail = b->prev;
+						else if (page->last_struct)
+							page->last_struct->last_block = b->prev;
+						else
+							page->last_block = b->prev;
+						break;
+					}
+				}
+				/* Now, allow for looking further back. */
+				prev = prev->prev;
+			}
+		}
+	}
+
+	if (tdev->flags & FZ_STEXT_LAZY_VECTORS)
+		b = add_lazy_vector(ctx, page, tdev, id);
+	else
 	b = add_block_to_page(ctx, page, FZ_STEXT_BLOCK_VECTOR, id);
 
 	b->bbox = bbox;

@@ -1092,6 +1092,19 @@ void fz_invert_pixmap_rect(fz_context *ctx, fz_pixmap *pix, fz_irect rect)
 	else if (pix->alpha)
 	{
 		int n1 = pix->n - pix->alpha - s;
+		if (n1 == 0)
+		{
+			for (y = y0; y < y1; y++)
+			{
+				unsigned char *d = pix->samples + ((y * (size_t)pix->stride) + (x0 * (size_t)pix->n));
+				for (x = x0; x < x1; x++)
+				{
+					*d++ ^= 0xff;
+				}
+			}
+		}
+		else
+		{
 		for (y = y0; y < y1; y++)
 		{
 			unsigned char *d = pix->samples + ((y * (size_t)pix->stride) + (x0 * (size_t)pix->n));
@@ -1104,6 +1117,7 @@ void fz_invert_pixmap_rect(fz_context *ctx, fz_pixmap *pix, fz_irect rect)
 				d += n;
 			}
 		}
+	}
 	}
 	else if (s)
 	{

@@ -1058,6 +1058,7 @@ function mupdf_files()
     "stext-iterator.c",
     "stext-output.c",
     "stext-para.c",
+    "stext-raft.c",
     "stext-search.c",
     "stext-table.c",
     "store.c",
@@ -1259,7 +1260,6 @@ function efi_files()
     "src/utils/StrUtil.*",
   }
 end
-
 
 function test_util_files()
   files_in_dir("src/utils", {

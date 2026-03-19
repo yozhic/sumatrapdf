@@ -268,7 +268,7 @@ static int walk_string(string_walker *walker)
 		if (walker->graphemes)
 			hb_buffer_set_cluster_level(walker->hb_buf, HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES);
 		else
-		hb_buffer_set_cluster_level(walker->hb_buf, HB_BUFFER_CLUSTER_LEVEL_CHARACTERS);
+			hb_buffer_set_cluster_level(walker->hb_buf, HB_BUFFER_CLUSTER_LEVEL_CHARACTERS);
 
 		hb_buffer_add_utf8(walker->hb_buf, walker->start, walker->end - walker->start, 0, -1);
 
@@ -680,8 +680,8 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 	{
 		/* Left 2 Right */
 		init_string_walker(ctx, &walker, hb_buf, 0 /* L2R */, node->box->style->font, node->script, node->markup_lang, node->box->style->small_caps, text, 1);
-	while (walk_string(&walker))
-	{
+		while (walk_string(&walker))
+		{
 			unsigned int i;
 #ifdef DEBUG_DESPERATE_SPLITTING
 			for (i = 0; i < walker.glyph_count; ++i)
@@ -693,8 +693,8 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 			}
 			printf("\n");
 #endif
-		for (i = 0; i < walker.glyph_count; ++i)
-		{
+			for (i = 0; i < walker.glyph_count; ++i)
+			{
 				uint32_t can_break_here = (hb_glyph_info_get_glyph_flags(&walker.glyph_info[i]) & HB_GLYPH_FLAG_UNSAFE_TO_BREAK) == 0;
 
 				if (can_break_here)
@@ -710,7 +710,7 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 
 				/* Make sure we have the whole cluster */
 				while (i+1 < walker.glyph_count && walker.glyph_info[i].cluster == walker.glyph_info[i+1].cluster)
-			{
+				{
 					i++;
 					w += walker.glyph_pos[i].x_advance * em / walker.scale;
 				}
@@ -720,12 +720,12 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 		{
 			/* node becomes first cluster, node->next becomes the rest */
 			split_flow_at_byte_offset(ctx, ld->pool, node, at);
-				node->next->overflow_wrap = 1;
-				measure_string_w(ctx, node, ld->hb_buf);
-				measure_string_w(ctx, node->next, ld->hb_buf);
-				return;
-			}
+			node->next->overflow_wrap = 1;
+			measure_string_w(ctx, node, ld->hb_buf);
+			measure_string_w(ctx, node->next, ld->hb_buf);
+			return;
 		}
+	}
 	else
 	{
 		/* Right 2 Left */
@@ -740,7 +740,7 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 				printf("%s(%x, %d)",
 					can_break_here ? "|" : " ",
 					walker.glyph_info[i].codepoint, walker.glyph_info[i].cluster);
-	}
+			}
 			printf("\n");
 #endif
 			/* Find the first cluster we can break before. */
@@ -785,7 +785,7 @@ static void break_word_for_overflow_wrap(fz_context *ctx, fz_html_flow *node, la
 
 	/* Unless we've overflowed word is already only one cluster. Don't try breaking here again! */
 	if (w <= max_w)
-	node->atomic = 1;
+		node->atomic = 1;
 }
 
 /*
@@ -1135,16 +1135,16 @@ static int layout_block_page_break(fz_context *ctx, layout_data *ld, float *yp, 
 			*yp += page_h;
 	}
 	if (page_break == PB_RIGHT)
-		{
+	{
 		/* If we're restarting, make sure we only restart on a right page. */
 		if (SHOULD_STOP_FOR_RESTART(restart))
 			restart->end_flags = FZ_HTML_RESTARTER_START_END_FLAGS_SPECIFIC_SIDE;
 		if (side == 1) /* left pages, side == 1 */
-				*yp += page_h;
+			*yp += page_h;
 	}
 
-			return 1;
-		}
+	return 1;
+}
 
 /* === POSITION LOGIC === */
 
@@ -1594,7 +1594,7 @@ post_position(fz_context *ctx, position_data *pd, layout_data *ld, fz_html_box *
 			{
 				/* Already fine */
 				(void) box;
-	}
+			}
 		}
 		else
 		{
@@ -2528,8 +2528,8 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 		for (y = 0; y < table->h; y++)
 		{
 			for (x = 0; x < table->w; x++)
-		{
-			fz_html_box *cell, *child;
+			{
+				fz_html_box *cell, *child;
 				float cell_pad;
 				table_cell *tc = cell_at(ctx, table, x, y);
 
@@ -2553,24 +2553,24 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 					tc->maxw = w;
 				}
 				else
-			{
+				{
 					float cellminw = 0;
 					float cellmaxw = 0;
-				for (child = cell->down; child; child = child->next)
-				{
-					float min = largest_min_width(ctx, child) + cell_pad;
-					float max = largest_max_width(ctx, child) + cell_pad;
+					for (child = cell->down; child; child = child->next)
+					{
+						float min = largest_min_width(ctx, child) + cell_pad;
+						float max = largest_max_width(ctx, child) + cell_pad;
 						/* The logic here looks screwy, but isn't! */
 						if (min > cellminw)
 							cellminw = min;
 						if (max > cellmaxw)
 							cellmaxw = max;
-				}
+					}
 					tc->fixed = 0;
 					tc->minw = cellminw;
 					tc->maxw = cellmaxw;
+				}
 			}
-		}
 		}
 
 		/* Now we can calculate the column widths. */
@@ -2591,9 +2591,9 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 
 		if (min_tabw >= avail_w)
 		{
-		/* The minimum table width is equal to or wider than the available space.
+			/* The minimum table width is equal to or wider than the available space.
 			 * Assign the minimum widths and let the lines overflow...
-		 */
+			 */
 			box->s.layout.w = min_tabw;
 			for (col = 0; col < ncol; ++col)
 				colw[col].actual = colw[col].min;
@@ -2608,18 +2608,18 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 		}
 		else
 		{
-		/* The maximum width of the table is greater than the available space, but
-		 * the minimum table width is smaller. In this case, find the difference
-		 * between the available space and the minimum table width, lets call it
-		 * W. Lets also call D the difference between maximum and minimum width of
-		 * the table.
-		 *
-		 * For each column, let d be the difference between maximum and minimum
-		 * width of that column. Now set the column's width to the minimum width
-		 * plus d times W over D. This makes columns with large differences
-		 * between minimum and maximum widths wider than columns with smaller
-		 * differences.
-		 */
+			/* The maximum width of the table is greater than the available space, but
+			 * the minimum table width is smaller. In this case, find the difference
+			 * between the available space and the minimum table width, lets call it
+			 * W. Lets also call D the difference between maximum and minimum width of
+			 * the table.
+			 *
+			 * For each column, let d be the difference between maximum and minimum
+			 * width of that column. Now set the column's width to the minimum width
+			 * plus d times W over D. This makes columns with large differences
+			 * between minimum and maximum widths wider than columns with smaller
+			 * differences.
+			 */
 			float W = (avail_w - min_tabw);
 			float D = (max_tabw - min_tabw);
 			box->s.layout.w = avail_w;
@@ -2628,11 +2628,11 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 				for (col = 0; col < ncol; ++col)
 					colw[col].actual = colw[col].min + W / ncol;
 			}
-		else
-		{
-			for (col = 0; col < ncol; ++col)
-				colw[col].actual = colw[col].min + (colw[col].max - colw[col].min) * W / D;
-		}
+			else
+			{
+				for (col = 0; col < ncol; ++col)
+					colw[col].actual = colw[col].min + (colw[col].max - colw[col].min) * W / D;
+			}
 		}
 
 		/* Layout each row in turn. */
@@ -2724,7 +2724,7 @@ static int layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box)
 			}
 			return 0;
 		}
-		}
+	}
 
 	if (layout_block_page_break(ctx, ld, &ld->used[B], box->style->page_break_after))
 	{
@@ -2829,7 +2829,7 @@ static int layout_block(fz_context *ctx, layout_data *ld, fz_html_box *box)
 		}
 		ld->used[L] = ld->bounds[L];
 
-			if (child->type == BOX_BLOCK)
+		if (child->type == BOX_BLOCK)
 			eop = layout_block(ctx, ld, child);
 
 		else if (child->type == BOX_TABLE)
@@ -2840,10 +2840,10 @@ static int layout_block(fz_context *ctx, layout_data *ld, fz_html_box *box)
 			layout_flow(ctx, ld, child, box);
 			if (!WE_ARE_SKIPPING(restart))
 			{
-			if (child->s.layout.b > child->s.layout.y)
+				if (child->s.layout.b > child->s.layout.y)
 					box->s.layout.b = ld->used[B];
-				}
 			}
+		}
 
 		if (!WE_ARE_SKIPPING(restart))
 		{
@@ -3564,7 +3564,7 @@ static int draw_flow_box(fz_context *ctx, fz_html_box *box, float page_top, floa
 
 static void draw_rect(fz_context *ctx, fz_device *dev, fz_matrix ctm, float page_top, fz_css_color color, float x0, float y0, float x1, float y1)
 {
-		float rgb[3];
+	float rgb[3];
 	fz_path *path;
 
 	if (color.a <= 0)

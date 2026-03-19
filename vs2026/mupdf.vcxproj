@@ -1019,6 +1019,7 @@
     <ClCompile Include="..\mupdf\source\fitz\stext-iterator.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-output.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-para.c" />
+    <ClCompile Include="..\mupdf\source\fitz\stext-raft.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-search.c" />
     <ClCompile Include="..\mupdf\source\fitz\stext-table.c" />
     <ClCompile Include="..\mupdf\source\fitz\store.c" />

@@ -127,10 +127,10 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 
 	FZ_STEXT_CLIP: If this option is set, characters that would be entirely
 	clipped away by the current clipping path (or, more accurate, the smallest
-	bbox that contains the current clipping path) will be ignored. The
-	clip path is guaranteed to be smaller then the page mediabox, hence
-	this option subsumes an older, now deprecated, FZ_STEXT_MEDIABOX_CLIP
-	option.
+	bbox that contains the current clipping path) will be ignored. The bboxes
+	of images will be similarly reduced in size. The clip path is guaranteed
+	to be smaller then the page mediabox, hence this option subsumes an older,
+	now deprecated, FZ_STEXT_MEDIABOX_CLIP option.
 
 	FZ_STEXT_CLIP_RECT: If this option is set, characters that would be entirely
 	clipped away by the specified 'clip' rectangle in the options struct
@@ -146,6 +146,17 @@ typedef struct fz_stext_grid_positions fz_stext_grid_positions;
 	FZ_STEXT_COLLECT_VECTORS: If this option is set, we will collect
 	details (currently just the bbox) of vector graphics. This is intended
 	to be of use in segmentation analysis.
+
+	FZ_STEXT_LAZY_VECTORS: If this option is set, we will defer collected
+	vectors to the end of the text run they appear in. This prevents vector
+	drawn strikeouts, or diacritics/accents/marks from breaking the flow
+	of text.
+
+	FZ_STEXT_FUZZY_VECTORS: If this option is set, we 'fuzzily' collect
+	rectangular vectors of the same colour together. This enables us to
+	spot where 'pixels' or 'slices' of vectors are used to create the
+	appearance of characters on the page without exploding the storage
+	and processing time requirements.
 
 	FZ_STEXT_IGNORE_ACTUALTEXT: If this option is set, we will no longer
 	replace text by the ActualText replacement specified in the document.
@@ -202,6 +213,8 @@ enum
 	FZ_STEXT_CLIP_RECT = (1<<17),
 	FZ_STEXT_ACCURATE_ASCENDERS = (1<<18),
 	FZ_STEXT_ACCURATE_SIDE_BEARINGS = (1<<19),
+	FZ_STEXT_LAZY_VECTORS = (1<<20),
+	FZ_STEXT_FUZZY_VECTORS = (1<<21),
 
 	/* An old, deprecated option. */
 	FZ_STEXT_MEDIABOX_CLIP = FZ_STEXT_CLIP
@@ -1100,6 +1113,12 @@ typedef struct
 fz_stext_page_block_iterator fz_stext_page_block_iterator_begin(fz_stext_page *page);
 
 /*
+	Create a new iterator, initialised to point at the first non-struct block on the page
+	in depth first search order.
+*/
+fz_stext_page_block_iterator fz_stext_page_block_iterator_begin_dfs(fz_stext_page *page);
+
+/*
 	Move to the next block (never moving upwards).
 
 	If there is no next block, iterator.block is returned as NULL.
@@ -1166,5 +1185,62 @@ fz_classify_stext_rect(fz_context *ctx, fz_stext_page *page, fz_structure classi
 */
 int
 fz_stext_remove_page_fill(fz_context *ctx, fz_stext_page *page);
+
+typedef struct
+{
+	/* The maximum width or height that should be considered for rafting. */
+	int max_size;
+	/* If non-zero, make a combined image, rather than just the bbox. */
+	int combine_image;
+} fz_image_raft_options;
+
+void
+fz_stext_raft_images(fz_context *ctx, fz_stext_page *stext, fz_image_raft_options *options);
+
+/*
+	Flotilla/Raft handling
+
+	We call any 2-dimensional area that's covered by (some type of) content
+	a raft. i.e. it's made up of several distinct objects ("planks") lashed
+	together into something that covers a large flat area (a "raft").
+
+	The set of all such non-overlapping rafts on a page can be called a
+	"flotilla".
+
+	For instance, the borders and/or backgrounds from a table would form a
+	raft behind the text content. And the boundaries of that raft might
+	help us distinguish that table from an adjacent table on a different
+	raft.
+
+	While we could theoretically make rafts from anything, images and
+	vectors seem like the best bet. We could make rafts from mixed images
+	and vectors, but to start with, I think we'll get best results from
+	images and vectors separately.
+*/
+typedef struct fz_flotilla fz_flotilla;
+
+/*
+	Construct a flotilla from all the (rectangular) vectors on a page.
+*/
+fz_flotilla *
+fz_new_flotilla_from_stext_page_vectors(fz_context *ctx, fz_stext_page *page);
+
+/*
+	Drop the flotilla.
+*/
+void
+fz_drop_flotilla(fz_context *ctx, fz_flotilla *f);
+
+/*
+	How many rafts in this flotilla?
+*/
+int
+fz_flotilla_size(fz_context *ctx, fz_flotilla *flot);
+
+/*
+	Return the bounds of the ith raft in the flotilla.
+*/
+fz_rect
+fz_flotilla_raft_area(fz_context *ctx, fz_flotilla *flot, int i);
 
 #endif
