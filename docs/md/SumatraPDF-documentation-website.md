@@ -1,7 +1,8 @@
 [SumatraPDF](https://www.sumatrapdfreader.org/) is a free [PDF, EPUB, MOBI, CHM, XPS, DjVu, CBZ and CBR](Supported-document-formats.md) reader for Windows. It's small, fast, customizable and full of features.
 
-:columns
 ## Documentation for users
+
+:columns
 
 [Command Palette](Command-Palette.md)
 
@@ -44,9 +45,11 @@
 [Uninstalling SumatraPDF](Uninstalling-SumatraPDF.md)
 
 [Version history](Version-history.md)
+:columns
 
-## Misc
+## Misc docs
 
+:columns
 [Contribute translation](Contribute-translation.md)
 
 [How to submit bug reports](How-to-submit-bug-reports.md)
@@ -62,28 +65,6 @@
 [Corrupted installation](Corrupted-installation.md)
 
 [Why only Windows?](Why-only-Windows.md)
-
-## Information for developers
-
-[Contribute to SumatraPDF](Contribute-to-SumatraPDF.md)
-
-[Logview](Logview.md)
-
-[Build system](Build-system.md)
-
-[Debugging Sumatra](Debugging-Sumatra.md)
-
-[How we store settings](How-we-store-settings.md)
-
-[Using DrMemory](Using-DrMemory.md)
-
-[Using OpenCppCoverage](Using-OpenCppCoverage.md)
-
-[Is there a virus in Sumatra sources?](Is-there-a-virus-in-Sumatra-sources.md)
-
-[Accessibility and Text-to-Speech](Accessibility-and-Text-to-Speech.md)
-
-[Source code downloads](Source-code-downloads.md)
 :columns
 
 ## Downloads
