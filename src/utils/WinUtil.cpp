@@ -792,6 +792,15 @@ void HandleRedirectedConsoleOnShutdown() {
     }
 }
 
+WCHAR* GetSelfExePathW() {
+    WCHAR buf[MAX_PATH + 2]{};
+    DWORD nChars = dimof(buf) - 1;
+    auto h = GetInstance();
+    // TODO: GetModuleFileNameW() truncates if too big but doesn't return the needed size
+    GetModuleFileNameW(h, buf, nChars);
+    return str::Dup(buf);
+}
+
 // Return the full exe path of my own executable
 TempStr GetSelfExePathTemp() {
     WCHAR buf[MAX_PATH + 2]{};

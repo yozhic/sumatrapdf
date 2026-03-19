@@ -2114,6 +2114,8 @@ int cmapdump_main(int argc, char* argv[]);
 int pdfaudit_main(int argc, char* argv[]);
 
 char** fz_argv_from_wargv(int argc, wchar_t** wargv);
+void fz_free_argv(int argc, char** argv);
+
 #define FZ_ENABLE_JS 1
 #define FZ_ENABLE_PDF 1
 #define FZ_ENABLE_BARCODE 0
@@ -2217,23 +2219,42 @@ static int MaybeMutool() {
         return kNoMutool;
     }
     int argc;
-    wchar_t** wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
+    WCHAR** wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
     if (!wargv) {
         // Very rare – allocation failure or severely malformed command line
         log("CommandLineToArgvW() failed\n");
         LogLastError();
         return 0;
     }
+    if (argc == 0) {
+        LocalFree(wargv);
+        return kNoMutool;
+    }
 
+    WCHAR* exePath = GetSelfExePathW();
     bool isMutool = false;
-    if (argc >= 1 && str::EqI(wargv[0], L"mutool")) isMutool = true;
-    if (argc >= 2 && str::EqI(wargv[1], L"mutool")) isMutool = true;
-    if (!isMutool) return kNoMutool;
+    bool skipFirstArg = false;
+    if (str::Find(wargv[0], exePath) != nullptr) {
+        skipFirstArg = true;
+        argc--;
+        wargv++;
+    }
+    str::Free(exePath);
+    if (argc == 0) {
+        LocalFree(wargv - 1);
+        return kNoMutool;
+    }
+    if (!str::EqI(wargv[0], L"mutool")) {
+        LocalFree(wargv - 1);
+        return kNoMutool;
+    }
 
     RedirectIOToExistingConsole();
-
     char** argv = fz_argv_from_wargv(argc, wargv);
-    return mutool_main(argc, argv);
+    LocalFree(wargv - 1);
+    int res = mutool_main(argc, argv);
+    fz_free_argv(argc, argv);
+    return res;
 }
 
 int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
@@ -2751,7 +2772,7 @@ ContinueOpenWindow:
     CleanUpThumbnailCache();
 
 Exit:
-    logf("Exiting with exit code: %d\n", exitCode);
+    //logf("Exiting with exit code: %d\n", exitCode);
     UnregisterSettingsForFileChanges();
 
     HandleRedirectedConsoleOnShutdown();

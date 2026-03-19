@@ -76,6 +76,7 @@ HRESULT CLSIDFromString(const char* lpsz, LPCLSID pclsid);
 TempStr GetSpecialFolderTemp(int csidl, bool createIfMissing = false);
 TempStr GetTempDirTemp();
 TempStr GetSelfExePathTemp();
+WCHAR* GetSelfExePathW();
 TempStr GetSelfExeDirTemp();
 void ChangeCurrDirToDocuments();
 int FileTimeDiffInSecs(const FILETIME& ft1, const FILETIME& ft2);

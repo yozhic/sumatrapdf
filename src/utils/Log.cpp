@@ -106,7 +106,7 @@ static void logToPipe(const char* s, size_t n = 0) {
     DWORD mode = PIPE_READMODE_MESSAGE;
     ok = SetNamedPipeHandleState(hLogPipe, &mode, nullptr, nullptr);
     if (!ok) {
-        OutputDebugStringA("logPipe: SetNamedPipeHandleState() failed\n");
+        OutputDebugStringA("logToPipe: SetNamedPipeHandleState() failed\n");
     }
 
     if (didConnect) {
@@ -122,7 +122,7 @@ static void logToPipe(const char* s, size_t n = 0) {
     if (!ok) {
 #if 0
         DWORD err = GetLastError();
-        OutputDebugStringA("logPipe: WriteFile() failed with error: ");
+        OutputDebugStringA("logToPipe: WriteFile() failed with error: ");
         char buf[256]{};
         snprintf(buf, sizeof(buf) - 1, "%d %s\n", (int)err, getWinError(err));
         OutputDebugStringA(buf);

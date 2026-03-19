@@ -20,6 +20,7 @@ EXPORTS
 	mugrep_main
 	pdfaudit_main
 	fz_argv_from_wargv
+	fz_free_argv
 	minilisp_gc
 	fz_set_user_css
 	fz_set_use_document_css
