@@ -261,7 +261,6 @@ struct js_State
 	js_Value *stack;
 
 	/* garbage collector list */
-	int gcpause;
 	int gcmark;
 	unsigned int gccounter, gcthresh;
 	js_Environment *gcenv;
@@ -270,6 +269,9 @@ struct js_State
 	js_String *gcstr;
 
 	js_Object *gcroot; /* gc scan list */
+
+	int runlimit;
+	int memlimit;
 
 	/* environments on the call stack but currently not in scope */
 	int envtop;
