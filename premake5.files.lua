@@ -946,7 +946,7 @@ function mupdf_files()
   files { "mupdf/source/fitz/*.h" }
   files_in_dir("mupdf/source/fitz", {
     "archive.c",
-    -- "barcode.c",
+    "barcode.c",
     "bbox-device.c",
     "bidi.c",
     "bidi-std.c",
@@ -1029,6 +1029,7 @@ function mupdf_files()
     "memento.c",
     "memory.c",
     "noto.c",
+    "ocr-device.c",
     "outline.c",
     "output.c",
     "output-cbz.c",
@@ -1083,8 +1084,10 @@ function mupdf_files()
     "untar.c",
     "unzip.c",
     "util.c",
+    "warp.c",
     "writer.c",
     "xml-write.c",
+    "xmltext-device.c",
     "xml.c",
     "zip.c",
   })
@@ -1138,6 +1141,7 @@ function mupdf_files()
     "pdf-nametree.c",
     "pdf-object.c",
     "pdf-op-buffer.c",
+    "pdf-op-color.c",
     "pdf-op-filter.c",
     "pdf-op-run.c",
     "pdf-op-vectorize.c",
@@ -1150,6 +1154,7 @@ function mupdf_files()
     "pdf-resources.c",
     "pdf-run.c",
     "pdf-shade.c",
+    "pdf-shade-recolor.c",
     "pdf-signature.c",
     "pdf-store.c",
     "pdf-stream.c",
@@ -1214,6 +1219,10 @@ function mupdf_files()
     "mupdf/include/mupdf/helpers/*.h",
     "mupdf/include/mupdf/pdf/*.h",
     "mupdf/include/mupdf/*.h"
+  }
+  files {
+    "mupdf/source/helpers/mu-threads/mu-threads.c",
+    "mupdf/source/helpers/pkcs7/pkcs7-openssl.c",
   }
 end
 

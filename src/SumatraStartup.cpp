@@ -653,7 +653,6 @@ static void CheckIsStoreBuild() {
     if (file::Exists(path)) {
         gIsStoreBuild = true;
     }
-    return;
 }
 
 // we delay load libmupdf.dll but it seems in some cases it fails to load
@@ -2090,7 +2089,154 @@ static void RunIFilterPipeServer(const char* pipeName) {
     logf("RunIFilterPipeServer: done, status=%d\n", status);
 }
 
-int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
+extern "C" {
+int muconvert_main(int argc, char* argv[]);
+int mudraw_main(int argc, char* argv[]);
+int mutrace_main(int argc, char* argv[]);
+int murun_main(int argc, char* argv[]);
+
+int pdfclean_main(int argc, char* argv[]);
+int pdfextract_main(int argc, char* argv[]);
+int pdfinfo_main(int argc, char* argv[]);
+int pdfposter_main(int argc, char* argv[]);
+int pdfshow_main(int argc, char* argv[]);
+int pdfpages_main(int argc, char* argv[]);
+int pdfcreate_main(int argc, char* argv[]);
+int pdfmerge_main(int argc, char* argv[]);
+int pdfsign_main(int argc, char* argv[]);
+int pdfrecolor_main(int argc, char* argv[]);
+int pdftrim_main(int argc, char* argv[]);
+int pdfbake_main(int argc, char* argv[]);
+int mubar_main(int argc, char* argv[]);
+int mugrep_main(int argc, char* argv[]);
+
+int cmapdump_main(int argc, char* argv[]);
+int pdfaudit_main(int argc, char* argv[]);
+
+char** fz_argv_from_wargv(int argc, wchar_t** wargv);
+#define FZ_ENABLE_JS 1
+#define FZ_ENABLE_PDF 1
+#define FZ_ENABLE_BARCODE 0
+#define nelem(x) (sizeof(x) / sizeof((x)[0]))
+#define FZ_VERSION "1.27.2"
+
+static struct {
+    int (*func)(int argc, char* argv[]);
+    const char* name;
+    const char* desc;
+} tools[] = {
+#if FZ_ENABLE_JS
+    {murun_main, "run", "run javascript"},
+#endif
+    {mudraw_main, "draw", "convert document"},
+    {muconvert_main, "convert", "convert document (with simpler options)"},
+#if FZ_ENABLE_PDF
+    {pdfaudit_main, "audit", "produce usage stats from PDF files"},
+    {pdfbake_main, "bake", "bake PDF form into static content"},
+    {pdfclean_main, "clean", "rewrite PDF file"},
+    {pdfcreate_main, "create", "create PDF document"},
+    {pdfextract_main, "extract", "extract font and image resources"},
+    {pdfinfo_main, "info", "show information about PDF resources"},
+    {pdfmerge_main, "merge", "merge pages from multiple PDF sources into a new PDF"},
+    {pdfpages_main, "pages", "show information about PDF pages"},
+    {pdfposter_main, "poster", "split large PDF page into many tiles"},
+    {pdfrecolor_main, "recolor", "change colorspace of PDF document"},
+    {pdfshow_main, "show", "show internal PDF objects"},
+    //{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
+    {pdftrim_main, "trim", "trim PDF page contents"},
+// #ifndef NDEBUG
+//{ cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
+// #endif
+#endif
+    {mugrep_main, "grep", "search for text"},
+    {mutrace_main, "trace", "trace device calls"},
+#if FZ_ENABLE_BARCODE
+    {mubar_main, "barcode", "encode/decode barcodes"},
+#endif
+};
+
+static int namematch(const char* end, const char* start, const char* match) {
+    size_t len = strlen(match);
+    return ((end - len >= start) && (strncmp(end - len, match, len) == 0));
+}
+
+static int mutool_main(int argc, char** argv) {
+    char *start, *end;
+    char buf[32];
+    int i;
+
+    if (argc == 0) {
+        fprintf(stderr, "No command name found!\n");
+        return 1;
+    }
+
+    /* Check argv[0] */
+
+    if (argc > 0) {
+        end = start = argv[0];
+        while (*end) end++;
+        if ((end - 4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
+            end = end - 4;
+        for (i = 0; i < (int)nelem(tools); i++) {
+            strcpy(buf, "mupdf");
+            strcat(buf, tools[i].name);
+            if (namematch(end, start, buf) || namematch(end, start, buf + 2)) return tools[i].func(argc, argv);
+            strcpy(buf, "mu");
+            strcat(buf, tools[i].name);
+            if (namematch(end, start, buf)) return tools[i].func(argc, argv);
+        }
+    }
+
+    /* Check argv[1] */
+
+    if (argc > 1) {
+        for (i = 0; i < (int)nelem(tools); i++)
+            if (!strcmp(tools[i].name, argv[1])) return tools[i].func(argc - 1, argv + 1);
+        if (!strcmp(argv[1], "-v")) {
+            fprintf(stderr, "mutool version %s\n", FZ_VERSION);
+            return 0;
+        }
+    }
+
+    /* Print usage */
+
+    fprintf(stderr, "mutool version %s\n", FZ_VERSION);
+    fprintf(stderr, "usage: mutool <command> [options]\n");
+
+    for (i = 0; i < (int)nelem(tools); i++) fprintf(stderr, "\t%s\t-- %s\n", tools[i].name, tools[i].desc);
+
+    return 1;
+}
+}
+
+constexpr int kNoMutool = -1234321;
+
+static int MaybeMutool() {
+    WCHAR* cmdLine = GetCommandLineW();
+    if (!str::Find(cmdLine, L"mutool")) {
+        return kNoMutool;
+    }
+    int argc;
+    wchar_t** wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
+    if (!wargv) {
+        // Very rare – allocation failure or severely malformed command line
+        log("CommandLineToArgvW() failed\n");
+        LogLastError();
+        return 0;
+    }
+
+    bool isMutool = false;
+    if (argc >= 1 && str::EqI(wargv[0], L"mutool")) isMutool = true;
+    if (argc >= 2 && str::EqI(wargv[1], L"mutool")) isMutool = true;
+    if (!isMutool) return kNoMutool;
+
+    RedirectIOToExistingConsole();
+
+    char** argv = fz_argv_from_wargv(argc, wargv);
+    return mutool_main(argc, argv);
+}
+
+int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
     RememberMainUIThreadId();
     int exitCode = 1; // by default it's error
     int nWithDde = 0;
@@ -2120,7 +2266,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _
     srand((unsigned int)time(nullptr));
 
     if (!gIsAsanBuild) {
-        // SetupCrashHandler()
         TempStr symDir = GetCrashInfoDirTemp();
         TempStr crashDumpPath = path::JoinTemp(symDir, "sumatrapdfcrash.dmp");
         TempStr crashFilePath = path::JoinTemp(symDir, "sumatrapdfcrash.txt");
@@ -2142,6 +2287,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _
     Flags flags;
     ParseFlags(GetCommandLineW(), flags);
     gCli = &flags;
+    bool isInstaller = flags.install || flags.runInstallNow || flags.fastInstall || IsInstallerAndNamedAsSuch();
+    bool isUninstaller = flags.uninstall;
+    bool noLogHere = isInstaller || isUninstaller;
+
+    if (MaybeMutool() != kNoMutool) {
+        goto Exit;
+    }
 
     if (gCli->silent) {
         gLogToConsole = false;
@@ -2186,10 +2338,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _
         return 0;
     }
 #endif
-
-    bool isInstaller = flags.install || flags.runInstallNow || flags.fastInstall || IsInstallerAndNamedAsSuch();
-    bool isUninstaller = flags.uninstall;
-    bool noLogHere = isInstaller || isUninstaller;
 
     if (flags.log && !noLogHere) {
         logFilePath = GetLogFilePathTemp();
@@ -2317,8 +2465,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _
 #if defined(DEBUG)
     if (flags.testApp) {
         // in TestApp.cpp
-        extern void TestApp(HINSTANCE hInstance);
-        TestApp(hInstance);
+        extern void TestApp();
+        TestApp();
         return 0;
     }
 #endif
@@ -2634,7 +2782,6 @@ Exit:
     DeleteCreatedFonts();
     DeleteBitmap(gBitmapReloadingCue);
 
-    extern void CleanupEngineDjVu(); // in EngineDjVu.cpp
     CleanupEngineDjVu();
     destroy_system_font_list();
 

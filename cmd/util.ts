@@ -70,8 +70,7 @@ function findVsRootVer(ver: string): string {
       return vsRoot;
     }
   }
-
-  throw new Error("couldn't find Visual Studio installation");
+  return "";
 }
 
 function findTool(vsRoot: string, relPath: string): string {
@@ -82,25 +81,18 @@ function findTool(vsRoot: string, relPath: string): string {
   return "";
 }
 
-export function detectVisualStudio2022(): VisualStudioInfo {
-  return detectVisualStudio("2022");
-}
-
-export function detectVisualStudio2026(): VisualStudioInfo {
-  return detectVisualStudio("18");
-}
-
-export function detectVisualStudio(ver = ""): VisualStudioInfo {
-  if (!ver) ver = "2022";
+export function detectVisualStudioVer(ver: string): VisualStudioInfo | undefined {
   const vsRoot = findVsRootVer(ver);
+  if (vsRoot == "") return;
+
   const msbuildPath = findTool(vsRoot, msBuildRelPath);
+  if (!msbuildPath) {
+    return;
+  }
+
   const clangFormatPath = findTool(vsRoot, clangFormatRelPath);
   const clangTidyPath = findTool(vsRoot, clangTidyRelPath);
   const llvmPdbutilPath = findLlvmPdbUtil();
-
-  if (!msbuildPath) {
-    throw new Error(`couldn't find msbuild.exe in ${vsRoot}`);
-  }
 
   console.log(`vsRoot: ${vsRoot}`);
   console.log(`msbuildPath: ${msbuildPath}`);
@@ -109,6 +101,34 @@ export function detectVisualStudio(ver = ""): VisualStudioInfo {
   if (llvmPdbutilPath) console.log(`llvmPdbutilPath: ${llvmPdbutilPath}`);
 
   return { vsRoot, msbuildPath, clangFormatPath, clangTidyPath, llvmPdbutilPath };
+}
+
+export function detectVisualStudio2022(): VisualStudioInfo {
+  let res = detectVisualStudioVer("2022");
+  if (!res) {
+    throw new Error(`couldn't find vs 2022 msbuild.exe `);
+  }
+  return res;
+}
+
+export function detectVisualStudio2026(): VisualStudioInfo {
+  let res = detectVisualStudioVer("18");
+  if (!res) {
+    throw new Error(`couldn't find vs 2026 msbuild.exe `);
+  }
+  return res;
+}
+
+export function detectVisualStudio(): VisualStudioInfo {
+  let res = detectVisualStudioVer("2022");
+  if (res) return res;
+  if (!res) {
+    res = detectVisualStudioVer("18");
+  }
+  if (!res) {
+    throw new Error(`couldn't find vs 2026 or vs 2022`);
+  }
+  return res;
 }
 
 export async function runLogged(cmd: string, args: string[], cwd?: string): Promise<void> {

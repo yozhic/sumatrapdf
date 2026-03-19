@@ -3,6 +3,6 @@
 #include "utils/WinUtil.h"
 #include "test-app.h"
 
-int TestTab(HINSTANCE hInstance, int nCmdShow) {
+int TestTab(int nCmdShow) {
     return 0;
 }

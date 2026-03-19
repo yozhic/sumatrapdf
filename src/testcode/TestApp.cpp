@@ -10,20 +10,18 @@
 #include "utils/Log.h"
 
 // in TestTab.cpp
-extern int TestTab(HINSTANCE hInstance, int nCmdShow);
+extern int TestTab(int nCmdShow);
 // in TestLayout.cpp
-extern int TestLayout(HINSTANCE hInstance, int nCmdShow);
+extern int TestLayout(int nCmdShow);
 // in SumatraPDF.cpp
 extern bool IsUIRtl();
 
-HINSTANCE gHinst = nullptr;
-
 static void LaunchTabs() {
-    TestTab(gHinst, SW_SHOW);
+    TestTab(SW_SHOW);
 }
 
 static void LaunchLayout() {
-    TestLayout(gHinst, SW_SHOW);
+    TestLayout(SW_SHOW);
 }
 
 static ILayout* CreateMainLayout(HWND hwnd) {
@@ -56,9 +54,7 @@ static void OnDestroy(Wnd::DestroyEvent*) {
 // in Window.cpp
 int RunMessageLoop(HACCEL accelTable, HWND hwndDialog);
 
-void TestApp(HINSTANCE hInstance) {
-    gHinst = hInstance;
-
+void TestApp() {
     auto w = new TestWnd();
     auto fn = MkFunc1Void<Wnd::DestroyEvent*>(OnDestroy);
     w->onDestroy = fn;

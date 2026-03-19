@@ -2,6 +2,24 @@
 
 LIBRARY libmupdf
 EXPORTS
+	muconvert_main
+	mudraw_main
+	mutrace_main
+	murun_main
+	pdfclean_main
+	pdfextract_main
+	pdfinfo_main
+	pdfposter_main
+	pdfshow_main
+	pdfpages_main
+	pdfcreate_main
+	pdfmerge_main
+	pdfrecolor_main
+	pdftrim_main
+	pdfbake_main
+	mugrep_main
+	pdfaudit_main
+	fz_argv_from_wargv
 	minilisp_gc
 	fz_set_user_css
 	fz_set_use_document_css

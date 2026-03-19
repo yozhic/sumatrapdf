@@ -1,7 +1,7 @@
 import { $, Glob } from "bun";
 import { join, basename } from "node:path";
 import { cpus } from "node:os";
-import { detectVisualStudio } from "./util.ts";
+import { detectVisualStudio } from "./util";
 
 async function globFiles(patterns: string[]): Promise<string[]> {
   const files: string[] = [];

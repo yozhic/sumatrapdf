@@ -909,6 +909,7 @@
     <ClCompile Include="..\mupdf\source\cbz\mucbz.c" />
     <ClCompile Include="..\mupdf\source\cbz\muimg.c" />
     <ClCompile Include="..\mupdf\source\fitz\archive.c" />
+    <ClCompile Include="..\mupdf\source\fitz\barcode.c" />
     <ClCompile Include="..\mupdf\source\fitz\bbox-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\bidi-std.c" />
     <ClCompile Include="..\mupdf\source\fitz\bidi.c" />
@@ -990,6 +991,7 @@
     <ClCompile Include="..\mupdf\source\fitz\memento.c" />
     <ClCompile Include="..\mupdf\source\fitz\memory.c" />
     <ClCompile Include="..\mupdf\source\fitz\noto.c" />
+    <ClCompile Include="..\mupdf\source\fitz\ocr-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\outline.c" />
     <ClCompile Include="..\mupdf\source\fitz\output-cbz.c" />
     <ClCompile Include="..\mupdf\source\fitz\output-csv.c" />
@@ -1044,10 +1046,14 @@
     <ClCompile Include="..\mupdf\source\fitz\untar.c" />
     <ClCompile Include="..\mupdf\source\fitz\unzip.c" />
     <ClCompile Include="..\mupdf\source\fitz\util.c" />
+    <ClCompile Include="..\mupdf\source\fitz\warp.c" />
     <ClCompile Include="..\mupdf\source\fitz\writer.c" />
     <ClCompile Include="..\mupdf\source\fitz\xml-write.c" />
     <ClCompile Include="..\mupdf\source\fitz\xml.c" />
+    <ClCompile Include="..\mupdf\source\fitz\xmltext-device.c" />
     <ClCompile Include="..\mupdf\source\fitz\zip.c" />
+    <ClCompile Include="..\mupdf\source\helpers\mu-threads\mu-threads.c" />
+    <ClCompile Include="..\mupdf\source\helpers\pkcs7\pkcs7-openssl.c" />
     <ClCompile Include="..\mupdf\source\html\css-apply.c" />
     <ClCompile Include="..\mupdf\source\html\css-parse.c" />
     <ClCompile Include="..\mupdf\source\html\epub-doc.c" />
@@ -1091,6 +1097,7 @@
     <ClCompile Include="..\mupdf\source\pdf\pdf-nametree.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-object.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-op-buffer.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-op-color.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-op-filter.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-op-run.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-op-vectorize.c" />
@@ -1102,6 +1109,7 @@
     <ClCompile Include="..\mupdf\source\pdf\pdf-repair.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-resources.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-run.c" />
+    <ClCompile Include="..\mupdf\source\pdf\pdf-shade-recolor.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-shade.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-signature.c" />
     <ClCompile Include="..\mupdf\source\pdf\pdf-store.c" />
