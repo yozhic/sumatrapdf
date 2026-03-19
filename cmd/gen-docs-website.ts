@@ -143,17 +143,9 @@ async function main() {
   }
 
   // copy CSS and JS files
-  const cssJsFiles = ["sumatra.css", "gen_toc.js"];
+  const cssJsFiles = ["sumatra.css", "gen_toc.js", "favicon.ico"];
   for (const name of cssJsFiles) {
-    const srcPath = join("docs", "www", name);
-    const dstPath = join(websiteDir, "www", name);
-    copyFileNormalized(dstPath, srcPath);
-  }
-
-  // copy search files
-  const searchFiles = ["gen_docs.search.js", "gen_docs.search.html"];
-  for (const name of searchFiles) {
-    const srcPath = join("cmd", "html-helpers", name);
+    const srcPath = join("cmd", "docs-html", name);
     const dstPath = join(websiteDir, "www", name);
     copyFileNormalized(dstPath, srcPath);
   }

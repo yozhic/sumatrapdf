@@ -17,13 +17,13 @@ import { commands as commandsDef } from "./gen-commands";
 
 const docsDir = "docs";
 const mdDir = join(docsDir, "md");
-const wwwOutDir = join(docsDir, "www");
+const wwwOutDir = "docs-www";
 
 const mdProcessed = new Map<string, string>();
 const mdToProcess: string[] = [];
 
-const searchJS = `<script>${readFileSync(join("cmd", "html-helpers", "gen_docs.search.js"), "utf-8")}</script>`;
-const searchHTML = readFileSync(join("cmd", "html-helpers", "gen_docs.search.html"), "utf-8");
+const searchJS = `<script>${readFileSync(join("cmd", "docs-html", "gen_docs.search.js"), "utf-8")}</script>`;
+const searchHTML = readFileSync(join("cmd", "docs-html", "gen_docs.search.html"), "utf-8");
 const tmplManual = readFileSync(join(docsDir, "manual.tmpl.html"), "utf-8");
 
 const h1BreadcrumbsStart = `
@@ -299,6 +299,8 @@ function writeDocsHtmlFiles(): void {
   }
 
   copyDirRecursive(join(wwwOutDir, "img"), join(mdDir, "img"));
+  // copyDirRecursive(wwwOutDir, join(mdDir, "img"));
+  copyDirRecursive(wwwOutDir, join("cmd", "docs-html"));
 }
 
 function extractCommandsFromMarkdown(): string[] {

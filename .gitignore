@@ -32,5 +32,4 @@ nul
 docs/scratch.txt
 bin/zopflipng.exe
 
-docs/www/img
-docs/www/*.html
+docs-www/
