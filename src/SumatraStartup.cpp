@@ -2207,7 +2207,7 @@ constexpr int kNoMutool = -1234321;
 
 static int MaybeMutool() {
     WCHAR* cmdLine = GetCommandLineW();
-    if (!str::Find(cmdLine, L"mutool")) {
+    if (!str::Find(cmdLine, L"tool")) {
         return kNoMutool;
     }
     int argc;
@@ -2236,7 +2236,8 @@ static int MaybeMutool() {
         LocalFree(wargv - 1);
         return kNoMutool;
     }
-    if (!str::EqI(wargv[0], L"mutool")) {
+    bool isTool = str::EqI(wargv[0], L"mutool") || str::EqI(wargv[0], L"tool");
+    if (!isTool) {
         LocalFree(wargv - 1);
         return kNoMutool;
     }
