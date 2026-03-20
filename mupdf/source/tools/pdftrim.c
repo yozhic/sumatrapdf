@@ -164,7 +164,7 @@ read_margins(float *margin, char *arg)
 static int
 usage(void)
 {
-	fprintf(stderr, "usage: mutool trim [options] <input filename>\n");
+	fprintf(stderr, "Usage: SumatraPDF trim [options] <input filename>\n");
 	fprintf(stderr, "\t-b -\tWhich box to trim to (MediaBox(default), CropBox, BleedBox, TrimBox, ArtBox)\n");
 	fprintf(stderr, "\t-m -\tAdd margins to box (+ve for inwards, -ve outwards).\n");
 	fprintf(stderr, "\t\t\t<All> or <V>,<H> or <T>,<R>,<B>,<L>\n");

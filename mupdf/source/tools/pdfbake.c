@@ -34,7 +34,7 @@
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool bake [options] input.pdf [output.pdf]\n"
+		"Usage: SumatraPDF bake [options] input.pdf [output.pdf]\n"
 		"\t-A\tkeep annotations\n"
 		"\t-F\tkeep forms\n"
 		"\t-O -\tcomma separated list of output options\n"

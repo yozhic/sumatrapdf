@@ -411,7 +411,7 @@ static struct {
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mudraw [options] file [pages]\n"
+		"usage: SumatraPDF draw [options] file [pages]\n"
 		"\t-p -\tpassword\n"
 		"\n"
 		"\t-o -\toutput file name (%%d for page number)\n"

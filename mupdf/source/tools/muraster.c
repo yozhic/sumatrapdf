@@ -504,8 +504,7 @@ static struct {
 static int usage(void)
 {
 	fprintf(stderr,
-		"muraster version " FZ_VERSION "\n"
-		"usage: muraster [options] file [pages]\n"
+		"usage: SumatraPDF raster [options] file [pages]\n"
 		"\t-p -\tpassword\n"
 		"\n"
 		"\t-o -\toutput file name\n"

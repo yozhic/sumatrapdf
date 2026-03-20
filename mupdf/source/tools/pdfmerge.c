@@ -36,7 +36,7 @@
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool merge [-o output.pdf] [-O options] input.pdf [pages] [input2.pdf] [pages2] ...\n"
+		"Usage: SumatraPDF merge [-o output.pdf] [-O options] input.pdf [pages] [input2.pdf] [pages2] ...\n"
 		"\t-o -\tname of PDF file to create\n"
 		"\t-O -\tcomma separated list of output options\n"
 		"\tinput.pdf\tname of input file from which to copy pages\n"

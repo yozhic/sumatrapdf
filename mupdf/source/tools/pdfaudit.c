@@ -2059,7 +2059,7 @@ filter_file(fz_context *ctx, fz_output *out, const char *filename)
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool audit [options] input.pdf [input2.pdf ...]\n"
+		"Usage: SumatraPDF audit [options] input.pdf [input2.pdf ...]\n"
 		"\t-o -\toutput file\n"
 		);
 	return 1;

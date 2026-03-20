@@ -38,7 +38,7 @@ static int doicc = 1;
 
 static int usage(void)
 {
-	fprintf(stderr, "usage: mutool extract [options] file.pdf [object numbers]\n");
+	fprintf(stderr, "Usage: SumatraPDF extract [options] file.pdf [object numbers]\n");
 	fprintf(stderr, "\t-p\tpassword\n");
 	fprintf(stderr, "\t-r\tconvert images to rgb\n");
 	fprintf(stderr, "\t-a\tembed SMasks as alpha channel\n");

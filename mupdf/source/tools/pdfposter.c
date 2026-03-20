@@ -40,7 +40,7 @@ static int x_dir = 1;
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool poster [options] input.pdf [output.pdf]\n"
+		"Usage: SumatraPDF poster [options] input.pdf [output.pdf]\n"
 		"\t-p -\tpassword\n"
 		"\t-m -\tmargin (overlap) between pages (pts, or %%)\n"
 		"\t-x\tx decimation factor\n"

@@ -186,7 +186,7 @@ static void
 infousage(void)
 {
 	fprintf(stderr,
-		"usage: mutool info [options] file.pdf [pages]\n"
+		"Usage: SumatraPDF info [options] file.pdf [pages]\n"
 		"\t-p -\tpassword for decryption\n"
 		"\t-F\tlist fonts\n"
 		"\t-I\tlist images\n"

@@ -36,7 +36,7 @@
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool create [-o output.pdf] [-O options] page.txt [page2.txt ...]\n"
+		"Usage: SumatraPDF create [-o output.pdf] [-O options] page.txt [page2.txt ...]\n"
 		"\t-o -\tname of PDF file to create\n"
 		"\t-O -\tcomma separated list of output options\n"
 		"\tpage.txt\tcontent stream with annotations for creating resources\n\n"

@@ -29,7 +29,7 @@
 static int usage(void)
 {
 	fprintf(stderr,
-		"usage: mutool trace [options] file [pages]\n"
+		"Usage: SumatraPDF trace [options] file [pages]\n"
 		"\t-p -\tpassword\n"
 		"\n"
 		"\t-b -\tuse named page box (MediaBox, CropBox, BleedBox, TrimBox, or ArtBox)\n"

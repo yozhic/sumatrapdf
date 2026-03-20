@@ -33,7 +33,7 @@
 static int
 usage(void)
 {
-	fprintf(stderr, "usage: mutool recolor [options] <input filename>\n");
+	fprintf(stderr, "Usage: SumatraPDF recolor [options] <input filename>\n");
 	fprintf(stderr, "\t-c -\tOutput colorspace (gray(default), rgb, cmyk)\n");
 	fprintf(stderr, "\t-r\tRemove OutputIntent(s)\n");
 	fprintf(stderr, "\t-o -\tOutput file\n");

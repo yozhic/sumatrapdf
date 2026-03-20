@@ -30,11 +30,11 @@ extern void WinUtilTest();
 extern void StrFormatTest();
 extern void StrVecTest();
 
- void GetPrintersInfo(struct str::Str&) {
+void GetPrintersInfo(struct str::Str&) {
     /* stub: do nothing */
 }
 
- void MaybeDelayedWarningNotification(const char*, ...) {
+void MaybeDelayedWarningNotification(const char*, ...) {
     // a stub to make this compile
 }
 

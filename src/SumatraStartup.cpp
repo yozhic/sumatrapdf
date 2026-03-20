@@ -2107,11 +2107,12 @@ int pdfaudit_main(int argc, char* argv[]);
 
 char** fz_argv_from_wargv(int argc, wchar_t** wargv);
 void fz_free_argv(int argc, char** argv);
+}
 
+// must match premake5.lua
 #define FZ_ENABLE_JS 1
 #define FZ_ENABLE_PDF 1
 #define FZ_ENABLE_BARCODE 0
-#define nelem(x) (sizeof(x) / sizeof((x)[0]))
 #define FZ_VERSION "1.27.2"
 
 static struct {
@@ -2149,104 +2150,48 @@ static struct {
 #endif
 };
 
-static int namematch(const char* end, const char* start, const char* match) {
-    size_t len = strlen(match);
-    return ((end - len >= start) && (strncmp(end - len, match, len) == 0));
-}
-
-static int mutool_main(int argc, char** argv) {
-    char *start, *end;
-    char buf[32];
-    int i;
-
-    if (argc == 0) {
-        fprintf(stderr, "No command name found!\n");
-        return 1;
-    }
-
-    /* Check argv[0] */
-
-    if (argc > 0) {
-        end = start = argv[0];
-        while (*end) end++;
-        if ((end - 4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
-            end = end - 4;
-        for (i = 0; i < (int)nelem(tools); i++) {
-            strcpy(buf, "mupdf");
-            strcat(buf, tools[i].name);
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2)) return tools[i].func(argc, argv);
-            strcpy(buf, "mu");
-            strcat(buf, tools[i].name);
-            if (namematch(end, start, buf)) return tools[i].func(argc, argv);
-        }
-    }
-
-    /* Check argv[1] */
-
-    if (argc > 1) {
-        for (i = 0; i < (int)nelem(tools); i++)
-            if (!strcmp(tools[i].name, argv[1])) return tools[i].func(argc - 1, argv + 1);
-        if (!strcmp(argv[1], "-v")) {
-            fprintf(stderr, "mutool version %s\n", FZ_VERSION);
-            return 0;
-        }
-    }
-
-    /* Print usage */
-
-    fprintf(stderr, "mutool version %s\n", FZ_VERSION);
-    fprintf(stderr, "usage: mutool <command> [options]\n");
-
-    for (i = 0; i < (int)nelem(tools); i++) fprintf(stderr, "\t%s\t-- %s\n", tools[i].name, tools[i].desc);
-
-    return 1;
-}
-}
-
-constexpr int kNoMutool = -1234321;
+constexpr int kNoMutool = -1234321; // arbitrary negative value that won't collide with any mutool exit code
 
 static int MaybeMutool() {
+    WCHAR* exePath;
+    int argc = 0;
+    char** argv = nullptr;
+    int res = kNoMutool;
+
     WCHAR* cmdLine = GetCommandLineW();
-    if (!str::Find(cmdLine, L"tool")) {
-        return kNoMutool;
-    }
-    int argc;
+
     WCHAR** wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
     if (!wargv) {
         // Very rare – allocation failure or severely malformed command line
         log("CommandLineToArgvW() failed\n");
         LogLastError();
-        return 0;
-    }
-    if (argc == 0) {
-        LocalFree(wargv);
         return kNoMutool;
     }
-
-    WCHAR* exePath = GetSelfExePathW();
-    bool isMutool = false;
-    bool skipFirstArg = false;
+    WCHAR** wargvOrig = wargv;
+    if (argc == 0) goto Exit;
+    exePath = GetSelfExePathW();
     if (str::Find(wargv[0], exePath) != nullptr) {
-        skipFirstArg = true;
         argc--;
         wargv++;
     }
     str::Free(exePath);
-    if (argc == 0) {
-        LocalFree(wargv - 1);
-        return kNoMutool;
-    }
-    bool isTool = str::EqI(wargv[0], L"mutool") || str::EqI(wargv[0], L"tool");
-    if (!isTool) {
-        LocalFree(wargv - 1);
-        return kNoMutool;
+    if (argc == 0) goto Exit;
+
+    argv = fz_argv_from_wargv(argc, wargv);
+    {
+        const char* toolName = argv[0];
+        for (int i = 0; i < dimofi(tools); i++) {
+            if (str::EqI(toolName, tools[i].name)) {
+                RedirectIOToExistingConsole();
+                res = tools[i].func(argc, argv);
+                goto Exit;
+            }
+        }
     }
 
-    RedirectIOToExistingConsole();
-    char** argv = fz_argv_from_wargv(argc, wargv);
-    LocalFree(wargv - 1);
-    int res = mutool_main(argc, argv);
-    fz_free_argv(argc, argv);
+Exit:
+    if (wargvOrig) LocalFree(wargvOrig);
+    if (argv) fz_free_argv(argc, argv);
     return res;
 }
 

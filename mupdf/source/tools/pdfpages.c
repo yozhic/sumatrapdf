@@ -35,7 +35,7 @@ static int
 infousage(void)
 {
 	fprintf(stderr,
-		"usage: mutool pages [options] file.pdf [pages]\n"
+		"Usage: SumatraPDF pages [options] file.pdf [pages]\n"
 		"\t-p -\tpassword for decryption\n"
 		"\tpages\tcomma separated list of page numbers and ranges\n"
 		);

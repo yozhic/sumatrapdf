@@ -52,7 +52,7 @@ static int count;
 static int usage(void)
 {
 	fprintf(stderr,
-		"Usage: mutool convert [options] file [pages]\n"
+		"Usage: SumatraPDF convert [options] file [pages]\n"
 		"\t-p -\tpassword\n"
 		"\n"
 		"\t-b -\tuse named page box (MediaBox, CropBox, BleedBox, TrimBox, or ArtBox)\n"
