@@ -3197,6 +3197,79 @@ int MsgBox(HWND hwnd, const char* text, const char* caption, UINT flags) {
     return MessageBoxW(hwnd, textW, captionW, flags);
 }
 
+static LRESULT CALLBACK WndProcTextView(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    if (msg == WM_SIZE) {
+        HWND hwndEdit = (HWND)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+        if (hwndEdit) {
+            int dx = LOWORD(lp);
+            int dy = HIWORD(lp);
+            MoveWindow(hwndEdit, 0, 0, dx, dy, TRUE);
+        }
+        return 0;
+    }
+    if (msg == WM_DESTROY) {
+        PostQuitMessage(0);
+        return 0;
+    }
+    return DefWindowProc(hwnd, msg, wp, lp);
+}
+
+void ShowTextInWindow(const char* title, const char* text) {
+    static const WCHAR* kTextViewWinClass = L"SumatraPDF_TextViewWnd";
+    static bool registered = false;
+
+    HMODULE h = GetModuleHandleW(nullptr);
+    if (!registered) {
+        WNDCLASSEX wcex = {};
+        FillWndClassEx(wcex, kTextViewWinClass, WndProcTextView);
+        wcex.hIcon = LoadIconW(h, MAKEINTRESOURCEW(1));
+        RegisterClassEx(&wcex);
+        registered = true;
+    }
+
+    auto titleW = ToWStrTemp(title);
+    DWORD style = WS_OVERLAPPEDWINDOW;
+    HWND hwnd = CreateWindowExW(0, kTextViewWinClass, titleW, style, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, nullptr,
+                                nullptr, h, nullptr);
+    if (!hwnd) {
+        return;
+    }
+
+    Rect cRc = ClientRect(hwnd);
+    DWORD editStyle =
+        WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | ES_AUTOHSCROLL;
+    HWND hwndEdit =
+        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, L"", editStyle, 0, 0, cRc.dx, cRc.dy, hwnd, nullptr, h, nullptr);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)hwndEdit);
+
+    HDC hdc = GetDC(hwnd);
+    HFONT font = CreateSimpleFont(hdc, "Consolas", 14);
+    ReleaseDC(hwnd, hdc);
+    if (font) {
+        SendMessageW(hwndEdit, WM_SETFONT, (WPARAM)font, TRUE);
+    }
+
+    // edit control needs \r\n line endings
+    str::Str crlfText;
+    for (const char* s = text; *s; s++) {
+        if (*s == '\n' && (s == text || *(s - 1) != '\r')) {
+            crlfText.AppendChar('\r');
+        }
+        crlfText.AppendChar(*s);
+    }
+    HwndSetText(hwndEdit, crlfText.CStr());
+    SendMessageW(hwndEdit, EM_SETSEL, 0, 0);
+
+    ShowWindow(hwnd, SW_SHOW);
+    UpdateWindow(hwnd);
+
+    MSG msg;
+    while (GetMessage(&msg, nullptr, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+}
+
 u32 CpuID() {
 #if IS_ARM_64
     // https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-isprocessorfeaturepresent

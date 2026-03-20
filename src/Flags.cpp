@@ -11,7 +11,6 @@
 #include "Flags.h"
 #include "MainWindow.h"
 #include "StressTesting.h"
-#include "SumatraConfig.h"
 
 #include "utils/Log.h"
 
@@ -323,7 +322,7 @@ static void EnumeratePrinters() {
     if (ok == 0 || !info2Arr) {
         out.AppendFmt("Call to EnumPrinters failed with error %#x", GetLastError());
         log(out.CStr());
-        MsgBox(nullptr, out.CStr(), "SumatraPDF - EnumeratePrinters", MB_OK | MB_ICONERROR);
+        ShowTextInWindow("SumatraPDF - EnumeratePrinters", out.CStr());
         free(info2Arr);
         return;
     }
@@ -375,7 +374,7 @@ static void EnumeratePrinters() {
     log(out.CStr());
     gLogToConsole = false;
     free(info2Arr);
-    MsgBox(nullptr, out.CStr(), "SumatraPDF - EnumeratePrinters", MB_OK | MB_ICONINFORMATION);
+    ShowTextInWindow("SumatraPDF - Show Printers", out.CStr());
 }
 
 // parses a list of page ranges such as 1,3-5,7- (i..e all but pages 2 and 6)
