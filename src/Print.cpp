@@ -1079,11 +1079,6 @@ static short GetPaperByName(const WCHAR* papername) {
 // wantedName can be a paper name, like "A6" or number for DMPAPER_* contstants like DMPAPER_LETTER
 static short GetPaperByName(Printer* printer, const char* wantedName) {
     auto devMode = printer->devMode;
-    // TODO: seen in crash report with cmd-line:
-    //  -print-to KM-202MD -print-settings "paper=76mm x 130mm" foo.pdf
-    // Note that: 76mm x 130mm is not valid
-    // Note: not sure what this was meant to check
-    // ReportIf(!(devMode->dmFields & DM_PAPERSIZE));
     if (!(devMode->dmFields & DM_PAPERSIZE)) {
         return devMode->dmPaperSize;
     }
@@ -1193,8 +1188,16 @@ static void ApplyPrintSettings(Printer* printer, const char* settings, int pageC
             devMode->dmDefaultSource = GetPaperSourceByName(printer, s + 4);
             devMode->dmFields |= DM_DEFAULTSOURCE;
         } else if (str::StartsWithI(s, "paper=")) {
-            devMode->dmPaperSize = GetPaperByName(printer, s + 6);
-            devMode->dmFields |= DM_PAPERSIZE;
+            float mmW = 0, mmH = 0;
+            if (str::Parse(s + 6, "%fmm x %fmm%$", &mmW, &mmH) && mmW > 0 && mmH > 0) {
+                // custom paper size specified as dimensions e.g. "paper=76mm x 130mm"
+                // SetCustomPaperSize expects tenths of a millimeter
+                SizeF size(mmW * 10.f, mmH * 10.f);
+                SetCustomPaperSize(printer, size);
+            } else {
+                devMode->dmPaperSize = GetPaperByName(printer, s + 6);
+                devMode->dmFields |= DM_PAPERSIZE;
+            }
         } else if (str::StartsWithI(s, "paperkind=")) {
             // alternatively allow indicating the paper kind directly by number
             devMode->dmPaperSize = GetPaperKind(s + 10);
