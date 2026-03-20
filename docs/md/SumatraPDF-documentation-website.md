@@ -47,6 +47,45 @@
 [Version history](Version-history.md)
 :columns
 
+## Using SumatraPDF to convert and modify PDF and other files
+
+Staring in [pre-release 3.7]((https://www.sumatrapdfreader.org/prerelease) you can use `SumatraPDF <tool> <option> <files>` commands to convert, extract, search PDF and other files.
+
+:columns
+[All cmd-line tools](Tools.md)
+
+[draw](Tool-draw.md)
+
+[convert](Tool-convert.md)
+
+[audit](Tool-audit.md)
+
+[bake](Tool-bake.md)
+
+[clean](Tool-clean.md)
+
+[extract](Tool-extract.md)
+
+[info](Tool-info.md)
+
+[merge](Tool-merge.md)
+
+[pages](Tool-pages.md)
+
+[poster](Tool-poster.md)
+
+[recolor](Tool-recolor.md)
+
+[show](Tool-show.md)
+
+[trim](Tool-trim.md)
+
+[grep](Tool-grep.md)
+
+[trace](Tool-trace.md)
+
+:columns
+
 ## Misc docs
 
 :columns
