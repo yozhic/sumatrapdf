@@ -2772,7 +2772,7 @@ ContinueOpenWindow:
     CleanUpThumbnailCache();
 
 Exit:
-    //logf("Exiting with exit code: %d\n", exitCode);
+    // logf("Exiting with exit code: %d\n", exitCode);
     UnregisterSettingsForFileChanges();
 
     HandleRedirectedConsoleOnShutdown();

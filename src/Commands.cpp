@@ -366,12 +366,6 @@ CustomCommand::~CustomCommand() {
 }
 
 CustomCommand* CreateCustomCommand(const char* definition, int origCmdId, CommandArg* args) {
-    for (auto cmd = gFirstCustomCommand; cmd; cmd = cmd->next) {
-        if (str::Eq(definition, cmd->definition)) {
-            return cmd;
-        }
-    }
-
     // if no args we retain original command id
     // only when we have unique args we have to create a new command id
     int id = origCmdId;
@@ -605,9 +599,18 @@ CommandArg* TryParseNamedArg(int firstArgIdx, const char** argsInOut) {
     return ParseArgOfType(argName, type, val);
 }
 
-// create custom command as defined in Shortcuts section in advanced settings.
-// we return null if unkown command
+// create custom command as defined in Shortcuts section in advanced settings
+// or DDE commands
+// return null if unkown command
 CustomCommand* CreateCommandFromDefinition(const char* definition) {
+    // the same command can be sent via DDE many times
+    // we don't want to create duplicate CustomCommand
+    for (auto cmd = gFirstCustomCommand; cmd; cmd = cmd->next) {
+        if (str::Eq(definition, cmd->definition)) {
+            return cmd;
+        }
+    }
+
     StrVec parts;
     Split(&parts, definition, " ", true, 2);
     const char* cmd = parts[0];
