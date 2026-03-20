@@ -112,6 +112,309 @@ Printer::~Printer() {
     free((void*)bins);
 }
 
+static void AppendPrinterAttributes(str::Str& out, DWORD attr) {
+    struct {
+        DWORD flag;
+        const char* name;
+    } flags[] = {
+        {PRINTER_ATTRIBUTE_QUEUED, "QUEUED"},
+        {PRINTER_ATTRIBUTE_DIRECT, "DIRECT"},
+        {PRINTER_ATTRIBUTE_DEFAULT, "DEFAULT"},
+        {PRINTER_ATTRIBUTE_SHARED, "SHARED"},
+        {PRINTER_ATTRIBUTE_NETWORK, "NETWORK"},
+        {PRINTER_ATTRIBUTE_HIDDEN, "HIDDEN"},
+        {PRINTER_ATTRIBUTE_LOCAL, "LOCAL"},
+        {PRINTER_ATTRIBUTE_ENABLE_DEVQ, "ENABLE_DEVQ"},
+        {PRINTER_ATTRIBUTE_KEEPPRINTEDJOBS, "KEEPPRINTEDJOBS"},
+        {PRINTER_ATTRIBUTE_DO_COMPLETE_FIRST, "DO_COMPLETE_FIRST"},
+        {PRINTER_ATTRIBUTE_WORK_OFFLINE, "WORK_OFFLINE"},
+        {PRINTER_ATTRIBUTE_ENABLE_BIDI, "ENABLE_BIDI"},
+        {PRINTER_ATTRIBUTE_RAW_ONLY, "RAW_ONLY"},
+        {PRINTER_ATTRIBUTE_PUBLISHED, "PUBLISHED"},
+        {PRINTER_ATTRIBUTE_FAX, "FAX"},
+        {PRINTER_ATTRIBUTE_TS, "TS"},
+    };
+    for (auto& f : flags) {
+        if (attr & f.flag) {
+            out.AppendFmt("\n    %s", f.name);
+        }
+    }
+}
+
+static void AppendPrinterStatus(str::Str& out, DWORD status) {
+    struct {
+        DWORD flag;
+        const char* name;
+    } flags[] = {
+        {PRINTER_STATUS_PAUSED, "PAUSED"},
+        {PRINTER_STATUS_ERROR, "ERROR"},
+        {PRINTER_STATUS_PENDING_DELETION, "PENDING_DELETION"},
+        {PRINTER_STATUS_PAPER_JAM, "PAPER_JAM"},
+        {PRINTER_STATUS_PAPER_OUT, "PAPER_OUT"},
+        {PRINTER_STATUS_MANUAL_FEED, "MANUAL_FEED"},
+        {PRINTER_STATUS_PAPER_PROBLEM, "PAPER_PROBLEM"},
+        {PRINTER_STATUS_OFFLINE, "OFFLINE"},
+        {PRINTER_STATUS_IO_ACTIVE, "IO_ACTIVE"},
+        {PRINTER_STATUS_BUSY, "BUSY"},
+        {PRINTER_STATUS_PRINTING, "PRINTING"},
+        {PRINTER_STATUS_OUTPUT_BIN_FULL, "OUTPUT_BIN_FULL"},
+        {PRINTER_STATUS_NOT_AVAILABLE, "NOT_AVAILABLE"},
+        {PRINTER_STATUS_WAITING, "WAITING"},
+        {PRINTER_STATUS_PROCESSING, "PROCESSING"},
+        {PRINTER_STATUS_INITIALIZING, "INITIALIZING"},
+        {PRINTER_STATUS_WARMING_UP, "WARMING_UP"},
+        {PRINTER_STATUS_TONER_LOW, "TONER_LOW"},
+        {PRINTER_STATUS_NO_TONER, "NO_TONER"},
+        {PRINTER_STATUS_PAGE_PUNT, "PAGE_PUNT"},
+        {PRINTER_STATUS_USER_INTERVENTION, "USER_INTERVENTION"},
+        {PRINTER_STATUS_OUT_OF_MEMORY, "OUT_OF_MEMORY"},
+        {PRINTER_STATUS_DOOR_OPEN, "DOOR_OPEN"},
+        {PRINTER_STATUS_SERVER_UNKNOWN, "SERVER_UNKNOWN"},
+        {PRINTER_STATUS_POWER_SAVE, "POWER_SAVE"},
+    };
+    bool any = false;
+    for (auto& f : flags) {
+        if (status & f.flag) {
+            out.AppendFmt("\n    %s", f.name);
+            any = true;
+        }
+    }
+    if (!any) {
+        out.Append("\n    READY");
+    }
+}
+
+static void AppendDeviceCapabilities(str::Str& out, const WCHAR* nameW, const WCHAR* portW) {
+    // paper bins
+    DWORD bins = DeviceCapabilitiesW(nameW, portW, DC_BINS, nullptr, nullptr);
+    DWORD binNames = DeviceCapabilitiesW(nameW, portW, DC_BINNAMES, nullptr, nullptr);
+    ReportIf(bins != binNames);
+    if (0 == bins) {
+        out.Append("  no paper bins available\n");
+    } else if (bins == (DWORD)-1) {
+        out.AppendFmt("  error: call to DeviceCapabilities failed with error %#x\n", GetLastError());
+    } else {
+        ScopedMem<WORD> binValues(AllocArray<WORD>(bins));
+        DeviceCapabilitiesW(nameW, portW, DC_BINS, (WCHAR*)binValues.Get(), nullptr);
+        ScopedMem<WCHAR> binNameValues(AllocArray<WCHAR>(24 * (size_t)binNames));
+        DeviceCapabilitiesW(nameW, portW, DC_BINNAMES, binNameValues.Get(), nullptr);
+        for (DWORD j = 0; j < bins; j++) {
+            WCHAR* ws = binNameValues.Get() + 24 * (size_t)j;
+            TempStr s = ToUtf8Temp(ws);
+            out.AppendFmt("  bin %d: '%s' (%d)\n", (int)j, s, binValues.Get()[j]);
+        }
+    }
+
+    // paper sizes
+    DWORD papers = DeviceCapabilitiesW(nameW, portW, DC_PAPERS, nullptr, nullptr);
+    DWORD paperNames = DeviceCapabilitiesW(nameW, portW, DC_PAPERNAMES, nullptr, nullptr);
+    if (papers > 0 && papers != (DWORD)-1) {
+        ScopedMem<WORD> paperValues(AllocArray<WORD>(papers));
+        DeviceCapabilitiesW(nameW, portW, DC_PAPERS, (WCHAR*)paperValues.Get(), nullptr);
+        // paper names are 64 WCHARs each
+        ScopedMem<WCHAR> paperNameValues(AllocArray<WCHAR>(64 * (size_t)paperNames));
+        DeviceCapabilitiesW(nameW, portW, DC_PAPERNAMES, paperNameValues.Get(), nullptr);
+        // paper sizes in tenths of a millimeter
+        ScopedMem<POINT> paperSizes(AllocArray<POINT>(papers));
+        DeviceCapabilitiesW(nameW, portW, DC_PAPERSIZE, (WCHAR*)paperSizes.Get(), nullptr);
+        out.Append("  paper sizes:\n");
+        for (DWORD j = 0; j < papers; j++) {
+            WCHAR* ws = paperNameValues.Get() + 64 * (size_t)j;
+            TempStr s = ToUtf8Temp(ws);
+            POINT sz = paperSizes.Get()[j];
+            out.AppendFmt("    '%s' (id %d, %.1f x %.1f mm)\n", s, paperValues.Get()[j], sz.x / 10.0, sz.y / 10.0);
+        }
+    }
+
+    // min/max custom paper size (dimensions packed in return value: LOWORD=width, HIWORD=height)
+    DWORD minRes = DeviceCapabilitiesW(nameW, portW, DC_MINEXTENT, nullptr, nullptr);
+    if (minRes != (DWORD)-1) {
+        DWORD maxRes = DeviceCapabilitiesW(nameW, portW, DC_MAXEXTENT, nullptr, nullptr);
+        int minW = LOWORD(minRes), minH = HIWORD(minRes);
+        int maxW = LOWORD(maxRes), maxH = HIWORD(maxRes);
+        out.AppendFmt("  custom paper size range: %.1f x %.1f mm to %.1f x %.1f mm\n", minW / 10.0, minH / 10.0,
+                      maxW / 10.0, maxH / 10.0);
+    }
+
+    // duplex
+    DWORD duplex = DeviceCapabilitiesW(nameW, portW, DC_DUPLEX, nullptr, nullptr);
+    out.AppendFmt("  duplex: %s\n", duplex == 1 ? "yes" : "no");
+
+    // color
+    DWORD color = DeviceCapabilitiesW(nameW, portW, DC_COLORDEVICE, nullptr, nullptr);
+    out.AppendFmt("  color: %s\n", color == 1 ? "yes" : "no");
+
+    // copies
+    DWORD copies = DeviceCapabilitiesW(nameW, portW, DC_COPIES, nullptr, nullptr);
+    if (copies != (DWORD)-1) {
+        out.AppendFmt("  max copies: %d\n", (int)copies);
+    }
+
+    // collate
+    DWORD collate = DeviceCapabilitiesW(nameW, portW, DC_COLLATE, nullptr, nullptr);
+    out.AppendFmt("  collation: %s\n", collate == 1 ? "yes" : "no");
+
+    // orientation
+    DWORD orient = DeviceCapabilitiesW(nameW, portW, DC_ORIENTATION, nullptr, nullptr);
+    if (orient != (DWORD)-1 && orient != 0) {
+        out.AppendFmt("  landscape rotation: %d degrees\n", (int)orient);
+    }
+
+    // resolutions
+    DWORD nRes = DeviceCapabilitiesW(nameW, portW, DC_ENUMRESOLUTIONS, nullptr, nullptr);
+    if (nRes > 0 && nRes != (DWORD)-1) {
+        ScopedMem<LONG> resPairs(AllocArray<LONG>(2 * (size_t)nRes));
+        DeviceCapabilitiesW(nameW, portW, DC_ENUMRESOLUTIONS, (WCHAR*)resPairs.Get(), nullptr);
+        out.Append("  resolutions:");
+        for (DWORD j = 0; j < nRes; j++) {
+            LONG xDpi = resPairs.Get()[j * 2];
+            LONG yDpi = resPairs.Get()[j * 2 + 1];
+            out.AppendFmt(" %dx%d", (int)xDpi, (int)yDpi);
+        }
+        out.Append("\n");
+    }
+
+    // N-up (pages per sheet)
+    DWORD nup = DeviceCapabilitiesW(nameW, portW, DC_NUP, nullptr, nullptr);
+    if (nup > 0 && nup != (DWORD)-1) {
+        ScopedMem<DWORD> nupValues(AllocArray<DWORD>(nup));
+        DeviceCapabilitiesW(nameW, portW, DC_NUP, (WCHAR*)nupValues.Get(), nullptr);
+        out.Append("  pages per sheet (N-up):");
+        for (DWORD j = 0; j < nup; j++) {
+            out.AppendFmt(" %d", (int)nupValues.Get()[j]);
+        }
+        out.Append("\n");
+    }
+
+    // media types
+    DWORD nMedia = DeviceCapabilitiesW(nameW, portW, DC_MEDIATYPENAMES, nullptr, nullptr);
+    if (nMedia > 0 && nMedia != (DWORD)-1) {
+        // media type names are 64 WCHARs each
+        ScopedMem<WCHAR> mediaNames(AllocArray<WCHAR>(64 * (size_t)nMedia));
+        DeviceCapabilitiesW(nameW, portW, DC_MEDIATYPENAMES, mediaNames.Get(), nullptr);
+        ScopedMem<DWORD> mediaValues(AllocArray<DWORD>(nMedia));
+        DeviceCapabilitiesW(nameW, portW, DC_MEDIATYPES, (WCHAR*)mediaValues.Get(), nullptr);
+        out.Append("  media types:\n");
+        for (DWORD j = 0; j < nMedia; j++) {
+            WCHAR* ws = mediaNames.Get() + 64 * (size_t)j;
+            TempStr s = ToUtf8Temp(ws);
+            out.AppendFmt("    '%s' (%d)\n", s, (int)mediaValues.Get()[j]);
+        }
+    }
+}
+
+static void AppendDevModeInfo(str::Str& out, DEVMODEW* dm) {
+    if (!dm) {
+        return;
+    }
+    out.Append("  devmode defaults:\n");
+    if (dm->dmFields & DM_ORIENTATION) {
+        const char* s = dm->dmOrientation == DMORIENT_PORTRAIT ? "portrait" : "landscape";
+        out.AppendFmt("    orientation: %s\n", s);
+    }
+    if (dm->dmFields & DM_PAPERSIZE) {
+        out.AppendFmt("    paper size id: %d\n", (int)dm->dmPaperSize);
+    }
+    if (dm->dmFields & DM_PAPERLENGTH) {
+        out.AppendFmt("    paper length: %.1f mm\n", dm->dmPaperLength / 10.0);
+    }
+    if (dm->dmFields & DM_PAPERWIDTH) {
+        out.AppendFmt("    paper width: %.1f mm\n", dm->dmPaperWidth / 10.0);
+    }
+    if (dm->dmFields & DM_COPIES) {
+        out.AppendFmt("    copies: %d\n", (int)dm->dmCopies);
+    }
+    if (dm->dmFields & DM_PRINTQUALITY) {
+        out.AppendFmt("    print quality: %d dpi\n", (int)dm->dmPrintQuality);
+    }
+    if (dm->dmFields & DM_YRESOLUTION) {
+        out.AppendFmt("    y resolution: %d dpi\n", (int)dm->dmYResolution);
+    }
+    if (dm->dmFields & DM_COLOR) {
+        const char* s = dm->dmColor == DMCOLOR_COLOR ? "color" : "monochrome";
+        out.AppendFmt("    color: %s\n", s);
+    }
+    if (dm->dmFields & DM_DUPLEX) {
+        const char* s = "unknown";
+        if (dm->dmDuplex == DMDUP_SIMPLEX) {
+            s = "simplex";
+        } else if (dm->dmDuplex == DMDUP_HORIZONTAL) {
+            s = "horizontal";
+        } else if (dm->dmDuplex == DMDUP_VERTICAL) {
+            s = "vertical";
+        }
+        out.AppendFmt("    duplex: %s\n", s);
+    }
+    if (dm->dmFields & DM_COLLATE) {
+        out.AppendFmt("    collate: %s\n", dm->dmCollate == DMCOLLATE_TRUE ? "yes" : "no");
+    }
+}
+
+void GetPrintersInfo(str::Str& out) {
+    PRINTER_INFO_2* info2Arr = nullptr;
+    DWORD bufSize = 0;
+    DWORD printersCount = 0;
+    DWORD flags = PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS;
+    BOOL ok = EnumPrintersW(flags, nullptr, 2, nullptr, 0, &bufSize, &printersCount);
+    if (ok != 0 || GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+        info2Arr = (PRINTER_INFO_2*)calloc(bufSize, 1);
+        if (info2Arr != nullptr) {
+            ok = EnumPrintersW(flags, nullptr, 2, (LPBYTE)info2Arr, bufSize, &bufSize, &printersCount);
+        }
+    }
+    if (ok == 0 || !info2Arr) {
+        out.AppendFmt("Call to EnumPrinters failed with error %#x", GetLastError());
+        free(info2Arr);
+        return;
+    }
+    TempStr defName = GetDefaultPrinterNameTemp();
+    out.AppendFmt("Default printer: \"%s\"\n", defName);
+    for (DWORD i = 0; i < printersCount; i++) {
+        PRINTER_INFO_2& info = info2Arr[i];
+        const WCHAR* nameW = info.pPrinterName;
+        const WCHAR* portW = info.pPortName;
+        DWORD attr = info.Attributes;
+        TempStr name = ToUtf8Temp(nameW);
+        TempStr port = ToUtf8Temp(portW);
+        out.AppendFmt("Printer: \"%s\"\n", name);
+        out.AppendFmt("  port: %s\n", port);
+
+        if (info.pDriverName) {
+            out.AppendFmt("  driver: %s\n", ToUtf8Temp(info.pDriverName));
+        }
+        if (info.pShareName && info.pShareName[0]) {
+            out.AppendFmt("  share name: %s\n", ToUtf8Temp(info.pShareName));
+        }
+        if (info.pComment && info.pComment[0]) {
+            out.AppendFmt("  comment: %s\n", ToUtf8Temp(info.pComment));
+        }
+        if (info.pLocation && info.pLocation[0]) {
+            out.AppendFmt("  location: %s\n", ToUtf8Temp(info.pLocation));
+        }
+        if (info.pPrintProcessor) {
+            out.AppendFmt("  print processor: %s\n", ToUtf8Temp(info.pPrintProcessor));
+        }
+        if (info.pDatatype) {
+            out.AppendFmt("  datatype: %s\n", ToUtf8Temp(info.pDatatype));
+        }
+
+        out.AppendFmt("  queued jobs: %d\n", (int)info.cJobs);
+
+        out.AppendFmt("  status: %#x", info.Status);
+        AppendPrinterStatus(out, info.Status);
+        out.Append("\n");
+
+        out.AppendFmt("  attributes: %#x", attr);
+        AppendPrinterAttributes(out, attr);
+        out.Append("\n");
+
+        AppendDevModeInfo(out, info.pDevMode);
+        AppendDeviceCapabilities(out, nameW, portW);
+        out.Append("\n");
+    }
+    free(info2Arr);
+}
+
 // get all the important info about a printer
 Printer* NewPrinter(char* printerName) {
     HANDLE hPrinter = nullptr;

@@ -44,6 +44,10 @@ struct Printer {
 };
 
 Printer* NewPrinter(const char* name);
+void GetPrintersInfo(str::Str& out);
+
+class EngineBase;
+struct MainWindow;
 
 bool PrintFile(const char* fileName, char* printerName = nullptr, bool displayErrors = true,
                const char* settings = nullptr);
