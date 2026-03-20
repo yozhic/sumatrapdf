@@ -357,7 +357,9 @@ static void GetPropsText(DocController* ctrl, str::Str& out, bool extended) {
         val = ctrl->GetPropertyTemp(kPropFontList);
         if (val) {
             out.Append("\n");
-            AppendProp(out, _TRA("Fonts:"), val);
+            out.Append(_TRA("Fonts:"));
+            out.Append("\n");
+            out.Append(val);
         }
     }
 }
