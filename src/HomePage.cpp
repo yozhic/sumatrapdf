@@ -119,9 +119,11 @@ void SetPromoString(const char* s) {
 }
 
 static TempStr GetAppVersionTemp() {
-    char* s = str::DupTemp("v" CURR_VERSION_STRA);
+    TempStr s = str::DupTemp("v" CURR_VERSION_STRA);
     if (IsProcess64()) {
         s = str::JoinTemp(s, " 64-bit");
+    } else {
+        s = str::JoinTemp(s, " 32-bit");
     }
     if (gIsDebugBuild) {
         s = str::JoinTemp(s, " (dbg)");
@@ -163,7 +165,7 @@ static void DrawSumatraVersion(HDC hdc, Rect rect) {
     int x = mainRect.x + mainRect.dx + DpiScale(hdc, kInnerPadding);
     int y = mainRect.y;
 
-    char* ver = GetAppVersionTemp();
+    TempStr ver = GetAppVersionTemp();
     Point p = {x, y};
     HdcDrawText(hdc, ver, p, fmt, fontVersionTxt);
     p.y += DpiScale(hdc, 13);
@@ -412,7 +414,7 @@ static void OnSizeAbout(HWND hwnd) {
 
 static void CopyAboutInfoToClipboard() {
     str::Str info(512);
-    char* ver = GetAppVersionTemp();
+    TempStr ver = GetAppVersionTemp();
     info.AppendFmt("%s %s\r\n", kAppName, ver);
     for (int i = info.Size() - 2; i > 0; i--) {
         info.AppendChar('-');
