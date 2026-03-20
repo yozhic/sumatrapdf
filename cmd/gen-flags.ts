@@ -35,6 +35,7 @@ const args = [
     "ReuseInstance", "reuse-instance",
     "EscToExit", "esc-to-exit",
     "ArgEnumPrinters", "enum-printers",
+    "ListPrinters", "list-printers",
     "SleepMs", "sleep-ms",
     "PrintTo", "print-to",
     "PrintSettings", "print-settings",

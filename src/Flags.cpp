@@ -27,17 +27,18 @@ enum class Arg {
     WithPreview = 20, Rand = 21, Regress = 22, Extract = 23,
     Tester = 24, TestApp = 25, NewWindow = 26, Log = 27,
     CrashOnOpen = 28, ReuseInstance = 29, EscToExit = 30, ArgEnumPrinters = 31,
-    SleepMs = 32, PrintTo = 33, PrintSettings = 34, InverseSearch = 35,
-    ForwardSearch1 = 36, ForwardSearch2 = 37, NamedDest = 38, NamedDest2 = 39,
-    Page = 40, View = 41, Zoom = 42, Scroll = 43,
-    AppData = 44, Plugin = 45, StressTest = 46, N = 47,
-    Max = 48, MaxFiles = 49, Render = 50, ExtractText = 51,
-    Bench = 52, Dir = 53, InstallDir = 54, Lang = 55,
-    UpdateSelfTo = 56, ArgDeleteFile = 57, BgCol = 58, BgCol2 = 59,
-    FwdSearchOffset = 60, FwdSearchWidth = 61, FwdSearchColor = 62, FwdSearchPermanent = 63,
-    MangaMode = 64, Search = 65, AllUsers = 66, AllUsers2 = 67,
-    RunInstallNow = 68, Adobe = 69, DDE = 70, EngineDump = 71,
-    SetColorRange = 72, PreviewPipe = 73, IFilterPipe = 74, TestPreviewPipe = 75,
+    ListPrinters = 32, SleepMs = 33, PrintTo = 34, PrintSettings = 35,
+    InverseSearch = 36, ForwardSearch1 = 37, ForwardSearch2 = 38, NamedDest = 39,
+    NamedDest2 = 40, Page = 41, View = 42, Zoom = 43,
+    Scroll = 44, AppData = 45, Plugin = 46, StressTest = 47,
+    N = 48, Max = 49, MaxFiles = 50, Render = 51,
+    ExtractText = 52, Bench = 53, Dir = 54, InstallDir = 55,
+    Lang = 56, UpdateSelfTo = 57, ArgDeleteFile = 58, BgCol = 59,
+    BgCol2 = 60, FwdSearchOffset = 61, FwdSearchWidth = 62, FwdSearchColor = 63,
+    FwdSearchPermanent = 64, MangaMode = 65, Search = 66, AllUsers = 67,
+    AllUsers2 = 68, RunInstallNow = 69, Adobe = 70, DDE = 71,
+    EngineDump = 72, SetColorRange = 73, PreviewPipe = 74, IFilterPipe = 75,
+    TestPreviewPipe = 76,
 };
 
 static const char* gArgNames =
@@ -49,22 +50,55 @@ static const char* gArgNames =
     "with-preview\0" "rand\0" "regress\0" "x\0"
     "tester\0" "testapp\0" "new-window\0" "log\0"
     "crash-on-open\0" "reuse-instance\0" "esc-to-exit\0" "enum-printers\0"
-    "sleep-ms\0" "print-to\0" "print-settings\0" "inverse-search\0"
-    "forward-search\0" "fwdsearch\0" "nameddest\0" "named-dest\0"
-    "page\0" "view\0" "zoom\0" "scroll\0"
-    "appdata\0" "plugin\0" "stress-test\0" "n\0"
-    "max\0" "max-files\0" "render\0" "extract-text\0"
-    "bench\0" "d\0" "install-dir\0" "lang\0"
-    "update-self-to\0" "delete-file\0" "bgcolor\0" "bg-color\0"
-    "fwdsearch-offset\0" "fwdsearch-width\0" "fwdsearch-color\0" "fwdsearch-permanent\0"
-    "manga-mode\0" "search\0" "all-users\0" "allusers\0"
-    "run-install-now\0" "a\0" "dde\0" "engine-dump\0"
-    "set-color-range\0" "preview-pipe\0" "ifilter-pipe\0" "test-preview-pipe\0";
+    "list-printers\0" "sleep-ms\0" "print-to\0" "print-settings\0"
+    "inverse-search\0" "forward-search\0" "fwdsearch\0" "nameddest\0"
+    "named-dest\0" "page\0" "view\0" "zoom\0"
+    "scroll\0" "appdata\0" "plugin\0" "stress-test\0"
+    "n\0" "max\0" "max-files\0" "render\0"
+    "extract-text\0" "bench\0" "d\0" "install-dir\0"
+    "lang\0" "update-self-to\0" "delete-file\0" "bgcolor\0"
+    "bg-color\0" "fwdsearch-offset\0" "fwdsearch-width\0" "fwdsearch-color\0"
+    "fwdsearch-permanent\0" "manga-mode\0" "search\0" "all-users\0"
+    "allusers\0" "run-install-now\0" "a\0" "dde\0"
+    "engine-dump\0" "set-color-range\0" "preview-pipe\0" "ifilter-pipe\0"
+    "test-preview-pipe\0";
 // clang-format on
 // @gen-end flags
 
+static void AppendPrinterAttributes(str::Str& out, DWORD attr) {
+    struct {
+        DWORD flag;
+        const char* name;
+    } flags[] = {
+        {PRINTER_ATTRIBUTE_QUEUED, "QUEUED"},
+        {PRINTER_ATTRIBUTE_DIRECT, "DIRECT"},
+        {PRINTER_ATTRIBUTE_DEFAULT, "DEFAULT"},
+        {PRINTER_ATTRIBUTE_SHARED, "SHARED"},
+        {PRINTER_ATTRIBUTE_NETWORK, "NETWORK"},
+        {PRINTER_ATTRIBUTE_HIDDEN, "HIDDEN"},
+        {PRINTER_ATTRIBUTE_LOCAL, "LOCAL"},
+        {PRINTER_ATTRIBUTE_ENABLE_DEVQ, "ENABLE_DEVQ"},
+        {PRINTER_ATTRIBUTE_KEEPPRINTEDJOBS, "KEEPPRINTEDJOBS"},
+        {PRINTER_ATTRIBUTE_DO_COMPLETE_FIRST, "DO_COMPLETE_FIRST"},
+        {PRINTER_ATTRIBUTE_WORK_OFFLINE, "WORK_OFFLINE"},
+        {PRINTER_ATTRIBUTE_ENABLE_BIDI, "ENABLE_BIDI"},
+        {PRINTER_ATTRIBUTE_RAW_ONLY, "RAW_ONLY"},
+        {PRINTER_ATTRIBUTE_PUBLISHED, "PUBLISHED"},
+        {PRINTER_ATTRIBUTE_FAX, "FAX"},
+        {PRINTER_ATTRIBUTE_TS, "TS"},
+    };
+    for (auto& f : flags) {
+        if (attr & f.flag) {
+            out.AppendFmt("\n    %s", f.name);
+        }
+    }
+}
+
 static void EnumeratePrinters() {
     str::Str out;
+
+    gLogToConsole = true;
+    RedirectIOToExistingConsole();
 
     PRINTER_INFO_5* info5Arr = nullptr;
     DWORD bufSize = 0;
@@ -79,40 +113,46 @@ static void EnumeratePrinters() {
     }
     if (ok == 0 || !info5Arr) {
         out.AppendFmt("Call to EnumPrinters failed with error %#x", GetLastError());
+        log(out.CStr());
         MsgBox(nullptr, out.CStr(), "SumatraPDF - EnumeratePrinters", MB_OK | MB_ICONERROR);
         free(info5Arr);
         return;
     }
-    char* defName = GetDefaultPrinterNameTemp();
+    TempStr defName = GetDefaultPrinterNameTemp();
+    out.AppendFmt("Default printer: \"%s\"\n", defName);
     for (DWORD i = 0; i < printersCount; i++) {
         PRINTER_INFO_5& info = info5Arr[i];
         const WCHAR* nameW = info.pPrinterName;
         const WCHAR* portW = info.pPortName;
         DWORD attr = info.Attributes;
-        char* name = ToUtf8Temp(nameW);
-        char* port = ToUtf8Temp(portW);
-        const char* defStr = str::Eq(defName, name) ? ", default" : "";
-        out.AppendFmt("%s (Port: %s, attributes: %#x%s)\n", name, port, attr, defStr);
+        TempStr name = ToUtf8Temp(nameW);
+        TempStr port = ToUtf8Temp(portW);
+        out.AppendFmt("Printer: \"%s\"\n  port: %s\n  attributes: %#x", name, port, attr);
+        AppendPrinterAttributes(out, attr);
+        out.Append("\n");
 
         DWORD bins = DeviceCapabilitiesW(nameW, portW, DC_BINS, nullptr, nullptr);
         DWORD binNames = DeviceCapabilitiesW(nameW, portW, DC_BINNAMES, nullptr, nullptr);
         ReportIf(bins != binNames);
         if (0 == bins) {
-            out.Append(" - no paper bins available\n");
+            out.Append("  no paper bins available\n");
         } else if (bins == (DWORD)-1) {
-            out.AppendFmt(" - Call to DeviceCapabilities failed with error %#x\n", GetLastError());
+            out.AppendFmt("  error: call to DeviceCapabilities failed with error %#x\n", GetLastError());
         } else {
             ScopedMem<WORD> binValues(AllocArray<WORD>(bins));
             DeviceCapabilitiesW(nameW, portW, DC_BINS, (WCHAR*)binValues.Get(), nullptr);
             ScopedMem<WCHAR> binNameValues(AllocArray<WCHAR>(24 * (size_t)binNames));
             DeviceCapabilitiesW(nameW, portW, DC_BINNAMES, binNameValues.Get(), nullptr);
             for (DWORD j = 0; j < bins; j++) {
+                out.AppendFmt("  bin %d:\n", (int)j);
                 WCHAR* ws = binNameValues.Get() + 24 * (size_t)j;
-                char* s = ToUtf8Temp(ws);
-                out.AppendFmt(" - '%s' (%d)\n", s, binValues.Get()[j]);
+                TempStr s = ToUtf8Temp(ws);
+                out.AppendFmt("    '%s' (%d)\n", s, binValues.Get()[j]);
             }
         }
     }
+    log(out.CStr());
+    gLogToConsole = false;
     free(info5Arr);
     MsgBox(nullptr, out.CStr(), "SumatraPDF - EnumeratePrinters", MB_OK | MB_ICONINFORMATION);
 }
@@ -482,7 +522,7 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
             i.globalPrefArgs.Append(argName);
             continue;
         }
-        if (arg == Arg::ArgEnumPrinters && (gIsDebugBuild || gIsPreReleaseBuild)) {
+        if ((arg == Arg::ArgEnumPrinters) || (arg == Arg::ListPrinters)) {
             EnumeratePrinters();
             /* this is for testing only, exit immediately */
             i.exitImmediately = true;
