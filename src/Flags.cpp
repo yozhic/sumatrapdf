@@ -179,13 +179,14 @@ static void AppendDeviceCapabilities(str::Str& out, const WCHAR* nameW, const WC
         }
     }
 
-    // min/max custom paper size
-    POINT minExt = {0}, maxExt = {0};
-    DWORD res = DeviceCapabilitiesW(nameW, portW, DC_MINEXTENT, (WCHAR*)&minExt, nullptr);
-    if (res != (DWORD)-1) {
-        DeviceCapabilitiesW(nameW, portW, DC_MAXEXTENT, (WCHAR*)&maxExt, nullptr);
-        out.AppendFmt("  custom paper size range: %.1f x %.1f mm to %.1f x %.1f mm\n", minExt.x / 10.0, minExt.y / 10.0,
-                      maxExt.x / 10.0, maxExt.y / 10.0);
+    // min/max custom paper size (dimensions packed in return value: LOWORD=width, HIWORD=height)
+    DWORD minRes = DeviceCapabilitiesW(nameW, portW, DC_MINEXTENT, nullptr, nullptr);
+    if (minRes != (DWORD)-1) {
+        DWORD maxRes = DeviceCapabilitiesW(nameW, portW, DC_MAXEXTENT, nullptr, nullptr);
+        int minW = LOWORD(minRes), minH = HIWORD(minRes);
+        int maxW = LOWORD(maxRes), maxH = HIWORD(maxRes);
+        out.AppendFmt("  custom paper size range: %.1f x %.1f mm to %.1f x %.1f mm\n", minW / 10.0, minH / 10.0,
+                      maxW / 10.0, maxH / 10.0);
     }
 
     // duplex
