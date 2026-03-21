@@ -41,6 +41,10 @@ bool WindowTab::IsAboutTab() const {
 
 WindowTab::~WindowTab() {
     logf("~WindowTab: 0x%p, dm: 0x%p\n", this, AsFixed());
+    if (hwndPDFInfo) {
+        DestroyWindow(hwndPDFInfo);
+        hwndPDFInfo = nullptr;
+    }
     CloseAndDeleteEditAnnotationsWindow(this);
     FileWatcherUnsubscribe(watcher);
     if (AsChm()) {

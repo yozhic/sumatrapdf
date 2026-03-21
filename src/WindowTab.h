@@ -52,6 +52,8 @@ struct WindowTab {
 
     bool hideAnnotations = false;
 
+    HWND hwndPDFInfo = nullptr;
+
     // TODO: arguably a hack
     bool ignoreNextAutoReload = false;
 

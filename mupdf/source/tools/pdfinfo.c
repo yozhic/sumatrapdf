@@ -1042,6 +1042,40 @@ pdfinfo_info(fz_context *ctx, fz_output *out, char *filename, char *password, in
 		fz_rethrow(ctx);
 }
 
+fz_buffer *pdfinfo_to_buffer(fz_context *ctx, const char *filename)
+{
+	fz_buffer *buf = NULL;
+	fz_output *out = NULL;
+	globals glo = { 0 };
+
+	glo.ctx = ctx;
+
+	buf = fz_new_buffer(ctx, 4096);
+	out = fz_new_output_with_buffer(ctx, buf);
+	glo.out = out;
+
+	fz_try(ctx)
+	{
+		glo.doc = pdf_open_document(ctx, filename);
+		glo.pagecount = pdf_count_pages(ctx, glo.doc);
+		showglobalinfo(ctx, &glo);
+		showinfo(ctx, &glo, (char *)filename, ALL, "1-N");
+	}
+	fz_always(ctx)
+	{
+		fz_close_output(ctx, out);
+		fz_drop_output(ctx, out);
+		closexref(ctx, &glo);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_buffer(ctx, buf);
+		fz_rethrow(ctx);
+	}
+
+	return buf;
+}
+
 int pdfinfo_main(int argc, char **argv)
 {
 	char *filename = "";

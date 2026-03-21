@@ -365,7 +365,8 @@ HGLOBAL MemToHGLOBAL(void* src, int n, UINT flags = GMEM_MOVEABLE);
 HGLOBAL StrToHGLOBAL(const char* s, UINT flags = GMEM_MOVEABLE);
 TempStr AtomToStrTemp(ATOM a);
 int MsgBox(HWND, const char*, const char*, UINT);
-void ShowTextInWindow(const char* title, const char* text);
+HWND ShowTextInWindow(const char* title, const char* text, HWND* hwndPtr = nullptr);
+void ShowTextInWindowDialog(const char* title, const char* text);
 
 constexpr u32 kCpuMMX = 1 << 1;
 constexpr u32 kCpuSSE = 1 << 2;

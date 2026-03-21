@@ -9,6 +9,7 @@ EXPORTS
 	pdfclean_main
 	pdfextract_main
 	pdfinfo_main
+	pdfinfo_to_buffer
 	pdfposter_main
 	pdfshow_main
 	pdfpages_main

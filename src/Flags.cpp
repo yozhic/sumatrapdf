@@ -75,7 +75,7 @@ static void EnumeratePrinters() {
     log(out.CStr());
 
     gLogToConsole = false;
-    ShowTextInWindow("SumatraPDF - Show Printers", out.CStr());
+    ShowTextInWindowDialog("SumatraPDF - Show Printers", out.CStr());
 }
 
 // parses a list of page ranges such as 1,3-5,7- (i..e all but pages 2 and 6)

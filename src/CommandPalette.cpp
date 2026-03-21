@@ -127,6 +127,7 @@ static i32 gCommandsNoActivate[] = {
     CmdProperties,
     CmdNewWindow,
     CmdDuplicateInNewWindow,
+    CmdShowPdfInfo,
     // TOOD: probably more
     0,
 };
@@ -248,6 +249,7 @@ struct CommandPaletteBuildCtx {
     bool canCloseOtherTabs = false;
     bool canCloseTabsToRight = false;
     bool canCloseTabsToLeft = false;
+    bool isPdf = false;
 
     ~CommandPaletteBuildCtx() = default;
 };
@@ -340,6 +342,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
     }
 
     if (!ctx.canSendEmail && (cmdId == CmdSendByEmail)) {
+        return false;
+    }
+
+    if (!ctx.isPdf && (cmdId == CmdShowPdfInfo)) {
         return false;
     }
 
@@ -514,6 +520,7 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     ctx.filePath = currTab ? currTab->filePath : nullptr;
     ctx.hasSelection = ctx.isDocLoaded && currTab && mainWin->showSelection && currTab->selectionOnPage;
     ctx.canSendEmail = CanSendAsEmailAttachment(currTab);
+    ctx.isPdf = ctx.isDocLoaded && CouldBePDFDoc(currTab);
     ctx.allowToggleMenuBar = !mainWin->tabsInTitlebar;
 
     int nTabs = mainWin->TabCount();

@@ -3197,6 +3197,8 @@ int MsgBox(HWND hwnd, const char* text, const char* caption, UINT flags) {
     return MessageBoxW(hwnd, textW, captionW, flags);
 }
 
+static const WCHAR* kPropHwndPtr = L"HwndPtr";
+
 static LRESULT CALLBACK WndProcTextView(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     if (msg == WM_SIZE) {
         HWND hwndEdit = (HWND)GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -3208,31 +3210,40 @@ static LRESULT CALLBACK WndProcTextView(HWND hwnd, UINT msg, WPARAM wp, LPARAM l
         return 0;
     }
     if (msg == WM_DESTROY) {
-        PostQuitMessage(0);
+        HWND* hwndPtr = (HWND*)GetPropW(hwnd, kPropHwndPtr);
+        if (hwndPtr) {
+            *hwndPtr = nullptr;
+            RemovePropW(hwnd, kPropHwndPtr);
+        }
         return 0;
     }
     return DefWindowProc(hwnd, msg, wp, lp);
 }
 
-void ShowTextInWindow(const char* title, const char* text) {
-    static const WCHAR* kTextViewWinClass = L"SumatraPDF_TextViewWnd";
-    static bool registered = false;
-
-    HMODULE h = GetModuleHandleW(nullptr);
-    if (!registered) {
-        WNDCLASSEX wcex = {};
-        FillWndClassEx(wcex, kTextViewWinClass, WndProcTextView);
-        wcex.hIcon = LoadIconW(h, MAKEINTRESOURCEW(1));
-        RegisterClassEx(&wcex);
-        registered = true;
+static LRESULT CALLBACK WndProcTextViewDialog(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    if (msg == WM_DESTROY) {
+        PostQuitMessage(0);
+        return 0;
     }
+    return WndProcTextView(hwnd, msg, wp, lp);
+}
 
+static void RegisterTextViewClass(const WCHAR* className, WNDPROC wndProc) {
+    HMODULE h = GetModuleHandleW(nullptr);
+    WNDCLASSEX wcex = {};
+    FillWndClassEx(wcex, className, wndProc);
+    wcex.hIcon = LoadIconW(h, MAKEINTRESOURCEW(1));
+    RegisterClassEx(&wcex);
+}
+
+static HWND CreateTextViewWindow(const WCHAR* className, const char* title, const char* text) {
+    HMODULE h = GetModuleHandleW(nullptr);
     auto titleW = ToWStrTemp(title);
     DWORD style = WS_OVERLAPPEDWINDOW;
-    HWND hwnd = CreateWindowExW(0, kTextViewWinClass, titleW, style, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, nullptr,
-                                nullptr, h, nullptr);
+    HWND hwnd = CreateWindowExW(0, className, titleW, style, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, nullptr, nullptr,
+                                h, nullptr);
     if (!hwnd) {
-        return;
+        return nullptr;
     }
 
     Rect cRc = ClientRect(hwnd);
@@ -3262,7 +3273,34 @@ void ShowTextInWindow(const char* title, const char* text) {
 
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
+    return hwnd;
+}
 
+HWND ShowTextInWindow(const char* title, const char* text, HWND* hwndPtr) {
+    static const WCHAR* kClassName = L"SumatraPDF_TextViewWnd";
+    static bool registered = false;
+    if (!registered) {
+        RegisterTextViewClass(kClassName, WndProcTextView);
+        registered = true;
+    }
+    HWND hwnd = CreateTextViewWindow(kClassName, title, text);
+    if (hwnd && hwndPtr) {
+        SetPropW(hwnd, kPropHwndPtr, (HANDLE)hwndPtr);
+    }
+    return hwnd;
+}
+
+void ShowTextInWindowDialog(const char* title, const char* text) {
+    static const WCHAR* kClassName = L"SumatraPDF_TextViewDlgWnd";
+    static bool registered = false;
+    if (!registered) {
+        RegisterTextViewClass(kClassName, WndProcTextViewDialog);
+        registered = true;
+    }
+    HWND hwnd = CreateTextViewWindow(kClassName, title, text);
+    if (!hwnd) {
+        return;
+    }
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0)) {
         TranslateMessage(&msg);

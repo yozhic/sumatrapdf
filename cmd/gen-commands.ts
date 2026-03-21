@@ -167,6 +167,7 @@ export const commands = [
     "CmdOpenPrevFileInFolder", "Open Previous File In Folder",
     "CmdCommandPalette", "Command Palette",
     "CmdShowLog", "Show Logs",
+    "CmdShowPdfInfo", "Show PDF Info",
     "CmdClearHistory", "Clear History",
     "CmdReopenLastClosedFile", "Reopen Last Closed",
     "CmdNextTab", "Next Tab",

@@ -5897,6 +5897,20 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
+        case CmdShowPdfInfo: {
+            if (tab && tab->filePath && CouldBePDFDoc(tab)) {
+                if (tab->hwndPDFInfo && IsWindow(tab->hwndPDFInfo)) {
+                    SetForegroundWindow(tab->hwndPDFInfo);
+                } else {
+                    TempStr info = EngineMupdfGetPdfInfo(tab->filePath);
+                    if (info) {
+                        tab->hwndPDFInfo = ShowTextInWindow("PDF Info", info, &tab->hwndPDFInfo);
+                    }
+                }
+            }
+            break;
+        }
+
         case CmdMoveFrameFocus:
             if (!HwndIsFocused(win->hwndFrame)) {
                 HwndSetFocus(win->hwndFrame);

@@ -58,6 +58,7 @@ bool EngineMupdfSupportsAnnotations(EngineBase*);
 bool EngineMupdfSaveUpdated(EngineBase* engine, const char* path, const ShowErrorCb& showErrorFunc);
 Annotation* EngineMupdfGetAnnotationAtPos(EngineBase*, int pageNo, PointF pos, Annotation*);
 ByteSlice EngineMupdfLoadAttachment(EngineBase*, int attachmentNo);
+TempStr EngineMupdfGetPdfInfo(const char* path);
 
 /* EnginePs.cpp */
 

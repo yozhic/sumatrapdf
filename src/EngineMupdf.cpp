@@ -4040,3 +4040,26 @@ Annotation* MakeAnnotationWrapper(EngineMupdf* engine, pdf_annot* annot, int pag
     res->type = typ;
     return res;
 }
+
+extern "C" fz_buffer* pdfinfo_to_buffer(fz_context* ctx, const char* filename);
+
+TempStr EngineMupdfGetPdfInfo(const char* path) {
+    fz_context* ctx = fz_new_context(nullptr, nullptr, FZ_STORE_UNLIMITED);
+    if (!ctx) {
+        return nullptr;
+    }
+    TempStr res = nullptr;
+    fz_buffer* buf = nullptr;
+    fz_try(ctx) {
+        buf = pdfinfo_to_buffer(ctx, path);
+        unsigned char* data;
+        size_t len = fz_buffer_storage(ctx, buf, &data);
+        res = str::DupTemp((const char*)data, len);
+    }
+    fz_catch(ctx) {
+        fz_report_error(ctx);
+    }
+    fz_drop_buffer(ctx, buf);
+    fz_drop_context(ctx);
+    return res;
+}
