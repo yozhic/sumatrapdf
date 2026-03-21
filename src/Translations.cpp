@@ -3,10 +3,12 @@
 
 #include "utils/BaseUtil.h"
 #include "utils/WinUtil.h"
+#include "utils/LzmaSimpleArchive.h"
 
 #include "SumatraConfig.h"
 
 #include "Translations.h"
+#include "resource.h"
 
 #include "utils/Log.h"
 
@@ -186,9 +188,32 @@ void SetCurrentLangByCode(const char* langCode) {
         // in debug we want to execute this code to catch errors
         return;
     }
-    StrSpan d = LoadDataResource(2);
+    LoadedDataResource ldr;
+    bool lok = LockDataResource(IDR_TRANSLATIONS, &ldr);
+    if (!lok) {
+        logf("SetCurrentLangByCode: LockDataResource(IDR_TRANSLATIONS) failed\n");
+        return;
+    }
+    lzma::SimpleArchive archive;
+    lok = lzma::ParseSimpleArchive(ldr.data, (size_t)ldr.dataSize, &archive);
+    if (!lok) {
+        logf("SetCurrentLangByCode: ParseSimpleArchive failed\n");
+        return;
+    }
+    int fileIdx = lzma::GetIdxFromName(&archive, "translations-good.txt");
+    if (fileIdx < 0) {
+        logf("SetCurrentLangByCode: translations-good.txt not found in archive\n");
+        return;
+    }
+    u8* data = lzma::GetFileDataByIdx(&archive, fileIdx, nullptr);
+    if (!data) {
+        logf("SetCurrentLangByCode: GetFileDataByIdx failed\n");
+        return;
+    }
+    int dataSize = (int)(archive.files[fileIdx].uncompressedSize);
+    StrSpan d = {(char*)data, dataSize};
     ParseTranslationsTxt(d, langCode);
-    str::Free(d);
+    free(data);
 }
 
 const char* ValidateLangCode(const char* langCode) {

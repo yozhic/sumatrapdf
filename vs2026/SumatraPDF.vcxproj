@@ -429,6 +429,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -464,6 +467,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
@@ -499,6 +505,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug x64_asan|x64'">
     <ClCompile>
@@ -534,6 +543,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugFull|Win32'">
     <ClCompile>
@@ -569,6 +581,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugFull|x64'">
     <ClCompile>
@@ -604,6 +619,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugFull|ARM64'">
     <ClCompile>
@@ -639,6 +657,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugFull x64_asan|x64'">
     <ClCompile>
@@ -674,6 +695,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -714,6 +738,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -754,6 +781,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
@@ -794,6 +824,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release x64_asan|x64'">
     <ClCompile>
@@ -833,6 +866,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze|Win32'">
     <ClCompile>
@@ -875,6 +911,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze|x64'">
     <ClCompile>
@@ -917,6 +956,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze|ARM64'">
     <ClCompile>
@@ -959,6 +1001,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze x64_asan|x64'">
     <ClCompile>
@@ -1000,6 +1045,9 @@
     </Link>
     <ProjectReference>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>..\bin\MakeLZSA.exe ..\translations\translations.txt.lzsa ..\translations\translations-good.txt:translations-good.txt</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\ext\darkmodelib\include\DarkModeSubclass.h" />
@@ -1497,9 +1545,9 @@
     <None Include="..\cmd\trans-with-ai.ts" />
     <None Include="..\cmd\trigger-codeql.ts" />
     <None Include="..\cmd\tsconfig.json" />
-    <None Include="..\cmd\update-auto-update-ver.ts" />
     <None Include="..\cmd\util.ts" />
     <None Include="..\cmd\wc.ts" />
+    <None Include="..\docs\gen_docs.search.html" />
     <None Include="..\docs\manual.tmpl.html" />
     <None Include="..\docs\md\Accessibility-and-Text-to-Speech.md" />
     <None Include="..\docs\md\Advanced-options-settings.md" />
@@ -1536,6 +1584,23 @@
     <None Include="..\docs\md\SumatraPDF-documentation-website.md" />
     <None Include="..\docs\md\SumatraPDF-documentation.md" />
     <None Include="..\docs\md\Supported-document-formats.md" />
+    <None Include="..\docs\md\Tool-audit.md" />
+    <None Include="..\docs\md\Tool-bake.md" />
+    <None Include="..\docs\md\Tool-clean.md" />
+    <None Include="..\docs\md\Tool-convert.md" />
+    <None Include="..\docs\md\Tool-draw.md" />
+    <None Include="..\docs\md\Tool-extract.md" />
+    <None Include="..\docs\md\Tool-grep.md" />
+    <None Include="..\docs\md\Tool-info.md" />
+    <None Include="..\docs\md\Tool-merge.md" />
+    <None Include="..\docs\md\Tool-pages.md" />
+    <None Include="..\docs\md\Tool-poster.md" />
+    <None Include="..\docs\md\Tool-recolor.md" />
+    <None Include="..\docs\md\Tool-run.md" />
+    <None Include="..\docs\md\Tool-show.md" />
+    <None Include="..\docs\md\Tool-trace.md" />
+    <None Include="..\docs\md\Tool-trim.md" />
+    <None Include="..\docs\md\Tools.md" />
     <None Include="..\docs\md\Uninstalling-SumatraPDF.md" />
     <None Include="..\docs\md\Update-check-doesnt-work.md" />
     <None Include="..\docs\md\Using-DrMemory.md" />
@@ -1547,6 +1612,7 @@
     <None Include="..\docs\scratch.txt" />
     <None Include="..\docs\wishlist.txt" />
     <None Include="..\ext\versions.txt" />
+    <None Include="..\out.txt" />
     <None Include="..\premake5.files.lua" />
     <None Include="..\premake5.lua" />
     <None Include="..\readme.md" />

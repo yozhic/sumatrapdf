@@ -878,14 +878,14 @@
     <None Include="..\cmd\tsconfig.json">
       <Filter>cmd</Filter>
     </None>
-    <None Include="..\cmd\update-auto-update-ver.ts">
-      <Filter>cmd</Filter>
-    </None>
     <None Include="..\cmd\util.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\wc.ts">
       <Filter>cmd</Filter>
+    </None>
+    <None Include="..\docs\gen_docs.search.html">
+      <Filter>docs</Filter>
     </None>
     <None Include="..\docs\manual.tmpl.html">
       <Filter>docs</Filter>
@@ -995,6 +995,57 @@
     <None Include="..\docs\md\Supported-document-formats.md">
       <Filter>docs\md</Filter>
     </None>
+    <None Include="..\docs\md\Tool-audit.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-bake.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-clean.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-convert.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-draw.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-extract.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-grep.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-info.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-merge.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-pages.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-poster.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-recolor.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-run.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-show.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-trace.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-trim.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tools.md">
+      <Filter>docs\md</Filter>
+    </None>
     <None Include="..\docs\md\Uninstalling-SumatraPDF.md">
       <Filter>docs\md</Filter>
     </None>
@@ -1028,6 +1079,7 @@
     <None Include="..\ext\versions.txt">
       <Filter>ext</Filter>
     </None>
+    <None Include="..\out.txt" />
     <None Include="..\premake5.files.lua" />
     <None Include="..\premake5.lua" />
     <None Include="..\readme.md" />

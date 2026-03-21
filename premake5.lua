@@ -877,6 +877,7 @@ filter "platforms:x64_asan"
 linkoptions { "/INFERASANLIBS" }
 filter {}
 dependson { "PdfFilter2", "PdfPreview2", "test_util" }
+prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
 
 -- a dll version where most functionality is in libmupdf.dll
 project "SumatraPDF-dll"
@@ -941,6 +942,7 @@ linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.
 linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
 linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
 dependson { "PdfFilter", "PdfPreview", "test_util" }
+prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
 prebuildcommands { "cd %{cfg.targetdir} & ..\\..\\bin\\MakeLZSA.exe InstallerData.dat libmupdf.dll:libmupdf.dll PdfFilter.dll:PdfFilter.dll PdfPreview.dll:PdfPreview.dll" }
 
 workspace "MakeLZSA"
