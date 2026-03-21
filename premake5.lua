@@ -70,8 +70,33 @@ newoption {
 
 include("premake5.files.lua")
 
--- TODO: could fold 9 libraries used by mupdf into a single
--- project mupdf-libs, to make solution smaller
+
+-- this is meant to make the binary win7 compatible but
+-- does't seem to work
+function winver7_defines()
+  defines {
+    "WIN32",
+    "_WIN32",
+    -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
+    "WINVER=0x0601", -- force not using API not available in Win7
+    "_WIN32_WINNT=0x0601"
+  }
+end
+
+function winver_latest_defines()
+  defines {
+    "WIN32",
+    "_WIN32",
+    -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
+    "WINVER=0x0605", -- force not using API not available in Win7
+    "_WIN32_WINNT=0x0603"
+  }
+end
+
+function winver_defines()
+  winver7_defines()
+  -- winver_latest_defines()
+end
 
 -- setup WebView2 paths
 function webview_conf()
@@ -179,854 +204,841 @@ function uses_zlib()
 end
 
 workspace "SumatraPDF"
-configurations { "Debug", "DebugFull", "Release", "ReleaseAnalyze", }
-platforms { "x86", "x64", "arm64", "x64_asan" }
-startproject "SumatraPDF"
+  configurations { "Debug", "DebugFull", "Release", "ReleaseAnalyze", }
+  platforms { "x86", "x64", "arm64", "x64_asan" }
+  startproject "SumatraPDF"
 
-filter "platforms:x86"
-architecture "x86"
-filter {}
+  filter "platforms:x86"
+    architecture "x86"
+  filter {}
 
-filter "platforms:x64_asan"
-sanitize { "Address" }
-defines { "ASAN_BUILD=1" }
-incrementallink("Off")
-editandcontinue "Off"
--- disablewarnings { "4731" }
-filter {}
+  filter "platforms:x64_asan"
+    sanitize { "Address" }
+    defines { "ASAN_BUILD=1" }
+    incrementallink("Off")
+    editandcontinue "Off"
+    -- disablewarnings { "4731" }
+  filter {}
 
-filter "platforms:x64 or x64_asan"
-architecture "x86_64"
--- strangely this is not set by default for rc.exe
-resdefines { "_WIN64" }
-filter {}
+  filter "platforms:x64 or x64_asan"
+    architecture "x86_64"
+    -- strangely this is not set by default for rc.exe
+    resdefines { "_WIN64" }
+  filter {}
 
-filter "platforms:arm64"
-architecture "ARM64"
-filter {}
+  filter "platforms:arm64"
+    architecture "ARM64"
+  filter {}
 
-disablewarnings { "4127", "4189", "4324", "4458", "4522", "4611", "4702", "4800", "6319" }
+  disablewarnings { "4127", "4189", "4324", "4458", "4522", "4611", "4702", "4800", "6319" }
 
-location "this_is_invalid_location"
+  location "this_is_invalid_location"
 
-filter "action:vs2022"
-location "vs2022"
-filter {}
+  filter "action:vs2022"
+    location "vs2022"
+  filter {}
 
-filter "action:vs2026"
-location "vs2026"
-filter {}
+  filter "action:vs2026"
+    location "vs2026"
+  filter {}
 
-clang_conf()
+  clang_conf()
 
-filter { "platforms:x86", "configurations:Release" }
-targetdir "out/rel32"
-filter { "platforms:x86", "configurations:ReleaseAnalyze" }
-targetdir "out/rel32_prefast"
-filter { "platforms:x86", "configurations:Debug" }
-targetdir "out/dbg32"
-filter { "platforms:x86", "configurations:DebugFull" }
-targetdir "out/dbgfull32"
+  filter { "platforms:x86", "configurations:Release" }
+    targetdir "out/rel32"
+  filter { "platforms:x86", "configurations:ReleaseAnalyze" }
+    targetdir "out/rel32_prefast"
+  filter { "platforms:x86", "configurations:Debug" }
+    targetdir "out/dbg32"
+  filter { "platforms:x86", "configurations:DebugFull" }
+    targetdir "out/dbgfull32"
 
-filter { "platforms:x64", "configurations:Release" }
-targetdir "out/rel64"
-filter { "platforms:x64", "configurations:ReleaseAnalyze" }
-targetdir "out/rel64_prefast"
-filter { "platforms:x64", "configurations:Debug" }
-targetdir "out/dbg64"
-filter { "platforms:x64", "configurations:DebugFull" }
-targetdir "out/dbgfull64"
-filter {}
+  filter { "platforms:x64", "configurations:Release" }
+    targetdir "out/rel64"
+  filter { "platforms:x64", "configurations:ReleaseAnalyze" }
+    targetdir "out/rel64_prefast"
+  filter { "platforms:x64", "configurations:Debug" }
+    targetdir "out/dbg64"
+  filter { "platforms:x64", "configurations:DebugFull" }
+    targetdir "out/dbgfull64"
+  filter {}
 
-filter { "platforms:x64_asan", "configurations:Release" }
-targetdir "out/rel64_asan"
-filter { "platforms:x64_asan", "configurations:ReleaseAnalyze" }
-targetdir "out/rel64_prefast_asan"
-filter { "platforms:x64_asan", "configurations:Debug" }
-targetdir "out/dbg64_asan"
-filter { "platforms:x64_asan", "configurations:DebugFull" }
-targetdir "out/dbgfull64_asan"
-filter {}
+  filter { "platforms:x64_asan", "configurations:Release" }
+    targetdir "out/rel64_asan"
+  filter { "platforms:x64_asan", "configurations:ReleaseAnalyze" }
+    targetdir "out/rel64_prefast_asan"
+  filter { "platforms:x64_asan", "configurations:Debug" }
+    targetdir "out/dbg64_asan"
+  filter { "platforms:x64_asan", "configurations:DebugFull" }
+    targetdir "out/dbgfull64_asan"
+  filter {}
 
-filter { "platforms:arm64", "configurations:Release" }
-targetdir "out/arm64"
-filter { "platforms:arm64", "configurations:ReleaseAnalyze" }
-targetdir "out/arm64_prefast"
-filter { "platforms:arm64", "configurations:Debug" }
-targetdir "out/dbgarm64"
-filter { "platforms:arm64", "configurations:DebugFull" }
-targetdir "out/dbgfullarm64"
-filter {}
+  filter { "platforms:arm64", "configurations:Release" }
+    targetdir "out/arm64"
+  filter { "platforms:arm64", "configurations:ReleaseAnalyze" }
+    targetdir "out/arm64_prefast"
+  filter { "platforms:arm64", "configurations:Debug" }
+    targetdir "out/dbgarm64"
+  filter { "platforms:arm64", "configurations:DebugFull" }
+    targetdir "out/dbgfullarm64"
+  filter {}
 
-objdir "%{cfg.targetdir}/obj"
+  objdir "%{cfg.targetdir}/obj"
 
--- https://github.com/premake/premake-core/wiki/symbols
--- https://blogs.msdn.microsoft.com/vcblog/2016/10/05/faster-c-build-cycle-in-vs-15-with-debugfastlink/
-symbols "FastLink"
-filter { "configurations:Release" }
-symbols "Full"
-filter {}
+  -- https://github.com/premake/premake-core/wiki/symbols
+  -- https://blogs.msdn.microsoft.com/vcblog/2016/10/05/faster-c-build-cycle-in-vs-15-with-debugfastlink/
+  symbols "FastLink"
+  filter { "configurations:Release" }
+    symbols "Full"
+  filter {}
 
-staticruntime "On"
--- https://github.com/premake/premake-core/wiki/flags
-multiprocessorcompile("On")
-mapfile("On")
-rtti "Off"
+  staticruntime "On"
+  -- https://github.com/premake/premake-core/wiki/flags
+  multiprocessorcompile("On")
+  mapfile("On")
+  rtti "Off"
 
-defines {
-  "WIN32",
-  "_WIN32",
-  -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-  "WINVER=0x0601", -- force not using API not available in Win7
-  "_WIN32_WINNT=0x0601"
-}
+  winver_defines()
 
-project "unrar"
-kind "StaticLib"
-language "C++"
-optimized_conf()
-defines { "UNRAR", "RARDLL", "SILENT" }
--- os.hpp redefines WINVER, is there a better way?
-disablewarnings { "4005", "4100", "4201", "4211", "4244", "4310", "4389", "4456", "4459", "4505", "4701", "4702", "4706", "4709", "4731", "4996" }
-exceptionhandling "On"
+  project "unrar"
+    kind "StaticLib"
+    language "C++"
+    optimized_conf()
+    defines { "UNRAR", "RARDLL", "SILENT" }
+    -- os.hpp redefines WINVER, is there a better way?
+    disablewarnings { "4005", "4100", "4201", "4211", "4244", "4310", "4389", "4456", "4459", "4505", "4701", "4702", "4706", "4709", "4731", "4996" }
+    exceptionhandling "On"
 
-includedirs { "ext/unrar" }
-unrar_files()
+    includedirs { "ext/unrar" }
+    unrar_files()
 
-project "libdjvu"
-kind "StaticLib"
-characterset("MBCS")
-language "C++"
-optimized_conf()
-defines {
-  "_CRT_SECURE_NO_WARNINGS",
-  "NEED_JPEG_DECODER",
-  "WINTHREADS=1",
-  "DDJVUAPI=/**/",
-  "MINILISPAPI=/**/",
-  "DEBUGLVL=0"
-}
-filter { "platforms:x64_asan" }
-defines { "DISABLE_MMX" }
-filter {}
-exceptionhandling "On"
-disablewarnings { "4100", "4189", "4244", "4267", "4302", "4311", "4312", "4505" }
-disablewarnings { "4456", "4457", "4459", "4701", "4702", "4703", "4706" }
-includedirs { "ext/libjpeg-turbo" }
-libdjvu_files()
+  project "libdjvu"
+    kind "StaticLib"
+    characterset("MBCS")
+    language "C++"
+    optimized_conf()
+    defines {
+      "_CRT_SECURE_NO_WARNINGS",
+      "NEED_JPEG_DECODER",
+      "WINTHREADS=1",
+      "DDJVUAPI=/**/",
+      "MINILISPAPI=/**/",
+      "DEBUGLVL=0"
+    }
+    filter { "platforms:x64_asan" }
+      defines { "DISABLE_MMX" }
+    filter {}
+    exceptionhandling "On"
+    disablewarnings { "4100", "4189", "4244", "4267", "4302", "4311", "4312", "4505" }
+    disablewarnings { "4456", "4457", "4459", "4701", "4702", "4703", "4706" }
+    includedirs { "ext/libjpeg-turbo" }
+    libdjvu_files()
 
-project "chm"
-kind "StaticLib"
-language "C"
-optimized_conf()
-defines { "_CRT_SECURE_NO_WARNINGS" }
-disablewarnings { "4018", "4244", "4267", "4996" }
-files { "ext/CHMLib/*.c", "ext/CHMLib/*.h" }
+  project "chm"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    defines { "_CRT_SECURE_NO_WARNINGS" }
+    disablewarnings { "4018", "4244", "4267", "4996" }
+    files { "ext/CHMLib/*.c", "ext/CHMLib/*.h" }
 
-project "unarrlib"
-kind "StaticLib"
-language "C"
-optimized_conf()
--- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
--- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
-defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
--- TODO: most of these warnings are due to bzip2 and lzma
-disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
-uses_zlib()
-includedirs { "ext/bzip2", "ext/lzma/C" }
-unarr_files()
+  project "unarrlib"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    -- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
+    -- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
+    defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
+    -- TODO: most of these warnings are due to bzip2 and lzma
+    disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
+    uses_zlib()
+    includedirs { "ext/bzip2", "ext/lzma/C" }
+    unarr_files()
 
-project "libwebp"
-kind "StaticLib"
-language "C"
-optimized_conf()
-disablewarnings { "4204", "4244", "4057", "4245", "4310", "4701" }
-includedirs { "ext/libwebp" }
-libwebp_files()
+  project "libwebp"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    disablewarnings { "4204", "4244", "4057", "4245", "4310", "4701" }
+    includedirs { "ext/libwebp" }
+    libwebp_files()
 
--- ARGS = "-Isrc\libdav1d_entrypoint.a.p" "-Isrc" "-I..\src" "-I." "-I.." "-Iinclude\dav1d" "-I..\include\dav1d" "-Iinclude" "-I..\include" "-I..\include\compat\msvc" "-DNDEBUG" "/MD" "/nologo" "/showIncludes" "/utf-8" "/W3" "/O2" "/Gw" "-D_POSIX_C_SOURCE=200112L" "-wd4028" "-wd4090" "-wd4996" "/Fdsrc\libdav1d_entrypoint.a.p\thread_task.c.pdb"
+    -- ARGS = "-Isrc\libdav1d_entrypoint.a.p" "-Isrc" "-I..\src" "-I." "-I.." "-Iinclude\dav1d" "-I..\include\dav1d" "-Iinclude" "-I..\include" "-I..\include\compat\msvc" "-DNDEBUG" "/MD" "/nologo" "/showIncludes" "/utf-8" "/W3" "/O2" "/Gw" "-D_POSIX_C_SOURCE=200112L" "-wd4028" "-wd4090" "-wd4996" "/Fdsrc\libdav1d_entrypoint.a.p\thread_task.c.pdb"
 
--- for asm files
--- build src/libdav1d.a.p/looprestoration_avx2.obj: CUSTOM_COMMAND_DEP ../src/x86/looprestoration_avx2.asm | C$:/Users/kjk/AppData/Local/bin/NASM/nasm.EXE
--- COMMAND = "C:\Users\kjk\AppData\Local\bin\NASM\nasm.EXE" "-f" "win64" "-I" "C:/Users/kjk/src/dav1d/src/" "-I" "C:/Users/kjk/src/dav1d/build/" "-MQ" "src/libdav1d.a.p/looprestoration_avx2.obj" "-MF" "src/libdav1d.a.p/looprestoration_avx2.obj.ndep" "../src/x86/looprestoration_avx2.asm" "-o" "src/libdav1d.a.p/looprestoration_avx2.obj"
+    -- for asm files
+    -- build src/libdav1d.a.p/looprestoration_avx2.obj: CUSTOM_COMMAND_DEP ../src/x86/looprestoration_avx2.asm | C$:/Users/kjk/AppData/Local/bin/NASM/nasm.EXE
+    -- COMMAND = "C:\Users\kjk\AppData\Local\bin\NASM\nasm.EXE" "-f" "win64" "-I" "C:/Users/kjk/src/dav1d/src/" "-I" "C:/Users/kjk/src/dav1d/build/" "-MQ" "src/libdav1d.a.p/looprestoration_avx2.obj" "-MF" "src/libdav1d.a.p/looprestoration_avx2.obj.ndep" "../src/x86/looprestoration_avx2.asm" "-o" "src/libdav1d.a.p/looprestoration_avx2.obj"
 
-project "libheif"
-kind "StaticLib"
-language "C++"
-cppdialect "C++latest"
-optimized_conf()
-defines { "_CRT_SECURE_NO_WARNINGS", "HAVE_DAV1D", "LIBHEIF_STATIC_BUILD" }
-includedirs { "ext/libheif/libheif", "ext/libheif/libheif/api", "ext/dav1d/include" }
-disablewarnings { "4018", "4065", "4100", "4101", "4146", "4244", "4245", "4267", "4273", "4319", "4456", "4701", "4703", "4805", "4996" }
--- TODO: I don't want RTTI and /EHsc
-rtti "On"
-buildoptions { "/EHsc" }
-libheif_files()
+  project "libheif"
+    kind "StaticLib"
+    language "C++"
+    cppdialect "C++latest"
+    optimized_conf()
+    defines { "_CRT_SECURE_NO_WARNINGS", "HAVE_DAV1D", "LIBHEIF_STATIC_BUILD" }
+    includedirs { "ext/libheif/libheif", "ext/libheif/libheif/api", "ext/dav1d/include" }
+    disablewarnings { "4018", "4065", "4100", "4101", "4146", "4244", "4245", "4267", "4273", "4319", "4456", "4701", "4703", "4805", "4996" }
+    -- TODO: I don't want RTTI and /EHsc
+    rtti "On"
+    buildoptions { "/EHsc" }
+    libheif_files()
 
-project "dav1d"
-kind "StaticLib"
-language "C"
-optimized_conf()
-defines { "_CRT_SECURE_NO_WARNINGS" }
-filter { 'platforms:x86' }
-defines { "ARCH_X86_32=1", "ARCH_X86_64=0", "__SSE2__" }
-filter { 'platforms:x64 or x64_asan' }
-defines { "ARCH_X86_32=0", "ARCH_X86_64=1" }
-filter {}
-disablewarnings { "4057", "4090", "4100", "4152", "4201", "4244", "4245", "4456", "4457", "4701", "4703", "4706", "4819", "4996", "5287" }
-includedirs { "ext/dav1d/include/compat/msvc", "ext/dav1d", "ext/dav1d/include" }
--- nasm.exe -I .\ext\libjpeg-turbo\simd\
--- -I .\ext\libjpeg-turbo\win\ -f win32
--- -o .\obj-rel\jpegturbo\jsimdcpu.obj
--- .\ext\libjpeg-turbo\simd\jsimdcpu.asm
-filter { 'files:**.asm', 'platforms:x86' }
-buildmessage '%{file.relpath}'
-buildoutputs { '%{cfg.objdir}/%{file.basename}_asm.obj' }
-buildcommands {
-  '..\\bin\\nasm.exe -f win32 -DPREFIX=1 -DARCH_X86_64=0 -DARCH_X86_32=1 -I ../ext/dav1d/src -I ../ext/dav1d/include -o "%{cfg.objdir}/%{file.basename}_asm.obj" "%{file.relpath}"'
-}
-filter {}
-filter { 'files:**.asm', 'platforms:x64 or x64_asan' }
-buildmessage '%{file.relpath}'
-buildoutputs { '%{cfg.objdir}/%{file.basename}_asm.obj' }
-buildcommands {
-  '..\\bin\\nasm.exe -f win64 -DARCH_X86_64=1 -DARCH_X86_32=0 -D__x86_64__ -DWIN64 -DMSVC -I ../ext/dav1d/src -I ../ext/dav1d/include -o "%{cfg.objdir}/%{file.basename}_asm.obj" "%{file.relpath}"'
-}
-filter {}
+  project "dav1d"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    defines { "_CRT_SECURE_NO_WARNINGS" }
+    filter { 'platforms:x86' }
+    defines { "ARCH_X86_32=1", "ARCH_X86_64=0", "__SSE2__" }
+    filter { 'platforms:x64 or x64_asan' }
+    defines { "ARCH_X86_32=0", "ARCH_X86_64=1" }
+    filter {}
+    disablewarnings { "4057", "4090", "4100", "4152", "4201", "4244", "4245", "4456", "4457", "4701", "4703", "4706", "4819", "4996", "5287" }
+    includedirs { "ext/dav1d/include/compat/msvc", "ext/dav1d", "ext/dav1d/include" }
+    -- nasm.exe -I .\ext\libjpeg-turbo\simd\
+    -- -I .\ext\libjpeg-turbo\win\ -f win32
+    -- -o .\obj-rel\jpegturbo\jsimdcpu.obj
+    -- .\ext\libjpeg-turbo\simd\jsimdcpu.asm
+    filter { 'files:**.asm', 'platforms:x86' }
+      buildmessage '%{file.relpath}'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}_asm.obj' }
+      buildcommands {
+        '..\\bin\\nasm.exe -f win32 -DPREFIX=1 -DARCH_X86_64=0 -DARCH_X86_32=1 -I ../ext/dav1d/src -I ../ext/dav1d/include -o "%{cfg.objdir}/%{file.basename}_asm.obj" "%{file.relpath}"'
+      }
+    filter {}
+    filter { 'files:**.asm', 'platforms:x64 or x64_asan' }
+      buildmessage '%{file.relpath}'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}_asm.obj' }
+      buildcommands {
+        '..\\bin\\nasm.exe -f win64 -DARCH_X86_64=1 -DARCH_X86_32=0 -D__x86_64__ -DWIN64 -DMSVC -I ../ext/dav1d/src -I ../ext/dav1d/include -o "%{cfg.objdir}/%{file.basename}_asm.obj" "%{file.relpath}"'
+      }
+    filter {}
 
-dav1d_files()
-filter { 'platforms:x86 or x64 or x64_asan' }
-dav1d_x68_files()
-filter {}
+    dav1d_files()
+    filter { 'platforms:x86 or x64 or x64_asan' }
+      dav1d_x68_files()
+    filter {}
 
-project "zlib"
-kind "StaticLib"
-language "C"
-optimized_conf()
-disablewarnings { "4131", "4244", "4245", "4267", "4996" }
-zlib_files()
+  project "zlib"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    disablewarnings { "4131", "4244", "4245", "4267", "4996" }
+    zlib_files()
 
 -- to make Visual Studio solution smaller
 -- combine 9 libs only used by mupdf into a single project
 -- instead of having 9 projects
 
-project "mupdf-libs"
-kind "StaticLib"
-language "C"
-optimized_conf()
+  project "mupdf-libs"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
 
--- zlib
--- disablewarnings { "4131", "4244", "4245", "4267", "4996" }
--- zlib_files()
+    -- zlib
+    -- disablewarnings { "4131", "4244", "4245", "4267", "4996" }
+    -- zlib_files()
 
--- libjpeg-turbo
-defines { "_CRT_SECURE_NO_WARNINGS" }
-disablewarnings { "4013", "4018", "4100", "4244", "4245", "4819" }
-includedirs { "ext/libjpeg-turbo", "ext/libjpeg-turbo/simd" }
--- nasm.exe -I .\ext\libjpeg-turbo\simd\
--- -I .\ext\libjpeg-turbo\win\ -f win32
--- -o .\obj-rel\jpegturbo\jsimdcpu.obj
--- .\ext\libjpeg-turbo\simd\jsimdcpu.asm
-filter { 'files:**.asm', 'platforms:x86' }
-buildmessage '%{file.relpath}'
-buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-buildcommands {
-  '..\\bin\\nasm.exe -f win32 -I ../ext/libjpeg-turbo/simd/ -I ../ext/libjpeg-turbo/win/ -o "%{cfg.objdir}/%{file.basename}.obj" "%{file.relpath}"'
-}
-filter {}
-filter { 'files:**.asm', 'platforms:x64 or x64_asan' }
-buildmessage '%{file.relpath}'
-buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-buildcommands {
-  '..\\bin\\nasm.exe -f win64 -D__x86_64__ -DWIN64 -DMSVC -I ../ext/libjpeg-turbo/simd/ -I ../ext/libjpeg-turbo/win/ -o "%{cfg.objdir}/%{file.basename}.obj" "%{file.relpath}"'
-}
-filter {}
-libjpeg_turbo_files()
+    -- libjpeg-turbo
+    defines { "_CRT_SECURE_NO_WARNINGS" }
+    disablewarnings { "4013", "4018", "4100", "4244", "4245", "4819" }
+    includedirs { "ext/libjpeg-turbo", "ext/libjpeg-turbo/simd" }
+    -- nasm.exe -I .\ext\libjpeg-turbo\simd\
+    -- -I .\ext\libjpeg-turbo\win\ -f win32
+    -- -o .\obj-rel\jpegturbo\jsimdcpu.obj
+    -- .\ext\libjpeg-turbo\simd\jsimdcpu.asm
+    filter { 'files:**.asm', 'platforms:x86' }
+      buildmessage '%{file.relpath}'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\nasm.exe -f win32 -I ../ext/libjpeg-turbo/simd/ -I ../ext/libjpeg-turbo/win/ -o "%{cfg.objdir}/%{file.basename}.obj" "%{file.relpath}"'
+      }
+    filter {}
+    filter { 'files:**.asm', 'platforms:x64 or x64_asan' }
+      buildmessage '%{file.relpath}'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\nasm.exe -f win64 -D__x86_64__ -DWIN64 -DMSVC -I ../ext/libjpeg-turbo/simd/ -I ../ext/libjpeg-turbo/win/ -o "%{cfg.objdir}/%{file.basename}.obj" "%{file.relpath}"'
+      }
+    filter {}
+    libjpeg_turbo_files()
 
--- jbig2dec
-defines { "_CRT_SECURE_NO_WARNINGS", "HAVE_STRING_H=1", "JBIG_NO_MEMENTO" }
-disablewarnings { "4018", "4100", "4146", "4244", "4267", "4456", "4701" }
-includedirs { "ext/jbig2dec" }
-jbig2dec_files()
+    -- jbig2dec
+    defines { "_CRT_SECURE_NO_WARNINGS", "HAVE_STRING_H=1", "JBIG_NO_MEMENTO" }
+    disablewarnings { "4018", "4100", "4146", "4244", "4267", "4456", "4701" }
+    includedirs { "ext/jbig2dec" }
+    jbig2dec_files()
 
--- openjpeg
-disablewarnings { "4100", "4244", "4310", "4389", "4456" }
--- openjpeg has opj_config_private.h for such over-rides
--- but we can't change it because we bring openjpeg as submodule
--- and we can't provide our own in a different directory because
--- msvc will include the one in ext/openjpeg/src/lib/openjp2 first
--- because #include "opj_config_private.h" searches current directory first
-defines { "_CRT_SECURE_NO_WARNINGS", "USE_JPIP", "OPJ_STATIC", "OPJ_EXPORTS" }
-openjpeg_files()
+    -- openjpeg
+    disablewarnings { "4100", "4244", "4310", "4389", "4456" }
+    -- openjpeg has opj_config_private.h for such over-rides
+    -- but we can't change it because we bring openjpeg as submodule
+    -- and we can't provide our own in a different directory because
+    -- msvc will include the one in ext/openjpeg/src/lib/openjp2 first
+    -- because #include "opj_config_private.h" searches current directory first
+    defines { "_CRT_SECURE_NO_WARNINGS", "USE_JPIP", "OPJ_STATIC", "OPJ_EXPORTS" }
+    openjpeg_files()
 
--- freetype
-defines {
-  "FT2_BUILD_LIBRARY",
-  "FT_CONFIG_MODULES_H=\"slimftmodules.h\"",
-  "FT_CONFIG_OPTIONS_H=\"slimftoptions.h\"",
-  "FT_CONFIG_OPTION_USE_BROTLI",
-}
-disablewarnings { "4018", "4100", "4101", "4244", "4267", "4312", "4701", "4706", "4996" }
-includedirs { "mupdf/scripts/freetype", "ext/freetype/include" }
-freetype_files()
+    -- freetype
+    defines {
+      "FT2_BUILD_LIBRARY",
+      "FT_CONFIG_MODULES_H=\"slimftmodules.h\"",
+      "FT_CONFIG_OPTIONS_H=\"slimftoptions.h\"",
+      "FT_CONFIG_OPTION_USE_BROTLI",
+    }
+    disablewarnings { "4018", "4100", "4101", "4244", "4267", "4312", "4701", "4706", "4996" }
+    includedirs { "mupdf/scripts/freetype", "ext/freetype/include" }
+    freetype_files()
 
--- lcms2
-disablewarnings { "4100" }
-includedirs { "ext/lcms2/include" }
-lcms2_files()
+    -- lcms2
+    disablewarnings { "4100" }
+    includedirs { "ext/lcms2/include" }
+    lcms2_files()
 
--- harfbuzz
-includedirs { "ext/harfbuzz/src/hb-ucdn", "mupdf/scripts/freetype", "ext/freetype/include" }
-defines {
-  --"_CRT_SECURE_NO_WARNINGS",
-  "HAVE_FALLBACK=1",
-  "HAVE_OT",
-  "HAVE_UCDN",
-  "HAVE_FREETYPE",
-}
-filter "configurations:Debug or DebugFull"
-defines {
-  "HAVE_ATEXIT",
-  "hb_malloc_impl=sumatra_hb_malloc",
-  "hb_calloc_impl=sumatra_hb_calloc",
-  "hb_realloc_impl=sumatra_hb_realloc",
-  "hb_free_impl=sumatra_hb_free"
-}
-filter "configurations:Release or ReleaseAnalyze"
-defines {
-  "hb_malloc_impl=fz_hb_malloc",
-  "hb_calloc_impl=fz_hb_calloc",
-  "hb_realloc_impl=fz_hb_realloc",
-  "hb_free_impl=fz_hb_free"
-}
-filter {}
-disablewarnings { "4805", "4100", "4146", "4244", "4245", "4267", "4456", "4457", "4459", "4701", "4702", "4706" }
-harfbuzz_files()
+    -- harfbuzz
+    includedirs { "ext/harfbuzz/src/hb-ucdn", "mupdf/scripts/freetype", "ext/freetype/include" }
+    defines {
+      --"_CRT_SECURE_NO_WARNINGS",
+      "HAVE_FALLBACK=1",
+      "HAVE_OT",
+      "HAVE_UCDN",
+      "HAVE_FREETYPE",
+    }
+    filter "configurations:Debug or DebugFull"
+    defines {
+      "HAVE_ATEXIT",
+      "hb_malloc_impl=sumatra_hb_malloc",
+      "hb_calloc_impl=sumatra_hb_calloc",
+      "hb_realloc_impl=sumatra_hb_realloc",
+      "hb_free_impl=sumatra_hb_free"
+    }
+    filter "configurations:Release or ReleaseAnalyze"
+      defines {
+        "hb_malloc_impl=fz_hb_malloc",
+        "hb_calloc_impl=fz_hb_calloc",
+        "hb_realloc_impl=fz_hb_realloc",
+        "hb_free_impl=fz_hb_free"
+      }
+    filter {}
+    disablewarnings { "4805", "4100", "4146", "4244", "4245", "4267", "4456", "4457", "4459", "4701", "4702", "4706" }
+    harfbuzz_files()
 
--- mujs
-includedirs { "ext/mujs" }
-disablewarnings { "4090", "4100", "4310", "4702", "4706" }
-files { "ext/mujs/one.c", "ext/mujs/mujs.h" }
+    -- mujs
+    includedirs { "ext/mujs" }
+    disablewarnings { "4090", "4100", "4310", "4702", "4706" }
+    files { "ext/mujs/one.c", "ext/mujs/mujs.h" }
 
--- gumbo
-disablewarnings { "4018", "4100", "4132", "4204", "4244", "4245", "4267",
-  "4305", "4306", "4389", "4456", "4701" }
-includedirs { "ext/gumbo-parser/include", "ext/gumbo-parser/visualc/include" }
-gumbo_files()
+    -- gumbo
+    disablewarnings { "4018", "4100", "4132", "4204", "4244", "4245", "4267",
+      "4305", "4306", "4389", "4456", "4701" }
+    includedirs { "ext/gumbo-parser/include", "ext/gumbo-parser/visualc/include" }
+    gumbo_files()
 
--- extract
-disablewarnings { "4005", "4201", "4130" }
-includedirs { "ext/extract/include" }
-uses_zlib()
-extract_files()
+    -- extract
+    disablewarnings { "4005", "4201", "4130" }
+    includedirs { "ext/extract/include" }
+    uses_zlib()
+    extract_files()
 
--- brotli
-includedirs { "ext/brotli/c/include" }
-brotli_files()
+    -- brotli
+    includedirs { "ext/brotli/c/include" }
+    brotli_files()
 
--- libheif
-defines { "LIBHEIF_STATIC_BUILD" }
+    -- libheif
+    defines { "LIBHEIF_STATIC_BUILD" }
 
-function fonts()
-  files {
+    function fonts()
+      files {
 
-    "mupdf/resources/fonts/urw/Dingbats.cff",
-    "mupdf/resources/fonts/urw/NimbusMonoPS-Regular.cff",
-    "mupdf/resources/fonts/urw/NimbusMonoPS-Italic.cff",
-    "mupdf/resources/fonts/urw/NimbusMonoPS-Bold.cff",
-    "mupdf/resources/fonts/urw/NimbusMonoPS-BoldItalic.cff",
-    "mupdf/resources/fonts/urw/NimbusRoman-Regular.cff",
-    "mupdf/resources/fonts/urw/NimbusRoman-Italic.cff",
-    "mupdf/resources/fonts/urw/NimbusRoman-Bold.cff",
-    "mupdf/resources/fonts/urw/NimbusRoman-BoldItalic.cff",
-    "mupdf/resources/fonts/urw/NimbusSans-Regular.cff",
-    "mupdf/resources/fonts/urw/NimbusSans-Italic.cff",
-    "mupdf/resources/fonts/urw/NimbusSans-Bold.cff",
-    "mupdf/resources/fonts/urw/NimbusSans-BoldItalic.cff",
-    "mupdf/resources/fonts/urw/StandardSymbolsPS.cff",
-    "mupdf/resources/fonts/droid/DroidSansFallbackFull.ttf",
-    "mupdf/resources/fonts/sil/CharisSIL.cff",
-    "mupdf/resources/fonts/sil/CharisSIL-Bold.cff",
-    "mupdf/resources/fonts/sil/CharisSIL-Italic.cff",
-    "mupdf/resources/fonts/sil/CharisSIL-BoldItalic.cff",
+        "mupdf/resources/fonts/urw/Dingbats.cff",
+        "mupdf/resources/fonts/urw/NimbusMonoPS-Regular.cff",
+        "mupdf/resources/fonts/urw/NimbusMonoPS-Italic.cff",
+        "mupdf/resources/fonts/urw/NimbusMonoPS-Bold.cff",
+        "mupdf/resources/fonts/urw/NimbusMonoPS-BoldItalic.cff",
+        "mupdf/resources/fonts/urw/NimbusRoman-Regular.cff",
+        "mupdf/resources/fonts/urw/NimbusRoman-Italic.cff",
+        "mupdf/resources/fonts/urw/NimbusRoman-Bold.cff",
+        "mupdf/resources/fonts/urw/NimbusRoman-BoldItalic.cff",
+        "mupdf/resources/fonts/urw/NimbusSans-Regular.cff",
+        "mupdf/resources/fonts/urw/NimbusSans-Italic.cff",
+        "mupdf/resources/fonts/urw/NimbusSans-Bold.cff",
+        "mupdf/resources/fonts/urw/NimbusSans-BoldItalic.cff",
+        "mupdf/resources/fonts/urw/StandardSymbolsPS.cff",
+        "mupdf/resources/fonts/droid/DroidSansFallbackFull.ttf",
+        "mupdf/resources/fonts/sil/CharisSIL.cff",
+        "mupdf/resources/fonts/sil/CharisSIL-Bold.cff",
+        "mupdf/resources/fonts/sil/CharisSIL-Italic.cff",
+        "mupdf/resources/fonts/sil/CharisSIL-BoldItalic.cff",
 
-    "mupdf/resources/fonts/noto/NotoSans-Regular.otf",
-    "mupdf/resources/fonts/noto/NotoSansMath-Regular.otf",
-    "mupdf/resources/fonts/noto/NotoSansSymbols-Regular.otf",
-    "mupdf/resources/fonts/noto/NotoSansSymbols2-Regular.otf",
-    "mupdf/resources/fonts/noto/NotoEmoji-Regular.ttf",
-    "mupdf/resources/fonts/noto/NotoMusic-Regular.otf",
-    "mupdf/resources/fonts/noto/NotoSerif-Regular.otf",
-  }
+        "mupdf/resources/fonts/noto/NotoSans-Regular.otf",
+        "mupdf/resources/fonts/noto/NotoSansMath-Regular.otf",
+        "mupdf/resources/fonts/noto/NotoSansSymbols-Regular.otf",
+        "mupdf/resources/fonts/noto/NotoSansSymbols2-Regular.otf",
+        "mupdf/resources/fonts/noto/NotoEmoji-Regular.ttf",
+        "mupdf/resources/fonts/noto/NotoMusic-Regular.otf",
+        "mupdf/resources/fonts/noto/NotoSerif-Regular.otf",
+      }
 
-  filter { 'files:**.cff', 'platforms:x86' }
-  buildmessage 'bin2coff %{file.basename}.cff (x86)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff x86'
-  }
-  filter { 'files:**.cff', 'platforms:x64 or x64_asan' }
-  buildmessage 'bin2coff %{file.basename}.cff (x64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff x86_64'
-  }
-  filter { 'files:**.cff', 'platforms:arm64' }
-  buildmessage 'bin2coff %{file.basename}.cff (arm64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff ARM64'
-  }
-  filter {}
+      filter { 'files:**.cff', 'platforms:x86' }
+      buildmessage 'bin2coff %{file.basename}.cff (x86)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff x86'
+      }
+      filter { 'files:**.cff', 'platforms:x64 or x64_asan' }
+      buildmessage 'bin2coff %{file.basename}.cff (x64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff x86_64'
+      }
+      filter { 'files:**.cff', 'platforms:arm64' }
+      buildmessage 'bin2coff %{file.basename}.cff (arm64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_cff ARM64'
+      }
+      filter {}
 
-  filter { 'files:**.ttf', 'platforms:x86' }
-  buildmessage 'bin2coff %{file.basename}.ttf (x86)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf x86'
-  }
-  filter { 'files:**.ttf', 'platforms:x64 or x64_asan' }
-  buildmessage 'bin2coff %{file.basename}.ttf (x64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf x86_64'
-  }
-  filter { 'files:**.ttf', 'platforms:arm64' }
-  buildmessage 'bin2coff %{file.basename}.ttf (arm64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf ARM64'
-  }
-  filter {}
+      filter { 'files:**.ttf', 'platforms:x86' }
+      buildmessage 'bin2coff %{file.basename}.ttf (x86)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf x86'
+      }
+      filter { 'files:**.ttf', 'platforms:x64 or x64_asan' }
+      buildmessage 'bin2coff %{file.basename}.ttf (x64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf x86_64'
+      }
+      filter { 'files:**.ttf', 'platforms:arm64' }
+      buildmessage 'bin2coff %{file.basename}.ttf (arm64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_ttf ARM64'
+      }
+      filter {}
 
-  filter { 'files:**.otf', 'platforms:x86' }
-  buildmessage 'bin2coff %{file.basename}.otf (x86)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf x86'
-  }
-  filter { 'files:**.otf', 'platforms:x64 or x64_asan' }
-  buildmessage 'bin2coff %{file.basename}.otf (x64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf x86_64'
-  }
-  filter { 'files:**.otf', 'platforms:arm64' }
-  buildmessage 'bin2coff %{file.basename}.otf (arm64)'
-  buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
-  buildcommands {
-    '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf ARM64'
-  }
-  filter {}
-end
+      filter { 'files:**.otf', 'platforms:x86' }
+      buildmessage 'bin2coff %{file.basename}.otf (x86)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf x86'
+      }
+      filter { 'files:**.otf', 'platforms:x64 or x64_asan' }
+      buildmessage 'bin2coff %{file.basename}.otf (x64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf x86_64'
+      }
+      filter { 'files:**.otf', 'platforms:arm64' }
+      buildmessage 'bin2coff %{file.basename}.otf (arm64)'
+      buildoutputs { '%{cfg.objdir}/%{file.basename}.obj' }
+      buildcommands {
+        '..\\bin\\bin2coff.exe "%{file.relpath}" "%{cfg.objdir}/%{file.basename}.obj" _binary_%{file.basename}_otf ARM64'
+      }
+      filter {}
+    end
 
-project "mupdf"
-kind "StaticLib"
-language "C"
-mixed_dbg_rel_conf()
--- for openjpeg, OPJ_STATIC is alrady defined in load-jpx.c
--- so we can't double-define it
-defines { "USE_JPIP", "OPJ_EXPORTS", "HAVE_LCMS2MT=1" }
-defines { "OPJ_STATIC", "SHARE_JPEG" }
--- this defines which fonts are to be excluded from being included directly
--- we exclude the very big cjk fonts
-defines { "TOFU_NOTO", "TOFU_CJK_LANG", "TOFU_NOTO_SUMATRA" }
-defines { "FZ_ENABLE_PDF=1", "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=1", "FZ_ENABLE_BARCODE=0", "FZ_ENABLE_JS=1", "FZ_ENABLE_HYPHEN=0" }
+  project "mupdf"
+    kind "StaticLib"
+    language "C"
+    mixed_dbg_rel_conf()
+    -- for openjpeg, OPJ_STATIC is alrady defined in load-jpx.c
+    -- so we can't double-define it
+    defines { "USE_JPIP", "OPJ_EXPORTS", "HAVE_LCMS2MT=1" }
+    defines { "OPJ_STATIC", "SHARE_JPEG" }
+    -- this defines which fonts are to be excluded from being included directly
+    -- we exclude the very big cjk fonts
+    defines { "TOFU_NOTO", "TOFU_CJK_LANG", "TOFU_NOTO_SUMATRA" }
+    defines { "FZ_ENABLE_PDF=1", "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=1", "FZ_ENABLE_BARCODE=0", "FZ_ENABLE_JS=1", "FZ_ENABLE_HYPHEN=0" }
 
-filter { "platforms:arm64" }
-defines { "ARCH_HAS_NEON=1" }
-filter {}
+    filter { "platforms:arm64" }
+    defines { "ARCH_HAS_NEON=1" }
+    filter {}
 
-disablewarnings {
-  "4005", "4013", "4018", "4057", "4100", "4115", "4130", "4132", "4200", "4204", "4206", "4210",
-  "4245", "4267", "4295", "4305", "4389", "4456", "4457", "4703", "4706", "4819", "5286"
-}
--- force including mupdf/scripts/openjpeg/opj_config_private.h
--- with our build over-rides
+    disablewarnings {
+      "4005", "4013", "4018", "4057", "4100", "4115", "4130", "4132", "4200", "4204", "4206", "4210",
+      "4245", "4267", "4295", "4305", "4389", "4456", "4457", "4703", "4706", "4819", "5286"
+    }
+    -- force including mupdf/scripts/openjpeg/opj_config_private.h
+    -- with our build over-rides
 
-uses_zlib()
-includedirs {
-  "mupdf/include",
-  "mupdf/generated",
-  "ext/jbig2dec",
-  "ext/libjpeg-turbo",
-  "ext/openjpeg/src/lib/openjp2",
-  "mupdf/scripts/freetype",
-  "ext/freetype/include",
-  "ext/mujs",
-  "ext/brotli/c/include",
-  "ext/harfbuzz/src",
-  "ext/lcms2/include",
-  "ext/gumbo-parser/src",
-  "ext/extract/include",
-}
-fonts()
+    uses_zlib()
+    includedirs {
+      "mupdf/include",
+      "mupdf/generated",
+      "ext/jbig2dec",
+      "ext/libjpeg-turbo",
+      "ext/openjpeg/src/lib/openjp2",
+      "mupdf/scripts/freetype",
+      "ext/freetype/include",
+      "ext/mujs",
+      "ext/brotli/c/include",
+      "ext/harfbuzz/src",
+      "ext/lcms2/include",
+      "ext/gumbo-parser/src",
+      "ext/extract/include",
+    }
+    fonts()
 
+    mupdf_files()
+    links { "mupdf-libs" }
+    -- links { "mupdf-libs", "zlib", "freetype", "openjpeg", "libjpeg-turbo", "jbig2dec", "lcms2", "harfbuzz", "mujs", "gumbo" }
 
-mupdf_files()
-links { "mupdf-libs" }
--- links { "mupdf-libs", "zlib", "freetype", "openjpeg", "libjpeg-turbo", "jbig2dec", "lcms2", "harfbuzz", "mujs", "gumbo" }
+    -- mupdf
+    -- this fixes "NAN" is not a constant in some version of msvc
+    -- without this it's #define _UCRT_NAN (__ucrt_int_to_float(0x7FC00000))
+    defines { "_UCRT_NOISY_NAN" }
 
--- mupdf
--- this fixes "NAN" is not a constant in some version of msvc
--- without this it's #define _UCRT_NAN (__ucrt_int_to_float(0x7FC00000))
-defines { "_UCRT_NOISY_NAN" }
+  project "libmupdf"
+    kind "SharedLib"
+    language "C"
+    optimized_conf()
+    disablewarnings { "4206", "4702" }
+    defines { "FZ_ENABLE_PDF=1", "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=1", "FZ_ENABLE_BARCODE=0", "FZ_ENABLE_JS=1", "FZ_ENABLE_HYPHEN=0" }
 
-project "libmupdf"
-kind "SharedLib"
-language "C"
-optimized_conf()
-disablewarnings { "4206", "4702" }
-defines { "FZ_ENABLE_PDF=1", "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=1", "FZ_ENABLE_BARCODE=0", "FZ_ENABLE_JS=1", "FZ_ENABLE_HYPHEN=0" }
+    filter { "platforms:arm64" }
+    defines { "ARCH_HAS_NEON=1" }
+    filter {}
 
-filter { "platforms:arm64" }
-defines { "ARCH_HAS_NEON=1" }
-filter {}
+    -- premake has logic in vs2010_vcxproj.lua that only sets PlatformToolset
+    -- if there is a c/c++ file, so we add a no-op cpp file to force This logic
+    files { "src/libmupdf.rc", "src/libmupdf.def", "src/no_op_for_premake.cpp" }
+    implibname "libmupdf"
+    -- TODO: is thre a better way to do it?
+    -- linkoptions { "/DEF:..\\src\\libmupdf.def", "-IGNORE:4702" }
+    linkoptions { "-IGNORE:4702" }
+    links_zlib()
+    links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif", "unarrlib" }
+    links {
+      "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
+      "shell32", "windowscodecs", "comctl32", "msimg32",
+      "winspool", "wininet", "urlmon", "gdiplus", "ole32",
+      "oleAut32", "shlwapi", "version", "crypt32"
+    }
 
--- premake has logic in vs2010_vcxproj.lua that only sets PlatformToolset
--- if there is a c/c++ file, so we add a no-op cpp file to force This logic
-files { "src/libmupdf.rc", "src/libmupdf.def", "src/no_op_for_premake.cpp" }
-implibname "libmupdf"
--- TODO: is thre a better way to do it?
--- linkoptions { "/DEF:..\\src\\libmupdf.def", "-IGNORE:4702" }
-linkoptions { "-IGNORE:4702" }
-links_zlib()
-links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif", "unarrlib" }
-links {
-  "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
-  "shell32", "windowscodecs", "comctl32", "msimg32",
-  "winspool", "wininet", "urlmon", "gdiplus", "ole32",
-  "oleAut32", "shlwapi", "version", "crypt32"
-}
+  project "utils"
+    kind "StaticLib"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    warnings_as_errors()
+    filter "configurations:ReleaseAnalyze"
+    -- TODO: somehow /analyze- is default which creates warning about
+    -- over-ride from cl.exe. Don't know how to disable the warning
+    buildoptions { "/analyze" }
+    disablewarnings { "28125", "28252", "28253" }
+    filter {}
 
-project "utils"
-kind "StaticLib"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-warnings_as_errors()
-filter "configurations:ReleaseAnalyze"
--- TODO: somehow /analyze- is default which creates warning about
--- over-ride from cl.exe. Don't know how to disable the warning
-buildoptions { "/analyze" }
-disablewarnings { "28125", "28252", "28253" }
-filter {}
-
--- QITABENT in shlwapi.h has incorrect definition and causes 4838
-disablewarnings { "4100", "4267", "4457", "4838" }
-uses_zlib()
-defines { "LIBHEIF_STATIC_BUILD" }
-includedirs { "src", "ext/lzma/C" }
-includedirs { "ext/libheif/libheif/api", "ext/libwebp/src", "ext/dav1d/include", "ext/unarr", "mupdf/include" }
-utils_files()
+    -- QITABENT in shlwapi.h has incorrect definition and causes 4838
+    disablewarnings { "4100", "4267", "4457", "4838" }
+    uses_zlib()
+    defines { "LIBHEIF_STATIC_BUILD" }
+    includedirs { "src", "ext/lzma/C" }
+    includedirs { "ext/libheif/libheif/api", "ext/libwebp/src", "ext/dav1d/include", "ext/unarr", "mupdf/include" }
+    utils_files()
 
 ---- executables
 
-project "plugin-test"
-kind "WindowedApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-entrypoint "WinMainCRTStartup"
-includedirs { "src" }
-plugin_test_files()
-links { "utils", "mupdf" }
-links { "shlwapi", "version", "comctl32", "wininet", "wintrust", "crypt32" }
+  project "plugin-test"
+    kind "WindowedApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    entrypoint "WinMainCRTStartup"
+    includedirs { "src" }
+    plugin_test_files()
+    links { "utils", "mupdf" }
+    links { "shlwapi", "version", "comctl32", "wininet", "wintrust", "crypt32" }
 
-project "test_util"
-kind "ConsoleApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4838" }
-includedirs { "src" }
-test_util_files()
-links { "gdiplus", "comctl32", "shlwapi", "Version", "wininet", "shcore", "wintrust", "crypt32" }
+  project "test_util"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4838" }
+    includedirs { "src" }
+    test_util_files()
+    links { "gdiplus", "comctl32", "shlwapi", "Version", "wininet", "shcore", "wintrust", "crypt32" }
 
-project "bin2coff"
-kind "ConsoleApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4200", "4838" }
-includedirs { "src" }
-bin2coff_files()
-links { "gdiplus", "comctl32", "shlwapi", "Version" }
+  project "bin2coff"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4200", "4838" }
+    includedirs { "src" }
+    bin2coff_files()
+    links { "gdiplus", "comctl32", "shlwapi", "Version" }
 
-project "PdfFilter"
-kind "SharedLib"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4100", "4838" }
-filter { "configurations:Debug" }
-defines { "BUILD_TEX_IFILTER", "BUILD_EPUB_IFILTER" }
-filter {}
-includedirs { "src", "src/wingui", "mupdf/include" }
-search_filter_files()
-links { "utils", "unrar", "libmupdf" }
-links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  project "PdfFilter"
+    kind "SharedLib"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4100", "4838" }
+    filter { "configurations:Debug" }
+    defines { "BUILD_TEX_IFILTER", "BUILD_EPUB_IFILTER" }
+    filter {}
+    includedirs { "src", "src/wingui", "mupdf/include" }
+    search_filter_files()
+    links { "utils", "unrar", "libmupdf" }
+    links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-project "PdfFilter2"
-kind "SharedLib"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4100", "4838" }
-includedirs { "src", "src/wingui" }
-search_filter2_files()
-links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  project "PdfFilter2"
+    kind "SharedLib"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4100", "4838" }
+    includedirs { "src", "src/wingui" }
+    search_filter2_files()
+    links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-project "PdfPreview2"
-kind "SharedLib"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4100", "4838" }
-includedirs {
-  "src", "src/wingui"
-}
-pdf_preview2_files()
--- TODO: "chm" should only be for Debug config but doing links { "chm" }
--- in the filter breaks linking by setting LinkLibraryDependencies to false
-links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  project "PdfPreview2"
+    kind "SharedLib"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4100", "4838" }
+    includedirs {
+      "src", "src/wingui"
+    }
+    pdf_preview2_files()
+    -- TODO: "chm" should only be for Debug config but doing links { "chm" }
+    -- in the filter breaks linking by setting LinkLibraryDependencies to false
+    links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-project "PdfPreview"
-kind "SharedLib"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4100", "4838" }
-includedirs {
-  "src", "src/wingui", "mupdf/include",
-  "ext/libdjvu", "ext/CHMLib"
-}
-pdf_preview_files()
--- TODO: "chm" should only be for Debug config but doing links { "chm" }
--- in the filter breaks linking by setting LinkLibraryDependencies to false
-links { "utils", "unrar", "libmupdf", "chm" }
-links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  project "PdfPreview"
+    kind "SharedLib"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4100", "4838" }
+    includedirs {
+      "src", "src/wingui", "mupdf/include",
+      "ext/libdjvu", "ext/CHMLib"
+    }
+    pdf_preview_files()
+    -- TODO: "chm" should only be for Debug config but doing links { "chm" }
+    -- in the filter breaks linking by setting LinkLibraryDependencies to false
+    links { "utils", "unrar", "libmupdf", "chm" }
+    links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-project "PdfPreviewTest"
-kind "ConsoleApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-disablewarnings { "4838" }
-includedirs { "src" }
-preview_test_files()
-links { "gdiplus", "comctl32", "shlwapi", "Version", "Ole32" }
-dependson { "PdfPreview" }
+  project "PdfPreviewTest"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    disablewarnings { "4838" }
+    includedirs { "src" }
+    preview_test_files()
+    links { "gdiplus", "comctl32", "shlwapi", "Version", "Ole32" }
+    dependson { "PdfPreview" }
 
--- a single static executable
-project "SumatraPDF"
-kind "WindowedApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-warnings_as_errors()
-entrypoint "WinMainCRTStartup"
-manifest("Off")
-includedirs { "src", "mupdf/include" }
-includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
+  -- a single static executable
+  project "SumatraPDF"
+    kind "WindowedApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    warnings_as_errors()
+    entrypoint "WinMainCRTStartup"
+    manifest("Off")
+    includedirs { "src", "mupdf/include" }
+    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
 
-includedirs { "ext/darkmodelib/include" }
-defines { "_DARKMODELIB_NO_INI_CONFIG" }
-darkmodelib_files()
+    includedirs { "ext/darkmodelib/include" }
+    defines { "_DARKMODELIB_NO_INI_CONFIG" }
+    darkmodelib_files()
 
-webview_conf()
+    webview_conf()
 
-synctex_files()
-mui_files()
-wingui_files()
-uia_files()
-engines_files()
-sumatrapdf_files()
+    synctex_files()
+    mui_files()
+    wingui_files()
+    uia_files()
+    engines_files()
+    sumatrapdf_files()
 
-defines { "_CRT_SECURE_NO_WARNINGS" }
-defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
+    defines { "_CRT_SECURE_NO_WARNINGS" }
+    defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
 
-filter "configurations:ReleaseAnalyze"
--- TODO: somehow /analyze- is default which creates warning about
--- over-ride from cl.exe. Don't know how to disable the warning
-buildoptions { "/analyze" }
-disablewarnings { "28125", "28252", "28253" }
-filter {}
+    filter "configurations:ReleaseAnalyze"
+    -- TODO: somehow /analyze- is default which creates warning about
+    -- over-ride from cl.exe. Don't know how to disable the warning
+    buildoptions { "/analyze" }
+    disablewarnings { "28125", "28252", "28253" }
+    filter {}
 
--- for synctex
-disablewarnings { "4100", "4244", "4267", "4702", "4706", "4819" }
-uses_zlib()
-includedirs { "ext/synctex" }
+    -- for synctex
+    disablewarnings { "4100", "4244", "4267", "4702", "4706", "4819" }
+    uses_zlib()
+    includedirs { "ext/synctex" }
 
--- for uia
-disablewarnings { "4302", "4311", "4838" }
+    -- for uia
+    disablewarnings { "4302", "4311", "4838" }
 
-links_zlib()
-links {
-  "libdjvu", "libwebp", "dav1d", "libheif", "mupdf", "unarrlib", "utils", "unrar", "chm"
-}
-links {
-  "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
-  "version", "windowscodecs", "wininet", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
-}
--- this is to prevent dll hijacking
-linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
-linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
-linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
-filter "platforms:x64_asan"
-linkoptions { "/INFERASANLIBS" }
-filter {}
-dependson { "PdfFilter2", "PdfPreview2", "test_util" }
-prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
+    links_zlib()
+    links {
+      "libdjvu", "libwebp", "dav1d", "libheif", "mupdf", "unarrlib", "utils", "unrar", "chm"
+    }
+    links {
+      "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
+      "version", "windowscodecs", "wininet", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
+    }
+    -- this is to prevent dll hijacking
+    linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
+    linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
+    linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
+    filter "platforms:x64_asan"
+    linkoptions { "/INFERASANLIBS" }
+    filter {}
+    dependson { "PdfFilter2", "PdfPreview2", "test_util" }
+    prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
 
--- a dll version where most functionality is in libmupdf.dll
-project "SumatraPDF-dll"
-kind "WindowedApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
-warnings_as_errors()
-entrypoint "WinMainCRTStartup"
-manifest("Off")
-includedirs { "src", "mupdf/include" }
-includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
-includedirs { "ext/darkmodelib/include" }
+  -- a dll version where most functionality is in libmupdf.dll
+  project "SumatraPDF-dll"
+    kind "WindowedApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
+    warnings_as_errors()
+    entrypoint "WinMainCRTStartup"
+    manifest("Off")
+    includedirs { "src", "mupdf/include" }
+    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
+    includedirs { "ext/darkmodelib/include" }
 
-includedirs { "ext/darkmodelib/include" }
-defines { "_DARKMODELIB_NO_INI_CONFIG" }
-darkmodelib_files()
+    includedirs { "ext/darkmodelib/include" }
+    defines { "_DARKMODELIB_NO_INI_CONFIG" }
+    darkmodelib_files()
 
-synctex_files()
-mui_files()
-wingui_files()
-uia_files()
-engines_files()
-sumatrapdf_files()
+    synctex_files()
+    mui_files()
+    wingui_files()
+    uia_files()
+    engines_files()
+    sumatrapdf_files()
 
-webview_conf()
+    webview_conf()
 
-defines { "_CRT_SECURE_NO_WARNINGS" }
-defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
+    defines { "_CRT_SECURE_NO_WARNINGS" }
+    defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
 
-filter "configurations:ReleaseAnalyze"
--- TODO: somehow /analyze- is default which creates warning about
--- over-ride from cl.exe. Don't know how to disable the warning
-buildoptions { "/analyze" }
-disablewarnings { "28125", "28252", "28253" }
-filter {}
+    filter "configurations:ReleaseAnalyze"
+    -- TODO: somehow /analyze- is default which creates warning about
+    -- over-ride from cl.exe. Don't know how to disable the warning
+    buildoptions { "/analyze" }
+    disablewarnings { "28125", "28252", "28253" }
+    filter {}
 
--- for synctex
-disablewarnings { "4100", "4244", "4267", "4702", "4706" }
-uses_zlib()
-includedirs { "ext/synctex" }
+    -- for synctex
+    disablewarnings { "4100", "4244", "4267", "4702", "4706" }
+    uses_zlib()
+    includedirs { "ext/synctex" }
 
--- for uia
-disablewarnings { "4302", "4311", "4838" }
+    -- for uia
+    disablewarnings { "4302", "4311", "4838" }
 
-disablewarnings { "4819" }
+    disablewarnings { "4819" }
 
-resdefines { "INSTALL_PAYLOAD_ZIP=.\\%{cfg.targetdir}\\InstallerData.dat" }
+    resdefines { "INSTALL_PAYLOAD_ZIP=.\\%{cfg.targetdir}\\InstallerData.dat" }
 
-files { "src/MuPDF_Exports.cpp" }
+    files { "src/MuPDF_Exports.cpp" }
 
-links {
-  "libmupdf", "unrar", "unarrlib", "utils", "chm"
-}
-links {
-  "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
-  "version", "wininet", "d2d1.lib", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
-}
--- this is to prevent dll hijacking
-linkoptions { "/DELAYLOAD:libmupdf.dll" }
-linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
-linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
-linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
-dependson { "PdfFilter", "PdfPreview", "test_util" }
-prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
-prebuildcommands { "cd %{cfg.targetdir} & ..\\..\\bin\\MakeLZSA.exe InstallerData.dat libmupdf.dll:libmupdf.dll PdfFilter.dll:PdfFilter.dll PdfPreview.dll:PdfPreview.dll" }
+    links {
+      "libmupdf", "unrar", "unarrlib", "utils", "chm"
+    }
+    links {
+      "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
+      "version", "wininet", "d2d1.lib", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
+    }
+    -- this is to prevent dll hijacking
+    linkoptions { "/DELAYLOAD:libmupdf.dll" }
+    linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
+    linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
+    linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
+    dependson { "PdfFilter", "PdfPreview", "test_util" }
+    prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
+    prebuildcommands { "cd %{cfg.targetdir} & ..\\..\\bin\\MakeLZSA.exe InstallerData.dat libmupdf.dll:libmupdf.dll PdfFilter.dll:PdfFilter.dll PdfPreview.dll:PdfPreview.dll" }
 
 workspace "MakeLZSA"
-configurations { "Debug", "Release" }
-platforms { "x86", "x64", "arm64", "x64_asan" }
-startproject "MakeLZSA"
+  configurations { "Debug", "Release" }
+  platforms { "x86", "x64", "arm64", "x64_asan" }
+  startproject "MakeLZSA"
 
-filter "platforms:x86"
-architecture "x86"
-filter {}
+  filter "platforms:x86"
+  architecture "x86"
+  filter {}
 
-filter "platforms:x64"
-architecture "x86_64"
--- strangely this is not set by default for rc.exe
-resdefines { "_WIN64" }
-filter {}
+  filter "platforms:x64"
+  architecture "x86_64"
+  -- strangely this is not set by default for rc.exe
+  resdefines { "_WIN64" }
+  filter {}
 
-disablewarnings { "4127", "4189", "4324", "4458", "4522", "4611", "4702", "4800", "6319" }
+  disablewarnings { "4127", "4189", "4324", "4458", "4522", "4611", "4702", "4800", "6319" }
 
-location "this_is_invalid_location"
+  location "this_is_invalid_location"
 
-filter "action:vs2022"
-location "vs2022"
-filter {}
+  filter "action:vs2022"
+    location "vs2022"
+  filter {}
 
-filter "action:vs2026"
-location "vs2026"
-filter {}
+  filter "action:vs2026"
+    location "vs2026"
+  filter {}
 
-clang_conf()
+  clang_conf()
 
-filter { "platforms:x86", "configurations:Release" }
-targetdir "out/rel32"
-filter { "platforms:x86", "configurations:Debug" }
-targetdir "out/dbg32"
-filter {}
+  filter { "platforms:x86", "configurations:Release" }
+    targetdir "out/rel32"
+  filter { "platforms:x86", "configurations:Debug" }
+    targetdir "out/dbg32"
+  filter {}
 
-filter { "platforms:x64", "configurations:Release" }
-targetdir "out/rel64"
-filter { "platforms:x64", "configurations:Debug" }
-targetdir "out/dbg64"
-filter {}
+  filter { "platforms:x64", "configurations:Release" }
+    targetdir "out/rel64"
+  filter { "platforms:x64", "configurations:Debug" }
+    targetdir "out/dbg64"
+  filter {}
 
-objdir "%{cfg.targetdir}/obj"
+  objdir "%{cfg.targetdir}/obj"
 
--- https://github.com/premake/premake-core/wiki/symbols
--- https://blogs.msdn.microsoft.com/vcblog/2016/10/05/faster-c-build-cycle-in-vs-15-with-debugfastlink/
-symbols "Full"
-staticruntime "On"
--- https://github.com/premake/premake-core/wiki/flags
+  -- https://github.com/premake/premake-core/wiki/symbols
+  -- https://blogs.msdn.microsoft.com/vcblog/2016/10/05/faster-c-build-cycle-in-vs-15-with-debugfastlink/
+  symbols "Full"
+  staticruntime "On"
+  -- https://github.com/premake/premake-core/wiki/flags
 
-fatalwarnings { "All" }
-multiprocessorcompile("On")
-mapfile("On")
+  fatalwarnings { "All" }
+  multiprocessorcompile("On")
+  mapfile("On")
 
-defines {
-  "WIN32",
-  "_WIN32",
-  -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-  "WINVER=0x0601", -- force not using API not available in Win7
-  "_WIN32_WINNT=0x0601"
-}
+  winver_defines()
 
-project "MakeLZSA"
-kind "ConsoleApp"
-language "C++"
-cppdialect "C++latest"
-mixed_dbg_rel_conf()
+  project "MakeLZSA"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++latest"
+    mixed_dbg_rel_conf()
 
-makelzsa_files()
-disablewarnings { "4131", "4244", "4245", "4267", "4996" }
-includedirs { "src", "ext/lzma/C", "ext/unarr" }
+    makelzsa_files()
+    disablewarnings { "4131", "4244", "4245", "4267", "4996" }
+    includedirs { "src", "ext/lzma/C", "ext/unarr" }
 
--- for zlib
-disablewarnings { "4131", "4244", "4245", "4267", "4996" }
-zlib_files()
-uses_zlib()
+    -- for zlib
+    disablewarnings { "4131", "4244", "4245", "4267", "4996" }
+    zlib_files()
+    uses_zlib()
 
--- unarrlib
--- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
--- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
-defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
--- TODO: most of these warnings are due to bzip2 and lzma
-disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
-includedirs { "ext/bzip2", "ext/lzma/C" }
-unarr_files()
-links { "shlwapi", "version", "comctl32", "wininet" }
+    -- unarrlib
+    -- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
+    -- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
+    defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
+    -- TODO: most of these warnings are due to bzip2 and lzma
+    disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
+    includedirs { "ext/bzip2", "ext/lzma/C" }
+    unarr_files()
+    links { "shlwapi", "version", "comctl32", "wininet" }
