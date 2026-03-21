@@ -65,6 +65,68 @@ const char* gInstalledFiles[] = {
 // clang-format on
 #endif
 
+static const char* GetEnvRegKey(bool allUsers) {
+    if (allUsers) {
+        return "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment";
+    }
+    return "Environment";
+}
+
+static void RemoveInstallDirFromPath(bool allUsers, const char* installDir) {
+    HKEY root = allUsers ? HKEY_LOCAL_MACHINE : HKEY_CURRENT_USER;
+    const char* keyName = GetEnvRegKey(allUsers);
+    char* currPath = ReadRegStrTemp(root, keyName, "Path");
+    if (!currPath || !*currPath) {
+        return;
+    }
+    if (!str::FindI(currPath, installDir)) {
+        logf("RemoveInstallDirFromPath: '%s' not found in PATH\n", installDir);
+        return;
+    }
+
+    str::Str newPath;
+    size_t installDirLen = str::Len(installDir);
+    const char* p = currPath;
+    while (*p) {
+        const char* semi = str::FindChar(p, ';');
+        size_t entryLen = semi ? (size_t)(semi - p) : str::Len(p);
+        // skip this entry if it matches installDir (case-insensitive)
+        bool match = (entryLen == installDirLen) && str::StartsWithI(p, installDir);
+        if (!match && entryLen > 0) {
+            if (newPath.Size() > 0) {
+                newPath.Append(";");
+            }
+            newPath.Append(p, entryLen);
+        }
+        p += entryLen;
+        if (semi) {
+            p++; // skip ';'
+        } else {
+            break;
+        }
+    }
+
+    // write as REG_EXPAND_SZ since PATH may contain %vars%
+    WCHAR* keyNameW = ToWStrTemp(keyName);
+    WCHAR* valueW = ToWStrTemp(newPath.CStr());
+    DWORD cbData = (DWORD)(str::Len(valueW) + 1) * sizeof(WCHAR);
+    HKEY hKey;
+    LONG res = RegOpenKeyExW(root, keyNameW, 0, KEY_SET_VALUE, &hKey);
+    if (res != ERROR_SUCCESS) {
+        logf("RemoveInstallDirFromPath: RegOpenKeyExW failed with %d\n", (int)res);
+        return;
+    }
+    res = RegSetValueExW(hKey, L"Path", 0, REG_EXPAND_SZ, (const BYTE*)valueW, cbData);
+    RegCloseKey(hKey);
+    if (res != ERROR_SUCCESS) {
+        logf("RemoveInstallDirFromPath: RegSetValueExW failed with %d\n", (int)res);
+        return;
+    }
+    logf("RemoveInstallDirFromPath: removed '%s' from PATH\n", installDir);
+    // notify other processes that environment has changed
+    SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"Environment", SMTO_ABORTIFHUNG, 5000, nullptr);
+}
+
 static void RemoveInstalledFiles() {
     // can't use GetExistingInstallationDir() anymore because we
     // delete registry entries
@@ -121,6 +183,7 @@ static void UninstallerThread() {
     RemoveInstallRegistryKeys(HKEY_CURRENT_USER);
     RemoveAppShortcuts();
 
+    RemoveInstallDirFromPath(gCli->allUsers, gCli->installDir);
     RemoveInstalledFiles();
 
     // always succeed, even for partial uninstallations

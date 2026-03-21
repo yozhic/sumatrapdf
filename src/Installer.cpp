@@ -236,6 +236,52 @@ void RemoveAppShortcuts() {
     }
 }
 
+static const char* GetEnvRegKey(bool allUsers) {
+    if (allUsers) {
+        return "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment";
+    }
+    return "Environment";
+}
+
+static void AddInstallDirToPath(bool allUsers, const char* installDir) {
+    HKEY root = allUsers ? HKEY_LOCAL_MACHINE : HKEY_CURRENT_USER;
+    const char* keyName = GetEnvRegKey(allUsers);
+    char* currPath = ReadRegStrTemp(root, keyName, "Path");
+    // check if installDir is already in PATH (case-insensitive)
+    if (currPath && str::FindI(currPath, installDir)) {
+        logf("AddInstallDirToPath: '%s' already in PATH\n", installDir);
+        return;
+    }
+    str::Str newPath;
+    if (currPath && *currPath) {
+        newPath.Append(currPath);
+        if (newPath.Last() != ';') {
+            newPath.Append(";");
+        }
+    }
+    newPath.Append(installDir);
+
+    // write as REG_EXPAND_SZ since PATH may contain %vars%
+    WCHAR* keyNameW = ToWStrTemp(keyName);
+    WCHAR* valueW = ToWStrTemp(newPath.CStr());
+    DWORD cbData = (DWORD)(str::Len(valueW) + 1) * sizeof(WCHAR);
+    HKEY hKey;
+    LONG res = RegOpenKeyExW(root, keyNameW, 0, KEY_SET_VALUE, &hKey);
+    if (res != ERROR_SUCCESS) {
+        logf("AddInstallDirToPath: RegOpenKeyExW failed with %d\n", (int)res);
+        return;
+    }
+    res = RegSetValueExW(hKey, L"Path", 0, REG_EXPAND_SZ, (const BYTE*)valueW, cbData);
+    RegCloseKey(hKey);
+    if (res != ERROR_SUCCESS) {
+        logf("AddInstallDirToPath: RegSetValueExW failed with %d\n", (int)res);
+        return;
+    }
+    logf("AddInstallDirToPath: added '%s' to PATH\n", installDir);
+    // notify other processes that environment has changed
+    SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"Environment", SMTO_ABORTIFHUNG, 5000, nullptr);
+}
+
 static void InstallerThread(Flags* cli) {
     bool ok;
 
@@ -294,6 +340,8 @@ static void InstallerThread(Flags* cli) {
     if (!ok) {
         NotifyFailed(_TRA("Failed to write the extended file extension information to the registry"));
     }
+
+    AddInstallDirToPath(allUsers, cli->installDir);
 
     ProgressStep();
     log("Installer thread finished\n");
