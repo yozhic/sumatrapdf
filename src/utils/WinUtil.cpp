@@ -702,7 +702,7 @@ static void redirectIOToConsole() {
     if (h != INVALID_HANDLE_VALUE) {
         freopen_s(&con, "CONOUT$", "w", stdout);
         // make them unbuffered
-        setvbuf(stdin, nullptr, _IONBF, 0);
+        setvbuf(stdout, nullptr, _IONBF, 0);
     }
     h = GetStdHandle(STD_ERROR_HANDLE);
     if (h != INVALID_HANDLE_VALUE) {
@@ -711,7 +711,7 @@ static void redirectIOToConsole() {
     }
 #if 0 // probably don't need stdin
     freopen_s(&con, "CONIN$", "r", stdin);
-    setvbuf(stdout, nullptr, _IONBF, 0);
+    setvbuf(stdin, nullptr, _IONBF, 0);
 #endif
 }
 
