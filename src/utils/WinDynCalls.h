@@ -61,34 +61,44 @@ typedef int(WINAPI* Sig_NormalizeString)(int, LPCWSTR, int, LPWSTR, int);
 NORMALIZ_API_LIST(API_DECLARATION)
 
 // kernel32.dll
-#define KERNEL32_API_LIST(V)     \
-    V(SetProcessDEPPolicy)       \
-    V(IsWow64Process)            \
-    V(GetProcessInformation)     \
-    V(SetDllDirectoryW)          \
-    V(SetDefaultDllDirectories)  \
-    V(RtlCaptureContext)         \
-    V(RtlCaptureStackBackTrace)  \
-    V(SetThreadDescription)      \
-    V(GetFinalPathNameByHandleW) \
-    V(SetProcessMitigationPolicy)
+#define KERNEL32_API_LIST(V)    \
+    V(SetProcessDEPPolicy)      \
+    V(IsWow64Process)           \
+    V(SetDllDirectoryW)         \
+    V(SetDefaultDllDirectories) \
+    V(RtlCaptureContext)        \
+    V(RtlCaptureStackBackTrace) \
+    V(SetThreadDescription)     \
+    V(GetFinalPathNameByHandleW)
 
 // TODO: only available in 20348, not yet present in SDK?
 // V(GetTempPath2W)
 
 KERNEL32_API_LIST(API_DECLARATION2)
 
+// not declared in SDK headers with _WIN32_WINNT=0x0601, define manually
+typedef BOOL(WINAPI* Sig_GetProcessInformation)(HANDLE, int, LPVOID, DWORD);
+typedef BOOL(WINAPI* Sig_SetProcessMitigationPolicy)(int, PVOID, SIZE_T);
+extern Sig_GetProcessInformation DynGetProcessInformation;
+extern Sig_SetProcessMitigationPolicy DynSetProcessMitigationPolicy;
+
 // user32.dll
-#define USER32_API_LIST(V)                 \
-    V(GetDpiForWindow)                     \
-    V(GetThreadDpiAwarenessContext)        \
-    V(GetAwarenessFromDpiAwarenessContext) \
-    V(SetThreadDpiAwarenessContext)        \
-    V(SetGestureConfig)                    \
-    V(GetGestureInfo)                      \
+#define USER32_API_LIST(V) \
+    V(SetGestureConfig)    \
+    V(GetGestureInfo)      \
     V(CloseGestureInfoHandle)
 
 USER32_API_LIST(API_DECLARATION2)
+
+// not declared in SDK headers with _WIN32_WINNT=0x0601, define manually
+typedef UINT(WINAPI* Sig_GetDpiForWindow)(HWND);
+typedef HANDLE(WINAPI* Sig_GetThreadDpiAwarenessContext)(void);
+typedef int(WINAPI* Sig_GetAwarenessFromDpiAwarenessContext)(HANDLE);
+typedef HANDLE(WINAPI* Sig_SetThreadDpiAwarenessContext)(HANDLE);
+extern Sig_GetDpiForWindow DynGetDpiForWindow;
+extern Sig_GetThreadDpiAwarenessContext DynGetThreadDpiAwarenessContext;
+extern Sig_GetAwarenessFromDpiAwarenessContext DynGetAwarenessFromDpiAwarenessContext;
+extern Sig_SetThreadDpiAwarenessContext DynSetThreadDpiAwarenessContext;
 
 // uxtheme.dll
 #define UXTHEME_API_LIST(V)                  \

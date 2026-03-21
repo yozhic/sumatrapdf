@@ -18,6 +18,14 @@ DBGHELP_API_LIST(API_DECLARATION)
 
 #undef API_DECLARATION
 
+// manual definitions for functions not in API lists
+Sig_GetProcessInformation DynGetProcessInformation = nullptr;
+Sig_SetProcessMitigationPolicy DynSetProcessMitigationPolicy = nullptr;
+Sig_GetDpiForWindow DynGetDpiForWindow = nullptr;
+Sig_GetThreadDpiAwarenessContext DynGetThreadDpiAwarenessContext = nullptr;
+Sig_GetAwarenessFromDpiAwarenessContext DynGetAwarenessFromDpiAwarenessContext = nullptr;
+Sig_SetThreadDpiAwarenessContext DynSetThreadDpiAwarenessContext = nullptr;
+
 #define API_LOAD(name) Dyn##name = (Sig_##name)GetProcAddress(h, #name);
 
 // Loads a DLL explicitly from the system's library collection
@@ -39,6 +47,8 @@ void InitDynCalls() {
     HMODULE h = SafeLoadLibrary("kernel32.dll");
     ReportIf(!h);
     KERNEL32_API_LIST(API_LOAD);
+    DynGetProcessInformation = (Sig_GetProcessInformation)GetProcAddress(h, "GetProcessInformation");
+    DynSetProcessMitigationPolicy = (Sig_SetProcessMitigationPolicy)GetProcAddress(h, "SetProcessMitigationPolicy");
 
     h = SafeLoadLibrary("ntdll.dll");
     ReportIf(!h);
@@ -47,6 +57,13 @@ void InitDynCalls() {
     h = SafeLoadLibrary("user32.dll");
     ReportIf(!h);
     USER32_API_LIST(API_LOAD);
+    DynGetDpiForWindow = (Sig_GetDpiForWindow)GetProcAddress(h, "GetDpiForWindow");
+    DynGetThreadDpiAwarenessContext =
+        (Sig_GetThreadDpiAwarenessContext)GetProcAddress(h, "GetThreadDpiAwarenessContext");
+    DynGetAwarenessFromDpiAwarenessContext =
+        (Sig_GetAwarenessFromDpiAwarenessContext)GetProcAddress(h, "GetAwarenessFromDpiAwarenessContext");
+    DynSetThreadDpiAwarenessContext =
+        (Sig_SetThreadDpiAwarenessContext)GetProcAddress(h, "SetThreadDpiAwarenessContext");
 
     h = SafeLoadLibrary("uxtheme.dll");
     if (h) {

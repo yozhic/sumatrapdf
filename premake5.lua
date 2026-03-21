@@ -277,8 +277,8 @@ defines {
   "WIN32",
   "_WIN32",
   -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-  "WINVER=0x0605", -- latest Windows SDK
-  "_WIN32_WINNT=0x0603"
+  "WINVER=0x0601", -- force not using API not available in Win7
+  "_WIN32_WINNT=0x0601"
 }
 
 project "unrar"
@@ -1002,8 +1002,8 @@ defines {
   "WIN32",
   "_WIN32",
   -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-  "WINVER=0x0605", -- latest Windows SDK
-  "_WIN32_WINNT=0x0603"
+  "WINVER=0x0601", -- force not using API not available in Win7
+  "_WIN32_WINNT=0x0601"
 }
 
 project "MakeLZSA"
