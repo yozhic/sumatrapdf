@@ -11,7 +11,7 @@ Use `Ctrl + K` to invoke command palette:
 Command palette is fast and convenient way to:
 
 - access all SumatraPDF functionality via commands : default view and `>`
-- `#` : open previously opened files
+- `#` : open file from history
 - `@` : switch to another tab
 - `:` : combined view (replicates behavior before ver 3.6)
 
@@ -25,15 +25,15 @@ How to use it:
 
 By default it shows available commands.
 
-## Tabs
+## Switching between tabs
 
 Type `@` to switch between opened tabs:
 
 ![Command Palette](img/command-palette-tabs.png)
 
-## File History
+## File history
 
-Type `#` to open a file from history of opened files:
+Type `#` to open a file from list of previously opened files:
 
 ![Command Palette](img/command-palette-file-history.png)
 

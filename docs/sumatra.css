@@ -33,38 +33,15 @@ html:focus-within {
 }
 
 html {
-  font-size: 12pt;
+  font-size: 11pt;
 }
-
-/* TODO: figure out how to make nav be stable when switching between pages.
-
-Tried so far (on Chrome)
-* html { width: 100vw; }
-  nav stable but scroll-x shows up on pages with scroll-y because
-  scrollbar pushes the total content width
-* body { scrollbar-gutter: stable; }
-  seemingly no effect
-  https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
-* body { overflow-y: overlay }
-  nav stable but covers right margin so centering with margins looks
-  asymetrical (e.g. testimonials).
-  Would have to set the margin-right to margin-left + scrollbar width
-  https://stackoverflow.com/questions/13054797/how-to-prevent-a-webkit-scrollbar-from-pushing-over-the-contents-of-a-div
-
-Not tried:
-* https://kingsora.github.io/OverlayScrollbars/
-  it's 53kB minified
-* http://grsmto.github.io/simplebar/
-  6kB minified but can't be used on body
-* https://dev.to/jonosellier/easy-overlay-scrollbars-variable-width-1mbh
-  a very simple way to implement overlay scrollbars
-  although overflow: overlay is deprecated?
-* https://stackoverflow.com/a/64554893
-  I don't get it
-*/
 
 html {
   scrollbar-gutter: stable;
+}
+
+pre > code {
+  font-size: 10pt;
 }
 
 /* makes scrollbar thin, from chat.openai.com */

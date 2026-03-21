@@ -303,7 +303,7 @@ function writeDocsHtmlFiles(): void {
   const htmlFiles = ["sumatra.css", "gen_toc.js", "favicon.ico"];
   for (const name of htmlFiles) {
     const srcPath = join("docs", name);
-    const dstPath = join(wwwOutDir, "www", name);
+    const dstPath = join(wwwOutDir, name);
     copyFileNormalized(dstPath, srcPath);
   }
 }
