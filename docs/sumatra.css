@@ -33,15 +33,10 @@ html:focus-within {
 }
 
 html {
-  font-size: 11pt;
+  font-size: 12pt;
 }
-
 html {
   scrollbar-gutter: stable;
-}
-
-pre > code {
-  font-size: 10pt;
 }
 
 /* makes scrollbar thin, from chat.openai.com */
@@ -298,6 +293,14 @@ a.for-nav-icon:hover {
     visibility: collapse;
     display: none;
   }
+}
+
+.notion-page {
+  font-size: 11pt;
+}
+
+pre > code {
+  font-size: 10pt;
 }
 
 .notion-page > div > img {
