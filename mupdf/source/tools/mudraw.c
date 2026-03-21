@@ -2814,3 +2814,30 @@ int mudraw_main(int argc, char **argv)
 
 	return (errored != 0);
 }
+
+/* SumatraPDF: this must be in libmupdf.dll */
+// https://www.tillett.info/2013/05/13/how-to-create-a-windows-program-that-works-as-both-as-a-gui-and-console-application/
+// TODO: see if https://github.com/apenwarr/fixconsole/blob/master/fixconsole_windows.go would improve things
+
+int fz_redirect_io_to_existing_console() {
+    FILE* con = NULL;
+    HANDLE h;
+
+	BOOL ok = AttachConsole(ATTACH_PARENT_PROCESS);
+    if (!ok) {
+        return 0;
+    }
+
+    h = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (h != INVALID_HANDLE_VALUE) {
+        freopen_s(&con, "CONOUT$", "w", stdout);
+        // make them unbuffered
+        setvbuf(stdout, NULL, _IONBF, 0);
+    }
+    h = GetStdHandle(STD_ERROR_HANDLE);
+    if (h != INVALID_HANDLE_VALUE) {
+        freopen_s(&con, "CONOUT$", "w", stderr);
+        setvbuf(stderr, NULL, _IONBF, 0);
+    }
+    return 1;
+}

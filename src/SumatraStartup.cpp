@@ -2107,6 +2107,7 @@ int pdfaudit_main(int argc, char* argv[]);
 
 char** fz_argv_from_wargv(int argc, wchar_t** wargv);
 void fz_free_argv(int argc, char** argv);
+int fz_redirect_io_to_existing_console();
 }
 
 // must match premake5.lua
@@ -2182,7 +2183,7 @@ static int MaybeMutool() {
         const char* toolName = argv[0];
         for (int i = 0; i < dimofi(tools); i++) {
             if (str::EqI(toolName, tools[i].name)) {
-                RedirectIOToExistingConsole();
+                fz_redirect_io_to_existing_console();
                 res = tools[i].func(argc, argv);
                 goto Exit;
             }
