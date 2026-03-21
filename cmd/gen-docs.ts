@@ -36,8 +36,6 @@ const h1BreadcrumbsEnd = `</div>
 </div>
 `;
 
-let breadCrumbs = "";
-
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -145,6 +143,15 @@ function mdToHTML(name: string): string {
 
   const isMainPage = name === "SumatraPDF-documentation.md";
   let text = readFileSync(join(mdDir, name), "utf-8");
+
+  // extract and remove first H1 line before conversion
+  let h1Text = "";
+  const h1Match = text.match(/^# (.+)$/m);
+  if (h1Match) {
+    h1Text = h1Match[1];
+    text = text.replace(/^# .+\n?/, "");
+  }
+
   text = preProcess(text);
 
   const md = new MarkdownIt({ html: true, typographer: true });
@@ -160,40 +167,15 @@ function mdToHTML(name: string): string {
     return `<pre><code>${md.utils.escapeHtml(t.content)}</code></pre>\n`;
   };
 
-  // heading state
-  let seenFirstH1 = false;
-  let h1Mode: "skip" | "breadcrumb" | null = null;
-
   md.renderer.rules.heading_open = (tokens: MarkdownIt.Token[], idx: number) => {
     const tok = tokens[idx];
-    const level = Number(tok.tag[1]);
     const text = getInlineText(tokens[idx + 1]);
     const id = slugify(text);
-
-    if (level === 1 && !seenFirstH1) {
-      seenFirstH1 = true;
-      if (isMainPage) {
-        // skip first H1 entirely on main page
-        h1Mode = "skip";
-        return "<!--skip-->";
-      }
-      // turn first H1 into breadcrumbs on other pages
-      h1Mode = "breadcrumb";
-      return h1BreadcrumbsStart;
-    }
     return `<${tok.tag} id="${id}">`;
   };
 
   md.renderer.rules.heading_close = (tokens: MarkdownIt.Token[], idx: number) => {
     const tok = tokens[idx];
-    if (h1Mode === "skip") {
-      h1Mode = null;
-      return "<!--/skip-->";
-    }
-    if (h1Mode === "breadcrumb") {
-      h1Mode = null;
-      return h1BreadcrumbsEnd;
-    }
     const text = getInlineText(tokens[idx - 1]);
     const id = slugify(text);
     return `<a class="hlink" href="#${id}"> # </a></${tok.tag}>\n`;
@@ -246,8 +228,11 @@ function mdToHTML(name: string): string {
 
   let innerHTML = md.render(text);
 
-  // remove skipped first H1 (main page) including inline content between markers
-  innerHTML = innerHTML.replace(/<!--skip-->[\s\S]*?<!--\/skip-->/g, "");
+  // add breadcrumbs at start and end for non-main pages
+  if (h1Text && !isMainPage) {
+    const bc = h1BreadcrumbsStart + h1Text + h1BreadcrumbsEnd;
+    innerHTML = bc + innerHTML + `<div>&nbsp;</div>` + bc;
+  }
 
   innerHTML = `<div class="notion-page">${innerHTML}</div>`;
 
