@@ -122,7 +122,7 @@ bool gCrashOnOpen = false;
 // in restricted mode, some features can be disabled (such as
 // opening files, printing, following URLs), so that SumatraPDF
 // can be used as a PDF reader on locked down systems
-static Perm gPolicyRestrictions = Perm::RestrictedUse;
+static Perm gPolicyRestrictions = Perm::All;
 // only the listed protocols will be passed to the OS for
 // opening in e.g. a browser or an email client (ignored,
 // if gPolicyRestrictions doesn't contain Perm::DiskAccess)
@@ -190,11 +190,12 @@ void SetCurrentLang(const char* langCode) {
 
 void InitializePolicies(bool restrict) {
     // default configuration should be to restrict everything
-    ReportIf(gPolicyRestrictions != Perm::RestrictedUse);
+    ReportIf(gPolicyRestrictions != Perm::All);
     ReportIf(gAllowedLinkProtocols.Size() != 0 || gAllowedFileTypes.Size() != 0);
 
     // the -restrict command line flag overrides any sumatrapdfrestrict.ini configuration
     if (restrict) {
+        gPolicyRestrictions = Perm::RestrictedUse;
         return;
     }
 
@@ -203,7 +204,6 @@ void InitializePolicies(bool restrict) {
     // (if the file isn't there, everything is allowed)
     TempStr restrictPath = GetPathInExeDirTemp(kRestrictionsFileName);
     if (!file::Exists(restrictPath)) {
-        gPolicyRestrictions = Perm::All;
         Split(&gAllowedLinkProtocols, DEFAULT_LINK_PROTOCOLS, ",");
         Split(&gAllowedFileTypes, DEFAULT_FILE_PERCEIVED_TYPES, ",");
         return;

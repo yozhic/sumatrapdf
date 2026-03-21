@@ -2259,10 +2259,6 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     bool isUninstaller = flags.uninstall;
     bool noLogHere = isInstaller || isUninstaller;
 
-    if (MaybeMutool() != kNoMutool) {
-        goto Exit;
-    }
-
     if (gCli->silent) {
         gLogToConsole = false;
     }
@@ -2436,6 +2432,10 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         return 0;
     }
 #endif
+
+    if (MaybeMutool() != kNoMutool) {
+        goto Exit;
+    }
 
     DetectExternalViewers();
 
