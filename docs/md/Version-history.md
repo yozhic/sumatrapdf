@@ -1,5 +1,12 @@
 # Version history
 
+**next: 3.7**
+
+Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
+
+- add cmd-line tools `SumatraPDF <tool> <args>`. Tools: draw, convert, audit, bake, clean, create, extract, info, merge, pages, poster, recolor, show, trim, grep, trace
+- add `CmdShowPdfInfo` (`Show PDF Info` in `Ctrl + k` [command palette](Command-Palette.md))
+
 ## 3.6 (2026-03-17)
 
 - add `DisableAntiAlias` advanced setting and `CmdToggleAntiAlias` command

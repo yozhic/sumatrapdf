@@ -201,6 +201,15 @@ CmdZoom8_33,,Zoom: 8.33%,
 CmdZoom800,,Zoom: 800%,
 ```
 
+## File information / conversion
+
+## External app
+
+```commands
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdShowPdfInfo,,Show PDF Info,shows information about currently opened PDF file
+```
+
 ## External app
 
 ```commands
