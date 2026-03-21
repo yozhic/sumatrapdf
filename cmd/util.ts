@@ -1,5 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
-import { join, dirname } from "node:path";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, dirname, extname } from "node:path";
 
 const msBuildRelPath = String.raw`MSBuild\Current\Bin\MSBuild.exe`;
 const clangFormatRelPath = String.raw`VC\Tools\Llvm\bin\clang-format.exe`;
@@ -194,4 +194,20 @@ export function extractSumatraVersion(): string {
     }
   }
   throw new Error(`couldn't extract CURR_VERSION from ${path}`);
+}
+
+function normalizeNewlines(data: string): string {
+  return data.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+}
+const extsToNormalizeNL = [".md", ".css"];
+export function copyFileNormalized(dst: string, src: string): void {
+  const dstDir = join(dst, "..");
+  mkdirSync(dstDir, { recursive: true });
+  const ext = extname(dst).toLowerCase();
+  if (extsToNormalizeNL.includes(ext)) {
+    const data = readFileSync(src, "utf-8");
+    writeFileSync(dst, normalizeNewlines(data));
+  } else {
+    copyFileSync(src, dst);
+  }
 }

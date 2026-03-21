@@ -1,7 +1,7 @@
 import { Glob } from "bun";
 import { unlink, appendFile, writeFile } from "node:fs/promises";
 import { join, basename } from "node:path";
-import { detectVisualStudio } from "./util.ts";
+import { detectVisualStudio } from "./util";
 
 const includes = [
   "-I",

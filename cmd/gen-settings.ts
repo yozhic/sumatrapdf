@@ -3,11 +3,7 @@
 
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname, resolve, basename } from "node:path";
-import { extractSumatraVersion, detectVisualStudio, runLogged, isGitClean } from "./util.ts";
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+import { extractSumatraVersion, detectVisualStudio, runLogged, isGitClean } from "./util";
 
 async function runCapture(cmd: string, args: string[], cwd?: string): Promise<string> {
   const proc = Bun.spawn([cmd, ...args], { stdout: "pipe", stderr: "pipe", cwd });
@@ -22,10 +18,6 @@ function writeFileMust(path: string, data: string): void {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, data, "utf-8");
 }
-
-// ---------------------------------------------------------------------------
-// Type system
-// ---------------------------------------------------------------------------
 
 interface Type {
   name: string;
@@ -51,10 +43,6 @@ const Float: Type = { name: "Float", ctype: "float" };
 const Int: Type = { name: "Int", ctype: "int" };
 const Str: Type = { name: "String", ctype: "char*" };
 const Comment: Type = { name: "Comment", ctype: "" };
-
-// ---------------------------------------------------------------------------
-// Field builder helpers
-// ---------------------------------------------------------------------------
 
 function toCName(name: string): string {
   if (name === "URL") return "url";
@@ -162,10 +150,6 @@ function mkRGBA(r: number, g: number, b: number, a: number): string {
 function isComment(f: Field): boolean {
   return f.Type.name === "Comment";
 }
-
-// ---------------------------------------------------------------------------
-// Setting definitions
-// ---------------------------------------------------------------------------
 
 const ebookUI: Field[] = [
   mkField("FontSize", Float, 0, "font size, default 8.0"),

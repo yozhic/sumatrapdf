@@ -1,8 +1,7 @@
 // build-codeql.ts - replaces Go "-build-codeql" flag
 // Just a static 64-bit release build for CodeQL analysis
 import { join } from "node:path";
-import { detectVisualStudio, runLogged } from "./util.ts";
-
+import { detectVisualStudio, runLogged } from "./util";
 
 function buildConfigPath(): string {
   return join("src", "utils", "BuildConfig.h");

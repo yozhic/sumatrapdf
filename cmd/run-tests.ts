@@ -1,6 +1,5 @@
 import { join, resolve } from "node:path";
-import { detectVisualStudio, runLogged } from "./util.ts";
-
+import { detectVisualStudio, runLogged } from "./util";
 
 const { msbuildPath } = detectVisualStudio();
 const slnPath = join("vs2022", "SumatraPDF.sln");

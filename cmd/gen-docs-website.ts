@@ -10,7 +10,7 @@ import {
 } from "node:fs";
 import { join, resolve, extname } from "node:path";
 import { $ } from "bun";
-import { isGitClean } from "./util";
+import { copyFileNormalized, isGitClean } from "./util";
 
 function getWebsiteDir(): string {
   return resolve(join("..", "hack", "webapps", "sumatra-website"));
@@ -73,12 +73,6 @@ async function updateSumatraWebsite(): Promise<string> {
   return wwwDir;
 }
 
-function normalizeNewlines(data: string): string {
-  return data.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-}
-
-const extsToNormalizeNL = new Set([".md", ".css"]);
-
 function shouldCopyFile(name: string, isDir: boolean): boolean {
   const bannedSuffixes = [".go", ".bat"];
   for (const s of bannedSuffixes) {
@@ -90,18 +84,6 @@ function shouldCopyFile(name: string, isDir: boolean): boolean {
   }
   const doNotCopy = ["tests"];
   return !doNotCopy.includes(name);
-}
-
-function copyFileNormalized(dst: string, src: string): void {
-  const dstDir = join(dst, "..");
-  mkdirSync(dstDir, { recursive: true });
-  const ext = extname(dst).toLowerCase();
-  if (extsToNormalizeNL.has(ext)) {
-    const data = readFileSync(src, "utf-8");
-    writeFileSync(dst, normalizeNewlines(data));
-  } else {
-    copyFileSync(src, dst);
-  }
 }
 
 function copyFilesRecur(dstDir: string, srcDir: string): void {
@@ -143,9 +125,9 @@ async function main() {
   }
 
   // copy CSS and JS files
-  const cssJsFiles = ["sumatra.css", "gen_toc.js", "favicon.ico"];
-  for (const name of cssJsFiles) {
-    const srcPath = join("cmd", "docs-html", name);
+  const htmlFiles = ["sumatra.css", "gen_toc.js", "favicon.ico"];
+  for (const name of htmlFiles) {
+    const srcPath = join("docs", name);
     const dstPath = join(websiteDir, "www", name);
     copyFileNormalized(dstPath, srcPath);
   }
