@@ -84,9 +84,7 @@ function winver7_defines()
   }
 
   -- v143 is the last that supports windows 7
-  filter { "toolset:msc*" }   -- or without filter if you want it globally
-    toolset "v143"   -- this is the official way in recent Premake versions
-  filter {}
+  toolset "v143"   -- this is the official way in recent Premake versions
 end
 
 function winver_latest_defines()
