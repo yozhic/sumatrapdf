@@ -231,20 +231,23 @@ inline void CrashMe() {
 // rare cases where we really want to know a given condition happens. Before
 // each release we should audit the uses of ReportAlwaysIf()
 
-extern void _uploadDebugReport(const char*, bool, bool);
+extern void _uploadDebugReport(const char*, const char*, bool, bool);
 
-#define ReportIfCond(cond, condStr, isCrash, captureCallstack)      \
-    __analysis_assume(!(cond));                                     \
-    do {                                                            \
-        if (cond) {                                                 \
-            _uploadDebugReport(condStr, isCrash, captureCallstack); \
-        }                                                           \
+#define STRINGIZE(x) #x
+#define FILE_LINE __FILE__ ":" STRINGIZE(__LINE__)
+
+#define ReportIfCond(cond, condStr, fileLine, isCrash, captureCallstack)      \
+    __analysis_assume(!(cond));                                               \
+    do {                                                                      \
+        if (cond) {                                                           \
+            _uploadDebugReport(condStr, fileLine, isCrash, captureCallstack); \
+        }                                                                     \
     } while (0)
 
-#define ReportIf(cond) ReportIfCond(cond, #cond, false, true)
-#define ReportIfFast(cond) ReportIfCond(cond, #cond, false, false)
+#define ReportIf(cond) ReportIfCond(cond, #cond, FILE_LINE, false, true)
+#define ReportIfFast(cond) ReportIfCond(cond, #cond, FILE_LINE, false, false)
 #if defined(DEBUG)
-#define ReportDebugIf(cond) ReportIfCond(cond, #cond, false, true)
+#define ReportDebugIf(cond) ReportIfCond(cond, #cond, FILE_LINE, false, true)
 #else
 #define ReportDebugIf(cond)
 #endif

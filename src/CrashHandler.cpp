@@ -115,16 +115,14 @@ static bool GetModules(str::Str& s, bool additionalOnly) {
     return isWine;
 }
 
-char* BuildCrashInfoText(const char* condStr, bool isCrash, bool captureCallstack) {
+static char* BuildCrashInfoText(const char* condStr, const char* fileLine, bool isCrash, bool captureCallstack) {
     str::Str s(16 * 1024, gCrashHandlerAllocator);
     if (!isCrash) {
         captureCallstack = true;
         s.Append("Type: debug report (not crash)\n");
     }
     if (condStr) {
-        s.Append("Cond: ");
-        s.Append(condStr);
-        s.Append("\n");
+        s.AppendFmt("Cond: %s@%s\n", condStr, fileLine);
     }
     if (gSystemInfo) {
         s.Append(gSystemInfo);
@@ -368,7 +366,7 @@ bool InitializeDbgHelp(bool force) {
     return true;
 }
 
-bool DownloadSymbolsIfNeeded() {
+static bool DownloadSymbolsIfNeededAndInitializeDbgHelp() {
     logf("DownloadSymbolsIfNeeded(), gSymbolsDir: '%s'\n", gSymbolsDir);
     if (!AreSymbolsDownloaded(gSymbolsDir)) {
         bool ok = CrashHandlerDownloadSymbols();
@@ -380,18 +378,22 @@ bool DownloadSymbolsIfNeeded() {
 }
 
 // like crash report, but can be triggered without a crash
-void _uploadDebugReport(const char* condStr, bool isCrash, bool captureCallstack) {
+void _uploadDebugReport(const char* condStr, const char* fileLine, bool isCrash, bool captureCallstack) {
     // in release builds ReportIf()/ReportIfFast() will break if running under
     // the debugger. In other builds it sends a debug report
     if (condStr) {
-        logfa("_uploadDebugReport: %s\n", condStr);
+        logfa("_uploadDebugReport: %s %s\n", condStr, fileLine);
     } else {
         loga("_uploadDebugReport\n");
     }
 
     bool shouldUpload = true;
     // debug build is likely other people modyfing
-    if (gIsDebugBuild || gIsAsanBuild) shouldUpload = false;
+    bool downloadSymbols = true;
+    if (gIsDebugBuild || gIsAsanBuild) {
+        shouldUpload = false;
+        downloadSymbols = false;
+    }
     if (!isCrash) {
         // for non-crashes, don't upload in release builds (too much info)
         shouldUpload = gIsPreReleaseBuild;
@@ -400,6 +402,16 @@ void _uploadDebugReport(const char* condStr, bool isCrash, bool captureCallstack
     if (!shouldUpload) {
         if (IsDebuggerPresent()) {
             DebugBreak();
+        } else {
+            InitializeDbgHelp(false);
+            auto s = BuildCrashInfoText(condStr, fileLine, isCrash, captureCallstack);
+            if (str::IsEmpty(s)) {
+                loga("_uploadDebugReport(): skipping because !BuildCrashInfoText()\n");
+                return;
+            }
+            ByteSlice d(s);
+            SaveCrashInfo(d);
+            log(s);
         }
         log("_uploadDebugReport skipping because !shouldUpload\n");
         return;
@@ -430,12 +442,12 @@ void _uploadDebugReport(const char* condStr, bool isCrash, bool captureCallstack
     logfa("_uploadDebugReport: isCrash: %d, captureCallstack: %d, gSymbolsDir: '%s'\n", (int)isCrash,
           (int)captureCallstack, gSymbolsDir);
 
-    if (captureCallstack) {
+    if (captureCallstack && downloadSymbols) {
         // we proceed even if we fail to download symbols
-        DownloadSymbolsIfNeeded();
+        DownloadSymbolsIfNeededAndInitializeDbgHelp();
     }
 
-    auto s = BuildCrashInfoText(condStr, isCrash, captureCallstack);
+    auto s = BuildCrashInfoText(condStr, fileLine, isCrash, captureCallstack);
     if (str::IsEmpty(s)) {
         loga("_uploadDebugReport(): skipping because !BuildCrashInfoText()\n");
         return;
@@ -456,7 +468,7 @@ static DWORD WINAPI CrashDumpThread(LPVOID) {
     }
 
     log("CrashDumpThread\n");
-    _uploadDebugReport(nullptr, true, true);
+    _uploadDebugReport(nullptr, "", true, true);
 
     // always write a MiniDump (for the latest crash only)
     // set the SUMATRAPDF_FULLDUMP environment variable for more complete dumps
