@@ -79,8 +79,14 @@ function winver7_defines()
     "_WIN32",
     -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
     "WINVER=0x0601", -- force not using API not available in Win7
-    "_WIN32_WINNT=0x0601"
+    "_WIN32_WINNT=0x0601",
+     "NTDDI_VERSION=0x06010000"
   }
+
+  -- v143 is the last that supports windows 7
+  filter { "toolset:msc*" }   -- or without filter if you want it globally
+    toolset "v143"   -- this is the official way in recent Premake versions
+  filter {}
 end
 
 function winver_latest_defines()
@@ -88,7 +94,7 @@ function winver_latest_defines()
     "WIN32",
     "_WIN32",
     -- https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-    "WINVER=0x0605", -- force not using API not available in Win7
+    "WINVER=0x0605",
     "_WIN32_WINNT=0x0603"
   }
 end
