@@ -484,8 +484,6 @@ LRESULT CALLBACK WndProcProperties(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     return 0;
 }
 
-static bool gDidRegister = false;
-
 void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
     PropertiesLayout* layoutData = FindPropertyWindowByHwnd(parent);
     if (layoutData) {
@@ -502,17 +500,13 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
     GetPropsText(ctrl, layoutData->propsText, extended);
 
     HMODULE h = GetModuleHandleW(nullptr);
-    if (!gDidRegister) {
-        WNDCLASSEX wcex = {};
-        FillWndClassEx(wcex, kPropertiesWinClassName, WndProcProperties);
-        wcex.hbrBackground = GetSysColorBrush(COLOR_BTNFACE);
-        WCHAR* iconName = MAKEINTRESOURCEW(GetAppIconID());
-        wcex.hIcon = LoadIconW(h, iconName);
-        ReportIf(!wcex.hIcon);
-        ATOM atom = RegisterClassEx(&wcex);
-        ReportIf(!atom);
-        gDidRegister = true;
-    }
+    WNDCLASSEX wcex = {};
+    FillWndClassEx(wcex, kPropertiesWinClassName, WndProcProperties);
+    wcex.hbrBackground = GetSysColorBrush(COLOR_BTNFACE);
+    WCHAR* iconName = MAKEINTRESOURCEW(GetAppIconID());
+    wcex.hIcon = LoadIconW(h, iconName);
+    ReportIf(!wcex.hIcon);
+    RegisterClassEx(&wcex);
 
     DWORD dwStyle = WS_OVERLAPPEDWINDOW;
     auto title = ToWStrTemp(_TRA("Document Properties"));

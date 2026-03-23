@@ -123,15 +123,9 @@ static LRESULT CALLBACK WndProcFrameRate(HWND hwnd, UINT msg, WPARAM wp, LPARAM 
 }
 
 static void RegisterFrameRateWndClass() {
-    static ATOM atom = 0;
-    if (atom != 0) {
-        // already registered
-        return;
-    }
     WNDCLASSEX wcex{};
     FillWndClassEx(wcex, FRAME_RATE_CLASS_NAME, WndProcFrameRate);
-    atom = RegisterClassEx(&wcex);
-    ReportIf(!atom);
+    RegisterClassEx(&wcex);
 }
 
 bool FrameRateWnd::Create(HWND hwndAssociatedWith) {

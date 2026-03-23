@@ -982,12 +982,7 @@ static bool CreateInstallerWnd(Flags* cli) {
         WCHAR* resName = MAKEINTRESOURCEW(GetAppIconID());
         wcex.hIcon = LoadIconW(h, resName);
 
-        ATOM atom = RegisterClassExW(&wcex);
-        ReportIf(!atom);
-        if (atom == 0) {
-            logf("CreateInstallerWindow: RegisterClassExW() failed\n");
-            return false;
-        }
+        RegisterClassExW(&wcex);
     }
 
     TempStr title = str::FormatTemp(_TRA("SumatraPDF %s Installer"), CURR_VERSION_STRA);

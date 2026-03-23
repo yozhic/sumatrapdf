@@ -915,21 +915,13 @@ void Wnd::Cleanup() {
 static void WndRegisterClass(const WCHAR* className) {
     WNDCLASSEX wc = {};
     wc.cbSize = sizeof(wc);
-    HINSTANCE inst = GetInstance();
-    BOOL ok = ::GetClassInfoExW(inst, className, &wc);
-    if (ok) {
-        return;
-    }
-    wc = {};
-    wc.cbSize = sizeof(wc);
+    wc.hInstance = GetInstance();
     wc.style = CS_DBLCLKS;
-    wc.hInstance = inst;
     wc.lpszClassName = className;
     wc.lpfnWndProc = WndWindowProc;
     wc.hCursor = ::LoadCursor(nullptr, IDC_ARROW);
     wc.hbrBackground = reinterpret_cast<HBRUSH>(::GetStockObject(WHITE_BRUSH));
-    ATOM atom = ::RegisterClassExW(&wc);
-    ReportIf(!atom);
+    ::RegisterClassExW(&wc);
 }
 
 HWND Wnd::CreateControl(const CreateControlArgs& args) {

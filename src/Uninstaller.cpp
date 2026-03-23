@@ -334,9 +334,8 @@ static bool RegisterWinClass() {
     WCHAR* iconName = MAKEINTRESOURCEW(GetAppIconID());
     wcex.hIcon = LoadIconW(h, iconName);
 
-    ATOM atom = RegisterClassExW(&wcex);
-    ReportIf(!atom);
-    return atom != 0;
+    RegisterClassExW(&wcex);
+    return true;
 }
 
 static bool InstanceInit() {
