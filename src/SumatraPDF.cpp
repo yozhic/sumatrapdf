@@ -3657,15 +3657,15 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     }
 
     // When using frameless window (tabsInTitlebar) and not maximized,
-    // inset the layout rect so child windows don't cover the resize borders.
-    // The top edge is handled by the caption returning HTTRANSPARENT,
-    // so we only need to inset left, right, and bottom.
+    // inset the layout rect by the invisible shadow/frame size so child
+    // windows don't cover the resize borders on left, right, and bottom.
+    // The top edge is handled by the caption returning HTTRANSPARENT.
     if (win->tabsInTitlebar && !IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
-        int borderX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-        int borderY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-        rc.x += borderX;
-        rc.dx -= 2 * borderX;
-        rc.dy -= borderY;
+        int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+        int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+        rc.x += frameX;
+        rc.dx -= 2 * frameX;
+        rc.dy -= frameY;
     }
 
     DeferWinPosHelper dh;

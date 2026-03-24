@@ -581,23 +581,8 @@ static void PaintCaptionBackground(HDC hdc, MainWindow* win, bool useDoubleBuffe
     gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
 }
 
-static void DrawFrame(HWND hwnd, COLORREF color) {
-    HDC hdc = GetWindowDC(hwnd);
-
-    RECT rWindow, rClient;
-    GetWindowRect(hwnd, &rWindow);
-    GetClientRect(hwnd, &rClient);
-    // convert the client rectangle to window coordinates and exclude it from the clipping region
-    MapWindowPoints(hwnd, HWND_DESKTOP, (LPPOINT)&rClient, 2);
-    OffsetRect(&rClient, -rWindow.left, -rWindow.top);
-    ExcludeClipRect(hdc, rClient.left, rClient.top, rClient.right, rClient.bottom);
-    // convert the window rectangle, from screen to window coordinates, and draw the frame
-    OffsetRect(&rWindow, -rWindow.left, -rWindow.top);
-    HBRUSH br = CreateSolidBrush(color);
-    FillRect(hdc, &rWindow, br);
-    DeleteObject(br);
-
-    ReleaseDC(hwnd, hdc);
+static void DrawFrame(HWND hwnd) {
+    // Nothing to draw — DWM handles the border.
 }
 
 // accelerator key which was pressed when invoking the "menubar",
@@ -614,7 +599,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             break;
 
         case WM_NCPAINT:
-            DrawFrame(hwnd, win->caption->bgColor);
+            DrawFrame(hwnd);
             *callDef = false;
             return 0;
 
@@ -624,7 +609,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 win->caption->btn[i].inactive = wp == FALSE;
             }
             if (!IsIconic(hwnd)) {
-                DrawFrame(hwnd, win->caption->bgColor);
+                DrawFrame(hwnd);
                 uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
                 RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
                 *callDef = false;
@@ -634,7 +619,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_NCUAHDRAWCAPTION:
         case WM_NCUAHDRAWFRAME:
-            DrawFrame(hwnd, win->caption->bgColor);
+            DrawFrame(hwnd);
             *callDef = false;
             return TRUE;
 
@@ -680,12 +665,12 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             GetWindowRect(hwnd, &wrc);
 
             if (!IsZoomed(hwnd)) {
-                // Use system frame metrics for resize border size.
-                // With WS_POPUP | WS_THICKFRAME, Windows adds an invisible border
-                // (shadow area) beyond the visible edge. The resize zone must cover
-                // both the invisible border and the visible edge.
-                int borderX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-                int borderY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                // The invisible shadow extends by the system frame size.
+                // We add 3px beyond the visible edge for the resize hit zone.
+                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int borderX = frameX + 3;
+                int borderY = frameY + 3;
                 // Check resize borders
                 bool onLeft = (x - wrc.left) < borderX;
                 bool onRight = (wrc.right - x) < borderX;
