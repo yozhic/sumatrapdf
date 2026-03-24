@@ -581,10 +581,6 @@ static void PaintCaptionBackground(HDC hdc, MainWindow* win, bool useDoubleBuffe
     gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
 }
 
-static void DrawFrame(HWND hwnd) {
-    // Nothing to draw — DWM handles the border.
-}
-
 // accelerator key which was pressed when invoking the "menubar",
 // needs to be passed from WM_SYSCOMMAND to WM_INITMENUPOPUP
 // (can be static because there can only be one menu active at a time)
@@ -599,7 +595,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             break;
 
         case WM_NCPAINT:
-            DrawFrame(hwnd);
             *callDef = false;
             return 0;
 
@@ -609,7 +604,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 win->caption->btn[i].inactive = wp == FALSE;
             }
             if (!IsIconic(hwnd)) {
-                DrawFrame(hwnd);
                 uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
                 RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
                 *callDef = false;
@@ -619,7 +613,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_NCUAHDRAWCAPTION:
         case WM_NCUAHDRAWFRAME:
-            DrawFrame(hwnd);
             *callDef = false;
             return TRUE;
 

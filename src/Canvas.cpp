@@ -2333,6 +2333,23 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             // return non-zero to indicate we erased
             // helps to avoid flicker
             return 1;
+
+        case WM_NCHITTEST:
+            // Let the frame handle resize near its edges by returning HTTRANSPARENT.
+            if (win && win->tabsInTitlebar && !IsZoomed(win->hwndFrame)) {
+                int x = GET_X_LPARAM(lp);
+                int y = GET_Y_LPARAM(lp);
+                RECT wrc;
+                GetWindowRect(win->hwndFrame, &wrc);
+                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int borderX = frameX + 3;
+                int borderY = frameY + 3;
+                if ((x - wrc.left) < borderX || (wrc.right - x) < borderX || (wrc.bottom - y) < borderY) {
+                    return HTTRANSPARENT;
+                }
+            }
+            break;
     }
 
     if (!win) {

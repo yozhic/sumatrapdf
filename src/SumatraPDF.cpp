@@ -1507,7 +1507,7 @@ static MainWindow* CreateMainWindow() {
 
     const WCHAR* clsName = FRAME_CLASS_NAME;
     const WCHAR* title = kSumatraWindowTitleW;
-    DWORD style = WS_POPUP | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU | WS_CLIPCHILDREN;
+    DWORD style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
     int x = windowPos.x;
     int y = windowPos.y;
     int dx = windowPos.dx;
@@ -1517,6 +1517,10 @@ static MainWindow* CreateMainWindow() {
     if (!hwndFrame) {
         return nullptr;
     }
+
+    // WM_NCCALCSIZE returning 0 disables DWM rounded corners; re-enable them.
+    auto cornerPref = DWMWCP_ROUND;
+    dwm::SetWindowAttribute(hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
 
     ReportIf(nullptr != FindMainWindowByHwnd(hwndFrame));
     MainWindow* win = new MainWindow(hwndFrame);
@@ -3654,18 +3658,6 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         // make the black/white canvas cover the entire window
         MoveWindow(win->hwndCanvas, rc);
         return;
-    }
-
-    // When using frameless window (tabsInTitlebar) and not maximized,
-    // inset the layout rect by the invisible shadow/frame size so child
-    // windows don't cover the resize borders on left, right, and bottom.
-    // The top edge is handled by the caption returning HTTRANSPARENT.
-    if (win->tabsInTitlebar && !IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
-        int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-        int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-        rc.x += frameX;
-        rc.dx -= 2 * frameX;
-        rc.dy -= frameY;
     }
 
     DeferWinPosHelper dh;
