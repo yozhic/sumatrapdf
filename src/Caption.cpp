@@ -117,14 +117,9 @@ void CaptionInfo::UpdateTheme() {
 }
 
 void CaptionInfo::UpdateColors(bool activeWindow) {
-    if (!theme || !SUCCEEDED(theme::GetThemeColor(theme, WP_CAPTION, 0,
-                                                  activeWindow ? TMT_FILLCOLORHINT : TMT_BORDERCOLORHINT, &bgColor))) {
-        bgColor = activeWindow ? GetSysColor(COLOR_GRADIENTACTIVECAPTION) : GetSysColor(COLOR_GRADIENTINACTIVECAPTION);
-    }
-    if (!theme || !SUCCEEDED(theme::GetThemeColor(
-                      theme, WP_CAPTION, 0, activeWindow ? TMT_CAPTIONTEXT : TMT_INACTIVECAPTIONTEXT, &textColor))) {
-        textColor = activeWindow ? GetSysColor(COLOR_CAPTIONTEXT) : GetSysColor(COLOR_INACTIVECAPTIONTEXT);
-    }
+    // Use the same background color as the tab bar.
+    bgColor = ThemeControlBackgroundColor();
+    textColor = ThemeWindowTextColor();
 }
 
 // TODO: not sure if needed, those are bitmaps
@@ -360,38 +355,30 @@ void RelayoutCaption(MainWindow* win) {
     ButtonInfo* button;
     DeferWinPosHelper dh;
 
-    int xEdge = GetSystemMetrics(SM_CXEDGE);
-    int yEdge = GetSystemMetrics(SM_CYEDGE);
-    bool isClassicStyle = ci->theme == nullptr;
-    int btnDx = GetSystemMetrics(SM_CXSIZE) - xEdge * (isClassicStyle ? 1 : 2);
-    int btnDy = GetSystemMetrics(SM_CYSIZE) - yEdge * 2;
+    // Square buttons with height equal to caption height, flush to right edge.
+    int btnSize = rc.dy;
     bool maximized = IsZoomed(win->hwndFrame);
-    int yPosBtn = rc.y + (maximized ? 0 : yEdge);
-    int topMargin = maximized ? yEdge : 0;
 
     button = &ci->btn[CB_CLOSE];
-    rc.dx -= btnDx + xEdge;
-    int rightMargin = maximized ? xEdge : 0;
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx + rightMargin, btnDy + topMargin,
-                    SWP_NOZORDER | SWP_SHOWWINDOW);
-    button->margins = {0, topMargin, rightMargin, 0};
+    rc.dx -= btnSize;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize, SWP_NOZORDER | SWP_SHOWWINDOW);
+    button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_RESTORE];
-    rc.dx -= btnDx + xEdge;
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
+    rc.dx -= btnSize;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize,
                     SWP_NOZORDER | (maximized ? SWP_SHOWWINDOW : SWP_HIDEWINDOW));
-    button->margins = {0, topMargin, 0, 0};
+    button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_MAXIMIZE];
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize,
                     SWP_NOZORDER | (maximized ? SWP_HIDEWINDOW : SWP_SHOWWINDOW));
-    button->margins = {0, topMargin, 0, 0};
+    button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_MINIMIZE];
-    rc.dx -= btnDx + (isClassicStyle ? 0 : xEdge);
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
-                    SWP_NOZORDER | SWP_SHOWWINDOW);
-    button->margins = {0, topMargin, 0, 0};
+    rc.dx -= btnSize;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize, SWP_NOZORDER | SWP_SHOWWINDOW);
+    button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_SYSTEM_MENU];
     int tabHeight = GetTabbarHeight(win->hwndFrame);
