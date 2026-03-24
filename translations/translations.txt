@@ -1,7 +1,8 @@
 AppTranslator: SumatraPDF
-2868f72d28726db839738554d0d984389d655d3f
+2d7ff0c6c8df5f6aed0208409c2c7d9de300441c
 :# File History
 am:# Ֆայլի պատմություն
+ar:# سجل الملفات
 br:# Histórico de Arquivos
 cn:# 文件历史记录
 co:# Cronolugia di schedariu
@@ -4062,6 +4063,7 @@ sr-rs:> Команде
 tw:> 命令
 :@ Tabs
 am:@ Ներդիրներ
+ar:@ علامات التبويب
 br:@ Abas
 cn:@ 标签页
 co:@ Unghjette
@@ -21746,6 +21748,7 @@ pl:Pokaż dzienniki
 ru:Показать журналы
 sk:Zobraziť logy
 tw:顯示記錄
+:Show PDF Info
 :Show Scr&ollbars
 am:Ցուցադրել ոլո&րագոտիները
 ar:إظهار أشرطة التمرير

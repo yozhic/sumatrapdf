@@ -31494,6 +31494,79 @@ tw:顯示記錄
 uk:Показати журнали
 uz:Jurnallarni ko'rsatish
 vn:Hiển thị nhật ký
+:Show PDF Info
+af:Wys PDF Inligting
+am:የPDF መረጃ አሳይ
+ar:عرض معلومات PDF
+az:PDF Məlumatını Göstər
+bg:Покажи информация за PDF
+bn:PDF তথ্য দেখান
+br:Diskouez titouroù ar PDF
+bs:Prikaži PDF informacije
+by:Паказаць інфармацыю пра PDF
+ca:Mostra informació del PDF
+ca-xv:Mostra la informació del PDF
+cn:显示PDF信息
+co:Affissà l'infurmazione PDF
+cy:Dangos Gwybodaeth PDF
+cz:Zobrazit informace o PDF
+de:PDF-Info anzeigen
+dk:Vis PDF-info
+el:Εμφάνιση πληροφοριών PDF
+es:Mostrar información del PDF
+et:Kuva PDF info
+eu:Erakutsi PDF informazioa
+fa:نمایش اطلاعات PDF
+fi:Näytä PDF-tiedot
+fo:Vís PDF upplýsingar
+fr:Afficher les informations du PDF
+fy-nl:PDF-ynfo toane
+ga:Taispeáin Eolas PDF
+gl:Mostrar información do PDF
+he:הצג מידע על PDF
+hi:PDF जानकारी दिखाएं
+hr:Prikaži PDF informacije
+hu:PDF információk megjelenítése
+id:Tampilkan Info PDF
+it:Mostra informazioni PDF
+ja:PDFの情報を表示
+jv:Tampilake Info PDF
+ka:PDF ინფორმაციის ჩვენება
+kr:PDF 정보 표시
+ku:Zانیارییەکانی PDF پیشان بدە
+kw:Diskwedhes Kedhlow PDF
+lt:Rodyti PDF informaciją
+lv:Rādīt PDF informāciju
+mk:Прикажи информации за PDF
+ml:PDF വിവരങ്ങൾ കാണിക്കുക
+mm:PDF အချက်အလက်ပြရန်
+my:PDF အချက်အလက်ပြရန်
+ne:PDF जानकारी देखाउनुहोस्
+nl:PDF-info weergeven
+nn:Vis PDF-info
+no:Vis PDF-info
+pa:PDF ਜਾਣਕਾਰੀ ਦਿਖਾਓ
+pl:Pokaż informacje o pliku PDF
+pt:Mostrar informações do PDF
+ro:Afișează informații PDF
+ru:Показать информацию о PDF
+sat:PDF ᱠᱷᱚᱵᱚᱨ ᱫᱮᱠᱷᱟᱣ ᱢᱮ
+si:PDF තොරතුරු පෙන්වන්න
+sk:Zobraziť informácie o PDF
+sl:Prikaži podatke o PDF
+sn:Ratidza Ruzivo rwePDF
+sp-rs:Prikaži PDF informacije
+sq:Shfaq Informacionin e PDF-së
+sr-rs:Prikaži PDF informacije
+sv:Visa PDF-information
+ta:PDF தகவலைக் காட்டு
+th:แสดงข้อมูล PDF
+tl:Ipakita ang Impormasyon ng PDF
+tr:PDF Bilgilerini Göster
+tw:顯示 PDF 資訊
+uk:Показати інформацію про PDF
+uz:PDF ma'lumotlarini ko'rsatish
+vn:Hiển thị thông tin PDF
 :Show Scr&ollbars
 am:Ցուցադրել ոլո&րագոտիները
 ar:إظهار أشرطة التمرير

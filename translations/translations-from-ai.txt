@@ -28038,3 +28038,147 @@ tl:pahina %d,
 uk:сторінка %d,
 :page %d,
 vn:trang %d,
+:Show PDF Info
+am:የPDF መረጃ አሳይ
+:Show PDF Info
+ar:عرض معلومات PDF
+:Show PDF Info
+br:Diskouez titouroù ar PDF
+:Show PDF Info
+cn:显示PDF信息
+:Show PDF Info
+co:Affissà l'infurmazione PDF
+:Show PDF Info
+de:PDF-Info anzeigen
+:Show PDF Info
+hi:PDF जानकारी दिखाएं
+:Show PDF Info
+ja:PDFの情報を表示
+:Show PDF Info
+ml:PDF വിവരങ്ങൾ കാണിക്കുക
+:Show PDF Info
+nl:PDF-info weergeven
+:Show PDF Info
+pl:Pokaż informacje o pliku PDF
+:Show PDF Info
+ru:Показать информацию о PDF
+:Show PDF Info
+sk:Zobraziť informácie o PDF
+:Show PDF Info
+sr-rs:Prikaži PDF informacije
+:Show PDF Info
+tw:顯示 PDF 資訊
+:Show PDF Info
+az:PDF Məlumatını Göstər
+:Show PDF Info
+by:Паказаць інфармацыю пра PDF
+:Show PDF Info
+ca:Mostra informació del PDF
+:Show PDF Info
+cy:Dangos Gwybodaeth PDF
+:Show PDF Info
+cz:Zobrazit informace o PDF
+:Show PDF Info
+el:Εμφάνιση πληροφοριών PDF
+:Show PDF Info
+es:Mostrar información del PDF
+:Show PDF Info
+fa:نمایش اطلاعات PDF
+:Show PDF Info
+fi:Näytä PDF-tiedot
+:Show PDF Info
+fo:Vís PDF upplýsingar
+:Show PDF Info
+fr:Afficher les informations du PDF
+:Show PDF Info
+ga:Taispeáin Eolas PDF
+:Show PDF Info
+gl:Mostrar información do PDF
+:Show PDF Info
+he:הצג מידע על PDF
+:Show PDF Info
+hu:PDF információk megjelenítése
+:Show PDF Info
+id:Tampilkan Info PDF
+:Show PDF Info
+it:Mostra informazioni PDF
+:Show PDF Info
+kr:PDF 정보 표시
+:Show PDF Info
+lv:Rādīt PDF informāciju
+:Show PDF Info
+my:PDF အချက်အလက်ပြရန်
+:Show PDF Info
+pt:Mostrar informações do PDF
+:Show PDF Info
+ro:Afișează informații PDF
+:Show PDF Info
+sat:PDF ᱠᱷᱚᱵᱚᱨ ᱫᱮᱠᱷᱟᱣ ᱢᱮ
+:Show PDF Info
+sl:Prikaži podatke o PDF
+:Show PDF Info
+sv:Visa PDF-information
+:Show PDF Info
+ta:PDF தகவலைக் காட்டு
+:Show PDF Info
+tr:PDF Bilgilerini Göster
+:Show PDF Info
+uz:PDF ma'lumotlarini ko'rsatish
+:Show PDF Info
+af:Wys PDF Inligting
+:Show PDF Info
+bg:Покажи информация за PDF
+:Show PDF Info
+bn:PDF তথ্য দেখান
+:Show PDF Info
+bs:Prikaži PDF informacije
+:Show PDF Info
+ca-xv:Mostra la informació del PDF
+:Show PDF Info
+dk:Vis PDF-info
+:Show PDF Info
+et:Kuva PDF info
+:Show PDF Info
+eu:Erakutsi PDF informazioa
+:Show PDF Info
+fy-nl:PDF-ynfo toane
+:Show PDF Info
+hr:Prikaži PDF informacije
+:Show PDF Info
+jv:Tampilake Info PDF
+:Show PDF Info
+ka:PDF ინფორმაციის ჩვენება
+:Show PDF Info
+ku:Zانیارییەکانی PDF پیشان بدە
+:Show PDF Info
+kw:Diskwedhes Kedhlow PDF
+:Show PDF Info
+lt:Rodyti PDF informaciją
+:Show PDF Info
+mk:Прикажи информации за PDF
+:Show PDF Info
+mm:PDF အချက်အလက်ပြရန်
+:Show PDF Info
+ne:PDF जानकारी देखाउनुहोस्
+:Show PDF Info
+nn:Vis PDF-info
+:Show PDF Info
+no:Vis PDF-info
+:Show PDF Info
+pa:PDF ਜਾਣਕਾਰੀ ਦਿਖਾਓ
+:Show PDF Info
+si:PDF තොරතුරු පෙන්වන්න
+:Show PDF Info
+sn:Ratidza Ruzivo rwePDF
+:Show PDF Info
+sp-rs:Prikaži PDF informacije
+:Show PDF Info
+sq:Shfaq Informacionin e PDF-së
+:Show PDF Info
+th:แสดงข้อมูล PDF
+:Show PDF Info
+tl:Ipakita ang Impormasyon ng PDF
+:Show PDF Info
+uk:Показати інформацію про PDF
+:Show PDF Info
+vn:Hiển thị thông tin PDF
