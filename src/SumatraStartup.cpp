@@ -2225,6 +2225,11 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 
     srand((unsigned int)time(nullptr));
 
+    {
+        TempStr s = ToUtf8Temp(GetCommandLineW());
+        logf("'%s'\n  ver %s\n", s, UPDATE_CHECK_VERA);
+    }
+
     if (!gIsAsanBuild) {
         TempStr symDir = GetCrashInfoDirTemp();
         TempStr crashDumpPath = path::JoinTemp(symDir, "sumatrapdfcrash.dmp");
@@ -2309,11 +2314,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         }
     }
 
-    {
-        char* s = ToUtf8Temp(GetCommandLineW());
-        logf("Starting: '%s'\n  ver %s, flags.install: %d, flags.uninstall: %d\n", s, UPDATE_CHECK_VERA,
-             (int)flags.install, (int)flags.uninstall);
-    }
+
 #if defined(DEBUG)
     if (gIsDebugBuild || gIsPreReleaseBuild) {
         if (flags.tester) {
