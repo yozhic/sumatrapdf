@@ -53,9 +53,6 @@ using Gdiplus::SolidBrush;
 // expand the non-client border at the expense of client area.
 #define NON_CLIENT_BAND 1
 
-// resize border thickness in pixels
-#define RESIZE_BORDER 6
-
 enum CaptionButtons {
     CB_BTN_FIRST = 0,
     CB_MINIMIZE = CB_BTN_FIRST,
@@ -434,53 +431,93 @@ static void DrawCaptionButton(DRAWITEMSTRUCT* item, MainWindow* win) {
     rc.dx -= bi->margins.left + bi->margins.right;
     rc.dy -= bi->margins.top + bi->margins.bottom;
 
-    int partId = 0, stateId;
-    uint state = (uint)-1;
-    switch (button) {
-        case CB_MINIMIZE:
-            partId = WP_MINBUTTON;
-            state = DFCS_CAPTIONMIN;
-            break;
-        case CB_MAXIMIZE:
-            partId = WP_MAXBUTTON;
-            state = DFCS_CAPTIONMAX;
-            break;
-        case CB_RESTORE:
-            partId = WP_RESTOREBUTTON;
-            state = DFCS_CAPTIONRESTORE;
-            break;
-        case CB_CLOSE:
-            partId = WP_CLOSEBUTTON;
-            state = DFCS_CAPTIONCLOSE;
-            break;
-    }
+    bool isSysButton = (button == CB_MINIMIZE || button == CB_MAXIMIZE || button == CB_RESTORE || button == CB_CLOSE);
 
+    int stateId;
     if (ODS_SELECTED & item->itemState) {
         stateId = CBS_PUSHED;
-        state |= DFCS_PUSHED;
     } else if (ODS_HOTLIGHT & item->itemState) {
         stateId = CBS_HOT;
-        state |= DFCS_HOT;
     } else if (ODS_DISABLED & item->itemState) {
         stateId = CBS_DISABLED;
-        state |= DFCS_INACTIVE;
     } else if (ODS_INACTIVE & item->itemState) {
         stateId = CBS_INACTIVE;
     } else {
         stateId = CBS_NORMAL;
     }
 
-    // draw system button
-    if (partId) {
-        if (rc != rButton || theme::IsThemeBackgroundPartiallyTransparent(win->caption->theme, partId, stateId)) {
-            PaintCaptionBackground(memDC, win, false);
+    // draw system button (Win11 style)
+    if (isSysButton) {
+        PaintCaptionBackground(memDC, win, false);
+
+        bool isClose = (button == CB_CLOSE);
+        bool isHot = (stateId == CBS_HOT);
+        bool isPushed = (stateId == CBS_PUSHED);
+        bool isInactive = (stateId == CBS_INACTIVE || stateId == CBS_DISABLED);
+
+        Graphics gfx(memDC);
+
+        // hover/pressed background over entire button area
+        if (isHot || isPushed) {
+            Color bgCol;
+            if (isClose) {
+                bgCol = isPushed ? Color(200, 196, 43, 28) : Color(255, 196, 43, 28);
+            } else {
+                bgCol = isPushed ? Color(255, 204, 204, 204) : Color(255, 229, 229, 229);
+            }
+            SolidBrush bgBr(bgCol);
+            gfx.FillRectangle(&bgBr, rButton.x, rButton.y, rButton.dx, rButton.dy);
         }
 
-        RECT r = ToRECT(rc);
-        if (win->caption->theme) {
-            theme::DrawThemeBackground(win->caption->theme, memDC, partId, stateId, &r, nullptr);
+        // icon color
+        Color iconCol;
+        if (isInactive) {
+            iconCol = Color(153, 153, 153);
+        } else if (isClose && (isHot || isPushed)) {
+            iconCol = Color(255, 255, 255);
         } else {
-            DrawFrameControl(memDC, &r, DFC_CAPTION, state);
+            COLORREF tc = win->caption->textColor;
+            iconCol = Color(GetRValue(tc), GetGValue(tc), GetBValue(tc));
+        }
+
+        // icon rect centered within inner button area
+        int iconSz = rc.dy * 10 / 30;
+        if (iconSz < 6) {
+            iconSz = 6;
+        }
+        iconSz = iconSz & ~1; // make even for symmetry
+        int ix = rc.x + (rc.dx - iconSz) / 2;
+        int iy = rc.y + (rc.dy - iconSz) / 2;
+
+        Pen pen(iconCol, 1.0f);
+
+        switch (button) {
+            case CB_CLOSE:
+                gfx.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+                gfx.DrawLine(&pen, ix, iy, ix + iconSz, iy + iconSz);
+                gfx.DrawLine(&pen, ix + iconSz, iy, ix, iy + iconSz);
+                break;
+            case CB_MAXIMIZE:
+                gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+                gfx.DrawRectangle(&pen, ix, iy, iconSz, iconSz);
+                break;
+            case CB_MINIMIZE: {
+                gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+                int midY = iy + iconSz / 2;
+                gfx.DrawLine(&pen, ix, midY, ix + iconSz, midY);
+            } break;
+            case CB_RESTORE: {
+                gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+                int off = iconSz / 3;
+                int sz = iconSz - off;
+                // front rectangle (bottom-left)
+                gfx.DrawRectangle(&pen, ix, iy + off, sz, sz);
+                // back rectangle visible edges (top-right)
+                gfx.DrawLine(&pen, ix + off, iy, ix + iconSz, iy);
+                gfx.DrawLine(&pen, ix + iconSz, iy, ix + iconSz, iy + sz);
+                gfx.DrawLine(&pen, ix + sz, iy + off, ix + iconSz, iy + off);
+                gfx.DrawLine(&pen, ix + off, iy, ix + off, iy + off);
+            } break;
         }
     }
 
@@ -659,11 +696,17 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             GetWindowRect(hwnd, &wrc);
 
             if (!IsZoomed(hwnd)) {
+                // Use system frame metrics for resize border size.
+                // With WS_POPUP | WS_THICKFRAME, Windows adds an invisible border
+                // (shadow area) beyond the visible edge. The resize zone must cover
+                // both the invisible border and the visible edge.
+                int borderX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int borderY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
                 // Check resize borders
-                bool onLeft = (x - wrc.left) < RESIZE_BORDER;
-                bool onRight = (wrc.right - x) < RESIZE_BORDER;
-                bool onTop = (y - wrc.top) < RESIZE_BORDER;
-                bool onBottom = (wrc.bottom - y) < RESIZE_BORDER;
+                bool onLeft = (x - wrc.left) < borderX;
+                bool onRight = (wrc.right - x) < borderX;
+                bool onTop = (y - wrc.top) < borderY;
+                bool onBottom = (wrc.bottom - y) < borderY;
 
                 if (onTop && onLeft) {
                     *callDef = false;
