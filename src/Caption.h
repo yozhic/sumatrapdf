@@ -4,6 +4,9 @@
 // factor by how large the non-maximized caption should be in relation to the tabbar
 #define kCaptionTabBarDyFactor 1.25f
 
+// gap in pixels between top of caption and tabs; this area allows dragging the window
+#define kCaptionTopPadding 14
+
 void CreateCaption(MainWindow* win);
 void RegisterCaptionWndClass();
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);

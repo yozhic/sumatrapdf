@@ -3665,8 +3665,12 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     // Tabbar and toolbar at the top
     if (!win->presentation && !win->isFullScreen) {
         if (win->tabsInTitlebar) {
-            float scale = IsZoomed(win->hwndFrame) ? 1.f : kCaptionTabBarDyFactor;
-            int captionHeight = GetTabbarHeight(win->hwndFrame, scale);
+            // Add a visible gap above the caption for window dragging.
+            if (!IsZoomed(win->hwndFrame)) {
+                rc.y += kCaptionTopPadding;
+                rc.dy -= kCaptionTopPadding;
+            }
+            int captionHeight = GetTabbarHeight(win->hwndFrame);
             if (updateToolbars) {
                 int captionWidth = rc.dx;
                 dh.SetWindowPos(win->hwndCaption, nullptr, rc.x, rc.y, captionWidth, captionHeight, SWP_NOZORDER);
@@ -6569,6 +6573,16 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return MA_ACTIVATE;
 
         case WM_ERASEBKGND:
+            // Paint the gap above the caption for window dragging.
+            if (win && win->tabsInTitlebar && !IsZoomed(hwnd)) {
+                HDC hdc = (HDC)wp;
+                RECT rc;
+                GetClientRect(hwnd, &rc);
+                rc.bottom = rc.top + kCaptionTopPadding;
+                HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+                FillRect(hdc, &rc, br);
+                DeleteObject(br);
+            }
             return TRUE;
 
         default:
