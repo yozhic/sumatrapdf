@@ -627,8 +627,7 @@ static void UpdateWindowRtlLayout(MainWindow* win) {
     if (win->tabsCtrl) win->tabsCtrl->LayoutTabs();
     SetCaptionButtonsRtl(win->caption, isRTL);
 
-    // TODO: why isn't SetWindowPos(..., SWP_FRAMECHANGED) enough?
-    SendMessageW(win->hwndFrame, WM_DWMCOMPOSITIONCHANGED, 0, 0);
+    SetWindowPos(win->hwndFrame, nullptr, 0, 0, 0, 0, SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE);
     RelayoutCaption(win);
 
     if (win->tocLabelWithClose) win->tocLabelWithClose->Layout();
@@ -1508,7 +1507,7 @@ static MainWindow* CreateMainWindow() {
 
     const WCHAR* clsName = FRAME_CLASS_NAME;
     const WCHAR* title = kSumatraWindowTitleW;
-    DWORD style = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
+    DWORD style = WS_POPUP | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU | WS_CLIPCHILDREN;
     int x = windowPos.x;
     int y = windowPos.y;
     int dx = windowPos.dx;
@@ -3662,30 +3661,10 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     // Tabbar and toolbar at the top
     if (!win->presentation && !win->isFullScreen) {
         if (win->tabsInTitlebar) {
-            if (dwm::IsCompositionEnabled()) {
-                int frameThickness = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-                rc.y += frameThickness;
-                rc.dy -= frameThickness;
-            }
             float scale = IsZoomed(win->hwndFrame) ? 1.f : kCaptionTabBarDyFactor;
             int captionHeight = GetTabbarHeight(win->hwndFrame, scale);
             if (updateToolbars) {
-                int captionWidth;
-                RECT capButtons;
-                if (dwm::IsCompositionEnabled() &&
-                    SUCCEEDED(dwm::GetWindowAttribute(win->hwndFrame, DWMWA_CAPTION_BUTTON_BOUNDS, &capButtons,
-                                                      sizeof(RECT)))) {
-                    Rect wr = WindowRect(win->hwndFrame);
-                    POINT pt = {wr.x + capButtons.left, wr.y + capButtons.top};
-                    ScreenToClient(win->hwndFrame, &pt);
-                    if (IsUIRtl()) {
-                        captionWidth = rc.x + rc.dx - pt.x;
-                    } else {
-                        captionWidth = pt.x - rc.x;
-                    }
-                } else {
-                    captionWidth = rc.dx;
-                }
+                int captionWidth = rc.dx;
                 dh.SetWindowPos(win->hwndCaption, nullptr, rc.x, rc.y, captionWidth, captionHeight, SWP_NOZORDER);
             }
             rc.y += captionHeight;

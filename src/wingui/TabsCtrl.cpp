@@ -156,19 +156,6 @@ TabsCtrl::MouseState TabsCtrl::TabStateFromMousePosition(const Point& p) {
     return res;
 }
 
-// TODO: duplicated in Caption.cpp
-static void PaintParentBackground(HWND hwnd, HDC hdc) {
-    HWND parent = GetParent(hwnd);
-    POINT pt = {0, 0};
-    MapWindowPoints(hwnd, parent, &pt, 1);
-    SetViewportOrgEx(hdc, -pt.x, -pt.y, &pt);
-    SendMessageW(parent, WM_ERASEBKGND, (WPARAM)hdc, 0);
-    SetViewportOrgEx(hdc, pt.x, pt.y, nullptr);
-
-    // TODO: needed to force repaint of tab area after closing a window
-    InvalidateRect(parent, nullptr, TRUE);
-}
-
 Gdiplus::Color GdipCol(COLORREF c) {
     return GdiRgbFromCOLORREF(c);
 }
@@ -193,11 +180,6 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
 
     // logfa("TabsCtrl::Paint, underMouse: %d, overClose: %d, selected: %d, rc: pos: (%d, %d), size: (%d, %d)\n",
     //  tabUnderMouse, (int)overClose, selectedIdx, rc.left, rc.top, RectDx(rc), RectDy(rc));
-
-    bool isTranslucentMode = inTitleBar && dwm::IsCompositionEnabled();
-    if (isTranslucentMode) {
-        PaintParentBackground(hwnd, hdc);
-    }
 
     Graphics gfx(hdc);
     gfx.SetCompositingMode(Gdiplus::CompositingModeSourceCopy);

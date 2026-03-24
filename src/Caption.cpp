@@ -24,7 +24,6 @@
 #include "Menu.h"
 #include "Theme.h"
 
-using Gdiplus::ARGB;
 using Gdiplus::Color;
 using Gdiplus::Graphics;
 using Gdiplus::Pen;
@@ -53,13 +52,9 @@ using Gdiplus::SolidBrush;
 // window and hides the taskbar and any topmost window. A simple workaround is to
 // expand the non-client border at the expense of client area.
 #define NON_CLIENT_BAND 1
-// This non-client-band hack is only needed for maximized non-fullscreen windows:
-static inline bool NeedsNonClientBandHack(HWND hwnd) {
-    return IsZoomed(hwnd) && HwndHasCaption(hwnd);
-}
 
-// When DWM composition is enabled, this is the ratio between alpha channels of active and inactive caption colors.
-#define ACTIVE_INACTIVE_ALPHA_RATIO 2.0f
+// resize border thickness in pixels
+#define RESIZE_BORDER 6
 
 enum CaptionButtons {
     CB_BTN_FIRST = 0,
@@ -89,7 +84,6 @@ struct CaptionInfo {
     HTHEME theme = nullptr;
     COLORREF bgColor = 0;
     COLORREF textColor = 0;
-    BYTE bgAlpha = 0;
     bool isMenuOpen = false;
 
     explicit CaptionInfo(HWND hwndCaption);
@@ -97,7 +91,6 @@ struct CaptionInfo {
 
     void UpdateTheme();
     void UpdateColors(bool activeWindow);
-    void UpdateBackgroundAlpha();
 };
 
 static void DrawCaptionButton(DRAWITEMSTRUCT* item, MainWindow* win);
@@ -108,17 +101,12 @@ static void MenuBarAsPopupMenu(MainWindow* win, int x, int y);
 CaptionInfo::CaptionInfo(HWND hwndCaption) : hwnd(hwndCaption) {
     UpdateTheme();
     UpdateColors(true);
-    UpdateBackgroundAlpha();
 }
 
 CaptionInfo::~CaptionInfo() {
     if (theme) {
         theme::CloseThemeData(theme);
     }
-}
-
-void CaptionInfo::UpdateBackgroundAlpha() {
-    bgAlpha = dwm::IsCompositionEnabled() ? 0 : 255;
 }
 
 void CaptionInfo::UpdateTheme() {
@@ -131,42 +119,14 @@ void CaptionInfo::UpdateTheme() {
     }
 }
 
-// http://withinwindows.com/2010/07/01/retrieving-aero-glass-base-color-for-opaque-surface-rendering/
-#define REG_DWM "Software\\Microsoft\\Windows\\DWM"
-
 void CaptionInfo::UpdateColors(bool activeWindow) {
-    ARGB colorizationColor;
-    if (dwm::IsCompositionEnabled() &&
-        // get the color from the Registry and blend it with white background
-        ReadRegDWORD(HKEY_CURRENT_USER, REG_DWM, "ColorizationColor", colorizationColor)) {
-        BYTE A, R, G, B, white;
-        A = BYTE((colorizationColor >> 24) & 0xff);
-        if (!activeWindow) {
-            A = (BYTE)floor(A / ACTIVE_INACTIVE_ALPHA_RATIO + 0.5f);
-        }
-        R = BYTE((colorizationColor >> 16) & 0xff);
-        G = BYTE((colorizationColor >> 8) & 0xff);
-        B = BYTE(colorizationColor & 0xff);
-        white = BYTE(255 - A);
-        float factor = A / 255.0f;
-        R = BYTE((int)floor(R * factor + 0.5f) + white);
-        G = BYTE((int)floor(G * factor + 0.5f) + white);
-        B = BYTE((int)floor(B * factor + 0.5f) + white);
-        bgColor = RGB(R, G, B);
-    } else if (!theme || !SUCCEEDED(theme::GetThemeColor(
-                             theme, WP_CAPTION, 0, activeWindow ? TMT_FILLCOLORHINT : TMT_BORDERCOLORHINT, &bgColor))) {
+    if (!theme || !SUCCEEDED(theme::GetThemeColor(theme, WP_CAPTION, 0,
+                                                  activeWindow ? TMT_FILLCOLORHINT : TMT_BORDERCOLORHINT, &bgColor))) {
         bgColor = activeWindow ? GetSysColor(COLOR_GRADIENTACTIVECAPTION) : GetSysColor(COLOR_GRADIENTINACTIVECAPTION);
     }
-    if (!theme ||
-        !SUCCEEDED(theme::GetThemeColor(
-            theme, WP_CAPTION, 0,
-            (activeWindow || dwm::IsCompositionEnabled()) ? TMT_CAPTIONTEXT : TMT_INACTIVECAPTIONTEXT, &textColor))) {
-        textColor = (activeWindow || dwm::IsCompositionEnabled()) ? GetSysColor(COLOR_CAPTIONTEXT)
-                                                                  : GetSysColor(COLOR_INACTIVECAPTIONTEXT);
-    }
-    if (gGlobalPrefs->useTabs) {
-        COLORREF col = ThemeControlBackgroundColor();
-        dwm::SetCaptionColor(::GetParent(hwnd), col);
+    if (!theme || !SUCCEEDED(theme::GetThemeColor(
+                      theme, WP_CAPTION, 0, activeWindow ? TMT_CAPTIONTEXT : TMT_INACTIVECAPTIONTEXT, &textColor))) {
+        textColor = activeWindow ? GetSysColor(COLOR_CAPTIONTEXT) : GetSysColor(COLOR_INACTIVECAPTIONTEXT);
     }
 }
 
@@ -181,7 +141,6 @@ void SetCaptionButtonsRtl(CaptionInfo* caption, bool isRTL) {
 void CaptionUpdateUI(MainWindow* win, CaptionInfo* caption) {
     caption->UpdateTheme();
     caption->UpdateColors(win->hwndFrame == GetForegroundWindow());
-    caption->UpdateBackgroundAlpha();
 }
 
 void DeleteCaption(CaptionInfo* caption) {
@@ -404,48 +363,38 @@ void RelayoutCaption(MainWindow* win) {
     ButtonInfo* button;
     DeferWinPosHelper dh;
 
-    if (dwm::IsCompositionEnabled()) {
-        // hide the buttons, because DWM paints and serves them, when the composition is enabled
-        for (int i = CB_MINIMIZE; i <= CB_CLOSE; i++) {
-            ShowWindow(ci->btn[i].hwnd, SW_HIDE);
-        }
-    } else {
-        int xEdge = GetSystemMetrics(SM_CXEDGE);
-        int yEdge = GetSystemMetrics(SM_CYEDGE);
-        bool isClassicStyle = win->caption->theme == nullptr;
-        // Under WIN XP GetSystemMetrics(SM_CXSIZE) returns wrong (previous) value, after theme change
-        // or font size change. For this to work, I assume that SM_CXSIZE == SM_CYSIZE.
-        int btnDx =
-            GetSystemMetrics(IsWindowsVistaOrGreater() ? SM_CXSIZE : SM_CYSIZE) - xEdge * (isClassicStyle ? 1 : 2);
-        int btnDy = GetSystemMetrics(SM_CYSIZE) - yEdge * 2;
-        bool maximized = IsZoomed(win->hwndFrame);
-        int yPosBtn = rc.y + (maximized ? 0 : yEdge);
-        int topMargin = maximized ? yEdge : 0;
+    int xEdge = GetSystemMetrics(SM_CXEDGE);
+    int yEdge = GetSystemMetrics(SM_CYEDGE);
+    bool isClassicStyle = ci->theme == nullptr;
+    int btnDx = GetSystemMetrics(SM_CXSIZE) - xEdge * (isClassicStyle ? 1 : 2);
+    int btnDy = GetSystemMetrics(SM_CYSIZE) - yEdge * 2;
+    bool maximized = IsZoomed(win->hwndFrame);
+    int yPosBtn = rc.y + (maximized ? 0 : yEdge);
+    int topMargin = maximized ? yEdge : 0;
 
-        button = &ci->btn[CB_CLOSE];
-        rc.dx -= btnDx + xEdge;
-        int rightMargin = maximized ? xEdge : 0;
-        dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx + rightMargin, btnDy + topMargin,
-                        SWP_NOZORDER | SWP_SHOWWINDOW);
-        button->margins = {0, topMargin, rightMargin, 0};
+    button = &ci->btn[CB_CLOSE];
+    rc.dx -= btnDx + xEdge;
+    int rightMargin = maximized ? xEdge : 0;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx + rightMargin, btnDy + topMargin,
+                    SWP_NOZORDER | SWP_SHOWWINDOW);
+    button->margins = {0, topMargin, rightMargin, 0};
 
-        button = &ci->btn[CB_RESTORE];
-        rc.dx -= btnDx + xEdge;
-        dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
-                        SWP_NOZORDER | (maximized ? SWP_SHOWWINDOW : SWP_HIDEWINDOW));
-        button->margins = {0, topMargin, 0, 0};
+    button = &ci->btn[CB_RESTORE];
+    rc.dx -= btnDx + xEdge;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
+                    SWP_NOZORDER | (maximized ? SWP_SHOWWINDOW : SWP_HIDEWINDOW));
+    button->margins = {0, topMargin, 0, 0};
 
-        button = &ci->btn[CB_MAXIMIZE];
-        dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
-                        SWP_NOZORDER | (maximized ? SWP_HIDEWINDOW : SWP_SHOWWINDOW));
-        button->margins = {0, topMargin, 0, 0};
+    button = &ci->btn[CB_MAXIMIZE];
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
+                    SWP_NOZORDER | (maximized ? SWP_HIDEWINDOW : SWP_SHOWWINDOW));
+    button->margins = {0, topMargin, 0, 0};
 
-        button = &ci->btn[CB_MINIMIZE];
-        rc.dx -= btnDx + (isClassicStyle ? 0 : xEdge);
-        dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
-                        SWP_NOZORDER | SWP_SHOWWINDOW);
-        button->margins = {0, topMargin, 0, 0};
-    }
+    button = &ci->btn[CB_MINIMIZE];
+    rc.dx -= btnDx + (isClassicStyle ? 0 : xEdge);
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, yPosBtn, btnDx, btnDy + topMargin,
+                    SWP_NOZORDER | SWP_SHOWWINDOW);
+    button->margins = {0, topMargin, 0, 0};
 
     button = &ci->btn[CB_SYSTEM_MENU];
     int tabHeight = GetTabbarHeight(win->hwndFrame);
@@ -561,7 +510,6 @@ static void DrawCaptionButton(DRAWITEMSTRUCT* item, MainWindow* win) {
             gfx.FillRectangle(&br, rc.x, rc.y, rc.dx, rc.dy);
         }
         // draw the three lines
-        // COLORREF c = win->caption->textColor;
         COLORREF c = ThemeWindowTextColor();
         u8 r, g, b;
         UnpackColor(c, r, g, b);
@@ -597,32 +545,16 @@ void PaintParentBackground(HWND hwnd, HDC hdc) {
 }
 
 static void PaintCaptionBackground(HDC hdc, MainWindow* win, bool useDoubleBuffer) {
+    UNREFERENCED_PARAMETER(useDoubleBuffer);
     RECT rClip;
     GetClipBox(hdc, &rClip);
     Rect rect = ToRect(rClip);
 
     COLORREF c = win->caption->bgColor;
-
-    if (win->caption->bgAlpha == 0) {
-        PaintParentBackground(win->hwndCaption, hdc);
-    } else if (win->caption->bgAlpha == 255) {
-        Graphics gfx(hdc);
-        Color col = GdiRgbFromCOLORREF(c);
-        SolidBrush br(col);
-        gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
-    } else {
-        DoubleBuffer buffer(win->hwndCaption, rect);
-        HDC memDC = useDoubleBuffer ? buffer.GetDC() : hdc;
-        PaintParentBackground(win->hwndCaption, memDC);
-        Graphics gfx(memDC);
-        u8 r, g, b;
-        UnpackColor(c, r, g, b);
-        SolidBrush br(Color(win->caption->bgAlpha, r, g, b));
-        gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
-        if (useDoubleBuffer) {
-            buffer.Flush(hdc);
-        }
-    }
+    Graphics gfx(hdc);
+    Color col = GdiRgbFromCOLORREF(c);
+    SolidBrush br(col);
+    gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
 }
 
 static void DrawFrame(HWND hwnd, COLORREF color, bool drawEdge = true) {
@@ -653,158 +585,126 @@ static void DrawFrame(HWND hwnd, COLORREF color, bool drawEdge = true) {
 static WCHAR gMenuAccelPressed = 0;
 
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win) {
-    if (dwm::IsCompositionEnabled()) {
-        // Pass the messages to DwmDefWindowProc first. It serves the hit testing for the buttons.
-        LRESULT res;
-        if (dwm::DefaultWindowProc(hwnd, msg, wp, lp, &res)) {
-            *callDef = false;
-            return res;
-        }
-
-        switch (msg) {
-            case WM_NCPAINT:
-#if NON_CLIENT_BAND > 0
-                if (NeedsNonClientBandHack(hwnd)) {
-                    DrawFrame(hwnd, RGB(0, 0, 0), false);
-                }
-#endif
-                break;
-
-            case WM_ERASEBKGND: {
-                // Erase the background only under the extended frame.
-                *callDef = false;
-                if (win->extendedFrameHeight == 0) {
-                    return TRUE;
-                }
-                Rect rc = ClientRect(hwnd);
-                rc.dy = win->extendedFrameHeight;
-                HRGN extendedFrameRegion = CreateRectRgn(rc.x, rc.y, rc.x + rc.dx, rc.y + rc.dy);
-                int newRegionComplexity = ExtSelectClipRgn((HDC)wp, extendedFrameRegion, RGN_AND);
-                DeleteObject(extendedFrameRegion);
-                if (newRegionComplexity == NULLREGION) {
-                    return TRUE;
-                }
-            }
-                return DefWindowProc(hwnd, msg, wp, lp);
-
-            case WM_SIZE:
-                // Extend the translucent frame in the client area.
-                if (wp == SIZE_MAXIMIZED || wp == SIZE_RESTORED) {
-                    int frameThickness = 0;
-                    if (HwndHasFrameThickness(hwnd)) {
-                        frameThickness = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-                    }
-                    int captionHeight = 0;
-                    if (HwndHasCaption(hwnd)) {
-                        float tabScale = kCaptionTabBarDyFactor;
-                        if (IsZoomed(hwnd)) {
-                            tabScale = 1.f;
-                        }
-                        captionHeight = GetTabbarHeight(win->hwndFrame, tabScale);
-                    }
-                    int top = frameThickness + captionHeight;
-                    int bottom = NeedsNonClientBandHack(hwnd) ? NON_CLIENT_BAND : 0;
-                    MARGINS margins = {0, 0, top, bottom};
-                    dwm::ExtendFrameIntoClientArea(hwnd, &margins);
-                    win->extendedFrameHeight = frameThickness + captionHeight;
-                }
-                break;
-
-            case WM_NCACTIVATE:
-                win->caption->UpdateColors((bool)wp);
-                if (!IsIconic(hwnd)) {
-                    uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-                    RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
-                }
-                break;
-        }
-    } else {
-        switch (msg) {
-            case WM_SETTINGCHANGE:
-                if (wp == SPI_SETNONCLIENTMETRICS) {
-                    RelayoutCaption(win);
-                }
-                break;
-
-            case WM_NCPAINT:
-                DrawFrame(hwnd, win->caption->bgColor);
-                *callDef = false;
-                return 0;
-
-            case WM_NCACTIVATE:
-                win->caption->UpdateColors((bool)wp);
-                for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-                    win->caption->btn[i].inactive = wp == FALSE;
-                }
-                if (!IsIconic(hwnd)) {
-                    DrawFrame(hwnd, win->caption->bgColor);
-                    uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-                    RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
-                    *callDef = false;
-                    return TRUE;
-                }
-                break;
-
-            case WM_NCUAHDRAWCAPTION:
-            case WM_NCUAHDRAWFRAME:
-                DrawFrame(hwnd, win->caption->bgColor);
-                *callDef = false;
-                return TRUE;
-
-            case WM_POPUPSYSTEMMENU:
-            case WM_SETCURSOR:
-            case WM_SETTEXT:
-            case WM_SETICON:
-                if (!win->caption->theme && IsWindowVisible(hwnd)) {
-                    // Remove the WS_VISIBLE style to prevent DefWindowProc from drawing
-                    // in the caption's area when processing these mesages.
-                    // TODO: can't such drawing be prevented by handling WM_(NC)PAINT instead?
-                    SetWindowStyle(hwnd, WS_VISIBLE, false);
-                    LRESULT res = DefWindowProc(hwnd, msg, wp, lp);
-                    SetWindowStyle(hwnd, WS_VISIBLE, true);
-                    *callDef = false;
-                    return res;
-                }
-                break;
-        }
-    }
-
-    // These messages must be handled in both modes - with or without DWM composition.
     switch (msg) {
-        case WM_NCCALCSIZE: {
-            // In order to have custom caption, we have to include its area in the client rectangle.
-            RECT* r = wp == TRUE ? &((NCCALCSIZE_PARAMS*)lp)->rgrc[0] : (RECT*)lp;
-            RECT rWindow = *r;
-            // Let DefWindowProc calculate the client rectangle.
-            DefWindowProc(hwnd, msg, wp, lp);
-            RECT rClient = *r;
-            // Modify the client rectangle to include the caption's area.
-            if (dwm::IsCompositionEnabled()) {
-                rClient.top = rWindow.top;
-            } else {
-                rClient.top = rWindow.top + rWindow.bottom - rClient.bottom;
+        case WM_SETTINGCHANGE:
+            if (wp == SPI_SETNONCLIENTMETRICS) {
+                RelayoutCaption(win);
             }
-            // prevents the hiding of the topmost windows, when this window is maximized
-            if (NeedsNonClientBandHack(hwnd)) {
-                rClient.bottom -= NON_CLIENT_BAND;
-            }
-            *r = rClient;
+            break;
+
+        case WM_NCPAINT:
+            DrawFrame(hwnd, win->caption->bgColor);
             *callDef = false;
-        }
             return 0;
 
+        case WM_NCACTIVATE:
+            win->caption->UpdateColors((bool)wp);
+            for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+                win->caption->btn[i].inactive = wp == FALSE;
+            }
+            if (!IsIconic(hwnd)) {
+                DrawFrame(hwnd, win->caption->bgColor);
+                uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
+                RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
+                *callDef = false;
+                return TRUE;
+            }
+            break;
+
+        case WM_NCUAHDRAWCAPTION:
+        case WM_NCUAHDRAWFRAME:
+            DrawFrame(hwnd, win->caption->bgColor);
+            *callDef = false;
+            return TRUE;
+
+        case WM_POPUPSYSTEMMENU:
+        case WM_SETCURSOR:
+        case WM_SETTEXT:
+        case WM_SETICON:
+            if (!win->caption->theme && IsWindowVisible(hwnd)) {
+                // Remove the WS_VISIBLE style to prevent DefWindowProc from drawing
+                // in the caption's area when processing these mesages.
+                SetWindowStyle(hwnd, WS_VISIBLE, false);
+                LRESULT res = DefWindowProc(hwnd, msg, wp, lp);
+                SetWindowStyle(hwnd, WS_VISIBLE, true);
+                *callDef = false;
+                return res;
+            }
+            break;
+
+        case WM_NCCALCSIZE: {
+            // Make the entire window area the client area (frameless window).
+            RECT* r = wp == TRUE ? &((NCCALCSIZE_PARAMS*)lp)->rgrc[0] : (RECT*)lp;
+            if (IsZoomed(hwnd)) {
+                // When maximized, the window extends beyond the screen by the frame thickness.
+                // Adjust the client rect inward so it fits within the visible monitor area,
+                // and leave a 1px bottom band to prevent fullscreen detection hiding the taskbar.
+                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                r->left += frameX;
+                r->top += frameY;
+                r->right -= frameX;
+                r->bottom -= frameY;
+                r->bottom -= NON_CLIENT_BAND;
+            }
+            *callDef = false;
+            return 0;
+        }
+
         case WM_NCHITTEST: {
-            // Provide hit testing for the caption.
+            // Hit testing for resize borders and custom caption area.
             int x = GET_X_LPARAM(lp);
             int y = GET_Y_LPARAM(lp);
+            RECT wrc;
+            GetWindowRect(hwnd, &wrc);
+
+            if (!IsZoomed(hwnd)) {
+                // Check resize borders
+                bool onLeft = (x - wrc.left) < RESIZE_BORDER;
+                bool onRight = (wrc.right - x) < RESIZE_BORDER;
+                bool onTop = (y - wrc.top) < RESIZE_BORDER;
+                bool onBottom = (wrc.bottom - y) < RESIZE_BORDER;
+
+                if (onTop && onLeft) {
+                    *callDef = false;
+                    return HTTOPLEFT;
+                }
+                if (onTop && onRight) {
+                    *callDef = false;
+                    return HTTOPRIGHT;
+                }
+                if (onBottom && onLeft) {
+                    *callDef = false;
+                    return HTBOTTOMLEFT;
+                }
+                if (onBottom && onRight) {
+                    *callDef = false;
+                    return HTBOTTOMRIGHT;
+                }
+                if (onLeft) {
+                    *callDef = false;
+                    return HTLEFT;
+                }
+                if (onRight) {
+                    *callDef = false;
+                    return HTRIGHT;
+                }
+                if (onTop) {
+                    *callDef = false;
+                    return HTTOP;
+                }
+                if (onBottom) {
+                    *callDef = false;
+                    return HTBOTTOM;
+                }
+            }
+
+            // Check if in the caption area (above the tab bar bottom edge)
             Point pt{x, y};
             Rect rClient = MapRectToWindow(ClientRect(hwnd), hwnd, HWND_DESKTOP);
             Rect rCaption = WindowRect(win->hwndCaption);
             if (rClient.Contains(pt) && pt.y < rCaption.y + rCaption.dy) {
                 *callDef = false;
-                if (pt.y < rCaption.y) {
-                    return HTTOP;
-                }
                 return HTCAPTION;
             }
         } break;
@@ -831,8 +731,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 // Show the "menu bar" (and the desired submenu)
                 gMenuAccelPressed = (WCHAR)lp;
                 if (' ' == gMenuAccelPressed) {
-                    // TODO: this is probably not needed anymore after we removed &Window sub-menu
-                    // and added app icon
                     // map space to the accelerator of the Window menu
                     auto pos = str::FindChar(_TRA("&Window"), '&');
                     if (pos) {
@@ -867,24 +765,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_SYSCOLORCHANGE:
             win->caption->UpdateColors(hwnd == GetForegroundWindow());
             break;
-
-        case WM_DWMCOLORIZATIONCOLORCHANGED:
-            win->caption->UpdateColors(hwnd == GetForegroundWindow());
-            if (!IsIconic(hwnd)) {
-                uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-                RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
-            }
-            break;
-
-        case WM_DWMCOMPOSITIONCHANGED:
-            win->caption->UpdateBackgroundAlpha();
-            Rect cr = ClientRect(hwnd);
-            SetWindowPos(hwnd, nullptr, 0, 0, 0, 0, SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE);
-            if (ClientRect(hwnd) == cr) {
-                SendMessageW(hwnd, WM_SIZE, 0, MAKELONG(cr.dx, cr.dy));
-            }
-            *callDef = false;
-            return 0;
     }
 
     *callDef = true;
@@ -896,7 +776,6 @@ static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
     HMENU menu = GetSystemMenu(hwnd, FALSE);
 
     // prevents drawing in the caption's area
-    // TODO: how can this even happen?
     SetWindowStyle(hwnd, WS_VISIBLE, false);
 
     bool maximized = IsZoomed(hwnd);

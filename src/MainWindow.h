@@ -137,7 +137,6 @@ struct MainWindow {
 
     HWND hwndCaption = nullptr;
     CaptionInfo* caption = nullptr;
-    int extendedFrameHeight = 0;
 
     Tooltip* infotip = nullptr;
 
