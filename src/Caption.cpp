@@ -281,29 +281,31 @@ void RelayoutCaption(MainWindow* win) {
     ButtonInfo* button;
     DeferWinPosHelper dh;
 
-    // Square buttons with height equal to caption height, flush to right edge.
-    int btnSize = rc.dy;
+    // Min/max/close buttons touch the top edge (y=0), spanning the full height
+    // from top edge to caption bottom. They are square based on that height.
+    int btnDy = rc.y + rc.dy; // from top of frame to bottom of caption
+    int btnDx = btnDy;
     bool maximized = IsZoomed(win->hwndFrame);
 
     button = &ci->btn[CB_CLOSE];
-    rc.dx -= btnSize;
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize, SWP_NOZORDER | SWP_SHOWWINDOW);
+    rc.dx -= btnDx;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, 0, btnDx, btnDy, SWP_NOZORDER | SWP_SHOWWINDOW);
     button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_RESTORE];
-    rc.dx -= btnSize;
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize,
+    rc.dx -= btnDx;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, 0, btnDx, btnDy,
                     SWP_NOZORDER | (maximized ? SWP_SHOWWINDOW : SWP_HIDEWINDOW));
     button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_MAXIMIZE];
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize,
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, 0, btnDx, btnDy,
                     SWP_NOZORDER | (maximized ? SWP_HIDEWINDOW : SWP_SHOWWINDOW));
     button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_MINIMIZE];
-    rc.dx -= btnSize;
-    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, rc.y, btnSize, btnSize, SWP_NOZORDER | SWP_SHOWWINDOW);
+    rc.dx -= btnDx;
+    dh.SetWindowPos(button->hwnd, nullptr, rc.x + rc.dx, 0, btnDx, btnDy, SWP_NOZORDER | SWP_SHOWWINDOW);
     button->margins = {0, 0, 0, 0};
 
     button = &ci->btn[CB_SYSTEM_MENU];
