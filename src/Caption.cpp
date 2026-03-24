@@ -186,12 +186,24 @@ void OpenSystemMenu(MainWindow* win) {
     TrackPopupMenuEx(systemMenu, flags, rc.left, rc.bottom, win->hwndFrame, nullptr);
 }
 
+static bool IsMaximizeButton(int index) {
+    return index == CB_MAXIMIZE || index == CB_RESTORE;
+}
+
 static WNDPROC DefWndProcButton = nullptr;
 static LRESULT CALLBACK WndProcButton(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     MainWindow* win = FindMainWindowByHwnd(hwnd);
     int index = (int)GetWindowLongPtr(hwnd, GWLP_ID) - BTN_ID_FIRST;
 
     switch (msg) {
+        case WM_NCHITTEST:
+            // Make maximize/restore button transparent to hit testing so the frame
+            // can return HTMAXBUTTON, enabling Windows 11 snap layouts.
+            if (IsMaximizeButton(index)) {
+                return HTTRANSPARENT;
+            }
+            break;
+
         case WM_MOUSEMOVE: {
             if (CB_SYSTEM_MENU == index && (wp & MK_LBUTTON)) {
                 ReleaseCapture();
@@ -660,6 +672,17 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 }
             }
 
+            // Return HTMAXBUTTON over maximize/restore button for Win11 snap layouts
+            {
+                int btnIdx = IsZoomed(hwnd) ? CB_RESTORE : CB_MAXIMIZE;
+                HWND btnHwnd = win->caption->btn[btnIdx].hwnd;
+                Rect rBtn = WindowRect(btnHwnd);
+                if (rBtn.Contains(Point{x, y})) {
+                    *callDef = false;
+                    return HTMAXBUTTON;
+                }
+            }
+
             // Check if in the caption area (above the tab bar bottom edge)
             Point pt{x, y};
             Rect rClient = MapRectToWindow(ClientRect(hwnd), hwnd, HWND_DESKTOP);
@@ -667,6 +690,41 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             if (rClient.Contains(pt) && pt.y < rCaption.y + rCaption.dy) {
                 *callDef = false;
                 return HTCAPTION;
+            }
+        } break;
+
+        case WM_NCLBUTTONUP:
+            // Handle click on maximize/restore button (returned as HTMAXBUTTON from WM_NCHITTEST).
+            if (wp == HTMAXBUTTON) {
+                WPARAM cmd = IsZoomed(hwnd) ? SC_RESTORE : SC_MAXIMIZE;
+                PostMessageW(hwnd, WM_SYSCOMMAND, cmd, 0);
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_NCMOUSEMOVE: {
+            // Highlight the maximize/restore button on hover.
+            int btnIdx = IsZoomed(hwnd) ? CB_RESTORE : CB_MAXIMIZE;
+            if (wp == HTMAXBUTTON) {
+                if (!win->caption->btn[btnIdx].highlighted) {
+                    win->caption->btn[btnIdx].highlighted = true;
+                    InvalidateRgn(win->caption->btn[btnIdx].hwnd, nullptr, FALSE);
+                }
+            } else {
+                if (win->caption->btn[btnIdx].highlighted) {
+                    win->caption->btn[btnIdx].highlighted = false;
+                    InvalidateRgn(win->caption->btn[btnIdx].hwnd, nullptr, FALSE);
+                }
+            }
+        } break;
+
+        case WM_NCMOUSELEAVE: {
+            // Clear maximize/restore button highlight when mouse leaves non-client area.
+            int btnIdx = IsZoomed(hwnd) ? CB_RESTORE : CB_MAXIMIZE;
+            if (win->caption->btn[btnIdx].highlighted) {
+                win->caption->btn[btnIdx].highlighted = false;
+                InvalidateRgn(win->caption->btn[btnIdx].hwnd, nullptr, FALSE);
             }
         } break;
 
