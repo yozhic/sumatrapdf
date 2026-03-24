@@ -251,9 +251,12 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
                 gfx.FillRectangle(&br, gr);
             }
 
-            // draw X
+            // draw X with a lighter color
             gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
-            br.SetColor(GdipCol(textColor));
+            gfx.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+            Color closeCol = GdipCol(textColor);
+            closeCol = Color(128+64, closeCol.GetR(), closeCol.GetG(), closeCol.GetB());
+            br.SetColor(closeCol);
             Pen penX(&br, closePenWidth);
             Gdiplus::Point p1(r.x, r.y);
             Gdiplus::Point p2(r.x + r.dx, r.y + r.dy);
@@ -262,6 +265,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             p2 = {r.x, r.y + r.dy};
             gfx.DrawLine(&penX, p1, p2);
             gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+            gfx.SetCompositingMode(Gdiplus::CompositingModeSourceCopy);
         }
 
         // draw text
