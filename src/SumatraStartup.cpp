@@ -122,7 +122,6 @@ static bool RegisterWinClass() {
     wcex.style |= CS_DBLCLKS;
     atom = RegisterClassEx(&wcex);
 
-    RegisterCaptionWndClass();
     return true;
 }
 

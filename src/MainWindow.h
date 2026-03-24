@@ -135,7 +135,6 @@ struct MainWindow {
     // of the previous tab when the current one is closed. (Points into tabs.)
     Vec<WindowTab*>* tabSelectionHistory = nullptr;
 
-    HWND hwndCaption = nullptr;
     CaptionInfo* caption = nullptr;
 
     Tooltip* infotip = nullptr;

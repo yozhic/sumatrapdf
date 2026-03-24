@@ -88,7 +88,6 @@
 #include "EditAnnotations.h"
 #include "CommandPalette.h"
 #include "Theme.h"
-#include "Caption.h"
 #include "DarkModeSubclass.h"
 
 #include "utils/Log.h"
@@ -1685,7 +1684,6 @@ void UpdateAfterThemeChange() {
         // includingNonClientArea == true.
         MainWindowRerender(win, true);
         uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-        RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
         RedrawWindow(win->hwndFrame, nullptr, nullptr, flags);
     }
     UpdateDocumentColors();
@@ -3671,9 +3669,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
                 rc.dy -= kCaptionTopPadding;
             }
             int captionHeight = GetTabbarHeight(win->hwndFrame);
+            win->caption->captionRect = {rc.x, rc.y, rc.dx, captionHeight};
             if (updateToolbars) {
-                int captionWidth = rc.dx;
-                dh.SetWindowPos(win->hwndCaption, nullptr, rc.x, rc.y, captionWidth, captionHeight, SWP_NOZORDER);
+                RelayoutCaption(win);
             }
             rc.y += captionHeight;
             rc.dy -= captionHeight;
@@ -4164,7 +4162,9 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     SetMenu(win->hwndFrame, nullptr);
     ShowWindow(win->hwndReBar, SW_HIDE);
     win->tabsCtrl->SetIsVisible(false);
-    ShowWindow(win->hwndCaption, SW_HIDE);
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        ShowWindow(win->caption->btn[i].hwnd, SW_HIDE);
+    }
 
     SetWindowLong(win->hwndFrame, GWL_STYLE, ws);
     uint flags = SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOZORDER;
@@ -4214,7 +4214,9 @@ void ExitFullScreen(MainWindow* win) {
     SetSidebarVisibility(win, tocVisible, gGlobalPrefs->showFavorites);
 
     if (win->tabsInTitlebar) {
-        ShowWindow(win->hwndCaption, SW_SHOW);
+        for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+            ShowWindow(win->caption->btn[i].hwnd, SW_SHOW);
+        }
     }
     if (win->tabsVisible) {
         win->tabsCtrl->SetIsVisible(true);

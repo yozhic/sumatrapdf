@@ -7,8 +7,43 @@
 // gap in pixels between top of caption and tabs; this area allows dragging the window
 #define kCaptionTopPadding 14
 
+enum CaptionButtons {
+    CB_BTN_FIRST = 0,
+    CB_MINIMIZE = CB_BTN_FIRST,
+    CB_MAXIMIZE,
+    CB_RESTORE,
+    CB_CLOSE,
+    CB_MENU,
+    CB_SYSTEM_MENU,
+    CB_BTN_COUNT
+};
+
+struct ButtonInfo {
+    HWND hwnd = nullptr;
+    bool highlighted = false;
+    bool inactive = false;
+    RECT margins{};
+    ButtonInfo() = default;
+};
+
+struct CaptionInfo {
+    HWND hwndFrame = nullptr;
+
+    ButtonInfo btn[CB_BTN_COUNT];
+    HTHEME theme = nullptr;
+    COLORREF bgColor = 0;
+    COLORREF textColor = 0;
+    bool isMenuOpen = false;
+    Rect captionRect{};
+
+    explicit CaptionInfo(HWND hwndFrame);
+    ~CaptionInfo();
+
+    void UpdateTheme();
+    void UpdateColors(bool activeWindow);
+};
+
 void CreateCaption(MainWindow* win);
-void RegisterCaptionWndClass();
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
 void PaintParentBackground(HWND hwnd, HDC hdc);
 void RelayoutCaption(MainWindow* win);

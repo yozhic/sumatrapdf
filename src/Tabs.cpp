@@ -598,8 +598,6 @@ void SetTabsInTitlebar(MainWindow* win, bool inTitleBar) {
     }
     win->tabsInTitlebar = inTitleBar;
     win->tabsCtrl->inTitleBar = inTitleBar;
-    SetParent(win->tabsCtrl->hwnd, inTitleBar ? win->hwndCaption : win->hwndFrame);
-    ShowWindow(win->hwndCaption, inTitleBar ? SW_SHOW : SW_HIDE);
     if (inTitleBar != win->isMenuHidden) {
         ToggleMenuBar(win, false);
     }

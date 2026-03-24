@@ -29,7 +29,6 @@ using Gdiplus::Graphics;
 using Gdiplus::Pen;
 using Gdiplus::SolidBrush;
 
-#define CUSTOM_CAPTION_CLASS_NAME L"CustomCaption"
 #define UNDOCUMENTED_MENU_CLASS_NAME L"#32768"
 
 #define BTN_ID_FIRST 100
@@ -53,49 +52,14 @@ using Gdiplus::SolidBrush;
 // expand the non-client border at the expense of client area.
 #define NON_CLIENT_BAND 1
 
-enum CaptionButtons {
-    CB_BTN_FIRST = 0,
-    CB_MINIMIZE = CB_BTN_FIRST,
-    CB_MAXIMIZE,
-    CB_RESTORE,
-    CB_CLOSE,
-    CB_MENU,
-    CB_SYSTEM_MENU,
-    CB_BTN_COUNT
-};
-
-struct ButtonInfo {
-    HWND hwnd = nullptr;
-    bool highlighted = false;
-    bool inactive = false;
-    // form the inner rectangle where the button image is drawn
-    RECT margins{};
-
-    ButtonInfo() = default;
-};
-
-struct CaptionInfo {
-    HWND hwnd = nullptr;
-
-    ButtonInfo btn[CB_BTN_COUNT];
-    HTHEME theme = nullptr;
-    COLORREF bgColor = 0;
-    COLORREF textColor = 0;
-    bool isMenuOpen = false;
-
-    explicit CaptionInfo(HWND hwndCaption);
-    ~CaptionInfo();
-
-    void UpdateTheme();
-    void UpdateColors(bool activeWindow);
-};
+// structs defined in Caption.h
 
 static void DrawCaptionButton(DRAWITEMSTRUCT* item, MainWindow* win);
 static void PaintCaptionBackground(HDC hdc, MainWindow* win, bool useDoubleBuffer);
 static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem);
 static void MenuBarAsPopupMenu(MainWindow* win, int x, int y);
 
-CaptionInfo::CaptionInfo(HWND hwndCaption) : hwnd(hwndCaption) {
+CaptionInfo::CaptionInfo(HWND frame) : hwndFrame(frame) {
     UpdateTheme();
     UpdateColors(true);
 }
@@ -112,7 +76,7 @@ void CaptionInfo::UpdateTheme() {
         theme = nullptr;
     }
     if (theme::IsThemeActive()) {
-        theme = theme::OpenThemeData(hwnd, L"WINDOW");
+        theme = theme::OpenThemeData(hwndFrame, L"WINDOW");
     }
 }
 
@@ -139,103 +103,77 @@ void DeleteCaption(CaptionInfo* caption) {
     delete caption;
 }
 
-static LRESULT CALLBACK WndProcCaption(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
-    MainWindow* win = FindMainWindowByHwnd(hwnd);
-
-    switch (msg) {
-        case WM_COMMAND:
-            if (win && BN_CLICKED == HIWORD(wp)) {
-                WPARAM cmd;
-                WORD button = LOWORD(wp) - BTN_ID_FIRST;
-                switch (button) {
-                    case CB_MINIMIZE:
-                        cmd = SC_MINIMIZE;
-                        break;
-                    case CB_MAXIMIZE:
-                        cmd = SC_MAXIMIZE;
-                        break;
-                    case CB_RESTORE:
-                        cmd = SC_RESTORE;
-                        break;
-                    case CB_CLOSE:
-                        cmd = SC_CLOSE;
-                        break;
-                    default:
-                        cmd = 0;
-                        break;
-                }
-                if (cmd) {
-                    PostMessageW(win->hwndFrame, WM_SYSCOMMAND, cmd, 0);
-                }
-
-                if (button == CB_MENU) {
-                    if (!KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID) && !win->caption->isMenuOpen) {
-                        HWND hMenuButton = win->caption->btn[CB_MENU].hwnd;
-                        Rect wr = WindowRect(hMenuButton);
-                        win->caption->isMenuOpen = true;
-                        if (!lp) {
-                            // if the WM_COMMAND message was sent as a result of keyboard command
-                            InvalidateRgn(hMenuButton, nullptr, FALSE);
-                        }
-                        MenuBarAsPopupMenu(win, wr.x, wr.y + wr.dy);
-                        win->caption->isMenuOpen = false;
-                        if (!lp) {
-                            InvalidateRgn(hMenuButton, nullptr, FALSE);
-                        }
-                        SetTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID, DO_NOT_REOPEN_MENU_DELAY_IN_MS, nullptr);
-                    }
-                    HwndSetFocus(win->hwndFrame);
-                }
-            }
-            break;
-
-        case WM_TIMER:
-            if (wp == DO_NOT_REOPEN_MENU_TIMER_ID) {
-                KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID);
-            }
-            break;
-
-        case WM_SIZE:
-            if (win) {
-                RelayoutCaption(win);
-            }
-            break;
-
-        case WM_NCHITTEST:
-            return HTTRANSPARENT;
-
-        case WM_ERASEBKGND:
-            if (win) {
-                PaintCaptionBackground((HDC)wp, win, true);
-            }
-            return TRUE;
-
-        case WM_DRAWITEM:
-            if (win) {
-                DRAWITEMSTRUCT* dis = (DRAWITEMSTRUCT*)lp;
-                int index = dis->CtlID - BTN_ID_FIRST;
-                if (CB_MENU == index && win->caption->isMenuOpen) {
-                    dis->itemState |= ODS_SELECTED;
-                }
-                if (win->caption->btn[index].highlighted) {
-                    dis->itemState |= ODS_HOTLIGHT;
-                } else if (win->caption->btn[index].inactive) {
-                    dis->itemState |= ODS_INACTIVE;
-                }
-                DrawCaptionButton(dis, win);
-            }
-            return TRUE;
-
-        case WM_THEMECHANGED:
-            if (win) {
-                win->caption->UpdateTheme();
-            }
-            break;
-
-        default:
-            return DefWindowProc(hwnd, msg, wp, lp);
+// Handle caption button commands. Called from the frame's WM_COMMAND handler.
+static bool HandleCaptionCommand(MainWindow* win, HWND hwnd, WPARAM wp, LPARAM lp) {
+    if (!win || !win->tabsInTitlebar || BN_CLICKED != HIWORD(wp)) {
+        return false;
     }
-    return 0;
+    WORD button = LOWORD(wp) - BTN_ID_FIRST;
+    if (button >= CB_BTN_COUNT) {
+        return false;
+    }
+    WPARAM cmd;
+    switch (button) {
+        case CB_MINIMIZE:
+            cmd = SC_MINIMIZE;
+            break;
+        case CB_MAXIMIZE:
+            cmd = SC_MAXIMIZE;
+            break;
+        case CB_RESTORE:
+            cmd = SC_RESTORE;
+            break;
+        case CB_CLOSE:
+            cmd = SC_CLOSE;
+            break;
+        default:
+            cmd = 0;
+            break;
+    }
+    if (cmd) {
+        PostMessageW(win->hwndFrame, WM_SYSCOMMAND, cmd, 0);
+    }
+
+    if (button == CB_MENU) {
+        if (!KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID) && !win->caption->isMenuOpen) {
+            HWND hMenuButton = win->caption->btn[CB_MENU].hwnd;
+            Rect wr = WindowRect(hMenuButton);
+            win->caption->isMenuOpen = true;
+            if (!lp) {
+                InvalidateRgn(hMenuButton, nullptr, FALSE);
+            }
+            MenuBarAsPopupMenu(win, wr.x, wr.y + wr.dy);
+            win->caption->isMenuOpen = false;
+            if (!lp) {
+                InvalidateRgn(hMenuButton, nullptr, FALSE);
+            }
+            SetTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID, DO_NOT_REOPEN_MENU_DELAY_IN_MS, nullptr);
+        }
+        HwndSetFocus(win->hwndFrame);
+    }
+    return true;
+}
+
+// Handle owner-draw for caption buttons. Called from the frame's WM_DRAWITEM handler.
+static bool HandleCaptionDrawItem(MainWindow* win, LPARAM lp) {
+    if (!win || !win->tabsInTitlebar) {
+        return false;
+    }
+    DRAWITEMSTRUCT* dis = (DRAWITEMSTRUCT*)lp;
+    int index = (int)dis->CtlID - BTN_ID_FIRST;
+    if (index < 0 || index >= CB_BTN_COUNT) {
+        return false;
+    }
+    if (CB_MENU == index && win->caption->isMenuOpen) {
+        dis->itemState |= ODS_SELECTED;
+    }
+    if (win->caption->btn[index].highlighted) {
+        dis->itemState |= ODS_HOTLIGHT;
+    } else if (win->caption->btn[index].inactive) {
+        dis->itemState |= ODS_INACTIVE;
+    }
+    DrawCaptionButton(dis, win);
+    return true;
 }
 
 void OpenSystemMenu(MainWindow* win) {
@@ -322,15 +260,10 @@ static LRESULT CALLBACK WndProcButton(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 
 void CreateCaption(MainWindow* win) {
     HMODULE h = GetModuleHandleW(nullptr);
-    DWORD dwStyle = WS_CHILDWINDOW | WS_CLIPCHILDREN;
+    win->caption = new CaptionInfo(win->hwndFrame);
+
+    DWORD dwStyle = WS_CHILDWINDOW | WS_VISIBLE | BS_OWNERDRAW;
     HWND hwndParent = win->hwndFrame;
-    win->hwndCaption =
-        CreateWindow(CUSTOM_CAPTION_CLASS_NAME, L"", dwStyle, 0, 0, 0, 0, hwndParent, nullptr, h, nullptr);
-
-    win->caption = new CaptionInfo(win->hwndCaption);
-
-    dwStyle = WS_CHILDWINDOW | WS_VISIBLE | BS_OWNERDRAW;
-    hwndParent = win->hwndCaption;
     for (UINT_PTR i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
         HMENU id = (HMENU)(BTN_ID_FIRST + i);
         HWND btn = CreateWindowExW(0, L"BUTTON", L"", dwStyle, 0, 0, 0, 0, hwndParent, id, h, nullptr);
@@ -342,15 +275,8 @@ void CreateCaption(MainWindow* win) {
     }
 }
 
-void RegisterCaptionWndClass() {
-    WNDCLASSEX wcex;
-    FillWndClassEx(wcex, CUSTOM_CAPTION_CLASS_NAME, WndProcCaption);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    RegisterClassEx(&wcex);
-}
-
 void RelayoutCaption(MainWindow* win) {
-    Rect rc = ClientRect(win->hwndCaption);
+    Rect rc = win->caption->captionRect;
     CaptionInfo* ci = win->caption;
     ButtonInfo* button;
     DeferWinPosHelper dh;
@@ -605,9 +531,37 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             }
             if (!IsIconic(hwnd)) {
                 uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-                RedrawWindow(win->hwndCaption, nullptr, nullptr, flags);
+                RedrawWindow(hwnd, nullptr, nullptr, flags);
                 *callDef = false;
                 return TRUE;
+            }
+            break;
+
+        case WM_COMMAND:
+            if (HandleCaptionCommand(win, hwnd, wp, lp)) {
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_DRAWITEM:
+            if (HandleCaptionDrawItem(win, lp)) {
+                *callDef = false;
+                return TRUE;
+            }
+            break;
+
+        case WM_TIMER:
+            if (wp == DO_NOT_REOPEN_MENU_TIMER_ID) {
+                KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID);
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_THEMECHANGED:
+            if (win) {
+                win->caption->UpdateTheme();
             }
             break;
 
@@ -707,7 +661,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             // Check if in the caption area (above the tab bar bottom edge)
             Point pt{x, y};
             Rect rClient = MapRectToWindow(ClientRect(hwnd), hwnd, HWND_DESKTOP);
-            Rect rCaption = WindowRect(win->hwndCaption);
+            Rect rCaption = MapRectToWindow(win->caption->captionRect, hwnd, HWND_DESKTOP);
             if (rClient.Contains(pt) && pt.y < rCaption.y + rCaption.dy) {
                 *callDef = false;
                 return HTCAPTION;
@@ -743,7 +697,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                         gMenuAccelPressed = (WCHAR)c;
                     }
                 }
-                PostMessageW(win->hwndCaption, WM_COMMAND, MAKELONG(BTN_ID_FIRST + CB_MENU, BN_CLICKED), 0);
+                PostMessageW(hwnd, WM_COMMAND, MAKELONG(BTN_ID_FIRST + CB_MENU, BN_CLICKED), 0);
                 *callDef = false;
                 return 0;
             }
