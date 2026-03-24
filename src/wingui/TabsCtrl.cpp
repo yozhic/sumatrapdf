@@ -184,7 +184,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
     Graphics gfx(hdc);
     gfx.SetCompositingMode(Gdiplus::CompositingModeSourceCopy);
     gfx.SetCompositingQuality(CompositingQualityHighQuality);
-    gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
+    gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
     gfx.SetTextRenderingHint(TextRenderingHintClearTypeGridFit);
     gfx.SetPageUnit(UnitPixel);
 
@@ -252,6 +252,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             }
 
             // draw X
+            gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
             br.SetColor(GdipCol(textColor));
             Pen penX(&br, closePenWidth);
             Gdiplus::Point p1(r.x, r.y);
@@ -260,6 +261,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             p1 = {r.x + r.dx, r.y};
             p2 = {r.x, r.y + r.dy};
             gfx.DrawLine(&penX, p1, p2);
+            gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
         }
 
         // draw text
@@ -675,6 +677,12 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_ERASEBKGND:
             return TRUE; // we handled it so don't erase
+
+        case WM_NCPAINT:
+            return 0; // prevent native tab control from drawing its edge
+
+        case WM_NCCALCSIZE:
+            return 0; // remove non-client area so no edge is reserved
 
         case WM_PAINT: {
             PAINTSTRUCT ps;

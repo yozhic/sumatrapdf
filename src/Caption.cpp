@@ -581,7 +581,7 @@ static void PaintCaptionBackground(HDC hdc, MainWindow* win, bool useDoubleBuffe
     gfx.FillRectangle(&br, rect.x, rect.y, rect.dx, rect.dy);
 }
 
-static void DrawFrame(HWND hwnd, COLORREF color, bool drawEdge = true) {
+static void DrawFrame(HWND hwnd, COLORREF color) {
     HDC hdc = GetWindowDC(hwnd);
 
     RECT rWindow, rClient;
@@ -596,9 +596,6 @@ static void DrawFrame(HWND hwnd, COLORREF color, bool drawEdge = true) {
     HBRUSH br = CreateSolidBrush(color);
     FillRect(hdc, &rWindow, br);
     DeleteObject(br);
-    if (drawEdge) {
-        DrawEdge(hdc, &rWindow, EDGE_RAISED, BF_RECT | BF_FLAT);
-    }
 
     ReleaseDC(hwnd, hdc);
 }
