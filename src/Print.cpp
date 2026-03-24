@@ -1481,7 +1481,14 @@ static void ApplyPrintSettings(Printer* printer, const char* settings, int pageC
             advanced.rotation = PrintRotationAdv::Landscape;
         } else if (str::EqI(s, "disable-auto-rotation")) {
             advanced.autoRotate = false;
-        } else if (str::Parse(s, "%dx%$", &val) && 0 < val && val < 1000) {
+        } else if (str::Parse(s, "%dx%$", &val)) {
+            if (val < 0) {
+                val = 1;
+            }
+            if (val > 1000) {
+                logf("limiting number of print copies from %d to %d\n", val, 1000);
+                val = 1000;
+            }
             devMode->dmCopies = (short)val;
             devMode->dmFields |= DM_COPIES;
         } else if (str::EqI(s, "simplex")) {
@@ -1579,7 +1586,7 @@ bool PrintFile2(EngineBase* engine, char* printerName, bool displayErrors, const
     if (printerName) {
         printer = NewPrinter(printerName);
     } else {
-        char* defName = GetDefaultPrinterNameTemp();
+        TempStr defName = GetDefaultPrinterNameTemp();
         if (!defName) {
             logf("PrintFile: GetDefaultPrinterName() failed\n");
             return false;
