@@ -6868,6 +6868,10 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 r->right -= frameX;
                 r->bottom -= frameY;
                 r->bottom -= NON_CLIENT_BAND;
+            } else if (!isFullScreen) {
+                // keep 1px non-client area at top so DWM preserves content
+                // during resize (returning 0 makes DWM clear the surface)
+                r->top += 1;
             }
             *callDef = false;
             return 0;
