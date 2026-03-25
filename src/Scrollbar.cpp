@@ -609,6 +609,9 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
             SendMessageW(sb->hwndOwner, msg, wp, lp);
             return 0;
 
+        case WM_MOUSEACTIVATE:
+            return MA_NOACTIVATE;
+
         case WM_NCHITTEST: {
             LRESULT def = DefWindowProcW(hwnd, msg, wp, lp);
             if (def == HTNOWHERE) {
@@ -643,7 +646,7 @@ OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, ScrollbarType type) {
     sb->hwndOwner = hwndOwner;
     sb->type = type;
 
-    DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_TRANSPARENT;
+    DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE;
     DWORD style = WS_POPUP;
 
     sb->hwnd = CreateWindowExW(exStyle, OVERLAY_SCROLLBAR_CLASS, nullptr, style, 0, 0, 1, 1, nullptr, nullptr,
