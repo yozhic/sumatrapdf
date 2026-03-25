@@ -47,10 +47,33 @@ using Gdiplus::SolidBrush;
 
 // structs defined in Caption.h
 
-static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem);
-
 void DeleteCaption(CaptionInfo* caption) {
     delete caption;
+}
+
+static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
+    // don't reset the system menu (in case other applications have added to it)
+    HMENU menu = GetSystemMenu(hwnd, FALSE);
+
+    // prevents drawing in the caption's area
+    SetWindowStyle(hwnd, WS_VISIBLE, false);
+
+    bool maximized = IsZoomed(hwnd);
+    EnableMenuItem(menu, SC_SIZE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_MOVE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_MINIMIZE, MF_ENABLED);
+    EnableMenuItem(menu, SC_MAXIMIZE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_CLOSE, MF_ENABLED);
+    EnableMenuItem(menu, SC_RESTORE, maximized ? MF_ENABLED : MF_GRAYED);
+    if (changeDefaultItem) {
+        SetMenuDefaultItem(menu, maximized ? SC_RESTORE : SC_MAXIMIZE, FALSE);
+    } else {
+        SetMenuDefaultItem(menu, SC_CLOSE, FALSE);
+    }
+
+    SetWindowStyle(hwnd, WS_VISIBLE, true);
+
+    return menu;
 }
 
 void OpenSystemMenu(MainWindow* win) {
@@ -683,29 +706,4 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
     *callDef = true;
     return 0;
-}
-
-static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
-    // don't reset the system menu (in case other applications have added to it)
-    HMENU menu = GetSystemMenu(hwnd, FALSE);
-
-    // prevents drawing in the caption's area
-    SetWindowStyle(hwnd, WS_VISIBLE, false);
-
-    bool maximized = IsZoomed(hwnd);
-    EnableMenuItem(menu, SC_SIZE, maximized ? MF_GRAYED : MF_ENABLED);
-    EnableMenuItem(menu, SC_MOVE, maximized ? MF_GRAYED : MF_ENABLED);
-    EnableMenuItem(menu, SC_MINIMIZE, MF_ENABLED);
-    EnableMenuItem(menu, SC_MAXIMIZE, maximized ? MF_GRAYED : MF_ENABLED);
-    EnableMenuItem(menu, SC_CLOSE, MF_ENABLED);
-    EnableMenuItem(menu, SC_RESTORE, maximized ? MF_ENABLED : MF_GRAYED);
-    if (changeDefaultItem) {
-        SetMenuDefaultItem(menu, maximized ? SC_RESTORE : SC_MAXIMIZE, FALSE);
-    } else {
-        SetMenuDefaultItem(menu, SC_CLOSE, FALSE);
-    }
-
-    SetWindowStyle(hwnd, WS_VISIBLE, true);
-
-    return menu;
 }
