@@ -1556,13 +1556,6 @@ static MainWindow* CreateMainWindow() {
     // WM_NCCALCSIZE returning 0 disables DWM rounded corners; re-enable them.
     dwm::SetWindowRoundedCorners(hwndFrame, true);
 
-    if (false) {
-        // Extend DWM frame into the entire client area so DWM knows to fill it
-        // during resize instead of showing a transparent flash.
-        MARGINS margins = {-1, -1, -1, -1};
-        dwm::ExtendFrameIntoClientArea(hwndFrame, &margins);
-    }
-
     ReportIf(nullptr != FindMainWindowByHwnd(hwndFrame));
     MainWindow* win = new MainWindow(hwndFrame);
 
