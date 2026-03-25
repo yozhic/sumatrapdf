@@ -38,15 +38,6 @@ struct ButtonInfo {
     ButtonInfo() = default;
 };
 
-struct CaptionInfo {
-    ButtonInfo btn[CB_BTN_COUNT];
-    bool isMenuOpen = false;
-    Rect captionRect{};
-
-    explicit CaptionInfo() = default;
-    ~CaptionInfo() = default;
-};
-
 struct IPageElement;
 struct PageDestination;
 struct TocItem;
@@ -169,7 +160,9 @@ struct MainWindow {
     // of the previous tab when the current one is closed. (Points into tabs.)
     Vec<WindowTab*>* tabSelectionHistory = nullptr;
 
-    CaptionInfo* caption = nullptr;
+    ButtonInfo captionBtn[CB_BTN_COUNT];
+    bool isMenuOpen = false;
+    Rect captionRect{};
 
     Tooltip* infotip = nullptr;
 
@@ -305,9 +298,7 @@ void HighlightTab(MainWindow*, WindowTab*);
 HWND GetHwndForNotification();
 bool AppIsValidHWND(HWND);
 
-void CreateCaption(MainWindow* win);
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
 void RelayoutCaption(MainWindow* win);
 void PaintCaption(HDC hdc, MainWindow* win);
-void DeleteCaption(CaptionInfo*);
 void OpenSystemMenu(MainWindow* win);

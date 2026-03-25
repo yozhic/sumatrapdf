@@ -1568,7 +1568,6 @@ static MainWindow* CreateMainWindow() {
     win->infotip = new Tooltip();
     win->infotip->Create(args);
 
-    CreateCaption(win);
     CreateTabbar(win);
     CreateToolbar(win);
     CreateSidebar(win);
@@ -3671,7 +3670,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
                 rc.dy -= kCaptionTopPadding;
             }
             int captionHeight = GetTabbarHeight(win->hwndFrame);
-            win->caption->captionRect = {rc.x, rc.y, rc.dx, captionHeight};
+            win->captionRect = {rc.x, rc.y, rc.dx, captionHeight};
             if (updateToolbars) {
                 RelayoutCaption(win);
             }
@@ -6333,10 +6332,6 @@ static LRESULT OnFrameGetMinMaxInfo(MINMAXINFO* info) {
 #define CBS_INACTIVE 5
 #define NON_CLIENT_BAND 1
 
-void DeleteCaption(CaptionInfo* caption) {
-    delete caption;
-}
-
 static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
     HMENU menu = GetSystemMenu(hwnd, FALSE);
     SetWindowStyle(hwnd, WS_VISIBLE, false);
@@ -6359,16 +6354,16 @@ static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
 }
 
 void OpenSystemMenu(MainWindow* win) {
-    Rect r = win->caption->btn[CB_SYSTEM_MENU].rect;
+    Rect r = win->captionBtn[CB_SYSTEM_MENU].rect;
     Rect rScreen = MapRectToWindow(r, win->hwndFrame, HWND_DESKTOP);
     HMENU systemMenu = GetUpdatedSystemMenu(win->hwndFrame, false);
     uint flags = 0;
     TrackPopupMenuEx(systemMenu, flags, rScreen.x, rScreen.y + rScreen.dy, win->hwndFrame, nullptr);
 }
 
-static int CaptionButtonAt(CaptionInfo* ci, Point pt) {
+static int CaptionButtonAt(MainWindow* win, Point pt) {
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        if (ci->btn[i].visible && ci->btn[i].rect.Contains(pt)) {
+        if (win->captionBtn[i].visible && win->captionBtn[i].rect.Contains(pt)) {
             return i;
         }
     }
@@ -6377,7 +6372,7 @@ static int CaptionButtonAt(CaptionInfo* ci, Point pt) {
 
 static void RepaintButton(HWND hwnd, int btnIdx, MainWindow* win) {
     if (false) {
-        RECT rc = ToRECT(win->caption->btn[btnIdx].rect);
+        RECT rc = ToRECT(win->captionBtn[btnIdx].rect);
         InvalidateRect(hwnd, &rc, FALSE);
         UpdateWindow(hwnd);
     } else {
@@ -6386,11 +6381,10 @@ static void RepaintButton(HWND hwnd, int btnIdx, MainWindow* win) {
 }
 
 static void ClearAllHighlights(MainWindow* win) {
-    CaptionInfo* ci = win->caption;
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        if (ci->btn[i].highlighted || ci->btn[i].pressed) {
-            ci->btn[i].highlighted = false;
-            ci->btn[i].pressed = false;
+        if (win->captionBtn[i].highlighted || win->captionBtn[i].pressed) {
+            win->captionBtn[i].highlighted = false;
+            win->captionBtn[i].pressed = false;
             RepaintButton(win->hwndFrame, i, win);
         }
     }
@@ -6420,7 +6414,7 @@ static void MenuBarAsPopupMenu(MainWindow* win, int x, int y) {
     }
 
     if (IsUIRtl()) {
-        x += win->caption->btn[CB_MENU].rect.dx;
+        x += win->captionBtn[CB_MENU].rect.dx;
     }
 
     MarkMenuOwnerDraw(popup);
@@ -6449,13 +6443,13 @@ static void HandleCaptionClick(MainWindow* win, int btnIdx) {
             PostMessageW(win->hwndFrame, WM_SYSCOMMAND, SC_CLOSE, 0);
             break;
         case CB_MENU:
-            if (!KillTimer(win->hwndFrame, DO_NOT_REOPEN_MENU_TIMER_ID) && !win->caption->isMenuOpen) {
-                Rect r = win->caption->btn[CB_MENU].rect;
+            if (!KillTimer(win->hwndFrame, DO_NOT_REOPEN_MENU_TIMER_ID) && !win->isMenuOpen) {
+                Rect r = win->captionBtn[CB_MENU].rect;
                 Rect rScreen = MapRectToWindow(r, win->hwndFrame, HWND_DESKTOP);
-                win->caption->isMenuOpen = true;
+                win->isMenuOpen = true;
                 RepaintButton(win->hwndFrame, CB_MENU, win);
                 MenuBarAsPopupMenu(win, rScreen.x, rScreen.y + rScreen.dy);
-                win->caption->isMenuOpen = false;
+                win->isMenuOpen = false;
                 RepaintButton(win->hwndFrame, CB_MENU, win);
                 SetTimer(win->hwndFrame, DO_NOT_REOPEN_MENU_TIMER_ID, DO_NOT_REOPEN_MENU_DELAY_IN_MS, nullptr);
             }
@@ -6467,43 +6461,38 @@ static void HandleCaptionClick(MainWindow* win, int btnIdx) {
     }
 }
 
-void CreateCaption(MainWindow* win) {
-    win->caption = new CaptionInfo();
-}
-
 void RelayoutCaption(MainWindow* win) {
-    Rect rc = win->caption->captionRect;
-    CaptionInfo* ci = win->caption;
+    Rect rc = win->captionRect;
     bool maximized = IsZoomed(win->hwndFrame);
 
     int btnDy = rc.y + rc.dy;
     int btnDx = btnDy;
 
-    ci->btn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    ci->btn[CB_CLOSE].visible = true;
+    win->captionBtn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    win->captionBtn[CB_CLOSE].visible = true;
     rc.dx -= btnDx;
 
-    ci->btn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    ci->btn[CB_RESTORE].visible = maximized;
+    win->captionBtn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    win->captionBtn[CB_RESTORE].visible = maximized;
 
-    ci->btn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    ci->btn[CB_MAXIMIZE].visible = !maximized;
+    win->captionBtn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    win->captionBtn[CB_MAXIMIZE].visible = !maximized;
     rc.dx -= btnDx;
 
-    ci->btn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    ci->btn[CB_MINIMIZE].visible = true;
+    win->captionBtn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    win->captionBtn[CB_MINIMIZE].visible = true;
     rc.dx -= btnDx;
 
     int tabHeight = GetTabbarHeight(win->hwndFrame);
     rc.y += rc.dy - tabHeight;
 
-    ci->btn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
-    ci->btn[CB_SYSTEM_MENU].visible = true;
+    win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+    win->captionBtn[CB_SYSTEM_MENU].visible = true;
     rc.x += tabHeight;
     rc.dx -= tabHeight;
 
-    ci->btn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
-    ci->btn[CB_MENU].visible = true;
+    win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+    win->captionBtn[CB_MENU].visible = true;
     rc.x += tabHeight;
     rc.dx -= tabHeight;
 
@@ -6514,15 +6503,15 @@ void RelayoutCaption(MainWindow* win) {
     UpdateTabWidth(win);
 
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        if (ci->btn[i].visible) {
-            RECT r = ToRECT(ci->btn[i].rect);
+        if (win->captionBtn[i].visible) {
+            RECT r = ToRECT(win->captionBtn[i].rect);
             InvalidateRect(win->hwndFrame, &r, TRUE);
         }
     }
 }
 
 static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
-    ButtonInfo* bi = &win->caption->btn[button];
+    ButtonInfo* bi = &win->captionBtn[button];
     if (!bi->visible) {
         return;
     }
@@ -6613,7 +6602,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
         SolidBrush bgBrMenu(GdiRgbFromCOLORREF(ThemeControlBackgroundColor()));
         gfx.FillRectangle(&bgBrMenu, rButton.x, rButton.y, rButton.dx, rButton.dy);
 
-        if (win->caption->isMenuOpen) {
+        if (win->isMenuOpen) {
             stateId = CBS_PUSHED;
         }
         BYTE buttonRGB = 1;
@@ -6653,7 +6642,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
 }
 
 void PaintCaption(HDC hdc, MainWindow* win) {
-    if (!win || !win->caption || !win->tabsInTitlebar) {
+    if (!win || !win->tabsInTitlebar) {
         return;
     }
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
@@ -6678,7 +6667,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
-            Rect cr = win->caption->captionRect;
+            Rect cr = win->captionRect;
             Rect captionArea = {cr.x, 0, cr.dx, cr.y + cr.dy};
             DoubleBuffer buffer(hwnd, captionArea);
             HDC memDC = buffer.GetDC();
@@ -6697,7 +6686,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_NCACTIVATE:
             for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-                win->caption->btn[i].inactive = wp == FALSE;
+                win->captionBtn[i].inactive = wp == FALSE;
             }
             if (!IsIconic(hwnd)) {
                 uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
@@ -6786,7 +6775,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             {
                 Point ptClient{x, y};
                 HwndScreenToClient(hwnd, ptClient);
-                int btnIdx = CaptionButtonAt(win->caption, ptClient);
+                int btnIdx = CaptionButtonAt(win, ptClient);
                 if (btnIdx >= 0) {
                     if (btnIdx == CB_MAXIMIZE || btnIdx == CB_RESTORE) {
                         *callDef = false;
@@ -6800,7 +6789,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             {
                 Point pt{x, y};
                 Rect rClient = MapRectToWindow(ClientRect(hwnd), hwnd, HWND_DESKTOP);
-                Rect rCaption = MapRectToWindow(win->caption->captionRect, hwnd, HWND_DESKTOP);
+                Rect rCaption = MapRectToWindow(win->captionRect, hwnd, HWND_DESKTOP);
                 if (rClient.Contains(pt) && pt.y < rCaption.y + rCaption.dy) {
                     *callDef = false;
                     return HTCAPTION;
@@ -6827,13 +6816,13 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_NCMOUSEMOVE: {
             int btnIdx = IsZoomed(hwnd) ? CB_RESTORE : CB_MAXIMIZE;
             if (wp == HTMAXBUTTON) {
-                if (!win->caption->btn[btnIdx].highlighted) {
-                    win->caption->btn[btnIdx].highlighted = true;
+                if (!win->captionBtn[btnIdx].highlighted) {
+                    win->captionBtn[btnIdx].highlighted = true;
                     RepaintButton(hwnd, btnIdx, win);
                 }
             } else {
-                if (win->caption->btn[btnIdx].highlighted) {
-                    win->caption->btn[btnIdx].highlighted = false;
+                if (win->captionBtn[btnIdx].highlighted) {
+                    win->captionBtn[btnIdx].highlighted = false;
                     RepaintButton(hwnd, btnIdx, win);
                 }
             }
@@ -6845,11 +6834,11 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_MOUSEMOVE: {
             Point ptm{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
-            int btnIdx = CaptionButtonAt(win->caption, ptm);
+            int btnIdx = CaptionButtonAt(win, ptm);
             for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
                 bool shouldHighlight = (i == btnIdx);
-                if (win->caption->btn[i].highlighted != shouldHighlight) {
-                    win->caption->btn[i].highlighted = shouldHighlight;
+                if (win->captionBtn[i].highlighted != shouldHighlight) {
+                    win->captionBtn[i].highlighted = shouldHighlight;
                     RepaintButton(hwnd, i, win);
                 }
             }
@@ -6864,9 +6853,9 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_LBUTTONDOWN: {
             Point ptd{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
-            int btnIdx = CaptionButtonAt(win->caption, ptd);
+            int btnIdx = CaptionButtonAt(win, ptd);
             if (btnIdx >= 0) {
-                win->caption->btn[btnIdx].pressed = true;
+                win->captionBtn[btnIdx].pressed = true;
                 RepaintButton(hwnd, btnIdx, win);
                 SetCapture(hwnd);
                 *callDef = false;
@@ -6879,10 +6868,10 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 ReleaseCapture();
             }
             Point ptu{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
-            int btnIdx = CaptionButtonAt(win->caption, ptu);
+            int btnIdx = CaptionButtonAt(win, ptu);
             for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-                if (win->caption->btn[i].pressed) {
-                    win->caption->btn[i].pressed = false;
+                if (win->captionBtn[i].pressed) {
+                    win->captionBtn[i].pressed = false;
                     RepaintButton(hwnd, i, win);
                     if (i == btnIdx) {
                         HandleCaptionClick(win, i);
@@ -6895,7 +6884,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
 
         case WM_LBUTTONDBLCLK: {
             Point ptdc{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
-            int btnIdx = CaptionButtonAt(win->caption, ptdc);
+            int btnIdx = CaptionButtonAt(win, ptdc);
             if (btnIdx == CB_SYSTEM_MENU) {
                 PostMessageW(hwnd, WM_SYSCOMMAND, SC_CLOSE, 0);
                 *callDef = false;

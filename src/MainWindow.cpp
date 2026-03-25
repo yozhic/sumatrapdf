@@ -124,7 +124,6 @@ MainWindow::~MainWindow() {
     delete linkHandler;
     delete buffer;
     delete tabSelectionHistory;
-    DeleteCaption(caption);
     DeleteVecMembers(staticLinks);
     auto tabs = Tabs();
     DeleteVecMembers(tabs);
