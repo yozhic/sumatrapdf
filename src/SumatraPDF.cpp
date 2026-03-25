@@ -3726,12 +3726,14 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         return;
     }
 
-    // inset by 1px border for resize hit-testing (not when maximized/fullscreen)
+    // inset by border for resize hit-testing (not when maximized/fullscreen)
     if (!IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
         rc.x += kFrameBorderSize;
-        rc.y += kFrameBorderSize;
+        // top border is kFrameBorderSize - 1 because 1px is already NC area
+        // (WM_NCCALCSIZE keeps 1px NC to prevent DWM transparent flash)
+        rc.y += kFrameBorderSize - 1;
         rc.dx -= 2 * kFrameBorderSize;
-        rc.dy -= 2 * kFrameBorderSize;
+        rc.dy -= kFrameBorderSize + (kFrameBorderSize - 1);
     }
 
     // hide overlay scrollbars before relayout so they don't appear outside
