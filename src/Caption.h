@@ -31,23 +31,17 @@ struct CaptionInfo {
     HWND hwndFrame = nullptr;
 
     ButtonInfo btn[CB_BTN_COUNT];
-    COLORREF bgColor = 0;
-    COLORREF textColor = 0;
     bool isMenuOpen = false;
     Rect captionRect{};
 
     explicit CaptionInfo(HWND hwndFrame);
     ~CaptionInfo();
-
-    void UpdateTheme();
-    void UpdateColors(bool activeWindow);
 };
 
 void CreateCaption(MainWindow* win);
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
 void RelayoutCaption(MainWindow* win);
 void PaintCaption(HDC hdc, MainWindow* win);
-void SetCaptionButtonsRtl(CaptionInfo*, bool isRtl);
 void CaptionUpdateUI(MainWindow*, CaptionInfo*);
 void DeleteCaption(CaptionInfo*);
 void OpenSystemMenu(MainWindow* win);

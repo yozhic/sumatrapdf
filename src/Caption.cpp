@@ -54,29 +54,12 @@ static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem);
 static void MenuBarAsPopupMenu(MainWindow* win, int x, int y);
 static void HandleCaptionClick(MainWindow* win, int btnIdx);
 
-CaptionInfo::CaptionInfo(HWND frame) : hwndFrame(frame) {
-    UpdateTheme();
-    UpdateColors(true);
-}
+CaptionInfo::CaptionInfo(HWND frame) : hwndFrame(frame) {}
 
 CaptionInfo::~CaptionInfo() {}
 
-void CaptionInfo::UpdateTheme() {}
-
-void CaptionInfo::UpdateColors(bool activeWindow) {
-    // Use the same background color as the tab bar.
-    bgColor = ThemeControlBackgroundColor();
-    textColor = ThemeWindowTextColor();
-}
-
-void SetCaptionButtonsRtl(CaptionInfo*, bool) {
-    // no-op: buttons are no longer child windows
-}
-
-// TODO: could lookup MainWindow ourselves
-void CaptionUpdateUI(MainWindow* win, CaptionInfo* caption) {
-    caption->UpdateTheme();
-    caption->UpdateColors(win->hwndFrame == GetForegroundWindow());
+void CaptionUpdateUI(MainWindow*, CaptionInfo*) {
+    // no-op: colors are fetched fresh from the theme when painting
 }
 
 void DeleteCaption(CaptionInfo* caption) {
@@ -240,7 +223,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
 
     if (isSysButton) {
         // background
-        COLORREF bgc = win->caption->bgColor;
+        COLORREF bgc = ThemeControlBackgroundColor();
         SolidBrush bgBrNormal(GdiRgbFromCOLORREF(bgc));
         gfx.FillRectangle(&bgBrNormal, rButton.x, rButton.y, rButton.dx, rButton.dy);
 
@@ -266,7 +249,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
         } else if (isClose && (isHot || isPushed)) {
             iconCol = Color(255, 255, 255);
         } else {
-            COLORREF tc = win->caption->textColor;
+            COLORREF tc = ThemeWindowTextColor();
             iconCol = Color(GetRValue(tc), GetGValue(tc), GetBValue(tc));
         }
 
@@ -305,7 +288,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
         }
     } else if (button == CB_MENU) {
         // Fill button rect with caption background
-        SolidBrush bgBrMenu(GdiRgbFromCOLORREF(win->caption->bgColor));
+        SolidBrush bgBrMenu(GdiRgbFromCOLORREF(ThemeControlBackgroundColor()));
         gfx.FillRectangle(&bgBrMenu, rButton.x, rButton.y, rButton.dx, rButton.dy);
 
         if (win->caption->isMenuOpen) {
@@ -319,10 +302,10 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
         }
 
         if (buttonRGB != 1) {
-            if (GetLightness(win->caption->textColor) > GetLightness(win->caption->bgColor)) {
+            if (GetLightness(ThemeWindowTextColor()) > GetLightness(ThemeControlBackgroundColor())) {
                 buttonRGB ^= 0xff;
             }
-            BYTE buttonAlpha = BYTE((255 - abs((int)GetLightness(win->caption->bgColor) - buttonRGB)) / 2);
+            BYTE buttonAlpha = BYTE((255 - abs((int)GetLightness(ThemeControlBackgroundColor()) - buttonRGB)) / 2);
             SolidBrush br(Color(buttonAlpha, buttonRGB, buttonRGB, buttonRGB));
             gfx.FillRectangle(&br, rc.x, rc.y, rc.dx, rc.dy);
         }
@@ -337,7 +320,7 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
         }
     } else if (button == CB_SYSTEM_MENU) {
         // Fill button rect with caption background
-        SolidBrush bgBrSys(GdiRgbFromCOLORREF(win->caption->bgColor));
+        SolidBrush bgBrSys(GdiRgbFromCOLORREF(ThemeControlBackgroundColor()));
         gfx.FillRectangle(&bgBrSys, rButton.x, rButton.y, rButton.dx, rButton.dy);
         int xIcon = GetSystemMetrics(SM_CXSMICON);
         int yIcon = GetSystemMetrics(SM_CYSMICON);
@@ -397,7 +380,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         }
 
         case WM_NCACTIVATE:
-            win->caption->UpdateColors((bool)wp);
             for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
                 win->caption->btn[i].inactive = wp == FALSE;
             }
@@ -414,12 +396,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID);
                 *callDef = false;
                 return 0;
-            }
-            break;
-
-        case WM_THEMECHANGED:
-            if (win) {
-                win->caption->UpdateTheme();
             }
             break;
 
@@ -677,7 +653,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
             break;
 
         case WM_SYSCOLORCHANGE:
-            win->caption->UpdateColors(hwnd == GetForegroundWindow());
             break;
     }
 
