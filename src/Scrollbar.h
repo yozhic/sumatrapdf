@@ -4,6 +4,8 @@
 // Overlay scrollbar - a semi-transparent top-level window that acts like
 // a standard Windows scrollbar but floats over the owner window.
 
+extern int gThickVisibilityDistance;
+
 enum class ScrollbarType {
     Vert,
     Horz,
@@ -26,8 +28,8 @@ struct OverlayScrollbar {
     int thickWidth = 16;
 
     // auto-hide timing (milliseconds)
-    int showAfterScrollMs = 5000; // how long to show thin bar after scroll info update
-    int showOnMouseMoveMs = 3000; // how long to show thin bar while mouse is moving
+    int showAfterScrollMs = 5000;    // how long to show thin bar after scroll info update
+    int hideAfterMouseStopMs = 3000; // hide after mouse stops moving
 
     // internal state
     bool isThick = false;    // currently showing thick version
@@ -50,9 +52,6 @@ void OverlayScrollbarGetInfo(OverlayScrollbar* sb, SCROLLINFO* si);
 
 // Call when owner window moves/resizes
 void OverlayScrollbarUpdatePos(OverlayScrollbar* sb);
-
-// Call when mouse moves over the owner window (to show the thin scrollbar)
-void OverlayScrollbarOnOwnerMouseMove(OverlayScrollbar* sb);
 
 // Show/hide
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show);

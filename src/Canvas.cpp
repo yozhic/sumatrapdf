@@ -2022,8 +2022,6 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
 
         case WM_MOUSEMOVE:
             OnMouseMove(win, x, y, wp);
-            OverlayScrollbarOnOwnerMouseMove(win->overlayScrollV);
-            OverlayScrollbarOnOwnerMouseMove(win->overlayScrollH);
             return 0;
 
         case WM_LBUTTONDOWN:
