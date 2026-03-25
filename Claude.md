@@ -14,7 +14,17 @@ To debug run: `windbgx -Q -o -g ./out/dbg64/SumatraPDF.exe`
 
 After making a change to .cpp, .c or .h file (and before running build.ts), run clang-format on those files to reformat them in place
 
-When commiting changes also commit ailog.txt (if changed)
+## Adding a new advanced setting
+
+To add a new advanced setting:
+- add definition in cmd/gen-settings.ts
+- run "bun cmd/gen-settings.ts" to regenerate src/Settings.h and src/Settings.cpp
+
+## Adding a new command
+
+To add a new command:
+- add to cmd/gen-commands.ts
+- run "bun cmd/gen-commands.ts" to regenerate src/Commands.h and src/Commands.cpp
 
 ## Windows Shell Safety
 

@@ -47,8 +47,6 @@
 
 #include "utils/Log.h"
 
-bool gUseOverlayScrollbar = true;
-
 struct LinkHandler : ILinkHandler {
     MainWindow* win = nullptr;
 

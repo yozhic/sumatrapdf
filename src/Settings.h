@@ -68,6 +68,9 @@ struct FixedPageUI {
     bool invertColors;
     // if true, hides the scrollbars but retains ability to scroll
     bool hideScrollbars;
+    // if true, uses overlay scrollbar instead of standard Windows
+    // scrollbar
+    bool useOverlayScrollbar;
 };
 
 // customization options for eBookUI
@@ -550,10 +553,11 @@ static const FieldInfo gFixedPageUIFields[] = {
     {offsetof(FixedPageUI, gradientColors), SettingType::ColorArray, 0},
     {offsetof(FixedPageUI, invertColors), SettingType::Bool, false},
     {offsetof(FixedPageUI, hideScrollbars), SettingType::Bool, false},
+    {offsetof(FixedPageUI, useOverlayScrollbar), SettingType::Bool, true},
 };
-static const StructInfo gFixedPageUIInfo = {sizeof(FixedPageUI), 8, gFixedPageUIFields,
+static const StructInfo gFixedPageUIInfo = {sizeof(FixedPageUI), 9, gFixedPageUIFields,
                                             "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0Gra"
-                                            "dientColors\0InvertColors\0HideScrollbars"};
+                                            "dientColors\0InvertColors\0HideScrollbars\0UseOverlayScrollbar"};
 
 static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, fontSize), SettingType::Float, (intptr_t)"0"},
@@ -763,7 +767,7 @@ static const StructInfo gFILETIMEInfo = {sizeof(FILETIME), 2, gFILETIMEFields, "
 
 static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment,
-     (intptr_t)"For documentation, see https://www.sumatrapdfreader.org/settings/settings3-6.html"},
+     (intptr_t)"For documentation, see https://www.sumatrapdfreader.org/settings/settings3-7.html"},
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, checkForUpdates), SettingType::Bool, true},
     {offsetof(GlobalPrefs, customScreenDPI), SettingType::Int, 0},

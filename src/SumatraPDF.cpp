@@ -824,7 +824,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     DisplayModel* dm = win->AsFixed();
 
     bool hideScrollbar = gGlobalPrefs->fixedPageUI.hideScrollbars;
-    bool useOverlay = gUseOverlayScrollbar;
+    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;

@@ -271,6 +271,10 @@ const fixedPageUI: Field[] = [
   ),
   mkField("InvertColors", Bool, false, "if true, TextColor and BackgroundColor of the document will be swapped"),
   mkField("HideScrollbars", Bool, false, "if true, hides the scrollbars but retains ability to scroll"),
+  setVersion(
+    mkField("UseOverlayScrollbar", Bool, true, "if true, uses overlay scrollbar instead of standard Windows scrollbar"),
+    "3.7",
+  ),
 ];
 
 const comicBookUI: Field[] = [

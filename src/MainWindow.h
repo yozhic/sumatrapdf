@@ -288,8 +288,6 @@ struct MainWindow {
     bool CreateUIAProvider();
 };
 
-extern bool gUseOverlayScrollbar;
-
 void UpdateControlsColors(MainWindow*);
 void ScheduleRepaint(MainWindow*, int delay);
 void ClearFindBox(MainWindow*);

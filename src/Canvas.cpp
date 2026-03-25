@@ -110,7 +110,7 @@ void UpdateDeltaPerLine() {
 static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gUseOverlayScrollbar && win->overlayScrollV;
+    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollV;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -232,7 +232,7 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
 static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gUseOverlayScrollbar && win->overlayScrollH;
+    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollH;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -2099,7 +2099,7 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
             return OnGesture(win, msg, wp, lp);
 
         case WM_NCPAINT: {
-            if (gGlobalPrefs->fixedPageUI.hideScrollbars || gUseOverlayScrollbar) {
+            if (gGlobalPrefs->fixedPageUI.hideScrollbars || gGlobalPrefs->fixedPageUI.useOverlayScrollbar) {
                 ShowScrollBar(win->hwndCanvas, SB_BOTH, false);
                 goto def;
             }
