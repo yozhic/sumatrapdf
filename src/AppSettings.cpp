@@ -168,6 +168,11 @@ static void CreateCustomShortcuts() {
         if (!cmd) {
             continue;
         }
+        // if command already has a key bound (from a previous shortcut entry),
+        // create a separate command so both shortcuts work
+        if (cmd->key && !str::IsEmptyOrWhiteSpace(shortcut->key)) {
+            cmd = CreateCustomCommand(shortcut->cmd, cmd->origId, nullptr);
+        }
         shortcut->cmdId = cmd->id;
         SetCommandNameAndShortcut(cmd, shortcut->name, shortcut->key);
     }
