@@ -39,7 +39,7 @@
 #include "SumatraPDF.h"
 #include "EditAnnotations.h"
 #include "Notifications.h"
-#include "Scrollbar.h"
+#include "OverlayScrollbar.h"
 #include "MainWindow.h"
 #include "resource.h"
 #include "Commands.h"

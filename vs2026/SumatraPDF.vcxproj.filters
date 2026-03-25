@@ -210,6 +210,9 @@
     <ClInclude Include="..\src\Notifications.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\OverlayScrollbar.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\PalmDbReader.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -238,9 +241,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scratch.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Scrollbar.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\SearchAndDDE.h">
@@ -515,6 +515,9 @@
     <ClCompile Include="..\src\Notifications.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\OverlayScrollbar.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\PalmDbReader.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -543,9 +546,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scratch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Scrollbar.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\SearchAndDDE.cpp">

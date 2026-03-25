@@ -30,7 +30,7 @@
 #include "TextSelection.h"
 #include "TextSearch.h"
 #include "Annotation.h"
-#include "Scrollbar.h"
+#include "OverlayScrollbar.h"
 #include "SumatraPDF.h"
 #include "MainWindow.h"
 #include "WindowTab.h"

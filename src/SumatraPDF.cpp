@@ -75,7 +75,7 @@
 #include "Selection.h"
 #include "StressTesting.h"
 #include "HomePage.h"
-#include "Scrollbar.h"
+#include "OverlayScrollbar.h"
 #include "SumatraDialogs.h"
 #include "SumatraProperties.h"
 #include "TableOfContents.h"

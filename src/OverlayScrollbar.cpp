@@ -5,7 +5,7 @@
 #include "utils/Dpi.h"
 #include "utils/WinUtil.h"
 
-#include "Scrollbar.h"
+#include "OverlayScrollbar.h"
 
 #define OVERLAY_SCROLLBAR_CLASS L"SUMATRA_OVERLAY_SCROLLBAR"
 
