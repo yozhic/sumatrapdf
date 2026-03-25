@@ -39,9 +39,6 @@ using Gdiplus::SolidBrush;
 // undocumented caption buttons state
 #define CBS_INACTIVE 5
 
-// undocumented window messages
-#define WM_NCUAHDRAWCAPTION 0xAE
-#define WM_NCUAHDRAWFRAME 0xAF
 #define WM_POPUPSYSTEMMENU 0x313
 
 // When a top level window is maximized the window manager checks whether its client
@@ -393,15 +390,19 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
+            Rect cr = win->caption->captionRect;
+            Rect captionArea = {cr.x, 0, cr.dx, cr.y + cr.dy};
+            DoubleBuffer buffer(hwnd, captionArea);
+            HDC memDC = buffer.GetDC();
             {
                 // Fill the entire caption area (top padding + caption rect) with background
                 HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
-                Rect cr = win->caption->captionRect;
-                RECT rcFill = {cr.x, 0, cr.x + cr.dx, cr.y + cr.dy};
-                FillRect(hdc, &rcFill, br);
+                RECT rcFill = ToRECT(captionArea);
+                FillRect(memDC, &rcFill, br);
                 DeleteObject(br);
             }
-            PaintCaption(hdc, win);
+            PaintCaption(memDC, win);
+            buffer.Flush(hdc);
             EndPaint(hwnd, &ps);
             *callDef = false;
             return 0;
@@ -433,11 +434,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 win->caption->UpdateTheme();
             }
             break;
-
-        case WM_NCUAHDRAWCAPTION:
-        case WM_NCUAHDRAWFRAME:
-            *callDef = false;
-            return TRUE;
 
         case WM_POPUPSYSTEMMENU:
         case WM_SETCURSOR:
