@@ -706,7 +706,7 @@ static bool ShouldSaveThumbnail(FileState* ds) {
         gFileHistory.GetRecentlyOpenedOrder(list);
     }
     int idx = list.Find(ds);
-    if (idx < 0 || kFileHistoryMaxFrequent * 2 <= idx) {
+    if (idx < 0) {
         return false;
     }
 
@@ -5759,6 +5759,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdScrollUpHalfPage: {
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_PAGEUP);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5772,6 +5776,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         // TODO: do I need both CmdScrollUpPage and CmdGoToPrevPage
         case CmdScrollUpPage: {
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_PAGEUP);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5786,6 +5794,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdScrollDown:
         case CmdScrollUp: {
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, cmdId == CmdScrollUp ? SB_LINEUP : SB_LINEDOWN);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5822,6 +5834,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         }
 
         case CmdScrollDownHalfPage: {
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_PAGEDOWN);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5834,6 +5850,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         } break;
 
         case CmdScrollDownPage: {
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_PAGEDOWN);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5878,6 +5898,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         } break;
 
         case CmdGoToFirstPage:
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_TOP);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }
@@ -5885,6 +5909,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdGoToLastPage:
+            if (win->IsCurrentTabAbout()) {
+                HomePageOnVScroll(win, SB_BOTTOM);
+                return 0;
+            }
             if (!win->IsDocLoaded()) {
                 return 0;
             }

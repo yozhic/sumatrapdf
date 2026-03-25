@@ -210,6 +210,9 @@ struct MainWindow {
     // a list of static links (mainly used for About and Frequently Read pages)
     Vec<StaticLink*> staticLinks;
 
+    // home page thumbnail scrolling
+    int homePageScrollY = 0;
+
     bool isFullScreen = false;
     PresentationMode presentation = PM_DISABLED;
     int windowStateBeforePresentation = 0;
