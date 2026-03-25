@@ -35,6 +35,7 @@ export const commands = [
     "CmdTogglePresentationMode", "View: Presentation Mode",
     "CmdToggleToolbar", "Toggle Toolbar",
     "CmdToggleScrollbars", "Toggle Scrollbars",
+    "CmdToggleOverlayScrollbar", "Toggle Overlay Scrollbar",
     "CmdToggleMenuBar", "Toggle Menu Bar",
     "CmdCopySelection", "Copy Selection",
     "CmdTranslateSelectionWithGoogle", "Translate Selection with Google",

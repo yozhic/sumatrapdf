@@ -5653,6 +5653,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             OnMenuViewShowHideScrollbars();
             break;
 
+        case CmdToggleOverlayScrollbar:
+            gGlobalPrefs->fixedPageUI.useOverlayScrollbar = !gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
+            UpdateFixedPageScrollbarsVisibility();
+            break;
+
         case CmdSaveAnnotations: {
             SaveAnnotationsToExistingFile(tab);
             break;

@@ -442,6 +442,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
             // hideScrollbars is inverted: true means hidden, toggling will show them
             newIsOn = gGlobalPrefs->fixedPageUI.hideScrollbars;
         } break;
+        case CmdToggleOverlayScrollbar: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
+        } break;
         case CmdToggleMenuBar: {
             isToggle = true;
             // isMenuHidden: true means hidden, toggling will show it
