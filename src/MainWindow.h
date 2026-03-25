@@ -30,6 +30,7 @@ enum CaptionButtons {
 };
 
 struct ButtonInfo {
+    int id = -1; // CaptionButtons value
     Rect rect{};
     bool highlighted = false;
     bool pressed = false;
@@ -298,7 +299,5 @@ void HighlightTab(MainWindow*, WindowTab*);
 HWND GetHwndForNotification();
 bool AppIsValidHWND(HWND);
 
-LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
 void RelayoutCaption(MainWindow* win);
-void PaintCaption(HDC hdc, MainWindow* win);
 void OpenSystemMenu(MainWindow* win);

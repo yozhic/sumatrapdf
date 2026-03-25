@@ -6462,6 +6462,9 @@ static void HandleCaptionClick(MainWindow* win, int btnIdx) {
 }
 
 void RelayoutCaption(MainWindow* win) {
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        win->captionBtn[i].id = i;
+    }
     Rect rc = win->captionRect;
     bool maximized = IsZoomed(win->hwndFrame);
 
@@ -6510,8 +6513,8 @@ void RelayoutCaption(MainWindow* win) {
     }
 }
 
-static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
-    ButtonInfo* bi = &win->captionBtn[button];
+static void DrawCaptionButton(MainWindow* win, HDC hdc, ButtonInfo* bi) {
+    int button = bi->id;
     if (!bi->visible) {
         return;
     }
@@ -6641,18 +6644,15 @@ static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
     }
 }
 
-void PaintCaption(HDC hdc, MainWindow* win) {
-    if (!win || !win->tabsInTitlebar) {
-        return;
-    }
+static void PaintCaption(MainWindow* win, HDC hdc) {
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        DrawCaptionButton(hdc, i, win);
+        DrawCaptionButton(win, hdc, &win->captionBtn[i]);
     }
 }
 
 static WCHAR gMenuAccelPressed = 0;
 
-LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win) {
+static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win) {
     switch (msg) {
         case WM_SETTINGCHANGE:
             if (wp == SPI_SETNONCLIENTMETRICS) {
@@ -6677,7 +6677,7 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
                 FillRect(memDC, &rcFill, br);
                 DeleteObject(br);
             }
-            PaintCaption(memDC, win);
+            PaintCaption(win, memDC);
             buffer.Flush(hdc);
             EndPaint(hwnd, &ps);
             *callDef = false;
