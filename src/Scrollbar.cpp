@@ -528,6 +528,32 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
                 }
             }
 
+            // Shift+click: jump thumb center to click position
+            if (GetKeyState(VK_SHIFT) & 0x8000) {
+                Rect track = GetTrackRect(sb);
+                int range = sb->nMax - sb->nMin + 1;
+                int trackLen = IsVert(sb) ? track.dy : track.dx;
+                int thumbLen = MulDiv(trackLen, (int)sb->nPage, range);
+                int minThumb = DpiScale(sb->hwndOwner, kMinThumbSize);
+                if (thumbLen < minThumb) {
+                    thumbLen = minThumb;
+                }
+                int scrollableTrack = trackLen - thumbLen;
+                int scrollableRange = range - (int)sb->nPage;
+                int clickInTrack = (IsVert(sb) ? my : mx) - (IsVert(sb) ? track.y : track.x);
+                int thumbOffset = clickInTrack - thumbLen / 2;
+                thumbOffset = std::clamp(thumbOffset, 0, scrollableTrack);
+                int newPos = sb->nMin;
+                if (scrollableTrack > 0 && scrollableRange > 0) {
+                    newPos = sb->nMin + MulDiv(thumbOffset, scrollableRange, scrollableTrack);
+                }
+                sb->nTrackPos = newPos;
+                PaintScrollbar(sb);
+                SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(SB_THUMBTRACK, newPos));
+                ReleaseCapture();
+                return 0;
+            }
+
             Rect thumbRc = GetThumbRect(sb);
             Point pt(mx, my);
             if (thumbRc.Contains(pt)) {
