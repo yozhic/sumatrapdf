@@ -1554,8 +1554,7 @@ static MainWindow* CreateMainWindow() {
     }
 
     // WM_NCCALCSIZE returning 0 disables DWM rounded corners; re-enable them.
-    auto cornerPref = DWMWCP_ROUND;
-    dwm::SetWindowAttribute(hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
+    dwm::SetWindowRoundedCorners(hwndFrame, true);
 
     ReportIf(nullptr != FindMainWindowByHwnd(hwndFrame));
     MainWindow* win = new MainWindow(hwndFrame);
@@ -4208,10 +4207,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     win->tabsCtrl->SetIsVisible(false);
 
     // disable DWM rounded corners and border for true edge-to-edge fullscreen
-    auto cornerPref = DWMWCP_DONOTROUND;
-    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
-    COLORREF borderColor = DWMWA_COLOR_NONE;
-    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_BORDER_COLOR, &borderColor, sizeof(borderColor));
+    dwm::SetWindowRoundedCorners(win->hwndFrame, false);
 
     SetWindowLong(win->hwndFrame, GWL_STYLE, ws);
     uint flags = SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOZORDER;
@@ -4271,10 +4267,7 @@ void ExitFullScreen(MainWindow* win) {
     }
 
     // restore DWM rounded corners and border
-    auto cornerPref = DWMWCP_ROUND;
-    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
-    COLORREF borderColor = DWMWA_COLOR_DEFAULT;
-    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_BORDER_COLOR, &borderColor, sizeof(borderColor));
+    dwm::SetWindowRoundedCorners(win->hwndFrame, true);
 
     Rect cr = ClientRect(win->hwndFrame);
     SetWindowLong(win->hwndFrame, GWL_STYLE, win->nonFullScreenWindowStyle);

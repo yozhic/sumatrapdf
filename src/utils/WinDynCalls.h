@@ -161,12 +161,9 @@ HRESULT GetThemeColor(HTHEME hTheme, int iPartId, int iStateId, int iPropId, COL
 
 namespace dwm {
 
-BOOL IsCompositionEnabled();
-HRESULT ExtendFrameIntoClientArea(HWND hwnd, const MARGINS* pMarInset);
-BOOL DefaultWindowProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, LRESULT* plResult);
 HRESULT GetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
 HRESULT SetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
-HRESULT SetCaptionColor(HWND hwnd, COLORREF col);
+void SetWindowRoundedCorners(HWND hwnd, bool rounded);
 
 }; // namespace dwm
 

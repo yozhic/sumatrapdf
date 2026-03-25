@@ -172,29 +172,11 @@ HRESULT GetThemeColor(HTHEME hTheme, int iPartId, int iStateId, int iPropId, COL
 
 namespace dwm {
 
-BOOL IsCompositionEnabled() {
-    if (!DynDwmIsCompositionEnabled) {
-        return FALSE;
-    }
-    BOOL isEnabled;
-    if (SUCCEEDED(DynDwmIsCompositionEnabled(&isEnabled))) {
-        return isEnabled;
-    }
-    return FALSE;
-}
-
 HRESULT ExtendFrameIntoClientArea(HWND hwnd, const MARGINS* pMarInset) {
     if (!DynDwmExtendFrameIntoClientArea) {
         return E_NOTIMPL;
     }
     return DynDwmExtendFrameIntoClientArea(hwnd, pMarInset);
-}
-
-BOOL DefaultWindowProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, LRESULT* plResult) {
-    if (!DynDwmDefWindowProc) {
-        return FALSE;
-    }
-    return DynDwmDefWindowProc(hwnd, msg, wp, lp, plResult);
 }
 
 HRESULT GetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute) {
@@ -211,9 +193,11 @@ HRESULT SetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWOR
     return DynDwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 }
 
-// https://stackoverflow.com/questions/39261826/change-the-color-of-the-title-bar-caption-of-a-win32-application
-HRESULT SetCaptionColor(HWND hwnd, COLORREF col) {
-    return SetWindowAttribute(hwnd, DWMWINDOWATTRIBUTE::DWMWA_CAPTION_COLOR, &col, sizeof(col));
+void SetWindowRoundedCorners(HWND hwnd, bool rounded) {
+    auto cornerPref = rounded ? DWMWCP_ROUND : DWMWCP_DONOTROUND;
+    SetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
+    COLORREF borderColor = rounded ? DWMWA_COLOR_DEFAULT : DWMWA_COLOR_NONE;
+    SetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, &borderColor, sizeof(borderColor));
 }
 
 }; // namespace dwm
