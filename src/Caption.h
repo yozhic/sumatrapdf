@@ -31,7 +31,6 @@ struct CaptionInfo {
     HWND hwndFrame = nullptr;
 
     ButtonInfo btn[CB_BTN_COUNT];
-    HTHEME theme = nullptr;
     COLORREF bgColor = 0;
     COLORREF textColor = 0;
     bool isMenuOpen = false;

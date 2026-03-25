@@ -59,21 +59,9 @@ CaptionInfo::CaptionInfo(HWND frame) : hwndFrame(frame) {
     UpdateColors(true);
 }
 
-CaptionInfo::~CaptionInfo() {
-    if (theme) {
-        theme::CloseThemeData(theme);
-    }
-}
+CaptionInfo::~CaptionInfo() {}
 
-void CaptionInfo::UpdateTheme() {
-    if (theme) {
-        theme::CloseThemeData(theme);
-        theme = nullptr;
-    }
-    if (theme::IsThemeActive()) {
-        theme = theme::OpenThemeData(hwndFrame, L"WINDOW");
-    }
-}
+void CaptionInfo::UpdateTheme() {}
 
 void CaptionInfo::UpdateColors(bool activeWindow) {
     // Use the same background color as the tab bar.
@@ -432,21 +420,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_THEMECHANGED:
             if (win) {
                 win->caption->UpdateTheme();
-            }
-            break;
-
-        case WM_POPUPSYSTEMMENU:
-        case WM_SETCURSOR:
-        case WM_SETTEXT:
-        case WM_SETICON:
-            if (!win->caption->theme && IsWindowVisible(hwnd)) {
-                // Remove the WS_VISIBLE style to prevent DefWindowProc from drawing
-                // in the caption's area when processing these mesages.
-                SetWindowStyle(hwnd, WS_VISIBLE, false);
-                LRESULT res = DefWindowProc(hwnd, msg, wp, lp);
-                SetWindowStyle(hwnd, WS_VISIBLE, true);
-                *callDef = false;
-                return res;
             }
             break;
 
