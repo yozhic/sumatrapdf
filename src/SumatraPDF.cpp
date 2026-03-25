@@ -1125,6 +1125,8 @@ static void UpdateUiForCurrentTab(MainWindow* win) {
     // hide the scrollbars before any other relayouting (for assertion in MainWindow::GetViewPortSize)
     if (!win->AsFixed()) {
         ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+        OverlayScrollbarShow(win->overlayScrollV, false);
+        OverlayScrollbarShow(win->overlayScrollH, false);
     }
 
     // menu for chm and ebook docs is different, so we have to re-create it
