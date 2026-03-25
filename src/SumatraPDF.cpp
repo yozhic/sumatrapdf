@@ -6644,12 +6644,6 @@ static void DrawCaptionButton(MainWindow* win, HDC hdc, ButtonInfo* bi) {
     }
 }
 
-static void PaintCaption(MainWindow* win, HDC hdc) {
-    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        DrawCaptionButton(win, hdc, &win->captionBtn[i]);
-    }
-}
-
 static WCHAR gMenuAccelPressed = 0;
 
 static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win) {
@@ -6677,7 +6671,9 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 FillRect(memDC, &rcFill, br);
                 DeleteObject(br);
             }
-            PaintCaption(win, memDC);
+            for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+                DrawCaptionButton(win, memDC, &win->captionBtn[i]);
+            }
             buffer.Flush(hdc);
             EndPaint(hwnd, &ps);
             *callDef = false;
