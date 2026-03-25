@@ -2023,6 +2023,9 @@ static void LoadDocumentAsyncFinish(LoadDocumentAsyncData* d) {
     auto args = d->args;
     RemoveNotification(d->wndNotif);
     MainWindow* win = args->win;
+    if (!IsMainWindowValid(win)) {
+        return;
+    }
     const char* path = args->FilePath();
     if (!args->ctrl) {
         ShowErrorLoadingNotification(win, path, args->noSavePrefs);
