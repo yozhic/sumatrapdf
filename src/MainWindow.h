@@ -297,7 +297,6 @@ MainWindow* FindMainWindowByController(DocController*);
 extern Vec<MainWindow*> gWindows;
 void HighlightTab(MainWindow*, WindowTab*);
 HWND GetHwndForNotification();
-bool AppIsValidHWND(HWND);
 
 void RelayoutCaption(MainWindow* win);
 void OpenSystemMenu(MainWindow* win);

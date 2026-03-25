@@ -447,8 +447,6 @@ LRESULT TabsCtrl::OnNotifyReflect(WPARAM wp, LPARAM lp) {
     return 0;
 }
 
-extern bool AppIsValidHWND(HWND);
-
 static bool CanDragTab(TabInfo* tab) {
     if (tab->isPinned) return false;
     return true;
@@ -467,12 +465,6 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     int tabUnderMouse = -1;
 
     if ((msg >= WM_MOUSEFIRST && msg <= WM_MOUSELAST) || (msg == WM_MOUSELEAVE)) {
-        // TODO: ugly hack, this code should not know about MainWindow
-        // MainWindow might have been deleted
-        if (!AppIsValidHWND(hwnd)) {
-            return 0;
-        }
-
         tabState = TabStateFromMousePosition(mousePos);
         tabUnderMouse = tabState.tabIdx;
         canClose = tabState.tabInfo && tabState.tabInfo->canClose;

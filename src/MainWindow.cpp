@@ -774,8 +774,3 @@ HWND GetHwndForNotification() {
     }
     return gWindows[0]->hwndCanvas;
 }
-
-bool AppIsValidHWND(HWND hwnd) {
-    MainWindow* win = FindMainWindowByHwnd(hwnd);
-    return win && !win->isBeingClosed;
-}
