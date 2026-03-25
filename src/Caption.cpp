@@ -23,7 +23,6 @@
 #include "Commands.h"
 #include "Menu.h"
 #include "Theme.h"
-#include "utils/Log.h"
 
 using Gdiplus::Color;
 using Gdiplus::Graphics;
@@ -369,15 +368,7 @@ void PaintCaption(HDC hdc, MainWindow* win) {
     if (!win || !win->caption || !win->tabsInTitlebar) {
         return;
     }
-    RECT clipBox;
-    GetClipBox(hdc, &clipBox);
-    logfa("PaintCaption: clipBox=(%d,%d)-(%d,%d)\n", clipBox.left, clipBox.top, clipBox.right, clipBox.bottom);
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        ButtonInfo* bi = &win->caption->btn[i];
-        if (bi->visible) {
-            logfa("  btn[%d]: rect=(%d,%d)-(%d,%d)\n", i, bi->rect.x, bi->rect.y, bi->rect.x + bi->rect.dx,
-                  bi->rect.y + bi->rect.dy);
-        }
         DrawCaptionButton(hdc, i, win);
     }
 }
@@ -402,8 +393,6 @@ LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* 
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
-            logfa("WM_PAINT: rcPaint=(%d,%d)-(%d,%d) erase=%d\n", ps.rcPaint.left, ps.rcPaint.top, ps.rcPaint.right,
-                  ps.rcPaint.bottom, ps.fErase);
             {
                 // Fill the entire caption area (top padding + caption rect) with background
                 HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());

@@ -6567,7 +6567,6 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return MA_ACTIVATE;
 
         case WM_ERASEBKGND:
-            logfa("WM_ERASEBKGND\n");
             return TRUE;
 
         default:
