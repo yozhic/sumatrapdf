@@ -1556,6 +1556,13 @@ static MainWindow* CreateMainWindow() {
     // WM_NCCALCSIZE returning 0 disables DWM rounded corners; re-enable them.
     dwm::SetWindowRoundedCorners(hwndFrame, true);
 
+    if (false) {
+        // Extend DWM frame into the entire client area so DWM knows to fill it
+        // during resize instead of showing a transparent flash.
+        MARGINS margins = {-1, -1, -1, -1};
+        dwm::ExtendFrameIntoClientArea(hwndFrame, &margins);
+    }
+
     ReportIf(nullptr != FindMainWindowByHwnd(hwndFrame));
     MainWindow* win = new MainWindow(hwndFrame);
 
@@ -6714,15 +6721,23 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
+
+            // fill the entire update region with background color to prevent
+            // transparent flashing during resize (WS_CLIPCHILDREN prevents
+            // painting over child windows)
+            HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+            FillRect(hdc, &ps.rcPaint, br);
+            DeleteObject(br);
+
             Rect cr = win->captionRect;
             Rect captionArea = {cr.x, 0, cr.dx, cr.y + cr.dy};
             DoubleBuffer buffer(hwnd, captionArea);
             HDC memDC = buffer.GetDC();
             {
-                HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+                HBRUSH brCap = CreateSolidBrush(ThemeControlBackgroundColor());
                 RECT rcFill = ToRECT(captionArea);
-                FillRect(memDC, &rcFill, br);
-                DeleteObject(br);
+                FillRect(memDC, &rcFill, brCap);
+                DeleteObject(brCap);
             }
             for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
                 DrawCaptionButton(win, memDC, &win->captionBtn[i]);

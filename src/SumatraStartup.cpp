@@ -114,11 +114,14 @@ static bool RegisterWinClass() {
     HMODULE h = GetModuleHandleW(nullptr);
     WCHAR* iconName = MAKEINTRESOURCEW(GetAppIconID());
     FillWndClassEx(wcex, FRAME_CLASS_NAME, WndProcSumatraFrame);
+    // remove CS_HREDRAW | CS_VREDRAW to avoid full invalidation on every resize
+    wcex.style = 0;
     wcex.hIcon = LoadIconW(h, iconName);
     atom = RegisterClassEx(&wcex);
 
     FillWndClassEx(wcex, CANVAS_CLASS_NAME, WndProcCanvas);
-    wcex.style |= CS_DBLCLKS;
+    // remove CS_HREDRAW | CS_VREDRAW to avoid full invalidation on resize
+    wcex.style = CS_DBLCLKS;
     atom = RegisterClassEx(&wcex);
 
     return true;

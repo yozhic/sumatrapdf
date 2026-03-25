@@ -2353,10 +2353,16 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             return 0;
 
             // https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-erasebkgnd
-        case WM_ERASEBKGND:
-            // return non-zero to indicate we erased
-            // helps to avoid flicker
+        case WM_ERASEBKGND: {
+            // actually fill the background to prevent transparent flash during resize
+            HDC hdc = (HDC)wp;
+            RECT rc;
+            GetClientRect(hwnd, &rc);
+            HBRUSH br = CreateSolidBrush(ThemeMainWindowBackgroundColor());
+            FillRect(hdc, &rc, br);
+            DeleteObject(br);
             return 1;
+        }
 
         case WM_NCHITTEST:
             // Let the frame handle resize near its edges by returning HTTRANSPARENT.
@@ -2389,6 +2395,9 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         case WM_SIZE:
             if (!IsIconic(win->hwndFrame)) {
                 win->UpdateCanvasSize();
+                // fully invalidate since layout depends on size
+                // (replaces CS_HREDRAW | CS_VREDRAW which caused transparent flash)
+                InvalidateRect(hwnd, nullptr, FALSE);
             }
             return 0;
 

@@ -161,6 +161,7 @@ HRESULT GetThemeColor(HTHEME hTheme, int iPartId, int iStateId, int iPropId, COL
 
 namespace dwm {
 
+HRESULT ExtendFrameIntoClientArea(HWND hwnd, const MARGINS* pMarInset);
 HRESULT GetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
 HRESULT SetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
 void SetWindowRoundedCorners(HWND hwnd, bool rounded);
