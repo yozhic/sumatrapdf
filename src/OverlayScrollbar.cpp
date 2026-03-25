@@ -464,6 +464,23 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
                 }
                 return 0;
             }
+            if (wp == OverlayScrollbar::kTimerRepeatScroll) {
+                if (sb->repeatScrollCode == 0) {
+                    KillTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll);
+                    return 0;
+                }
+                SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(sb->repeatScrollCode, 0));
+                if (sb->repeatIsInitial) {
+                    // switch from initial delay to repeat rate
+                    sb->repeatIsInitial = false;
+                    UINT repeatMs = 0;
+                    SystemParametersInfoW(SPI_GETKEYBOARDSPEED, 0, &repeatMs, 0);
+                    // SPI_GETKEYBOARDSPEED returns 0-31, map to ~33-500ms (same as OS key repeat)
+                    repeatMs = 400 - repeatMs * 12;
+                    SetTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll, repeatMs, nullptr);
+                }
+                return 0;
+            }
             break;
 
         case WM_MOUSEMOVE: {
@@ -521,13 +538,23 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
                 if (arrowTop.Contains(pt)) {
                     UINT code = IsVert(sb) ? SB_LINEUP : SB_LINELEFT;
                     SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(code, 0));
-                    ReleaseCapture();
+                    sb->repeatScrollCode = code;
+                    sb->repeatIsInitial = true;
+                    UINT delayMs = 0;
+                    SystemParametersInfoW(SPI_GETKEYBOARDDELAY, 0, &delayMs, 0);
+                    delayMs = 250 + delayMs * 250; // 0-3 maps to 250-1000ms
+                    SetTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll, delayMs, nullptr);
                     return 0;
                 }
                 if (arrowBot.Contains(pt)) {
                     UINT code = IsVert(sb) ? SB_LINEDOWN : SB_LINERIGHT;
                     SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(code, 0));
-                    ReleaseCapture();
+                    sb->repeatScrollCode = code;
+                    sb->repeatIsInitial = true;
+                    UINT delayMs = 0;
+                    SystemParametersInfoW(SPI_GETKEYBOARDDELAY, 0, &delayMs, 0);
+                    delayMs = 250 + delayMs * 250;
+                    SetTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll, delayMs, nullptr);
                     return 0;
                 }
             }
@@ -572,28 +599,37 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
             if (track.Contains(pt)) {
                 int clickPos = IsVert(sb) ? my : mx;
                 int thumbMid = IsVert(sb) ? (thumbRc.y + thumbRc.dy / 2) : (thumbRc.x + thumbRc.dx / 2);
+                UINT code;
                 if (clickPos < thumbMid) {
-                    UINT code = IsVert(sb) ? SB_PAGEUP : SB_PAGELEFT;
-                    SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(code, 0));
+                    code = IsVert(sb) ? SB_PAGEUP : SB_PAGELEFT;
                 } else {
-                    UINT code = IsVert(sb) ? SB_PAGEDOWN : SB_PAGERIGHT;
-                    SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(code, 0));
+                    code = IsVert(sb) ? SB_PAGEDOWN : SB_PAGERIGHT;
                 }
+                SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(code, 0));
+                sb->repeatScrollCode = code;
+                sb->repeatIsInitial = true;
+                UINT delayMs = 0;
+                SystemParametersInfoW(SPI_GETKEYBOARDDELAY, 0, &delayMs, 0);
+                delayMs = 250 + delayMs * 250;
+                SetTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll, delayMs, nullptr);
+                return 0;
             }
             ReleaseCapture();
             return 0;
         }
 
         case WM_LBUTTONUP:
+            if (sb->repeatScrollCode != 0) {
+                sb->repeatScrollCode = 0;
+                KillTimer(hwnd, OverlayScrollbar::kTimerRepeatScroll);
+            }
             if (sb->isDragging) {
                 sb->isDragging = false;
                 sb->nPos = sb->nTrackPos;
-                ReleaseCapture();
                 PaintScrollbar(sb);
                 SendScrollMsg(sb, ScrollMsgForType(sb), MAKEWPARAM(SB_THUMBPOSITION, sb->nPos));
-            } else {
-                ReleaseCapture();
             }
+            ReleaseCapture();
             return 0;
 
         case WM_MOUSEWHEEL:

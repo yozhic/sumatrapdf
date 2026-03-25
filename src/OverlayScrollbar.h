@@ -40,8 +40,13 @@ struct OverlayScrollbar {
     int dragStartPos = 0;    // nPos when drag started
     bool mouseOverThumb = false;
 
+    // repeat-scroll state (for held arrow/track clicks)
+    UINT repeatScrollCode = 0;    // SB_LINEUP, SB_PAGEDOWN, etc.; 0 = not repeating
+    bool repeatIsInitial = false; // true = waiting for initial delay, false = repeating
+
     // timer IDs
     static constexpr UINT_PTR kTimerAutoHide = 1;
+    static constexpr UINT_PTR kTimerRepeatScroll = 2;
 };
 
 OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, ScrollbarType type);
