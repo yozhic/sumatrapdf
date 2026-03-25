@@ -3731,6 +3731,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         rc.dy -= 2 * kFrameBorderSize;
     }
 
+    // suppress intermediate repaints during relayout
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
+
     DeferWinPosHelper dh;
 
     // Tabbar and toolbar at the top
@@ -3828,6 +3831,10 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     dh.MoveWindow(win->hwndCanvas, rc);
 
     dh.End();
+
+    // re-enable redraw and invalidate once
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
+    RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_FRAME);
 
     // TODO: if a document with ToC and a broken document are loaded
     //       and the first document is closed with the ToC still visible,

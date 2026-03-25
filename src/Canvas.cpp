@@ -2365,17 +2365,14 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
             // https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-erasebkgnd
         case WM_ERASEBKGND: {
-            // actually fill the background to prevent transparent flash during resize
-            HDC hdc = (HDC)wp;
-            RECT rc;
-            GetClientRect(hwnd, &rc);
             if (gRedrawLog) {
+                RECT rc;
+                GetClientRect(hwnd, &rc);
                 logf("redraw: WM_ERASEBKGND hwnd=0x%p (canvas) rc=(%d,%d,%d,%d)\n", hwnd, rc.left, rc.top, rc.right,
                      rc.bottom);
             }
-            HBRUSH br = CreateSolidBrush(ThemeMainWindowBackgroundColor());
-            FillRect(hdc, &rc, br);
-            DeleteObject(br);
+            // don't paint here; old content stays until WM_PAINT covers it
+            // (CS_HREDRAW|CS_VREDRAW removed so no transparent flash)
             return 1;
         }
 
