@@ -734,15 +734,28 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     int scrollW = ScaledWidth(sb, sb->isThick);
     int x, y, w, h;
 
+    // Check if the sibling scrollbar (other orientation, same owner) is thick
+    bool siblingThick = false;
+    for (auto* other : gAllScrollbars) {
+        if (other != sb && other->hwndOwner == sb->hwndOwner && other->enabled && other->isThick) {
+            siblingThick = true;
+            break;
+        }
+    }
+    int siblingInset = 0;
+    if (sb->isThick && siblingThick) {
+        siblingInset = scrollW;
+    }
+
     if (IsVert(sb)) {
         x = ownerRc.right - scrollW;
         y = ownerRc.top;
         w = scrollW;
-        h = ownerRc.bottom - ownerRc.top;
+        h = ownerRc.bottom - ownerRc.top - siblingInset;
     } else {
         x = ownerRc.left;
         y = ownerRc.bottom - scrollW;
-        w = ownerRc.right - ownerRc.left;
+        w = ownerRc.right - ownerRc.left - siblingInset;
         h = scrollW;
     }
 
