@@ -255,7 +255,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
             gfx.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             Color closeCol = GdipCol(textColor);
-            closeCol = Color(128+64, closeCol.GetR(), closeCol.GetG(), closeCol.GetB());
+            closeCol = Color(128 + 64, closeCol.GetR(), closeCol.GetG(), closeCol.GetB());
             br.SetColor(closeCol);
             Pen penX(&br, closePenWidth);
             Gdiplus::Point p1(r.x, r.y);

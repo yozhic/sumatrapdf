@@ -39,8 +39,6 @@ using Gdiplus::SolidBrush;
 // undocumented caption buttons state
 #define CBS_INACTIVE 5
 
-#define WM_POPUPSYSTEMMENU 0x313
-
 // When a top level window is maximized the window manager checks whether its client
 // area covers the entire screen. If it does, the manager assumes that this is a fullscreen
 // window and hides the taskbar and any topmost window. A simple workaround is to
@@ -49,18 +47,7 @@ using Gdiplus::SolidBrush;
 
 // structs defined in Caption.h
 
-static void DrawCaptionButton(HDC hdc, int button, MainWindow* win);
 static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem);
-static void MenuBarAsPopupMenu(MainWindow* win, int x, int y);
-static void HandleCaptionClick(MainWindow* win, int btnIdx);
-
-CaptionInfo::CaptionInfo(HWND frame) : hwndFrame(frame) {}
-
-CaptionInfo::~CaptionInfo() {}
-
-void CaptionUpdateUI(MainWindow*, CaptionInfo*) {
-    // no-op: colors are fetched fresh from the theme when painting
-}
 
 void DeleteCaption(CaptionInfo* caption) {
     delete caption;
@@ -105,6 +92,44 @@ static void ClearAllHighlights(MainWindow* win) {
     }
 }
 
+static void MenuBarAsPopupMenu(MainWindow* win, int x, int y) {
+    int count = GetMenuItemCount(win->menu);
+    if (count <= 0) {
+        return;
+    }
+    HMENU popup = CreatePopupMenu();
+
+    MENUITEMINFO mii{};
+    mii.cbSize = sizeof(MENUITEMINFO);
+    mii.fMask = MIIM_SUBMENU | MIIM_STRING;
+    for (int i = 0; i < count; i++) {
+        mii.dwTypeData = nullptr;
+        GetMenuItemInfo(win->menu, i, TRUE, &mii);
+        if (!mii.hSubMenu || !mii.cch) {
+            continue;
+        }
+        mii.cch++;
+        AutoFreeWStr subMenuName(AllocArray<WCHAR>(mii.cch));
+        mii.dwTypeData = subMenuName;
+        GetMenuItemInfo(win->menu, i, TRUE, &mii);
+        AppendMenuW(popup, MF_POPUP | MF_STRING, (UINT_PTR)mii.hSubMenu, subMenuName);
+    }
+
+    if (IsUIRtl()) {
+        x += win->caption->btn[CB_MENU].rect.dx;
+    }
+
+    MarkMenuOwnerDraw(popup);
+    TrackPopupMenu(popup, TPM_LEFTALIGN, x, y, 0, win->hwndFrame, nullptr);
+    FreeMenuOwnerDrawInfoData(popup);
+
+    while (count > 0) {
+        --count;
+        RemoveMenu(popup, count, MF_BYPOSITION);
+    }
+    DestroyMenu(popup);
+}
+
 static void HandleCaptionClick(MainWindow* win, int btnIdx) {
     switch (btnIdx) {
         case CB_MINIMIZE:
@@ -139,7 +164,7 @@ static void HandleCaptionClick(MainWindow* win, int btnIdx) {
 }
 
 void CreateCaption(MainWindow* win) {
-    win->caption = new CaptionInfo(win->hwndFrame);
+    win->caption = new CaptionInfo();
 }
 
 void RelayoutCaption(MainWindow* win) {
@@ -683,42 +708,4 @@ static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
     SetWindowStyle(hwnd, WS_VISIBLE, true);
 
     return menu;
-}
-
-static void MenuBarAsPopupMenu(MainWindow* win, int x, int y) {
-    int count = GetMenuItemCount(win->menu);
-    if (count <= 0) {
-        return;
-    }
-    HMENU popup = CreatePopupMenu();
-
-    MENUITEMINFO mii{};
-    mii.cbSize = sizeof(MENUITEMINFO);
-    mii.fMask = MIIM_SUBMENU | MIIM_STRING;
-    for (int i = 0; i < count; i++) {
-        mii.dwTypeData = nullptr;
-        GetMenuItemInfo(win->menu, i, TRUE, &mii);
-        if (!mii.hSubMenu || !mii.cch) {
-            continue;
-        }
-        mii.cch++;
-        AutoFreeWStr subMenuName(AllocArray<WCHAR>(mii.cch));
-        mii.dwTypeData = subMenuName;
-        GetMenuItemInfo(win->menu, i, TRUE, &mii);
-        AppendMenuW(popup, MF_POPUP | MF_STRING, (UINT_PTR)mii.hSubMenu, subMenuName);
-    }
-
-    if (IsUIRtl()) {
-        x += win->caption->btn[CB_MENU].rect.dx;
-    }
-
-    MarkMenuOwnerDraw(popup);
-    TrackPopupMenu(popup, TPM_LEFTALIGN, x, y, 0, win->hwndFrame, nullptr);
-    FreeMenuOwnerDrawInfoData(popup);
-
-    while (count > 0) {
-        --count;
-        RemoveMenu(popup, count, MF_BYPOSITION);
-    }
-    DestroyMenu(popup);
 }

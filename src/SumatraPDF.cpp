@@ -624,7 +624,6 @@ static void UpdateWindowRtlLayout(MainWindow* win) {
     }
 
     if (win->tabsCtrl) win->tabsCtrl->LayoutTabs();
-    SetCaptionButtonsRtl(win->caption, isRTL);
 
     SetWindowPos(win->hwndFrame, nullptr, 0, 0, 0, 0, SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE);
     RelayoutCaption(win);
@@ -1671,7 +1670,6 @@ void UpdateAfterThemeChange() {
 
         UpdateControlsColors(win);
         RebuildMenuBarForWindow(win);
-        CaptionUpdateUI(win, win->caption);
         // TODO: probably leaking toolbar image list
         UpdateToolbarAfterThemeChange(win);
         if (UseDarkModeLib()) {

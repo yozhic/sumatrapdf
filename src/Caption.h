@@ -28,20 +28,17 @@ struct ButtonInfo {
 };
 
 struct CaptionInfo {
-    HWND hwndFrame = nullptr;
-
     ButtonInfo btn[CB_BTN_COUNT];
     bool isMenuOpen = false;
     Rect captionRect{};
 
-    explicit CaptionInfo(HWND hwndFrame);
-    ~CaptionInfo();
+    explicit CaptionInfo() = default;
+    ~CaptionInfo() = default;
 };
 
 void CreateCaption(MainWindow* win);
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
 void RelayoutCaption(MainWindow* win);
 void PaintCaption(HDC hdc, MainWindow* win);
-void CaptionUpdateUI(MainWindow*, CaptionInfo*);
 void DeleteCaption(CaptionInfo*);
 void OpenSystemMenu(MainWindow* win);

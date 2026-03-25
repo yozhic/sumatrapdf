@@ -602,7 +602,6 @@ void SetTabsInTitlebar(MainWindow* win, bool inTitleBar) {
         ToggleMenuBar(win, false);
     }
     if (inTitleBar) {
-        CaptionUpdateUI(win, win->caption);
         RelayoutCaption(win);
     }
     uint flags = SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE;
