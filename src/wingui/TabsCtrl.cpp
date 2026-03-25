@@ -240,7 +240,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
         gr = ToGdipRect(ti->r);
         gfx.FillRectangle(&br, gr);
 
-        if (ti->canClose) {
+        if (ti->canClose && (i == tabUnderMouse || i == selectedIdx)) {
             r = ti->rClose;
             if (i == tabUnderMouse && overClose && closeCircleEnabled) {
                 // draw bacground of X
