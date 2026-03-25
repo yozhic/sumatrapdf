@@ -2017,6 +2017,12 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
     int y = GET_Y_LPARAM(lp);
     switch (msg) {
         case WM_PAINT:
+            if (gRedrawLog) {
+                RECT urc;
+                GetUpdateRect(hwnd, &urc, FALSE);
+                logf("redraw: WM_PAINT hwnd=0x%p (canvas-fixed) rc=(%d,%d,%d,%d)\n", hwnd, urc.left, urc.top, urc.right,
+                     urc.bottom);
+            }
             OnPaintDocument(win);
             return 0;
 
@@ -2171,6 +2177,9 @@ static void OnPaintError(MainWindow* win) {
 static LRESULT WndProcCanvasLoadError(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     switch (msg) {
         case WM_PAINT:
+            if (gRedrawLog) {
+                logf("redraw: WM_PAINT hwnd=0x%p (canvas-error)\n", hwnd);
+            }
             OnPaintError(win);
             return 0;
 
@@ -2206,7 +2215,9 @@ static void RepaintTask(RepaintTaskData* d) {
 }
 
 void ScheduleRepaint(MainWindow* win, int delayInMs) {
-    // logf("ScheduleRepaint RenderCache:\n");
+    if (gRedrawLog) {
+        logf("redraw: ScheduleRepaint delayMs=%d canvas=0x%p\n", delayInMs, win->hwndCanvas);
+    }
     auto data = new RepaintTaskData;
     data->win = win;
     data->delayInMs = delayInMs;
@@ -2358,6 +2369,10 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             HDC hdc = (HDC)wp;
             RECT rc;
             GetClientRect(hwnd, &rc);
+            if (gRedrawLog) {
+                logf("redraw: WM_ERASEBKGND hwnd=0x%p (canvas) rc=(%d,%d,%d,%d)\n", hwnd, rc.left, rc.top, rc.right,
+                     rc.bottom);
+            }
             HBRUSH br = CreateSolidBrush(ThemeMainWindowBackgroundColor());
             FillRect(hdc, &rc, br);
             DeleteObject(br);
@@ -2380,6 +2395,11 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_SIZE:
             if (!IsIconic(win->hwndFrame)) {
+                if (gRedrawLog) {
+                    RECT rc;
+                    GetClientRect(hwnd, &rc);
+                    logf("redraw: WM_SIZE hwnd=0x%p (canvas) size=(%d,%d)\n", hwnd, rc.right, rc.bottom);
+                }
                 win->UpdateCanvasSize();
                 // fully invalidate since layout depends on size
                 // (replaces CS_HREDRAW | CS_VREDRAW which caused transparent flash)

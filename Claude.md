@@ -28,6 +28,12 @@ To add a new command:
 - add to cmd/gen-commands.ts
 - run "bun cmd/gen-commands.ts" to regenerate src/Commands.h and src/Commands.cpp
 
+## Adding a new cmd-line flag
+
+To add a new cmd-line flag:
+- add to cmd/gen-flags.ts
+- run "bun cmd/gen-flags.ts" to regenerate src/Flags.h and src/Flags.cpp
+
 ## Windows Shell Safety
 
 The Bash tool runs under Git Bash (MSYS2), **not** cmd.exe. This causes critical issues with Windows-style commands:

@@ -311,12 +311,17 @@ static BOOL CALLBACK RedrawHwndCallback(HWND hwnd, LPARAM lp) {
 }
 
 void MainWindow::RedrawAll(bool update) const {
+    if (gRedrawLog) {
+        logf("redraw: RedrawAll update=%d frame=0x%p\n", (int)update, this->hwndFrame);
+    }
     EnumChildWindows(this->hwndFrame, RedrawHwndCallback, (LPARAM)update);
     RedrawHwndCallback(this->hwndFrame, (LPARAM)update);
 }
 
 void MainWindow::RedrawAllIncludingNonClient() const {
-    // logf("MainWindow::RedrawAllIncludingNonClient RenderCache:\n");
+    if (gRedrawLog) {
+        logf("redraw: RedrawAllIncludingNonClient canvas=0x%p\n", this->hwndCanvas);
+    }
     InvalidateRect(this->hwndCanvas, nullptr, false);
     RedrawWindow(this->hwndCanvas, nullptr, nullptr, RDW_FRAME | RDW_INVALIDATE);
 }

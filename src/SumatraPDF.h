@@ -6,6 +6,8 @@ struct AnnotCreateArgs;
 #define CANVAS_CLASS_NAME L"SUMATRA_PDF_CANVAS"
 #define FRAME_CLASS_NAME L"SUMATRA_PDF_FRAME"
 
+extern bool gRedrawLog;
+
 constexpr const char* kWebsiteURL = "https://www.sumatrapdfreader.org/";
 constexpr const char* kManualURL = "https://www.sumatrapdfreader.org/manual";
 constexpr const char* kContributeTranslationsURL = "https://www.sumatrapdfreader.org/docs/Contribute-translation";

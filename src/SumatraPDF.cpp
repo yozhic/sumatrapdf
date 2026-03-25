@@ -122,6 +122,32 @@ HCURSOR gCursorDrag;
 bool gSupressNextAltMenuTrigger = false;
 
 bool gCrashOnOpen = false;
+bool gRedrawLog = false;
+
+static const char* HwndName(HWND hwnd) {
+    WCHAR cls[64]{};
+    GetClassNameW(hwnd, cls, dimof(cls));
+    if (str::Eq(cls, FRAME_CLASS_NAME)) {
+        return "frame";
+    }
+    if (str::Eq(cls, CANVAS_CLASS_NAME)) {
+        return "canvas";
+    }
+    // TODO: could identify more windows (rebar, toc, etc.)
+    return "other";
+}
+
+static void LogRedraw(const char* what, HWND hwnd, const RECT* rc = nullptr) {
+    if (!gRedrawLog) {
+        return;
+    }
+    if (rc) {
+        logf("redraw: %s hwnd=0x%p (%s) rc=(%d,%d,%d,%d)\n", what, hwnd, HwndName(hwnd), rc->left, rc->top, rc->right,
+             rc->bottom);
+    } else {
+        logf("redraw: %s hwnd=0x%p (%s)\n", what, hwnd, HwndName(hwnd));
+    }
+}
 
 // in restricted mode, some features can be disabled (such as
 // opening files, printing, following URLs), so that SumatraPDF
@@ -3686,6 +3712,10 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     if (rc.IsEmpty()) {
         return;
     }
+    if (gRedrawLog) {
+        RECT r = ToRECT(rc);
+        LogRedraw("RelayoutFrame", win->hwndFrame, &r);
+    }
 
     if (PM_BLACK_SCREEN == win->presentation || PM_WHITE_SCREEN == win->presentation) {
         // make the black/white canvas cover the entire window
@@ -6718,18 +6748,19 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             break;
 
         case WM_NCPAINT:
-            *callDef = false;   
+            *callDef = false;
             return 0;
 
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
+            LogRedraw("WM_PAINT", hwnd, &ps.rcPaint);
 
             // fill the entire update region to prevent transparent flashing
             // during resize (WS_CLIPCHILDREN prevents painting over child windows).
             // The 1px border for resize is painted red (TODO: use proper color).
-             HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
-            //HBRUSH br = CreateSolidBrush(RGB(255, 0, 0));
+            HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+            // HBRUSH br = CreateSolidBrush(RGB(255, 0, 0));
             FillRect(hdc, &ps.rcPaint, br);
             DeleteObject(br);
 
@@ -7265,6 +7296,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return MA_ACTIVATE;
 
         case WM_ERASEBKGND:
+            LogRedraw("WM_ERASEBKGND", hwnd);
             return TRUE;
 
         default:
