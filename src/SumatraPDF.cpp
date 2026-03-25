@@ -65,7 +65,6 @@
 #include "AppSettings.h"
 #include "AppTools.h"
 #include "Canvas.h"
-#include "Caption.h"
 #include "CrashHandler.h"
 #include "ExternalViewers.h"
 #include "Favorites.h"
@@ -91,6 +90,11 @@
 #include "DarkModeSubclass.h"
 
 #include "utils/Log.h"
+
+using Gdiplus::Color;
+using Gdiplus::Graphics;
+using Gdiplus::Pen;
+using Gdiplus::SolidBrush;
 
 constexpr const char* kRestrictionsFileName = "sumatrapdfrestrict.ini";
 
@@ -6320,6 +6324,643 @@ static LRESULT OnFrameGetMinMaxInfo(MINMAXINFO* info) {
     info->ptMinTrackSize.y = kWinMinDy;
     return 0;
 }
+
+// --- Caption code (moved from Caption.cpp) ---
+
+#define UNDOCUMENTED_MENU_CLASS_NAME L"#32768"
+#define DO_NOT_REOPEN_MENU_TIMER_ID 1
+#define DO_NOT_REOPEN_MENU_DELAY_IN_MS 1
+#define CBS_INACTIVE 5
+#define NON_CLIENT_BAND 1
+
+void DeleteCaption(CaptionInfo* caption) {
+    delete caption;
+}
+
+static HMENU GetUpdatedSystemMenu(HWND hwnd, bool changeDefaultItem) {
+    HMENU menu = GetSystemMenu(hwnd, FALSE);
+    SetWindowStyle(hwnd, WS_VISIBLE, false);
+
+    bool maximized = IsZoomed(hwnd);
+    EnableMenuItem(menu, SC_SIZE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_MOVE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_MINIMIZE, MF_ENABLED);
+    EnableMenuItem(menu, SC_MAXIMIZE, maximized ? MF_GRAYED : MF_ENABLED);
+    EnableMenuItem(menu, SC_CLOSE, MF_ENABLED);
+    EnableMenuItem(menu, SC_RESTORE, maximized ? MF_ENABLED : MF_GRAYED);
+    if (changeDefaultItem) {
+        SetMenuDefaultItem(menu, maximized ? SC_RESTORE : SC_MAXIMIZE, FALSE);
+    } else {
+        SetMenuDefaultItem(menu, SC_CLOSE, FALSE);
+    }
+
+    SetWindowStyle(hwnd, WS_VISIBLE, true);
+    return menu;
+}
+
+void OpenSystemMenu(MainWindow* win) {
+    Rect r = win->caption->btn[CB_SYSTEM_MENU].rect;
+    Rect rScreen = MapRectToWindow(r, win->hwndFrame, HWND_DESKTOP);
+    HMENU systemMenu = GetUpdatedSystemMenu(win->hwndFrame, false);
+    uint flags = 0;
+    TrackPopupMenuEx(systemMenu, flags, rScreen.x, rScreen.y + rScreen.dy, win->hwndFrame, nullptr);
+}
+
+static int CaptionButtonAt(CaptionInfo* ci, Point pt) {
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        if (ci->btn[i].visible && ci->btn[i].rect.Contains(pt)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static void RepaintButton(HWND hwnd, int btnIdx, MainWindow* win) {
+    if (false) {
+        RECT rc = ToRECT(win->caption->btn[btnIdx].rect);
+        InvalidateRect(hwnd, &rc, FALSE);
+        UpdateWindow(hwnd);
+    } else {
+        InvalidateRect(hwnd, nullptr, FALSE);
+    }
+}
+
+static void ClearAllHighlights(MainWindow* win) {
+    CaptionInfo* ci = win->caption;
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        if (ci->btn[i].highlighted || ci->btn[i].pressed) {
+            ci->btn[i].highlighted = false;
+            ci->btn[i].pressed = false;
+            RepaintButton(win->hwndFrame, i, win);
+        }
+    }
+}
+
+static void MenuBarAsPopupMenu(MainWindow* win, int x, int y) {
+    int count = GetMenuItemCount(win->menu);
+    if (count <= 0) {
+        return;
+    }
+    HMENU popup = CreatePopupMenu();
+
+    MENUITEMINFO mii{};
+    mii.cbSize = sizeof(MENUITEMINFO);
+    mii.fMask = MIIM_SUBMENU | MIIM_STRING;
+    for (int i = 0; i < count; i++) {
+        mii.dwTypeData = nullptr;
+        GetMenuItemInfo(win->menu, i, TRUE, &mii);
+        if (!mii.hSubMenu || !mii.cch) {
+            continue;
+        }
+        mii.cch++;
+        AutoFreeWStr subMenuName(AllocArray<WCHAR>(mii.cch));
+        mii.dwTypeData = subMenuName;
+        GetMenuItemInfo(win->menu, i, TRUE, &mii);
+        AppendMenuW(popup, MF_POPUP | MF_STRING, (UINT_PTR)mii.hSubMenu, subMenuName);
+    }
+
+    if (IsUIRtl()) {
+        x += win->caption->btn[CB_MENU].rect.dx;
+    }
+
+    MarkMenuOwnerDraw(popup);
+    TrackPopupMenu(popup, TPM_LEFTALIGN, x, y, 0, win->hwndFrame, nullptr);
+    FreeMenuOwnerDrawInfoData(popup);
+
+    while (count > 0) {
+        --count;
+        RemoveMenu(popup, count, MF_BYPOSITION);
+    }
+    DestroyMenu(popup);
+}
+
+static void HandleCaptionClick(MainWindow* win, int btnIdx) {
+    switch (btnIdx) {
+        case CB_MINIMIZE:
+            PostMessageW(win->hwndFrame, WM_SYSCOMMAND, SC_MINIMIZE, 0);
+            break;
+        case CB_MAXIMIZE:
+            PostMessageW(win->hwndFrame, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+            break;
+        case CB_RESTORE:
+            PostMessageW(win->hwndFrame, WM_SYSCOMMAND, SC_RESTORE, 0);
+            break;
+        case CB_CLOSE:
+            PostMessageW(win->hwndFrame, WM_SYSCOMMAND, SC_CLOSE, 0);
+            break;
+        case CB_MENU:
+            if (!KillTimer(win->hwndFrame, DO_NOT_REOPEN_MENU_TIMER_ID) && !win->caption->isMenuOpen) {
+                Rect r = win->caption->btn[CB_MENU].rect;
+                Rect rScreen = MapRectToWindow(r, win->hwndFrame, HWND_DESKTOP);
+                win->caption->isMenuOpen = true;
+                RepaintButton(win->hwndFrame, CB_MENU, win);
+                MenuBarAsPopupMenu(win, rScreen.x, rScreen.y + rScreen.dy);
+                win->caption->isMenuOpen = false;
+                RepaintButton(win->hwndFrame, CB_MENU, win);
+                SetTimer(win->hwndFrame, DO_NOT_REOPEN_MENU_TIMER_ID, DO_NOT_REOPEN_MENU_DELAY_IN_MS, nullptr);
+            }
+            HwndSetFocus(win->hwndFrame);
+            break;
+        case CB_SYSTEM_MENU:
+            OpenSystemMenu(win);
+            break;
+    }
+}
+
+void CreateCaption(MainWindow* win) {
+    win->caption = new CaptionInfo();
+}
+
+void RelayoutCaption(MainWindow* win) {
+    Rect rc = win->caption->captionRect;
+    CaptionInfo* ci = win->caption;
+    bool maximized = IsZoomed(win->hwndFrame);
+
+    int btnDy = rc.y + rc.dy;
+    int btnDx = btnDy;
+
+    ci->btn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    ci->btn[CB_CLOSE].visible = true;
+    rc.dx -= btnDx;
+
+    ci->btn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    ci->btn[CB_RESTORE].visible = maximized;
+
+    ci->btn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    ci->btn[CB_MAXIMIZE].visible = !maximized;
+    rc.dx -= btnDx;
+
+    ci->btn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+    ci->btn[CB_MINIMIZE].visible = true;
+    rc.dx -= btnDx;
+
+    int tabHeight = GetTabbarHeight(win->hwndFrame);
+    rc.y += rc.dy - tabHeight;
+
+    ci->btn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+    ci->btn[CB_SYSTEM_MENU].visible = true;
+    rc.x += tabHeight;
+    rc.dx -= tabHeight;
+
+    ci->btn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+    ci->btn[CB_MENU].visible = true;
+    rc.x += tabHeight;
+    rc.dx -= tabHeight;
+
+    DeferWinPosHelper dh;
+    dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
+    dh.End();
+
+    UpdateTabWidth(win);
+
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        if (ci->btn[i].visible) {
+            RECT r = ToRECT(ci->btn[i].rect);
+            InvalidateRect(win->hwndFrame, &r, TRUE);
+        }
+    }
+}
+
+static void DrawCaptionButton(HDC hdc, int button, MainWindow* win) {
+    ButtonInfo* bi = &win->caption->btn[button];
+    if (!bi->visible) {
+        return;
+    }
+    Rect rButton = bi->rect;
+    Rect rc = rButton;
+
+    bool isSysButton = (button == CB_MINIMIZE || button == CB_MAXIMIZE || button == CB_RESTORE || button == CB_CLOSE);
+
+    int stateId;
+    if (bi->pressed) {
+        stateId = CBS_PUSHED;
+    } else if (bi->highlighted) {
+        stateId = CBS_HOT;
+    } else if (bi->inactive) {
+        stateId = CBS_INACTIVE;
+    } else {
+        stateId = CBS_NORMAL;
+    }
+
+    Graphics gfx(hdc);
+    gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+
+    if (isSysButton) {
+        COLORREF bgc = ThemeControlBackgroundColor();
+        SolidBrush bgBrNormal(GdiRgbFromCOLORREF(bgc));
+        gfx.FillRectangle(&bgBrNormal, rButton.x, rButton.y, rButton.dx, rButton.dy);
+
+        bool isClose = (button == CB_CLOSE);
+        bool isHot = (stateId == CBS_HOT);
+        bool isPushed = (stateId == CBS_PUSHED);
+        bool isInactive = (stateId == CBS_INACTIVE);
+
+        if (isHot || isPushed) {
+            Color bgCol;
+            if (isClose) {
+                bgCol = isPushed ? Color(200, 196, 43, 28) : Color(255, 196, 43, 28);
+            } else {
+                bgCol = isPushed ? Color(255, 204, 204, 204) : Color(255, 229, 229, 229);
+            }
+            SolidBrush bgBr(bgCol);
+            gfx.FillRectangle(&bgBr, rButton.x, rButton.y, rButton.dx, rButton.dy);
+        }
+
+        Color iconCol;
+        if (isInactive) {
+            iconCol = Color(153, 153, 153);
+        } else if (isClose && (isHot || isPushed)) {
+            iconCol = Color(255, 255, 255);
+        } else {
+            COLORREF tc = ThemeWindowTextColor();
+            iconCol = Color(GetRValue(tc), GetGValue(tc), GetBValue(tc));
+        }
+
+        int iconSz = rc.dy * 10 / 30;
+        if (iconSz < 6) {
+            iconSz = 6;
+        }
+        iconSz = iconSz & ~1;
+        int ix = rc.x + (rc.dx - iconSz) / 2;
+        int iy = rc.y + (rc.dy - iconSz) / 2;
+
+        Pen pen(iconCol, 1.0f);
+
+        switch (button) {
+            case CB_CLOSE:
+                gfx.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+                gfx.DrawLine(&pen, ix, iy, ix + iconSz, iy + iconSz);
+                gfx.DrawLine(&pen, ix + iconSz, iy, ix, iy + iconSz);
+                break;
+            case CB_MAXIMIZE:
+                gfx.DrawRectangle(&pen, ix, iy, iconSz, iconSz);
+                break;
+            case CB_MINIMIZE: {
+                int midY = iy + iconSz / 2;
+                gfx.DrawLine(&pen, ix, midY, ix + iconSz, midY);
+            } break;
+            case CB_RESTORE: {
+                int off = iconSz / 3;
+                int sz = iconSz - off;
+                gfx.DrawRectangle(&pen, ix, iy + off, sz, sz);
+                gfx.DrawLine(&pen, ix + off, iy, ix + iconSz, iy);
+                gfx.DrawLine(&pen, ix + iconSz, iy, ix + iconSz, iy + sz);
+                gfx.DrawLine(&pen, ix + sz, iy + off, ix + iconSz, iy + off);
+                gfx.DrawLine(&pen, ix + off, iy, ix + off, iy + off);
+            } break;
+        }
+    } else if (button == CB_MENU) {
+        SolidBrush bgBrMenu(GdiRgbFromCOLORREF(ThemeControlBackgroundColor()));
+        gfx.FillRectangle(&bgBrMenu, rButton.x, rButton.y, rButton.dx, rButton.dy);
+
+        if (win->caption->isMenuOpen) {
+            stateId = CBS_PUSHED;
+        }
+        BYTE buttonRGB = 1;
+        if (CBS_PUSHED == stateId) {
+            buttonRGB = 0;
+        } else if (CBS_HOT == stateId) {
+            buttonRGB = 255;
+        }
+
+        if (buttonRGB != 1) {
+            if (GetLightness(ThemeWindowTextColor()) > GetLightness(ThemeControlBackgroundColor())) {
+                buttonRGB ^= 0xff;
+            }
+            BYTE buttonAlpha = BYTE((255 - abs((int)GetLightness(ThemeControlBackgroundColor()) - buttonRGB)) / 2);
+            SolidBrush br(Color(buttonAlpha, buttonRGB, buttonRGB, buttonRGB));
+            gfx.FillRectangle(&br, rc.x, rc.y, rc.dx, rc.dy);
+        }
+        COLORREF c = ThemeWindowTextColor();
+        u8 r, g, b;
+        UnpackColor(c, r, g, b);
+        float width = floor((float)rc.dy / 8.0f);
+        Pen p(Color(r, g, b), width);
+        rc.Inflate(-int(rc.dx * 0.2f + 0.5f), -int(rc.dy * 0.3f + 0.5f));
+        for (int i = 0; i < 3; i++) {
+            gfx.DrawLine(&p, rc.x, rc.y + i * rc.dy / 2, rc.x + rc.dx, rc.y + i * rc.dy / 2);
+        }
+    } else if (button == CB_SYSTEM_MENU) {
+        SolidBrush bgBrSys(GdiRgbFromCOLORREF(ThemeControlBackgroundColor()));
+        gfx.FillRectangle(&bgBrSys, rButton.x, rButton.y, rButton.dx, rButton.dy);
+        int xIcon = GetSystemMetrics(SM_CXSMICON);
+        int yIcon = GetSystemMetrics(SM_CYSMICON);
+        HICON hIcon = (HICON)GetClassLongPtr(win->hwndFrame, GCLP_HICONSM);
+        int x = rButton.x + (rButton.dx - xIcon) / 2;
+        int y = rButton.y + (rButton.dy - yIcon) / 2;
+        DrawIconEx(hdc, x, y, hIcon, xIcon, yIcon, 0, nullptr, DI_NORMAL);
+    }
+}
+
+void PaintCaption(HDC hdc, MainWindow* win) {
+    if (!win || !win->caption || !win->tabsInTitlebar) {
+        return;
+    }
+    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+        DrawCaptionButton(hdc, i, win);
+    }
+}
+
+static WCHAR gMenuAccelPressed = 0;
+
+LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win) {
+    switch (msg) {
+        case WM_SETTINGCHANGE:
+            if (wp == SPI_SETNONCLIENTMETRICS) {
+                RelayoutCaption(win);
+            }
+            break;
+
+        case WM_NCPAINT:
+            *callDef = false;
+            return 0;
+
+        case WM_PAINT: {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+            Rect cr = win->caption->captionRect;
+            Rect captionArea = {cr.x, 0, cr.dx, cr.y + cr.dy};
+            DoubleBuffer buffer(hwnd, captionArea);
+            HDC memDC = buffer.GetDC();
+            {
+                HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+                RECT rcFill = ToRECT(captionArea);
+                FillRect(memDC, &rcFill, br);
+                DeleteObject(br);
+            }
+            PaintCaption(memDC, win);
+            buffer.Flush(hdc);
+            EndPaint(hwnd, &ps);
+            *callDef = false;
+            return 0;
+        }
+
+        case WM_NCACTIVATE:
+            for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+                win->caption->btn[i].inactive = wp == FALSE;
+            }
+            if (!IsIconic(hwnd)) {
+                uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
+                RedrawWindow(hwnd, nullptr, nullptr, flags);
+                *callDef = false;
+                return TRUE;
+            }
+            break;
+
+        case WM_TIMER:
+            if (wp == DO_NOT_REOPEN_MENU_TIMER_ID) {
+                KillTimer(hwnd, DO_NOT_REOPEN_MENU_TIMER_ID);
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_THEMECHANGED:
+            break;
+
+        case WM_NCCALCSIZE: {
+            RECT* r = wp == TRUE ? &((NCCALCSIZE_PARAMS*)lp)->rgrc[0] : (RECT*)lp;
+            if (IsZoomed(hwnd)) {
+                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                r->left += frameX;
+                r->top += frameY;
+                r->right -= frameX;
+                r->bottom -= frameY;
+                r->bottom -= NON_CLIENT_BAND;
+            }
+            *callDef = false;
+            return 0;
+        }
+
+        case WM_NCHITTEST: {
+            int x = GET_X_LPARAM(lp);
+            int y = GET_Y_LPARAM(lp);
+            RECT wrc;
+            GetWindowRect(hwnd, &wrc);
+
+            if (!IsZoomed(hwnd)) {
+                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
+                int borderX = frameX + 3;
+                int borderY = frameY + 3;
+                bool onLeft = (x - wrc.left) < borderX;
+                bool onRight = (wrc.right - x) < borderX;
+                bool onTop = (y - wrc.top) < borderY;
+                bool onBottom = (wrc.bottom - y) < borderY;
+
+                if (onTop && onLeft) {
+                    *callDef = false;
+                    return HTTOPLEFT;
+                }
+                if (onTop && onRight) {
+                    *callDef = false;
+                    return HTTOPRIGHT;
+                }
+                if (onBottom && onLeft) {
+                    *callDef = false;
+                    return HTBOTTOMLEFT;
+                }
+                if (onBottom && onRight) {
+                    *callDef = false;
+                    return HTBOTTOMRIGHT;
+                }
+                if (onLeft) {
+                    *callDef = false;
+                    return HTLEFT;
+                }
+                if (onRight) {
+                    *callDef = false;
+                    return HTRIGHT;
+                }
+                if (onTop) {
+                    *callDef = false;
+                    return HTTOP;
+                }
+                if (onBottom) {
+                    *callDef = false;
+                    return HTBOTTOM;
+                }
+            }
+
+            {
+                Point ptClient{x, y};
+                HwndScreenToClient(hwnd, ptClient);
+                int btnIdx = CaptionButtonAt(win->caption, ptClient);
+                if (btnIdx >= 0) {
+                    if (btnIdx == CB_MAXIMIZE || btnIdx == CB_RESTORE) {
+                        *callDef = false;
+                        return HTMAXBUTTON;
+                    }
+                    *callDef = false;
+                    return HTCLIENT;
+                }
+            }
+
+            {
+                Point pt{x, y};
+                Rect rClient = MapRectToWindow(ClientRect(hwnd), hwnd, HWND_DESKTOP);
+                Rect rCaption = MapRectToWindow(win->caption->captionRect, hwnd, HWND_DESKTOP);
+                if (rClient.Contains(pt) && pt.y < rCaption.y + rCaption.dy) {
+                    *callDef = false;
+                    return HTCAPTION;
+                }
+            }
+        } break;
+
+        case WM_NCLBUTTONDOWN:
+            if (wp == HTMAXBUTTON) {
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_NCLBUTTONUP:
+            if (wp == HTMAXBUTTON) {
+                WPARAM cmd = IsZoomed(hwnd) ? SC_RESTORE : SC_MAXIMIZE;
+                PostMessageW(hwnd, WM_SYSCOMMAND, cmd, 0);
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_NCMOUSEMOVE: {
+            int btnIdx = IsZoomed(hwnd) ? CB_RESTORE : CB_MAXIMIZE;
+            if (wp == HTMAXBUTTON) {
+                if (!win->caption->btn[btnIdx].highlighted) {
+                    win->caption->btn[btnIdx].highlighted = true;
+                    RepaintButton(hwnd, btnIdx, win);
+                }
+            } else {
+                if (win->caption->btn[btnIdx].highlighted) {
+                    win->caption->btn[btnIdx].highlighted = false;
+                    RepaintButton(hwnd, btnIdx, win);
+                }
+            }
+        } break;
+
+        case WM_NCMOUSELEAVE:
+            ClearAllHighlights(win);
+            break;
+
+        case WM_MOUSEMOVE: {
+            Point ptm{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+            int btnIdx = CaptionButtonAt(win->caption, ptm);
+            for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+                bool shouldHighlight = (i == btnIdx);
+                if (win->caption->btn[i].highlighted != shouldHighlight) {
+                    win->caption->btn[i].highlighted = shouldHighlight;
+                    RepaintButton(hwnd, i, win);
+                }
+            }
+            if (btnIdx >= 0) {
+                TrackMouseLeave(hwnd);
+            }
+        } break;
+
+        case WM_MOUSELEAVE:
+            ClearAllHighlights(win);
+            break;
+
+        case WM_LBUTTONDOWN: {
+            Point ptd{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+            int btnIdx = CaptionButtonAt(win->caption, ptd);
+            if (btnIdx >= 0) {
+                win->caption->btn[btnIdx].pressed = true;
+                RepaintButton(hwnd, btnIdx, win);
+                SetCapture(hwnd);
+                *callDef = false;
+                return 0;
+            }
+        } break;
+
+        case WM_LBUTTONUP: {
+            if (GetCapture() == hwnd) {
+                ReleaseCapture();
+            }
+            Point ptu{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+            int btnIdx = CaptionButtonAt(win->caption, ptu);
+            for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
+                if (win->caption->btn[i].pressed) {
+                    win->caption->btn[i].pressed = false;
+                    RepaintButton(hwnd, i, win);
+                    if (i == btnIdx) {
+                        HandleCaptionClick(win, i);
+                    }
+                }
+            }
+            *callDef = false;
+            return 0;
+        }
+
+        case WM_LBUTTONDBLCLK: {
+            Point ptdc{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+            int btnIdx = CaptionButtonAt(win->caption, ptdc);
+            if (btnIdx == CB_SYSTEM_MENU) {
+                PostMessageW(hwnd, WM_SYSCOMMAND, SC_CLOSE, 0);
+                *callDef = false;
+                return 0;
+            }
+        } break;
+
+        case WM_NCRBUTTONUP:
+            if (wp == HTCAPTION) {
+                HMENU menu = GetUpdatedSystemMenu(hwnd, true);
+                uint flags = TPM_RIGHTBUTTON | TPM_NONOTIFY | TPM_RETURNCMD;
+                if (GetSystemMetrics(SM_MENUDROPALIGNMENT)) {
+                    flags |= TPM_RIGHTALIGN;
+                }
+                WPARAM cmd = TrackPopupMenu(menu, flags, GET_X_LPARAM(lp), GET_Y_LPARAM(lp), 0, hwnd, nullptr);
+                if (cmd) {
+                    PostMessageW(hwnd, WM_SYSCOMMAND, cmd, 0);
+                }
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_SYSCOMMAND:
+            if (wp == SC_KEYMENU) {
+                gMenuAccelPressed = (WCHAR)lp;
+                if (' ' == gMenuAccelPressed) {
+                    auto pos = str::FindChar(_TRA("&Window"), '&');
+                    if (pos) {
+                        char c = pos[1];
+                        gMenuAccelPressed = (WCHAR)c;
+                    }
+                }
+                HandleCaptionClick(win, CB_MENU);
+                *callDef = false;
+                return 0;
+            }
+            break;
+
+        case WM_INITMENUPOPUP:
+            if (gMenuAccelPressed) {
+                HWND hMenu = FindWindow(UNDOCUMENTED_MENU_CLASS_NAME, nullptr);
+                if (hMenu) {
+                    if ('a' <= gMenuAccelPressed && gMenuAccelPressed <= 'z') {
+                        gMenuAccelPressed -= 'a' - 'A';
+                    }
+                    if ('A' <= gMenuAccelPressed && gMenuAccelPressed <= 'Z') {
+                        PostMessageW(hMenu, WM_KEYDOWN, gMenuAccelPressed, 0);
+                    } else {
+                        PostMessageW(hMenu, WM_CHAR, gMenuAccelPressed, 0);
+                    }
+                }
+                gMenuAccelPressed = 0;
+            }
+            break;
+
+        case WM_SYSCOLORCHANGE:
+            break;
+    }
+
+    *callDef = true;
+    return 0;
+}
+
+// --- End caption code ---
 
 HWND gLastActiveFrameHwnd = nullptr;
 

@@ -50,7 +50,6 @@
 #include "Scratch.h"
 #include "AppSettings.h"
 #include "Canvas.h"
-#include "Caption.h"
 #include "CrashHandler.h"
 #include "FileThumbnails.h"
 #include "Print.h"

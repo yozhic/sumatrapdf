@@ -29,7 +29,6 @@
 #include "WindowTab.h"
 #include "resource.h"
 #include "Commands.h"
-#include "Caption.h"
 #include "Menu.h"
 #include "TableOfContents.h"
 #include "Tabs.h"

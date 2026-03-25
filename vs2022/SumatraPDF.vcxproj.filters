@@ -123,9 +123,6 @@
     <ClInclude Include="..\src\Canvas.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Caption.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\ChmFile.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -411,9 +408,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\CanvasAboutUI.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Caption.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ChmFile.cpp">
@@ -801,6 +795,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\build-with-mingw.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\build.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\bun.lock">

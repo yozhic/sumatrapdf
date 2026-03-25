@@ -1072,7 +1072,6 @@
     <ClInclude Include="..\src\AppSettings.h" />
     <ClInclude Include="..\src\AppTools.h" />
     <ClInclude Include="..\src\Canvas.h" />
-    <ClInclude Include="..\src\Caption.h" />
     <ClInclude Include="..\src\ChmFile.h" />
     <ClInclude Include="..\src\ChmModel.h" />
     <ClInclude Include="..\src\CommandPalette.h" />
@@ -1170,7 +1169,6 @@
     <ClCompile Include="..\src\AppTools.cpp" />
     <ClCompile Include="..\src\Canvas.cpp" />
     <ClCompile Include="..\src\CanvasAboutUI.cpp" />
-    <ClCompile Include="..\src\Caption.cpp" />
     <ClCompile Include="..\src\ChmFile.cpp" />
     <ClCompile Include="..\src\ChmModel.cpp" />
     <ClCompile Include="..\src\CommandPalette.cpp" />
@@ -1520,6 +1518,7 @@
     <None Include="..\cmd\build-no-info.ts" />
     <None Include="..\cmd\build-smoke.ts" />
     <None Include="..\cmd\build-with-mingw.ts" />
+    <None Include="..\cmd\build.ts" />
     <None Include="..\cmd\bun.lock" />
     <None Include="..\cmd\check-access-keys.ts" />
     <None Include="..\cmd\clang-tidy.ts" />

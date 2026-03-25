@@ -36,7 +36,6 @@
 #include "TableOfContents.h"
 #include "resource.h"
 #include "Commands.h"
-#include "Caption.h"
 #include "Selection.h"
 #include "Flags.h"
 #include "StressTesting.h"

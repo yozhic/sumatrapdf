@@ -43,7 +43,6 @@
 #include "resource.h"
 #include "Commands.h"
 #include "Canvas.h"
-#include "Caption.h"
 #include "Menu.h"
 #include "uia/Provider.h"
 #include "SearchAndDDE.h"

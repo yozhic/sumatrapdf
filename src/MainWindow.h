@@ -10,8 +10,42 @@ struct LabelWithCloseWnd;
 struct Splitter;
 struct Tooltip;
 struct TreeView;
-struct CaptionInfo;
 struct TabsCtrl;
+
+// factor by how large the non-maximized caption should be in relation to the tabbar
+#define kCaptionTabBarDyFactor 1.25f
+
+// gap in pixels between top of caption and tabs; this area allows dragging the window
+#define kCaptionTopPadding 14
+
+enum CaptionButtons {
+    CB_BTN_FIRST = 0,
+    CB_MINIMIZE = CB_BTN_FIRST,
+    CB_MAXIMIZE,
+    CB_RESTORE,
+    CB_CLOSE,
+    CB_MENU,
+    CB_SYSTEM_MENU,
+    CB_BTN_COUNT
+};
+
+struct ButtonInfo {
+    Rect rect{};
+    bool highlighted = false;
+    bool pressed = false;
+    bool inactive = false;
+    bool visible = true;
+    ButtonInfo() = default;
+};
+
+struct CaptionInfo {
+    ButtonInfo btn[CB_BTN_COUNT];
+    bool isMenuOpen = false;
+    Rect captionRect{};
+
+    explicit CaptionInfo() = default;
+    ~CaptionInfo() = default;
+};
 
 struct IPageElement;
 struct PageDestination;
@@ -270,3 +304,10 @@ extern Vec<MainWindow*> gWindows;
 void HighlightTab(MainWindow*, WindowTab*);
 HWND GetHwndForNotification();
 bool AppIsValidHWND(HWND);
+
+void CreateCaption(MainWindow* win);
+LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
+void RelayoutCaption(MainWindow* win);
+void PaintCaption(HDC hdc, MainWindow* win);
+void DeleteCaption(CaptionInfo*);
+void OpenSystemMenu(MainWindow* win);
