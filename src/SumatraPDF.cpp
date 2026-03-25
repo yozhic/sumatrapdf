@@ -4786,7 +4786,7 @@ static void FrameOnChar(MainWindow* win, WPARAM key, LPARAM info = 0) {
 static bool FrameOnSysChar(MainWindow* win, WPARAM key) {
     // use Alt+1 to Alt+8 for selecting the first 8 tabs and Alt+9 for the last tab
     if (win->tabsVisible && ('1' <= key && key <= '9')) {
-        TabsSelect(win, key < '9' ? (int)(key - '1') : (int)win->TabCount() - 1);
+        TabsSelect(win, key < '9' ? (int)(key - '1') : win->TabCount() - 1);
         return true;
     }
     // Alt + Space opens a sys menu
@@ -5022,7 +5022,7 @@ static void OnMenuCustomZoom(MainWindow* win) {
     }
 
     float virtZoom = win->ctrl->GetZoomVirtual();
-    if (!Dialog_CustomZoom(win->hwndFrame, win->AsChm(), &virtZoom)) {
+    if (!Dialog_CustomZoom(win->hwndFrame, win->AsChm() != nullptr, &virtZoom)) {
         return;
     }
     SmartZoom(win, virtZoom, nullptr, true);
@@ -6763,17 +6763,8 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             HDC hdc = BeginPaint(hwnd, &ps);
             LogRedraw("WM_PAINT", hwnd, &ps.rcPaint);
 
-            // fill the entire update region to prevent transparent flashing
-            // during resize (WS_CLIPCHILDREN prevents painting over child windows).
-            // The 1px border for resize is painted red (TODO: use proper color).
-            HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
-            // HBRUSH br = CreateSolidBrush(RGB(255, 0, 0));
-            FillRect(hdc, &ps.rcPaint, br);
-            DeleteObject(br);
-
             Rect cr = win->captionRect;
-            // captionArea spans from (0,0) to include the border on top/left;
-            // the red border fill already painted behind this
+            // captionArea spans from (0,0) to include the border on top/left
             Rect captionArea = {0, 0, cr.x + cr.dx, cr.y + cr.dy};
             DoubleBuffer buffer(hwnd, captionArea);
             HDC memDC = buffer.GetDC();
@@ -6787,6 +6778,17 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 DrawCaptionButton(win, memDC, &win->captionBtn[i]);
             }
             buffer.Flush(hdc);
+
+            // paint the 3px border outside the caption area
+            // (WS_CLIPCHILDREN prevents painting over child windows)
+            {
+                RECT rcCaption = ToRECT(captionArea);
+                ExcludeClipRect(hdc, rcCaption.left, rcCaption.top, rcCaption.right, rcCaption.bottom);
+                HBRUSH brBorder = CreateSolidBrush(ThemeControlBackgroundColor());
+                FillRect(hdc, &ps.rcPaint, brBorder);
+                DeleteObject(brBorder);
+            }
+
             EndPaint(hwnd, &ps);
             *callDef = false;
             return 0;
