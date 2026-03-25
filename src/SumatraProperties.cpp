@@ -420,6 +420,16 @@ static void LayoutButtons(PropertiesLayout* pl) {
 
 LRESULT CALLBACK WndProcProperties(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
+static WNDPROC DefWndProcPropertiesEdit = nullptr;
+
+static LRESULT CALLBACK WndProcPropertiesEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    if (WM_CHAR == msg && VK_ESCAPE == wp) {
+        DestroyWindow(GetParent(hwnd));
+        return 0;
+    }
+    return CallWindowProc(DefWndProcPropertiesEdit, hwnd, msg, wp, lp);
+}
+
 static void PropertiesOnCommand(HWND hwnd, WPARAM wp) {
     auto cmd = LOWORD(wp);
     PropertiesLayout* pl = FindPropertyWindowByHwnd(hwnd);
@@ -532,6 +542,11 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
     HWND hwndEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, L"", editStyle, 0, 0, cRc.dx, editDy, hwnd, nullptr, h, nullptr);
     layoutData->hwndEdit = hwndEdit;
+
+    if (!DefWndProcPropertiesEdit) {
+        DefWndProcPropertiesEdit = (WNDPROC)GetWindowLongPtr(hwndEdit, GWLP_WNDPROC);
+    }
+    SetWindowLongPtr(hwndEdit, GWLP_WNDPROC, (LONG_PTR)WndProcPropertiesEdit);
 
     HDC hdc = GetDC(hwnd);
     HFONT font = CreateSimpleFont(hdc, "Consolas", 14);
