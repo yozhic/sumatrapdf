@@ -4207,6 +4207,12 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     ShowWindow(win->hwndReBar, SW_HIDE);
     win->tabsCtrl->SetIsVisible(false);
 
+    // disable DWM rounded corners and border for true edge-to-edge fullscreen
+    auto cornerPref = DWMWCP_DONOTROUND;
+    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
+    COLORREF borderColor = DWMWA_COLOR_NONE;
+    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_BORDER_COLOR, &borderColor, sizeof(borderColor));
+
     SetWindowLong(win->hwndFrame, GWL_STYLE, ws);
     uint flags = SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOZORDER;
     SetWindowPos(win->hwndFrame, nullptr, rect.x, rect.y, rect.dx, rect.dy, flags);
@@ -4263,6 +4269,12 @@ void ExitFullScreen(MainWindow* win) {
     if (!win->isMenuHidden) {
         SetMenu(win->hwndFrame, win->menu);
     }
+
+    // restore DWM rounded corners and border
+    auto cornerPref = DWMWCP_ROUND;
+    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
+    COLORREF borderColor = DWMWA_COLOR_DEFAULT;
+    dwm::SetWindowAttribute(win->hwndFrame, DWMWA_BORDER_COLOR, &borderColor, sizeof(borderColor));
 
     Rect cr = ClientRect(win->hwndFrame);
     SetWindowLong(win->hwndFrame, GWL_STYLE, win->nonFullScreenWindowStyle);
