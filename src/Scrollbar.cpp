@@ -26,7 +26,6 @@ static COLORREF kThumbColor = RGB(0x88, 0x88, 0x88);
 static COLORREF kThumbHoverColor = RGB(0x66, 0x66, 0x66);
 static COLORREF kArrowColor = RGB(0x66, 0x66, 0x66);
 static COLORREF kTrackColor = RGB(0xF0, 0xF0, 0xF0);
-static constexpr int kThumbCornerRadius = 3;
 static constexpr int kMinThumbSize = 20;
 static constexpr BYTE kAlphaThin = 180;
 static constexpr BYTE kAlphaThick = 220;
@@ -213,46 +212,11 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
         }
     };
 
-    auto fillRoundedRect = [&](Rect r, int radius, COLORREF color) {
-        DWORD pixel = premultiply(color, alpha);
-        DWORD* pixels = (DWORD*)bits;
-        int x0 = std::max(r.x, 0);
-        int y0 = std::max(r.y, 0);
-        int x1 = std::min(r.x + r.dx, w);
-        int y1 = std::min(r.y + r.dy, h);
-        for (int y = y0; y < y1; y++) {
-            for (int x = x0; x < x1; x++) {
-                bool inside = true;
-                if (x < r.x + radius && y < r.y + radius) {
-                    int dx2 = x - (r.x + radius);
-                    int dy2 = y - (r.y + radius);
-                    inside = (dx2 * dx2 + dy2 * dy2) <= (radius * radius);
-                } else if (x >= r.x + r.dx - radius && y < r.y + radius) {
-                    int dx2 = x - (r.x + r.dx - radius - 1);
-                    int dy2 = y - (r.y + radius);
-                    inside = (dx2 * dx2 + dy2 * dy2) <= (radius * radius);
-                } else if (x < r.x + radius && y >= r.y + r.dy - radius) {
-                    int dx2 = x - (r.x + radius);
-                    int dy2 = y - (r.y + r.dy - radius - 1);
-                    inside = (dx2 * dx2 + dy2 * dy2) <= (radius * radius);
-                } else if (x >= r.x + r.dx - radius && y >= r.y + r.dy - radius) {
-                    int dx2 = x - (r.x + r.dx - radius - 1);
-                    int dy2 = y - (r.y + r.dy - radius - 1);
-                    inside = (dx2 * dx2 + dy2 * dy2) <= (radius * radius);
-                }
-                if (inside) {
-                    pixels[y * w + x] = pixel;
-                }
-            }
-        }
-    };
-
     if (sb->isThick) {
         fillRect(Rect(0, 0, w, h), kTrackColor);
     }
 
     Rect thumbRc = GetThumbRect(sb);
-    int cornerR = DpiScale(sb->hwndOwner, kThumbCornerRadius);
     COLORREF thumbCol = sb->mouseOverThumb ? kThumbHoverColor : kThumbColor;
 
     if (!sb->isThick) {
@@ -265,7 +229,7 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
             thumbRc.dy = thinW;
         }
     }
-    fillRoundedRect(thumbRc, cornerR, thumbCol);
+    fillRect(thumbRc, thumbCol);
 
     if (sb->isThick) {
         Rect arrowTop = GetArrowTopRect(sb);
@@ -278,8 +242,9 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
             int cx = arrowTop.x + arrowTop.dx / 2;
             int cy = arrowTop.y + arrowTop.dy / 2;
             int sz = arrowTop.dx / 4;
+            // Up-pointing triangle: point at top, base at bottom
             for (int dy2 = -sz; dy2 <= sz; dy2++) {
-                int halfW = sz - abs(dy2);
+                int halfW = (dy2 + sz) / 2;
                 int yy = cy + dy2;
                 if (yy < 0 || yy >= h) {
                     continue;
@@ -292,13 +257,11 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
                 }
             }
 
+            // Down-pointing triangle: base at top, point at bottom
             cx = arrowBot.x + arrowBot.dx / 2;
             cy = arrowBot.y + arrowBot.dy / 2;
             for (int dy2 = -sz; dy2 <= sz; dy2++) {
-                int halfW = abs(dy2);
-                if (halfW > sz) {
-                    halfW = sz;
-                }
+                int halfW = (sz - dy2) / 2;
                 int yy = cy + dy2;
                 if (yy < 0 || yy >= h) {
                     continue;
@@ -314,8 +277,9 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
             int cx = arrowTop.x + arrowTop.dx / 2;
             int cy = arrowTop.y + arrowTop.dy / 2;
             int sz = arrowTop.dy / 4;
+            // Left-pointing triangle: point at left, base at right
             for (int dx2 = -sz; dx2 <= sz; dx2++) {
-                int halfH = sz - abs(dx2);
+                int halfH = (dx2 + sz) / 2;
                 int xx = cx + dx2;
                 if (xx < 0 || xx >= w) {
                     continue;
@@ -328,13 +292,11 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
                 }
             }
 
+            // Right-pointing triangle: base at left, point at right
             cx = arrowBot.x + arrowBot.dx / 2;
             cy = arrowBot.y + arrowBot.dy / 2;
             for (int dx2 = -sz; dx2 <= sz; dx2++) {
-                int halfH = abs(dx2);
-                if (halfH > sz) {
-                    halfH = sz;
-                }
+                int halfH = (sz - dx2) / 2;
                 int xx = cx + dx2;
                 if (xx < 0 || xx >= w) {
                     continue;
