@@ -6753,7 +6753,8 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
 
         case WM_NCCALCSIZE: {
             RECT* r = wp == TRUE ? &((NCCALCSIZE_PARAMS*)lp)->rgrc[0] : (RECT*)lp;
-            if (IsZoomed(hwnd)) {
+            bool isFullScreen = win->isFullScreen || win->presentation;
+            if (IsZoomed(hwnd) && !isFullScreen) {
                 int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
                 int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
                 r->left += frameX;
