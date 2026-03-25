@@ -6784,7 +6784,9 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 r->bottom -= NON_CLIENT_BAND;
             }
             *callDef = false;
-            return 0;
+            // WVR_REDRAW: repaint entire client area on resize instead of
+            // copying old content, which causes a flash on the right edge
+            return wp == TRUE ? WVR_REDRAW : 0;
         }
 
         case WM_NCHITTEST: {
