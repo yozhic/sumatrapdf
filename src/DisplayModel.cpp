@@ -68,6 +68,8 @@
 // if true, we pre-render the pages right before and after the visible pages
 bool gPredictiveRender = true;
 
+extern bool gUseOverlayScrollbar;
+
 static int ColumnsFromDisplayMode(DisplayMode displayMode) {
     if (!IsSingle(displayMode)) {
         return 2;
@@ -712,7 +714,7 @@ RestartLayout:
         // restart the layout if we detect we need to show scrollbars, skip if
         //   scrollbars are being hidden or if `needVScroll` has already been
         //   set to true (i.e., the block has been processed)
-        if ((!gGlobalPrefs->fixedPageUI.hideScrollbars) && (!needVScroll) && viewPort.dy < currPosY + rowMaxPageDy) {
+        if ((!gGlobalPrefs->fixedPageUI.hideScrollbars && !gUseOverlayScrollbar) && (!needVScroll) && viewPort.dy < currPosY + rowMaxPageDy) {
             needVScroll = true;
             viewPort.dx -= GetSystemMetrics(SM_CXVSCROLL);
             goto RestartLayout;
@@ -729,7 +731,7 @@ RestartLayout:
         // restart the layout if we detect we need to show scrollbars, skip if
         //   scrollbars are being hidden or if `needHScroll` has already been
         //   set to true (i.e., the block has been processed)
-        if ((!gGlobalPrefs->fixedPageUI.hideScrollbars) && (!needHScroll) &&
+        if ((!gGlobalPrefs->fixedPageUI.hideScrollbars && !gUseOverlayScrollbar) && (!needHScroll) &&
             viewPort.dx < windowMargin.left + columnMaxWidth[0] +
                               (columns == 2 ? pageSpacing.dx + columnMaxWidth[1] : 0) + windowMargin.right) {
             needHScroll = true;
@@ -756,7 +758,7 @@ RestartLayout:
     // restart the layout if we detect we need to show scrollbars
     // (there are some edge cases we can't catch in the above loop)
     const int canvasDy = currPosY + windowMargin.bottom - pageSpacing.dy;
-    if ((!gGlobalPrefs->fixedPageUI.hideScrollbars) && (!needVScroll) && canvasDy > viewPort.dy) {
+    if ((!gGlobalPrefs->fixedPageUI.hideScrollbars && !gUseOverlayScrollbar) && (!needVScroll) && canvasDy > viewPort.dy) {
         needVScroll = true;
         viewPort.dx -= GetSystemMetrics(SM_CXVSCROLL);
         goto RestartLayout;
@@ -775,7 +777,7 @@ RestartLayout:
     // (there are some edge cases we can't catch in the above loop)
     int canvasDx = windowMargin.left + columnMaxWidth[0] + (columns == 2 ? pageSpacing.dx + columnMaxWidth[1] : 0) +
                    windowMargin.right;
-    if ((!gGlobalPrefs->fixedPageUI.hideScrollbars) && (!needHScroll) && canvasDx > viewPort.dx) {
+    if ((!gGlobalPrefs->fixedPageUI.hideScrollbars && !gUseOverlayScrollbar) && (!needHScroll) && canvasDx > viewPort.dx) {
         needHScroll = true;
         viewPort.dy -= GetSystemMetrics(SM_CYHSCROLL);
         goto RestartLayout;

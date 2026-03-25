@@ -220,6 +220,10 @@ struct MainWindow {
     Rect canvasRc;      // size of the canvas (excluding any scroll bars)
     int currPageNo = 0; // cached value, needed to determine when to auto-update the ToC selection
 
+    // overlay scrollbars (used when useOverlayScrollbar is true)
+    struct OverlayScrollbar* overlayScrollV = nullptr;
+    struct OverlayScrollbar* overlayScrollH = nullptr;
+
     int wheelAccumDelta = 0;
     UINT_PTR delayedRepaintTimer = 0;
 
@@ -283,6 +287,8 @@ struct MainWindow {
 
     bool CreateUIAProvider();
 };
+
+extern bool gUseOverlayScrollbar;
 
 void UpdateControlsColors(MainWindow*);
 void ScheduleRepaint(MainWindow*, int delay);

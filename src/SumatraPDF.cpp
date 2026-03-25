@@ -75,6 +75,7 @@
 #include "Selection.h"
 #include "StressTesting.h"
 #include "HomePage.h"
+#include "Scrollbar.h"
 #include "SumatraDialogs.h"
 #include "SumatraProperties.h"
 #include "TableOfContents.h"
@@ -823,6 +824,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     DisplayModel* dm = win->AsFixed();
 
     bool hideScrollbar = gGlobalPrefs->fixedPageUI.hideScrollbars;
+    bool useOverlay = gUseOverlayScrollbar;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -839,8 +841,22 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     }
 
     bool showHScroll = (viewPort.dx < canvas.dx) && !hideScrollbar;
-    ShowScrollBar(win->hwndCanvas, SB_HORZ, showHScroll);
-    SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
+    if (useOverlay) {
+        // Hide native scrollbar, use overlay instead
+        ShowScrollBar(win->hwndCanvas, SB_HORZ, FALSE);
+        SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
+        if (!win->overlayScrollH) {
+            win->overlayScrollH = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Horz);
+        }
+        if (showHScroll) {
+            OverlayScrollbarSetInfo(win->overlayScrollH, &si, TRUE);
+        } else {
+            OverlayScrollbarShow(win->overlayScrollH, false);
+        }
+    } else {
+        ShowScrollBar(win->hwndCanvas, SB_HORZ, showHScroll);
+        SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
+    }
 
     bool isSinglePageMode = gGlobalPrefs->scrollbarInSinglePage && (dm->GetDisplayMode() == DisplayMode::SinglePage);
     bool showVScroll = true;
@@ -871,8 +887,21 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     if (hideScrollbar) {
         showVScroll = false;
     }
-    ShowScrollBar(win->hwndCanvas, SB_VERT, showVScroll);
-    SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
+    if (useOverlay) {
+        ShowScrollBar(win->hwndCanvas, SB_VERT, FALSE);
+        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
+        if (!win->overlayScrollV) {
+            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Vert);
+        }
+        if (showVScroll) {
+            OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
+        } else {
+            OverlayScrollbarShow(win->overlayScrollV, false);
+        }
+    } else {
+        ShowScrollBar(win->hwndCanvas, SB_VERT, showVScroll);
+        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
+    }
 }
 
 static TempStr BuildZoomString(float zoomLevel) {
@@ -3767,8 +3796,18 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     }
 }
 
+static void UpdateOverlayScrollbarPositions(MainWindow* win) {
+    if (win->overlayScrollV) {
+        OverlayScrollbarUpdatePos(win->overlayScrollV);
+    }
+    if (win->overlayScrollH) {
+        OverlayScrollbarUpdatePos(win->overlayScrollH);
+    }
+}
+
 static void FrameOnSize(MainWindow* win, int, int) {
     RelayoutFrame(win);
+    UpdateOverlayScrollbarPositions(win);
 
     if (win->presentation || win->isFullScreen) {
         Rect fullscreen = GetFullscreenRect(win->hwndFrame);
@@ -6987,6 +7026,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         case WM_MOVE:
             if (win) {
                 RememberDefaultWindowPosition(win);
+                UpdateOverlayScrollbarPositions(win);
             }
             break;
 

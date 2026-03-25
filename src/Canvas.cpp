@@ -39,6 +39,7 @@
 #include "SumatraPDF.h"
 #include "EditAnnotations.h"
 #include "Notifications.h"
+#include "Scrollbar.h"
 #include "MainWindow.h"
 #include "resource.h"
 #include "Commands.h"
@@ -109,10 +110,15 @@ void UpdateDeltaPerLine() {
 static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
+    bool useOverlay = gUseOverlayScrollbar && win->overlayScrollV;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
-    GetScrollInfo(win->hwndCanvas, SB_VERT, &si);
+    if (useOverlay) {
+        OverlayScrollbarGetInfo(win->overlayScrollV, &si);
+    } else {
+        GetScrollInfo(win->hwndCanvas, SB_VERT, &si);
+    }
 
     int currPos = si.nPos;
     auto* ctrl = win->ctrl;
@@ -203,6 +209,13 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
     si.fMask = SIF_POS;
     SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
     GetScrollInfo(win->hwndCanvas, SB_VERT, &si);
+    if (useOverlay) {
+        SCROLLINFO siUpdate{};
+        siUpdate.cbSize = sizeof(siUpdate);
+        siUpdate.fMask = SIF_POS;
+        siUpdate.nPos = si.nPos;
+        OverlayScrollbarSetInfo(win->overlayScrollV, &siUpdate, TRUE);
+    }
 
     // If the position has changed or we're dealing with a touchpad scroll event,
     // scroll the window and update it
@@ -219,10 +232,15 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
 static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
+    bool useOverlay = gUseOverlayScrollbar && win->overlayScrollH;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
-    GetScrollInfo(win->hwndCanvas, SB_HORZ, &si);
+    if (useOverlay) {
+        OverlayScrollbarGetInfo(win->overlayScrollH, &si);
+    } else {
+        GetScrollInfo(win->hwndCanvas, SB_HORZ, &si);
+    }
 
     int currPos = si.nPos;
     USHORT msg = LOWORD(wp);
@@ -255,6 +273,13 @@ static void OnHScroll(MainWindow* win, WPARAM wp) {
     si.fMask = SIF_POS;
     SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
     GetScrollInfo(win->hwndCanvas, SB_HORZ, &si);
+    if (useOverlay) {
+        SCROLLINFO siUpdate{};
+        siUpdate.cbSize = sizeof(siUpdate);
+        siUpdate.fMask = SIF_POS;
+        siUpdate.nPos = si.nPos;
+        OverlayScrollbarSetInfo(win->overlayScrollH, &siUpdate, TRUE);
+    }
 
     // If the position has changed or we're dealing with a touchpad scroll event,
     // scroll the window and update it
@@ -1997,6 +2022,8 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
 
         case WM_MOUSEMOVE:
             OnMouseMove(win, x, y, wp);
+            OverlayScrollbarOnOwnerMouseMove(win->overlayScrollV);
+            OverlayScrollbarOnOwnerMouseMove(win->overlayScrollH);
             return 0;
 
         case WM_LBUTTONDOWN:
@@ -2074,7 +2101,7 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
             return OnGesture(win, msg, wp, lp);
 
         case WM_NCPAINT: {
-            if (gGlobalPrefs->fixedPageUI.hideScrollbars) {
+            if (gGlobalPrefs->fixedPageUI.hideScrollbars || gUseOverlayScrollbar) {
                 ShowScrollBar(win->hwndCanvas, SB_BOTH, false);
                 goto def;
             }

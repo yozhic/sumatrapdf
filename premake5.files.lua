@@ -748,6 +748,7 @@ function sumatrapdf_files()
     "RenderCache.*",
     "resource.h",
     "SearchAndDDE.*",
+    "Scrollbar.*",
     "Selection.*",
     "Settings.h",
     "SettingsStructs.*",

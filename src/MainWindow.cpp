@@ -30,6 +30,7 @@
 #include "TextSelection.h"
 #include "TextSearch.h"
 #include "Annotation.h"
+#include "Scrollbar.h"
 #include "SumatraPDF.h"
 #include "MainWindow.h"
 #include "WindowTab.h"
@@ -45,6 +46,8 @@
 #include "Canvas.h"
 
 #include "utils/Log.h"
+
+bool gUseOverlayScrollbar = true;
 
 struct LinkHandler : ILinkHandler {
     MainWindow* win = nullptr;
@@ -107,6 +110,9 @@ MainWindow::~MainWindow() {
     ReportIf(linkOnLastButtonDown);
 
     UnsubclassToc(this);
+
+    OverlayScrollbarDestroy(overlayScrollV);
+    OverlayScrollbarDestroy(overlayScrollH);
 
     DeleteObject(brMovePattern);
     DeleteObject(bmpMovePattern);
