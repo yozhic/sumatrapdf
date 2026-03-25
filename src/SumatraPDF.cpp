@@ -4162,9 +4162,6 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     SetMenu(win->hwndFrame, nullptr);
     ShowWindow(win->hwndReBar, SW_HIDE);
     win->tabsCtrl->SetIsVisible(false);
-    for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-        ShowWindow(win->caption->btn[i].hwnd, SW_HIDE);
-    }
 
     SetWindowLong(win->hwndFrame, GWL_STYLE, ws);
     uint flags = SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOZORDER;
@@ -4213,11 +4210,6 @@ void ExitFullScreen(MainWindow* win) {
     bool tocVisible = win->CurrentTab() && win->CurrentTab()->showToc;
     SetSidebarVisibility(win, tocVisible, gGlobalPrefs->showFavorites);
 
-    if (win->tabsInTitlebar) {
-        for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
-            ShowWindow(win->caption->btn[i].hwnd, SW_SHOW);
-        }
-    }
     if (win->tabsVisible) {
         win->tabsCtrl->SetIsVisible(true);
     }
@@ -6575,16 +6567,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return MA_ACTIVATE;
 
         case WM_ERASEBKGND:
-            // Paint the gap above the caption for window dragging.
-            if (win && win->tabsInTitlebar && !IsZoomed(hwnd)) {
-                HDC hdc = (HDC)wp;
-                RECT rc;
-                GetClientRect(hwnd, &rc);
-                rc.bottom = rc.top + kCaptionTopPadding;
-                HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
-                FillRect(hdc, &rc, br);
-                DeleteObject(br);
-            }
+            logfa("WM_ERASEBKGND\n");
             return TRUE;
 
         default:

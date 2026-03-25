@@ -19,10 +19,11 @@ enum CaptionButtons {
 };
 
 struct ButtonInfo {
-    HWND hwnd = nullptr;
+    Rect rect{};
     bool highlighted = false;
+    bool pressed = false;
     bool inactive = false;
-    RECT margins{};
+    bool visible = true;
     ButtonInfo() = default;
 };
 
@@ -45,8 +46,8 @@ struct CaptionInfo {
 
 void CreateCaption(MainWindow* win);
 LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, bool* callDef, MainWindow* win);
-void PaintParentBackground(HWND hwnd, HDC hdc);
 void RelayoutCaption(MainWindow* win);
+void PaintCaption(HDC hdc, MainWindow* win);
 void SetCaptionButtonsRtl(CaptionInfo*, bool isRtl);
 void CaptionUpdateUI(MainWindow*, CaptionInfo*);
 void DeleteCaption(CaptionInfo*);
