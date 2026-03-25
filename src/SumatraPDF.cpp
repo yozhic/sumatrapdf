@@ -3678,6 +3678,8 @@ constexpr int kSplitterDy = 4;
 constexpr int kSidebarMinDx = 150;
 constexpr int kTocMinDy = 100;
 
+constexpr int kFrameBorderSize = 3;
+
 static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sidebarDx = -1) {
     Rect rc = ClientRect(win->hwndFrame);
     // don't relayout while the window is minimized
@@ -3689,6 +3691,14 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         // make the black/white canvas cover the entire window
         MoveWindow(win->hwndCanvas, rc);
         return;
+    }
+
+    // inset by 1px border for resize hit-testing (not when maximized/fullscreen)
+    if (!IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
+        rc.x += kFrameBorderSize;
+        rc.y += kFrameBorderSize;
+        rc.dx -= 2 * kFrameBorderSize;
+        rc.dy -= 2 * kFrameBorderSize;
     }
 
     DeferWinPosHelper dh;
@@ -6708,22 +6718,25 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             break;
 
         case WM_NCPAINT:
-            *callDef = false;
+            *callDef = false;   
             return 0;
 
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
 
-            // fill the entire update region with background color to prevent
-            // transparent flashing during resize (WS_CLIPCHILDREN prevents
-            // painting over child windows)
-            HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+            // fill the entire update region to prevent transparent flashing
+            // during resize (WS_CLIPCHILDREN prevents painting over child windows).
+            // The 1px border for resize is painted red (TODO: use proper color).
+             HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+            //HBRUSH br = CreateSolidBrush(RGB(255, 0, 0));
             FillRect(hdc, &ps.rcPaint, br);
             DeleteObject(br);
 
             Rect cr = win->captionRect;
-            Rect captionArea = {cr.x, 0, cr.dx, cr.y + cr.dy};
+            // captionArea spans from (0,0) to include the border on top/left;
+            // the red border fill already painted behind this
+            Rect captionArea = {0, 0, cr.x + cr.dx, cr.y + cr.dy};
             DoubleBuffer buffer(hwnd, captionArea);
             HDC memDC = buffer.GetDC();
             {
@@ -6777,9 +6790,7 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 r->bottom -= NON_CLIENT_BAND;
             }
             *callDef = false;
-            // WVR_REDRAW: repaint entire client area on resize instead of
-            // copying old content, which causes a flash on the right edge
-            return wp == TRUE ? WVR_REDRAW : 0;
+            return 0;
         }
 
         case WM_NCHITTEST: {
@@ -6788,15 +6799,13 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             RECT wrc;
             GetWindowRect(hwnd, &wrc);
 
-            if (!IsZoomed(hwnd)) {
-                int frameX = GetSystemMetrics(SM_CXFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-                int frameY = GetSystemMetrics(SM_CYFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
-                int borderX = frameX + 3;
-                int borderY = frameY + 3;
-                bool onLeft = (x - wrc.left) < borderX;
-                bool onRight = (wrc.right - x) < borderX;
-                bool onTop = (y - wrc.top) < borderY;
-                bool onBottom = (wrc.bottom - y) < borderY;
+            // 1px painted border provides resize edges
+            if (!IsZoomed(hwnd) && !win->isFullScreen && !win->presentation) {
+                int b = kFrameBorderSize;
+                bool onLeft = (x - wrc.left) < b;
+                bool onRight = (wrc.right - x) <= b;
+                bool onTop = (y - wrc.top) < b;
+                bool onBottom = (wrc.bottom - y) <= b;
 
                 if (onTop && onLeft) {
                     *callDef = false;
