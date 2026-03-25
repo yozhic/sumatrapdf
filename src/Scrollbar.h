@@ -32,6 +32,7 @@ struct OverlayScrollbar {
     int hideAfterMouseStopMs = 3000; // hide after mouse stops moving
 
     // internal state
+    bool enabled = false;    // whether scrolling is needed (set by Show)
     bool isThick = false;    // currently showing thick version
     bool isThin = false;     // currently showing thin version
     bool isDragging = false; // user is dragging the thumb

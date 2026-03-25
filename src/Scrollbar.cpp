@@ -363,6 +363,10 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
             continue;
         }
 
+        if (!sb->enabled) {
+            continue;
+        }
+
         // Only process scrollbars whose owner is in the active window hierarchy
         bool ownerActive = IsOrIsParentOf(hwndForeground, sb->hwndOwner);
         if (!ownerActive) {
@@ -757,6 +761,7 @@ void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
     if (!sb) {
         return;
     }
+    sb->enabled = show;
     if (show) {
         ShowScrollbarWindow(sb, false);
     } else {

@@ -849,6 +849,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
             win->overlayScrollH = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Horz);
         }
         if (showHScroll) {
+            win->overlayScrollH->enabled = true;
             OverlayScrollbarSetInfo(win->overlayScrollH, &si, TRUE);
         } else {
             OverlayScrollbarShow(win->overlayScrollH, false);
@@ -894,6 +895,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
             win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Vert);
         }
         if (showVScroll) {
+            win->overlayScrollV->enabled = true;
             OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
         } else {
             OverlayScrollbarShow(win->overlayScrollV, false);
