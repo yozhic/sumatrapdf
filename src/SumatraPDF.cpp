@@ -3731,6 +3731,15 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         rc.dy -= 2 * kFrameBorderSize;
     }
 
+    // hide overlay scrollbars before relayout so they don't appear outside
+    // the window while child windows are being repositioned
+    if (win->overlayScrollV && (win->overlayScrollV->isThick || win->overlayScrollV->isThin)) {
+        ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
+    }
+    if (win->overlayScrollH && (win->overlayScrollH->isThick || win->overlayScrollH->isThin)) {
+        ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
+    }
+
     // suppress intermediate repaints during relayout
     SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
 
