@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync } from "node:fs";
 import { join, extname } from "node:path";
+import { spawnSync } from "node:child_process";
 import { commands } from "./gen-commands";
 
 const apptranslatorServer = "https://www.apptranslator.org";
@@ -484,6 +485,18 @@ async function main() {
   console.log(`Wrote ${path} of size ${fixed.length}`);
 
   printBadTranslations(badTranslations);
+
+  // compress translations-good.txt into .lzsa archive
+  const lzsaPath = join(translationsDir, "translations.txt.lzsa");
+  const goodPath = join(translationsDir, "translations-good.txt");
+  const makeLzsa = join("bin", "MakeLZSA.exe");
+  const lzsaArgs = [lzsaPath, `${goodPath}:translations-good.txt`];
+  console.log(`Running ${makeLzsa} ${lzsaArgs.join(" ")}`);
+  const res = spawnSync(makeLzsa, lzsaArgs, { stdio: "inherit" });
+  if (res.status !== 0) {
+    throw new Error(`MakeLZSA failed with exit code ${res.status}`);
+  }
+  console.log(`Wrote ${lzsaPath}`);
 }
 
 await main();
