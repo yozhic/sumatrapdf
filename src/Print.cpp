@@ -1595,7 +1595,8 @@ bool PrintFile2(EngineBase* engine, char* printerName, bool displayErrors, const
     }
 
     if (!printer) {
-        MessageBoxWarningCond(displayErrors, _TRA("Printer with given name doesn't exist"), _TRA("Printing problem."));
+        TempStr msg = str::FormatTemp(_TRA("Printer '%s' doesn't exist"), printerName);
+        MessageBoxWarningCond(displayErrors, msg, _TRA("Printing problem."));
         return false;
     }
 
