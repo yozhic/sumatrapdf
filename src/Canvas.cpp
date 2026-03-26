@@ -2181,6 +2181,7 @@ static void OnPaintError(MainWindow* win) {
     const char* filePath = tab->filePath;
     if (filePath) {
         TempStr msg = str::FormatTemp(_TRA("Loading %s ..."), filePath);
+        SetTextColor(hdc, ThemeWindowTextColor());
         DrawCenteredText(hdc, ClientRect(win->hwndCanvas), msg, IsUIRtl());
     }
     SelectObject(hdc, hPrevFont);
