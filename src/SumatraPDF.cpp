@@ -5733,6 +5733,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             UpdateFixedPageScrollbarsVisibility();
             break;
 
+        case CmdToggleUseTabs:
+            gGlobalPrefs->useTabs = !gGlobalPrefs->useTabs;
+            break;
+
         case CmdSaveAnnotations: {
             SaveAnnotationsToExistingFile(tab);
             break;

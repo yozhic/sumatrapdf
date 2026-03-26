@@ -98,10 +98,12 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugTestApp,
     CmdDebugTogglePredictiveRender,
     CmdDebugToggleRtl,
-    CmdFavoriteToggle,
+    CmdToggleAntiAlias,
     CmdToggleFullscreen,
     CmdToggleMenuBar,
     CmdToggleToolbar,
+    CmdToggleUseTabs,
+    CmdFavoriteToggle,
     CmdShowLog,
     CmdClearHistory,
     CmdReopenLastClosedFile,
@@ -495,6 +497,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         case CmdToggleAntiAlias: {
             isToggle = true;
             newIsOn = gGlobalPrefs->disableAntiAlias;
+        } break;
+        case CmdToggleUseTabs: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->useTabs;
         } break;
         case CmdToggleZoom: {
             // TODO: this toggles via different values

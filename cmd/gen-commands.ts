@@ -37,6 +37,7 @@ export const commands = [
     "CmdToggleScrollbars", "Toggle Scrollbars",
     "CmdToggleOverlayScrollbar", "Toggle Overlay Scrollbar",
     "CmdToggleMenuBar", "Toggle Menu Bar",
+    "CmdToggleUseTabs", "Toggle Use Tabs",
     "CmdCopySelection", "Copy Selection",
     "CmdTranslateSelectionWithGoogle", "Translate Selection with Google",
     "CmdTranslateSelectionWithDeepL", "Translate Selection With DeepL",
