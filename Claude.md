@@ -35,6 +35,8 @@ To add a new command:
 To add a new cmd-line flag:
 - add to cmd/gen-flags.ts
 - run "bun cmd/gen-flags.ts" to regenerate src/Flags.h and src/Flags.cpp
+- implement handling in Flags.cpp
+- document in docs/md/Version-history.md in **next** section
 
 ## Windows Shell Safety
 

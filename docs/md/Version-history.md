@@ -12,6 +12,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
 - you can drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers
+- add `-log-to-file <file>` cmd-line flag to log to a specific file (like `-log` but with custom log file path)
 
 ## 3.6 (2026-03-17)
 

@@ -26,19 +26,19 @@ enum class Arg {
     Install = 16, UnInstall = 17, WithFilter = 18, WithSearch = 19,
     WithPreview = 20, Rand = 21, Regress = 22, Extract = 23,
     Tester = 24, TestApp = 25, NewWindow = 26, Log = 27,
-    CrashOnOpen = 28, ReuseInstance = 29, EscToExit = 30, ArgEnumPrinters = 31,
-    ListPrinters = 32, SleepMs = 33, PrintTo = 34, PrintSettings = 35,
-    InverseSearch = 36, ForwardSearch1 = 37, ForwardSearch2 = 38, NamedDest = 39,
-    NamedDest2 = 40, Page = 41, View = 42, Zoom = 43,
-    Scroll = 44, AppData = 45, Plugin = 46, StressTest = 47,
-    N = 48, Max = 49, MaxFiles = 50, Render = 51,
-    ExtractText = 52, Bench = 53, Dir = 54, InstallDir = 55,
-    Lang = 56, UpdateSelfTo = 57, ArgDeleteFile = 58, BgCol = 59,
-    BgCol2 = 60, FwdSearchOffset = 61, FwdSearchWidth = 62, FwdSearchColor = 63,
-    FwdSearchPermanent = 64, MangaMode = 65, Search = 66, AllUsers = 67,
-    AllUsers2 = 68, RunInstallNow = 69, Adobe = 70, DDE = 71,
-    EngineDump = 72, SetColorRange = 73, PreviewPipe = 74, IFilterPipe = 75,
-    TestPreviewPipe = 76,
+    LogToFile = 28, CrashOnOpen = 29, ReuseInstance = 30, EscToExit = 31,
+    ArgEnumPrinters = 32, ListPrinters = 33, SleepMs = 34, PrintTo = 35,
+    PrintSettings = 36, InverseSearch = 37, ForwardSearch1 = 38, ForwardSearch2 = 39,
+    NamedDest = 40, NamedDest2 = 41, Page = 42, View = 43,
+    Zoom = 44, Scroll = 45, AppData = 46, Plugin = 47,
+    StressTest = 48, N = 49, Max = 50, MaxFiles = 51,
+    Render = 52, ExtractText = 53, Bench = 54, Dir = 55,
+    InstallDir = 56, Lang = 57, UpdateSelfTo = 58, ArgDeleteFile = 59,
+    BgCol = 60, BgCol2 = 61, FwdSearchOffset = 62, FwdSearchWidth = 63,
+    FwdSearchColor = 64, FwdSearchPermanent = 65, MangaMode = 66, Search = 67,
+    AllUsers = 68, AllUsers2 = 69, RunInstallNow = 70, Adobe = 71,
+    DDE = 72, EngineDump = 73, SetColorRange = 74, PreviewPipe = 75,
+    IFilterPipe = 76, TestPreviewPipe = 77,
 };
 
 static const char* gArgNames =
@@ -49,19 +49,19 @@ static const char* gArgNames =
     "install\0" "uninstall\0" "with-filter\0" "with-search\0"
     "with-preview\0" "rand\0" "regress\0" "x\0"
     "tester\0" "testapp\0" "new-window\0" "log\0"
-    "crash-on-open\0" "reuse-instance\0" "esc-to-exit\0" "enum-printers\0"
-    "list-printers\0" "sleep-ms\0" "print-to\0" "print-settings\0"
-    "inverse-search\0" "forward-search\0" "fwdsearch\0" "nameddest\0"
-    "named-dest\0" "page\0" "view\0" "zoom\0"
-    "scroll\0" "appdata\0" "plugin\0" "stress-test\0"
-    "n\0" "max\0" "max-files\0" "render\0"
-    "extract-text\0" "bench\0" "d\0" "install-dir\0"
-    "lang\0" "update-self-to\0" "delete-file\0" "bgcolor\0"
-    "bg-color\0" "fwdsearch-offset\0" "fwdsearch-width\0" "fwdsearch-color\0"
-    "fwdsearch-permanent\0" "manga-mode\0" "search\0" "all-users\0"
-    "allusers\0" "run-install-now\0" "a\0" "dde\0"
-    "engine-dump\0" "set-color-range\0" "preview-pipe\0" "ifilter-pipe\0"
-    "test-preview-pipe\0";
+    "log-to-file\0" "crash-on-open\0" "reuse-instance\0" "esc-to-exit\0"
+    "enum-printers\0" "list-printers\0" "sleep-ms\0" "print-to\0"
+    "print-settings\0" "inverse-search\0" "forward-search\0" "fwdsearch\0"
+    "nameddest\0" "named-dest\0" "page\0" "view\0"
+    "zoom\0" "scroll\0" "appdata\0" "plugin\0"
+    "stress-test\0" "n\0" "max\0" "max-files\0"
+    "render\0" "extract-text\0" "bench\0" "d\0"
+    "install-dir\0" "lang\0" "update-self-to\0" "delete-file\0"
+    "bgcolor\0" "bg-color\0" "fwdsearch-offset\0" "fwdsearch-width\0"
+    "fwdsearch-color\0" "fwdsearch-permanent\0" "manga-mode\0" "search\0"
+    "all-users\0" "allusers\0" "run-install-now\0" "a\0"
+    "dde\0" "engine-dump\0" "set-color-range\0" "preview-pipe\0"
+    "ifilter-pipe\0" "test-preview-pipe\0";
 // clang-format on
 // @gen-end flags
 
@@ -459,6 +459,12 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
         }
         paramInt = atoi(param);
 
+        if (arg == Arg::LogToFile) {
+            i.logFile = str::Dup(param);
+            i.log = true;
+            continue;
+        }
+
         if (arg == Arg::SleepMs) {
             i.sleepMs = paramInt;
             continue;
@@ -689,6 +695,7 @@ Flags::~Flags() {
     str::Free(updateSelfTo);
     str::Free(deleteFile);
     str::Free(search);
+    str::Free(logFile);
     str::Free(dde);
     str::Free(previewPipeName);
     str::Free(ifilterPipeName);

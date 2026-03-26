@@ -31,6 +31,7 @@ const args = [
     "TestApp", "testapp",
     "NewWindow", "new-window",
     "Log", "log",
+    "LogToFile", "log-to-file",
     "CrashOnOpen", "crash-on-open",
     "ReuseInstance", "reuse-instance",
     "EscToExit", "esc-to-exit",

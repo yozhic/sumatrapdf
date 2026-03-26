@@ -104,6 +104,7 @@ struct Flags {
     bool withPreview = false;
     bool justExtractFiles = false;
     bool log = false;
+    char* logFile = nullptr;
     bool allUsers = false;
     bool runInstallNow = false;
     bool storeInstaller = false;

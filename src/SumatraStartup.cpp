@@ -2298,7 +2298,12 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 #endif
 
     if (flags.log && !noLogHere) {
-        logFilePath = GetLogFilePathTemp();
+        if (flags.logFile) {
+            dir::CreateForFile(flags.logFile);
+            logFilePath = flags.logFile;
+        } else {
+            logFilePath = GetLogFilePathTemp();
+        }
         if (logFilePath) {
             StartLogToFile(logFilePath, true);
         }
