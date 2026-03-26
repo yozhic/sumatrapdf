@@ -646,8 +646,7 @@ const globalPrefs: Field[] = [
         "ShowMenubar",
         Bool,
         true,
-        "if false, the menu bar will be hidden for all newly opened windows " +
-          "(use F9 to show it until the window closes or Alt to show it just briefly), only applies if UseTabs is false",
+        "if false, the menu bar will be hidden (use F9 to toggle, persisted across sessions)",
       ),
     ),
     "2.5",

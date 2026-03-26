@@ -457,8 +457,7 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         } break;
         case CmdToggleMenuBar: {
             isToggle = true;
-            // isMenuHidden: true means hidden, toggling will show it
-            newIsOn = win->isMenuHidden;
+            newIsOn = !gGlobalPrefs->showMenubar;
         } break;
         case CmdToggleBookmarks:
         case CmdToggleTableOfContents: {

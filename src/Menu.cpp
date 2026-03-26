@@ -2311,13 +2311,13 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
         // disable custom caption to make room for the regular menu bar
         SetTabsInTitlebar(win, false);
         SetMenu(hwnd, win->menu);
-        win->isMenuHidden = false;
+        gGlobalPrefs->showMenubar = true;
         return;
     }
 
     bool hideMenu = GetMenu(hwnd) != nullptr;
     SetMenu(hwnd, hideMenu ? nullptr : win->menu);
-    win->isMenuHidden = hideMenu;
+    gGlobalPrefs->showMenubar = !hideMenu;
 
     // if hiding menu and useTabs, restore tabs in titlebar
     if (hideMenu && gGlobalPrefs->useTabs) {

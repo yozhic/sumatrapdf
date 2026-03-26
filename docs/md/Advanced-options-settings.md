@@ -92,9 +92,8 @@ RestoreSession = true
 ; if true, we'll always open files using existing SumatraPDF process
 ReuseInstance = true
 
-; if false, the menu bar will be hidden for all newly opened windows (use F9 to
-; show it until the window closes or Alt to show it just briefly), only applies
-; if UseTabs is false (introduced in version 2.5)
+; if false, the menu bar will be hidden (use F9 to toggle, persisted across
+; sessions) (introduced in version 2.5)
 ShowMenubar = true
 
 ; if true, we show the toolbar at the top of the window

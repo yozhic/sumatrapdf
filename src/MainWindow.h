@@ -168,7 +168,6 @@ struct MainWindow {
     Tooltip* infotip = nullptr;
 
     HMENU menu = nullptr;
-    bool isMenuHidden = false; // not persisted at shutdown
 
     DoubleBuffer* buffer = nullptr;
 

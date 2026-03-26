@@ -688,7 +688,7 @@ static void UpdateWindowRtlLayout(MainWindow* win) {
 void RebuildMenuBarForWindow(MainWindow* win) {
     HMENU oldMenu = win->menu;
     win->menu = BuildMenu(win);
-    if (!win->presentation && !win->isFullScreen && !win->isMenuHidden) {
+    if (!win->presentation && !win->isFullScreen && gGlobalPrefs->showMenubar) {
         SetMenu(win->hwndFrame, win->menu);
     }
     FreeMenuOwnerDrawInfoData(oldMenu);
@@ -1612,8 +1612,7 @@ static MainWindow* CreateMainWindow() {
 
     ReportIf(win->menu);
     win->menu = BuildMenu(win);
-    win->isMenuHidden = !gGlobalPrefs->showMenubar;
-    if (!win->isMenuHidden) {
+    if (gGlobalPrefs->showMenubar) {
         SetMenu(win->hwndFrame, win->menu);
     }
     win->brControlBgColor = CreateSolidBrush(ThemeControlBackgroundColor());
@@ -4339,7 +4338,7 @@ void ExitFullScreen(MainWindow* win) {
     if (gGlobalPrefs->showToolbar) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     }
-    if (!win->isMenuHidden) {
+    if (gGlobalPrefs->showMenubar) {
         SetMenu(win->hwndFrame, win->menu);
     }
 
@@ -7273,7 +7272,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
 
         case WM_SYSCOMMAND:
             // temporarily show the menu bar if it has been hidden
-            if (wp == SC_KEYMENU && win && win->isMenuHidden) {
+            if (wp == SC_KEYMENU && win && !gGlobalPrefs->showMenubar) {
                 ToggleMenuBar(win, true);
             }
             return DefWindowProc(hwnd, msg, wp, lp);
@@ -7285,7 +7284,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         case WM_EXITMENULOOP:
             gOverlayScrollbarSuppressThick = false;
             // hide the menu bar again if it was shown only temporarily
-            if (!wp && win && win->isMenuHidden) {
+            if (!wp && win && !gGlobalPrefs->showMenubar) {
                 SetMenu(hwnd, nullptr);
             }
             return DefWindowProc(hwnd, msg, wp, lp);
