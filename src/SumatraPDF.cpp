@@ -6701,7 +6701,13 @@ static void DrawCaptionButton(MainWindow* win, HDC hdc, ButtonInfo* bi) {
             if (isClose) {
                 bgCol = isPushed ? Color(200, 196, 43, 28) : Color(255, 196, 43, 28);
             } else {
-                bgCol = isPushed ? Color(255, 204, 204, 204) : Color(255, 229, 229, 229);
+                COLORREF hotBg = bgc;
+                if (IsLightColor(bgc)) {
+                    hotBg = isPushed ? AdjustLightness2(bgc, -40) : AdjustLightness2(bgc, -20);
+                } else {
+                    hotBg = isPushed ? AdjustLightness2(bgc, 40) : AdjustLightness2(bgc, 20);
+                }
+                bgCol = GdiRgbFromCOLORREF(hotBg);
             }
             SolidBrush bgBr(bgCol);
             gfx.FillRectangle(&bgBr, rButton.x, rButton.y, rButton.dx, rButton.dy);
