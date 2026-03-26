@@ -199,31 +199,34 @@ void CreateThemeCommands() {
     gCurrSetThemeCmdId = gFirstSetThemeCmdId + gCurrThemeIndex;
 }
 
-static COLORREF gOrigMenuTextColor = CLR_INVALID;
-static COLORREF gOrigMenuBgColor = CLR_INVALID;
+static constexpr int kMenuSysColorCount = 5;
+static INT gMenuSysColorIndices[kMenuSysColorCount] = {COLOR_MENUTEXT, COLOR_MENU, COLOR_3DSHADOW, COLOR_3DHIGHLIGHT,
+                                                       COLOR_MENUHILIGHT};
+static COLORREF gOrigMenuSysColors[kMenuSysColorCount];
+static bool gMenuSysColorsSaved = false;
 
 static void SetMenuSysColors(COLORREF txtCol, COLORREF bgCol) {
     if (!IsWindowsVistaOrGreater()) {
         return;
     }
-    if (gOrigMenuTextColor == CLR_INVALID) {
-        gOrigMenuTextColor = GetSysColor(COLOR_MENUTEXT);
-        gOrigMenuBgColor = GetSysColor(COLOR_MENU);
+    if (!gMenuSysColorsSaved) {
+        for (int i = 0; i < kMenuSysColorCount; i++) {
+            gOrigMenuSysColors[i] = GetSysColor(gMenuSysColorIndices[i]);
+        }
+        gMenuSysColorsSaved = true;
     }
-    INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
-    COLORREF colors[] = {txtCol, bgCol};
-    SetSysColors(dimof(indices), indices, colors);
+    COLORREF edgeCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
+    COLORREF highlightBg = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
+    COLORREF colors[kMenuSysColorCount] = {txtCol, bgCol, edgeCol, edgeCol, highlightBg};
+    SetSysColors(kMenuSysColorCount, gMenuSysColorIndices, colors);
 }
 
 static void RestoreMenuSysColors() {
-    if (gOrigMenuTextColor == CLR_INVALID) {
+    if (!gMenuSysColorsSaved) {
         return;
     }
-    INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
-    COLORREF colors[] = {gOrigMenuTextColor, gOrigMenuBgColor};
-    SetSysColors(dimof(indices), indices, colors);
-    gOrigMenuTextColor = CLR_INVALID;
-    gOrigMenuBgColor = CLR_INVALID;
+    SetSysColors(kMenuSysColorCount, gMenuSysColorIndices, gOrigMenuSysColors);
+    gMenuSysColorsSaved = false;
 }
 
 void SetThemeByIndex(int themeIdx) {
