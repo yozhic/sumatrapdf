@@ -327,6 +327,10 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
 }
 
 static void ShowScrollbarWindow(OverlayScrollbar* sb, bool thick) {
+    // Don't revert to thin while user is dragging the thumb
+    if (sb->isDragging && !thick) {
+        return;
+    }
     sb->isThick = thick;
     sb->isThin = !thick;
     OverlayScrollbarUpdatePos(sb);
@@ -340,6 +344,10 @@ static void ShowScrollbarWindow(OverlayScrollbar* sb, bool thick) {
 }
 
 static void HideScrollbarWindow(OverlayScrollbar* sb) {
+    // Don't hide while user is dragging the thumb
+    if (sb->isDragging) {
+        return;
+    }
     sb->isThick = false;
     sb->isThin = false;
     sb->mouseOverThumb = false;
