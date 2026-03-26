@@ -4581,7 +4581,7 @@ static void OnFrameKeyEsc(MainWindow* win) {
         return;
     }
     if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
-        CloseCurrentTab(win, true);
+        CloseWindow(win, true, false);
         return;
     }
 }
