@@ -2114,8 +2114,6 @@ void MenuCustomDrawMesureItem(HWND hwnd, MEASUREITEMSTRUCT* mis) {
 // - paint shortcut (part after \t if exists) separately
 // - paint MFS_DISABLED state
 // - paint icons for system menus
-// - for submenus, the triangle on the right doesn't draw in the right color
-//   I don't know who's drawing it
 void MenuCustomDrawItem(HWND hwnd, DRAWITEMSTRUCT* dis) {
     if (ODT_MENU != dis->CtlType) {
         return;

@@ -230,6 +230,13 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setDlgBackgroundColor(ctrlBg);
         DarkMode::setLinkTextColor(ThemeWindowLinkColor());
         DarkMode::setEdgeColor(edgeCol);
+        // set menu system colors so Windows draws submenu arrows correctly
+        // (DarkMode::setSysColor only supports COLOR_WINDOW/WINDOWTEXT/BTNFACE)
+        {
+            INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
+            COLORREF colors[] = {ThemeWindowTextColor(), ThemeMainWindowBackgroundColor()};
+            SetSysColors(dimof(indices), indices, colors);
+        }
         DarkMode::updateThemeBrushesAndPens();
 
         DarkMode::setViewTextColor(ThemeWindowTextColor());
