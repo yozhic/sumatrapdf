@@ -1615,6 +1615,9 @@ static MainWindow* CreateMainWindow() {
     }
     win->brControlBgColor = CreateSolidBrush(ThemeControlBackgroundColor());
 
+    // suppress painting during window setup to avoid white flash with dark themes
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
+
     ShowWindow(win->hwndCanvas, SW_SHOW);
     UpdateWindow(win->hwndCanvas);
 
@@ -1660,6 +1663,10 @@ static MainWindow* CreateMainWindow() {
         // could custom paint instead of using DarkMode
         // DarkMode::setDarkTooltips(win->infotip->hwnd, (int)DarkMode::ToolTipsType::tooltip);
     }
+
+    // re-enable painting now that dark mode is configured
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
+
     return win;
 }
 
