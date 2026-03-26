@@ -34,9 +34,11 @@
 #include "DarkModeSubclass.h"
 #include "Notifications.h"
 #include "Translations.h"
+#include "Installer.h"
+#include "RegistryPreview.h"
+#include "RegistrySearchFilter.h"
 
 #include "utils/Log.h"
-
 
 // clang-format off
 // those commands never show up in command palette
@@ -293,11 +295,17 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return RecentlyCloseDocumentsCount() > 0;
     }
 
+    // must check before ctx.isDocLoaded
+    if (cmdId == CmdToggleWindowsPreviewer || cmdId == CmdToggleWindowsSearchFilter) {
+        return IsOurExeInstalled();
+    }
+
     // when document is not loaded, most commands are not available
     // except those white-listed
     if (IsCmdInList(cmdId, gDocumentNotOpenWhitelist)) {
         return true;
     }
+
     if (!ctx.isDocLoaded) {
         return false;
     }
@@ -518,6 +526,23 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
     if (isToggle) {
         s = (const char*)str::JoinTemp(s, newIsOn ? ": on" : ": off");
     }
+
+    if (cmdId == CmdToggleWindowsPreviewer) {
+        if (IsPreviewInstalled()) {
+            s = _TRA("Un-register Windows Previewer");
+        } else {
+            s = _TRA("Register Windows Previewer");
+        }
+    }
+
+    if (cmdId == CmdToggleWindowsSearchFilter) {
+        if (IsSearchFilterInstalled()) {
+            s = _TRA("Un-register Windows Search Filter");
+        } else {
+            s = _TRA("Register Windows Search Filter");
+        }
+    }
+
     return s;
 }
 
@@ -625,14 +650,15 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     StrVecCP tempCommands;
     int cmdId = (int)CmdFirst + 1;
     for (SeqStrings name = gCommandDescriptions; name; seqstrings::Next(name, &cmdId)) {
-        if (AllowCommand(ctx, (i32)cmdId)) {
-            ReportIf(str::Leni(name) == 0);
-            ItemDataCP data;
-            data.cmdId = (i32)cmdId;
-            auto nameTranslated = trans::GetTranslation(name);
-            auto nameUpdated = UpdateCommandNameTemp(mainWin, cmdId, (TempStr)nameTranslated);
-            tempCommands.Append(nameUpdated, data);
+        if (!AllowCommand(ctx, (i32)cmdId)) {
+            continue;
         }
+        ReportIf(str::Leni(name) == 0);
+        ItemDataCP data;
+        data.cmdId = (i32)cmdId;
+        auto nameTranslated = trans::GetTranslation(name);
+        auto nameUpdated = UpdateCommandNameTemp(mainWin, cmdId, (TempStr)nameTranslated);
+        tempCommands.Append(nameUpdated, data);
     }
 
     // includes externalViewers, selectionHandlers and keyboardShortcuts

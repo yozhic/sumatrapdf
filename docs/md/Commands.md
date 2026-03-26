@@ -268,6 +268,8 @@ CmdHelpVisitWebsite,,Help: SumatraPDF Website
 Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdToggleInverseSearch,,Toggle Inverse Search,"temporarily disable TeX inverse search on left mouse click, ver 3.6+"
 CmdToggleAntiAlias,,Toggle Anti-Alias Rendering,"Toggle anti-alias rendering in pdf and epub documents, ver 3.6+"
+CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only available when SumatraPDF is installed. Registers or un-registers the PDF preview handler for Windows Explorer preview pane, ver 3.7+"
+CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only available when SumatraPDF is installed. Registers or un-registers the PDF search filter for Windows Search indexing, ver 3.7+"
 ```
 
 ## Debug

@@ -3,6 +3,13 @@ import { join, extname } from "node:path";
 import { spawnSync } from "node:child_process";
 import { commands } from "./gen-commands";
 
+// strings that should not be sent for translation
+// (e.g. command names whose display text is set dynamically)
+const translationBlacklist: string[] = [
+  "Toggle Windows Previewer",
+  "Toggle Windows Search Filter",
+];
+
 const apptranslatorServer = "https://www.apptranslator.org";
 const translationsDir = "translations";
 const translationsTxtPath = join(translationsDir, "translations.txt");
@@ -49,8 +56,16 @@ function extractStringsToTranslate(): string[] {
     strs.push(commands[i]);
   }
   const unique = [...new Set(strs)];
-  console.log(`${unique.length} unique strings to translate (including command descriptions)`);
-  return unique;
+  // verify blacklisted strings are actually in the list before removing them
+  for (const bl of translationBlacklist) {
+    if (!unique.includes(bl)) {
+      throw new Error(`Blacklisted string "${bl}" not found in strings to translate`);
+    }
+  }
+  const blacklistSet = new Set(translationBlacklist);
+  const filtered = unique.filter((s) => !blacklistSet.has(s));
+  console.log(`${filtered.length} unique strings to translate (including command descriptions, ${translationBlacklist.length} blacklisted)`);
+  return filtered;
 }
 
 function getTransSecret(): string {

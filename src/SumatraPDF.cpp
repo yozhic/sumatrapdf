@@ -87,6 +87,9 @@
 #include "SumatraConfig.h"
 #include "EditAnnotations.h"
 #include "CommandPalette.h"
+#include "Installer.h"
+#include "RegistryPreview.h"
+#include "RegistrySearchFilter.h"
 #include "Theme.h"
 #include "DarkModeSubclass.h"
 
@@ -4509,10 +4512,10 @@ static bool FrameOnKeydown(MainWindow* win, WPARAM key, LPARAM lp) {
     // lf("key=%d,%c,shift=%d\n", key, (char)key, (int)WasKeyDown(VK_SHIFT));
 
     if (VK_MULTIPLY == key && dm) {
-        //logf("VK_MULTIPLY\n");
+        // logf("VK_MULTIPLY\n");
         dm->RotateBy(90);
     } else if (VK_DIVIDE == key && dm) {
-        //logf("VK_DIVIDE\n");
+        // logf("VK_DIVIDE\n");
         dm->RotateBy(-90);
         gIsDivideKeyDown = true;
     } else if (VK_DELETE == key && !isCtrl && !isShift) {
@@ -5732,6 +5735,32 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         case CmdToggleMenuBar: {
             if (!win->tabsInTitlebar) {
                 ToggleMenuBar(win, false);
+            }
+            break;
+        }
+
+        case CmdToggleWindowsPreviewer: {
+            PreviousInstallationInfo info;
+            GetPreviousInstallInfo(&info);
+            if (info.installationDir) {
+                if (IsPreviewInstalled()) {
+                    UnRegisterPreviewer();
+                } else {
+                    RegisterPreviewer(info.allUsers, info.installationDir);
+                }
+            }
+            break;
+        }
+
+        case CmdToggleWindowsSearchFilter: {
+            PreviousInstallationInfo info;
+            GetPreviousInstallInfo(&info);
+            if (info.installationDir) {
+                if (IsSearchFilterInstalled()) {
+                    UnRegisterSearchFilter();
+                } else {
+                    RegisterSearchFilter(info.allUsers, info.installationDir);
+                }
             }
             break;
         }

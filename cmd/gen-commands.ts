@@ -195,6 +195,8 @@ export const commands = [
     "CmdDebugTogglePredictiveRender", "Debug: Toggle Predictive Rendering",
     "CmdDebugToggleRtl", "Debug: Toggle Rtl",
     "CmdToggleAntiAlias", "Toggle Anti-Alias Rendering",
+    "CmdToggleWindowsPreviewer", "Toggle Windows Previewer",
+    "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",
     "CmdNone", "Do nothing",
 ];
 
