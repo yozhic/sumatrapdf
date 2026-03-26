@@ -3789,11 +3789,8 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
             if (updateToolbars) {
                 dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
             }
-            // TODO: show tab bar also for About window (or hide the toolbar so that it doesn't jump around)
-            if (!win->IsCurrentTabAbout()) {
-                rc.y += tabHeight;
-                rc.dy -= tabHeight;
-            }
+            rc.y += tabHeight;
+            rc.dy -= tabHeight;
         }
     }
     if (gGlobalPrefs->showToolbar && !win->presentation && !win->isFullScreen) {
@@ -5763,9 +5760,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         }
 
         case CmdToggleMenuBar: {
-            if (!win->tabsInTitlebar) {
-                ToggleMenuBar(win, false);
-            }
+            ToggleMenuBar(win, false);
             break;
         }
 

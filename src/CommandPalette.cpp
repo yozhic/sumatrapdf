@@ -555,7 +555,7 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     ctx.hasSelection = ctx.isDocLoaded && currTab && mainWin->showSelection && currTab->selectionOnPage;
     ctx.canSendEmail = CanSendAsEmailAttachment(currTab);
     ctx.isPdf = ctx.isDocLoaded && CouldBePDFDoc(currTab);
-    ctx.allowToggleMenuBar = !mainWin->tabsInTitlebar;
+    ctx.allowToggleMenuBar = true;
 
     int nTabs = mainWin->TabCount();
     int tabIdx = mainWin->GetTabIdx(currTab);

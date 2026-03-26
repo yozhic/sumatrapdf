@@ -38,6 +38,7 @@
 #include "Favorites.h"
 #include "FileThumbnails.h"
 #include "Selection.h"
+#include "Tabs.h"
 #include "HomePage.h"
 #include "Translations.h"
 #include "Toolbar.h"
@@ -2298,11 +2299,28 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
     HWND hwnd = win->hwndFrame;
 
     if (showTemporarily) {
+        if (win->tabsInTitlebar) {
+            // can't show regular menu with custom caption, so do nothing
+            return;
+        }
         SetMenu(hwnd, win->menu);
         return;
     }
 
-    bool hideMenu = !showTemporarily && GetMenu(hwnd) != nullptr;
+    if (win->tabsInTitlebar) {
+        // disable custom caption to make room for the regular menu bar
+        SetTabsInTitlebar(win, false);
+        SetMenu(hwnd, win->menu);
+        win->isMenuHidden = false;
+        return;
+    }
+
+    bool hideMenu = GetMenu(hwnd) != nullptr;
     SetMenu(hwnd, hideMenu ? nullptr : win->menu);
     win->isMenuHidden = hideMenu;
+
+    // if hiding menu and useTabs, restore tabs in titlebar
+    if (hideMenu && gGlobalPrefs->useTabs) {
+        SetTabsInTitlebar(win, true);
+    }
 }
