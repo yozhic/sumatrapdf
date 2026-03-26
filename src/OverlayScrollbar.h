@@ -5,6 +5,7 @@
 // a standard Windows scrollbar but floats over the owner window.
 
 extern int gThickVisibilityDistance;
+extern bool gOverlayScrollbarSuppressThick;
 
 enum class ScrollbarType {
     Vert,

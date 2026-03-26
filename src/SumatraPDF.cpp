@@ -7255,7 +7255,12 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             }
             return DefWindowProc(hwnd, msg, wp, lp);
 
+        case WM_ENTERMENULOOP:
+            gOverlayScrollbarSuppressThick = true;
+            return DefWindowProc(hwnd, msg, wp, lp);
+
         case WM_EXITMENULOOP:
+            gOverlayScrollbarSuppressThick = false;
             // hide the menu bar again if it was shown only temporarily
             if (!wp && win && win->isMenuHidden) {
                 SetMenu(hwnd, nullptr);

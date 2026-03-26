@@ -14,6 +14,7 @@ static bool gScrollbarClassRegistered = false;
 
 // distance in pixels from scrollbar edge at which it transitions to thick
 int gThickVisibilityDistance = 32;
+bool gOverlayScrollbarSuppressThick = false;
 
 // all live overlay scrollbars, for global mouse tracking
 static Vec<OverlayScrollbar*> gAllScrollbars;
@@ -421,6 +422,10 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
 
         if (sb->isDragging) {
             // Don't change state while dragging
+            continue;
+        }
+
+        if (gOverlayScrollbarSuppressThick) {
             continue;
         }
 
