@@ -248,6 +248,7 @@ CmdCheckUpdate,,Check For Updates
 CmdClearHistory,,Clear History
 CmdContributeTranslation,,Contribute Translation
 CmdForgetSelectedDocument,,Remove Selected Document From History
+CmdListPrinters,,List Printers,ver 3.7+
 CmdOptions,,Options...
 CmdShowLog,,Show Logs
 ```

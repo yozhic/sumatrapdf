@@ -11,6 +11,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
 - you can drag&drop selected text to another application, like a text editor
+- added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers
 
 ## 3.6 (2026-03-17)
 

@@ -78,7 +78,8 @@ static SeqStrings gCommandNames =
     "CmdDebugCorruptMemory\0" "CmdDebugCrashMe\0" "CmdDebugDownloadSymbols\0"
     "CmdDebugTestApp\0" "CmdDebugShowNotif\0" "CmdDebugStartStressTest\0"
     "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0" "CmdToggleAntiAlias\0"
-    "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0" "CmdNone\0" "\0";
+    "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0"
+    "CmdNone\0" "\0";
 
 static i32 gCommandIds[] = {
     CmdOpenFile, CmdClose, CmdCloseCurrentDocument,
@@ -145,7 +146,8 @@ static i32 gCommandIds[] = {
     CmdDebugCorruptMemory, CmdDebugCrashMe, CmdDebugDownloadSymbols,
     CmdDebugTestApp, CmdDebugShowNotif, CmdDebugStartStressTest,
     CmdDebugTogglePredictiveRender, CmdDebugToggleRtl, CmdToggleAntiAlias,
-    CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter, CmdNone,
+    CmdListPrinters, CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter,
+    CmdNone,
 };
 
 SeqStrings gCommandDescriptions =
@@ -213,7 +215,8 @@ SeqStrings gCommandDescriptions =
     "Debug: Corrupt Memory\0" "Debug: Crash Me\0" "Debug: Download Symbols\0"
     "Debug: Test App\0" "Debug: Show Notification\0" "Debug: Start Stress Test\0"
     "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0" "Toggle Anti-Alias Rendering\0"
-    "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0" "Do nothing\0" "\0";
+    "List Printers\0" "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0"
+    "Do nothing\0" "\0";
 // clang-format on
 // @gen-end cmd-c
 

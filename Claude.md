@@ -27,6 +27,8 @@ To add a new advanced setting:
 To add a new command:
 - add to cmd/gen-commands.ts
 - run "bun cmd/gen-commands.ts" to regenerate src/Commands.h and src/Commands.cpp
+- document in docs/md/Commands.md
+- document in docs/md/Version-history.md in **next** section
 
 ## Adding a new cmd-line flag
 

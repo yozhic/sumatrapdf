@@ -5072,6 +5072,26 @@ void ShowLogFileSmart() {
     LaunchFileIfExists(path);
 }
 
+struct ListPrintersResult {
+    HWND hwndParent;
+    char* text;
+};
+
+static void ListPrintersShowResult(ListPrintersResult* d) {
+    RemoveNotificationsForGroup(d->hwndParent, kNotifActionResponse);
+    ShowTextInWindow("SumatraPDF - Printers", d->text);
+    str::Free(d->text);
+    delete d;
+}
+
+static void ListPrintersThread(HWND* hwndPtr) {
+    str::Str out;
+    GetPrintersInfo(out);
+    auto d = new ListPrintersResult{*hwndPtr, str::Dup(out.CStr())};
+    delete hwndPtr;
+    uitask::Post(MkFunc0<ListPrintersResult>(ListPrintersShowResult, d));
+}
+
 void ReopenLastClosedFile(MainWindow* win) {
     char* path = PopRecentlyClosedDocument();
     if (!path) {
@@ -5570,6 +5590,16 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         case CmdShowLog:
             ShowLogFileSmart();
             break;
+
+        case CmdListPrinters: {
+            NotificationCreateArgs nargs;
+            nargs.hwndParent = win->hwndCanvas;
+            nargs.msg = _TRA("Collecting list of printers");
+            ShowNotification(nargs);
+            auto data = new HWND(win->hwndCanvas);
+            RunAsync(MkFunc0<HWND>(ListPrintersThread, data), "ListPrinters");
+            break;
+        }
 
         case CmdNextTab:
         case CmdPrevTab: {

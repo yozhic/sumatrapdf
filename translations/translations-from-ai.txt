@@ -33332,3 +33332,291 @@ vn:Đăng ký Windows Search Filter
 vn:Hủy đăng ký Windows Previewer
 :Un-register Windows Search Filter
 vn:Hủy đăng ký Windows Search Filter
+:Collecting list of printers
+am:የአታሚዎች ዝርዝር በመሰብሰብ ላይ
+:List Printers
+am:አታሚዎችን ዘርዝር
+:Collecting list of printers
+ar:جمع قائمة الطابعات
+:List Printers
+ar:قائمة الطابعات
+:Collecting list of printers
+br:O teskañ roll ar moulerezioù
+:List Printers
+br:Roll ar moulerezioù
+:Collecting list of printers
+cn:正在收集打印机列表
+:List Printers
+cn:打印机列表
+:Collecting list of printers
+co:Raccolta di a lista di stampanti
+:List Printers
+co:Lista Stampanti
+:Collecting list of printers
+de:Erfasse Liste der Drucker
+:List Printers
+de:Drucker auflisten
+:Collecting list of printers
+el:Συλλογή λίστας εκτυπωτών
+:List Printers
+el:Λίστα Εκτυπωτών
+:Collecting list of printers
+hi:प्रिंटरों की सूची एकत्र की जा रही है
+:List Printers
+hi:प्रिंटर सूची
+:Collecting list of printers
+ja:プリンターのリストを収集中
+:List Printers
+ja:プリンター一覧
+:Collecting list of printers
+ml:പ്രിന്ററുകളുടെ പട്ടിക ശേഖരിക്കുന്നു
+:List Printers
+ml:പ്രിന്ററുകൾ പട്ടികപ്പെടുത്തുക
+:Collecting list of printers
+nl:Lijst met printers verzamelen
+:List Printers
+nl:Printers weergeven
+:Collecting list of printers
+pl:Zbieranie listy drukarek
+:List Printers
+pl:Lista drukarek
+:Collecting list of printers
+ru:Сбор списка принтеров
+:List Printers
+ru:Список принтеров
+:Collecting list of printers
+sk:Zbieram zoznam tlačiarní
+:List Printers
+sk:Zoznam tlačiarní
+:Collecting list of printers
+sr-rs:Прикупљање листе штампача
+:List Printers
+sr-rs:Листа штампача
+:Collecting list of printers
+tw:正在收集印表機清單
+:List Printers
+tw:列出印表機
+:Collecting list of printers
+az:Printer siyahısı toplanır
+:List Printers
+az:Printerlərin siyahısı
+:Collecting list of printers
+by:Збор спіса прынтэраў
+:List Printers
+by:Спіс прынтэраў
+:Collecting list of printers
+ca:Recollint la llista d'impressores
+:List Printers
+ca:Llista d'impressores
+:Collecting list of printers
+cy:Casglu rhestr o argraffwyr
+:List Printers
+cy:Rhestru Argraffwyr
+:Collecting list of printers
+cz:Získávání seznamu tiskáren
+:List Printers
+cz:Seznam tiskáren
+:Collecting list of printers
+es:Recopilando lista de impresoras
+:List Printers
+es:Listar impresoras
+:Collecting list of printers
+fa:در حال جمع‌آوری فهرست چاپگرها
+:List Printers
+fa:فهرست چاپگرها
+:Collecting list of printers
+fi:Kerätään tulostinluetteloa
+:List Printers
+fi:Listaa tulostimet
+:Collecting list of printers
+fo:Savnar lista av prентarum
+:List Printers
+fo:Lista Prentarar
+:Collecting list of printers
+fr:Collecte de la liste des imprimantes
+:List Printers
+fr:Lister les imprimantes
+:Collecting list of printers
+ga:Liosta na bpriontálaithe á bhailiú
+:List Printers
+ga:Liostú Priontálaithe
+:Collecting list of printers
+gl:Recollendo lista de impresoras
+:List Printers
+gl:Listar impresoras
+:Collecting list of printers
+he:אוסף רשימת מדפסות
+:List Printers
+he:רשימת מדפסות
+:Collecting list of printers
+hu:Nyomtatók listájának összegyűjtése
+:List Printers
+hu:Nyomtatók listája
+:Collecting list of printers
+id:Mengumpulkan daftar printer
+:List Printers
+id:Daftar Printer
+:Collecting list of printers
+it:Raccolta elenco stampanti
+:List Printers
+it:Elenca stampanti
+:Collecting list of printers
+kr:프린터 목록 수집 중
+:List Printers
+kr:프린터 목록
+:Collecting list of printers
+lv:Notiek printeru saraksta vākšana
+:List Printers
+lv:Printeru saraksts
+:Collecting list of printers
+my:ပရင်တာစာရင်းကို စုဆောင်းနေသည်
+:List Printers
+my:ပရင်တာများ စာရင်း
+:Collecting list of printers
+pt:Coletando lista de impressoras
+:List Printers
+pt:Listar Impressoras
+:Collecting list of printers
+ro:Se colectează lista de imprimante
+:List Printers
+ro:Listează imprimante
+:Collecting list of printers
+sat:ᱪᱷᱟᱯᱟᱠᱚ ᱨᱮᱭᱟᱜ ᱞᱤᱥᱴᱤ ᱡᱟᱣᱨᱟᱣ ᱠᱟᱱᱟ
+:List Printers
+sat:ᱪᱷᱟᱯᱟᱠᱚ ᱞᱤᱥᱴᱤ
+:Collecting list of printers
+sl:Zbiranje seznama tiskalnikov
+:List Printers
+sl:Seznam tiskalnikov
+:Collecting list of printers
+sv:Samlar lista över skrivare
+:List Printers
+sv:Lista skrivare
+:Collecting list of printers
+ta:அச்சுப்பொறிகளின் பட்டியலை சேகரிக்கிறது
+:List Printers
+ta:அச்சுப்பொறிகளை பட்டியலிடு
+:Collecting list of printers
+tr:Yazıcı listesi toplanıyor
+:List Printers
+tr:Yazıcıları Listele
+:Collecting list of printers
+uz:Printerlar ro'yxati yig'ilmoqda
+:List Printers
+uz:Printerlar ro'yxati
+:Collecting list of printers
+af:Versamel lys van drukkers
+:List Printers
+af:Lys Drukkers
+:Collecting list of printers
+bg:Събиране на списък с принтери
+:List Printers
+bg:Списък с принтери
+:Collecting list of printers
+bn:প্রিন্টারের তালিকা সংগ্রহ করা হচ্ছে
+:List Printers
+bn:প্রিন্টারের তালিকা
+:Collecting list of printers
+bs:Prikupljanje liste štampača
+:List Printers
+bs:Lista štampača
+:Collecting list of printers
+ca-xv:Recopilant llista d'impressores
+:List Printers
+ca-xv:Llistar impressores
+:Collecting list of printers
+dk:Indsamler liste over printere
+:List Printers
+dk:Vis printere
+:Collecting list of printers
+et:Printerite loendi kogumine
+:List Printers
+et:Printerite loend
+:Collecting list of printers
+eu:Inprimagailuen zerrenda jasotzen
+:List Printers
+eu:Inprimagailuen zerrenda
+:Collecting list of printers
+fy-nl:List mei printers sammelje
+:List Printers
+fy-nl:Printers werjaan
+:Collecting list of printers
+hr:Prikupljanje popisa pisača
+:List Printers
+hr:Popis pisača
+:Collecting list of printers
+jv:Nglumpukake dhaptar printer
+:List Printers
+jv:Dhaptar Printer
+:Collecting list of printers
+ka:პრინტერების სიის შეგროვება
+:List Printers
+ka:პრინტერების სია
+:Collecting list of printers
+ku:Lîsteya çapkeran tê berhevkirin
+:List Printers
+ku:Lîsteya Çapkeran
+:Collecting list of printers
+kw:Ow tybri rol a bryntoryon
+:List Printers
+kw:Rol Pryntoryon
+:Collecting list of printers
+lt:Renkamas spausdintuvų sąrašas
+:List Printers
+lt:Spausdintuvų sąrašas
+:Collecting list of printers
+mk:Собирање lista на печатачи
+:List Printers
+mk:Листа на печатачи
+:Collecting list of printers
+mm:ပရင်တာများစာရင်းကို စုဆောင်းနေသည်
+:List Printers
+mm:ပရင်တာများ စာရင်း
+:Collecting list of printers
+ne:प्रिन्टरहरूको सूची सङ्कलन गर्दै
+:List Printers
+ne:प्रिन्टरहरू सूचीबद्ध गर्नुहोस्
+:Collecting list of printers
+nn:Samlar inn liste over skrivarar
+:List Printers
+nn:List skrivarar
+:Collecting list of printers
+no:Henter liste over skrivere
+:List Printers
+no:Vis skrivere
+:Collecting list of printers
+pa:ਪ੍ਰਿੰਟਰਾਂ ਦੀ ਸੂਚੀ ਇਕੱਠੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ
+:List Printers
+pa:ਪ੍ਰਿੰਟਰਾਂ ਦੀ ਸੂਚੀ
+:Collecting list of printers
+si:මුද්‍රණ යන්ත්‍ර ලැයිස්තුව රැස් කරමින්
+:List Printers
+si:මුද්‍රණ යන්ත්‍ර ලැයිස්තුව
+:Collecting list of printers
+sn:Kuunganidza rondedzero yevaprinta
+:List Printers
+sn:Rondedzero Yevaprinta
+:Collecting list of printers
+sp-rs:Прикупљање liste штампача
+:List Printers
+sp-rs:Листа штампача
+:Collecting list of printers
+sq:Po mblidhet lista e printerëve
+:List Printers
+sq:Listë Printerësh
+:Collecting list of printers
+th:กำลังรวบรวมรายการเครื่องพิมพ์
+:List Printers
+th:รายการเครื่องพิมพ์
+:Collecting list of printers
+tl:Kinukuha ang listahan ng mga printer
+:List Printers
+tl:Listahan ng mga Printer
+:Collecting list of printers
+uk:Збір списку принтерів
+:List Printers
+uk:Список принтерів
+:Collecting list of printers
+vn:Đang thu thập danh sách máy in
+:List Printers
+vn:Danh sách máy in
