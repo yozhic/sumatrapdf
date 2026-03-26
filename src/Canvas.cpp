@@ -871,6 +871,21 @@ static void OnMouseLeftButtonUp(MainWindow* win, int x, int y, WPARAM key) {
             ScheduleRepaint(win, 0);
         }
         SetCursorCached(IDC_ARROW);
+
+        // Ctrl+click on internal link: open in new tab and navigate there
+        bool isInternal = (kindDestinationLaunchURL != kind && kindDestinationLaunchFile != kind);
+        if (IsCtrlPressed() && dest && isInternal && tab->filePath) {
+            LoadArgs args(tab->filePath, win);
+            args.showWin = true;
+            args.noPlaceWindow = true;
+            args.forceReuse = false;
+            MainWindow* newWin = LoadDocument(&args);
+            if (newWin && newWin->IsDocLoaded()) {
+                newWin->linkHandler->ScrollTo(dest);
+            }
+            return;
+        }
+
         win->ctrl->HandleLink(dest, win->linkHandler);
         // win->linkHandler->GotoLink(dest);
         return;
