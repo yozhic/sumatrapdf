@@ -78,6 +78,7 @@ CmdToggleMangaMode,,Toggle Manga Mode,
 CmdToggleMenuBar,F9,Toggle Menu Bar,
 CmdTogglePageInfo,Shift + i,Show / Hide Current Page Number,
 CmdToggleScrollbars,,Toggle Scrollbars,
+CmdToggleOverlayScrollbar,,Toggle Overlay Scrollbar,ver 3.7+
 CmdToggleToolbar,F8,Toggle Toolbar,
 CmdToggleUseTabs,,Toggle Use Tabs,"Toggle UseTabs setting, only affects new windows, ver 3.7+"
 CmdToggleFrequentlyRead,,Toggle Frequently Read,ver 3.5+
