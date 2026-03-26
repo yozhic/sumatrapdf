@@ -5806,14 +5806,14 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             if (!win->IsDocLoaded()) {
                 return 0;
             }
-            if (dm && dm->NeedVScroll()) {
+            if (dm && dm->NeedVScroll() && dm->GetZoomVirtual() != kZoomFitContent) {
                 int n = GetCommandIntArg(cmd, kCmdArgN, 1);
                 WPARAM dir = (cmdId == CmdScrollUp) ? SB_LINEUP : SB_LINEDOWN;
                 for (int i = 0; i < n; i++) {
                     SendMessageW(win->hwndCanvas, WM_VSCROLL, dir, 0);
                 }
             } else {
-                // in single page view, scrolls by page
+                // in single page view or fit content, scrolls by page
                 if (cmdId == CmdScrollUp) {
                     win->ctrl->GoToPrevPage(true);
                 } else {
