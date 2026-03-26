@@ -1068,8 +1068,7 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
                  l.rcPromoteInfo.dy);
         }
 #endif
-        // COLORREF promoBgCol = RGB(232, 232, 240);
-        COLORREF promoBgCol = RGB(255, 255, 255);
+        COLORREF promoBgCol = ThemeControlBackgroundColor();
         FillRect(hdc, l.rcPromote, promoBgCol);
 
         HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
