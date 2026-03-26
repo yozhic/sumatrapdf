@@ -199,6 +199,33 @@ void CreateThemeCommands() {
     gCurrSetThemeCmdId = gFirstSetThemeCmdId + gCurrThemeIndex;
 }
 
+static COLORREF gOrigMenuTextColor = CLR_INVALID;
+static COLORREF gOrigMenuBgColor = CLR_INVALID;
+
+static void SetMenuSysColors(COLORREF txtCol, COLORREF bgCol) {
+    if (!IsWindowsVistaOrGreater()) {
+        return;
+    }
+    if (gOrigMenuTextColor == CLR_INVALID) {
+        gOrigMenuTextColor = GetSysColor(COLOR_MENUTEXT);
+        gOrigMenuBgColor = GetSysColor(COLOR_MENU);
+    }
+    INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
+    COLORREF colors[] = {txtCol, bgCol};
+    SetSysColors(dimof(indices), indices, colors);
+}
+
+static void RestoreMenuSysColors() {
+    if (gOrigMenuTextColor == CLR_INVALID) {
+        return;
+    }
+    INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
+    COLORREF colors[] = {gOrigMenuTextColor, gOrigMenuBgColor};
+    SetSysColors(dimof(indices), indices, colors);
+    gOrigMenuTextColor = CLR_INVALID;
+    gOrigMenuBgColor = CLR_INVALID;
+}
+
 void SetThemeByIndex(int themeIdx) {
     ReportIf((themeIdx < 0) || (themeIdx >= gThemeCount));
     if (themeIdx >= gThemeCount) {
@@ -232,11 +259,7 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setEdgeColor(edgeCol);
         // set menu system colors so Windows draws submenu arrows correctly
         // (DarkMode::setSysColor only supports COLOR_WINDOW/WINDOWTEXT/BTNFACE)
-        {
-            INT indices[] = {COLOR_MENUTEXT, COLOR_MENU};
-            COLORREF colors[] = {ThemeWindowTextColor(), ThemeMainWindowBackgroundColor()};
-            SetSysColors(dimof(indices), indices, colors);
-        }
+        SetMenuSysColors(ThemeWindowTextColor(), ThemeMainWindowBackgroundColor());
         DarkMode::updateThemeBrushesAndPens();
 
         DarkMode::setViewTextColor(ThemeWindowTextColor());
@@ -247,6 +270,7 @@ void SetThemeByIndex(int themeIdx) {
 
         DarkMode::setPrevTreeViewStyle();
     } else {
+        RestoreMenuSysColors();
         UpdateAfterThemeChange();
     }
 };
