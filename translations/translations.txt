@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-589029ff4b2444458f055aceb4d9a0f5f0e47d5b
+f857e1fde83b3f61481b3420a98da64a09effc25
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -9076,6 +9076,7 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Ctrl+Tab to navigate
 :Current file
 am:Ընթացիկ ֆայլը
 ar:الملف الحالي
@@ -10633,6 +10634,7 @@ tw:請輸入滑鼠按兩下 PDF 文件時，應執行的命令(&E):
 uk:Введіть командну стрічку, що викликається при подвійному клацані на PDF-документі:
 uz:PDF-hujjatni ikki marta bosganda ishga tushadigan buyruq satrini kiriting:
 vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
+:Enter to select
 :Error
 am:Սխալ
 ar:خطأ
@@ -10742,6 +10744,7 @@ tw:載入 %s 時發生錯誤
 uk:Помилка завантаження %s
 uz:%s yuklab olish xatosi
 vn:Không mở %s được
+:Esc to close
 :Execute a program
 am:Կատարել ծրագիր
 br:Executar um programa
@@ -19336,6 +19339,7 @@ tw:標記密文
 uk:Редагувати
 uz:Tahrirlash
 vn:Biên tập
+:Release Ctrl to select
 :Reload Document
 am:Վերաբեռնել փաստաթուղթը
 br:Recarregar Documento
@@ -22400,6 +22404,7 @@ tw:來源檔案 %s 沒有同步點
 uk:Файл сирцевого коду %s не має точки синхронізації
 uz:%s manba faylida sinxronlanish nuqtasi yo'q
 vn:Tập tin nguồn %s không có điểm đồng bộ
+:Space for sticky mode
 :Square
 am:Քառակուսի
 ar:مربع
@@ -25877,3 +25882,4 @@ tw:正在列印文件
 uk:друк документа
 uz:hujjatni chop etish
 vn:đang in tập tin
+:↑ ↓ to navigate

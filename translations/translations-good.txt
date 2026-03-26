@@ -12410,6 +12410,79 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Ctrl+Tab to navigate
+af:Ctrl+Tab om te navigeer
+am:ለማሰስ Ctrl+Tab
+ar:Ctrl+Tab للتنقل
+az:Naviqasiya üçün Ctrl+Tab
+bg:Ctrl+Tab за навигация
+bn:নেভিগেট করতে Ctrl+Tab
+br:Ctrl+Tab da verdeiñ
+bs:Ctrl+Tab za navigaciju
+by:Ctrl+Tab для навігацыі
+ca:Ctrl+Tab per navegar
+ca-xv:Ctrl+Tab per navegar
+cn:Ctrl+Tab 导航
+co:Ctrl+Tab per navigà
+cy:Ctrl+Tab i lywio
+cz:Ctrl+Tab pro navigaci
+de:Strg+Tab zum Navigieren
+dk:Ctrl+Tab for at navigere
+el:Ctrl+Tab για πλοήγηση
+es:Ctrl+Tab para navegar
+et:Ctrl+Tab navigeerimiseks
+eu:Ktrl+Tab nabigatzeko
+fa:Ctrl+Tab برای پیمایش
+fi:Ctrl+Tab siirtyäksesi
+fo:Ctrl+Tab til at fara
+fr:Ctrl+Tab pour naviguer
+fy-nl:Ctrl+Tab om te navigearjen
+ga:Ctrl+Tab chun nascleanúint
+gl:Ctrl+Tab para navegar
+he:Ctrl+Tab לניווט
+hi:नेविगेट करने के लिए Ctrl+Tab
+hr:Ctrl+Tab za navigaciju
+hu:Ctrl+Tab a navigáláshoz
+id:Ctrl+Tab untuk navigasi
+it:Ctrl+Tab per navigare
+ja:Ctrl+Tabで移動
+jv:Ctrl+Tab kanggo navigasi
+ka:Ctrl+Tab ნავიგაციისთვის
+kr:Ctrl+Tab 탐색
+ku:Ctrl+Tab ji bo gerokê
+kw:Ctrl+Tab dhe lewya
+lt:Ctrl+Tab navigacijai
+lv:Ctrl+Tab, lai pārvietotos
+mk:Ctrl+Tab за навигација
+ml:നാവിഗേറ്റ് ചെയ്യാൻ Ctrl+Tab
+mm:Ctrl+Tab နှိပ်၍ သွားရန်
+my:သွားရန် Ctrl+Tab
+ne:नेभिगेट गर्न Ctrl+Tab
+nl:Ctrl+Tab om te navigeren
+nn:Ctrl+Tab for å navigere
+no:Ctrl+Tab for å navigere
+pa:ਨੈਵੀਗੇਟ ਕਰਨ ਲਈ Ctrl+Tab
+pl:Ctrl+Tab aby nawigować
+pt:Ctrl+Tab para navegar
+ro:Ctrl+Tab pentru navigare
+ru:Ctrl+Tab для навигации
+sat:Ctrl+Tab ᱛᱮ ᱥᱮᱱᱚᱜ
+si:සංචලනය සඳහා Ctrl+Tab
+sk:Ctrl+Tab na navigáciu
+sl:Ctrl+Tab za navigacijo
+sn:Ctrl+Tab kufambisa
+sp-rs:Ctrl+Tab za navigaciju
+sq:Ctrl+Tab për të lundruar
+sr-rs:Ctrl+Tab за навигацију
+sv:Ctrl+Tab för att navigera
+ta:வழிசெலுத்த Ctrl+Tab
+th:Ctrl+Tab เพื่อนำทาง
+tl:Ctrl+Tab upang mag-navigate
+tr:Gezinmek için Ctrl+Tab
+tw:Ctrl+Tab 進行導覽
+uk:Ctrl+Tab для навігації
+uz:Navigatsiya qilish uchun Ctrl+Tab
+vn:Ctrl+Tab để điều hướng
 :Current file
 af:Huidige lêer
 am:Ընթացիկ ֆայլը
@@ -14965,6 +15038,79 @@ tw:請輸入滑鼠按兩下 PDF 文件時，應執行的命令(&E):
 uk:Введіть командну стрічку, що викликається при подвійному клацані на PDF-документі:
 uz:PDF-hujjatni ikki marta bosganda ishga tushadigan buyruq satrini kiriting:
 vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
+:Enter to select
+af:Enter om te kies
+am:ለመምረጥ Enter
+ar:Enter للاختيار
+az:Seçmək üçün Enter
+bg:Enter за избор
+bn:নির্বাচন করতে Enter
+br:Enter da choaz
+bs:Enter za odabir
+by:Enter для выбару
+ca:Enter per seleccionar
+ca-xv:Enter per seleccionar
+cn:回车选择
+co:Enter per selezziunà
+cy:Enter i ddewis
+cz:Enter pro výběr
+de:Eingabe zum Auswählen
+dk:Enter for at vælge
+el:Enter για επιλογή
+es:Enter para seleccionar
+et:Enter valimiseks
+eu:Enter hautatzeko
+fa:Enter برای انتخاب
+fi:Enter valitaksesi
+fo:Enter til at velja
+fr:Entrée pour sélectionner
+fy-nl:Enter om te selektearjen
+ga:Enter chun roghnú
+gl:Intro para seleccionar
+he:Enter לבחירה
+hi:चुनने के लिए Enter
+hr:Enter za odabir
+hu:Enter a kiválasztáshoz
+id:Enter untuk memilih
+it:Invio per selezionare
+ja:Enterで選択
+jv:Enter kanggo milih
+ka:Enter არჩევისთვის
+kr:Enter 선택
+ku:Enter ji bo hilbijartinê
+kw:Enter dhe dhewis
+lt:Enter pasirinkimui
+lv:Enter, lai atlasītu
+mk:Enter за избор
+ml:തിരഞ്ഞെടുക്കാൻ Enter
+mm:Enter နှိပ်၍ ရွေးရန်
+my:ရွေးချယ်ရန် Enter
+ne:चयन गर्न Enter
+nl:Enter om te selecteren
+nn:Enter for å velje
+no:Enter for å velge
+pa:ਚੁਣਨ ਲਈ Enter
+pl:Enter aby wybrać
+pt:Enter para selecionar
+ro:Enter pentru selectare
+ru:Enter для выбора
+sat:Enter ᱛᱮ ᱵᱟᱪᱷᱟᱣ
+si:තෝරා ගැනීමට Enter
+sk:Enter na výber
+sl:Enter za izbiro
+sn:Enter kusarudza
+sp-rs:Enter za izbor
+sq:Enter për të zgjedhur
+sr-rs:Enter за избор
+sv:Enter för att välja
+ta:தேர்ந்தெடுக்க Enter
+th:Enter เพื่อเลือก
+tl:Enter upang pumili
+tr:Seçmek için Enter
+tw:Enter 進行選擇
+uk:Enter для вибору
+uz:Tanlash uchun Enter
+vn:Enter để chọn
 :Error
 af:Fout
 am:Սխալ
@@ -15111,6 +15257,79 @@ tw:載入 %s 時發生錯誤
 uk:Помилка завантаження %s
 uz:%s yuklab olish xatosi
 vn:Không mở %s được
+:Esc to close
+af:Esc om te sluit
+am:ለመዝጋት Esc
+ar:Esc للإغلاق
+az:Bağlamaq üçün Esc
+bg:Esc за затваряне
+bn:বন্ধ করতে Esc
+br:Esc da serriñ
+bs:Esc za zatvaranje
+by:Esc для закрыцця
+ca:Esc per tancar
+ca-xv:Esc per tancar
+cn:Esc 关闭
+co:Esc per chjude
+cy:Esc i gau
+cz:Esc pro zavření
+de:Esc zum Schließen
+dk:Esc for at lukke
+el:Esc για κλείσιμο
+es:Esc para cerrar
+et:Esc sulgemiseks
+eu:Esc ixteko
+fa:Esc برای بستن
+fi:Esc sulkeaksesi
+fo:Esc til at lata aftur
+fr:Échap pour fermer
+fy-nl:Esc om te sluten
+ga:Esc chun dúnadh
+gl:Esc para pechar
+he:Esc לסגירה
+hi:बंद करने के लिए Esc
+hr:Esc za zatvaranje
+hu:Esc a bezáráshoz
+id:Esc untuk menutup
+it:Esc per chiudere
+ja:Escで閉じる
+jv:Esc kanggo nutup
+ka:Esc დასახურად
+kr:Esc 닫기
+ku:Esc ji bo girtinê
+kw:Esc dhe degea
+lt:Esc uždarymui
+lv:Esc, lai aizvērtu
+mk:Esc за затворање
+ml:അടയ്ക്കാൻ Esc
+mm:Esc နှိပ်၍ ပိုင်ရန်
+my:ပိတ်ရန် Esc
+ne:बन्द गर्न Esc
+nl:Esc om te sluiten
+nn:Esc for å lukke
+no:Esc for å lukke
+pa:ਬੰਦ ਕਰਨ ਲਈ Esc
+pl:Esc aby zamknąć
+pt:Esc para fechar
+ro:Esc pentru închidere
+ru:Esc для закрытия
+sat:Esc ᱛᱮ ᱵᱚᱸᱫᱚᱭ
+si:වසා දැමීමට Esc
+sk:Esc na zatvorenie
+sl:Esc za zaprtje
+sn:Esc kuvhara
+sp-rs:Esc za zatvaranje
+sq:Esc për të mbyllur
+sr-rs:Esc за затварање
+sv:Esc för att stänga
+ta:மூட Esc
+th:Esc เพื่อปิด
+tl:Esc upang isara
+tr:Kapatmak için Esc
+tw:Esc 關閉
+uk:Esc для закриття
+uz:Yopish uchun Esc
+vn:Esc để đóng
 :Execute a program
 af:Voer 'n program uit
 am:Կատարել ծրագիր
@@ -28032,6 +28251,79 @@ tw:標記密文
 uk:Редагувати
 uz:Tahrirlash
 vn:Biên tập
+:Release Ctrl to select
+af:Los Ctrl om te kies
+am:ለመምረጥ Ctrl ይልቀቁ
+ar:حرر Ctrl للاختيار
+az:Seçmək üçün Ctrl buraxın
+bg:Пуснете Ctrl за избор
+bn:নির্বাচন করতে Ctrl ছেড়ে দিন
+br:Leuskel Ctrl da choaz
+bs:Otpustite Ctrl za odabir
+by:Адпусціце Ctrl для выбару
+ca:Allibera Ctrl per seleccionar
+ca-xv:Allibera Ctrl per seleccionar
+cn:释放 Ctrl 选择
+co:Liberà Ctrl per selezziunà
+cy:Rhyddhau Ctrl i ddewis
+cz:Uvolněte Ctrl pro výběr
+de:Strg loslassen zum Auswählen
+dk:Slip Ctrl for at vælge
+el:Αφήστε το Ctrl για επιλογή
+es:Suelta Ctrl para seleccionar
+et:Vabasta Ctrl valimiseks
+eu:Askatu Ktrl hautatzeko
+fa:رها کردن Ctrl برای انتخاب
+fi:Vapauta Ctrl valitaksesi
+fo:Slepp Ctrl til at velja
+fr:Relâcher Ctrl pour sélectionner
+fy-nl:Ctrl losslitte om te selektearjen
+ga:Scaoil Ctrl chun roghnú
+gl:Soltar Ctrl para seleccionar
+he:שחרר Ctrl לבחירה
+hi:चुनने के लिए Ctrl छोड़ें
+hr:Otpustite Ctrl za odabir
+hu:Engedje el a Ctrl-t a kiválasztáshoz
+id:Lepas Ctrl untuk memilih
+it:Rilascia Ctrl per selezionare
+ja:Ctrlを離して選択
+jv:Uculake Ctrl kanggo milih
+ka:გაათავისუფლეთ Ctrl არჩევისთვის
+kr:Ctrl 놓아서 선택
+ku:Ctrl berdide ji bo hilbijartinê
+kw:Gasa Ctrl dhe dhewis
+lt:Atleiskite Ctrl pasirinkimui
+lv:Atlaidiet Ctrl, lai atlasītu
+mk:Отпуштете Ctrl за избор
+ml:തിരഞ്ഞെടുക്കാൻ Ctrl വിടുക
+mm:Ctrl ကို လွှတ်၍ ရွေးရန်
+my:ရွေးချယ်ရန် Ctrl ကိုလွှတ်ပါ
+ne:चयन गर्न Ctrl छोड्नुहोस्
+nl:Laat Ctrl los om te selecteren
+nn:Slepp Ctrl for å velje
+no:Slipp Ctrl for å velge
+pa:ਚੁਣਨ ਲਈ Ctrl ਛੱਡੋ
+pl:Zwolnij Ctrl aby wybrać
+pt:Solte Ctrl para selecionar
+ro:Eliberează Ctrl pentru selectare
+ru:Отпустите Ctrl для выбора
+sat:Ctrl ᱪᱟᱰᱟᱭ ᱢᱮ ᱵᱟᱪᱷᱟᱣ ᱞᱟᱹᱜᱤᱫ
+si:තෝරා ගැනීමට Ctrl මුදා හරින්න
+sk:Uvoľnite Ctrl na výber
+sl:Spustite Ctrl za izbiro
+sn:Sunungura Ctrl kusarudza
+sp-rs:Otpustite Ctrl za izbor
+sq:Lësho Ctrl për të zgjedhur
+sr-rs:Отпустите Ctrl за избор
+sv:Släpp Ctrl för att välja
+ta:தேர்ந்தெடுக்க Ctrl ஐ விடுவிக்கவும்
+th:ปล่อย Ctrl เพื่อเลือก
+tl:Bitawan ang Ctrl upang pumili
+tr:Seçmek için Ctrl'yi bırakın
+tw:放開 Ctrl 進行選擇
+uk:Відпустіть Ctrl для вибору
+uz:Tanlash uchun Ctrl ni qo'yib yuboring
+vn:Nhả Ctrl để chọn
 :Reload Document
 af:Herlaai Dokument
 am:Վերաբեռնել փաստաթուղթը
@@ -33872,6 +34164,79 @@ tw:來源檔案 %s 沒有同步點
 uk:Файл сирцевого коду %s не має точки синхронізації
 uz:%s manba faylida sinxronlanish nuqtasi yo'q
 vn:Tập tin nguồn %s không có điểm đồng bộ
+:Space for sticky mode
+af:Spasie vir kleefmodus
+am:ለተጣባቂ ሁነታ Space
+ar:مسافة للوضع الثابت
+az:Yapışqan rejim üçün Boşluq
+bg:Интервал за лепнещ режим
+bn:স্টিকি মোডের জন্য Space
+br:Spas evit ar mod pegus
+bs:Space za sticky način
+by:Прабел для рэжыму фіксацыі
+ca:Espai per mode fixat
+ca-xv:Espai per mode fix
+cn:空格切换粘滞模式
+co:Spaziu per u modu fissu
+cy:Bwlch ar gyfer modd gludiog
+cz:Mezerník pro trvalý režim
+de:Leertaste für fixierten Modus
+dk:Mellemrum for sticky-tilstand
+el:Space για λειτουργία καρφιτσώματος
+es:Espacio para modo fijo
+et:Tühik kleepuva režiimi jaoks
+eu:Zuriunea modu itsaskor modurako
+fa:Space برای حالت چسبنده
+fi:Välilyönti pysyvään tilaan
+fo:Stongartekn fyri fastsitandi ham
+fr:Espace pour le mode épinglé
+fy-nl:Spaasje foar sticky-modus
+ga:Spás don mhód greamaitheach
+gl:Espazo para modo fixo
+he:רווח למצב נעוץ
+hi:स्टिकी मोड के लिए Space
+hr:Razmaknica za ljepljivi način
+hu:Szóköz a rögzített módhoz
+id:Spasi untuk mode tetap
+it:Spazio per modalità fissa
+ja:スペースで固定モード
+jv:Spasi kanggo mode sticky
+ka:Space ფიქსირებული რეჟიმისთვის
+kr:Space 고정 모드
+ku:Space ji bo moda girtî
+kw:Spas rag mood stikys
+lt:Tarpas fiksuotam režimui
+lv:Atstarpe fiksētajam režīmam
+mk:Space за лепливо стање
+ml:സ്റ്റിക്കി മോഡിനായി Space
+mm:Space နှိပ်၍ sticky mode အတွက်
+my:sticky mode အတွက် Space
+ne:स्टिकी मोडको लागि Space
+nl:Spatiebalk voor kleverige modus
+nn:Mellomrom for fastsett modus
+no:Mellomrom for klisteremodus
+pa:ਸਟਿੱਕੀ ਮੋਡ ਲਈ Space
+pl:Spacja dla trybu lepkiego
+pt:Espaço para modo fixo
+ro:Spațiu pentru modul persistent
+ru:Пробел для закрепления режима
+sat:Space ᱛᱮ ᱪᱤᱯᱩᱫ ᱢᱳᱰ
+si:ස්ථීර ප්‍රකාරය සඳහා Space
+sk:Medzerník pre trvalý režim
+sl:Preslednica za lepljivi način
+sn:Space kumamiriro unonamatira
+sp-rs:Space za lepljivi režim
+sq:Hapësirë për modalitetin ngjitës
+sr-rs:Space за лепљиви режим
+sv:Mellanslag för fast läge
+ta:ஒட்டும் பயன்முறைக்கு Space
+th:Space สำหรับโหมดค้าง
+tl:Space para sa sticky mode
+tr:Sabit mod için Boşluk
+tw:空白鍵切換固定模式
+uk:Пробіл для закріпленого режиму
+uz:Yopishqoq rejim uchun Space
+vn:Space để bật chế độ dính
 :Square
 af:Vierkant
 am:Քառակուսի
@@ -40661,3 +41026,76 @@ tw:正在列印文件
 uk:друк документа
 uz:hujjatni chop etish
 vn:đang in tập tin
+:↑ ↓ to navigate
+af:↑ ↓ om te navigeer
+am:ለማሰስ ↑ ↓
+ar:↑ ↓ للتنقل
+az:Naviqasiya üçün ↑ ↓
+bg:↑ ↓ за навигация
+bn:নেভিগেট করতে ↑ ↓
+br:↑ ↓ da verdeiñ
+bs:↑ ↓ za navigaciju
+by:↑ ↓ для навігацыі
+ca:↑ ↓ per navegar
+ca-xv:↑ ↓ per navegar
+cn:↑ ↓ 导航
+co:↑ ↓ per navigà
+cy:↑ ↓ i lywio
+cz:↑ ↓ pro navigaci
+de:↑ ↓ zum Navigieren
+dk:↑ ↓ for at navigere
+el:↑ ↓ για πλοήγηση
+es:↑ ↓ para navegar
+et:↑ ↓ navigeerimiseks
+eu:↑ ↓ nabigatzeko
+fa:↑ ↓ برای پیمایش
+fi:↑ ↓ siirtyäksesi
+fo:↑ ↓ til at fara
+fr:↑ ↓ pour naviguer
+fy-nl:↑ ↓ om te navigearjen
+ga:↑ ↓ chun nascleanúint
+gl:↑ ↓ para navegar
+he:↑ ↓ לניווט
+hi:नेविगेट करने के लिए ↑ ↓
+hr:↑ ↓ za navigaciju
+hu:↑ ↓ a navigáláshoz
+id:↑ ↓ untuk navigasi
+it:↑ ↓ per navigare
+ja:↑ ↓で移動
+jv:↑ ↓ kanggo navigasi
+ka:↑ ↓ ნავიგაციისთვის
+kr:↑ ↓ 탐색
+ku:↑ ↓ ji bo gerokê
+kw:↑ ↓ dhe lewya
+lt:↑ ↓ navigacijai
+lv:↑ ↓, lai pārvietotos
+mk:↑ ↓ за навигација
+ml:നാവിഗേറ്റ് ചെയ്യാൻ ↑ ↓
+mm:↑ ↓ နှိပ်၍ သွားရန်
+my:သွားရန် ↑ ↓
+ne:नेभिगेट गर्न ↑ ↓
+nl:↑ ↓ om te navigeren
+nn:↑ ↓ for å navigere
+no:↑ ↓ for å navigere
+pa:ਨੈਵੀਗੇਟ ਕਰਨ ਲਈ ↑ ↓
+pl:↑ ↓ aby nawigować
+pt:↑ ↓ para navegar
+ro:↑ ↓ pentru navigare
+ru:↑ ↓ для навигации
+sat:↑ ↓ ᱛᱮ ᱥᱮᱱᱚᱜ
+si:සංචලනය සඳහා ↑ ↓
+sk:↑ ↓ na navigáciu
+sl:↑ ↓ za navigacijo
+sn:↑ ↓ kufambisa
+sp-rs:↑ ↓ za navigaciju
+sq:↑ ↓ për të lundruar
+sr-rs:↑ ↓ за навигацију
+sv:↑ ↓ för att navigera
+ta:வழிசெலுத்த ↑ ↓
+th:↑ ↓ เพื่อนำทาง
+tl:↑ ↓ upang mag-navigate
+tr:Gezinmek için ↑ ↓
+tw:↑ ↓ 進行導覽
+uk:↑ ↓ для навігації
+uz:Navigatsiya qilish uchun ↑ ↓
+vn:↑ ↓ để điều hướng

@@ -31748,3 +31748,867 @@ uk:Перемкнути використання вкладок
 vn:Bật/tắt thanh cuộn phủ lớp
 :Toggle Use Tabs
 vn:Bật/tắt sử dụng tab
+:Ctrl+Tab to navigate
+am:ለማሰስ Ctrl+Tab
+:Enter to select
+am:ለመምረጥ Enter
+:Esc to close
+am:ለመዝጋት Esc
+:Release Ctrl to select
+am:ለመምረጥ Ctrl ይልቀቁ
+:Space for sticky mode
+am:ለተጣባቂ ሁነታ Space
+:↑ ↓ to navigate
+am:ለማሰስ ↑ ↓
+:Ctrl+Tab to navigate
+ar:Ctrl+Tab للتنقل
+:Enter to select
+ar:Enter للاختيار
+:Esc to close
+ar:Esc للإغلاق
+:Release Ctrl to select
+ar:حرر Ctrl للاختيار
+:Space for sticky mode
+ar:مسافة للوضع الثابت
+:↑ ↓ to navigate
+ar:↑ ↓ للتنقل
+:Ctrl+Tab to navigate
+br:Ctrl+Tab da verdeiñ
+:Enter to select
+br:Enter da choaz
+:Esc to close
+br:Esc da serriñ
+:Release Ctrl to select
+br:Leuskel Ctrl da choaz
+:Space for sticky mode
+br:Spas evit ar mod pegus
+:↑ ↓ to navigate
+br:↑ ↓ da verdeiñ
+:Ctrl+Tab to navigate
+cn:Ctrl+Tab 导航
+:Enter to select
+cn:回车选择
+:Esc to close
+cn:Esc 关闭
+:Release Ctrl to select
+cn:释放 Ctrl 选择
+:Space for sticky mode
+cn:空格切换粘滞模式
+:↑ ↓ to navigate
+cn:↑ ↓ 导航
+:Ctrl+Tab to navigate
+co:Ctrl+Tab per navigà
+:Enter to select
+co:Enter per selezziunà
+:Esc to close
+co:Esc per chjude
+:Release Ctrl to select
+co:Liberà Ctrl per selezziunà
+:Space for sticky mode
+co:Spaziu per u modu fissu
+:↑ ↓ to navigate
+co:↑ ↓ per navigà
+:Ctrl+Tab to navigate
+de:Strg+Tab zum Navigieren
+:Enter to select
+de:Eingabe zum Auswählen
+:Esc to close
+de:Esc zum Schließen
+:Release Ctrl to select
+de:Strg loslassen zum Auswählen
+:Space for sticky mode
+de:Leertaste für fixierten Modus
+:↑ ↓ to navigate
+de:↑ ↓ zum Navigieren
+:Ctrl+Tab to navigate
+el:Ctrl+Tab για πλοήγηση
+:Enter to select
+el:Enter για επιλογή
+:Esc to close
+el:Esc για κλείσιμο
+:Release Ctrl to select
+el:Αφήστε το Ctrl για επιλογή
+:Space for sticky mode
+el:Space για λειτουργία καρφιτσώματος
+:↑ ↓ to navigate
+el:↑ ↓ για πλοήγηση
+:Ctrl+Tab to navigate
+hi:नेविगेट करने के लिए Ctrl+Tab
+:Enter to select
+hi:चुनने के लिए Enter
+:Esc to close
+hi:बंद करने के लिए Esc
+:Release Ctrl to select
+hi:चुनने के लिए Ctrl छोड़ें
+:Space for sticky mode
+hi:स्टिकी मोड के लिए Space
+:↑ ↓ to navigate
+hi:नेविगेट करने के लिए ↑ ↓
+:Ctrl+Tab to navigate
+ja:Ctrl+Tabで移動
+:Enter to select
+ja:Enterで選択
+:Esc to close
+ja:Escで閉じる
+:Release Ctrl to select
+ja:Ctrlを離して選択
+:Space for sticky mode
+ja:スペースで固定モード
+:↑ ↓ to navigate
+ja:↑ ↓で移動
+:Ctrl+Tab to navigate
+ml:നാവിഗേറ്റ് ചെയ്യാൻ Ctrl+Tab
+:Enter to select
+ml:തിരഞ്ഞെടുക്കാൻ Enter
+:Esc to close
+ml:അടയ്ക്കാൻ Esc
+:Release Ctrl to select
+ml:തിരഞ്ഞെടുക്കാൻ Ctrl വിടുക
+:Space for sticky mode
+ml:സ്റ്റിക്കി മോഡിനായി Space
+:↑ ↓ to navigate
+ml:നാവിഗേറ്റ് ചെയ്യാൻ ↑ ↓
+:Ctrl+Tab to navigate
+nl:Ctrl+Tab om te navigeren
+:Enter to select
+nl:Enter om te selecteren
+:Esc to close
+nl:Esc om te sluiten
+:Release Ctrl to select
+nl:Laat Ctrl los om te selecteren
+:Space for sticky mode
+nl:Spatiebalk voor kleverige modus
+:↑ ↓ to navigate
+nl:↑ ↓ om te navigeren
+:Ctrl+Tab to navigate
+pl:Ctrl+Tab aby nawigować
+:Enter to select
+pl:Enter aby wybrać
+:Esc to close
+pl:Esc aby zamknąć
+:Release Ctrl to select
+pl:Zwolnij Ctrl aby wybrać
+:Space for sticky mode
+pl:Spacja dla trybu lepkiego
+:↑ ↓ to navigate
+pl:↑ ↓ aby nawigować
+:Ctrl+Tab to navigate
+ru:Ctrl+Tab для навигации
+:Enter to select
+ru:Enter для выбора
+:Esc to close
+ru:Esc для закрытия
+:Release Ctrl to select
+ru:Отпустите Ctrl для выбора
+:Space for sticky mode
+ru:Пробел для закрепления режима
+:↑ ↓ to navigate
+ru:↑ ↓ для навигации
+:Ctrl+Tab to navigate
+sk:Ctrl+Tab na navigáciu
+:Enter to select
+sk:Enter na výber
+:Esc to close
+sk:Esc na zatvorenie
+:Release Ctrl to select
+sk:Uvoľnite Ctrl na výber
+:Space for sticky mode
+sk:Medzerník pre trvalý režim
+:↑ ↓ to navigate
+sk:↑ ↓ na navigáciu
+:Ctrl+Tab to navigate
+sr-rs:Ctrl+Tab за навигацију
+:Enter to select
+sr-rs:Enter за избор
+:Esc to close
+sr-rs:Esc за затварање
+:Release Ctrl to select
+sr-rs:Отпустите Ctrl за избор
+:Space for sticky mode
+sr-rs:Space за лепљиви режим
+:↑ ↓ to navigate
+sr-rs:↑ ↓ за навигацију
+:Ctrl+Tab to navigate
+tw:Ctrl+Tab 進行導覽
+:Enter to select
+tw:Enter 進行選擇
+:Esc to close
+tw:Esc 關閉
+:Release Ctrl to select
+tw:放開 Ctrl 進行選擇
+:Space for sticky mode
+tw:空白鍵切換固定模式
+:↑ ↓ to navigate
+tw:↑ ↓ 進行導覽
+:Ctrl+Tab to navigate
+az:Naviqasiya üçün Ctrl+Tab
+:Enter to select
+az:Seçmək üçün Enter
+:Esc to close
+az:Bağlamaq üçün Esc
+:Release Ctrl to select
+az:Seçmək üçün Ctrl buraxın
+:Space for sticky mode
+az:Yapışqan rejim üçün Boşluq
+:↑ ↓ to navigate
+az:Naviqasiya üçün ↑ ↓
+:Ctrl+Tab to navigate
+by:Ctrl+Tab для навігацыі
+:Enter to select
+by:Enter для выбару
+:Esc to close
+by:Esc для закрыцця
+:Release Ctrl to select
+by:Адпусціце Ctrl для выбару
+:Space for sticky mode
+by:Прабел для рэжыму фіксацыі
+:↑ ↓ to navigate
+by:↑ ↓ для навігацыі
+:Ctrl+Tab to navigate
+ca:Ctrl+Tab per navegar
+:Enter to select
+ca:Enter per seleccionar
+:Esc to close
+ca:Esc per tancar
+:Release Ctrl to select
+ca:Allibera Ctrl per seleccionar
+:Space for sticky mode
+ca:Espai per mode fixat
+:↑ ↓ to navigate
+ca:↑ ↓ per navegar
+:Ctrl+Tab to navigate
+cy:Ctrl+Tab i lywio
+:Enter to select
+cy:Enter i ddewis
+:Esc to close
+cy:Esc i gau
+:Release Ctrl to select
+cy:Rhyddhau Ctrl i ddewis
+:Space for sticky mode
+cy:Bwlch ar gyfer modd gludiog
+:↑ ↓ to navigate
+cy:↑ ↓ i lywio
+:Ctrl+Tab to navigate
+cz:Ctrl+Tab pro navigaci
+:Enter to select
+cz:Enter pro výběr
+:Esc to close
+cz:Esc pro zavření
+:Release Ctrl to select
+cz:Uvolněte Ctrl pro výběr
+:Space for sticky mode
+cz:Mezerník pro trvalý režim
+:↑ ↓ to navigate
+cz:↑ ↓ pro navigaci
+:Ctrl+Tab to navigate
+es:Ctrl+Tab para navegar
+:Enter to select
+es:Enter para seleccionar
+:Esc to close
+es:Esc para cerrar
+:Release Ctrl to select
+es:Suelta Ctrl para seleccionar
+:Space for sticky mode
+es:Espacio para modo fijo
+:↑ ↓ to navigate
+es:↑ ↓ para navegar
+:Ctrl+Tab to navigate
+fa:Ctrl+Tab برای پیمایش
+:Enter to select
+fa:Enter برای انتخاب
+:Esc to close
+fa:Esc برای بستن
+:Release Ctrl to select
+fa:رها کردن Ctrl برای انتخاب
+:Space for sticky mode
+fa:Space برای حالت چسبنده
+:↑ ↓ to navigate
+fa:↑ ↓ برای پیمایش
+:Ctrl+Tab to navigate
+fi:Ctrl+Tab siirtyäksesi
+:Enter to select
+fi:Enter valitaksesi
+:Esc to close
+fi:Esc sulkeaksesi
+:Release Ctrl to select
+fi:Vapauta Ctrl valitaksesi
+:Space for sticky mode
+fi:Välilyönti pysyvään tilaan
+:↑ ↓ to navigate
+fi:↑ ↓ siirtyäksesi
+:Ctrl+Tab to navigate
+fo:Ctrl+Tab til at fara
+:Enter to select
+fo:Enter til at velja
+:Esc to close
+fo:Esc til at lata aftur
+:Release Ctrl to select
+fo:Slepp Ctrl til at velja
+:Space for sticky mode
+fo:Stongartekn fyri fastsitandi ham
+:↑ ↓ to navigate
+fo:↑ ↓ til at fara
+:Ctrl+Tab to navigate
+fr:Ctrl+Tab pour naviguer
+:Enter to select
+fr:Entrée pour sélectionner
+:Esc to close
+fr:Échap pour fermer
+:Release Ctrl to select
+fr:Relâcher Ctrl pour sélectionner
+:Space for sticky mode
+fr:Espace pour le mode épinglé
+:↑ ↓ to navigate
+fr:↑ ↓ pour naviguer
+:Ctrl+Tab to navigate
+ga:Ctrl+Tab chun nascleanúint
+:Enter to select
+ga:Enter chun roghnú
+:Esc to close
+ga:Esc chun dúnadh
+:Release Ctrl to select
+ga:Scaoil Ctrl chun roghnú
+:Space for sticky mode
+ga:Spás don mhód greamaitheach
+:↑ ↓ to navigate
+ga:↑ ↓ chun nascleanúint
+:Ctrl+Tab to navigate
+gl:Ctrl+Tab para navegar
+:Enter to select
+gl:Intro para seleccionar
+:Esc to close
+gl:Esc para pechar
+:Release Ctrl to select
+gl:Soltar Ctrl para seleccionar
+:Space for sticky mode
+gl:Espazo para modo fixo
+:↑ ↓ to navigate
+gl:↑ ↓ para navegar
+:Ctrl+Tab to navigate
+he:Ctrl+Tab לניווט
+:Enter to select
+he:Enter לבחירה
+:Esc to close
+he:Esc לסגירה
+:Release Ctrl to select
+he:שחרר Ctrl לבחירה
+:Space for sticky mode
+he:רווח למצב נעוץ
+:↑ ↓ to navigate
+he:↑ ↓ לניווט
+:Ctrl+Tab to navigate
+hu:Ctrl+Tab a navigáláshoz
+:Enter to select
+hu:Enter a kiválasztáshoz
+:Esc to close
+hu:Esc a bezáráshoz
+:Release Ctrl to select
+hu:Engedje el a Ctrl-t a kiválasztáshoz
+:Space for sticky mode
+hu:Szóköz a rögzített módhoz
+:↑ ↓ to navigate
+hu:↑ ↓ a navigáláshoz
+:Ctrl+Tab to navigate
+id:Ctrl+Tab untuk navigasi
+:Enter to select
+id:Enter untuk memilih
+:Esc to close
+id:Esc untuk menutup
+:Release Ctrl to select
+id:Lepas Ctrl untuk memilih
+:Space for sticky mode
+id:Spasi untuk mode tetap
+:↑ ↓ to navigate
+id:↑ ↓ untuk navigasi
+:Ctrl+Tab to navigate
+it:Ctrl+Tab per navigare
+:Enter to select
+it:Invio per selezionare
+:Esc to close
+it:Esc per chiudere
+:Release Ctrl to select
+it:Rilascia Ctrl per selezionare
+:Space for sticky mode
+it:Spazio per modalità fissa
+:↑ ↓ to navigate
+it:↑ ↓ per navigare
+:Ctrl+Tab to navigate
+kr:Ctrl+Tab 탐색
+:Enter to select
+kr:Enter 선택
+:Esc to close
+kr:Esc 닫기
+:Release Ctrl to select
+kr:Ctrl 놓아서 선택
+:Space for sticky mode
+kr:Space 고정 모드
+:↑ ↓ to navigate
+kr:↑ ↓ 탐색
+:Ctrl+Tab to navigate
+lv:Ctrl+Tab, lai pārvietotos
+:Enter to select
+lv:Enter, lai atlasītu
+:Esc to close
+lv:Esc, lai aizvērtu
+:Release Ctrl to select
+lv:Atlaidiet Ctrl, lai atlasītu
+:Space for sticky mode
+lv:Atstarpe fiksētajam režīmam
+:↑ ↓ to navigate
+lv:↑ ↓, lai pārvietotos
+:Ctrl+Tab to navigate
+my:သွားရန် Ctrl+Tab
+:Enter to select
+my:ရွေးချယ်ရန် Enter
+:Esc to close
+my:ပိတ်ရန် Esc
+:Release Ctrl to select
+my:ရွေးချယ်ရန် Ctrl ကိုလွှတ်ပါ
+:Space for sticky mode
+my:sticky mode အတွက် Space
+:↑ ↓ to navigate
+my:သွားရန် ↑ ↓
+:Ctrl+Tab to navigate
+pt:Ctrl+Tab para navegar
+:Enter to select
+pt:Enter para selecionar
+:Esc to close
+pt:Esc para fechar
+:Release Ctrl to select
+pt:Solte Ctrl para selecionar
+:Space for sticky mode
+pt:Espaço para modo fixo
+:↑ ↓ to navigate
+pt:↑ ↓ para navegar
+:Ctrl+Tab to navigate
+ro:Ctrl+Tab pentru navigare
+:Enter to select
+ro:Enter pentru selectare
+:Esc to close
+ro:Esc pentru închidere
+:Release Ctrl to select
+ro:Eliberează Ctrl pentru selectare
+:Space for sticky mode
+ro:Spațiu pentru modul persistent
+:↑ ↓ to navigate
+ro:↑ ↓ pentru navigare
+:Ctrl+Tab to navigate
+sat:Ctrl+Tab ᱛᱮ ᱥᱮᱱᱚᱜ
+:Enter to select
+sat:Enter ᱛᱮ ᱵᱟᱪᱷᱟᱣ
+:Esc to close
+sat:Esc ᱛᱮ ᱵᱚᱸᱫᱚᱭ
+:Release Ctrl to select
+sat:Ctrl ᱪᱟᱰᱟᱭ ᱢᱮ ᱵᱟᱪᱷᱟᱣ ᱞᱟᱹᱜᱤᱫ
+:Space for sticky mode
+sat:Space ᱛᱮ ᱪᱤᱯᱩᱫ ᱢᱳᱰ
+:↑ ↓ to navigate
+sat:↑ ↓ ᱛᱮ ᱥᱮᱱᱚᱜ
+:Ctrl+Tab to navigate
+sl:Ctrl+Tab za navigacijo
+:Enter to select
+sl:Enter za izbiro
+:Esc to close
+sl:Esc za zaprtje
+:Release Ctrl to select
+sl:Spustite Ctrl za izbiro
+:Space for sticky mode
+sl:Preslednica za lepljivi način
+:↑ ↓ to navigate
+sl:↑ ↓ za navigacijo
+:Ctrl+Tab to navigate
+sv:Ctrl+Tab för att navigera
+:Enter to select
+sv:Enter för att välja
+:Esc to close
+sv:Esc för att stänga
+:Release Ctrl to select
+sv:Släpp Ctrl för att välja
+:Space for sticky mode
+sv:Mellanslag för fast läge
+:↑ ↓ to navigate
+sv:↑ ↓ för att navigera
+:Ctrl+Tab to navigate
+ta:வழிசெலுத்த Ctrl+Tab
+:Enter to select
+ta:தேர்ந்தெடுக்க Enter
+:Esc to close
+ta:மூட Esc
+:Release Ctrl to select
+ta:தேர்ந்தெடுக்க Ctrl ஐ விடுவிக்கவும்
+:Space for sticky mode
+ta:ஒட்டும் பயன்முறைக்கு Space
+:↑ ↓ to navigate
+ta:வழிசெலுத்த ↑ ↓
+:Ctrl+Tab to navigate
+tr:Gezinmek için Ctrl+Tab
+:Enter to select
+tr:Seçmek için Enter
+:Esc to close
+tr:Kapatmak için Esc
+:Release Ctrl to select
+tr:Seçmek için Ctrl'yi bırakın
+:Space for sticky mode
+tr:Sabit mod için Boşluk
+:↑ ↓ to navigate
+tr:Gezinmek için ↑ ↓
+:Ctrl+Tab to navigate
+uz:Navigatsiya qilish uchun Ctrl+Tab
+:Enter to select
+uz:Tanlash uchun Enter
+:Esc to close
+uz:Yopish uchun Esc
+:Release Ctrl to select
+uz:Tanlash uchun Ctrl ni qo'yib yuboring
+:Space for sticky mode
+uz:Yopishqoq rejim uchun Space
+:↑ ↓ to navigate
+uz:Navigatsiya qilish uchun ↑ ↓
+:Ctrl+Tab to navigate
+af:Ctrl+Tab om te navigeer
+:Enter to select
+af:Enter om te kies
+:Esc to close
+af:Esc om te sluit
+:Release Ctrl to select
+af:Los Ctrl om te kies
+:Space for sticky mode
+af:Spasie vir kleefmodus
+:↑ ↓ to navigate
+af:↑ ↓ om te navigeer
+:Ctrl+Tab to navigate
+bg:Ctrl+Tab за навигация
+:Enter to select
+bg:Enter за избор
+:Esc to close
+bg:Esc за затваряне
+:Release Ctrl to select
+bg:Пуснете Ctrl за избор
+:Space for sticky mode
+bg:Интервал за лепнещ режим
+:↑ ↓ to navigate
+bg:↑ ↓ за навигация
+:Ctrl+Tab to navigate
+bn:নেভিগেট করতে Ctrl+Tab
+:Enter to select
+bn:নির্বাচন করতে Enter
+:Esc to close
+bn:বন্ধ করতে Esc
+:Release Ctrl to select
+bn:নির্বাচন করতে Ctrl ছেড়ে দিন
+:Space for sticky mode
+bn:স্টিকি মোডের জন্য Space
+:↑ ↓ to navigate
+bn:নেভিগেট করতে ↑ ↓
+:Ctrl+Tab to navigate
+bs:Ctrl+Tab za navigaciju
+:Enter to select
+bs:Enter za odabir
+:Esc to close
+bs:Esc za zatvaranje
+:Release Ctrl to select
+bs:Otpustite Ctrl za odabir
+:Space for sticky mode
+bs:Space za sticky način
+:↑ ↓ to navigate
+bs:↑ ↓ za navigaciju
+:Ctrl+Tab to navigate
+ca-xv:Ctrl+Tab per navegar
+:Enter to select
+ca-xv:Enter per seleccionar
+:Esc to close
+ca-xv:Esc per tancar
+:Release Ctrl to select
+ca-xv:Allibera Ctrl per seleccionar
+:Space for sticky mode
+ca-xv:Espai per mode fix
+:↑ ↓ to navigate
+ca-xv:↑ ↓ per navegar
+:Ctrl+Tab to navigate
+dk:Ctrl+Tab for at navigere
+:Enter to select
+dk:Enter for at vælge
+:Esc to close
+dk:Esc for at lukke
+:Release Ctrl to select
+dk:Slip Ctrl for at vælge
+:Space for sticky mode
+dk:Mellemrum for sticky-tilstand
+:↑ ↓ to navigate
+dk:↑ ↓ for at navigere
+:Ctrl+Tab to navigate
+et:Ctrl+Tab navigeerimiseks
+:Enter to select
+et:Enter valimiseks
+:Esc to close
+et:Esc sulgemiseks
+:Release Ctrl to select
+et:Vabasta Ctrl valimiseks
+:Space for sticky mode
+et:Tühik kleepuva režiimi jaoks
+:↑ ↓ to navigate
+et:↑ ↓ navigeerimiseks
+:Ctrl+Tab to navigate
+eu:Ktrl+Tab nabigatzeko
+:Enter to select
+eu:Enter hautatzeko
+:Esc to close
+eu:Esc ixteko
+:Release Ctrl to select
+eu:Askatu Ktrl hautatzeko
+:Space for sticky mode
+eu:Zuriunea modu itsaskor modurako
+:↑ ↓ to navigate
+eu:↑ ↓ nabigatzeko
+:Ctrl+Tab to navigate
+fy-nl:Ctrl+Tab om te navigearjen
+:Enter to select
+fy-nl:Enter om te selektearjen
+:Esc to close
+fy-nl:Esc om te sluten
+:Release Ctrl to select
+fy-nl:Ctrl losslitte om te selektearjen
+:Space for sticky mode
+fy-nl:Spaasje foar sticky-modus
+:↑ ↓ to navigate
+fy-nl:↑ ↓ om te navigearjen
+:Ctrl+Tab to navigate
+hr:Ctrl+Tab za navigaciju
+:Enter to select
+hr:Enter za odabir
+:Esc to close
+hr:Esc za zatvaranje
+:Release Ctrl to select
+hr:Otpustite Ctrl za odabir
+:Space for sticky mode
+hr:Razmaknica za ljepljivi način
+:↑ ↓ to navigate
+hr:↑ ↓ za navigaciju
+:Ctrl+Tab to navigate
+jv:Ctrl+Tab kanggo navigasi
+:Enter to select
+jv:Enter kanggo milih
+:Esc to close
+jv:Esc kanggo nutup
+:Release Ctrl to select
+jv:Uculake Ctrl kanggo milih
+:Space for sticky mode
+jv:Spasi kanggo mode sticky
+:↑ ↓ to navigate
+jv:↑ ↓ kanggo navigasi
+:Ctrl+Tab to navigate
+ka:Ctrl+Tab ნავიგაციისთვის
+:Enter to select
+ka:Enter არჩევისთვის
+:Esc to close
+ka:Esc დასახურად
+:Release Ctrl to select
+ka:გაათავისუფლეთ Ctrl არჩევისთვის
+:Space for sticky mode
+ka:Space ფიქსირებული რეჟიმისთვის
+:↑ ↓ to navigate
+ka:↑ ↓ ნავიგაციისთვის
+:Ctrl+Tab to navigate
+ku:Ctrl+Tab ji bo gerokê
+:Enter to select
+ku:Enter ji bo hilbijartinê
+:Esc to close
+ku:Esc ji bo girtinê
+:Release Ctrl to select
+ku:Ctrl berdide ji bo hilbijartinê
+:Space for sticky mode
+ku:Space ji bo moda girtî
+:↑ ↓ to navigate
+ku:↑ ↓ ji bo gerokê
+:Ctrl+Tab to navigate
+kw:Ctrl+Tab dhe lewya
+:Enter to select
+kw:Enter dhe dhewis
+:Esc to close
+kw:Esc dhe degea
+:Release Ctrl to select
+kw:Gasa Ctrl dhe dhewis
+:Space for sticky mode
+kw:Spas rag mood stikys
+:↑ ↓ to navigate
+kw:↑ ↓ dhe lewya
+:Ctrl+Tab to navigate
+lt:Ctrl+Tab navigacijai
+:Enter to select
+lt:Enter pasirinkimui
+:Esc to close
+lt:Esc uždarymui
+:Release Ctrl to select
+lt:Atleiskite Ctrl pasirinkimui
+:Space for sticky mode
+lt:Tarpas fiksuotam režimui
+:↑ ↓ to navigate
+lt:↑ ↓ navigacijai
+:Ctrl+Tab to navigate
+mk:Ctrl+Tab за навигација
+:Enter to select
+mk:Enter за избор
+:Esc to close
+mk:Esc за затворање
+:Release Ctrl to select
+mk:Отпуштете Ctrl за избор
+:Space for sticky mode
+mk:Space за лепливо стање
+:↑ ↓ to navigate
+mk:↑ ↓ за навигација
+:Ctrl+Tab to navigate
+mm:Ctrl+Tab နှိပ်၍ သွားရန်
+:Enter to select
+mm:Enter နှိပ်၍ ရွေးရန်
+:Esc to close
+mm:Esc နှိပ်၍ ပိုင်ရန်
+:Release Ctrl to select
+mm:Ctrl ကို လွှတ်၍ ရွေးရန်
+:Space for sticky mode
+mm:Space နှိပ်၍ sticky mode အတွက်
+:↑ ↓ to navigate
+mm:↑ ↓ နှိပ်၍ သွားရန်
+:Ctrl+Tab to navigate
+ne:नेभिगेट गर्न Ctrl+Tab
+:Enter to select
+ne:चयन गर्न Enter
+:Esc to close
+ne:बन्द गर्न Esc
+:Release Ctrl to select
+ne:चयन गर्न Ctrl छोड्नुहोस्
+:Space for sticky mode
+ne:स्टिकी मोडको लागि Space
+:↑ ↓ to navigate
+ne:नेभिगेट गर्न ↑ ↓
+:Ctrl+Tab to navigate
+nn:Ctrl+Tab for å navigere
+:Enter to select
+nn:Enter for å velje
+:Esc to close
+nn:Esc for å lukke
+:Release Ctrl to select
+nn:Slepp Ctrl for å velje
+:Space for sticky mode
+nn:Mellomrom for fastsett modus
+:↑ ↓ to navigate
+nn:↑ ↓ for å navigere
+:Ctrl+Tab to navigate
+no:Ctrl+Tab for å navigere
+:Enter to select
+no:Enter for å velge
+:Esc to close
+no:Esc for å lukke
+:Release Ctrl to select
+no:Slipp Ctrl for å velge
+:Space for sticky mode
+no:Mellomrom for klisteremodus
+:↑ ↓ to navigate
+no:↑ ↓ for å navigere
+:Ctrl+Tab to navigate
+pa:ਨੈਵੀਗੇਟ ਕਰਨ ਲਈ Ctrl+Tab
+:Enter to select
+pa:ਚੁਣਨ ਲਈ Enter
+:Esc to close
+pa:ਬੰਦ ਕਰਨ ਲਈ Esc
+:Release Ctrl to select
+pa:ਚੁਣਨ ਲਈ Ctrl ਛੱਡੋ
+:Space for sticky mode
+pa:ਸਟਿੱਕੀ ਮੋਡ ਲਈ Space
+:↑ ↓ to navigate
+pa:ਨੈਵੀਗੇਟ ਕਰਨ ਲਈ ↑ ↓
+:Ctrl+Tab to navigate
+si:සංචලනය සඳහා Ctrl+Tab
+:Enter to select
+si:තෝරා ගැනීමට Enter
+:Esc to close
+si:වසා දැමීමට Esc
+:Release Ctrl to select
+si:තෝරා ගැනීමට Ctrl මුදා හරින්න
+:Space for sticky mode
+si:ස්ථීර ප්‍රකාරය සඳහා Space
+:↑ ↓ to navigate
+si:සංචලනය සඳහා ↑ ↓
+:Ctrl+Tab to navigate
+sn:Ctrl+Tab kufambisa
+:Enter to select
+sn:Enter kusarudza
+:Esc to close
+sn:Esc kuvhara
+:Release Ctrl to select
+sn:Sunungura Ctrl kusarudza
+:Space for sticky mode
+sn:Space kumamiriro unonamatira
+:↑ ↓ to navigate
+sn:↑ ↓ kufambisa
+:Ctrl+Tab to navigate
+sp-rs:Ctrl+Tab za navigaciju
+:Enter to select
+sp-rs:Enter za izbor
+:Esc to close
+sp-rs:Esc za zatvaranje
+:Release Ctrl to select
+sp-rs:Otpustite Ctrl za izbor
+:Space for sticky mode
+sp-rs:Space za lepljivi režim
+:↑ ↓ to navigate
+sp-rs:↑ ↓ za navigaciju
+:Ctrl+Tab to navigate
+sq:Ctrl+Tab për të lundruar
+:Enter to select
+sq:Enter për të zgjedhur
+:Esc to close
+sq:Esc për të mbyllur
+:Release Ctrl to select
+sq:Lësho Ctrl për të zgjedhur
+:Space for sticky mode
+sq:Hapësirë për modalitetin ngjitës
+:↑ ↓ to navigate
+sq:↑ ↓ për të lundruar
+:Ctrl+Tab to navigate
+th:Ctrl+Tab เพื่อนำทาง
+:Enter to select
+th:Enter เพื่อเลือก
+:Esc to close
+th:Esc เพื่อปิด
+:Release Ctrl to select
+th:ปล่อย Ctrl เพื่อเลือก
+:Space for sticky mode
+th:Space สำหรับโหมดค้าง
+:↑ ↓ to navigate
+th:↑ ↓ เพื่อนำทาง
+:Ctrl+Tab to navigate
+tl:Ctrl+Tab upang mag-navigate
+:Enter to select
+tl:Enter upang pumili
+:Esc to close
+tl:Esc upang isara
+:Release Ctrl to select
+tl:Bitawan ang Ctrl upang pumili
+:Space for sticky mode
+tl:Space para sa sticky mode
+:↑ ↓ to navigate
+tl:↑ ↓ upang mag-navigate
+:Ctrl+Tab to navigate
+uk:Ctrl+Tab для навігації
+:Enter to select
+uk:Enter для вибору
+:Esc to close
+uk:Esc для закриття
+:Release Ctrl to select
+uk:Відпустіть Ctrl для вибору
+:Space for sticky mode
+uk:Пробіл для закріпленого режиму
+:↑ ↓ to navigate
+uk:↑ ↓ для навігації
+:Ctrl+Tab to navigate
+vn:Ctrl+Tab để điều hướng
+:Enter to select
+vn:Enter để chọn
+:Esc to close
+vn:Esc để đóng
+:Release Ctrl to select
+vn:Nhả Ctrl để chọn
+:Space for sticky mode
+vn:Space để bật chế độ dính
+:↑ ↓ to navigate
+vn:↑ ↓ để điều hướng

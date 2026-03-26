@@ -37,8 +37,6 @@
 
 #include "utils/Log.h"
 
-constexpr const char* kInfoRegular = "↑ ↓ to navigate      Enter to select     Esc to close";
-constexpr const char* kInfoSmartTab = "Ctrl+Tab to navigate         Release Ctrl to select    Space for sticky mode";
 
 // clang-format off
 // those commands never show up in command palette
@@ -1308,11 +1306,29 @@ bool CommandPaletteWnd::Create(MainWindow* win, const char* prefix, int smartTab
         }
         vbox->AddChild(c, 1);
     }
+
     {
-        auto c = CreateStatic(hwnd, this->font, smartTabMode ? kInfoSmartTab : kInfoRegular);
-        c->SetColors(colTxt, colBg);
-        staticInfo = c;
-        vbox->AddChild(c);
+        char const* strings[3];
+        if (smartTabMode) {
+            strings[0] = _TRA("Ctrl+Tab to navigate");
+            strings[1] = _TRA("Release Ctrl to select");
+            strings[2] = _TRA("Space for sticky mode");
+        } else {
+            strings[0] = _TRA("↑ ↓ to navigate");
+            strings[1] = _TRA("Enter to select");
+            strings[2] = _TRA("Esc to close");
+        }
+        auto hbox = new HBox();
+        hbox->alignMain = MainAxisAlign::MainCenter;
+        hbox->alignCross = CrossAxisAlign::CrossCenter;
+        auto pad = Insets{0, 8, 0, 8};
+        for (int i = 0; i < 3; i++) {
+            auto c = CreateStatic(hwnd, font, strings[i]);
+            c->SetColors(colTxt, colBg);
+            auto p = new Padding(c, pad);
+            hbox->AddChild(p);
+        }
+        vbox->AddChild(hbox);
     }
 
     auto padding = new Padding(vbox, DpiScaledInsets(hwnd, 4, 8));
