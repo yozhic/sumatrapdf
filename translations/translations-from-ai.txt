@@ -31414,3 +31414,337 @@ vn:Mở trong Microsoft HTML Help
 vn:Tìm kiếm với Google Scholar
 :Search with &Wikipedia
 vn:Tìm kiếm với Wikipedia
+:Toggle Overlay Scrollbar
+am:የሽፋን አሸሳቢን ቀያይር
+:Toggle Use Tabs
+am:ትሮች አጠቃቀምን ቀያይር
+:Toggle Overlay Scrollbar
+ar:تبديل شريط التمرير المتراكب
+:Toggle Use Tabs
+ar:تبديل استخدام علامات التبويب
+:Toggle Overlay Scrollbar
+br:Kemmañ ar varenn-dibunañ dreistplakaat
+:Toggle Use Tabs
+br:Kemmañ an implijout ivinelloù
+:Toggle Overlay Scrollbar
+cn:切换覆盖滚动条
+:Toggle Use Tabs
+cn:切换使用标签页
+:Toggle Overlay Scrollbar
+co:Attivà/Disattivà a Barra di Scurrimentu Soprapposta
+:Toggle Use Tabs
+co:Attivà/Disattivà l'Usu di Tabulazioni
+:Toggle Overlay Scrollbar
+de:Overlay-Scrollleiste umschalten
+:Toggle Use Tabs
+de:Verwendung von Tabs umschalten
+:Toggle Overlay Scrollbar
+el:Εναλλαγή Επικαλυπτόμενης Γραμμής Κύλισης
+:Toggle Use Tabs
+el:Εναλλαγή Χρήσης Καρτελών
+:Toggle Overlay Scrollbar
+hi:ओवरले स्क्रॉलबार टॉगल करें
+:Toggle Use Tabs
+hi:टैब उपयोग टॉगल करें
+:Toggle Overlay Scrollbar
+ja:オーバーレイスクロールバーの切り替え
+:Toggle Use Tabs
+ja:タブ使用の切り替え
+:Show Book&marks
+ml:ബുക്ക്മാർക്കുകൾ കാണിക്കുക
+:Show Scr&ollbars
+ml:സ്ക്രോൾബാറുകൾ കാണിക്കുക
+:Toggle Overlay Scrollbar
+ml:ഓവർലേ സ്ക്രോൾബാർ മാറ്റുക
+:Toggle Use Tabs
+ml:ടാബുകൾ ഉപയോഗിക്കുന്നത് മാറ്റുക
+:Toggle Overlay Scrollbar
+nl:Overlayschuifbalk in-/uitschakelen
+:Toggle Use Tabs
+nl:Tabbladen gebruiken in-/uitschakelen
+:Toggle Overlay Scrollbar
+pl:Przełącz nakładany pasek przewijania
+:Toggle Use Tabs
+pl:Przełącz używanie kart
+:Toggle Overlay Scrollbar
+ru:Переключить наложенную полосу прокрутки
+:Toggle Use Tabs
+ru:Переключить использование вкладок
+:Toggle Overlay Scrollbar
+sk:Prepnúť prekrývací posúvač
+:Toggle Use Tabs
+sk:Prepnúť použitie kariet
+:Toggle Overlay Scrollbar
+sr-rs:Прекључи преклопљени клизач
+:Toggle Use Tabs
+sr-rs:Прекључи коришћење картица
+:Toggle Overlay Scrollbar
+tw:切換覆蓋捲軸
+:Toggle Use Tabs
+tw:切換使用分頁
+:Toggle Overlay Scrollbar
+az:Üst-üstə düşən sürüşdürmə çubuğunu aç/bağla
+:Toggle Use Tabs
+az:Tab istifadəsini aç/bağla
+:Toggle Overlay Scrollbar
+by:Пераключыць накладны паласу пракруткі
+:Toggle Use Tabs
+by:Пераключыць выкарыстанне ўкладак
+:Toggle Overlay Scrollbar
+ca:Commuta la barra de desplaçament superposada
+:Toggle Use Tabs
+ca:Commuta l'ús de pestanyes
+:Toggle Overlay Scrollbar
+cy:Toglo Bar Sgrolio Troshaen
+:Toggle Use Tabs
+cy:Toglo Defnyddio Tabiau
+:Toggle Overlay Scrollbar
+cz:Přepnout překryvný posuvník
+:Toggle Use Tabs
+cz:Přepnout použití záložek
+:Toggle Overlay Scrollbar
+es:Alternar barra de desplazamiento superpuesta
+:Toggle Use Tabs
+es:Alternar uso de pestañas
+:Toggle Overlay Scrollbar
+fa:تغییر وضعیت نوار پیمایش روی‌هم
+:Toggle Use Tabs
+fa:تغییر وضعیت استفاده از تب‌ها
+:Toggle Overlay Scrollbar
+fi:Vaihda päällekkäinen vierityspalkki
+:Toggle Use Tabs
+fi:Vaihda välilehtien käyttö
+:Toggle Overlay Scrollbar
+fo:Skift yvirliggjandi rullistong
+:Toggle Use Tabs
+fo:Skift nýtslu av flipum
+:Toggle Overlay Scrollbar
+fr:Activer/désactiver la barre de défilement superposée
+:Toggle Use Tabs
+fr:Activer/désactiver l'utilisation des onglets
+:Toggle Overlay Scrollbar
+ga:Scorr-Bharra Forleagan a Scoránú
+:Toggle Use Tabs
+ga:Úsáid Cluaisíní a Scoránú
+:Toggle Overlay Scrollbar
+gl:Alternar barra de desprazamento superposta
+:Toggle Use Tabs
+gl:Alternar uso de tabulacións
+:Toggle Overlay Scrollbar
+he:החלף פס גלילה שכבה
+:Toggle Use Tabs
+he:החלף שימוש בטאבים
+:Toggle Overlay Scrollbar
+hu:Átfedő görgetősáv ki-/bekapcsolása
+:Toggle Use Tabs
+hu:Lapok használatának ki-/bekapcsolása
+:Toggle Overlay Scrollbar
+id:Alihkan Bilah Gulir Overlay
+:Toggle Use Tabs
+id:Alihkan Gunakan Tab
+:Toggle Overlay Scrollbar
+it:Attiva/disattiva barra di scorrimento sovrapposta
+:Toggle Use Tabs
+it:Attiva/disattiva uso schede
+:Toggle Overlay Scrollbar
+kr:오버레이 스크롤바 전환
+:Toggle Use Tabs
+kr:탭 사용 전환
+:Toggle Overlay Scrollbar
+lv:Pārslēgt pārklājuma ritjoslu
+:Toggle Use Tabs
+lv:Pārslēgt ciļņu izmantošanu
+:Toggle Overlay Scrollbar
+my:အထပ်ပိုး လှိမ့်ဘားကို ပြောင်းလဲရန်
+:Toggle Use Tabs
+my:တက်ဘ်များ အသုံးပြုမှုကို ပြောင်းလဲရန်
+:Toggle Overlay Scrollbar
+pt:Alternar Barra de Rolagem Sobreposta
+:Toggle Use Tabs
+pt:Alternar Uso de Abas
+:Toggle Overlay Scrollbar
+ro:Comutare bară de derulare suprapusă
+:Toggle Use Tabs
+ro:Comutare utilizare file
+:Toggle Overlay Scrollbar
+sat:ओभरले स्क्रोलबार टगल करॗ
+:Toggle Use Tabs
+sat:टैब बॕवहार टगल करॗ
+:Toggle Overlay Scrollbar
+sl:Preklopi prekrivni drsnik
+:Toggle Use Tabs
+sl:Preklopi uporabo zavihkov
+:Toggle Overlay Scrollbar
+sv:Växla överlagrad rullningslist
+:Toggle Use Tabs
+sv:Växla användning av flikar
+:Toggle Overlay Scrollbar
+ta:மேலடுக்கு உருள்பட்டியை நிலைமாற்று
+:Toggle Use Tabs
+ta:தாவிகளைப் பயன்படுத்துவதை நிலைமாற்று
+:Toggle Overlay Scrollbar
+tr:Üst Üste Bindirilmiş Kaydırma Çubuğunu Aç/Kapat
+:Toggle Use Tabs
+tr:Sekme Kullanımını Aç/Kapat
+:Toggle Overlay Scrollbar
+uz:Qoplama aylantirish panelini yoqish/o'chirish
+:Toggle Use Tabs
+uz:Varaqlardan foydalanishni yoqish/o'chirish
+:Show Book&marks
+af:Wys Boekmerke
+:Show Scr&ollbars
+af:Wys Rolbalke
+:Toggle Overlay Scrollbar
+af:Wissel Oorlegrolbalk
+:Toggle Use Tabs
+af:Wissel Gebruik Oortjies
+:Toggle Overlay Scrollbar
+bg:Превключване на плаваща лента за превъртане
+:Toggle Use Tabs
+bg:Превключване на използването на раздели
+:Show Book&marks
+bn:বুকমার্ক দেখান
+:Show Scr&ollbars
+bn:স্ক্রলবার দেখান
+:Toggle Overlay Scrollbar
+bn:ওভারলে স্ক্রলবার টগল করুন
+:Toggle Use Tabs
+bn:ট্যাব ব্যবহার টগল করুন
+:Show Scr&ollbars
+bs:Prikaži trake za pomicanje
+:Toggle Overlay Scrollbar
+bs:Uključi/isključi prekrivajuću traku za pomicanje
+:Toggle Use Tabs
+bs:Uključi/isključi korištenje kartica
+:Toggle Overlay Scrollbar
+ca-xv:Commuta la barra de desplaçament superposada
+:Toggle Use Tabs
+ca-xv:Commuta l'ús de pestanyes
+:Toggle Overlay Scrollbar
+dk:Skift overlejret rullebjælke
+:Toggle Use Tabs
+dk:Skift brug af faneblade
+:Toggle Overlay Scrollbar
+et:Lülita ülekatte kerimisriba sisse/välja
+:Toggle Use Tabs
+et:Lülita vahelehtede kasutamine sisse/välja
+:Toggle Overlay Scrollbar
+eu:Txandakatu gainjarritako korritze-barra
+:Toggle Use Tabs
+eu:Txandakatu fitxen erabilera
+:Show Book&marks
+fy-nl:Blêdwizers toane
+:Show Scr&ollbars
+fy-nl:Scrollbalken toane
+:Toggle Overlay Scrollbar
+fy-nl:Oerlaachscrollbalke wikselje
+:Toggle Use Tabs
+fy-nl:Brûken fan ljepblêden wikselje
+:Toggle Overlay Scrollbar
+hr:Uključi/isključi prekrivajuću traku za pomicanje
+:Toggle Use Tabs
+hr:Uključi/isključi korištenje kartica
+:Toggle Overlay Scrollbar
+jv:Ganti Scrollbar Overlay
+:Toggle Use Tabs
+jv:Ganti Nganggo Tab
+:Toggle Overlay Scrollbar
+ka:გადართვა გადახურვის გადაადგილების ზოლი
+:Toggle Use Tabs
+ka:გადართვა ჩანართების გამოყენება
+:Show Scr&ollbars
+ku:Hêlbijarkên Nîşan Bide
+:Toggle Overlay Scrollbar
+ku:Hêlbijarê Sertêkêş Veguherîne
+:Toggle Use Tabs
+ku:Bikaranîna Hilpekan Veguherîne
+:Show Book&marks
+kw:Diskwedhes Folennosow
+:Toggle Overlay Scrollbar
+kw:Keschanjya Barr-skrollya Gordhres
+:Toggle Use Tabs
+kw:Keschanjya Usya Tabbys
+:Toggle Overlay Scrollbar
+lt:Perjungti perdangos slinkties juostą
+:Toggle Use Tabs
+lt:Perjungti skirtukų naudojimą
+:Show Scr&ollbars
+mk:Прикажи лизгачи
+:Toggle Overlay Scrollbar
+mk:Вклучи/исклучи преклопен лизгач
+:Toggle Use Tabs
+mk:Вклучи/исклучи јазичиња
+:Show Book&marks
+mm:မှတ်သားချက်များ ပြရန်
+:Show Scr&ollbars
+mm:လှိမ့်ဘားများ ပြရန်
+:Toggle Overlay Scrollbar
+mm:ထပ်ပိုးလှိမ့်ဘား ပြောင်းရန်
+:Toggle Use Tabs
+mm:တက်ဘ်များ အသုံးပြုခြင်း ပြောင်းရန်
+:Show Scr&ollbars
+ne:स्क्रोलबारहरू देखाउनुहोस्
+:Toggle Overlay Scrollbar
+ne:ओभरले स्क्रोलबार टगल गर्नुहोस्
+:Toggle Use Tabs
+ne:ट्याबहरू प्रयोग टगल गर्नुहोस्
+:Search With &Google
+nn:Søk med Google
+:Show Scr&ollbars
+nn:Vis rullefelt
+:Toggle Overlay Scrollbar
+nn:Slå av/på overliggjande rullefelt
+:Toggle Use Tabs
+nn:Slå av/på bruk av faner
+:Toggle Overlay Scrollbar
+no:Veksle overlegg-rullelinje
+:Toggle Use Tabs
+no:Veksle bruk av faner
+:Toggle Overlay Scrollbar
+pa:ਓਵਰਲੇ ਸਕ੍ਰੋਲਬਾਰ ਟੌਗਲ ਕਰੋ
+:Toggle Use Tabs
+pa:ਟੈਬਾਂ ਵਰਤੋਂ ਟੌਗਲ ਕਰੋ
+:Show Scr&ollbars
+si:අනුචලන තීරු පෙන්වන්න
+:Toggle Overlay Scrollbar
+si:උඩැතිරි අනුචලන තීරුව ටොගල් කරන්න
+:Toggle Use Tabs
+si:ටැබ් භාවිතය ටොගල් කරන්න
+:Show Book&marks
+sn:Ratidza Zvibhukumaki
+:Show Scr&ollbars
+sn:Ratidza Mabha Ekukwesha
+:Toggle Overlay Scrollbar
+sn:Shandura Bha Rekukwesha Rinopfurikidza
+:Toggle Use Tabs
+sn:Shandura Kushandisa Matabu
+:Show Scr&ollbars
+sp-rs:Prikaži trake za pomeranje
+:Toggle Overlay Scrollbar
+sp-rs:Uključi/isključi prekrivajuću traku za pomeranje
+:Toggle Use Tabs
+sp-rs:Uključi/isključi korišćenje kartica
+:Show Scr&ollbars
+sq:Shfaq Shiritat e Rrëshqitjes
+:Toggle Overlay Scrollbar
+sq:Aktivizo/Çaktivizo Shiritat e Rrëshqitjes Mbivendosur
+:Toggle Use Tabs
+sq:Aktivizo/Çaktivizo Përdorimin e Skedave
+:Show Book&marks
+th:แสดงที่คั่นหน้า
+:Toggle Overlay Scrollbar
+th:เปิด/ปิดแถบเลื่อนแบบทับซ้อน
+:Toggle Use Tabs
+th:เปิด/ปิดการใช้แท็บ
+:Toggle Overlay Scrollbar
+tl:I-toggle ang Overlay Scrollbar
+:Toggle Use Tabs
+tl:I-toggle ang Paggamit ng mga Tab
+:Toggle Overlay Scrollbar
+uk:Перемкнути накладену смугу прокручування
+:Toggle Use Tabs
+uk:Перемкнути використання вкладок
+:Toggle Overlay Scrollbar
+vn:Bật/tắt thanh cuộn phủ lớp
+:Toggle Use Tabs
+vn:Bật/tắt sử dụng tab
