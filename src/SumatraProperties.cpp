@@ -77,34 +77,89 @@ void DeletePropertiesWindow(HWND hwndParent) {
 // See: http://www.verypdf.com/pdfinfoeditor/pdf-date-format.htm
 // Format:  "D:YYYYMMDDHHMMSSxxxxxxx"
 // Example: "D:20091222171933-05'00'"
-static bool PdfDateParseA(const char* pdfDate, SYSTEMTIME* timeOut) {
+static bool PdfDateParseA(const char* date, SYSTEMTIME* timeOut, int* timeZoneOut) {
+    if (!date || !*date) return false;
+
     ZeroMemory(timeOut, sizeof(SYSTEMTIME));
+    *timeZoneOut = 0;
+
     // "D:" at the beginning is optional
-    if (str::StartsWith(pdfDate, "D:")) {
-        pdfDate += 2;
+    if (str::StartsWith(date, "D:")) {
+        date += 2;
     }
-    return str::Parse(pdfDate,
-                      "%4d%2d%2d"
-                      "%2d%2d%2d",
-                      &timeOut->wYear, &timeOut->wMonth, &timeOut->wDay, &timeOut->wHour, &timeOut->wMinute,
-                      &timeOut->wSecond) != nullptr;
+    const char* end = str::Parse(date,
+                                 "%4d%2d%2d"
+                                 "%2d%2d%2d",
+                                 &timeOut->wYear, &timeOut->wMonth, &timeOut->wDay, &timeOut->wHour, &timeOut->wMinute,
+                                 &timeOut->wSecond);
+    if (!end) {
+        return false;
+    }
+    // parse optional timezone: Z, +HH'MM', -HH'MM' (or +HH'MM, +HHMM, +HH)
+    if (*end == 'Z') {
+        *timeZoneOut = 0;
+    } else if (*end == '+' || *end == '-') {
+        int sign = (*end == '+') ? 1 : -1;
+        int tzHour = 0;
+        int tzMin = 0;
+        const char* tz = end + 1;
+        const char* tzEnd = str::Parse(tz, "%2d'%2d", &tzHour, &tzMin);
+        if (!tzEnd) {
+            tzEnd = str::Parse(tz, "%2d:%2d", &tzHour, &tzMin);
+        }
+        if (!tzEnd) {
+            str::Parse(tz, "%2d", &tzHour);
+        }
+        *timeZoneOut = sign * (tzHour * 100 + tzMin);
+    }
+    return true;
     // don't bother about the day of week, we won't display it anyway
 }
 
 // See: ISO 8601 specification
 // Format:  "YYYY-MM-DDTHH:MM:SSZ"
 // Example: "2011-04-19T22:10:48Z"
-static bool IsoDateParse(const char* isoDate, SYSTEMTIME* timeOut) {
+static bool IsoDateParse(const char* date, SYSTEMTIME* timeOut, int* timeZoneOut) {
+    if (!date || !*date) return false;
+
     ZeroMemory(timeOut, sizeof(SYSTEMTIME));
-    const char* end = str::Parse(isoDate, "%4d-%2d-%2d", &timeOut->wYear, &timeOut->wMonth, &timeOut->wDay);
+    *timeZoneOut = 0;
+
+    const char* end = str::Parse(date, "%4d-%2d-%2d", &timeOut->wYear, &timeOut->wMonth, &timeOut->wDay);
     if (end) { // time is optional
-        str::Parse(end, "T%2d:%2d:%2dZ", &timeOut->wHour, &timeOut->wMinute, &timeOut->wSecond);
+        const char* timeEnd = str::Parse(end, "T%2d:%2d:%2d", &timeOut->wHour, &timeOut->wMinute, &timeOut->wSecond);
+        if (timeEnd) {
+            // parse optional timezone: Z, +HH:MM, -HH:MM
+            if (*timeEnd == 'Z') {
+                *timeZoneOut = 0;
+            } else if (*timeEnd == '+' || *timeEnd == '-') {
+                int sign = (*timeEnd == '+') ? 1 : -1;
+                int tzHour = 0;
+                int tzMin = 0;
+                const char* tz = timeEnd + 1;
+                const char* tzEnd = str::Parse(tz, "%2d:%2d", &tzHour, &tzMin);
+                if (!tzEnd) {
+                    str::Parse(tz, "%2d%2d", &tzHour, &tzMin);
+                }
+                *timeZoneOut = sign * (tzHour * 100 + tzMin);
+            }
+        }
     }
     return end != nullptr;
     // don't bother about the day of week, we won't display it anyway
 }
 
-static TempStr FormatSystemTimeTemp(SYSTEMTIME& date) {
+static TempStr AddTimeZone(TempStr s, int timeZone) {
+    if (timeZone == 0) return nullptr;
+
+    const char* tzSign = (timeZone > 0) ? "+" : "-";
+    int abs = (timeZone > 0) ? timeZone : -timeZone;
+    int hours = abs / 100;
+    int mins = abs % 100;
+    return str::FormatTemp("%s %s%02d:%02d", s, tzSign, hours, mins);
+}
+
+static TempStr FormatSystemTimeTemp(SYSTEMTIME& date, int timeZone) {
     WCHAR bufW[512]{};
     int cchBufLen = dimof(bufW);
     int ret = GetDateFormatW(LOCALE_USER_DEFAULT, DATE_SHORTDATE, &date, nullptr, bufW, cchBufLen);
@@ -114,7 +169,8 @@ static TempStr FormatSystemTimeTemp(SYSTEMTIME& date) {
 
     // don't add 00:00:00 for dates without time
     if (0 == date.wHour && 0 == date.wMinute && 0 == date.wSecond) {
-        return ToUtf8Temp(bufW);
+        TempStr res = ToUtf8Temp(bufW);
+        return AddTimeZone(res, timeZone);
     }
 
     WCHAR* tmp = bufW + ret;
@@ -123,27 +179,17 @@ static TempStr FormatSystemTimeTemp(SYSTEMTIME& date) {
     if (ret < 2) { // GetTimeFormat() failed or returned an empty result
         tmp[-1] = '\0';
     }
-
-    return ToUtf8Temp(bufW);
+    TempStr res = ToUtf8Temp(bufW);
+    return AddTimeZone(res, timeZone);
 }
 
 // Convert a date in PDF or XPS format, e.g. "D:20091222171933-05'00'" to a display
 // format e.g. "12/22/2009 5:19:33 PM"
 // See: http://www.verypdf.com/pdfinfoeditor/pdf-date-format.htm
 // The conversion happens in place
-static TempStr ConvDateToDisplayTemp(const char* s, bool (*dateParseFn)(const char* date, SYSTEMTIME* timeOut)) {
-    if (!s || !*s || !dateParseFn) {
-        return nullptr;
-    }
-
-    SYSTEMTIME date{};
-    bool ok = dateParseFn(s, &date);
-    if (!ok) {
-        return nullptr;
-    }
-
-    return FormatSystemTimeTemp(date);
-}
+// static TempStr ConvDateToDisplayTemp(SYSTEMTIME* timeOut) {
+//    return
+//}
 
 // format page size according to locale (e.g. "29.7 x 21.0 cm" or "11.69 x 8.27 in")
 static TempStr FormatPageSizeTemp(EngineBase* engine, int pageNo, int rotation) {
@@ -320,20 +366,29 @@ static void GetPropsText(DocController* ctrl, str::Str& out, bool extended) {
     AppendPropTranslated(out, ctrl, kPropCopyright);
 
     TempStr val = ctrl->GetPropertyTemp(kPropCreationDate);
+    SYSTEMTIME date;
+    int timeZone = 0;
+    bool ok = false;
     if (val && dm && kindEngineMupdf == dm->engineType) {
-        strTemp = ConvDateToDisplayTemp(val, PdfDateParseA);
+        ok = PdfDateParseA(val, &date, &timeZone);
     } else {
-        strTemp = ConvDateToDisplayTemp(val, IsoDateParse);
+        ok = IsoDateParse(val, &date, &timeZone);
     }
-    AppendProp(out, _TRA("Created:"), strTemp);
+    if (ok) {
+        strTemp = FormatSystemTimeTemp(date, timeZone);
+        AppendProp(out, _TRA("Created:"), strTemp);
+    }
 
     val = ctrl->GetPropertyTemp(kPropModificationDate);
     if (val && dm && kindEngineMupdf == dm->engineType) {
-        strTemp = ConvDateToDisplayTemp(val, PdfDateParseA);
+        ok = PdfDateParseA(val, &date, &timeZone);
     } else {
-        strTemp = ConvDateToDisplayTemp(val, IsoDateParse);
+        ok = IsoDateParse(val, &date, &timeZone);
     }
-    AppendProp(out, _TRA("Modified:"), strTemp);
+    if (ok) {
+        strTemp = FormatSystemTimeTemp(date, timeZone);
+        AppendProp(out, _TRA("Modified:"), strTemp);
+    }
 
     AppendPropTranslated(out, ctrl, kPropCreatorApp);
     AppendPropTranslated(out, ctrl, kPropPdfProducer);
