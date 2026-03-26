@@ -55,9 +55,9 @@
     V(VK_OEM_PLUS, "+")              \
     V(VK_ADD, "Add")                 \
     V(VK_OEM_MINUS, "-")             \
+    V(VK_SUBTRACT, "-")              \
     V(VK_SUBTRACT, "Subtract")       \
     V(VK_SUBTRACT, "Sub")            \
-    V(VK_SUBTRACT, "-")              \
     V(VK_DIVIDE, "/")                \
     V(VK_DIVIDE, "Divide")           \
     V(VK_DIVIDE, "Div")              \

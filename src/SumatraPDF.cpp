@@ -4479,12 +4479,6 @@ static bool FrameOnKeydown(MainWindow* win, WPARAM key, LPARAM lp) {
 
     bool isCtrl = IsCtrlPressed();
     bool isShift = IsShiftPressed();
-#if 0
-    if (win->tabsVisible && isCtrl && VK_TAB == key) {
-        TabsOnCtrlTab(win, isShift);
-        return true;
-    }
-#endif
     if (!win->IsDocLoaded()) {
         return false;
     }
@@ -4514,43 +4508,11 @@ static bool FrameOnKeydown(MainWindow* win, WPARAM key, LPARAM lp) {
     }
     // lf("key=%d,%c,shift=%d\n", key, (char)key, (int)WasKeyDown(VK_SHIFT));
 
-    // the parts that are commented out should now be handled
-    // in OnCommand via accelerators
-    if (VK_UP == key) {
-        logf("VK_UP\n");
-    } else if (VK_DOWN == key) {
-        logf("VK_DOWN\n");
-    } else if (VK_PRIOR == key && isCtrl) {
-        // win->ctrl->GoToPrevPage();
-        logf("CTRL + VK_PRIOR\n");
-    } else if (VK_NEXT == key && isCtrl) {
-        // win->ctrl->GoToNextPage();
-        logf("CTRL + VK_NEXTds\n");
-    } else if (VK_HOME == key && isCtrl) {
-        logf("CTRL + VK_HOME\n");
-        // win->ctrl->GoToFirstPage();
-    } else if (VK_END == key && isCtrl) {
-        logf("CTRL + VK_END\n");
-        if (!win->ctrl->GoToLastPage()) {
-            //    SendMessageW(win->hwndCanvas, WM_VSCROLL, SB_BOTTOM, 0);
-        }
-    } else if (VK_LEFT == key) {
-        logf("VK_LEFT\n");
-    } else if (VK_RIGHT == key) {
-        logf("VK_RIGHT\n");
-    } else if (VK_HOME == key) {
-        logf("VK_HOME\n");
-        // win->ctrl->GoToFirstPage();
-    } else if (VK_END == key) {
-        logf("VK_END\n");
-        if (!win->ctrl->GoToLastPage()) {
-            // SendMessageW(win->hwndCanvas, WM_VSCROLL, SB_BOTTOM, 0);
-        }
-    } else if (VK_MULTIPLY == key && dm) {
-        logf("VK_MULTIPLY\n");
+    if (VK_MULTIPLY == key && dm) {
+        //logf("VK_MULTIPLY\n");
         dm->RotateBy(90);
     } else if (VK_DIVIDE == key && dm) {
-        logf("VK_DIVIDE\n");
+        //logf("VK_DIVIDE\n");
         dm->RotateBy(-90);
         gIsDivideKeyDown = true;
     } else if (VK_DELETE == key && !isCtrl && !isShift) {
