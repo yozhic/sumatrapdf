@@ -1495,12 +1495,12 @@ If you add or remove lines with square brackets, **make sure to always add/remov
 The syntax for colors is: \`#rrggbb\` or \`#aarrggbb\`.
 
 The components are hex values (ranging from 00 to FF) and stand for:
+- \`aa\` : alpha (transparency). ff is fully transparent, 0 is not transparent, and 7f is 50% transparent
 - \`rr\` : red component
 - \`gg\` : green component
 - \`bb\` : blue component
-- \`aa\` : alpha (transparency) component
 
-For example #ff0000 means red color. #ff00007f is half-transparent red.
+For example #ff0000 means red color. #7fff0000 is half-transparent red.
 
 `;
 
