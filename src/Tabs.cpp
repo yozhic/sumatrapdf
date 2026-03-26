@@ -597,9 +597,6 @@ void SetTabsInTitlebar(MainWindow* win, bool inTitleBar) {
     }
     win->tabsInTitlebar = inTitleBar;
     win->tabsCtrl->inTitleBar = inTitleBar;
-    if (inTitleBar != win->isMenuHidden) {
-        ToggleMenuBar(win, false);
-    }
     if (inTitleBar) {
         RelayoutCaption(win);
     }
