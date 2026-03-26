@@ -6,6 +6,7 @@
 #include "utils/WinUtil.h"
 
 #include "OverlayScrollbar.h"
+#include "Theme.h"
 
 #define OVERLAY_SCROLLBAR_CLASS L"SUMATRA_OVERLAY_SCROLLBAR"
 
@@ -21,11 +22,31 @@ static POINT gLastMousePos = {-1, -1};
 static constexpr UINT_PTR kMouseTrackTimerID = 100;
 static constexpr int kMouseTrackIntervalMs = 50;
 
-// colors
-static COLORREF kThumbColor = RGB(0x88, 0x88, 0x88);
-static COLORREF kThumbHoverColor = RGB(0x66, 0x66, 0x66);
-static COLORREF kArrowColor = RGB(0x66, 0x66, 0x66);
-static COLORREF kTrackColor = RGB(0xF0, 0xF0, 0xF0);
+// Derive scrollbar colors from current theme
+static COLORREF ThemeTrackColor() {
+    COLORREF bg = ThemeControlBackgroundColor();
+    return bg;
+}
+
+static COLORREF ThemeThumbColor() {
+    COLORREF bg = ThemeControlBackgroundColor();
+    if (IsLightColor(bg)) {
+        return AdjustLightness2(bg, -100);
+    }
+    return AdjustLightness2(bg, 100);
+}
+
+static COLORREF ThemeThumbHoverColor() {
+    COLORREF bg = ThemeControlBackgroundColor();
+    if (IsLightColor(bg)) {
+        return AdjustLightness2(bg, -140);
+    }
+    return AdjustLightness2(bg, 140);
+}
+
+static COLORREF ThemeArrowColor() {
+    return ThemeThumbHoverColor();
+}
 static constexpr int kMinThumbSize = 20;
 static constexpr BYTE kAlphaThin = 180;
 static constexpr BYTE kAlphaThick = 220;
@@ -213,11 +234,11 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
     };
 
     if (sb->isThick) {
-        fillRect(Rect(0, 0, w, h), kTrackColor);
+        fillRect(Rect(0, 0, w, h), ThemeTrackColor());
     }
 
     Rect thumbRc = GetThumbRect(sb);
-    COLORREF thumbCol = sb->mouseOverThumb ? kThumbHoverColor : kThumbColor;
+    COLORREF thumbCol = sb->mouseOverThumb ? ThemeThumbHoverColor() : ThemeThumbColor();
 
     if (!sb->isThick) {
         int thinW = ScaledWidth(sb, false);
@@ -235,7 +256,7 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
         Rect arrowTop = GetArrowTopRect(sb);
         Rect arrowBot = GetArrowBottomRect(sb);
 
-        DWORD arrowPixel = premultiply(kArrowColor, alpha);
+        DWORD arrowPixel = premultiply(ThemeArrowColor(), alpha);
         DWORD* pixels = (DWORD*)bits;
 
         if (IsVert(sb)) {
