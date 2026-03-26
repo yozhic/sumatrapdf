@@ -36,6 +36,7 @@
 #include "Theme.h"
 
 #include "utils/Log.h"
+#include <Notifications.h>
 
 // workaround for OnMenuExit
 // if this flag is set, CloseWindow will not save prefs before closing the window.
@@ -102,6 +103,7 @@ static void SetCommandNameAndShortcut(CustomCommand* cmd, const char* name, cons
     }
     if (!IsValidShortcutString(key)) {
         logf("SetCommandNameAndShortcut: '%s' is not a valid shortcut for '%s'\n", key, cmd->definition);
+        MaybeDelayedWarningNotification("'%s' is not a valid shortcut for '%s'", key, cmd->definition);
         return;
     }
     cmd->key = str::Dup(key);
