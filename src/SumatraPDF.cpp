@@ -1650,7 +1650,7 @@ static MainWindow* CreateMainWindow() {
     // layout re-calculations from MainWindow and creation of windows
     win->UpdateCanvasSize();
     if (UseDarkModeLib()) {
-        DarkMode::setDarkTitleBar(win->hwndFrame);
+        DarkMode::setDarkTitleBarEx(win->hwndFrame, true);
         DarkMode::setChildCtrlsSubclassAndTheme(win->hwndFrame);
         DarkMode::removeTabCtrlSubclass(win->tabsCtrl->hwnd);
         DarkMode::setDarkScrollBar(win->hwndCanvas);
@@ -1735,7 +1735,7 @@ void UpdateAfterThemeChange() {
         // TODO: probably leaking toolbar image list
         UpdateToolbarAfterThemeChange(win);
         if (UseDarkModeLib()) {
-            DarkMode::setDarkTitleBar(win->hwndFrame);
+            DarkMode::setDarkTitleBarEx(win->hwndFrame, true);
             DarkMode::setChildCtrlsTheme(win->hwndFrame);
             DarkMode::setDarkScrollBar(win->hwndCanvas);
             DarkMode::setWindowMenuBarSubclass(win->hwndFrame);
