@@ -184,8 +184,13 @@ RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
 
     Graphics g(hDC);
     g.SetCompositingQuality(CompositingQualityHighQuality);
-    g.SetInterpolationMode(InterpolationModeHighQualityBicubic);
-    g.SetSmoothingMode(SmoothingModeAntiAlias);
+    if (this->disableAntiAlias) {
+        g.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+        g.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
+    } else {
+        g.SetSmoothingMode(SmoothingModeAntiAlias);
+        g.SetInterpolationMode(InterpolationModeHighQualityBicubic);
+    }
     g.SetPageUnit(UnitPixel);
 
     Color white(0xFF, 0xFF, 0xFF);
