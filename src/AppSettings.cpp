@@ -197,10 +197,13 @@ bool LoadSettings() {
         prefsData.Free();
     }
 
-    if (!gprefs->uiLanguage || !trans::ValidateLangCode(gprefs->uiLanguage)) {
+    if (trans::ValidateLangCode(gprefs->uiLanguage)) {
+        SetCurrentLang(gprefs->uiLanguage);
+    } else {
         // guess the ui language on first start
         str::ReplaceWithCopy(&gprefs->uiLanguage, trans::DetectUserLang());
     }
+
     gprefs->lastPrefUpdate = file::GetModificationTime(settingsPath);
     gprefs->defaultDisplayModeEnum = DisplayModeFromString(gprefs->defaultDisplayMode, DisplayMode::Automatic);
     gprefs->defaultZoomFloat = ZoomFromString(gprefs->defaultZoom, kZoomActualSize);
