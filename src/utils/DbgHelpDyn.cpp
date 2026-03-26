@@ -333,8 +333,8 @@ void GetAddressInfo(str::Str& s, DWORD64 addr, bool compact) {
 
         if (symName) {
             s.AppendFmt("!%s+0x%x", symName, (int)symDisp);
-        } else if (symDisp != 0) {
-            s.AppendFmt("+0x%x", (int)symDisp);
+        } else {
+            s.AppendFmt("+0x%x", (int)offset);
         }
         IMAGEHLP_LINE64 line;
         line.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
