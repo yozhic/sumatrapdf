@@ -62,6 +62,154 @@ bool gNoFlickerRender = true;
 
 Kind kNotifAnnotation = "notifAnnotation";
 
+// OLE drag-drop support for dragging selected text out of the window
+class TextDropSource : public IDropSource {
+    LONG refCount = 1;
+
+  public:
+    STDMETHODIMP QueryInterface(REFIID riid, void** ppv) override {
+        if (riid == IID_IUnknown || riid == IID_IDropSource) {
+            *ppv = this;
+            AddRef();
+            return S_OK;
+        }
+        *ppv = nullptr;
+        return E_NOINTERFACE;
+    }
+    ULONG STDMETHODCALLTYPE AddRef() override { return InterlockedIncrement(&refCount); }
+    ULONG STDMETHODCALLTYPE Release() override {
+        LONG r = InterlockedDecrement(&refCount);
+        if (r == 0) {
+            delete this;
+        }
+        return r;
+    }
+    STDMETHODIMP QueryContinueDrag(BOOL fEscapePressed, DWORD grfKeyState) override {
+        if (fEscapePressed) {
+            return DRAGDROP_S_CANCEL;
+        }
+        if (!(grfKeyState & MK_LBUTTON)) {
+            return DRAGDROP_S_DROP;
+        }
+        return S_OK;
+    }
+    STDMETHODIMP GiveFeedback(__unused DWORD) override { return DRAGDROP_S_USEDEFAULTCURSORS; }
+};
+
+class TextDataObject : public IDataObject {
+    LONG refCount = 1;
+    HGLOBAL hText = nullptr;
+
+  public:
+    explicit TextDataObject(const WCHAR* text) {
+        size_t cb = (str::Len(text) + 1) * sizeof(WCHAR);
+        hText = GlobalAlloc(GMEM_MOVEABLE, cb);
+        if (hText) {
+            void* p = GlobalLock(hText);
+            memcpy(p, text, cb);
+            GlobalUnlock(hText);
+        }
+    }
+    ~TextDataObject() {
+        if (hText) {
+            GlobalFree(hText);
+        }
+    }
+
+    STDMETHODIMP QueryInterface(REFIID riid, void** ppv) override {
+        if (riid == IID_IUnknown || riid == IID_IDataObject) {
+            *ppv = this;
+            AddRef();
+            return S_OK;
+        }
+        *ppv = nullptr;
+        return E_NOINTERFACE;
+    }
+    ULONG STDMETHODCALLTYPE AddRef() override { return InterlockedIncrement(&refCount); }
+    ULONG STDMETHODCALLTYPE Release() override {
+        LONG r = InterlockedDecrement(&refCount);
+        if (r == 0) {
+            delete this;
+        }
+        return r;
+    }
+
+    STDMETHODIMP GetData(FORMATETC* pFE, STGMEDIUM* pMedium) override {
+        if (!hText) {
+            return E_UNEXPECTED;
+        }
+        if (pFE->cfFormat != CF_UNICODETEXT || !(pFE->tymed & TYMED_HGLOBAL)) {
+            return DV_E_FORMATETC;
+        }
+        size_t cb = GlobalSize(hText);
+        HGLOBAL hCopy = GlobalAlloc(GMEM_MOVEABLE, cb);
+        if (!hCopy) {
+            return E_OUTOFMEMORY;
+        }
+        void* src = GlobalLock(hText);
+        void* dst = GlobalLock(hCopy);
+        memcpy(dst, src, cb);
+        GlobalUnlock(hCopy);
+        GlobalUnlock(hText);
+        pMedium->tymed = TYMED_HGLOBAL;
+        pMedium->hGlobal = hCopy;
+        pMedium->pUnkForRelease = nullptr;
+        return S_OK;
+    }
+    STDMETHODIMP GetDataHere(__unused FORMATETC*, __unused STGMEDIUM*) override { return E_NOTIMPL; }
+    STDMETHODIMP QueryGetData(FORMATETC* pFE) override {
+        if (pFE->cfFormat == CF_UNICODETEXT && (pFE->tymed & TYMED_HGLOBAL)) {
+            return S_OK;
+        }
+        return DV_E_FORMATETC;
+    }
+    STDMETHODIMP GetCanonicalFormatEtc(__unused FORMATETC*, FORMATETC* pOut) override {
+        pOut->ptd = nullptr;
+        return E_NOTIMPL;
+    }
+    STDMETHODIMP SetData(__unused FORMATETC*, __unused STGMEDIUM*, __unused BOOL) override { return E_NOTIMPL; }
+    STDMETHODIMP EnumFormatEtc(__unused DWORD, __unused IEnumFORMATETC**) override { return E_NOTIMPL; }
+    STDMETHODIMP DAdvise(__unused FORMATETC*, __unused DWORD, __unused IAdviseSink*, __unused DWORD*) override {
+        return E_NOTIMPL;
+    }
+    STDMETHODIMP DUnadvise(__unused DWORD) override { return E_NOTIMPL; }
+    STDMETHODIMP EnumDAdvise(__unused IEnumSTATDATA**) override { return E_NOTIMPL; }
+};
+
+static bool IsPointInSelection(MainWindow* win, Point pt) {
+    WindowTab* tab = win->CurrentTab();
+    if (!tab || !tab->selectionOnPage) {
+        return false;
+    }
+    DisplayModel* dm = win->AsFixed();
+    if (!dm) {
+        return false;
+    }
+    for (SelectionOnPage& sel : *tab->selectionOnPage) {
+        Rect r = sel.GetRect(dm);
+        if (r.Contains(pt)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static void StartTextDragDrop(MainWindow* win) {
+    WindowTab* tab = win->CurrentTab();
+    bool isTextOnly = false;
+    TempStr text = GetSelectedTextTemp(tab, "\r\n", isTextOnly);
+    if (str::IsEmpty(text)) {
+        return;
+    }
+    WCHAR* wtext = ToWStrTemp(text);
+    TextDataObject* dataObj = new TextDataObject(wtext);
+    TextDropSource* dropSrc = new TextDropSource();
+    DWORD dwEffect = 0;
+    DoDragDrop(dataObj, dropSrc, DROPEFFECT_COPY, &dwEffect);
+    dropSrc->Release();
+    dataObj->Release();
+}
+
 // Resize handle positions that used in resizing annotations
 enum class ResizeHandle {
     None = 0,
@@ -499,6 +647,20 @@ static void OnMouseMove(MainWindow* win, int x, int y, WPARAM) {
     Point pos{x, y};
     NotificationWnd* cursorPosNotif = GetNotificationForGroup(win->hwndCanvas, kNotifCursorPos);
 
+    if (win->textDragPending) {
+        if (!IsDragDistance(x, win->dragStart.x, y, win->dragStart.y)) {
+            return;
+        }
+        // threshold met: initiate OLE drag-drop of selected text
+        win->textDragPending = false;
+        win->dragStartPending = false;
+        if (GetCapture() == win->hwndCanvas) {
+            ReleaseCapture();
+        }
+        StartTextDragDrop(win);
+        return;
+    }
+
     if (win->dragStartPending) {
         if (!IsDragDistance(x, win->dragStart.x, y, win->dragStart.y)) {
             return;
@@ -772,6 +934,7 @@ static void OnMouseLeftButtonDown(MainWindow* win, int x, int y, WPARAM key) {
 
     win->dragStartPending = true;
     win->dragStart = pt;
+    win->textDragPending = false;
 
     // - without modifiers, clicking on text starts a text selection
     //   and clicking somewhere else starts a drag
@@ -783,6 +946,15 @@ static void OnMouseLeftButtonDown(MainWindow* win, int x, int y, WPARAM key) {
     bool isCtrl = IsCtrlPressed();
     bool canCopy = HasPermission(Perm::CopySelection);
     bool isOverText = win->AsFixed()->IsOverText(pt);
+
+    // if clicking on already selected text, prepare for drag-out instead of new selection
+    if (canCopy && !isShift && !isCtrl && isOverText && win->showSelection && IsPointInSelection(win, pt)) {
+        win->textDragPending = true;
+        win->linkOnLastButtonDown = nullptr;
+        SetCapture(win->hwndCanvas);
+        return;
+    }
+
     if (resizeHandle != ResizeHandle::None || isMoveableAnnot || !canCopy || (isShift || !isOverText) && !isCtrl) {
         StartMouseDrag(win, x, y);
     } else {
@@ -793,6 +965,18 @@ static void OnMouseLeftButtonDown(MainWindow* win, int x, int y, WPARAM key) {
 static void OnMouseLeftButtonUp(MainWindow* win, int x, int y, WPARAM key) {
     DisplayModel* dm = win->AsFixed();
     ReportIf(!dm);
+
+    // click on selected text without dragging: clear selection
+    if (win->textDragPending) {
+        win->textDragPending = false;
+        win->dragStartPending = false;
+        if (GetCapture() == win->hwndCanvas) {
+            ReleaseCapture();
+        }
+        DeleteOldSelectionInfo(win, true);
+        return;
+    }
+
     auto ma = win->mouseAction;
     if (MouseAction::None == ma || IsRightDragging(win)) {
         return;

@@ -10,6 +10,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - make thumbnails on home page scrollable
 - add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
+- you can drag&drop selected text to another application, like a text editor
 
 ## 3.6 (2026-03-17)
 
