@@ -122,7 +122,7 @@ static char* BuildCrashInfoText(const char* condStr, const char* fileLine, bool 
         s.Append("Type: debug report (not crash)\n");
     }
     if (condStr) {
-        s.AppendFmt("Cond: %s@%s\n", condStr, fileLine);
+        s.AppendFmt("Cond: %s @ %s\n", condStr, fileLine);
     }
     if (gSystemInfo) {
         s.Append(gSystemInfo);
