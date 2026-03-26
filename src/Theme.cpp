@@ -220,10 +220,16 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setDefaultColors(false);
 
         DarkMode::setBackgroundColor(ThemeWindowBackgroundColor());
+        DarkMode::setCtrlBackgroundColor(ThemeWindowControlBackgroundColor());
+        COLORREF ctrlBg = ThemeWindowControlBackgroundColor();
+        COLORREF hotBg = IsLightColor(ctrlBg) ? AdjustLightness2(ctrlBg, -20) : AdjustLightness2(ctrlBg, 20);
+        COLORREF edgeCol = IsLightColor(ctrlBg) ? AdjustLightness2(ctrlBg, -40) : AdjustLightness2(ctrlBg, 40);
+        DarkMode::setHotBackgroundColor(hotBg);
         DarkMode::setTextColor(ThemeWindowTextColor());
         DarkMode::setDisabledTextColor(ThemeWindowTextDisabledColor());
-        DarkMode::setDlgBackgroundColor(ThemeWindowControlBackgroundColor());
+        DarkMode::setDlgBackgroundColor(ctrlBg);
         DarkMode::setLinkTextColor(ThemeWindowLinkColor());
+        DarkMode::setEdgeColor(edgeCol);
         DarkMode::updateThemeBrushesAndPens();
 
         DarkMode::setViewTextColor(ThemeWindowTextColor());
