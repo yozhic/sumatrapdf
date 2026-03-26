@@ -199,36 +199,6 @@ void CreateThemeCommands() {
     gCurrSetThemeCmdId = gFirstSetThemeCmdId + gCurrThemeIndex;
 }
 
-static constexpr int kMenuSysColorCount = 5;
-static INT gMenuSysColorIndices[kMenuSysColorCount] = {COLOR_MENUTEXT, COLOR_MENU, COLOR_3DSHADOW, COLOR_3DHIGHLIGHT,
-                                                       COLOR_MENUHILIGHT};
-static COLORREF gOrigMenuSysColors[kMenuSysColorCount];
-static bool gMenuSysColorsSaved = false;
-
-static void SetMenuSysColors(COLORREF txtCol, COLORREF bgCol) {
-    if (!IsWindowsVistaOrGreater()) {
-        return;
-    }
-    if (!gMenuSysColorsSaved) {
-        for (int i = 0; i < kMenuSysColorCount; i++) {
-            gOrigMenuSysColors[i] = GetSysColor(gMenuSysColorIndices[i]);
-        }
-        gMenuSysColorsSaved = true;
-    }
-    COLORREF edgeCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
-    COLORREF highlightBg = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
-    COLORREF colors[kMenuSysColorCount] = {txtCol, bgCol, edgeCol, edgeCol, highlightBg};
-    SetSysColors(kMenuSysColorCount, gMenuSysColorIndices, colors);
-}
-
-static void RestoreMenuSysColors() {
-    if (!gMenuSysColorsSaved) {
-        return;
-    }
-    SetSysColors(kMenuSysColorCount, gMenuSysColorIndices, gOrigMenuSysColors);
-    gMenuSysColorsSaved = false;
-}
-
 void SetThemeByIndex(int themeIdx) {
     ReportIf((themeIdx < 0) || (themeIdx >= gThemeCount));
     if (themeIdx >= gThemeCount) {
@@ -260,9 +230,6 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setDlgBackgroundColor(ctrlBg);
         DarkMode::setLinkTextColor(ThemeWindowLinkColor());
         DarkMode::setEdgeColor(edgeCol);
-        // set menu system colors so Windows draws submenu arrows correctly
-        // (DarkMode::setSysColor only supports COLOR_WINDOW/WINDOWTEXT/BTNFACE)
-        SetMenuSysColors(ThemeWindowTextColor(), ThemeMainWindowBackgroundColor());
         DarkMode::updateThemeBrushesAndPens();
 
         DarkMode::setViewTextColor(ThemeWindowTextColor());
@@ -273,7 +240,6 @@ void SetThemeByIndex(int themeIdx) {
 
         DarkMode::setPrevTreeViewStyle();
     } else {
-        RestoreMenuSysColors();
         UpdateAfterThemeChange();
     }
 };
