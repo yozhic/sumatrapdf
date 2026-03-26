@@ -487,10 +487,12 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     // Check if mouse has moved beyond system drag threshold
     bool beyondDragThreshold = false;
     if (msg == WM_MOUSEMOVE && GetCapture() == hwnd && !draggingTab) {
-        int cxDrag = GetSystemMetrics(SM_CXDRAG);
-        int cyDrag = GetSystemMetrics(SM_CYDRAG);
-        beyondDragThreshold = (abs(mousePos.x - grabLocation.x - GetTab(tabHighlighted)->r.x) > cxDrag) ||
-                              (abs(mousePos.y - grabLocation.y - GetTab(tabHighlighted)->r.y) > cyDrag);
+        if (tabHighlighted >= 0 && tabHighlighted < TabCount()) {
+            int cxDrag = GetSystemMetrics(SM_CXDRAG);
+            int cyDrag = GetSystemMetrics(SM_CYDRAG);
+            beyondDragThreshold = (abs(mousePos.x - grabLocation.x - GetTab(tabHighlighted)->r.x) > cxDrag) ||
+                                  (abs(mousePos.y - grabLocation.y - GetTab(tabHighlighted)->r.y) > cyDrag);
+        }
     }
 
     switch (msg) {
