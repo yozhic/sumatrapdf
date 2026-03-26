@@ -7346,7 +7346,6 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         case WM_CLOSE: {
             if (!win) {
                 logf("WM_CLOSE to 0x%p, but didn't find MainWindow for it\n", hwnd);
-                ReportIf(true);
             }
             if (CanCloseWindow(win)) {
                 CloseWindow(win, true, false);
