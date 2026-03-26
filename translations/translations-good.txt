@@ -27448,79 +27448,79 @@ tw:列印範圍
 uk:Межі друку
 uz:Chop etish diapazoni
 vn:Giới hạn vùng in
-:Printer with given name doesn't exist
-af:Drukker met gegewe naam bestaan nie
-am:Այս անվամբ տպիչ գոյություն չունի
-ar:طابعة بهذا الاسم غير موجودة
-az:Bu adda printer mövcud deyil
-bg:Принтер с това име не съществува
-bn:প্রদত্ত নামের প্রিন্টার বিদ্যমান নেই
-br:Não existe uma impressora com o nome dado
-bs:Štampač sa datim nazivom ne postoji
-by:Друкарка з такім імем не існуе
-ca:No existeix cap impressora amb el nom donat
-ca-xv:No existeix cap impressora amb aquest nom
-cn:该打印机不存在
-co:A stampetta cù stu nome ùn esiste micca
-cy:Nid oes argraffydd gyda'r enw yna'n bod
-cz:Tiskárna se zadaným názvem neexistuje
-de:Drucker mit dem angegebenen Namen nicht gefunden
-dk:Printer med dette navn findes ikke
-el:Ο εκτυπωτής με αυτό το όνομα δεν υπάρχει
-es:No existe la impresora con el nombre especificado
-et:Antud nimega printerit ei leidu
-eu:Ez dagi emandako izenik duen irarkailurik
-fa:چاپگری با نام داده شده وجود ندارد
-fi:Annetun nimistä tulostinta ei ole
-fo:Nevndi prentari finst ikki
-fr:Il n'y a pas d'imprimante de ce nom
-fy-nl:Printer mei jûne namme bestiet net
-ga:Níl clóire leis an ainm sin ann
-gl:A impresora co nome indicado non existe
-he:לא זוהתה מדפסת בשם שצוין.
-hi:दिए गए नाम का प्रिंटर मौजूद नहीं है
-hr:Ne postoji printer sa zadanim imenom
-hu:Nem található nyomtató a megadott néven
-id:Printer dengan nama tersebut tidak ada
-it:La stampante con quel nome non esiste
-ja:指定されたプリンタが見つかりません
-jv:Printer kanthi jeneng kasebut ora ana
-ka:მოცემული სახელის მქონე პრინეტრი არ არსებობს
-kr:지정된 이름의 프린터가 없습니다.
-ku:هیچ چاپکەرێک بەو ناوە بوونی نیە
-kw:Nyns eus pryntyer gans an hanow na
-lt:Spausdintuvo tokiu vardu nėra
-lv:Printeris ar šādu nosaukumu nepastāv
-mk:Не постои печатач со зададеното име
-ml:നൽകിയ പേരിലുള്ള പ്രിന്റർ നിലവിലില്ല
-mm:ပေးထားသော အမည်ရှိ ပရင်တာ မရှိပါ
-my:Pencetak dengan nama yang diberikan tidak wujud
-ne:दिईएको नाम भएको मुद्रक अवस्थित छैन
-nl:Printer met de opgegeven naam bestaat niet
-nn:Ein skriver med det namnet finnes ikkje
-no:Skriver med gjeldende navn eksisterer ikke
-pa:ਦਿੱਤੇ ਨਾਮ ਵਾਲਾ ਪ੍ਰਿੰਟਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ
-pl:Drukarka o podanej nazwie nie istnieje
-pt:Não existe uma impressora com este nome
-ro:Imprimanta cu numele respectiv nu există
-ru:Нет принтера с указанным именем
-sat:ᱚᱱᱟ ᱧᱩᱛᱩᱢ ᱨᱮᱭᱟᱜ ᱪᱷᱟᱯᱟ ᱫᱚ ᱵᱟᱹᱱᱩᱜ ᱠᱟᱫᱟ
-si:දෙන ලද නම සහිත මුද්‍රණ යන්ත්‍රයක් නොපවතී
-sk:Tlačiareň s uvedeným názvom neexistuje.
-sl:Tiskalnik z navedenim imenom ne obstaja
-sn:Dhindisa nezita rakapihwa haripo
-sp-rs:Štampač sa navedenim imenom ne postoji
-sq:Nuk ekziston printeri me këtë emër
-sr-rs:Штампач са наведеним именом не постоји
-sv:Det finns ingen skrivade med angivet namn
-ta:குறிபிட்ட பெயரில் அச்சுப்பொறி இல்லை.
-th:ไม่มีเครื่องพิมพ์ที่มีชื่อที่กำหนด
-tl:Printer na may ibinigay na pangalan ay wala
-tr:Verilen adda yazıcı yok.
-tw:指定之印表機不存在
-uk:Принтера з даним іменем не існує
-uz:Bunday printer mavjud emas
-vn:Máy in với tên được cho không tồn tại
+:Printer '%s' doesn't exist
+af:Drukker '%s' bestaan nie
+am:ማተሚያ '%s' አልተገኘም
+ar:الطابعة '%s' غير موجودة
+az:'%s' printeri mövcud deyil
+bg:Принтерът '%s' не съществува
+bn:প্রিন্টার '%s' বিদ্যমান নেই
+br:Ar voullerez '%s' n'eus ket anezhañ
+bs:Štampač '%s' ne postoji
+by:Прынтар '%s' не існуе
+ca:La impressora '%s' no existeix
+ca-xv:La impressora '%s' no existeix
+cn:打印机 '%s' 不存在
+co:A stampante '%s' ùn esiste micca
+cy:Nid yw'r argraffydd '%s' yn bodoli
+cz:Tiskárna '%s' neexistuje
+de:Drucker '%s' existiert nicht
+dk:Printer '%s' eksisterer ikke
+el:Ο εκτυπωτής '%s' δεν υπάρχει
+es:La impresora '%s' no existe
+et:Printer '%s' ei eksisteeri
+eu:'%s' inprimagailua ez da existitzen
+fa:چاپگر '%s' وجود ندارد
+fi:Tulostinta '%s' ei ole olemassa
+fo:Prentari '%s' finst ikki
+fr:L'imprimante '%s' n'existe pas
+fy-nl:Printer '%s' bestiet net
+ga:Níl an printéir '%s' ann
+gl:A impresora '%s' non existe
+he:המדפסת '%s' לא קיימת
+hi:प्रिंटर '%s' मौजूद नहीं है
+hr:Pisač '%s' ne postoji
+hu:A(z) '%s' nyomtató nem létezik
+id:Printer '%s' tidak ada
+it:La stampante '%s' non esiste
+ja:プリンター '%s' は存在しません
+jv:Printer '%s' ora ana
+ka:პრინტერი '%s' არ არსებობს
+kr:프린터 '%s'이(가) 존재하지 않습니다
+ku:Çapker '%s' tune nîne
+kw:Nyns eus pryntyer '%s'
+lt:Spausdintuvas '%s' neegzistuoja
+lv:Printeris '%s' neeksistē
+mk:Печатачот '%s' не постои
+ml:പ്രിന്റർ '%s' നിലവിലില്ല
+mm:ပုံနှိပ်စက် '%s' မရှိပါ
+my:ပရင်တာ '%s' မရှိပါ
+ne:प्रिन्टर '%s' अवस्थित छैन
+nl:Printer '%s' bestaat niet
+nn:Skrivaren '%s' finst ikkje
+no:Skriver '%s' finnes ikke
+pa:ਪ੍ਰਿੰਟਰ '%s' ਮੌਜੂਦ ਨਹੀਂ ਹੈ
+pl:Drukarka '%s' nie istnieje
+pt:A impressora '%s' não existe
+ro:Imprimanta '%s' nu există
+ru:Принтер '%s' не существует
+sat:ᱯᱨᱤᱱᱴᱟᱨ '%s' ᱵᱟᱹᱱᱩᱜ ᱟ
+si:මුද්‍රණ යන්ත්‍රය '%s' නොපවතී
+sk:Tlačiareň '%s' neexistuje
+sl:Tiskalnik '%s' ne obstaja
+sn:Purinzi '%s' hairipo
+sp-rs:Штампач '%s' не постоји
+sq:Printeri '%s' nuk ekziston
+sr-rs:Штампач '%s' не постоји
+sv:Skrivaren '%s' finns inte
+ta:அச்சுப்பொறி '%s' இல்லை
+th:เครื่องพิมพ์ '%s' ไม่มีอยู่
+tl:Ang printer '%s' ay hindi umiiral
+tr:Yazıcı '%s' mevcut değil
+tw:印表機 '%s' 不存在
+uk:Принтер '%s' не існує
+uz:'%s' printeri mavjud emas
+vn:Máy in '%s' không tồn tại
 :Printing in progress.
 af:Drukwerk is aan die gang.
 am:Տպում է:
@@ -28251,6 +28251,152 @@ tw:標記密文
 uk:Редагувати
 uz:Tahrirlash
 vn:Biên tập
+:Register Windows Previewer
+af:Registreer Windows-voorskou
+am:የዊንዶውስ ቅድመ-እይታን ምዝግብ
+ar:تسجيل معاين Windows
+az:Windows Önizləyicisini Qeyd Et
+bg:Регистриране на Windows Previewer
+bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন করুন
+br:Enrollañ Rakweler Windows
+bs:Registruj Windows pregled
+by:Зарэгістраваць прагляднік Windows
+ca:Registra el visualitzador de Windows
+ca-xv:Registrar el Previsualizador de Windows
+cn:注册 Windows 预览器
+co:Arregistrà u Previsualizatore Windows
+cy:Cofrestru Rhagolygydd Windows
+cz:Registrovat Windows Previewer
+de:Windows-Vorschau registrieren
+dk:Registrer Windows Forhåndsvisning
+el:Εγγραφή Προεπισκόπησης Windows
+es:Registrar vista previa de Windows
+et:Registreeri Windowsi eelvaatleja
+eu:Erregistratu Windows aurrebista
+fa:ثبت پیش‌نمایشگر ویندوز
+fi:Rekisteröi Windows-esikatselu
+fo:Skráseta Windows Previewer
+fr:Enregistrer l'aperçu Windows
+fy-nl:Windows Foarbyld registrearje
+ga:Cláraigh Réamhamharcóir Windows
+gl:Rexistrar previsualizador de Windows
+he:רשום תצוגה מקדימה של Windows
+hi:विंडोज प्रीव्यूअर पंजीकृत करें
+hr:Registriraj Windows preglednik
+hu:Windows Előnézet regisztrálása
+id:Daftarkan Pratinjau Windows
+it:Registra visualizzatore Windows
+ja:Windows プレビューアーを登録
+jv:Ndhaptar Windows Previewer
+ka:Windows Previewer-ის რეგისტრაცია
+kr:Windows 미리 보기 등록
+ku:Tomar kirdinî pêşdîtina Windows
+kw:Kovskrifya Ragwelyer Windows
+lt:Registruoti Windows peržiūros priemonę
+lv:Reģistrēt Windows priekšskatītāju
+mk:Регистрирај Windows прегледувач
+ml:വിൻഡോസ് പ്രിവ്യൂവർ രജിസ്റ്റർ ചെയ്യുക
+mm:Windows အစမ်းကြည့်ရှုကိရိယာ မှတ်ပုံတင်ရန်
+my:Windows အစမ်းကြည့်ရှုမှုကို မှတ်ပုံတင်ရန်
+ne:Windows पूर्वावलोकन दर्ता गर्नुहोस्
+nl:Windows-voorbeeldweergave registreren
+nn:Registrer Windows-førehandsvising
+no:Registrer Windows-forhåndsviser
+pa:ਵਿੰਡੋਜ਼ ਪ੍ਰੀਵਿਊਅਰ ਰਜਿਸਟਰ ਕਰੋ
+pl:Zarejestruj podgląd Windows
+pt:Registrar Visualizador do Windows
+ro:Înregistrează Windows Previewer
+ru:Зарегистрировать средство просмотра Windows
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱯᱨᱤᱵᱷᱤᱣᱟᱨ ᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+si:Windows පූර්වදර්ශකය ලියාපදිංචි කරන්න
+sk:Registrovať Windows Previewer
+sl:Registriraj predogledovalnik za Windows
+sn:Nyoresa Windows Previewer
+sp-rs:Registruj Windows preglednik
+sq:Regjistro Shfaqësin e Parapamjes së Windows
+sr-rs:Registruj Windows preglednik
+sv:Registrera Windows förhandsgranskare
+ta:Windows முன்னோட்டத்தை பதிவு செய்
+th:ลงทะเบียนตัวแสดงตัวอย่าง Windows
+tl:Irehistro ang Windows Previewer
+tr:Windows Önizleyicisini Kaydet
+tw:註冊 Windows 預覽程式
+uk:Зареєструвати програму перегляду Windows
+uz:Windows Previewer-ni ro'yxatdan o'tkazish
+vn:Đăng ký Windows Previewer
+:Register Windows Search Filter
+af:Registreer Windows-soekfilter
+am:የዊንዶውስ ፍለጋ ማጣሪያን ምዝግብ
+ar:تسجيل مرشح بحث Windows
+az:Windows Axtarış Filtrini Qeyd Et
+bg:Регистриране на филтър за Windows Search
+bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন করুন
+br:Enrollañ Sil Klask Windows
+bs:Registruj Windows filter pretrage
+by:Зарэгістраваць фільтр пошуку Windows
+ca:Registra el filtre de cerca de Windows
+ca-xv:Registrar el Filtre de Cerca de Windows
+cn:注册 Windows 搜索筛选器
+co:Arregistrà u Filtru di Ricerca Windows
+cy:Cofrestru Hidlydd Chwilio Windows
+cz:Registrovat filtr Windows Search
+de:Windows-Suchfilter registrieren
+dk:Registrer Windows Søgefilter
+el:Εγγραφή Φίλτρου Αναζήτησης Windows
+es:Registrar filtro de búsqueda de Windows
+et:Registreeri Windowsi otsingufilter
+eu:Erregistratu Windows bilaketa iragazkia
+fa:ثبت فیلتر جستجوی ویندوز
+fi:Rekisteröi Windows-hakusuodatin
+fo:Skráseta Windows Search Filter
+fr:Enregistrer le filtre de recherche Windows
+fy-nl:Windows Sykfilter registrearje
+ga:Cláraigh Scagaire Cuardaigh Windows
+gl:Rexistrar filtro de busca de Windows
+he:רשום מסנן חיפוש של Windows
+hi:विंडोज खोज फ़िल्टर पंजीकृत करें
+hr:Registriraj Windows filter pretraživanja
+hu:Windows Keresési szűrő regisztrálása
+id:Daftarkan Filter Pencarian Windows
+it:Registra filtro di ricerca Windows
+ja:Windows 検索フィルターを登録
+jv:Ndhaptar Windows Search Filter
+ka:Windows Search Filter-ის რეგისტრაცია
+kr:Windows 검색 필터 등록
+ku:Tomar kirdinî parzûna lêgerîna Windows
+kw:Kovskrifya Sidhler Hwilas Windows
+lt:Registruoti Windows paieškos filtrą
+lv:Reģistrēt Windows meklēšanas filtru
+mk:Регистрирај Windows филтер за пребарување
+ml:വിൻഡോസ് സെർച്ച് ഫിൽട്ടർ രജിസ്റ്റർ ചെയ്യുക
+mm:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာ မှတ်ပုံတင်ရန်
+my:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာကို မှတ်ပုံတင်ရန်
+ne:Windows खोज फिल्टर दर्ता गर्नुहोस्
+nl:Windows-zoekfilter registreren
+nn:Registrer Windows-søkjefilter
+no:Registrer Windows-søkefilter
+pa:ਵਿੰਡੋਜ਼ ਖੋਜ ਫਿਲਟਰ ਰਜਿਸਟਰ ਕਰੋ
+pl:Zarejestruj filtr wyszukiwania Windows
+pt:Registrar Filtro de Pesquisa do Windows
+ro:Înregistrează filtrul de căutare Windows
+ru:Зарегистрировать фильтр поиска Windows
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+si:Windows සෙවුම් පෙරණය ලියාපදිංචි කරන්න
+sk:Registrovať filter Windows Search
+sl:Registriraj filter za iskanje v Windows
+sn:Nyoresa Windows Search Filter
+sp-rs:Registruj Windows filter pretrage
+sq:Regjistro Filtrin e Kërkimit të Windows
+sr-rs:Registruj Windows filter pretrage
+sv:Registrera Windows sökfilter
+ta:Windows தேடல் வடிப்பானை பதிவு செய்
+th:ลงทะเบียนตัวกรองการค้นหา Windows
+tl:Irehistro ang Windows Search Filter
+tr:Windows Arama Filtresini Kaydet
+tw:註冊 Windows 搜尋篩選器
+uk:Зареєструвати фільтр пошуку Windows
+uz:Windows Search Filter-ni ro'yxatdan o'tkazish
+vn:Đăng ký Windows Search Filter
 :Release Ctrl to select
 af:Los Ctrl om te kies
 am:ለመምረጥ Ctrl ይልቀቁ
@@ -37595,6 +37741,152 @@ tw:使用 DeepL 翻譯(&D)
 uk:Перекласти за допомогою &DeepL
 uz:&DeepL bilan tarjima qilish
 vn:Dịch với &DeepL
+:Un-register Windows Previewer
+af:Deregistreer Windows-voorskou
+am:የዊንዶውስ ቅድመ-እይታ ምዝገባ አቋርጥ
+ar:إلغاء تسجيل معاين Windows
+az:Windows Önizləyicisinin Qeydini Ləğv Et
+bg:Дерегистриране на Windows Previewer
+bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন বাতিল করুন
+br:Disenrollañ Rakweler Windows
+bs:Odregistruj Windows pregled
+by:Адрэгістраваць прагляднік Windows
+ca:Desregistra el visualitzador de Windows
+ca-xv:Desregistrar el Previsualizador de Windows
+cn:注销 Windows 预览器
+co:Disarregistrà u Previsualizatore Windows
+cy:Dad-gofrestru Rhagolygydd Windows
+cz:Odregistrovat Windows Previewer
+de:Windows-Vorschau deregistrieren
+dk:Afregistrer Windows Forhåndsvisning
+el:Απεγγραφή Προεπισκόπησης Windows
+es:Desregistrar vista previa de Windows
+et:Tühista Windowsi eelvaatleja registreering
+eu:Kendu Windows aurrebistaren erregistroa
+fa:لغو ثبت پیش‌نمایشگر ویندوز
+fi:Poista Windows-esikatselun rekisteröinti
+fo:Strika Windows Previewer
+fr:Désenregistrer l'aperçu Windows
+fy-nl:Windows Foarbyld ûntregistrearje
+ga:Díchláraigh Réamhamharcóir Windows
+gl:Eliminar rexistro do previsualizador de Windows
+he:בטל רישום תצוגה מקדימה של Windows
+hi:विंडोज प्रीव्यूअर पंजीकरण रद्द करें
+hr:Odregistriraj Windows preglednik
+hu:Windows Előnézet regisztrációjának törlése
+id:Batalkan Pendaftaran Pratinjau Windows
+it:Annulla registrazione visualizzatore Windows
+ja:Windows プレビューアーの登録を解除
+jv:Mbusak ndhaptar Windows Previewer
+ka:Windows Previewer-ის რეგისტრაციის გაუქმება
+kr:Windows 미리 보기 등록 해제
+ku:Rakirdinî tomar pêşdîtina Windows
+kw:Digovskrifya Ragwelyer Windows
+lt:Išregistruoti Windows peržiūros priemonę
+lv:Atreģistrēt Windows priekšskatītāju
+mk:Отстрани регистрација на Windows прегледувач
+ml:വിൻഡോസ് പ്രിവ്യൂവർ അൺ-രജിസ്റ്റർ ചെയ്യുക
+mm:Windows အစမ်းကြည့်ရှုကိရိယာ မှတ်ပုံတင်ဖျက်ရန်
+my:Windows အစမ်းကြည့်ရှုမှုကို မှတ်ပုံတင်ဖျက်ရန်
+ne:Windows पूर्वावलोकन दर्ता रद्द गर्नुहोस्
+nl:Windows-voorbeeldweergave uitschrijven
+nn:Avregistrer Windows-førehandsvising
+no:Avregistrer Windows-forhåndsviser
+pa:ਵਿੰਡੋਜ਼ ਪ੍ਰੀਵਿਊਅਰ ਅਣ-ਰਜਿਸਟਰ ਕਰੋ
+pl:Wyrejestruj podgląd Windows
+pt:Cancelar registro do Visualizador do Windows
+ro:Anulează înregistrarea Windows Previewer
+ru:Отменить регистрацию средства просмотра Windows
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱯᱨᱤᱵᱷᱤᱣᱟᱨ ᱚᱱᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+si:Windows පූර්වදර්ශකය ලියාපදිංචි කිරීම අවලංගු කරන්න
+sk:Zrušiť registráciu Windows Previewer
+sl:Prekliči registracijo predogledovalnika za Windows
+sn:Bvisa kunyoresa Windows Previewer
+sp-rs:Ukloni registraciju Windows preglednika
+sq:Çregjistro Shfaqësin e Parapamjes së Windows
+sr-rs:Odjavi Windows preglednik
+sv:Avregistrera Windows förhandsgranskare
+ta:Windows முன்னோட்டத்தை பதிவு நீக்கு
+th:ยกเลิกการลงทะเบียนตัวแสดงตัวอย่าง Windows
+tl:I-alis ang rehistro ng Windows Previewer
+tr:Windows Önizleyicisinin Kaydını Kaldır
+tw:取消註冊 Windows 預覽程式
+uk:Скасувати реєстрацію програми перегляду Windows
+uz:Windows Previewer-ni ro'yxatdan o'chirish
+vn:Hủy đăng ký Windows Previewer
+:Un-register Windows Search Filter
+af:Deregistreer Windows-soekfilter
+am:የዊንዶውስ ፍለጋ ማጣሪያ ምዝገባ አቋርጥ
+ar:إلغاء تسجيل مرشح بحث Windows
+az:Windows Axtarış Filtrinin Qeydini Ləğv Et
+bg:Дерегистриране на филтър за Windows Search
+bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন বাতিল করুন
+br:Disenrollañ Sil Klask Windows
+bs:Odregistruj Windows filter pretrage
+by:Адрэгістраваць фільтр пошуку Windows
+ca:Desregistra el filtre de cerca de Windows
+ca-xv:Desregistrar el Filtre de Cerca de Windows
+cn:注销 Windows 搜索筛选器
+co:Disarregistrà u Filtru di Ricerca Windows
+cy:Dad-gofrestru Hidlydd Chwilio Windows
+cz:Odregistrovat filtr Windows Search
+de:Windows-Suchfilter deregistrieren
+dk:Afregistrer Windows Søgefilter
+el:Απεγγραφή Φίλτρου Αναζήτησης Windows
+es:Desregistrar filtro de búsqueda de Windows
+et:Tühista Windowsi otsingufiltri registreering
+eu:Kendu Windows bilaketa iragazkiaren erregistroa
+fa:لغو ثبت فیلتر جستجوی ویندوز
+fi:Poista Windows-hakusuodattimen rekisteröinti
+fo:Strika Windows Search Filter
+fr:Désenregistrer le filtre de recherche Windows
+fy-nl:Windows Sykfilter ûntregistrearje
+ga:Díchláraigh Scagaire Cuardaigh Windows
+gl:Eliminar rexistro do filtro de busca de Windows
+he:בטל רישום מסנן חיפוש של Windows
+hi:विंडोज खोज फ़िल्टर पंजीकरण रद्द करें
+hr:Odregistriraj Windows filter pretraživanja
+hu:Windows Keresési szűrő regisztrációjának törlése
+id:Batalkan Pendaftaran Filter Pencarian Windows
+it:Annulla registrazione filtro di ricerca Windows
+ja:Windows 検索フィルターの登録を解除
+jv:Mbusak ndhaptar Windows Search Filter
+ka:Windows Search Filter-ის რეგისტრაციის გაუქმება
+kr:Windows 검색 필터 등록 해제
+ku:Rakirdinî tomar parzûna lêgerîna Windows
+kw:Digovskrifya Sidhler Hwilas Windows
+lt:Išregistruoti Windows paieškos filtrą
+lv:Atreģistrēt Windows meklēšanas filtru
+mk:Отстрани регистрација на Windows филтер за пребарување
+ml:വിൻഡോസ് സെർച്ച് ഫിൽട്ടർ അൺ-രജിസ്റ്റർ ചെയ്യുക
+mm:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာ မှတ်ပုံတင်ဖျက်ရန်
+my:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာကို မှတ်ပုံတင်ဖျက်ရန်
+ne:Windows खोज फिल्टर दर्ता रद्द गर्नुहोस्
+nl:Windows-zoekfilter uitschrijven
+nn:Avregistrer Windows-søkjefilter
+no:Avregistrer Windows-søkefilter
+pa:ਵਿੰਡੋਜ਼ ਖੋਜ ਫਿਲਟਰ ਅਣ-ਰਜਿਸਟਰ ਕਰੋ
+pl:Wyrejestruj filtr wyszukiwania Windows
+pt:Cancelar registro do Filtro de Pesquisa do Windows
+ro:Anulează înregistrarea filtrului de căutare Windows
+ru:Отменить регистрацию фильтра поиска Windows
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱚᱱᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+si:Windows සෙවුම් පෙරණය ලියාපදිංචි කිරීම අවලංගු කරන්න
+sk:Zrušiť registráciu filtra Windows Search
+sl:Prekliči registracijo filtra za iskanje v Windows
+sn:Bvisa kunyoresa Windows Search Filter
+sp-rs:Ukloni registraciju Windows filtera pretrage
+sq:Çregjistro Filtrin e Kërkimit të Windows
+sr-rs:Odjavi Windows filter pretrage
+sv:Avregistrera Windows sökfilter
+ta:Windows தேடல் வடிப்பானை பதிவு நீக்கு
+th:ยกเลิกการลงทะเบียนตัวกรองการค้นหา Windows
+tl:I-alis ang rehistro ng Windows Search Filter
+tr:Windows Arama Filtresinin Kaydını Kaldır
+tw:取消註冊 Windows 搜尋篩選器
+uk:Скасувати реєстрацію фільтра пошуку Windows
+uz:Windows Search Filter-ni ro'yxatdan o'chirish
+vn:Hủy đăng ký Windows Search Filter
 :Uninstall SumatraPDF
 af:Verwyder SumatraPDF
 am:Ջնջել SumatraPDF-ը

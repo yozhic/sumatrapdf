@@ -630,15 +630,6 @@ static bool IsInstallerAndNamedAsSuch() {
     return ExeHasNameOfInstaller();
 }
 
-static bool IsOurExeInstalled() {
-    AutoFreeStr installedDir = GetExistingInstallationDir();
-    if (!installedDir.Get()) {
-        return false;
-    }
-    TempStr exeDir = GetSelfExeDirTemp();
-    return str::EqI(installedDir.Get(), exeDir);
-}
-
 static bool IsInstallerButNotInstalled() {
     if (!ExeHasInstallerResources()) {
         return false;

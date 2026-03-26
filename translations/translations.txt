@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-f857e1fde83b3f61481b3420a98da64a09effc25
+e9b58681c5e8c7b4f077cb5413d8456db70db58c
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -18713,71 +18713,7 @@ tw:列印範圍
 uk:Межі друку
 uz:Chop etish diapazoni
 vn:Giới hạn vùng in
-:Printer with given name doesn't exist
-am:Այս անվամբ տպիչ գոյություն չունի
-ar:طابعة بهذا الاسم غير موجودة
-az:Bu adda printer mövcud deyil
-bg:Принтер с това име не съществува
-br:Não existe uma impressora com o nome dado
-bs:Štampač sa datim nazivom ne postoji
-by:Друкарка з такім імем не існуе
-ca-xv:No existeix cap impressora amb aquest nom
-ca:No existeix cap impressora amb el nom donat
-cn:该打印机不存在
-co:A stampetta cù stu nome ùn esiste micca
-cy:Nid oes argraffydd gyda'r enw yna'n bod
-cz:Tiskárna se zadaným názvem neexistuje
-de:Drucker mit dem angegebenen Namen nicht gefunden
-dk:Printer med dette navn findes ikke
-el:Ο εκτυπωτής με αυτό το όνομα δεν υπάρχει
-es:No existe la impresora con el nombre especificado
-et:Antud nimega printerit ei leidu
-eu:Ez dagi emandako izenik duen irarkailurik
-fa:چاپگری با نام داده شده وجود ندارد
-fi:Annetun nimistä tulostinta ei ole
-fo:Nevndi prentari finst ikki
-fr:Il n'y a pas d'imprimante de ce nom
-ga:Níl clóire leis an ainm sin ann
-gl:A impresora co nome indicado non existe
-he:לא זוהתה מדפסת בשם שצוין.
-hi:दिए गए नाम का प्रिंटर मौजूद नहीं है
-hr:Ne postoji printer sa zadanim imenom
-hu:Nem található nyomtató a megadott néven
-id:Printer dengan nama tersebut tidak ada
-it:La stampante con quel nome non esiste
-ja:指定されたプリンタが見つかりません
-ka:მოცემული სახელის მქონე პრინეტრი არ არსებობს
-kr:지정된 이름의 프린터가 없습니다.
-ku:هیچ چاپکەرێک بەو ناوە بوونی نیە
-kw:Nyns eus pryntyer gans an hanow na
-lt:Spausdintuvo tokiu vardu nėra
-lv:Printeris ar šādu nosaukumu nepastāv
-mk:Не постои печатач со зададеното име
-my:Pencetak dengan nama yang diberikan tidak wujud
-ne:दिईएको नाम भएको मुद्रक अवस्थित छैन
-nl:Printer met de opgegeven naam bestaat niet
-nn:Ein skriver med det namnet finnes ikkje
-no:Skriver med gjeldende navn eksisterer ikke
-pl:Drukarka o podanej nazwie nie istnieje
-pt:Não existe uma impressora com este nome
-ro:Imprimanta cu numele respectiv nu există
-ru:Нет принтера с указанным именем
-sat:ᱚᱱᱟ ᱧᱩᱛᱩᱢ ᱨᱮᱭᱟᱜ ᱪᱷᱟᱯᱟ ᱫᱚ ᱵᱟᱹᱱᱩᱜ ᱠᱟᱫᱟ
-si:දෙන ලද නම සහිත මුද්‍රණ යන්ත්‍රයක් නොපවතී
-sk:Tlačiareň s uvedeným názvom neexistuje.
-sl:Tiskalnik z navedenim imenom ne obstaja
-sp-rs:Štampač sa navedenim imenom ne postoji
-sq:Nuk ekziston printeri me këtë emër
-sr-rs:Штампач са наведеним именом не постоји
-sv:Det finns ingen skrivade med angivet namn
-ta:குறிபிட்ட பெயரில் அச்சுப்பொறி இல்லை.
-th:ไม่มีเครื่องพิมพ์ที่มีชื่อที่กำหนด
-tl:Printer na may ibinigay na pangalan ay wala
-tr:Verilen adda yazıcı yok.
-tw:指定之印表機不存在
-uk:Принтера з даним іменем не існує
-uz:Bunday printer mavjud emas
-vn:Máy in với tên được cho không tồn tại
+:Printer '%s' doesn't exist
 :Printing in progress.
 am:Տպում է:
 ar:الطباعة في التقدم.
@@ -19339,6 +19275,8 @@ tw:標記密文
 uk:Редагувати
 uz:Tahrirlash
 vn:Biên tập
+:Register Windows Previewer
+:Register Windows Search Filter
 :Release Ctrl to select
 :Reload Document
 am:Վերաբեռնել փաստաթուղթը
@@ -24103,6 +24041,8 @@ tw:使用 DeepL 翻譯(&D)
 uk:Перекласти за допомогою &DeepL
 uz:&DeepL bilan tarjima qilish
 vn:Dịch với &DeepL
+:Un-register Windows Previewer
+:Un-register Windows Search Filter
 :Uninstall SumatraPDF
 am:Ջնջել SumatraPDF-ը
 ar:إزالة SumatraPDF

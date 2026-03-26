@@ -32612,3 +32612,723 @@ vn:Nhả Ctrl để chọn
 vn:Space để bật chế độ dính
 :↑ ↓ to navigate
 vn:↑ ↓ để điều hướng
+:Register Windows Previewer
+am:የዊንዶውስ ቅድመ-እይታን ምዝግብ
+:Register Windows Search Filter
+am:የዊንዶውስ ፍለጋ ማጣሪያን ምዝግብ
+:Un-register Windows Previewer
+am:የዊንዶውስ ቅድመ-እይታ ምዝገባ አቋርጥ
+:Un-register Windows Search Filter
+am:የዊንዶውስ ፍለጋ ማጣሪያ ምዝገባ አቋርጥ
+:Register Windows Previewer
+ar:تسجيل معاين Windows
+:Register Windows Search Filter
+ar:تسجيل مرشح بحث Windows
+:Un-register Windows Previewer
+ar:إلغاء تسجيل معاين Windows
+:Un-register Windows Search Filter
+ar:إلغاء تسجيل مرشح بحث Windows
+:Register Windows Previewer
+br:Enrollañ Rakweler Windows
+:Register Windows Search Filter
+br:Enrollañ Sil Klask Windows
+:Un-register Windows Previewer
+br:Disenrollañ Rakweler Windows
+:Un-register Windows Search Filter
+br:Disenrollañ Sil Klask Windows
+:Register Windows Previewer
+cn:注册 Windows 预览器
+:Register Windows Search Filter
+cn:注册 Windows 搜索筛选器
+:Un-register Windows Previewer
+cn:注销 Windows 预览器
+:Un-register Windows Search Filter
+cn:注销 Windows 搜索筛选器
+:Register Windows Previewer
+co:Arregistrà u Previsualizatore Windows
+:Register Windows Search Filter
+co:Arregistrà u Filtru di Ricerca Windows
+:Un-register Windows Previewer
+co:Disarregistrà u Previsualizatore Windows
+:Un-register Windows Search Filter
+co:Disarregistrà u Filtru di Ricerca Windows
+:Register Windows Previewer
+de:Windows-Vorschau registrieren
+:Register Windows Search Filter
+de:Windows-Suchfilter registrieren
+:Un-register Windows Previewer
+de:Windows-Vorschau deregistrieren
+:Un-register Windows Search Filter
+de:Windows-Suchfilter deregistrieren
+:Register Windows Previewer
+el:Εγγραφή Προεπισκόπησης Windows
+:Register Windows Search Filter
+el:Εγγραφή Φίλτρου Αναζήτησης Windows
+:Un-register Windows Previewer
+el:Απεγγραφή Προεπισκόπησης Windows
+:Un-register Windows Search Filter
+el:Απεγγραφή Φίλτρου Αναζήτησης Windows
+:Register Windows Previewer
+hi:विंडोज प्रीव्यूअर पंजीकृत करें
+:Register Windows Search Filter
+hi:विंडोज खोज फ़िल्टर पंजीकृत करें
+:Un-register Windows Previewer
+hi:विंडोज प्रीव्यूअर पंजीकरण रद्द करें
+:Un-register Windows Search Filter
+hi:विंडोज खोज फ़िल्टर पंजीकरण रद्द करें
+:Register Windows Previewer
+ja:Windows プレビューアーを登録
+:Register Windows Search Filter
+ja:Windows 検索フィルターを登録
+:Un-register Windows Previewer
+ja:Windows プレビューアーの登録を解除
+:Un-register Windows Search Filter
+ja:Windows 検索フィルターの登録を解除
+:Register Windows Previewer
+ml:വിൻഡോസ് പ്രിവ്യൂവർ രജിസ്റ്റർ ചെയ്യുക
+:Register Windows Search Filter
+ml:വിൻഡോസ് സെർച്ച് ഫിൽട്ടർ രജിസ്റ്റർ ചെയ്യുക
+:Un-register Windows Previewer
+ml:വിൻഡോസ് പ്രിവ്യൂവർ അൺ-രജിസ്റ്റർ ചെയ്യുക
+:Un-register Windows Search Filter
+ml:വിൻഡോസ് സെർച്ച് ഫിൽട്ടർ അൺ-രജിസ്റ്റർ ചെയ്യുക
+:Register Windows Previewer
+nl:Windows-voorbeeldweergave registreren
+:Register Windows Search Filter
+nl:Windows-zoekfilter registreren
+:Un-register Windows Previewer
+nl:Windows-voorbeeldweergave uitschrijven
+:Un-register Windows Search Filter
+nl:Windows-zoekfilter uitschrijven
+:Register Windows Previewer
+pl:Zarejestruj podgląd Windows
+:Register Windows Search Filter
+pl:Zarejestruj filtr wyszukiwania Windows
+:Un-register Windows Previewer
+pl:Wyrejestruj podgląd Windows
+:Un-register Windows Search Filter
+pl:Wyrejestruj filtr wyszukiwania Windows
+:Register Windows Previewer
+ru:Зарегистрировать средство просмотра Windows
+:Register Windows Search Filter
+ru:Зарегистрировать фильтр поиска Windows
+:Un-register Windows Previewer
+ru:Отменить регистрацию средства просмотра Windows
+:Un-register Windows Search Filter
+ru:Отменить регистрацию фильтра поиска Windows
+:Register Windows Previewer
+sk:Registrovať Windows Previewer
+:Register Windows Search Filter
+sk:Registrovať filter Windows Search
+:Un-register Windows Previewer
+sk:Zrušiť registráciu Windows Previewer
+:Un-register Windows Search Filter
+sk:Zrušiť registráciu filtra Windows Search
+:Register Windows Previewer
+sr-rs:Registruj Windows preglednik
+:Register Windows Search Filter
+sr-rs:Registruj Windows filter pretrage
+:Un-register Windows Previewer
+sr-rs:Odjavi Windows preglednik
+:Un-register Windows Search Filter
+sr-rs:Odjavi Windows filter pretrage
+:Register Windows Previewer
+tw:註冊 Windows 預覽程式
+:Register Windows Search Filter
+tw:註冊 Windows 搜尋篩選器
+:Un-register Windows Previewer
+tw:取消註冊 Windows 預覽程式
+:Un-register Windows Search Filter
+tw:取消註冊 Windows 搜尋篩選器
+:Register Windows Previewer
+az:Windows Önizləyicisini Qeyd Et
+:Register Windows Search Filter
+az:Windows Axtarış Filtrini Qeyd Et
+:Un-register Windows Previewer
+az:Windows Önizləyicisinin Qeydini Ləğv Et
+:Un-register Windows Search Filter
+az:Windows Axtarış Filtrinin Qeydini Ləğv Et
+:Register Windows Previewer
+by:Зарэгістраваць прагляднік Windows
+:Register Windows Search Filter
+by:Зарэгістраваць фільтр пошуку Windows
+:Un-register Windows Previewer
+by:Адрэгістраваць прагляднік Windows
+:Un-register Windows Search Filter
+by:Адрэгістраваць фільтр пошуку Windows
+:Register Windows Previewer
+ca:Registra el visualitzador de Windows
+:Register Windows Search Filter
+ca:Registra el filtre de cerca de Windows
+:Un-register Windows Previewer
+ca:Desregistra el visualitzador de Windows
+:Un-register Windows Search Filter
+ca:Desregistra el filtre de cerca de Windows
+:Register Windows Previewer
+cy:Cofrestru Rhagolygydd Windows
+:Register Windows Search Filter
+cy:Cofrestru Hidlydd Chwilio Windows
+:Un-register Windows Previewer
+cy:Dad-gofrestru Rhagolygydd Windows
+:Un-register Windows Search Filter
+cy:Dad-gofrestru Hidlydd Chwilio Windows
+:Register Windows Previewer
+cz:Registrovat Windows Previewer
+:Register Windows Search Filter
+cz:Registrovat filtr Windows Search
+:Un-register Windows Previewer
+cz:Odregistrovat Windows Previewer
+:Un-register Windows Search Filter
+cz:Odregistrovat filtr Windows Search
+:Register Windows Previewer
+es:Registrar vista previa de Windows
+:Register Windows Search Filter
+es:Registrar filtro de búsqueda de Windows
+:Un-register Windows Previewer
+es:Desregistrar vista previa de Windows
+:Un-register Windows Search Filter
+es:Desregistrar filtro de búsqueda de Windows
+:Register Windows Previewer
+fa:ثبت پیش‌نمایشگر ویندوز
+:Register Windows Search Filter
+fa:ثبت فیلتر جستجوی ویندوز
+:Un-register Windows Previewer
+fa:لغو ثبت پیش‌نمایشگر ویندوز
+:Un-register Windows Search Filter
+fa:لغو ثبت فیلتر جستجوی ویندوز
+:Register Windows Previewer
+fi:Rekisteröi Windows-esikatselu
+:Register Windows Search Filter
+fi:Rekisteröi Windows-hakusuodatin
+:Un-register Windows Previewer
+fi:Poista Windows-esikatselun rekisteröinti
+:Un-register Windows Search Filter
+fi:Poista Windows-hakusuodattimen rekisteröinti
+:Register Windows Previewer
+fo:Skráseta Windows Previewer
+:Register Windows Search Filter
+fo:Skráseta Windows Search Filter
+:Un-register Windows Previewer
+fo:Strika Windows Previewer
+:Un-register Windows Search Filter
+fo:Strika Windows Search Filter
+:Register Windows Previewer
+fr:Enregistrer l'aperçu Windows
+:Register Windows Search Filter
+fr:Enregistrer le filtre de recherche Windows
+:Un-register Windows Previewer
+fr:Désenregistrer l'aperçu Windows
+:Un-register Windows Search Filter
+fr:Désenregistrer le filtre de recherche Windows
+:Register Windows Previewer
+ga:Cláraigh Réamhamharcóir Windows
+:Register Windows Search Filter
+ga:Cláraigh Scagaire Cuardaigh Windows
+:Un-register Windows Previewer
+ga:Díchláraigh Réamhamharcóir Windows
+:Un-register Windows Search Filter
+ga:Díchláraigh Scagaire Cuardaigh Windows
+:Register Windows Previewer
+gl:Rexistrar previsualizador de Windows
+:Register Windows Search Filter
+gl:Rexistrar filtro de busca de Windows
+:Un-register Windows Previewer
+gl:Eliminar rexistro do previsualizador de Windows
+:Un-register Windows Search Filter
+gl:Eliminar rexistro do filtro de busca de Windows
+:Register Windows Previewer
+he:רשום תצוגה מקדימה של Windows
+:Register Windows Search Filter
+he:רשום מסנן חיפוש של Windows
+:Un-register Windows Previewer
+he:בטל רישום תצוגה מקדימה של Windows
+:Un-register Windows Search Filter
+he:בטל רישום מסנן חיפוש של Windows
+:Register Windows Previewer
+hu:Windows Előnézet regisztrálása
+:Register Windows Search Filter
+hu:Windows Keresési szűrő regisztrálása
+:Un-register Windows Previewer
+hu:Windows Előnézet regisztrációjának törlése
+:Un-register Windows Search Filter
+hu:Windows Keresési szűrő regisztrációjának törlése
+:Register Windows Previewer
+id:Daftarkan Pratinjau Windows
+:Register Windows Search Filter
+id:Daftarkan Filter Pencarian Windows
+:Un-register Windows Previewer
+id:Batalkan Pendaftaran Pratinjau Windows
+:Un-register Windows Search Filter
+id:Batalkan Pendaftaran Filter Pencarian Windows
+:Register Windows Previewer
+it:Registra visualizzatore Windows
+:Register Windows Search Filter
+it:Registra filtro di ricerca Windows
+:Un-register Windows Previewer
+it:Annulla registrazione visualizzatore Windows
+:Un-register Windows Search Filter
+it:Annulla registrazione filtro di ricerca Windows
+:Register Windows Previewer
+kr:Windows 미리 보기 등록
+:Register Windows Search Filter
+kr:Windows 검색 필터 등록
+:Un-register Windows Previewer
+kr:Windows 미리 보기 등록 해제
+:Un-register Windows Search Filter
+kr:Windows 검색 필터 등록 해제
+:Register Windows Previewer
+lv:Reģistrēt Windows priekšskatītāju
+:Register Windows Search Filter
+lv:Reģistrēt Windows meklēšanas filtru
+:Un-register Windows Previewer
+lv:Atreģistrēt Windows priekšskatītāju
+:Un-register Windows Search Filter
+lv:Atreģistrēt Windows meklēšanas filtru
+:Register Windows Previewer
+my:Windows အစမ်းကြည့်ရှုမှုကို မှတ်ပုံတင်ရန်
+:Register Windows Search Filter
+my:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာကို မှတ်ပုံတင်ရန်
+:Un-register Windows Previewer
+my:Windows အစမ်းကြည့်ရှုမှုကို မှတ်ပုံတင်ဖျက်ရန်
+:Un-register Windows Search Filter
+my:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာကို မှတ်ပုံတင်ဖျက်ရန်
+:Register Windows Previewer
+pt:Registrar Visualizador do Windows
+:Register Windows Search Filter
+pt:Registrar Filtro de Pesquisa do Windows
+:Un-register Windows Previewer
+pt:Cancelar registro do Visualizador do Windows
+:Un-register Windows Search Filter
+pt:Cancelar registro do Filtro de Pesquisa do Windows
+:Register Windows Previewer
+ro:Înregistrează Windows Previewer
+:Register Windows Search Filter
+ro:Înregistrează filtrul de căutare Windows
+:Un-register Windows Previewer
+ro:Anulează înregistrarea Windows Previewer
+:Un-register Windows Search Filter
+ro:Anulează înregistrarea filtrului de căutare Windows
+:Register Windows Previewer
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱯᱨᱤᱵᱷᱤᱣᱟᱨ ᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+:Register Windows Search Filter
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+:Un-register Windows Previewer
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱯᱨᱤᱵᱷᱤᱣᱟᱨ ᱚᱱᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+:Un-register Windows Search Filter
+sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱚᱱᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
+:Register Windows Previewer
+sl:Registriraj predogledovalnik za Windows
+:Register Windows Search Filter
+sl:Registriraj filter za iskanje v Windows
+:Un-register Windows Previewer
+sl:Prekliči registracijo predogledovalnika za Windows
+:Un-register Windows Search Filter
+sl:Prekliči registracijo filtra za iskanje v Windows
+:Register Windows Previewer
+sv:Registrera Windows förhandsgranskare
+:Register Windows Search Filter
+sv:Registrera Windows sökfilter
+:Un-register Windows Previewer
+sv:Avregistrera Windows förhandsgranskare
+:Un-register Windows Search Filter
+sv:Avregistrera Windows sökfilter
+:Register Windows Previewer
+ta:Windows முன்னோட்டத்தை பதிவு செய்
+:Register Windows Search Filter
+ta:Windows தேடல் வடிப்பானை பதிவு செய்
+:Un-register Windows Previewer
+ta:Windows முன்னோட்டத்தை பதிவு நீக்கு
+:Un-register Windows Search Filter
+ta:Windows தேடல் வடிப்பானை பதிவு நீக்கு
+:Register Windows Previewer
+tr:Windows Önizleyicisini Kaydet
+:Register Windows Search Filter
+tr:Windows Arama Filtresini Kaydet
+:Un-register Windows Previewer
+tr:Windows Önizleyicisinin Kaydını Kaldır
+:Un-register Windows Search Filter
+tr:Windows Arama Filtresinin Kaydını Kaldır
+:Register Windows Previewer
+uz:Windows Previewer-ni ro'yxatdan o'tkazish
+:Register Windows Search Filter
+uz:Windows Search Filter-ni ro'yxatdan o'tkazish
+:Un-register Windows Previewer
+uz:Windows Previewer-ni ro'yxatdan o'chirish
+:Un-register Windows Search Filter
+uz:Windows Search Filter-ni ro'yxatdan o'chirish
+:Register Windows Previewer
+af:Registreer Windows-voorskou
+:Register Windows Search Filter
+af:Registreer Windows-soekfilter
+:Un-register Windows Previewer
+af:Deregistreer Windows-voorskou
+:Un-register Windows Search Filter
+af:Deregistreer Windows-soekfilter
+:Register Windows Previewer
+bg:Регистриране на Windows Previewer
+:Register Windows Search Filter
+bg:Регистриране на филтър за Windows Search
+:Un-register Windows Previewer
+bg:Дерегистриране на Windows Previewer
+:Un-register Windows Search Filter
+bg:Дерегистриране на филтър за Windows Search
+:Register Windows Previewer
+bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন করুন
+:Register Windows Search Filter
+bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন করুন
+:Un-register Windows Previewer
+bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন বাতিল করুন
+:Un-register Windows Search Filter
+bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন বাতিল করুন
+:Register Windows Previewer
+bs:Registruj Windows pregled
+:Register Windows Search Filter
+bs:Registruj Windows filter pretrage
+:Un-register Windows Previewer
+bs:Odregistruj Windows pregled
+:Un-register Windows Search Filter
+bs:Odregistruj Windows filter pretrage
+:Register Windows Previewer
+ca-xv:Registrar el Previsualizador de Windows
+:Register Windows Search Filter
+ca-xv:Registrar el Filtre de Cerca de Windows
+:Un-register Windows Previewer
+ca-xv:Desregistrar el Previsualizador de Windows
+:Un-register Windows Search Filter
+ca-xv:Desregistrar el Filtre de Cerca de Windows
+:Register Windows Previewer
+dk:Registrer Windows Forhåndsvisning
+:Register Windows Search Filter
+dk:Registrer Windows Søgefilter
+:Un-register Windows Previewer
+dk:Afregistrer Windows Forhåndsvisning
+:Un-register Windows Search Filter
+dk:Afregistrer Windows Søgefilter
+:Register Windows Previewer
+et:Registreeri Windowsi eelvaatleja
+:Register Windows Search Filter
+et:Registreeri Windowsi otsingufilter
+:Un-register Windows Previewer
+et:Tühista Windowsi eelvaatleja registreering
+:Un-register Windows Search Filter
+et:Tühista Windowsi otsingufiltri registreering
+:Register Windows Previewer
+eu:Erregistratu Windows aurrebista
+:Register Windows Search Filter
+eu:Erregistratu Windows bilaketa iragazkia
+:Un-register Windows Previewer
+eu:Kendu Windows aurrebistaren erregistroa
+:Un-register Windows Search Filter
+eu:Kendu Windows bilaketa iragazkiaren erregistroa
+:Register Windows Previewer
+fy-nl:Windows Foarbyld registrearje
+:Register Windows Search Filter
+fy-nl:Windows Sykfilter registrearje
+:Un-register Windows Previewer
+fy-nl:Windows Foarbyld ûntregistrearje
+:Un-register Windows Search Filter
+fy-nl:Windows Sykfilter ûntregistrearje
+:Register Windows Previewer
+hr:Registriraj Windows preglednik
+:Register Windows Search Filter
+hr:Registriraj Windows filter pretraživanja
+:Un-register Windows Previewer
+hr:Odregistriraj Windows preglednik
+:Un-register Windows Search Filter
+hr:Odregistriraj Windows filter pretraživanja
+:Register Windows Previewer
+jv:Ndhaptar Windows Previewer
+:Register Windows Search Filter
+jv:Ndhaptar Windows Search Filter
+:Un-register Windows Previewer
+jv:Mbusak ndhaptar Windows Previewer
+:Un-register Windows Search Filter
+jv:Mbusak ndhaptar Windows Search Filter
+:Register Windows Previewer
+ka:Windows Previewer-ის რეგისტრაცია
+:Register Windows Search Filter
+ka:Windows Search Filter-ის რეგისტრაცია
+:Un-register Windows Previewer
+ka:Windows Previewer-ის რეგისტრაციის გაუქმება
+:Un-register Windows Search Filter
+ka:Windows Search Filter-ის რეგისტრაციის გაუქმება
+:Register Windows Previewer
+ku:Tomar kirdinî pêşdîtina Windows
+:Register Windows Search Filter
+ku:Tomar kirdinî parzûna lêgerîna Windows
+:Un-register Windows Previewer
+ku:Rakirdinî tomar pêşdîtina Windows
+:Un-register Windows Search Filter
+ku:Rakirdinî tomar parzûna lêgerîna Windows
+:Register Windows Previewer
+kw:Kovskrifya Ragwelyer Windows
+:Register Windows Search Filter
+kw:Kovskrifya Sidhler Hwilas Windows
+:Un-register Windows Previewer
+kw:Digovskrifya Ragwelyer Windows
+:Un-register Windows Search Filter
+kw:Digovskrifya Sidhler Hwilas Windows
+:Register Windows Previewer
+lt:Registruoti Windows peržiūros priemonę
+:Register Windows Search Filter
+lt:Registruoti Windows paieškos filtrą
+:Un-register Windows Previewer
+lt:Išregistruoti Windows peržiūros priemonę
+:Un-register Windows Search Filter
+lt:Išregistruoti Windows paieškos filtrą
+:Register Windows Previewer
+mk:Регистрирај Windows прегледувач
+:Register Windows Search Filter
+mk:Регистрирај Windows филтер за пребарување
+:Un-register Windows Previewer
+mk:Отстрани регистрација на Windows прегледувач
+:Un-register Windows Search Filter
+mk:Отстрани регистрација на Windows филтер за пребарување
+:Register Windows Previewer
+mm:Windows အစမ်းကြည့်ရှုကိရိယာ မှတ်ပုံတင်ရန်
+:Register Windows Search Filter
+mm:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာ မှတ်ပုံတင်ရန်
+:Un-register Windows Previewer
+mm:Windows အစမ်းကြည့်ရှုကိရိယာ မှတ်ပုံတင်ဖျက်ရန်
+:Un-register Windows Search Filter
+mm:Windows ရှာဖွေမှု စစ်ထုတ်ကိရိယာ မှတ်ပုံတင်ဖျက်ရန်
+:Register Windows Previewer
+ne:Windows पूर्वावलोकन दर्ता गर्नुहोस्
+:Register Windows Search Filter
+ne:Windows खोज फिल्टर दर्ता गर्नुहोस्
+:Un-register Windows Previewer
+ne:Windows पूर्वावलोकन दर्ता रद्द गर्नुहोस्
+:Un-register Windows Search Filter
+ne:Windows खोज फिल्टर दर्ता रद्द गर्नुहोस्
+:Register Windows Previewer
+nn:Registrer Windows-førehandsvising
+:Register Windows Search Filter
+nn:Registrer Windows-søkjefilter
+:Un-register Windows Previewer
+nn:Avregistrer Windows-førehandsvising
+:Un-register Windows Search Filter
+nn:Avregistrer Windows-søkjefilter
+:Register Windows Previewer
+no:Registrer Windows-forhåndsviser
+:Register Windows Search Filter
+no:Registrer Windows-søkefilter
+:Un-register Windows Previewer
+no:Avregistrer Windows-forhåndsviser
+:Un-register Windows Search Filter
+no:Avregistrer Windows-søkefilter
+:Register Windows Previewer
+pa:ਵਿੰਡੋਜ਼ ਪ੍ਰੀਵਿਊਅਰ ਰਜਿਸਟਰ ਕਰੋ
+:Register Windows Search Filter
+pa:ਵਿੰਡੋਜ਼ ਖੋਜ ਫਿਲਟਰ ਰਜਿਸਟਰ ਕਰੋ
+:Un-register Windows Previewer
+pa:ਵਿੰਡੋਜ਼ ਪ੍ਰੀਵਿਊਅਰ ਅਣ-ਰਜਿਸਟਰ ਕਰੋ
+:Un-register Windows Search Filter
+pa:ਵਿੰਡੋਜ਼ ਖੋਜ ਫਿਲਟਰ ਅਣ-ਰਜਿਸਟਰ ਕਰੋ
+:Register Windows Previewer
+si:Windows පූර්වදර්ශකය ලියාපදිංචි කරන්න
+:Register Windows Search Filter
+si:Windows සෙවුම් පෙරණය ලියාපදිංචි කරන්න
+:Un-register Windows Previewer
+si:Windows පූර්වදර්ශකය ලියාපදිංචි කිරීම අවලංගු කරන්න
+:Un-register Windows Search Filter
+si:Windows සෙවුම් පෙරණය ලියාපදිංචි කිරීම අවලංගු කරන්න
+:Register Windows Previewer
+sn:Nyoresa Windows Previewer
+:Register Windows Search Filter
+sn:Nyoresa Windows Search Filter
+:Un-register Windows Previewer
+sn:Bvisa kunyoresa Windows Previewer
+:Un-register Windows Search Filter
+sn:Bvisa kunyoresa Windows Search Filter
+:Register Windows Previewer
+sp-rs:Registruj Windows preglednik
+:Register Windows Search Filter
+sp-rs:Registruj Windows filter pretrage
+:Un-register Windows Previewer
+sp-rs:Ukloni registraciju Windows preglednika
+:Un-register Windows Search Filter
+sp-rs:Ukloni registraciju Windows filtera pretrage
+:Register Windows Previewer
+sq:Regjistro Shfaqësin e Parapamjes së Windows
+:Register Windows Search Filter
+sq:Regjistro Filtrin e Kërkimit të Windows
+:Un-register Windows Previewer
+sq:Çregjistro Shfaqësin e Parapamjes së Windows
+:Un-register Windows Search Filter
+sq:Çregjistro Filtrin e Kërkimit të Windows
+:Register Windows Previewer
+th:ลงทะเบียนตัวแสดงตัวอย่าง Windows
+:Register Windows Search Filter
+th:ลงทะเบียนตัวกรองการค้นหา Windows
+:Un-register Windows Previewer
+th:ยกเลิกการลงทะเบียนตัวแสดงตัวอย่าง Windows
+:Un-register Windows Search Filter
+th:ยกเลิกการลงทะเบียนตัวกรองการค้นหา Windows
+:Register Windows Previewer
+tl:Irehistro ang Windows Previewer
+:Register Windows Search Filter
+tl:Irehistro ang Windows Search Filter
+:Un-register Windows Previewer
+tl:I-alis ang rehistro ng Windows Previewer
+:Un-register Windows Search Filter
+tl:I-alis ang rehistro ng Windows Search Filter
+:Register Windows Previewer
+uk:Зареєструвати програму перегляду Windows
+:Register Windows Search Filter
+uk:Зареєструвати фільтр пошуку Windows
+:Un-register Windows Previewer
+uk:Скасувати реєстрацію програми перегляду Windows
+:Un-register Windows Search Filter
+uk:Скасувати реєстрацію фільтра пошуку Windows
+:Printer '%s' doesn't exist
+am:ማተሚያ '%s' አልተገኘም
+:Printer '%s' doesn't exist
+ar:الطابعة '%s' غير موجودة
+:Printer '%s' doesn't exist
+br:Ar voullerez '%s' n'eus ket anezhañ
+:Printer '%s' doesn't exist
+cn:打印机 '%s' 不存在
+:Printer '%s' doesn't exist
+co:A stampante '%s' ùn esiste micca
+:Printer '%s' doesn't exist
+de:Drucker '%s' existiert nicht
+:Printer '%s' doesn't exist
+el:Ο εκτυπωτής '%s' δεν υπάρχει
+:Printer '%s' doesn't exist
+hi:प्रिंटर '%s' मौजूद नहीं है
+:Printer '%s' doesn't exist
+ja:プリンター '%s' は存在しません
+:Printer '%s' doesn't exist
+ml:പ്രിന്റർ '%s' നിലവിലില്ല
+:Printer '%s' doesn't exist
+nl:Printer '%s' bestaat niet
+:Printer '%s' doesn't exist
+pl:Drukarka '%s' nie istnieje
+:Printer '%s' doesn't exist
+ru:Принтер '%s' не существует
+:Printer '%s' doesn't exist
+sk:Tlačiareň '%s' neexistuje
+:Printer '%s' doesn't exist
+sr-rs:Штампач '%s' не постоји
+:Printer '%s' doesn't exist
+tw:印表機 '%s' 不存在
+:Printer '%s' doesn't exist
+az:'%s' printeri mövcud deyil
+:Printer '%s' doesn't exist
+by:Прынтар '%s' не існуе
+:Printer '%s' doesn't exist
+ca:La impressora '%s' no existeix
+:Printer '%s' doesn't exist
+cy:Nid yw'r argraffydd '%s' yn bodoli
+:Printer '%s' doesn't exist
+cz:Tiskárna '%s' neexistuje
+:Printer '%s' doesn't exist
+es:La impresora '%s' no existe
+:Printer '%s' doesn't exist
+fa:چاپگر '%s' وجود ندارد
+:Printer '%s' doesn't exist
+fi:Tulostinta '%s' ei ole olemassa
+:Printer '%s' doesn't exist
+fo:Prentari '%s' finst ikki
+:Printer '%s' doesn't exist
+fr:L'imprimante '%s' n'existe pas
+:Printer '%s' doesn't exist
+ga:Níl an printéir '%s' ann
+:Printer '%s' doesn't exist
+gl:A impresora '%s' non existe
+:Printer '%s' doesn't exist
+he:המדפסת '%s' לא קיימת
+:Printer '%s' doesn't exist
+hu:A(z) '%s' nyomtató nem létezik
+:Printer '%s' doesn't exist
+id:Printer '%s' tidak ada
+:Printer '%s' doesn't exist
+it:La stampante '%s' non esiste
+:Printer '%s' doesn't exist
+kr:프린터 '%s'이(가) 존재하지 않습니다
+:Printer '%s' doesn't exist
+lv:Printeris '%s' neeksistē
+:Printer '%s' doesn't exist
+my:ပရင်တာ '%s' မရှိပါ
+:Printer '%s' doesn't exist
+pt:A impressora '%s' não existe
+:Printer '%s' doesn't exist
+ro:Imprimanta '%s' nu există
+:Printer '%s' doesn't exist
+sat:ᱯᱨᱤᱱᱴᱟᱨ '%s' ᱵᱟᱹᱱᱩᱜ ᱟ
+:Printer '%s' doesn't exist
+sl:Tiskalnik '%s' ne obstaja
+:Printer '%s' doesn't exist
+sv:Skrivaren '%s' finns inte
+:Printer '%s' doesn't exist
+ta:அச்சுப்பொறி '%s' இல்லை
+:Printer '%s' doesn't exist
+tr:Yazıcı '%s' mevcut değil
+:Printer '%s' doesn't exist
+uz:'%s' printeri mavjud emas
+:Printer '%s' doesn't exist
+af:Drukker '%s' bestaan nie
+:Printer '%s' doesn't exist
+bg:Принтерът '%s' не съществува
+:Printer '%s' doesn't exist
+bn:প্রিন্টার '%s' বিদ্যমান নেই
+:Printer '%s' doesn't exist
+bs:Štampač '%s' ne postoji
+:Printer '%s' doesn't exist
+ca-xv:La impressora '%s' no existeix
+:Printer '%s' doesn't exist
+dk:Printer '%s' eksisterer ikke
+:Printer '%s' doesn't exist
+et:Printer '%s' ei eksisteeri
+:Printer '%s' doesn't exist
+eu:'%s' inprimagailua ez da existitzen
+:Printer '%s' doesn't exist
+fy-nl:Printer '%s' bestiet net
+:Printer '%s' doesn't exist
+hr:Pisač '%s' ne postoji
+:Printer '%s' doesn't exist
+jv:Printer '%s' ora ana
+:Printer '%s' doesn't exist
+ka:პრინტერი '%s' არ არსებობს
+:Printer '%s' doesn't exist
+ku:Çapker '%s' tune nîne
+:Printer '%s' doesn't exist
+kw:Nyns eus pryntyer '%s'
+:Printer '%s' doesn't exist
+lt:Spausdintuvas '%s' neegzistuoja
+:Printer '%s' doesn't exist
+mk:Печатачот '%s' не постои
+:Printer '%s' doesn't exist
+mm:ပုံနှိပ်စက် '%s' မရှိပါ
+:Printer '%s' doesn't exist
+ne:प्रिन्टर '%s' अवस्थित छैन
+:Printer '%s' doesn't exist
+nn:Skrivaren '%s' finst ikkje
+:Printer '%s' doesn't exist
+no:Skriver '%s' finnes ikke
+:Printer '%s' doesn't exist
+pa:ਪ੍ਰਿੰਟਰ '%s' ਮੌਜੂਦ ਨਹੀਂ ਹੈ
+:Printer '%s' doesn't exist
+si:මුද්‍රණ යන්ත්‍රය '%s' නොපවතී
+:Printer '%s' doesn't exist
+sn:Purinzi '%s' hairipo
+:Printer '%s' doesn't exist
+sp-rs:Штампач '%s' не постоји
+:Printer '%s' doesn't exist
+sq:Printeri '%s' nuk ekziston
+:Printer '%s' doesn't exist
+th:เครื่องพิมพ์ '%s' ไม่มีอยู่
+:Printer '%s' doesn't exist
+tl:Ang printer '%s' ay hindi umiiral
+:Printer '%s' doesn't exist
+uk:Принтер '%s' не існує
+:Printer '%s' doesn't exist
+vn:Máy in '%s' không tồn tại
+:Register Windows Previewer
+vn:Đăng ký Windows Previewer
+:Register Windows Search Filter
+vn:Đăng ký Windows Search Filter
+:Un-register Windows Previewer
+vn:Hủy đăng ký Windows Previewer
+:Un-register Windows Search Filter
+vn:Hủy đăng ký Windows Search Filter
