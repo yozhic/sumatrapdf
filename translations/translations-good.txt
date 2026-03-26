@@ -32245,7 +32245,7 @@ nl:Stel thema '%s' in
 nn:Vel tema '%s'
 no:Angi tema '%s'
 pa:ਥੀਮ '%s' ਸੈੱਟ ਕਰੋ
-pl:Ustaw motyw „%s”
+pl:Ustaw motyw '%s'
 pt:Definir tema '%s'
 ro:Setează tema '%s'
 ru:Установить тему '%s'

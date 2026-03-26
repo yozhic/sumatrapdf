@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-396068bdb05bb19ea48465725506dad0095b766f
+589029ff4b2444458f055aceb4d9a0f5f0e47d5b
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -21389,7 +21389,7 @@ de:Design '%s' festlegen
 el:Ορισμός θέματος '%s'
 ja:配色テーマ '%s'
 nl:Stel thema '%s' in
-pl:Ustaw motyw „%s”
+pl:Ustaw motyw '%s'
 ru:Установить тему '%s'
 sk:Nastaviť motív '%s'
 tw:設定成 '%s' 主題
