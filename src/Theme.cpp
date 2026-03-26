@@ -379,10 +379,14 @@ COLORREF ThemeWindowTextColor() {
 }
 
 COLORREF ThemeWindowTextDisabledColor() {
-    auto col = ThemeWindowTextColor();
-    // TODO: probably add textDisabledColor
-    auto col2 = AdjustLightOrDark(col, 0x7f);
-    return col2;
+    // blend text color halfway toward background so disabled text
+    // is visible but clearly muted on both light and dark themes
+    COLORREF txt = ThemeWindowTextColor();
+    COLORREF bg = ThemeMainWindowBackgroundColor();
+    u8 r = (u8)((GetRValue(txt) + GetRValue(bg)) / 2);
+    u8 g = (u8)((GetGValue(txt) + GetGValue(bg)) / 2);
+    u8 b = (u8)((GetBValue(txt) + GetBValue(bg)) / 2);
+    return RGB(r, g, b);
 }
 
 COLORREF ThemeWindowControlBackgroundColor() {

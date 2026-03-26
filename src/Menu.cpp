@@ -1984,8 +1984,10 @@ void FreeMenuOwnerDrawInfoData(HMENU hmenu) {
     };
 }
 
-void MarkMenuOwnerDraw(HMENU hmenu) {
-    if (UseDarkModeLib() && DarkMode::isEnabled()) {
+void MarkMenuOwnerDraw(HMENU hmenu, bool isMenuBar) {
+    // darkmodelib handles the menu bar via setWindowMenuBarSubclass
+    // but doesn't handle popup/context menus, so we owner-draw those
+    if (isMenuBar && UseDarkModeLib() && DarkMode::isEnabled()) {
         return;
     }
     if (!ThemeColorizeControls()) {
@@ -2158,17 +2160,16 @@ void MenuCustomDrawItem(HWND hwnd, DRAWITEMSTRUCT* dis) {
 
     COLORREF bgCol = ThemeMainWindowBackgroundColor();
     COLORREF txtCol = ThemeWindowTextColor();
-    // TODO: if isDisabled, pick a color that represents disabled
-    // either add it to theme definition or auto-generate
-    // (lighter if dark color, darker if light color)
-    if (isDisabled) {
-        txtCol = ThemeWindowTextDisabledColor();
-    }
 
     bool isSelected = bit::IsMaskSet(dis->itemState, (uint)ODS_SELECTED);
-    if (isSelected) {
-        // TODO: probably better colors
-        std::swap(bgCol, txtCol);
+    if (isDisabled) {
+        txtCol = ThemeWindowTextDisabledColor();
+        if (isSelected) {
+            // subtle highlight for disabled selected items
+            bgCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -10) : AdjustLightness2(bgCol, 10);
+        }
+    } else if (isSelected) {
+        bgCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
     }
 
     RECT rc = dis->rcItem;
@@ -2264,7 +2265,7 @@ HMENU BuildMenu(MainWindow* win) {
     AutoDelete delCtx(ctx);
     HMENU mainMenu = BuildMenuFromDef(menuDefMenubar, CreateMenu(), ctx);
 
-    MarkMenuOwnerDraw(mainMenu);
+    MarkMenuOwnerDraw(mainMenu, true);
     return mainMenu;
 }
 
@@ -2284,7 +2285,7 @@ void UpdateAppMenu(MainWindow* win, HMENU m) {
         BuildMenuZoom(m);
     }
     MenuUpdateStateForWindow(win);
-    MarkMenuOwnerDraw(win->menu);
+    MarkMenuOwnerDraw(win->menu, true);
 }
 
 // show/hide top-level menu bar. This doesn't persist across launches
