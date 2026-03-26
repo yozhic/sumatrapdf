@@ -1129,6 +1129,8 @@ void DrawHomePage(MainWindow* win, HDC hdc) {
         si.nPos = win->homePageScrollY;
         win->overlayScrollV->enabled = true;
         OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
+        // show thin scrollbar briefly to indicate content is scrollable
+        OverlayScrollbarShow(win->overlayScrollV, true);
     } else if (win->overlayScrollV) {
         OverlayScrollbarShow(win->overlayScrollV, false);
     }
