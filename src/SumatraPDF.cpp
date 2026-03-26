@@ -3735,8 +3735,8 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         return;
     }
 
-    // inset by border for resize hit-testing (not when maximized/fullscreen)
-    if (!IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
+    // inset by border for resize hit-testing (only with custom caption, not when maximized/fullscreen)
+    if (win->tabsInTitlebar && !IsZoomed(win->hwndFrame) && !win->isFullScreen && !win->presentation) {
         rc.x += kFrameBorderSize;
         // top border is kFrameBorderSize - 1 because 1px is already NC area
         // (WM_NCCALCSIZE keeps 1px NC to prevent DWM transparent flash)
