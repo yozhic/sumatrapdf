@@ -858,10 +858,11 @@ RestartLayout:
         }
     }
 
-    // for kZoomFitPage, clamp canvas to viewport to avoid 1px scrollbar
-    // from floating point rounding in zoom calculation
+    // for kZoomFitPage in single-page modes, clamp canvas to viewport to avoid
+    // 1px scrollbar from floating point rounding in zoom calculation.
+    // Don't clamp in continuous modes where canvasDy spans all pages.
     // (kZoomFitContent intentionally overflows because content box != full page)
-    if (zoomVirtual == kZoomFitPage) {
+    if (zoomVirtual == kZoomFitPage && !IsContinuous(displayMode)) {
         canvasDy = std::min(canvasDy, viewPort.dy);
         canvasDx = std::min(canvasDx, viewPort.dx);
     }
