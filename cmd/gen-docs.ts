@@ -27,6 +27,31 @@ const searchJS = `<script>${readFileSync(join(docsDir, "gen_docs.search.js"), "u
 const searchHTML = readFileSync(join(docsDir, "gen_docs.search.html"), "utf-8");
 const tmplManual = readFileSync(join(docsDir, "manual.tmpl.html"), "utf-8");
 
+function buildTocHTML(): string {
+  const text = readFileSync(join(mdDir, "SumatraPDF-documentation.md"), "utf-8");
+  const linkRe = /\[([^\]]+)\]\(([^)]+\.md)\)/g;
+  const items: string[] = [];
+  // only extract links between :columns markers
+  const lines = text.split("\n");
+  let inColumns = false;
+  for (const line of lines) {
+    if (line.trim() === ":columns") {
+      inColumns = !inColumns;
+      continue;
+    }
+    if (!inColumns) {
+      continue;
+    }
+    let match;
+    while ((match = linkRe.exec(line)) !== null) {
+      const title = match[1];
+      const href = getHTMLFileName(match[2]);
+      items.push(`<a href="${href}">${title}</a>`);
+    }
+  }
+  return `<nav class="sidebar-toc">\n<div class="toc-title"><a href="SumatraPDF-documentation.html">SumatraPDF docs</a></div>\n${items.join("\n")}\n</nav>`;
+}
+
 const h1BreadcrumbsStart = `
   <div class="breadcrumbs">
     <div><a href="SumatraPDF-documentation.html">SumatraPDF documentation</a></div>
@@ -236,13 +261,17 @@ function mdToHTML(name: string): string {
 
   innerHTML = `<div class="notion-page">${innerHTML}</div>`;
 
-  let html = tmplManual.replace("{{InnerHTML}}", innerHTML);
+  const tocHTML = buildTocHTML();
+  // use function replacements to avoid $' and $` special patterns in String.replace()
+  let html = tmplManual
+    .replace("{{TocHTML}}", () => tocHTML)
+    .replace("{{InnerHTML}}", () => innerHTML);
   const title = getHTMLFileName(name).replace(".html", "").replace(/-/g, " ");
-  html = html.replace("{{Title}}", title);
+  html = html.replace("{{Title}}", () => title);
 
   if (name === "Commands.md") {
-    html = html.replace("<div>:search:</div>", searchHTML);
-    html = html.replace("</body>", searchJS + "</body>");
+    html = html.replace("<div>:search:</div>", () => searchHTML);
+    html = html.replace("</body>", () => searchJS + "</body>");
   }
 
   mdProcessed.set(name, html);
