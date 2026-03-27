@@ -16,8 +16,10 @@
 static const WCHAR* kScreenshotOverlayClassName = L"SumatraScreenshotOverlay";
 static bool gScreenshotClassRegistered = false;
 
-// padding between thumbnails and around the grid
-constexpr int kThumbPadding = 16;
+// horizontal padding in each grid cell (on each side of thumbnail)
+constexpr int kGridPaddingX = 16;
+// vertical padding in each grid cell (on each side of thumbnail)
+constexpr int kGridPaddingY = 16;
 // outer padding around the entire overlay
 constexpr int kOuterPadding = 32;
 // border thickness for selected thumbnail
@@ -26,8 +28,8 @@ constexpr int kBorderThickness = 3;
 constexpr int kMaxThumbSize = 240;
 // height reserved for label text below thumbnail
 constexpr int kLabelHeight = 20;
-// gap between thumbnail bottom and next row's thumbnail top (includes label)
-constexpr int kRowGap = kLabelHeight + 8;
+// extra gap below label
+constexpr int kLabelGap = 4;
 // height for the info bar at the bottom
 constexpr int kInfoBarHeight = 30;
 
@@ -46,9 +48,11 @@ struct ScreenshotOverlayData {
     int selected = 0; // index of currently selected (hovered/arrow-keyed)
     int cols = 0;
     int rows = 0;
-    int cellW = 0;
-    int cellH = 0;
-    int winW = 0; // overlay window size
+    Vec<int> colWidths;  // width of each column
+    Vec<int> rowHeights; // height of each row
+    Vec<int> colX;       // x start of each column (cumulative)
+    Vec<int> rowY;       // y start of each row (cumulative)
+    int winW = 0;
     int winH = 0;
 };
 
@@ -310,12 +314,56 @@ static void ComputeLayout(ScreenshotOverlayData* data) {
     data->cols = (int)ceil(sqrt((double)n));
     data->rows = (n + data->cols - 1) / data->cols;
 
-    data->cellW = kMaxThumbSize + kBorderThickness;
-    data->cellH = kMaxThumbSize + kRowGap + kThumbPadding;
+    // compute per-column widths (max thumb width in that column + 2*kGridPaddingX)
+    data->colWidths.SetSize(data->cols);
+    for (int c = 0; c < data->cols; c++) {
+        data->colWidths[c] = 0;
+    }
+    for (int i = 0; i < n; i++) {
+        int col = i % data->cols;
+        int tw = data->captures[i].thumbW;
+        if (tw > data->colWidths[col]) {
+            data->colWidths[col] = tw;
+        }
+    }
+    for (int c = 0; c < data->cols; c++) {
+        data->colWidths[c] += 2 * kGridPaddingX;
+    }
+
+    // compute per-row heights (max thumb height in that row + label + 2*kGridPaddingY)
+    data->rowHeights.SetSize(data->rows);
+    for (int r = 0; r < data->rows; r++) {
+        data->rowHeights[r] = 0;
+    }
+    for (int i = 0; i < n; i++) {
+        int row = i / data->cols;
+        int th = data->captures[i].thumbH;
+        if (th > data->rowHeights[row]) {
+            data->rowHeights[row] = th;
+        }
+    }
+    for (int r = 0; r < data->rows; r++) {
+        data->rowHeights[r] += kLabelGap + kLabelHeight + (2 * kGridPaddingY);
+    }
+
+    // compute cumulative x/y offsets for each column/row
+    data->colX.SetSize(data->cols);
+    int x = kOuterPadding;
+    for (int c = 0; c < data->cols; c++) {
+        data->colX[c] = x;
+        x += data->colWidths[c];
+    }
+
+    data->rowY.SetSize(data->rows);
+    int y = kOuterPadding;
+    for (int r = 0; r < data->rows; r++) {
+        data->rowY[r] = y;
+        y += data->rowHeights[r];
+    }
 
     // window sized to fit content + outer padding + info bar
-    data->winW = (data->cols * data->cellW) + kThumbPadding + (2 * kOuterPadding);
-    data->winH = (data->rows * data->cellH) + kThumbPadding + (2 * kOuterPadding) + kInfoBarHeight;
+    data->winW = x + kOuterPadding;
+    data->winH = y + kOuterPadding + kInfoBarHeight;
 }
 
 // Get the bounding rect for thumbnail at index i (in client coords)
@@ -324,13 +372,16 @@ static RECT GetThumbRect(ScreenshotOverlayData* data, int idx) {
     int row = idx / data->cols;
     auto& cs = data->captures[idx];
 
-    int cellX = kOuterPadding + kThumbPadding + (col * data->cellW);
-    int cellY = kOuterPadding + kThumbPadding + (row * data->cellH);
+    int cellX = data->colX[col];
+    int cellY = data->rowY[row];
+    int cellW = data->colWidths[col];
+    // thumb area height = rowHeight - kLabelGap - kLabelHeight - 2*kGridPaddingY + 2*kGridPaddingY
+    // simplifies to: rowHeight - kLabelGap - kLabelHeight
+    int thumbAreaH = data->rowHeights[row] - kLabelGap - kLabelHeight;
 
-    // center thumbnail horizontally in its cell
-    int tx = cellX + ((kMaxThumbSize - cs.thumbW) / 2);
-    // align thumbnail to bottom of the thumb area so label is below
-    int ty = cellY + (kMaxThumbSize - cs.thumbH);
+    // center thumbnail in cell
+    int tx = cellX + (cellW - cs.thumbW) / 2;
+    int ty = cellY + kGridPaddingY + (thumbAreaH - (2 * kGridPaddingY) - cs.thumbH) / 2;
 
     RECT rc;
     rc.left = tx;
@@ -346,7 +397,7 @@ static int HitTestThumb(ScreenshotOverlayData* data, int mx, int my) {
     for (int i = 0; i < n; i++) {
         RECT rc = GetThumbRect(data, i);
         // expand hit area to include the label
-        rc.bottom += kRowGap;
+        rc.bottom += kLabelGap + kLabelHeight;
         POINT pt = {mx, my};
         if (PtInRect(&rc, pt)) {
             return i;
@@ -497,7 +548,7 @@ static void PaintOverlayLayered(HWND hwnd, ScreenshotOverlayData* data) {
 
     SetTextColor(hdcTemp, RGB(255, 255, 255));
     SetBkMode(hdcTemp, TRANSPARENT);
-    DrawTextW(hdcTemp, L"Pick screenshot to save, Esc to cancel", -1, &infoRect,
+    DrawTextW(hdcTemp, L"Select screenshot to save. ↑ ↓ to navigate. Enter to select. Esc to cancel", -1, &infoRect,
               DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
     SelectObject(hdcTemp, prevInfoFont);
