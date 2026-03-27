@@ -400,11 +400,9 @@ void ShowOrHideToolbar(MainWindow* win) {
 }
 
 void UpdateFindbox(MainWindow* win) {
-    if (IsCurrentThemeDefault()) {
-        // this looks ugly in dark themes i.e. non-default i.e. non-colorized
-        SetWindowStyle(win->hwndFindBg, SS_WHITERECT, win->IsDocLoaded());
-        SetWindowStyle(win->hwndPageBg, SS_WHITERECT, win->IsDocLoaded());
-    }
+    // remove SS_WHITERECT so WM_CTLCOLORSTATIC controls the background color
+    SetWindowStyle(win->hwndFindBg, SS_WHITERECT, false);
+    SetWindowStyle(win->hwndPageBg, SS_WHITERECT, false);
 
     InvalidateRect(win->hwndToolbar, nullptr, TRUE);
     UpdateWindow(win->hwndToolbar);
@@ -490,11 +488,15 @@ static LRESULT CALLBACK WndProcToolbar(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp
             auto br = GetStockBrush(NULL_BRUSH);
             return (LRESULT)br;
         }
-        if ((win->hwndFindBg != hwndCtrl && win->hwndPageBg != hwndCtrl) || theme::IsAppThemed()) {
-            // Set color used in "Page:" and "Find:" labels
-            auto col = RGB(0x00, 0x00, 0x00);
+        {
+            bool isBgCtrl = (win->hwndFindBg == hwndCtrl || win->hwndPageBg == hwndCtrl);
+            bool isEditCtrl = (win->hwndFindEdit == hwndCtrl || win->hwndPageEdit == hwndCtrl);
             SetTextColor(hdc, ThemeWindowTextColor());
             SetBkMode(hdc, TRANSPARENT);
+            if ((isBgCtrl || isEditCtrl) && !ThemeColorizeControls()) {
+                SetBkColor(hdc, RGB(0xff, 0xff, 0xff));
+                return (LRESULT)GetStockObject(WHITE_BRUSH);
+            }
             return (LRESULT)win->brControlBgColor;
         }
     }
