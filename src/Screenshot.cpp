@@ -9,7 +9,9 @@
 #include "utils/GdiPlusUtil.h"
 #include "utils/Log.h"
 
+#include "Notifications.h"
 #include "AppTools.h"
+#include "Screenshot.h"
 
 static bool ShouldCaptureWindow(HWND hwnd) {
     if (!IsWindowVisible(hwnd)) {
@@ -212,4 +214,15 @@ void TakeScreenshots() {
 
     // Open screenshot directory in default file manager
     LaunchFileShell(screenshotDir, nullptr, "open");
+}
+
+void RegisterScreenshotHotkey(HWND hwnd) {
+    BOOL ok = RegisterHotKey(hwnd, kScreenshotHotkeyId, 0, VK_SNAPSHOT);
+    if (!ok) {
+        MaybeDelayedWarningNotification("Couldn't register PrtScr global hotkey for taking screenshots");
+    }
+}
+
+void UnregisterScreenshotHotkey(HWND hwnd) {
+    UnregisterHotKey(hwnd, kScreenshotHotkeyId);
 }

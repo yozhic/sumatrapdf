@@ -1647,6 +1647,9 @@ static MainWindow* CreateMainWindow() {
         DragAcceptFiles(win->hwndCanvas, TRUE);
     }
 
+    if (gWindows.IsEmpty()) {
+        RegisterScreenshotHotkey(win->hwndFrame);
+    }
     gWindows.Append(win);
     ShowMaybeDelayedNotifications(win->hwndCanvas);
     // needed for RTL languages
@@ -7364,6 +7367,13 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             UpdateAppMenu(win, (HMENU)wp);
             break;
 
+        case WM_HOTKEY:
+            if (wp == kScreenshotHotkeyId) {
+                TakeScreenshots();
+                return 0;
+            }
+            break;
+
         case WM_COMMAND:
             return FrameOnCommand(win, hwnd, msg, wp, lp);
 
@@ -7516,6 +7526,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         }
 
         case WM_DESTROY: {
+            UnregisterScreenshotHotkey(hwnd);
             FreeMenuOwnerDrawInfoData(GetMenu(hwnd));
         } break;
 

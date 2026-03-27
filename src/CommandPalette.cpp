@@ -112,6 +112,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdListPrinters,
     CmdDebugCrashMe,
     CmdDebugCorruptMemory,
+    CmdScreenshot,
     0,
 };
 
