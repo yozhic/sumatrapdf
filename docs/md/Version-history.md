@@ -13,10 +13,10 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - you can now drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers
 - add `-log-to-file <file>` cmd-line flag to log to a specific file (like `-log` but with custom log file path)
-- add `CmdScreenshot` (`Screenshot` in `Ctrl + k` [command palette](Command-Palette.md)) to capture screenshots of the desktop and all visible windows, saved as PNG files in `Screenshots` sub-directory of SumatraPDF data directory
 - add `DefaultImageZoom` advanced setting to control default zoom level for images
 - improve `Toggle Use Tabs` (`CmdToggleUseTabs`). You can now transition between using tabs / not using tabs witout restarting the app
 - allow showing menu bar when using tabs (previously menu bar was only shown when not using tabs)
+- add `CmdScreenshot` (`Take Screenshot` in `Ctrl + k` [command palette](Command-Palette.md)) to capture screenshots of the desktop and all visible windows, saved as PNG files in `Screenshots` sub-directory of SumatraPDF data directory
 
 ## 3.6 (2026-03-17)
 

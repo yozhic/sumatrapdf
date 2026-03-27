@@ -1,9 +1,9 @@
 AppTranslator: SumatraPDF
-c23713564f28bc2ab468318c2c15cde7dff4c2f1
+95a3c49732649a273e0f7320d96f3e289fe98fb8
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
-br:# Histórico de Arquivos
+br:# Histórico dos Arquivos
 cn:# 文件历史记录
 co:# Cronolugia di schedariu
 de:# Dateiverlauf
@@ -6861,6 +6861,10 @@ uk:Згорнути всі
 uz:Barchasini yig‘ish
 vn:Thu gọn tất cả
 :Collecting list of printers
+br:Coletando lista de impressoras
+de:Liste der Drucker zusammenstellen
+pl:Gromadzenie listy drukarek
+sk:Získava sa zoznam tlačiarní
 :Color:
 am:Գույն.
 ar:اللون:
@@ -9078,8 +9082,10 @@ uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
 :Ctrl+Tab to navigate
+br:Ctrl+Tab pra navegar
 de:Strg+Tab zum Navigieren
 pl:Ctrl+Tab, aby nawigować
+sk:Použite Ctrl+Tab na prechádzanie
 :Current file
 am:Ընթացիկ ֆայլը
 ar:الملف الحالي
@@ -10638,8 +10644,10 @@ uk:Введіть командну стрічку, що викликається
 uz:PDF-hujjatni ikki marta bosganda ishga tushadigan buyruq satrini kiriting:
 vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
 :Enter to select
+br:Enter pra selecionar
 de:Enter zum Auswählen
 pl:Enter, aby zaznaczyć
+sk:Enter na výber
 :Error
 am:Սխալ
 ar:خطأ
@@ -10750,8 +10758,10 @@ uk:Помилка завантаження %s
 uz:%s yuklab olish xatosi
 vn:Không mở %s được
 :Esc to close
+br:Esc pra fechar
 de:Esc zum Schließen
 pl:Esc, aby zamknąć
+sk:Esc na zatvorenie
 :Execute a program
 am:Կատարել ծրագիր
 br:Executar um programa
@@ -11696,7 +11706,7 @@ ar:ملف مرفق
 az:Qoşma fayl
 bg:Прикачен файл
 bn:নথি সংযুক্তি
-br:Arquivo Anexo
+br:Arquivo Anexado
 by:Далучаны файл
 ca-xv:Fitxer adjunt
 ca:Fitxer adjunt
@@ -14747,6 +14757,10 @@ uk:Початок рядка:
 uz:Qator boshi:
 vn:Dòng Bắt Đầu:
 :List Printers
+br:Listar Impressoras
+de:Drucker auflisten
+pl:Wyświetl drukarki
+sk:Zoznam tlačiarní
 :Loading %s ...
 am:%s-ի բեռնում...
 ar:يحمّل %s ...
@@ -16188,7 +16202,7 @@ uk:Відкрити вкладення
 uz:Ilovani ochish
 :Open Current Document In New Tab
 am:Բացել ընթացիկ փաստաթուղթը նոր ներդիրում
-br:Abrir Documento Atual em Nova Aba
+br:Abrir o Documento Atual numa Nova Aba
 cn:在新标签页中打开当前文档
 co:Apre u ducumentu attuale in un’unghjetta nova
 de:Aktuelles Dokument in neuem Tab öffnen
@@ -16199,7 +16213,7 @@ sk:Otvoriť aktuálny dokument na novej karte
 tw:在新分頁中開啟目前文件
 :Open Current Document In New Window
 am:Բացել ընթացիկ փաստաթուղթը նոր պատուհանում
-br:Abrir Documento Atual em Nova Janela
+br:Abrir o Documento Atual numa Nova Janela
 cn:在新窗口中打开当前文档
 co:Apre u ducumentu attuale in una finestra nova
 de:Aktuelles Dokument in neuem Fenster öffnen
@@ -18722,8 +18736,10 @@ uk:Межі друку
 uz:Chop etish diapazoni
 vn:Giới hạn vùng in
 :Printer '%s' doesn't exist
+br:A impressora "%s" não existe
 de:Drucker '%s' existiert nicht
 pl:Drukarka „%s” nie istnieje
+sk:Tlačiareň '%s' neexistuje
 :Printing in progress.
 am:Տպում է:
 ar:الطباعة في التقدم.
@@ -19286,12 +19302,20 @@ uk:Редагувати
 uz:Tahrirlash
 vn:Biên tập
 :Register Windows Previewer
+br:Registrar o Pré-Visualizador do Windows
+de:Windows-Vorschau registrieren
 pl:Zarejestruj podgląd Windows
+sk:Registrovať Windows Previewer
 :Register Windows Search Filter
+br:Registrar o Filtro de Busca do Windows
+de:Suchfilter in Windows registrieren
 pl:Zarejestruj filtr wyszukiwania Windows
+sk:Registrovať Windows Search Filter
 :Release Ctrl to select
+br:Solte o Ctrl pra selecionar
 de:Strg loslassen, um auszuwählen
 pl:Puść Ctrl, aby zaznaczyć
+sk:Uvoľnením klávesu Ctrl vyberiete
 :Reload Document
 am:Վերաբեռնել փաստաթուղթը
 br:Recarregar Documento
@@ -19899,7 +19923,7 @@ uz:SVG hujjatlari
 vn:Các Tài Liệu SVG
 :Save Annotations to a new PDF
 am:Պահպանեք ծանոթագրությունները նոր PDF ֆայլում
-br:Salvar Anotações em um PDF novo
+br:Salvar as Anotações num PDF novo
 cn:将标注保存到新的 PDF 文件
 co:Arregistrà l’annutazioni in un PDF novu
 de:Anmerkungen in neuer PDF-Datei speichern
@@ -21831,8 +21855,10 @@ ru:Показать журналы
 sk:Zobraziť logy
 tw:顯示記錄
 :Show PDF Info
+br:Mostrar a Informação do PDF
 de:PDF-Info anzeigen
 pl:Pokaż informacje o PDF
+sk:Zobraziť informácie o PDF
 :Show Scr&ollbars
 am:Ցուցադրել ոլո&րագոտիները
 ar:إظهار أشرطة التمرير
@@ -22359,8 +22385,10 @@ uk:Файл сирцевого коду %s не має точки синхрон
 uz:%s manba faylida sinxronlanish nuqtasi yo'q
 vn:Tập tin nguồn %s không có điểm đồng bộ
 :Space for sticky mode
+br:Barra de Espaço pro modo fixo
 de:Platz für Sticky‑Modus
 pl:Spacja dla trybu lepkiego
+sk:Medzerník pre trvalý režim
 :Square
 am:Քառակուսի
 ar:مربع
@@ -23144,6 +23172,7 @@ tw:已標示的 PDF
 uk:PDF з мітками
 uz:Belgilangan PDF
 vn:PDF được gắn thẻ
+:Take Screenshot
 :Text Alignment:
 am:Գրվածքի հավասարեցում
 ar:محاذاة النص:
@@ -23901,7 +23930,10 @@ pl:Przełącz pasek menu
 sk:Prepnúť panel s ponukami
 tw:切換功能表列
 :Toggle Overlay Scrollbar
+br:Alternar a Barra de Rolagem da Sobreposição
+de:Überlappende Bildlaufleiste ein-/ausblenden
 pl:Przełącz nakładkowy pasek przewijania
+sk:Prepnúť skrývanie posuvníka
 :Toggle Page Info
 am:Ցուցադրել/թաքցնել էջի տեղեկությունները
 br:Exibir/Ocultar Informações da Página
@@ -23969,7 +24001,10 @@ pl:Przełącz pasek narzędzi
 sk:Prepnúť panel nástrojov
 tw:切換工具列
 :Toggle Use Tabs
+br:Alternar o Uso das Abas
+de:Tabs ein-/ausblenden
 pl:Przełącz używanie kart
+sk:Prepnúť Použiť karty
 :Toggle Zoom
 am:Միացնել/անջատել դիտափոխումը
 br:Ativar/Desativar Zoom
@@ -24062,9 +24097,15 @@ uk:Перекласти за допомогою &DeepL
 uz:&DeepL bilan tarjima qilish
 vn:Dịch với &DeepL
 :Un-register Windows Previewer
+br:Remover o registro do Pré-Visualizador do Windows
+de:Windows-Vorschau deaktivieren
 pl:Wyrejestruj podgląd Windows
+sk:Zrušiť registráciu Windows Previewer
 :Un-register Windows Search Filter
+br:Remover o registro do Filtro de Busca do Windows
+de:Suchfilter in Windows deaktivieren
 pl:Wyrejestruj filtr wyszukiwania Windows
+sk:Zrušiť registráciu Windows Search Filter
 :Uninstall SumatraPDF
 am:Ջնջել SumatraPDF-ը
 ar:إزالة SumatraPDF
@@ -25607,7 +25648,7 @@ sk:Zväčšiť: Prispôsobiť šírke
 tw:縮放：符合頁面寬度
 :Zoom: Fit Width And Continuous
 am:Դիտափոխում՝ հարմարեցնել լայնությանը և շարունակական
-br:Zoom: Ajustar pela Largura e Contínua
+br:Zoom: Ajustar pela Largura e Contínuo
 cn:缩放：适合宽度且连续显示
 co:Ingrandamentu : adattà à a larghezza è lettura in cuntinuu
 de:Zoom: Fortlaufend an Fensterbreite anpassen
@@ -25768,7 +25809,7 @@ sk:nepoužiť
 tw:不要使用
 :page %d,
 am:էջ %d,
-br:página %d,
+br:Página %d,
 cn:第 %d 页，
 co:pagina %d,
 de:Seite %d,
@@ -25845,5 +25886,7 @@ uk:друк документа
 uz:hujjatni chop etish
 vn:đang in tập tin
 :↑ ↓ to navigate
+br:↑ ↓ pra navegar
 de:↑ ↓ zum Navigieren
 pl:↑ ↓ aby nawigować
+sk:↑ ↓ na navigáciu

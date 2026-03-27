@@ -33620,3 +33620,147 @@ uk:Список принтерів
 vn:Đang thu thập danh sách máy in
 :List Printers
 vn:Danh sách máy in
+:Take Screenshot
+am:ቅጽበታዊ ገጽ እይታ ያንሱ
+:Take Screenshot
+ar:التقط لقطة شاشة
+:Take Screenshot
+br:Kemer un tapadenn
+:Take Screenshot
+cn:截屏
+:Take Screenshot
+co:Piglià una cattura di schermu
+:Take Screenshot
+de:Screenshot erstellen
+:Take Screenshot
+el:Λήψη Στιγμιότυπου
+:Take Screenshot
+hi:स्क्रीनशॉट लें
+:Take Screenshot
+ja:スクリーンショットを撮る
+:Take Screenshot
+ml:സ്ക്രീൻഷോട്ട് എടുക്കുക
+:Take Screenshot
+nl:Maak schermafbeelding
+:Take Screenshot
+pl:Zrób zrzut ekranu
+:Take Screenshot
+ru:Сделать скриншот
+:Take Screenshot
+sk:Urobiť snímku obrazovky
+:Take Screenshot
+sr-rs:Napravi snimak ekrana
+:Take Screenshot
+tw:擷取螢幕畫面
+:Take Screenshot
+az:Ekran şəkli çək
+:Take Screenshot
+by:Зрабіць здымак экрана
+:Take Screenshot
+ca:Fes una captura de pantalla
+:Take Screenshot
+cy:Cymryd Sgrinlun
+:Take Screenshot
+cz:Pořídit snímek obrazovky
+:Take Screenshot
+es:Tomar captura de pantalla
+:Take Screenshot
+fa:عکس صفحه بگیرید
+:Take Screenshot
+fi:Ota kuvakaappaus
+:Take Screenshot
+fo:Tak skjámynd
+:Take Screenshot
+fr:Prendre une capture d'écran
+:Take Screenshot
+ga:Glac Scáileán
+:Take Screenshot
+gl:Capturar pantalla
+:Take Screenshot
+he:צלם מסך
+:Take Screenshot
+hu:Képernyőkép készítése
+:Take Screenshot
+id:Ambil Tangkapan Layar
+:Take Screenshot
+it:Cattura schermata
+:Take Screenshot
+kr:스크린샷 찍기
+:Take Screenshot
+lv:Uzņemt ekrānuzņēmumu
+:Take Screenshot
+my:စခရင်ရှော့ ရိုက်ယူရန်
+:Take Screenshot
+pt:Tirar Captura de Ecrã
+:Take Screenshot
+ro:Faceți captură de ecran
+:Take Screenshot
+sat:ᱥᱠᱨᱤᱱᱥᱚᱴ ᱞᱮᱵᱮᱱ
+:Take Screenshot
+sl:Zajemi posnetek zaslona
+:Take Screenshot
+sv:Ta skärmbild
+:Take Screenshot
+ta:திரைப்பிடிப்பை எடு
+:Take Screenshot
+tr:Ekran Görüntüsü Al
+:Take Screenshot
+uz:Skrinshot olish
+:Take Screenshot
+af:Neem Skermskoot
+:Take Screenshot
+bg:Направи екранна снимка
+:Take Screenshot
+bn:স্ক্রিনশট নিন
+:Take Screenshot
+bs:Napravi snimak ekrana
+:Take Screenshot
+ca-xv:Fes captura de pantalla
+:Take Screenshot
+dk:Tag skærmbillede
+:Take Screenshot
+et:Tee ekraanipilt
+:Take Screenshot
+eu:Egin pantaila-argazkia
+:Take Screenshot
+fy-nl:Skermôfdruk meitsje
+:Take Screenshot
+hr:Snimi snimku zaslona
+:Take Screenshot
+jv:Jupuk Gambar Layar
+:Take Screenshot
+ka:ეკრანის ანაბეჭდის გადაღება
+:Take Screenshot
+ku:Wêneyê Dîmenderê Bigre
+:Take Screenshot
+kw:Kemeres skrinlun
+:Take Screenshot
+lt:Padaryti ekrano kopiją
+:Take Screenshot
+mk:Направи снимка на екранот
+:Take Screenshot
+mm:ဓာတ်ပုံရိုက်ယူရန်
+:Take Screenshot
+ne:स्क्रिनसट लिनुहोस्
+:Take Screenshot
+nn:Ta skjermbilete
+:Take Screenshot
+no:Ta skjermbilde
+:Take Screenshot
+pa:ਸਕਰੀਨਸ਼ਾਟ ਲਓ
+:Take Screenshot
+si:තිර රුව ලබා ගන්න
+:Take Screenshot
+sn:Tora Mufananidzo Wechidzitiro
+:Take Screenshot
+sp-rs:Направи снимак екрана
+:Take Screenshot
+sq:Bëj Pamje Ekrani
+:Take Screenshot
+th:ถ่ายภาพหน้าจอ
+:Take Screenshot
+tl:Kumuha ng Screenshot
+:Take Screenshot
+uk:Зробити знімок екрана
+:Take Screenshot
+vn:Chụp ảnh màn hình

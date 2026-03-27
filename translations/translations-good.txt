@@ -7,7 +7,7 @@ ar:# سجل الملفات
 az:# Fayl Tarixçəsi
 bg:# История на файла
 bn:# ফাইল ইতিহাস
-br:# Histórico de Arquivos
+br:# Histórico dos Arquivos
 bs:# Historija datoteke
 by:# Гісторыя файла
 ca:# Historial de fitxers
@@ -8548,7 +8548,7 @@ ar:جمع قائمة الطابعات
 az:Printer siyahısı toplanır
 bg:Събиране на списък с принтери
 bn:প্রিন্টারের তালিকা সংগ্রহ করা হচ্ছে
-br:O teskañ roll ar moulerezioù
+br:Coletando lista de impressoras
 bs:Prikupljanje liste štampača
 by:Збор спіса прынтэраў
 ca:Recollint la llista d'impressores
@@ -8557,7 +8557,7 @@ cn:正在收集打印机列表
 co:Raccolta di a lista di stampanti
 cy:Casglu rhestr o argraffwyr
 cz:Získávání seznamu tiskáren
-de:Erfasse Liste der Drucker
+de:Liste der Drucker zusammenstellen
 dk:Indsamler liste over printere
 el:Συλλογή λίστας εκτυπωτών
 es:Recopilando lista de impresoras
@@ -8593,13 +8593,13 @@ nl:Lijst met printers verzamelen
 nn:Samlar inn liste over skrivarar
 no:Henter liste over skrivere
 pa:ਪ੍ਰਿੰਟਰਾਂ ਦੀ ਸੂਚੀ ਇਕੱਠੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ
-pl:Zbieranie listy drukarek
+pl:Gromadzenie listy drukarek
 pt:Coletando lista de impressoras
 ro:Se colectează lista de imprimante
 ru:Сбор списка принтеров
 sat:ᱪᱷᱟᱯᱟᱠᱚ ᱨᱮᱭᱟᱜ ᱞᱤᱥᱴᱤ ᱡᱟᱣᱨᱟᱣ ᱠᱟᱱᱟ
 si:මුද්‍රණ යන්ත්‍ර ලැයිස්තුව රැස් කරමින්
-sk:Zbieram zoznam tlačiarní
+sk:Získava sa zoznam tlačiarní
 sl:Zbiranje seznama tiskalnikov
 sn:Kuunganidza rondedzero yevaprinta
 sp-rs:Прикупљање liste штампача
@@ -12490,7 +12490,7 @@ ar:Ctrl+Tab للتنقل
 az:Naviqasiya üçün Ctrl+Tab
 bg:Ctrl+Tab за навигация
 bn:নেভিগেট করতে Ctrl+Tab
-br:Ctrl+Tab da verdeiñ
+br:Ctrl+Tab pra navegar
 bs:Ctrl+Tab za navigaciju
 by:Ctrl+Tab для навігацыі
 ca:Ctrl+Tab per navegar
@@ -12541,7 +12541,7 @@ ro:Ctrl+Tab pentru navigare
 ru:Ctrl+Tab для навигации
 sat:Ctrl+Tab ᱛᱮ ᱥᱮᱱᱚᱜ
 si:සංචලනය සඳහා Ctrl+Tab
-sk:Ctrl+Tab na navigáciu
+sk:Použite Ctrl+Tab na prechádzanie
 sl:Ctrl+Tab za navigacijo
 sn:Ctrl+Tab kufambisa
 sp-rs:Ctrl+Tab za navigaciju
@@ -15118,7 +15118,7 @@ ar:Enter للاختيار
 az:Seçmək üçün Enter
 bg:Enter за избор
 bn:নির্বাচন করতে Enter
-br:Enter da choaz
+br:Enter pra selecionar
 bs:Enter za odabir
 by:Enter для выбару
 ca:Enter per seleccionar
@@ -15337,7 +15337,7 @@ ar:Esc للإغلاق
 az:Bağlamaq üçün Esc
 bg:Esc за затваряне
 bn:বন্ধ করতে Esc
-br:Esc da serriñ
+br:Esc pra fechar
 bs:Esc za zatvaranje
 by:Esc для закрыцця
 ca:Esc per tancar
@@ -16651,7 +16651,7 @@ ar:ملف مرفق
 az:Qoşma fayl
 bg:Прикачен файл
 bn:নথি সংযুক্তি
-br:Arquivo Anexo
+br:Arquivo Anexado
 bs:Prilog datoteke
 by:Далучаны файл
 ca:Fitxer adjunt
@@ -21104,7 +21104,7 @@ ar:قائمة الطابعات
 az:Printerlərin siyahısı
 bg:Списък с принтери
 bn:প্রিন্টারের তালিকা
-br:Roll ar moulerezioù
+br:Listar Impressoras
 bs:Lista štampača
 by:Спіс прынтэраў
 ca:Llista d'impressores
@@ -21149,7 +21149,7 @@ nl:Printers weergeven
 nn:List skrivarar
 no:Vis skrivere
 pa:ਪ੍ਰਿੰਟਰਾਂ ਦੀ ਸੂਚੀ
-pl:Lista drukarek
+pl:Wyświetl drukarki
 pt:Listar Impressoras
 ro:Listează imprimante
 ru:Список принтеров
@@ -23221,7 +23221,7 @@ ar:فتح المستند الحالي في علامة تبويب جديدة
 az:Cari Sənədi Yeni Vərəqdə Aç
 bg:Отвори текущия документ в нов раздел
 bn:বর্তমান নথি নতুন ট্যাবে খুলুন
-br:Abrir Documento Atual em Nova Aba
+br:Abrir o Documento Atual numa Nova Aba
 bs:Otvori trenutni dokument u novoj kartici
 by:Адкрыць бягучы дакумент у новай укладцы
 ca:Obre el document actual en una pestanya nova
@@ -23294,7 +23294,7 @@ ar:فتح المستند الحالي في نافذة جديدة
 az:Cari Sənədi Yeni Pəncərədə Aç
 bg:Отвори текущия документ в нов прозорец
 bn:বর্তমান নথি নতুন উইন্ডোতে খুলুন
-br:Abrir Documento Atual em Nova Janela
+br:Abrir o Documento Atual numa Nova Janela
 bs:Otvori trenutni dokument u novom prozoru
 by:Адкрыць бягучы дакумент у новым акне
 ca:Obre el document actual en una finestra nova
@@ -27601,7 +27601,7 @@ ar:الطابعة '%s' غير موجودة
 az:'%s' printeri mövcud deyil
 bg:Принтерът '%s' не съществува
 bn:প্রিন্টার '%s' বিদ্যমান নেই
-br:Ar voullerez '%s' n'eus ket anezhañ
+br:A impressora "%s" não existe
 bs:Štampač '%s' ne postoji
 by:Прынтар '%s' не існуе
 ca:La impressora '%s' no existeix
@@ -28404,7 +28404,7 @@ ar:تسجيل معاين Windows
 az:Windows Önizləyicisini Qeyd Et
 bg:Регистриране на Windows Previewer
 bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন করুন
-br:Enrollañ Rakweler Windows
+br:Registrar o Pré-Visualizador do Windows
 bs:Registruj Windows pregled
 by:Зарэгістраваць прагляднік Windows
 ca:Registra el visualitzador de Windows
@@ -28477,7 +28477,7 @@ ar:تسجيل مرشح بحث Windows
 az:Windows Axtarış Filtrini Qeyd Et
 bg:Регистриране на филтър за Windows Search
 bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন করুন
-br:Enrollañ Sil Klask Windows
+br:Registrar o Filtro de Busca do Windows
 bs:Registruj Windows filter pretrage
 by:Зарэгістраваць фільтр пошуку Windows
 ca:Registra el filtre de cerca de Windows
@@ -28486,7 +28486,7 @@ cn:注册 Windows 搜索筛选器
 co:Arregistrà u Filtru di Ricerca Windows
 cy:Cofrestru Hidlydd Chwilio Windows
 cz:Registrovat filtr Windows Search
-de:Windows-Suchfilter registrieren
+de:Suchfilter in Windows registrieren
 dk:Registrer Windows Søgefilter
 el:Εγγραφή Φίλτρου Αναζήτησης Windows
 es:Registrar filtro de búsqueda de Windows
@@ -28528,7 +28528,7 @@ ro:Înregistrează filtrul de căutare Windows
 ru:Зарегистрировать фильтр поиска Windows
 sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
 si:Windows සෙවුම් පෙරණය ලියාපදිංචි කරන්න
-sk:Registrovať filter Windows Search
+sk:Registrovať Windows Search Filter
 sl:Registriraj filter za iskanje v Windows
 sn:Nyoresa Windows Search Filter
 sp-rs:Registruj Windows filter pretrage
@@ -28550,7 +28550,7 @@ ar:حرر Ctrl للاختيار
 az:Seçmək üçün Ctrl buraxın
 bg:Пуснете Ctrl за избор
 bn:নির্বাচন করতে Ctrl ছেড়ে দিন
-br:Leuskel Ctrl da choaz
+br:Solte o Ctrl pra selecionar
 bs:Otpustite Ctrl za odabir
 by:Адпусціце Ctrl для выбару
 ca:Allibera Ctrl per seleccionar
@@ -28601,7 +28601,7 @@ ro:Eliberează Ctrl pentru selectare
 ru:Отпустите Ctrl для выбора
 sat:Ctrl ᱪᱟᱰᱟᱭ ᱢᱮ ᱵᱟᱪᱷᱟᱣ ᱞᱟᱹᱜᱤᱫ
 si:තෝරා ගැනීමට Ctrl මුදා හරින්න
-sk:Uvoľnite Ctrl na výber
+sk:Uvoľnením klávesu Ctrl vyberiete
 sl:Spustite Ctrl za izbiro
 sn:Sunungura Ctrl kusarudza
 sp-rs:Otpustite Ctrl za izbor
@@ -29718,7 +29718,7 @@ ar:حفظ التعليقات التوضيحية في ملف PDF جديد
 az:Qeydləri yeni PDF-ə saxla
 bg:Запазване на анотациите в нов PDF
 bn:একটি নতুন PDF-এ টীকা সংরক্ষণ করুন
-br:Salvar Anotações em um PDF novo
+br:Salvar as Anotações num PDF novo
 bs:Sačuvaj bilješke u novi PDF
 by:Захаваць анатацыі ў новы PDF
 ca:Desa les anotacions en un PDF nou
@@ -33660,7 +33660,7 @@ ar:عرض معلومات PDF
 az:PDF Məlumatını Göstər
 bg:Покажи информация за PDF
 bn:PDF তথ্য দেখান
-br:Diskouez titouroù ar PDF
+br:Mostrar a Informação do PDF
 bs:Prikaži PDF informacije
 by:Паказаць інфармацыю пра PDF
 ca:Mostra informació del PDF
@@ -34463,7 +34463,7 @@ ar:مسافة للوضع الثابت
 az:Yapışqan rejim üçün Boşluq
 bg:Интервал за лепнещ режим
 bn:স্টিকি মোডের জন্য Space
-br:Spas evit ar mod pegus
+br:Barra de Espaço pro modo fixo
 bs:Space za sticky način
 by:Прабел для рэжыму фіксацыі
 ca:Espai per mode fixat
@@ -35405,6 +35405,79 @@ tw:已標示的 PDF
 uk:PDF з мітками
 uz:Belgilangan PDF
 vn:PDF được gắn thẻ
+:Take Screenshot
+af:Neem Skermskoot
+am:ቅጽበታዊ ገጽ እይታ ያንሱ
+ar:التقط لقطة شاشة
+az:Ekran şəkli çək
+bg:Направи екранна снимка
+bn:স্ক্রিনশট নিন
+br:Kemer un tapadenn
+bs:Napravi snimak ekrana
+by:Зрабіць здымак экрана
+ca:Fes una captura de pantalla
+ca-xv:Fes captura de pantalla
+cn:截屏
+co:Piglià una cattura di schermu
+cy:Cymryd Sgrinlun
+cz:Pořídit snímek obrazovky
+de:Screenshot erstellen
+dk:Tag skærmbillede
+el:Λήψη Στιγμιότυπου
+es:Tomar captura de pantalla
+et:Tee ekraanipilt
+eu:Egin pantaila-argazkia
+fa:عکس صفحه بگیرید
+fi:Ota kuvakaappaus
+fo:Tak skjámynd
+fr:Prendre une capture d'écran
+fy-nl:Skermôfdruk meitsje
+ga:Glac Scáileán
+gl:Capturar pantalla
+he:צלם מסך
+hi:स्क्रीनशॉट लें
+hr:Snimi snimku zaslona
+hu:Képernyőkép készítése
+id:Ambil Tangkapan Layar
+it:Cattura schermata
+ja:スクリーンショットを撮る
+jv:Jupuk Gambar Layar
+ka:ეკრანის ანაბეჭდის გადაღება
+kr:스크린샷 찍기
+ku:Wêneyê Dîmenderê Bigre
+kw:Kemeres skrinlun
+lt:Padaryti ekrano kopiją
+lv:Uzņemt ekrānuzņēmumu
+mk:Направи снимка на екранот
+ml:സ്ക്രീൻഷോട്ട് എടുക്കുക
+mm:ဓာတ်ပုံရိုက်ယူရန်
+my:စခရင်ရှော့ ရိုက်ယူရန်
+ne:स्क्रिनसट लिनुहोस्
+nl:Maak schermafbeelding
+nn:Ta skjermbilete
+no:Ta skjermbilde
+pa:ਸਕਰੀਨਸ਼ਾਟ ਲਓ
+pl:Zrób zrzut ekranu
+pt:Tirar Captura de Ecrã
+ro:Faceți captură de ecran
+ru:Сделать скриншот
+sat:ᱥᱠᱨᱤᱱᱥᱚᱴ ᱞᱮᱵᱮᱱ
+si:තිර රුව ලබා ගන්න
+sk:Urobiť snímku obrazovky
+sl:Zajemi posnetek zaslona
+sn:Tora Mufananidzo Wechidzitiro
+sp-rs:Направи снимак екрана
+sq:Bëj Pamje Ekrani
+sr-rs:Napravi snimak ekrana
+sv:Ta skärmbild
+ta:திரைப்பிடிப்பை எடு
+th:ถ่ายภาพหน้าจอ
+tl:Kumuha ng Screenshot
+tr:Ekran Görüntüsü Al
+tw:擷取螢幕畫面
+uk:Зробити знімок екрана
+uz:Skrinshot olish
+vn:Chụp ảnh màn hình
 :Text Alignment:
 af:Teks Belyning:
 am:Գրվածքի հավասարեցում
@@ -37018,7 +37091,7 @@ ar:تبديل شريط التمرير المتراكب
 az:Üst-üstə düşən sürüşdürmə çubuğunu aç/bağla
 bg:Превключване на плаваща лента за превъртане
 bn:ওভারলে স্ক্রলবার টগল করুন
-br:Kemmañ ar varenn-dibunañ dreistplakaat
+br:Alternar a Barra de Rolagem da Sobreposição
 bs:Uključi/isključi prekrivajuću traku za pomicanje
 by:Пераключыць накладны паласу пракруткі
 ca:Commuta la barra de desplaçament superposada
@@ -37027,7 +37100,7 @@ cn:切换覆盖滚动条
 co:Attivà/Disattivà a Barra di Scurrimentu Soprapposta
 cy:Toglo Bar Sgrolio Troshaen
 cz:Přepnout překryvný posuvník
-de:Overlay-Scrollleiste umschalten
+de:Überlappende Bildlaufleiste ein-/ausblenden
 dk:Skift overlejret rullebjælke
 el:Εναλλαγή Επικαλυπτόμενης Γραμμής Κύλισης
 es:Alternar barra de desplazamiento superpuesta
@@ -37069,7 +37142,7 @@ ro:Comutare bară de derulare suprapusă
 ru:Переключить наложенную полосу прокрутки
 sat:ओभरले स्क्रोलबार टगल करॗ
 si:උඩැතිරි අනුචලන තීරුව ටොගල් කරන්න
-sk:Prepnúť prekrývací posúvač
+sk:Prepnúť skrývanie posuvníka
 sl:Preklopi prekrivni drsnik
 sn:Shandura Bha Rekukwesha Rinopfurikidza
 sp-rs:Uključi/isključi prekrivajuću traku za pomeranje
@@ -37529,7 +37602,7 @@ ar:تبديل استخدام علامات التبويب
 az:Tab istifadəsini aç/bağla
 bg:Превключване на използването на раздели
 bn:ট্যাব ব্যবহার টগল করুন
-br:Kemmañ an implijout ivinelloù
+br:Alternar o Uso das Abas
 bs:Uključi/isključi korištenje kartica
 by:Пераключыць выкарыстанне ўкладак
 ca:Commuta l'ús de pestanyes
@@ -37538,7 +37611,7 @@ cn:切换使用标签页
 co:Attivà/Disattivà l'Usu di Tabulazioni
 cy:Toglo Defnyddio Tabiau
 cz:Přepnout použití záložek
-de:Verwendung von Tabs umschalten
+de:Tabs ein-/ausblenden
 dk:Skift brug af faneblade
 el:Εναλλαγή Χρήσης Καρτελών
 es:Alternar uso de pestañas
@@ -37580,7 +37653,7 @@ ro:Comutare utilizare file
 ru:Переключить использование вкладок
 sat:टैब बॕवहार टगल करॗ
 si:ටැබ් භාවිතය ටොගල් කරන්න
-sk:Prepnúť použitie kariet
+sk:Prepnúť Použiť karty
 sl:Preklopi uporabo zavihkov
 sn:Shandura Kushandisa Matabu
 sp-rs:Uključi/isključi korišćenje kartica
@@ -37894,7 +37967,7 @@ ar:إلغاء تسجيل معاين Windows
 az:Windows Önizləyicisinin Qeydini Ləğv Et
 bg:Дерегистриране на Windows Previewer
 bn:উইন্ডোজ প্রিভিউয়ার নিবন্ধন বাতিল করুন
-br:Disenrollañ Rakweler Windows
+br:Remover o registro do Pré-Visualizador do Windows
 bs:Odregistruj Windows pregled
 by:Адрэгістраваць прагляднік Windows
 ca:Desregistra el visualitzador de Windows
@@ -37903,7 +37976,7 @@ cn:注销 Windows 预览器
 co:Disarregistrà u Previsualizatore Windows
 cy:Dad-gofrestru Rhagolygydd Windows
 cz:Odregistrovat Windows Previewer
-de:Windows-Vorschau deregistrieren
+de:Windows-Vorschau deaktivieren
 dk:Afregistrer Windows Forhåndsvisning
 el:Απεγγραφή Προεπισκόπησης Windows
 es:Desregistrar vista previa de Windows
@@ -37967,7 +38040,7 @@ ar:إلغاء تسجيل مرشح بحث Windows
 az:Windows Axtarış Filtrinin Qeydini Ləğv Et
 bg:Дерегистриране на филтър за Windows Search
 bn:উইন্ডোজ সার্চ ফিল্টার নিবন্ধন বাতিল করুন
-br:Disenrollañ Sil Klask Windows
+br:Remover o registro do Filtro de Busca do Windows
 bs:Odregistruj Windows filter pretrage
 by:Адрэгістраваць фільтр пошуку Windows
 ca:Desregistra el filtre de cerca de Windows
@@ -37976,7 +38049,7 @@ cn:注销 Windows 搜索筛选器
 co:Disarregistrà u Filtru di Ricerca Windows
 cy:Dad-gofrestru Hidlydd Chwilio Windows
 cz:Odregistrovat filtr Windows Search
-de:Windows-Suchfilter deregistrieren
+de:Suchfilter in Windows deaktivieren
 dk:Afregistrer Windows Søgefilter
 el:Απεγγραφή Φίλτρου Αναζήτησης Windows
 es:Desregistrar filtro de búsqueda de Windows
@@ -38018,7 +38091,7 @@ ro:Anulează înregistrarea filtrului de căutare Windows
 ru:Отменить регистрацию фильтра поиска Windows
 sat:ᱣᱤᱱᱰᱳᱡᱽ ᱥᱟᱨᱪ ᱯᱷᱤᱞᱴᱟᱨ ᱚᱱᱨᱮᱡᱤᱥᱴᱟᱨ ᱢᱮ
 si:Windows සෙවුම් පෙරණය ලියාපදිංචි කිරීම අවලංගු කරන්න
-sk:Zrušiť registráciu filtra Windows Search
+sk:Zrušiť registráciu Windows Search Filter
 sl:Prekliči registracijo filtra za iskanje v Windows
 sn:Bvisa kunyoresa Windows Search Filter
 sp-rs:Ukloni registraciju Windows filtera pretrage
@@ -41033,7 +41106,7 @@ ar:تكبير/تصغير: ملاءمة العرض ومستمر
 az:Miqyas: Enə Uyğunlaşdır və Davamlı
 bg:Мащаб: Побиране по ширина и непрекъснато
 bn:জুম: প্রস্থ ফিট করুন এবং ক্রমাগত
-br:Zoom: Ajustar pela Largura e Contínua
+br:Zoom: Ajustar pela Largura e Contínuo
 bs:Zum: Prilagodi širinu i neprekidno
 by:Маштаб: Па шырыні і бесперапынна
 ca:Zoom: Ajustar amplada i continu
@@ -41325,7 +41398,7 @@ ar:صفحة %d،
 az:səhifə %d,
 bg:страница %d,
 bn:পৃষ্ঠা %d,
-br:página %d,
+br:Página %d,
 bs:stranica %d,
 by:старонка %d,
 ca:pàgina %d,
@@ -41471,7 +41544,7 @@ ar:↑ ↓ للتنقل
 az:Naviqasiya üçün ↑ ↓
 bg:↑ ↓ за навигация
 bn:নেভিগেট করতে ↑ ↓
-br:↑ ↓ da verdeiñ
+br:↑ ↓ pra navegar
 bs:↑ ↓ za navigaciju
 by:↑ ↓ для навігацыі
 ca:↑ ↓ per navegar

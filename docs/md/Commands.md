@@ -251,7 +251,7 @@ CmdContributeTranslation,,Contribute Translation,
 CmdForgetSelectedDocument,,Remove Selected Document From History,
 CmdListPrinters,,List Printers,ver 3.7+
 CmdOptions,,Options...,
-CmdScreenshot,,Screenshot,ver 3.7+
+CmdScreenshot,,Take Screenshot,ver 3.7+
 CmdShowLog,,Show Logs,
 ```
 
