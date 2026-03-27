@@ -486,6 +486,21 @@ LRESULT CALLBACK ReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
     return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
+static WNDPROC DefWndProcEditBg = nullptr;
+static LRESULT CALLBACK WndProcEditBg(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    LRESULT res = CallWindowProc(DefWndProcEditBg, hwnd, msg, wp, lp);
+    if (msg == WM_PAINT) {
+        HDC hdc = GetDC(hwnd);
+        RECT rc;
+        GetClientRect(hwnd, &rc);
+        HBRUSH br = CreateSolidBrush(RGB(0xCC, 0xCC, 0xCC));
+        FrameRect(hdc, &rc, br);
+        DeleteObject(br);
+        ReleaseDC(hwnd, hdc);
+    }
+    return res;
+}
+
 static WNDPROC DefWndProcToolbar = nullptr;
 static LRESULT CALLBACK WndProcToolbar(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     if (WM_CTLCOLORSTATIC == msg || WM_CTLCOLOREDIT == msg) {
@@ -673,13 +688,18 @@ static void CreateFindBox(MainWindow* win, HFONT hfont, int iconDy) {
     int findBoxDx = HwndMeasureText(win->hwndFrame, "this is a story of my", hfont).dx;
     HMODULE hmod = GetModuleHandleW(nullptr);
     HWND p = win->hwndToolbar;
-    DWORD style = WS_VISIBLE | WS_CHILD | WS_BORDER;
+    DWORD style = WS_VISIBLE | WS_CHILD;
     DWORD exStyle = 0;
     if (isRtl) exStyle |= WS_EX_LAYOUTRTL;
     int dy = iconDy + 2;
     // Size textSize = HwndMeasureText(win->hwndFrame, L"M", hfont);
     HWND findBg =
         CreateWindowEx(exStyle, WC_STATIC, L"", style, 0, 1, findBoxDx, dy, p, (HMENU) nullptr, hmod, nullptr);
+
+    if (!DefWndProcEditBg) {
+        DefWndProcEditBg = (WNDPROC)GetWindowLongPtr(findBg, GWLP_WNDPROC);
+    }
+    SetWindowLongPtr(findBg, GWLP_WNDPROC, (LONG_PTR)WndProcEditBg);
 
     style = WS_VISIBLE | WS_CHILD | ES_AUTOHSCROLL;
     // dy = iconDy + DpiScale(win->hwndFrame, 2);
@@ -879,8 +899,9 @@ static void CreatePageBox(MainWindow* win, HFONT font, int iconDy) {
     DWORD exStyle = 0;
     if (isRtl) exStyle |= WS_EX_LAYOUTRTL;
 
-    HWND pageBg = CreateWindowExW(exStyle, WC_STATICW, L"", style | WS_BORDER, 0, 1, dx, dy, hwndToolbar,
-                                  (HMENU) nullptr, h, nullptr);
+    HWND pageBg =
+        CreateWindowExW(exStyle, WC_STATICW, L"", style, 0, 1, dx, dy, hwndToolbar, (HMENU) nullptr, h, nullptr);
+    SetWindowLongPtr(pageBg, GWLP_WNDPROC, (LONG_PTR)WndProcEditBg);
     HWND label = CreateWindowExW(0, WC_STATICW, L"", style, 0, 1, 0, 0, hwndToolbar, (HMENU) nullptr, h, nullptr);
     HWND total = CreateWindowExW(0, WC_STATICW, L"", style, 0, 1, 0, 0, hwndToolbar, (HMENU) nullptr, h, nullptr);
 
