@@ -27,9 +27,14 @@ const searchJS = `<script>${readFileSync(join(docsDir, "gen_docs.search.js"), "u
 const searchHTML = readFileSync(join(docsDir, "gen_docs.search.html"), "utf-8");
 const tmplManual = readFileSync(join(docsDir, "manual.tmpl.html"), "utf-8");
 
-function buildTocHTML(): string {
-  const text = readFileSync(join(mdDir, "SumatraPDF-documentation.md"), "utf-8");
+function buildTocHTML(currentPage: string): string {
+  const text = readFileSync(
+    join(mdDir, "SumatraPDF-documentation.md"),
+    "utf-8",
+  );
   const linkRe = /\[([^\]]+)\]\(([^)]+\.md)\)/g;
+  const pageName = currentPage.replace(/^\.\//, "");
+  const currentHtml = getHTMLFileName(pageName);
   const items: string[] = [];
   // only extract links between :columns markers
   const lines = text.split("\n");
@@ -46,10 +51,11 @@ function buildTocHTML(): string {
     while ((match = linkRe.exec(line)) !== null) {
       const title = match[1];
       const href = getHTMLFileName(match[2]);
-      items.push(`<a href="${href}">${title}</a>`);
+      const cls = href === currentHtml ? ` class="toc-current"` : "";
+      items.push(`<a${cls} href="${href}">${title}</a>`);
     }
   }
-  return `<nav class="sidebar-toc">\n<div class="toc-title"><a href="SumatraPDF-documentation.html">SumatraPDF docs</a></div>\n${items.join("\n")}\n</nav>`;
+  return `<nav class="sidebar-toc">\n<div class="toc-title"></div>\n${items.join("\n")}\n</nav>`;
 }
 
 const h1BreadcrumbsStart = `
@@ -188,18 +194,25 @@ function mdToHTML(name: string): string {
   // render ```commands fenced blocks as CSV tables
   md.renderer.rules.fence = (tokens: MarkdownIt.Token[], idx: number) => {
     const t = tokens[idx];
-    if (t.info.trim() === "commands") return genCsvTableHTML(parseCsv(t.content));
+    if (t.info.trim() === "commands")
+      return genCsvTableHTML(parseCsv(t.content));
     return `<pre><code>${md.utils.escapeHtml(t.content)}</code></pre>\n`;
   };
 
-  md.renderer.rules.heading_open = (tokens: MarkdownIt.Token[], idx: number) => {
+  md.renderer.rules.heading_open = (
+    tokens: MarkdownIt.Token[],
+    idx: number,
+  ) => {
     const tok = tokens[idx];
     const text = getInlineText(tokens[idx + 1]);
     const id = slugify(text);
     return `<${tok.tag} id="${id}">`;
   };
 
-  md.renderer.rules.heading_close = (tokens: MarkdownIt.Token[], idx: number) => {
+  md.renderer.rules.heading_close = (
+    tokens: MarkdownIt.Token[],
+    idx: number,
+  ) => {
     const tok = tokens[idx];
     const text = getInlineText(tokens[idx - 1]);
     const id = slugify(text);
@@ -207,17 +220,28 @@ function mdToHTML(name: string): string {
   };
 
   // rewrite links: .md → .html, external links get target="_blank"
-  md.renderer.rules.link_open = (tokens: MarkdownIt.Token[], idx: number, options: any, _env: any, self: any) => {
+  md.renderer.rules.link_open = (
+    tokens: MarkdownIt.Token[],
+    idx: number,
+    options: any,
+    _env: any,
+    self: any,
+  ) => {
     const tok = tokens[idx];
     let href = tok.attrGet("href") ?? "";
 
     const isExternal =
-      (href.startsWith("https://") || href.startsWith("http://")) && !href.includes("sumatrapdfreader.org");
+      (href.startsWith("https://") || href.startsWith("http://")) &&
+      !href.includes("sumatrapdfreader.org");
     if (isExternal) {
       tok.attrSet("target", "_blank");
     }
 
-    if (!href.startsWith("https://") && !href.startsWith("http://") && !href.startsWith("mailto:")) {
+    if (
+      !href.startsWith("https://") &&
+      !href.startsWith("http://") &&
+      !href.startsWith("mailto:")
+    ) {
       const decoded = href.replace(/%20/g, " ");
       const hashIdx = decoded.indexOf("#");
       const fileName = hashIdx >= 0 ? decoded.slice(0, hashIdx) : decoded;
@@ -238,7 +262,13 @@ function mdToHTML(name: string): string {
   };
 
   // validate image references exist
-  md.renderer.rules.image = (tokens: MarkdownIt.Token[], idx: number, options: any, _env: any, self: any) => {
+  md.renderer.rules.image = (
+    tokens: MarkdownIt.Token[],
+    idx: number,
+    options: any,
+    _env: any,
+    self: any,
+  ) => {
     const tok = tokens[idx];
     const src = tok.attrGet("src") ?? "";
     if (!src.startsWith("https://") && !src.startsWith("http://")) {
@@ -261,7 +291,7 @@ function mdToHTML(name: string): string {
 
   innerHTML = `<div class="notion-page">${innerHTML}</div>`;
 
-  const tocHTML = buildTocHTML();
+  const tocHTML = buildTocHTML(name);
   // use function replacements to avoid $' and $` special patterns in String.replace()
   let html = tmplManual
     .replace("{{TocHTML}}", () => tocHTML)
@@ -330,7 +360,8 @@ function extractCommandsFromMarkdown(): string[] {
     const idx = line.indexOf(",");
     if (idx >= 0) cmds.push(line.slice(0, idx));
   }
-  if (cmds.length < 20) throw new Error(`too few commands in Commands.md: ${cmds.length}`);
+  if (cmds.length < 20)
+    throw new Error(`too few commands in Commands.md: ${cmds.length}`);
   return cmds;
 }
 
@@ -410,7 +441,9 @@ export async function main() {
   console.log(`size of '${archive}': ${formatSize(size)}`);
 
   const absDir = resolve(wwwOutDir);
-  console.log(`To view, open: file://${join(absDir, "SumatraPDF-documentation.html")}`);
+  console.log(
+    `To view, open: file://${join(absDir, "SumatraPDF-documentation.html")}`,
+  );
 
   checkCommandsAreDocumented();
 
