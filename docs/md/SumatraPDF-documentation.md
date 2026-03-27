@@ -39,6 +39,8 @@
 
 [Customizing eBook UI](Customizing-eBook-UI.md)
 
+[Supported File Formats](Supported-document-formats.md)
+
 [Installer cmd-line arguments](Installer-cmd-line-arguments.md)
 
 [Uninstalling SumatraPDF](Uninstalling-SumatraPDF.md)
