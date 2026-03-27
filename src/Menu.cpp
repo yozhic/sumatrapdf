@@ -1984,7 +1984,12 @@ void FreeMenuOwnerDrawInfoData(HMENU hmenu) {
         }
     };
 }
-
+#if 1
+void MarkMenuOwnerDraw(HMENU, bool) {
+    // our painting isn't good enough so disable for now
+    // rely on darkmodelib for menu theming, which only does light / dark theme from os
+}
+#else
 void MarkMenuOwnerDraw(HMENU hmenu, bool isMenuBar) {
     // darkmodelib handles the menu bar via setWindowMenuBarSubclass
     // but doesn't handle popup/context menus, so we owner-draw those
@@ -2056,6 +2061,7 @@ void MarkMenuOwnerDraw(HMENU hmenu, bool isMenuBar) {
         }
     }
 }
+#endif
 
 static int GetMenuCheckMarkCx(HWND hwnd) {
     int cx = DpiScale(hwnd, GetSystemMetrics(SM_CXMENUCHECK));
