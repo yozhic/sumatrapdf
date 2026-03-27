@@ -1298,6 +1298,38 @@ void LimitWindowSizeToScreen(HWND hwnd, SIZE& size) {
     }
 }
 
+// If the window is off-screen (e.g. a monitor was disconnected),
+// move it to the nearest visible monitor's work area.
+void HwndEnsureVisible(HWND hwnd) {
+    if (!hwnd) {
+        return;
+    }
+    Rect rect = WindowRect(hwnd);
+    if (rect.IsEmpty()) {
+        return;
+    }
+    Rect shifted = ShiftRectToWorkArea(rect, nullptr, false);
+    if (IsZoomed(hwnd)) {
+        // for maximized windows, check if the window's non-maximized position
+        // would be on a visible monitor; if not, move to primary and re-maximize
+        WINDOWPLACEMENT wp{};
+        wp.length = sizeof(wp);
+        if (GetWindowPlacement(hwnd, &wp)) {
+            Rect normal = ToRect(wp.rcNormalPosition);
+            Rect normalShifted = ShiftRectToWorkArea(normal);
+            if (normal != normalShifted) {
+                wp.rcNormalPosition = ToRECT(normalShifted);
+                SetWindowPlacement(hwnd, &wp);
+            }
+        }
+        return;
+    }
+    if (rect == shifted) {
+        return;
+    }
+    MoveWindow(hwnd, shifted);
+}
+
 // returns available area of the screen i.e. screen minus taskbar area
 Rect GetWorkAreaRect(Rect rect, HWND hwnd) {
     RECT tmpRect = ToRECT(rect);

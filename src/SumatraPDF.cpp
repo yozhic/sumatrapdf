@@ -1374,6 +1374,9 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         if (win) {
             UpdateWindow(win->hwndFrame);
         }
+        if (args->isNewWindow && win) {
+            HwndEnsureVisible(win->hwndFrame);
+        }
     }
 
     // if the window isn't shown and win.canvasRc is still empty, zoom
@@ -1698,6 +1701,7 @@ MainWindow* CreateAndShowMainWindow(SessionData* data) {
         ShowWindow(win->hwndFrame, SW_SHOW);
     }
     UpdateWindow(win->hwndFrame);
+    HwndEnsureVisible(win->hwndFrame);
 
     if (gWindows.Size() == 1 && (true || IsDebuggerPresent())) {
         HwndToForeground(win->hwndFrame);
