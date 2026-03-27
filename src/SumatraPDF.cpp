@@ -5068,6 +5068,128 @@ void ShowLogFileSmart() {
     LaunchFileIfExists(path);
 }
 
+// collect file paths from all windows, closing all but the last
+// returns the surviving window (with no documents)
+static MainWindow* CollectPathsAndCloseWindows(StrVec& paths) {
+    for (MainWindow* w : gWindows) {
+        for (WindowTab* tab : w->Tabs()) {
+            if (tab->IsAboutTab() || !tab->filePath) {
+                continue;
+            }
+            paths.Append(tab->filePath);
+        }
+    }
+
+    SaveSettings();
+
+    // close all windows except the last; use quitIfLast=false to keep it alive
+    Vec<MainWindow*> toClose(gWindows);
+    for (MainWindow* w : toClose) {
+        if (!CanCloseWindow(w)) {
+            continue;
+        }
+        CloseWindow(w, false, false);
+    }
+
+    // the last window survives as an empty/about window
+    if (gWindows.size() > 0) {
+        return gWindows.at(0);
+    }
+    return nullptr;
+}
+
+static void TransitionToNoTabs() {
+    StrVec paths;
+
+    if (paths.Size() == 0) {
+        // check before collecting - if no files, just relayout
+        bool hasFiles = false;
+        for (MainWindow* w : gWindows) {
+            for (WindowTab* tab : w->Tabs()) {
+                if (!tab->IsAboutTab() && tab->filePath) {
+                    hasFiles = true;
+                    break;
+                }
+            }
+            if (hasFiles) {
+                break;
+            }
+        }
+        if (!hasFiles) {
+            for (MainWindow* w : gWindows) {
+                SetTabsInTitlebar(w, false);
+                w->RedrawAllIncludingNonClient();
+            }
+            return;
+        }
+    }
+
+    MainWindow* surviving = CollectPathsAndCloseWindows(paths);
+
+    // re-open each file in its own window, reuse the surviving window for the first file
+    for (int i = 0; i < paths.Size(); i++) {
+        const char* path = paths.At(i);
+        MainWindow* win;
+        if (i == 0 && surviving) {
+            win = surviving;
+            SetTabsInTitlebar(win, false);
+        } else {
+            win = CreateAndShowMainWindow(nullptr);
+            if (!win) {
+                continue;
+            }
+        }
+        LoadArgs args(path, win);
+        args.showWin = true;
+        args.forceReuse = true;
+        LoadDocument(&args);
+    }
+}
+
+static void TransitionToTabs() {
+    StrVec paths;
+
+    // check if any files are open
+    bool hasFiles = false;
+    for (MainWindow* w : gWindows) {
+        for (WindowTab* tab : w->Tabs()) {
+            if (!tab->IsAboutTab() && tab->filePath) {
+                hasFiles = true;
+                break;
+            }
+        }
+        if (hasFiles) {
+            break;
+        }
+    }
+    if (!hasFiles) {
+        for (MainWindow* w : gWindows) {
+            SetTabsInTitlebar(w, true);
+            w->RedrawAllIncludingNonClient();
+        }
+        return;
+    }
+
+    MainWindow* surviving = CollectPathsAndCloseWindows(paths);
+
+    // open all files as tabs in the surviving window
+    MainWindow* win = surviving;
+    if (!win) {
+        win = CreateAndShowMainWindow(nullptr);
+        if (!win) {
+            return;
+        }
+    }
+    SetTabsInTitlebar(win, true);
+    for (int i = 0; i < paths.Size(); i++) {
+        const char* path = paths.At(i);
+        LoadArgs args(path, win);
+        args.showWin = true;
+        args.forceReuse = (i == 0);
+        LoadDocument(&args);
+    }
+}
+
 struct ListPrintersResult {
     HWND hwndParent;
     char* text;
@@ -5735,6 +5857,12 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdToggleUseTabs:
             gGlobalPrefs->useTabs = !gGlobalPrefs->useTabs;
+            gGlobalPrefs->showMenubar = !gGlobalPrefs->useTabs;
+            if (gGlobalPrefs->useTabs) {
+                uitask::Post(MkFunc0Void(TransitionToTabs));
+            } else {
+                uitask::Post(MkFunc0Void(TransitionToNoTabs));
+            }
             break;
 
         case CmdSaveAnnotations: {
