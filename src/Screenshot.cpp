@@ -492,16 +492,19 @@ static void PaintOverlayLayered(HWND hwnd, ScreenshotOverlayData* data) {
         SelectObject(hdcSrc, prev);
         DeleteDC(hdcSrc);
 
-        // draw process name label below thumbnail
+        // draw label below thumbnail: process name on left, dimensions on right
         RECT labelRect;
-        labelRect.left = rc.left;
-        labelRect.right = rc.right;
-        labelRect.top = rc.bottom + 4;
-        labelRect.bottom = rc.bottom + 4 + kLabelHeight;
+        labelRect.left = rc.left + 4;
+        labelRect.right = rc.right - 4;
+        labelRect.top = rc.bottom + kLabelGap;
+        labelRect.bottom = rc.bottom + kLabelGap + kLabelHeight;
         SetTextColor(hdcTemp, RGB(0, 0, 0));
         SetBkMode(hdcTemp, TRANSPARENT);
-        TempWStr labelW = ToWStrTemp(cs.processName);
-        DrawTextW(hdcTemp, labelW, -1, &labelRect, DT_CENTER | DT_SINGLELINE | DT_END_ELLIPSIS);
+        TempWStr nameW = ToWStrTemp(cs.processName);
+        DrawTextW(hdcTemp, nameW, -1, &labelRect, DT_LEFT | DT_SINGLELINE | DT_END_ELLIPSIS);
+        TempStr dimStr = str::FormatTemp("%dx%d", cs.origW, cs.origH);
+        TempWStr dimW = ToWStrTemp(dimStr);
+        DrawTextW(hdcTemp, dimW, -1, &labelRect, DT_RIGHT | DT_SINGLELINE);
 
         // draw selection border around thumbnail and label
         if (i == data->selected) {
