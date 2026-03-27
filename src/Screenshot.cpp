@@ -13,7 +13,49 @@
 #include "AppTools.h"
 #include "Screenshot.h"
 
-static bool ShouldCaptureWindow(HWND hwnd) {
+static const WCHAR* kScreenshotOverlayClassName = L"SumatraScreenshotOverlay";
+static bool gScreenshotClassRegistered = false;
+
+// padding between thumbnails and around the grid
+constexpr int kThumbPadding = 16;
+// outer padding around the entire overlay
+constexpr int kOuterPadding = 32;
+// border thickness for selected thumbnail
+constexpr int kBorderThickness = 3;
+// max thumbnail size
+constexpr int kMaxThumbSize = 240;
+// height reserved for label text below thumbnail
+constexpr int kLabelHeight = 20;
+// gap between thumbnail bottom and next row's thumbnail top (includes label)
+constexpr int kRowGap = kLabelHeight + 8;
+// height for the info bar at the bottom
+constexpr int kInfoBarHeight = 30;
+
+struct CapturedScreenshot {
+    HBITMAP bmp = nullptr;   // full-size capture
+    HBITMAP thumb = nullptr; // scaled thumbnail
+    int origW = 0;
+    int origH = 0;
+    int thumbW = 0;
+    int thumbH = 0;
+    char* processName = nullptr; // for file naming
+};
+
+struct ScreenshotOverlayData {
+    Vec<CapturedScreenshot> captures;
+    int selected = 0; // index of currently selected (hovered/arrow-keyed)
+    int cols = 0;
+    int rows = 0;
+    int cellW = 0;
+    int cellH = 0;
+    int winW = 0; // overlay window size
+    int winH = 0;
+};
+
+static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
+    if (hwnd == overlayHwnd) {
+        return false;
+    }
     if (!IsWindowVisible(hwnd)) {
         return false;
     }
@@ -121,7 +163,6 @@ static HBITMAP CaptureWindowBmp(HWND hwnd) {
     return nullptr;
 }
 
-// Get process name (without .exe extension) for a window
 static TempStr GetWindowProcessNameTemp(HWND hwnd) {
     DWORD pid = 0;
     GetWindowThreadProcessId(hwnd, &pid);
@@ -139,12 +180,10 @@ static TempStr GetWindowProcessNameTemp(HWND hwnd) {
     }
     TempStr fullPath = ToUtf8Temp(path);
     TempStr baseName = path::GetBaseNameTemp(fullPath);
-    // Remove .exe extension
     TempStr noExt = path::GetPathNoExtTemp(baseName);
     return noExt;
 }
 
-// Build a unique file path: dir/base.png, dir/base.1.png, dir/base.2.png, ...
 static TempStr MakeUniquePathTemp(const char* dir, const char* base) {
     TempStr name = str::FormatTemp("%s.png", base);
     TempStr path = path::JoinTemp(dir, name);
@@ -161,59 +200,553 @@ static TempStr MakeUniquePathTemp(const char* dir, const char* base) {
     return nullptr;
 }
 
-struct ScreenshotWindowInfo {
-    HWND hwnd;
+// Create a scaled thumbnail of a bitmap
+static HBITMAP CreateThumbnail(HBITMAP src, int srcW, int srcH, int* outW, int* outH) {
+    int tw, th;
+    if (srcW >= srcH) {
+        tw = kMaxThumbSize;
+        th = MulDiv(srcH, kMaxThumbSize, srcW);
+    } else {
+        th = kMaxThumbSize;
+        tw = MulDiv(srcW, kMaxThumbSize, srcH);
+    }
+    if (tw < 1) {
+        tw = 1;
+    }
+    if (th < 1) {
+        th = 1;
+    }
+
+    HDC hdcScreen = GetDC(nullptr);
+    HDC hdcSrc = CreateCompatibleDC(hdcScreen);
+    HDC hdcDst = CreateCompatibleDC(hdcScreen);
+    HBITMAP hbmThumb = CreateCompatibleBitmap(hdcScreen, tw, th);
+    SelectObject(hdcSrc, src);
+    SelectObject(hdcDst, hbmThumb);
+    SetStretchBltMode(hdcDst, HALFTONE);
+    SetBrushOrgEx(hdcDst, 0, 0, nullptr);
+    StretchBlt(hdcDst, 0, 0, tw, th, hdcSrc, 0, 0, srcW, srcH, SRCCOPY);
+    DeleteDC(hdcSrc);
+    DeleteDC(hdcDst);
+    ReleaseDC(nullptr, hdcScreen);
+
+    *outW = tw;
+    *outH = th;
+    return hbmThumb;
+}
+
+static void FreeCapturedScreenshots(ScreenshotOverlayData* data) {
+    for (auto& cs : data->captures) {
+        if (cs.bmp) {
+            DeleteObject(cs.bmp);
+        }
+        if (cs.thumb) {
+            DeleteObject(cs.thumb);
+        }
+        str::Free(cs.processName);
+    }
+    data->captures.Reset();
+}
+
+struct EnumCaptureCtx {
+    Vec<CapturedScreenshot>* captures;
+    HWND overlayHwnd;
 };
 
-static BOOL CALLBACK EnumScreenshotWindowsProc(HWND hwnd, LPARAM lParam) {
-    Vec<ScreenshotWindowInfo>* windows = (Vec<ScreenshotWindowInfo>*)lParam;
-    if (ShouldCaptureWindow(hwnd)) {
-        ScreenshotWindowInfo info;
-        info.hwnd = hwnd;
-        windows->Append(info);
+static BOOL CALLBACK EnumCaptureWindowsProc(HWND hwnd, LPARAM lParam) {
+    EnumCaptureCtx* ctx = (EnumCaptureCtx*)lParam;
+    if (!ShouldCaptureWindow(hwnd, ctx->overlayHwnd)) {
+        return TRUE;
     }
+    HBITMAP hbm = CaptureWindowBmp(hwnd);
+    if (!hbm) {
+        return TRUE;
+    }
+    RECT rect;
+    GetWindowRect(hwnd, &rect);
+    int w = rect.right - rect.left;
+    int h = rect.bottom - rect.top;
+
+    CapturedScreenshot cs;
+    cs.bmp = hbm;
+    cs.origW = w;
+    cs.origH = h;
+    cs.thumb = CreateThumbnail(hbm, w, h, &cs.thumbW, &cs.thumbH);
+    TempStr procName = GetWindowProcessNameTemp(hwnd);
+    cs.processName = str::Dup(procName ? procName : "unknown");
+    ctx->captures->Append(cs);
     return TRUE;
 }
 
-void TakeScreenshots() {
+static void CaptureAllScreenshots(ScreenshotOverlayData* data, HWND overlayHwnd) {
+    // Desktop first
+    HBITMAP hbmDesktop = CaptureDesktop();
+    if (hbmDesktop) {
+        int dw = GetSystemMetrics(SM_CXVIRTUALSCREEN);
+        int dh = GetSystemMetrics(SM_CYVIRTUALSCREEN);
+        CapturedScreenshot cs;
+        cs.bmp = hbmDesktop;
+        cs.origW = dw;
+        cs.origH = dh;
+        cs.thumb = CreateThumbnail(hbmDesktop, dw, dh, &cs.thumbW, &cs.thumbH);
+        cs.processName = str::Dup("desktop");
+        data->captures.Append(cs);
+    }
+
+    // Individual windows
+    EnumCaptureCtx ctx;
+    ctx.captures = &data->captures;
+    ctx.overlayHwnd = overlayHwnd;
+    EnumWindows(EnumCaptureWindowsProc, (LPARAM)&ctx);
+}
+
+// Compute grid layout and overlay window size
+static void ComputeLayout(ScreenshotOverlayData* data) {
+    int n = data->captures.Size();
+    if (n == 0) {
+        return;
+    }
+
+    data->cols = (int)ceil(sqrt((double)n));
+    data->rows = (n + data->cols - 1) / data->cols;
+
+    data->cellW = kMaxThumbSize + kBorderThickness;
+    data->cellH = kMaxThumbSize + kRowGap + kThumbPadding;
+
+    // window sized to fit content + outer padding + info bar
+    data->winW = (data->cols * data->cellW) + kThumbPadding + (2 * kOuterPadding);
+    data->winH = (data->rows * data->cellH) + kThumbPadding + (2 * kOuterPadding) + kInfoBarHeight;
+}
+
+// Get the bounding rect for thumbnail at index i (in client coords)
+static RECT GetThumbRect(ScreenshotOverlayData* data, int idx) {
+    int col = idx % data->cols;
+    int row = idx / data->cols;
+    auto& cs = data->captures[idx];
+
+    int cellX = kOuterPadding + kThumbPadding + (col * data->cellW);
+    int cellY = kOuterPadding + kThumbPadding + (row * data->cellH);
+
+    // center thumbnail horizontally in its cell
+    int tx = cellX + ((kMaxThumbSize - cs.thumbW) / 2);
+    // align thumbnail to bottom of the thumb area so label is below
+    int ty = cellY + (kMaxThumbSize - cs.thumbH);
+
+    RECT rc;
+    rc.left = tx;
+    rc.top = ty;
+    rc.right = tx + cs.thumbW;
+    rc.bottom = ty + cs.thumbH;
+    return rc;
+}
+
+// Hit test: returns index of thumbnail under point, or -1
+static int HitTestThumb(ScreenshotOverlayData* data, int mx, int my) {
+    int n = data->captures.Size();
+    for (int i = 0; i < n; i++) {
+        RECT rc = GetThumbRect(data, i);
+        // expand hit area to include the label
+        rc.bottom += kRowGap;
+        POINT pt = {mx, my};
+        if (PtInRect(&rc, pt)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static void SaveSelectedScreenshot(ScreenshotOverlayData* data) {
+    if (data->selected < 0 || data->selected >= data->captures.Size()) {
+        return;
+    }
     TempStr dataDir = GetAppDataDirTemp();
     TempStr screenshotDir = path::JoinTemp(dataDir, "Screenshots");
     dir::CreateAll(screenshotDir);
 
-    // Capture desktop
-    HBITMAP hbmDesktop = CaptureDesktop();
-    if (hbmDesktop) {
-        TempStr desktopPath = MakeUniquePathTemp(screenshotDir, "desktop");
-        if (desktopPath) {
-            SaveHBitmapAsPng(hbmDesktop, desktopPath);
-            logf("Screenshot: saved desktop to '%s'\n", desktopPath);
-        }
-        DeleteObject(hbmDesktop);
+    auto& cs = data->captures[data->selected];
+    TempStr filePath = MakeUniquePathTemp(screenshotDir, cs.processName);
+    if (!filePath) {
+        return;
+    }
+    SaveHBitmapAsPng(cs.bmp, filePath);
+    logf("Screenshot: saved to '%s'\n", filePath);
+
+    // Open saved screenshot in SumatraPDF
+    TempStr exePath = GetSelfExePathTemp();
+    TempStr cmdLine = str::FormatTemp("\"%s\"", filePath);
+    CreateProcessHelper(exePath, cmdLine);
+}
+
+// Premultiply alpha for a pixel: component = component * alpha / 255
+static inline DWORD PremultiplyPixel(BYTE r, BYTE g, BYTE b, BYTE a) {
+    r = (BYTE)((r * a) / 255);
+    g = (BYTE)((g * a) / 255);
+    b = (BYTE)((b * a) / 255);
+    return (a << 24) | (r << 16) | (g << 8) | b;
+}
+
+static void PaintOverlayLayered(HWND hwnd, ScreenshotOverlayData* data) {
+    int w = data->winW;
+    int h = data->winH;
+
+    HDC hdcScreen = GetDC(nullptr);
+    HDC hdcMem = CreateCompatibleDC(hdcScreen);
+
+    // Create 32-bit ARGB DIB section for per-pixel alpha
+    BITMAPINFO bmi{};
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = w;
+    bmi.bmiHeader.biHeight = -h; // top-down
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 32;
+    bmi.bmiHeader.biCompression = BI_RGB;
+
+    DWORD* pixels = nullptr;
+    HBITMAP hbmDib = CreateDIBSection(hdcScreen, &bmi, DIB_RGB_COLORS, (void**)&pixels, nullptr, 0);
+    HGDIOBJ oldBmp = SelectObject(hdcMem, hbmDib);
+
+    // Fill background: light blue at 93% opaque (7% transparent), premultiplied
+    DWORD bgPixel = PremultiplyPixel(220, 230, 245, 237);
+    for (int i = 0; i < w * h; i++) {
+        pixels[i] = bgPixel;
     }
 
-    // Capture individual windows
-    Vec<ScreenshotWindowInfo> windows;
-    EnumWindows(EnumScreenshotWindowsProc, (LPARAM)&windows);
+    // Draw thumbnails and labels using GDI onto the DIB
+    // First draw into a temp compatible DC, then copy pixels with full alpha
+    HDC hdcTemp = CreateCompatibleDC(hdcScreen);
+    HBITMAP hbmTemp = CreateCompatibleBitmap(hdcScreen, w, h);
+    HGDIOBJ oldTemp = SelectObject(hdcTemp, hbmTemp);
 
-    for (auto& wi : windows) {
-        HBITMAP hbm = CaptureWindowBmp(wi.hwnd);
-        if (!hbm) {
-            continue;
+    // select GUI font for text drawing
+    HFONT guiFont = GetDefaultGuiFont();
+    HGDIOBJ oldFont = SelectObject(hdcTemp, guiFont);
+
+    // white background for the temp surface
+    RECT fullRect = {0, 0, w, h};
+    HBRUSH brWhite = CreateSolidBrush(RGB(255, 255, 255));
+    FillRect(hdcTemp, &fullRect, brWhite);
+    DeleteObject(brWhite);
+
+    int n = data->captures.Size();
+    for (int i = 0; i < n; i++) {
+        auto& cs = data->captures[i];
+        RECT rc = GetThumbRect(data, i);
+
+        // draw thumbnail onto temp DC
+        HDC hdcSrc = CreateCompatibleDC(hdcTemp);
+        HGDIOBJ prev = SelectObject(hdcSrc, cs.thumb);
+        BitBlt(hdcTemp, rc.left, rc.top, cs.thumbW, cs.thumbH, hdcSrc, 0, 0, SRCCOPY);
+        SelectObject(hdcSrc, prev);
+        DeleteDC(hdcSrc);
+
+        // draw process name label below thumbnail
+        RECT labelRect;
+        labelRect.left = rc.left;
+        labelRect.right = rc.right;
+        labelRect.top = rc.bottom + 4;
+        labelRect.bottom = rc.bottom + 4 + kLabelHeight;
+        SetTextColor(hdcTemp, RGB(0, 0, 0));
+        SetBkMode(hdcTemp, TRANSPARENT);
+        TempWStr labelW = ToWStrTemp(cs.processName);
+        DrawTextW(hdcTemp, labelW, -1, &labelRect, DT_CENTER | DT_SINGLELINE | DT_END_ELLIPSIS);
+
+        // draw selection border around thumbnail and label
+        if (i == data->selected) {
+            HPEN pen = CreatePen(PS_SOLID, kBorderThickness, RGB(0, 120, 215));
+            HGDIOBJ oldPen = SelectObject(hdcTemp, pen);
+            HGDIOBJ oldBrush = SelectObject(hdcTemp, GetStockObject(NULL_BRUSH));
+            int b = (kBorderThickness / 2) + 1;
+            int selLeft = std::min((int)rc.left, (int)labelRect.left) - b;
+            int selTop = rc.top - b;
+            int selRight = std::max((int)rc.right, (int)labelRect.right) + b;
+            int selBottom = labelRect.bottom + b;
+            Rectangle(hdcTemp, selLeft, selTop, selRight, selBottom);
+            SelectObject(hdcTemp, oldBrush);
+            SelectObject(hdcTemp, oldPen);
+            DeleteObject(pen);
         }
-        TempStr procName = GetWindowProcessNameTemp(wi.hwnd);
-        if (!procName) {
-            procName = (TempStr) "unknown";
-        }
-        TempStr filePath = MakeUniquePathTemp(screenshotDir, procName);
-        if (filePath) {
-            SaveHBitmapAsPng(hbm, filePath);
-            logf("Screenshot: saved window to '%s'\n", filePath);
-        }
-        DeleteObject(hbm);
     }
 
-    // Open screenshot directory in default file manager
-    LaunchFileShell(screenshotDir, nullptr, "open");
+    // Draw 1px blue border around the window
+    HPEN borderPen = CreatePen(PS_SOLID, 1, RGB(0, 90, 180));
+    HGDIOBJ oldPen2 = SelectObject(hdcTemp, borderPen);
+    HGDIOBJ oldBrush2 = SelectObject(hdcTemp, GetStockObject(NULL_BRUSH));
+    Rectangle(hdcTemp, 0, 0, w, h);
+    SelectObject(hdcTemp, oldBrush2);
+    SelectObject(hdcTemp, oldPen2);
+    DeleteObject(borderPen);
+
+    // Draw info bar at the bottom with solid blue background
+    RECT infoRect;
+    infoRect.left = 0;
+    infoRect.right = w;
+    infoRect.top = h - kInfoBarHeight;
+    infoRect.bottom = h;
+    HBRUSH brBlue = CreateSolidBrush(RGB(0, 90, 180));
+    FillRect(hdcTemp, &infoRect, brBlue);
+    DeleteObject(brBlue);
+
+    // Use bigger bold font for info text
+    NONCLIENTMETRICS ncm{};
+    ncm.cbSize = sizeof(ncm);
+    SystemParametersInfoW(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);
+    ncm.lfMessageFont.lfHeight = (LONG)(ncm.lfMessageFont.lfHeight * 1.3);
+    ncm.lfMessageFont.lfWeight = FW_BOLD;
+    HFONT infoFont = CreateFontIndirectW(&ncm.lfMessageFont);
+    HGDIOBJ prevInfoFont = SelectObject(hdcTemp, infoFont);
+
+    SetTextColor(hdcTemp, RGB(255, 255, 255));
+    SetBkMode(hdcTemp, TRANSPARENT);
+    DrawTextW(hdcTemp, L"Pick screenshot to save, Esc to cancel", -1, &infoRect,
+              DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+    SelectObject(hdcTemp, prevInfoFont);
+    DeleteObject(infoFont);
+
+    // Read back temp bitmap pixels
+    BITMAPINFO bmiTemp{};
+    bmiTemp.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmiTemp.bmiHeader.biWidth = w;
+    bmiTemp.bmiHeader.biHeight = -h;
+    bmiTemp.bmiHeader.biPlanes = 1;
+    bmiTemp.bmiHeader.biBitCount = 32;
+    bmiTemp.bmiHeader.biCompression = BI_RGB;
+    DWORD* tempPixels = (DWORD*)malloc(w * h * 4);
+    GetDIBits(hdcTemp, hbmTemp, 0, h, tempPixels, &bmiTemp, DIB_RGB_COLORS);
+
+    // Copy thumbnail and label regions with full opacity into the DIB
+    for (int i = 0; i < n; i++) {
+        auto& cs = data->captures[i];
+        RECT rc = GetThumbRect(data, i);
+
+        // expand region to include border and label
+        int b = (kBorderThickness / 2) + 2;
+        int x0 = std::max(0, (int)rc.left - b);
+        int y0 = std::max(0, (int)rc.top - b);
+        int x1 = std::min(w, (int)rc.right + b);
+        int y1 = std::min(h, (int)rc.bottom + 4 + kLabelHeight + b);
+
+        for (int y = y0; y < y1; y++) {
+            for (int x = x0; x < x1; x++) {
+                DWORD px = tempPixels[y * w + x];
+                BYTE r = (px >> 16) & 0xFF;
+                BYTE g = (px >> 8) & 0xFF;
+                BYTE bb = px & 0xFF;
+                pixels[y * w + x] = (255u << 24) | (r << 16) | (g << 8) | bb;
+            }
+        }
+    }
+
+    // Copy info bar region with full opacity
+    {
+        int y0 = h - kInfoBarHeight;
+        for (int y = y0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                DWORD px = tempPixels[y * w + x];
+                BYTE r = (px >> 16) & 0xFF;
+                BYTE g = (px >> 8) & 0xFF;
+                BYTE bb = px & 0xFF;
+                pixels[y * w + x] = (255u << 24) | (r << 16) | (g << 8) | bb;
+            }
+        }
+    }
+
+    // Copy 1px border around the window with full opacity
+    for (int x = 0; x < w; x++) {
+        // top edge
+        DWORD px = tempPixels[x];
+        pixels[x] = (255u << 24) | (px & 0xFFFFFF);
+        // bottom edge
+        px = tempPixels[(h - 1) * w + x];
+        pixels[(h - 1) * w + x] = (255u << 24) | (px & 0xFFFFFF);
+    }
+    for (int y = 0; y < h; y++) {
+        // left edge
+        DWORD px = tempPixels[y * w];
+        pixels[y * w] = (255u << 24) | (px & 0xFFFFFF);
+        // right edge
+        px = tempPixels[y * w + w - 1];
+        pixels[y * w + w - 1] = (255u << 24) | (px & 0xFFFFFF);
+    }
+
+    free(tempPixels);
+    SelectObject(hdcTemp, oldFont);
+    SelectObject(hdcTemp, oldTemp);
+    DeleteObject(hbmTemp);
+    DeleteDC(hdcTemp);
+
+    // Update layered window
+    POINT ptSrc = {0, 0};
+    SIZE szWnd = {w, h};
+    BLENDFUNCTION blend{};
+    blend.BlendOp = AC_SRC_OVER;
+    blend.SourceConstantAlpha = 255;
+    blend.AlphaFormat = AC_SRC_ALPHA;
+
+    RECT winRect;
+    GetWindowRect(hwnd, &winRect);
+    POINT ptDst = {winRect.left, winRect.top};
+    UpdateLayeredWindow(hwnd, hdcScreen, &ptDst, &szWnd, hdcMem, &ptSrc, 0, &blend, ULW_ALPHA);
+
+    SelectObject(hdcMem, oldBmp);
+    DeleteObject(hbmDib);
+    DeleteDC(hdcMem);
+    ReleaseDC(nullptr, hdcScreen);
+}
+
+static LRESULT CALLBACK WndProcScreenshotOverlay(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    ScreenshotOverlayData* data = (ScreenshotOverlayData*)GetWindowLongPtrW(hwnd, GWLP_USERDATA);
+
+    switch (msg) {
+        case WM_ERASEBKGND:
+            return TRUE;
+
+        case WM_MOUSEACTIVATE:
+            SetFocus(hwnd);
+            return MA_ACTIVATE;
+
+        case WM_ACTIVATE:
+            if (LOWORD(wp) == WA_INACTIVE) {
+                DestroyWindow(hwnd);
+                return 0;
+            }
+            break;
+
+        case WM_KEYDOWN:
+            if (!data) {
+                break;
+            }
+            switch (wp) {
+                case VK_ESCAPE:
+                    DestroyWindow(hwnd);
+                    return 0;
+                case VK_LEFT:
+                    if (data->selected > 0) {
+                        data->selected--;
+                        PaintOverlayLayered(hwnd, data);
+                    }
+                    return 0;
+                case VK_RIGHT:
+                    if (data->selected < data->captures.Size() - 1) {
+                        data->selected++;
+                        PaintOverlayLayered(hwnd, data);
+                    }
+                    return 0;
+                case VK_UP:
+                    if (data->selected >= data->cols) {
+                        data->selected -= data->cols;
+                        PaintOverlayLayered(hwnd, data);
+                    }
+                    return 0;
+                case VK_DOWN:
+                    if (data->selected + data->cols < data->captures.Size()) {
+                        data->selected += data->cols;
+                        PaintOverlayLayered(hwnd, data);
+                    }
+                    return 0;
+                case VK_RETURN:
+                    SaveSelectedScreenshot(data);
+                    DestroyWindow(hwnd);
+                    return 0;
+            }
+            break;
+
+        case WM_MOUSEMOVE:
+            if (data) {
+                int mx = GET_X_LPARAM(lp);
+                int my = GET_Y_LPARAM(lp);
+                int hit = HitTestThumb(data, mx, my);
+                if (hit >= 0 && hit != data->selected) {
+                    data->selected = hit;
+                    PaintOverlayLayered(hwnd, data);
+                }
+            }
+            return 0;
+
+        case WM_LBUTTONDOWN:
+            if (data) {
+                int mx = GET_X_LPARAM(lp);
+                int my = GET_Y_LPARAM(lp);
+                int hit = HitTestThumb(data, mx, my);
+                if (hit >= 0) {
+                    data->selected = hit;
+                    SaveSelectedScreenshot(data);
+                }
+                DestroyWindow(hwnd);
+            }
+            return 0;
+
+        case WM_DESTROY:
+            if (data) {
+                FreeCapturedScreenshots(data);
+                delete data;
+                SetWindowLongPtrW(hwnd, GWLP_USERDATA, 0);
+            }
+            return 0;
+    }
+
+    return DefWindowProcW(hwnd, msg, wp, lp);
+}
+
+static void RegisterScreenshotOverlayClass() {
+    if (gScreenshotClassRegistered) {
+        return;
+    }
+    WNDCLASSEX wcex{};
+    FillWndClassEx(wcex, kScreenshotOverlayClassName, WndProcScreenshotOverlay);
+    wcex.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+    RegisterClassEx(&wcex);
+    gScreenshotClassRegistered = true;
+}
+
+void TakeScreenshots() {
+    RegisterScreenshotOverlayClass();
+
+    int screenW = GetSystemMetrics(SM_CXSCREEN);
+    int screenH = GetSystemMetrics(SM_CYSCREEN);
+
+    // Create a hidden overlay window first, then capture, then size and show
+    DWORD exStyle = WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_LAYERED;
+    DWORD style = WS_POPUP;
+    HWND hwnd = CreateWindowExW(exStyle, kScreenshotOverlayClassName, nullptr, style, 0, 0, 1, 1, nullptr, nullptr,
+                                GetModuleHandleW(nullptr), nullptr);
+    if (!hwnd) {
+        logf("Screenshot: failed to create overlay window\n");
+        return;
+    }
+
+    auto* data = new ScreenshotOverlayData();
+    SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)data);
+
+    CaptureAllScreenshots(data, hwnd);
+
+    if (data->captures.IsEmpty()) {
+        logf("Screenshot: no windows captured\n");
+        DestroyWindow(hwnd);
+        return;
+    }
+
+    ComputeLayout(data);
+
+    // Clamp to screen size
+    if (data->winW > screenW) {
+        data->winW = screenW;
+    }
+    if (data->winH > screenH) {
+        data->winH = screenH;
+    }
+
+    // Center on screen
+    int x = (screenW - data->winW) / 2;
+    int y = (screenH - data->winH) / 2;
+    SetWindowPos(hwnd, HWND_TOPMOST, x, y, data->winW, data->winH, 0);
+
+    // Paint the layered content
+    PaintOverlayLayered(hwnd, data);
+
+    ShowWindow(hwnd, SW_SHOWNORMAL);
+    SetForegroundWindow(hwnd);
+    SetFocus(hwnd);
 }
 
 void RegisterScreenshotHotkey(HWND hwnd) {
