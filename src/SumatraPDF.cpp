@@ -1262,6 +1262,10 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
     EngineBase* engine = tab->GetEngine();
     if (engine) {
         engine->hideAnnotations = tab->hideAnnotations;
+        float imageZoom = gGlobalPrefs->defaultImageZoomFloat;
+        if (engine->kind == kindEngineImage && imageZoom != 0) {
+            zoomVirtual = imageZoom;
+        }
     }
 
     // ToC items might hold a reference to an Engine, so make sure to

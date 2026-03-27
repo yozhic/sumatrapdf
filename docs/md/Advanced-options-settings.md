@@ -43,8 +43,13 @@ CustomScreenDPI = 0
 ; view, continuous, continuous facing, continuous book view
 DefaultDisplayMode = automatic
 
-; default zoom (in %) or one of those values: fit page, fit width, fit content
+; default zoom. valid values: fit page, fit width, fit content or percent like
+; 100%
 DefaultZoom = fit page
+
+; default zoom for image files. valid values: fit page, fit width, fit content
+; or percent like 100%
+DefaultImageZoom = 
 
 ; if true, we expose the SyncTeX inverse search command line in Settings ->
 ; Options

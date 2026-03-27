@@ -573,7 +573,13 @@ const globalPrefs: Field[] = [
     "DefaultZoom",
     Str,
     "fit page",
-    "default zoom (in %) or one of those values: fit page, fit width, fit content",
+    "default zoom. valid values: fit page, fit width, fit content or percent like 100%",
+  ),
+  mkField(
+    "DefaultImageZoom",
+    Str,
+    "",
+    "default zoom for image files. valid values: fit page, fit width, fit content or percent like 100%",
   ),
   mkField(
     "EnableTeXEnhancements",
@@ -858,6 +864,7 @@ const globalPrefs: Field[] = [
     ),
   ),
   setInternal(mkField("DefaultZoomFloat", Float, -1, "value of DefaultZoom for internal usage")),
+  setInternal(mkField("DefaultImageZoomFloat", Float, 0, "value of DefaultImageZoom for internal usage. 0 means not set")),
   mkEmptyLine(),
   mkComment("Settings below are not recognized by the current version"),
 ];

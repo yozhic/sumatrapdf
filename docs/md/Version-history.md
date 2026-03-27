@@ -13,7 +13,8 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - you can drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers
 - add `-log-to-file <file>` cmd-line flag to log to a specific file (like `-log` but with custom log file path)
-
+- add `DefaultImageZoom` advanced setting to control default zoom level for images
+ 
 ## 3.6 (2026-03-17)
 
 - add `DisableAntiAlias` advanced setting and `CmdToggleAntiAlias` command
