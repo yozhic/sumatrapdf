@@ -675,6 +675,15 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
             return MA_NOACTIVATE;
 
         case WM_NCHITTEST: {
+            // pass through rightmost 2px of vertical scrollbar for frame resize
+            if (IsVert(sb)) {
+                int x = GET_X_LPARAM(lp);
+                RECT rc;
+                GetWindowRect(hwnd, &rc);
+                if ((rc.right - x) <= 2) {
+                    return HTTRANSPARENT;
+                }
+            }
             LRESULT def = DefWindowProcW(hwnd, msg, wp, lp);
             if (def == HTNOWHERE) {
                 return HTCLIENT;

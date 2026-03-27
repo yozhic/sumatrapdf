@@ -3726,7 +3726,7 @@ constexpr int kSplitterDy = 4;
 constexpr int kSidebarMinDx = 150;
 constexpr int kTocMinDy = 100;
 
-constexpr int kFrameBorderSize = 3;
+constexpr int kFrameBorderSize = 1;
 
 static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sidebarDx = -1) {
     Rect rc = ClientRect(win->hwndFrame);
@@ -7067,9 +7067,9 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             RECT wrc;
             GetWindowRect(hwnd, &wrc);
 
-            // 1px painted border provides resize edges
+            // use a larger hit-test area than the visible border for easier resizing
             if (!IsZoomed(hwnd) && !win->isFullScreen && !win->presentation) {
-                int b = kFrameBorderSize;
+                int b = kFrameResizeHitTest;
                 bool onLeft = (x - wrc.left) < b;
                 bool onRight = (wrc.right - x) <= b;
                 bool onTop = (y - wrc.top) < b;

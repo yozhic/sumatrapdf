@@ -2590,8 +2590,21 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             return 1;
         }
 
-        case WM_NCHITTEST:
+        case WM_NCHITTEST: {
+            // return HTTRANSPARENT near frame edges so the parent frame
+            // can handle resize hit-testing beyond kFrameBorderSize
+            if (win && win->tabsInTitlebar && !IsZoomed(GetParent(hwnd))) {
+                int x = GET_X_LPARAM(lp);
+                int y = GET_Y_LPARAM(lp);
+                RECT wrc;
+                GetWindowRect(GetParent(hwnd), &wrc);
+                int b = kFrameResizeHitTest;
+                if ((x - wrc.left) < b || (wrc.right - x) <= b || (y - wrc.top) < b || (wrc.bottom - y) <= b) {
+                    return HTTRANSPARENT;
+                }
+            }
             break;
+        }
     }
 
     if (!win) {
