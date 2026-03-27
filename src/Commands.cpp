@@ -79,7 +79,7 @@ static SeqStrings gCommandNames =
     "CmdDebugTestApp\0" "CmdDebugShowNotif\0" "CmdDebugStartStressTest\0"
     "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0" "CmdToggleAntiAlias\0"
     "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0"
-    "CmdNone\0" "\0";
+    "CmdScreenshot\0" "CmdNone\0" "\0";
 
 static i32 gCommandIds[] = {
     CmdOpenFile, CmdClose, CmdCloseCurrentDocument,
@@ -147,7 +147,7 @@ static i32 gCommandIds[] = {
     CmdDebugTestApp, CmdDebugShowNotif, CmdDebugStartStressTest,
     CmdDebugTogglePredictiveRender, CmdDebugToggleRtl, CmdToggleAntiAlias,
     CmdListPrinters, CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter,
-    CmdNone,
+    CmdScreenshot, CmdNone,
 };
 
 SeqStrings gCommandDescriptions =
@@ -216,7 +216,7 @@ SeqStrings gCommandDescriptions =
     "Debug: Test App\0" "Debug: Show Notification\0" "Debug: Start Stress Test\0"
     "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0" "Toggle Anti-Alias Rendering\0"
     "List Printers\0" "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0"
-    "Do nothing\0" "\0";
+    "Screenshot\0" "Do nothing\0" "\0";
 // clang-format on
 // @gen-end cmd-c
 

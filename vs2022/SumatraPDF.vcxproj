@@ -1124,6 +1124,7 @@
     <ClInclude Include="..\src\RegistrySearchFilter.h" />
     <ClInclude Include="..\src\RenderCache.h" />
     <ClInclude Include="..\src\Scratch.h" />
+    <ClInclude Include="..\src\Screenshot.h" />
     <ClInclude Include="..\src\SearchAndDDE.h" />
     <ClInclude Include="..\src\Selection.h" />
     <ClInclude Include="..\src\Settings.h" />
@@ -1236,6 +1237,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze|ARM64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseAnalyze x64_asan|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\src\Screenshot.cpp" />
     <ClCompile Include="..\src\SearchAndDDE.cpp" />
     <ClCompile Include="..\src\Selection.cpp" />
     <ClCompile Include="..\src\SimpleBrowserWindow.cpp" />
@@ -1602,6 +1604,7 @@
     <None Include="..\docs\md\Tool-clean.md" />
     <None Include="..\docs\md\Tool-convert.md" />
     <None Include="..\docs\md\Tool-draw.md" />
+    <None Include="..\docs\md\Tool-extract-text-from-pdf.md" />
     <None Include="..\docs\md\Tool-extract.md" />
     <None Include="..\docs\md\Tool-grep.md" />
     <None Include="..\docs\md\Tool-info.md" />

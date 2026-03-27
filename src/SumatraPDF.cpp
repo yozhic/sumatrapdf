@@ -73,6 +73,7 @@
 #include "Print.h"
 #include "SearchAndDDE.h"
 #include "Selection.h"
+#include "Screenshot.h"
 #include "StressTesting.h"
 #include "HomePage.h"
 #include "OverlayScrollbar.h"
@@ -5730,6 +5731,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdShowLog:
             ShowLogFileSmart();
+            break;
+
+        case CmdScreenshot:
+            TakeScreenshots();
             break;
 
         case CmdListPrinters: {

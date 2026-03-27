@@ -198,6 +198,7 @@ export const commands = [
     "CmdListPrinters", "List Printers",
     "CmdToggleWindowsPreviewer", "Toggle Windows Previewer",
     "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",
+    "CmdScreenshot", "Screenshot",
     "CmdNone", "Do nothing",
 ];
 

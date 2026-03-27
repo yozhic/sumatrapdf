@@ -243,6 +243,9 @@
     <ClInclude Include="..\src\Scratch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Screenshot.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\SearchAndDDE.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -549,6 +552,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scratch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Screenshot.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\SearchAndDDE.cpp">
@@ -1014,6 +1020,9 @@
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tool-draw.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-extract-text-from-pdf.md">
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tool-extract.md">
