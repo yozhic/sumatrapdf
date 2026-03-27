@@ -8,11 +8,11 @@ Let's assume you have `foo.pdf`
 
 ## Extract all text from PDF
 
-`SumatraPDF.exe draw -o foo.txt foo.pdf`
+`SumatraPDF draw -o foo.txt foo.pdf`
 
 ## Extract text from selected pages of a PDF
 
-`SumatraPDF.exe draw -o foo.txt foo.pdf 1-3,4,8-9`
+`SumatraPDF draw -o foo.txt foo.pdf 1-3,4,8-9`
 
 This will extract text from pages 1,2,3,4,8,9.
 
@@ -42,10 +42,10 @@ You can use this output in your custom processing program.
 
 ### Extract structured text from PDF in XML format
 
-`SumatraPDF.exe draw -o foo.stext foo.pdf`
+`SumatraPDF draw -o foo.stext foo.pdf`
 
 ### Extract structured text from PDF in JSON format
 
-`SumatraPDF.exe draw -o foo.stext.json -F stext.json foo.pdf`
+`SumatraPDF draw -o foo.stext.json -F stext.json foo.pdf`
 
 It's the same information but in JSON format.

@@ -20,19 +20,19 @@ Let's assume you have `foo.pdf` with 8 pages.
 
 ### Extract 2nd page
 
-`SumatraPDF.exe draw -o foo-page-2.pdf foo.pdf 2`
+`SumatraPDF draw -o foo-page-2.pdf foo.pdf 2`
 
 ### Extract pages 1,2,7,8 into a separate file each
 
-`SumatraPDF.exe draw -o "foo-page-%d.pdf" foo.pdf 1-2,7,8`
+`SumatraPDF draw -o "foo-page-%d.pdf" foo.pdf 1-2,7,8`
 
 ### Delete 3rd page
 
-`SumatraPDF.exe draw -o foo-3rd-page-deleted.pdf foo.pdf 1-2,4-8`
+`SumatraPDF draw -o foo-3rd-page-deleted.pdf foo.pdf 1-2,4-8`
 
 ### Extract 2nd page as png image
 
-`SumatraPDF.exe draw -o foo-page-2.png -F png foo.pdf 2`
+`SumatraPDF draw -o foo-page-2.png -F png foo.pdf 2`
 
 ### Rotate pages
 
@@ -40,11 +40,11 @@ Use `-R 90|180|270` option to rotate pages.
 
 ### Extract each page as PNG image
 
-`SumatraPDF.exe draw -o "foo-%d.png" foo.pdf`
+`SumatraPDF draw -o "foo-%d.png" foo.pdf`
 
 ### Convert PDF to PNG
 
-`SumatraPDF.exe draw -o "foo-%d.png" foo.pdf`
+`SumatraPDF draw -o "foo-%d.png" foo.pdf`
 
 ### Change output image size
 
@@ -52,23 +52,23 @@ Each page in a PDF has a given width / height.
 
 When convertint to an image (like PNG), you can change the size of output image:
 
-`SumatraPDF.exe draw -o "foo-%d.png" -w 400 -h 800 foo.pdf`
+`SumatraPDF draw -o "foo-%d.png" -w 400 -h 800 foo.pdf`
 
 ### Convert PNG to PDF
 
-`SumatraPDF.exe draw  -o foo.pdf foo.png`
+`SumatraPDF draw  -o foo.pdf foo.png`
 
 ### Convert PDF to self-contained HTML file
 
-`SumatraPDF.exe draw -o foo.html foo.pdf`
+`SumatraPDF draw -o foo.html foo.pdf`
 
 ### Convert PDF to self-contained SVG file
 
-`SumatraPDF.exe draw -o foo.svg foo.pdf`
+`SumatraPDF draw -o foo.svg foo.pdf`
 
 ### Extract all text from PDF
 
-`SumatraPDF.exe draw -o foo.txt foo.pdf`
+`SumatraPDF draw -o foo.txt foo.pdf`
 
 ### Structured text
 
@@ -78,7 +78,7 @@ If you want to see detailed information about text in PDF, especially for furthe
 
 ### Extract structured text from PDF in XML format
 
-`SumatraPDF.exe draw -o foo.stext foo.pdf`
+`SumatraPDF draw -o foo.stext foo.pdf`
 
 In XML format it might look like:
 
@@ -91,7 +91,7 @@ Here it shows that letter `d` in font `CharisSIL` is at a given x/y position in 
 
 ### Extract structured text from PDF in JSON format
 
-`SumatraPDF.exe draw -o foo.stext.json -F stext.json foo.pdf`
+`SumatraPDF draw -o foo.stext.json -F stext.json foo.pdf`
 
 It's the same information but in JSON format.
 

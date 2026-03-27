@@ -14,7 +14,7 @@ It generates HTML file with information about objects in PDF file.
 
 ## Generate HTML report about PDF file
 
-`SumatraPDF.exe audit -o report.html .\foo.pdf`
+`SumatraPDF audit -o report.html .\foo.pdf`
 
 You can then open `report.html` in a browser.
 
