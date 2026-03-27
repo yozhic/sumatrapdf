@@ -760,6 +760,21 @@ void LayoutHomePage(HomePageLayout& l) {
 
     l.rcLine = {0, sz.dy, rc.dx, 0};
 
+    // --- Pre-compute thumbnail grid x offset so header can align with it ---
+    int nFilesForLayout = fileStates.Size();
+    int colsForLayout =
+        (rc.dx - kThumbsMarginLeft - kThumbsMarginRight + kThumbsSpaceBetweenX) / (kThumbnailDx + kThumbsSpaceBetweenX);
+    int thumbsColsForLayout = std::max(colsForLayout, 1);
+    int thumbsStartX = rc.x + kThumbsMarginLeft +
+                       (rc.dx - thumbsColsForLayout * kThumbnailDx - (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX -
+                        kThumbsMarginLeft - kThumbsMarginRight) /
+                           2;
+    if (thumbsStartX < DpiScale(hdc, kInnerPadding)) {
+        thumbsStartX = DpiScale(hdc, kInnerPadding);
+    } else if (nFilesForLayout == 0) {
+        thumbsStartX = kThumbsMarginLeft;
+    }
+
     // --- Step 1: layout header at the top ---
     const char* txt = _TRA("Recently Opened");
     if (gGlobalPrefs->homePageSortByFrequentlyRead) {
@@ -770,11 +785,10 @@ void LayoutHomePage(HomePageLayout& l) {
     hdr->isRtl = isRtl;
     Size txtSize = hdr->GetIdealSize(true);
 
-    int hdrMarginX = DpiScale(hdc, 40);
     int hdrY = DpiScale(hdc, 8);
-    Rect rcHdr(hdrMarginX, hdrY, txtSize.dx, txtSize.dy);
+    Rect rcHdr(thumbsStartX, hdrY, txtSize.dx, txtSize.dy);
     if (isRtl) {
-        rcHdr.x = rc.dx - hdrMarginX - rcHdr.dx;
+        rcHdr.x = rc.dx - thumbsStartX - rcHdr.dx;
     }
     hdr->SetBounds(rcHdr);
 
@@ -837,10 +851,8 @@ void LayoutHomePage(HomePageLayout& l) {
 
     l.rcThumbsArea = {0, thumbsTopY, rc.dx, thumbsVisibleDy};
 
-    int nFiles = fileStates.Size();
-    int cols =
-        (rc.dx - kThumbsMarginLeft - kThumbsMarginRight + kThumbsSpaceBetweenX) / (kThumbnailDx + kThumbsSpaceBetweenX);
-    int thumbsCols = std::max(cols, 1);
+    int nFiles = nFilesForLayout;
+    int thumbsCols = thumbsColsForLayout;
     int thumbsRows = (nFiles + thumbsCols - 1) / thumbsCols;
     int thumbsContentDy = thumbsRows * (kThumbnailDy + kThumbsSpaceBetweenY) - kThumbsSpaceBetweenY;
 
@@ -853,16 +865,7 @@ void LayoutHomePage(HomePageLayout& l) {
     l.totalContentDy = thumbsContentDy;
     l.thumbsVisibleDy = thumbsVisibleDy;
 
-    int x = rc.x + kThumbsMarginLeft +
-            (rc.dx - thumbsCols * kThumbnailDx - (thumbsCols - 1) * kThumbsSpaceBetweenX - kThumbsMarginLeft -
-             kThumbsMarginRight) /
-                2;
-    Point ptOff(x, thumbsTopY - scrollY);
-    if (ptOff.x < DpiScale(hdc, kInnerPadding)) {
-        ptOff.x = DpiScale(hdc, kInnerPadding);
-    } else if (fileStates.size() == 0) {
-        ptOff.x = kThumbsMarginLeft;
-    }
+    Point ptOff(thumbsStartX, thumbsTopY - scrollY);
 
     for (int row = 0; row < thumbsRows; row++) {
         for (int col = 0; col < thumbsCols; col++) {
