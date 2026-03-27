@@ -8,13 +8,15 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdShowPdfInfo` (`Show PDF Info` in `Ctrl + k` [command palette](Command-Palette.md))
 - improved overlay scrollbar
 - make thumbnails on home page scrollable
-- add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette
+- add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette. Use "Register Windows Preview", Un-register Windows Preview", "Register Windows Search Filter", "Un-register Windows Search Filter".
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
-- you can drag&drop selected text to another application, like a text editor
+- you can now drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers
 - add `-log-to-file <file>` cmd-line flag to log to a specific file (like `-log` but with custom log file path)
 - add `DefaultImageZoom` advanced setting to control default zoom level for images
- 
+- improve `Toggle Use Tabs` (`CmdToggleUseTabs`). You can now transition between using tabs / not using tabs witout restarting the app
+- allow showing menu bar when using tabs (previously menu bar was only shown when not using tabs)
+
 ## 3.6 (2026-03-17)
 
 - add `DisableAntiAlias` advanced setting and `CmdToggleAntiAlias` command

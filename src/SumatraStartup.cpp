@@ -2594,7 +2594,8 @@ ContinueOpenWindow:
 
     if (restoreSession) {
         for (SessionData* data : *gInitialSessionData) {
-            win = CreateAndShowMainWindow(data);
+            // create window hidden to avoid flashing the about page
+            win = CreateAndShowMainWindow(data, false);
             for (TabState* state : *data->tabStates) {
                 if (str::IsEmpty(state->filePath)) {
                     logf("WinMain: skipping RestoreTabOnStartup() because state->filePath is empty\n");
@@ -2607,6 +2608,7 @@ ContinueOpenWindow:
                 // trigger loading of the document
                 ReloadDocument(win, false);
             }
+            ShowMainWindow(win, data->windowState);
         }
     }
 

@@ -186,7 +186,8 @@ struct PasswordUI;
 MainWindow* LoadDocument(LoadArgs* args);
 MainWindow* LoadDocumentFinish(LoadArgs* args);
 void StartLoadDocument(LoadArgs* args);
-MainWindow* CreateAndShowMainWindow(SessionData* data = nullptr);
+MainWindow* CreateAndShowMainWindow(SessionData* data = nullptr, bool showWin = true);
+void ShowMainWindow(MainWindow* win, int windowState);
 DocController* CreateControllerForEngineOrFile(EngineBase* engine, const char* path, PasswordUI* pwdUI,
                                                MainWindow* win);
 

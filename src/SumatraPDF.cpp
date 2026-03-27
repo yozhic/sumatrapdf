@@ -1679,7 +1679,25 @@ static MainWindow* CreateMainWindow() {
     return win;
 }
 
-MainWindow* CreateAndShowMainWindow(SessionData* data) {
+void ShowMainWindow(MainWindow* win, int windowState) {
+    if (WIN_STATE_FULLSCREEN == windowState || WIN_STATE_MAXIMIZED == windowState) {
+        ShowWindow(win->hwndFrame, SW_MAXIMIZE);
+    } else {
+        ShowWindow(win->hwndFrame, SW_SHOW);
+    }
+    UpdateWindow(win->hwndFrame);
+    HwndEnsureVisible(win->hwndFrame);
+
+    if (gWindows.Size() == 1 && (true || IsDebuggerPresent())) {
+        HwndToForeground(win->hwndFrame);
+    }
+
+    if (WIN_STATE_FULLSCREEN == windowState) {
+        EnterFullScreen(win);
+    }
+}
+
+MainWindow* CreateAndShowMainWindow(SessionData* data, bool showWin) {
     int windowState = gGlobalPrefs->windowState;
     MainWindow* win = CreateMainWindow();
     if (!win) {
@@ -1695,24 +1713,13 @@ MainWindow* CreateAndShowMainWindow(SessionData* data) {
         // TODO: also restore data->sidebarDx
     }
 
-    if (WIN_STATE_FULLSCREEN == windowState || WIN_STATE_MAXIMIZED == windowState) {
-        ShowWindow(win->hwndFrame, SW_MAXIMIZE);
-    } else {
-        ShowWindow(win->hwndFrame, SW_SHOW);
-    }
-    UpdateWindow(win->hwndFrame);
-    HwndEnsureVisible(win->hwndFrame);
-
-    if (gWindows.Size() == 1 && (true || IsDebuggerPresent())) {
-        HwndToForeground(win->hwndFrame);
-    }
-
+    // always set up toolbar and sidebar, even if we defer showing
     ShowOrHideToolbar(win);
     SetSidebarVisibility(win, false, gGlobalPrefs->showFavorites);
     ToolbarUpdateStateForWindow(win, true);
 
-    if (WIN_STATE_FULLSCREEN == windowState) {
-        EnterFullScreen(win);
+    if (showWin) {
+        ShowMainWindow(win, windowState);
     }
     return win;
 }
@@ -2016,7 +2023,9 @@ static MainWindow* MaybeCreateWindowForFileLoad(LoadArgs* args) {
         args->isNewWindow = false;
     } else if (!win || !openNewTab && !args->forceReuse && win->IsDocLoaded()) {
         MainWindow* currWin = win;
-        win = CreateAndShowMainWindow(nullptr);
+        // during startup, create window hidden to avoid flashing the about page;
+        // it will be shown by ReplaceDocumentInCurrentTab or ShowMainWindow later
+        win = CreateAndShowMainWindow(nullptr, !gIsStartup);
         if (!win) {
             return nullptr;
         }
@@ -2195,6 +2204,11 @@ MainWindow* LoadDocument(LoadArgs* args) {
         }
 
         if (!ctrl) {
+            // ensure window is visible even if loading failed
+            // (it may have been created hidden during startup)
+            if (!IsWindowVisible(win->hwndFrame)) {
+                ShowMainWindow(win, gGlobalPrefs->windowState);
+            }
             ShowErrorLoadingNotification(win, path, args->noSavePrefs);
             // re-sync win->ctrl with current tab after ShowErrorLoadingNotification
             // which can pump messages and change tab selection
