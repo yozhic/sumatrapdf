@@ -241,17 +241,17 @@ CmdInvokeInverseSearch,,Invoke Inverse Search,ver 3.6+
 ## System
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdAdvancedOptions,,Advanced Options (Settings)...
-CmdAdvancedSettings,,Advanced Options (Settings)...
-CmdChangeLanguage,,Change Language...
-CmdCheckUpdate,,Check For Updates
-CmdClearHistory,,Clear History
-CmdContributeTranslation,,Contribute Translation
-CmdForgetSelectedDocument,,Remove Selected Document From History
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdAdvancedOptions,,Advanced Options (Settings)...,
+CmdAdvancedSettings,,Advanced Options (Settings)...,
+CmdChangeLanguage,,Change Language...,
+CmdCheckUpdate,,Check For Updates,
+CmdClearHistory,,Clear History,
+CmdContributeTranslation,,Contribute Translation,
+CmdForgetSelectedDocument,,Remove Selected Document From History,
 CmdListPrinters,,List Printers,ver 3.7+
-CmdOptions,,Options...
-CmdShowLog,,Show Logs
+CmdOptions,,Options...,
+CmdShowLog,,Show Logs,
 ```
 
 ## Help
