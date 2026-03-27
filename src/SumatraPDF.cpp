@@ -1699,6 +1699,7 @@ MainWindow* CreateAndShowMainWindow(SessionData* data) {
         HwndToForeground(win->hwndFrame);
     }
 
+    ShowOrHideToolbar(win);
     SetSidebarVisibility(win, false, gGlobalPrefs->showFavorites);
     ToolbarUpdateStateForWindow(win, true);
 
