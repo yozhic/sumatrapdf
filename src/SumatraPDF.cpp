@@ -6966,9 +6966,21 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             }
             break;
 
-        case WM_NCPAINT:
+        case WM_NCPAINT: {
+            // paint the 1px NC strip at top with the correct color
+            HDC hdc = GetWindowDC(hwnd);
+            if (hdc) {
+                Rect wr = WindowRect(hwnd);
+                // window DC is in window coordinates (origin at top-left of window)
+                RECT rc = {0, 0, wr.dx, 1};
+                HBRUSH br = CreateSolidBrush(ThemeControlBackgroundColor());
+                FillRect(hdc, &rc, br);
+                DeleteObject(br);
+                ReleaseDC(hwnd, hdc);
+            }
             *callDef = false;
             return 0;
+        }
 
         case WM_PAINT: {
             PAINTSTRUCT ps;
