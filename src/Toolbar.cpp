@@ -383,11 +383,25 @@ void SetToolbarButtonEnableState(MainWindow* win, int cmdId, bool isEnabled) {
         UpdateToolbarButtonStateByIdx(win->hwndToolbar, idx, isEnabled, TBSTATE_ENABLED);
     }
 }
+bool IsShowingToolbar(MainWindow* win) {
+    if (!gGlobalPrefs->showToolbar) {
+        return false;
+    }
+    if (win->presentation || win->isFullScreen) {
+        return false;
+    }
+    // hide toolbar on about/home page when not using tabs
+    if (!gGlobalPrefs->useTabs && win->IsCurrentTabAbout()) {
+        return false;
+    }
+    return true;
+}
+
 void ShowOrHideToolbar(MainWindow* win) {
     if (win->presentation || win->isFullScreen) {
         return;
     }
-    if (gGlobalPrefs->showToolbar) {
+    if (IsShowingToolbar(win)) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     } else {
         // Move the focus out of the toolbar

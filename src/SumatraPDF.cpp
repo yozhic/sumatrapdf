@@ -3793,7 +3793,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
             rc.dy -= tabHeight;
         }
     }
-    if (gGlobalPrefs->showToolbar && !win->presentation && !win->isFullScreen) {
+    if (IsShowingToolbar(win)) {
         if (updateToolbars) {
             Rect rcRebar = WindowRect(win->hwndReBar);
             dh.SetWindowPos(win->hwndReBar, nullptr, rc.x, rc.y, rc.dx, rcRebar.dy, SWP_NOZORDER);
