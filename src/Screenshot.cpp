@@ -36,6 +36,7 @@ constexpr int kInfoBarHeight = 30;
 struct CapturedScreenshot {
     HBITMAP bmp = nullptr;   // full-size capture
     HBITMAP thumb = nullptr; // scaled thumbnail
+    HWND srcHwnd = nullptr;  // source window (nullptr for desktop)
     int origW = 0;
     int origH = 0;
     int thumbW = 0;
@@ -273,6 +274,7 @@ static BOOL CALLBACK EnumCaptureWindowsProc(HWND hwnd, LPARAM lParam) {
 
     CapturedScreenshot cs;
     cs.bmp = hbm;
+    cs.srcHwnd = hwnd;
     cs.origW = w;
     cs.origH = h;
     cs.thumb = CreateThumbnail(hbm, w, h, &cs.thumbW, &cs.thumbH);
@@ -722,8 +724,8 @@ static LRESULT CALLBACK WndProcScreenshotOverlay(HWND hwnd, UINT msg, WPARAM wp,
                 if (hit >= 0) {
                     data->selected = hit;
                     SaveSelectedScreenshot(data);
+                    DestroyWindow(hwnd);
                 }
-                DestroyWindow(hwnd);
             }
             return 0;
 
@@ -753,6 +755,9 @@ static void RegisterScreenshotOverlayClass() {
 void TakeScreenshots() {
     RegisterScreenshotOverlayClass();
 
+    // Remember the foreground window before we create our overlay
+    HWND hwndForeground = GetForegroundWindow();
+
     int screenW = GetSystemMetrics(SM_CXSCREEN);
     int screenH = GetSystemMetrics(SM_CYSCREEN);
 
@@ -775,6 +780,18 @@ void TakeScreenshots() {
         logf("Screenshot: no windows captured\n");
         DestroyWindow(hwnd);
         return;
+    }
+
+    // Select the previously active window's thumbnail, or first if not found
+    data->selected = 0;
+    if (hwndForeground) {
+        int n = data->captures.Size();
+        for (int i = 0; i < n; i++) {
+            if (data->captures[i].srcHwnd == hwndForeground) {
+                data->selected = i;
+                break;
+            }
+        }
     }
 
     ComputeLayout(data);
