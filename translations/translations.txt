@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-72b9453c5e0717bf7e46949c547fb85617d5cbe3
+c23713564f28bc2ab468318c2c15cde7dff4c2f1
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -22359,6 +22359,7 @@ uk:Файл сирцевого коду %s не має точки синхрон
 uz:%s manba faylida sinxronlanish nuqtasi yo'q
 vn:Tập tin nguồn %s không có điểm đồng bộ
 :Space for sticky mode
+de:Platz für Sticky‑Modus
 pl:Spacja dla trybu lepkiego
 :Square
 am:Քառակուսի

@@ -34472,7 +34472,7 @@ cn:空格切换粘滞模式
 co:Spaziu per u modu fissu
 cy:Bwlch ar gyfer modd gludiog
 cz:Mezerník pro trvalý režim
-de:Leertaste für fixierten Modus
+de:Platz für Sticky‑Modus
 dk:Mellemrum for sticky-tilstand
 el:Space για λειτουργία καρφιτσώματος
 es:Espacio para modo fijo
