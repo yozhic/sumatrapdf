@@ -498,6 +498,9 @@ void SaveCurrentWindowTab(MainWindow* win) {
     if (!win) {
         return;
     }
+    if (!win->tabsCtrl) {
+        return;
+    }
 
     int current = win->tabsCtrl->GetSelected();
     if (-1 == current) {
