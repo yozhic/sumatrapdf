@@ -362,15 +362,15 @@ static void ComputeLayout(ScreenshotOverlayData* data) {
     }
 
     data->rowY.SetSize(data->rows);
-    int y = kOuterPadding;
+    int y = kInfoBarHeight + kOuterPadding; // start below info bar
     for (int r = 0; r < data->rows; r++) {
         data->rowY[r] = y;
         y += data->rowHeights[r];
     }
 
-    // window sized to fit content + outer padding + info bar
+    // window sized to fit content + outer padding + info bar at top
     data->winW = x + kOuterPadding;
-    data->winH = y + kOuterPadding + kInfoBarHeight;
+    data->winH = y + kOuterPadding;
 }
 
 // Get the bounding rect for thumbnail at index i (in client coords)
@@ -537,12 +537,12 @@ static void PaintOverlayLayered(HWND hwnd, ScreenshotOverlayData* data) {
     SelectObject(hdcTemp, oldPen2);
     DeleteObject(borderPen);
 
-    // Draw info bar at the bottom with solid blue background
+    // Draw info bar at the top with solid blue background
     RECT infoRect;
     infoRect.left = 0;
     infoRect.right = w;
-    infoRect.top = h - kInfoBarHeight;
-    infoRect.bottom = h;
+    infoRect.top = 0;
+    infoRect.bottom = kInfoBarHeight;
     HBRUSH brBlue = CreateSolidBrush(RGB(0, 90, 180));
     FillRect(hdcTemp, &infoRect, brBlue);
     DeleteObject(brBlue);
@@ -598,10 +598,9 @@ static void PaintOverlayLayered(HWND hwnd, ScreenshotOverlayData* data) {
         }
     }
 
-    // Copy info bar region with full opacity
+    // Copy info bar region at top with full opacity
     {
-        int y0 = h - kInfoBarHeight;
-        for (int y = y0; y < h; y++) {
+        for (int y = 0; y < kInfoBarHeight; y++) {
             for (int x = 0; x < w; x++) {
                 DWORD px = tempPixels[y * w + x];
                 BYTE r = (px >> 16) & 0xFF;
