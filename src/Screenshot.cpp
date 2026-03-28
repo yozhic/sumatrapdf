@@ -68,7 +68,7 @@ static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
         return false;
     }
     WCHAR className[256];
-    if (GetClassNameW(hwnd, className, 256) > 0) {
+    if (GetClassNameW(hwnd, className, 256) > 0 ) {
         if (str::Eq(className, L"Progman") || str::Eq(className, L"WorkerW")) {
             return false;
         }
@@ -141,36 +141,122 @@ static HBITMAP CaptureDesktop() {
     return hbm;
 }
 
-static HBITMAP CaptureWindowBmp(HWND hwnd) {
-    RECT rect;
-    if (!GetWindowRect(hwnd, &rect)) {
+// replace black corner pixels from PrintWindow with bgColor using a rounded corner mask
+static void FixRoundedCorners(HBITMAP hbm, int w, int h, COLORREF bgColor) {
+    // get DWM corner radius; typical Windows 11 value is 8
+    int radius = 8;
+
+    BITMAPINFO bmi{};
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = w;
+    bmi.bmiHeader.biHeight = -h; // top-down
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 32;
+    bmi.bmiHeader.biCompression = BI_RGB;
+
+    HDC hdc = GetDC(nullptr);
+    DWORD* pixels = (DWORD*)malloc(w * h * 4);
+    if (!pixels) {
+        ReleaseDC(nullptr, hdc);
+        return;
+    }
+    GetDIBits(hdc, hbm, 0, h, pixels, &bmi, DIB_RGB_COLORS);
+
+    DWORD bg = (GetRValue(bgColor) << 16) | (GetGValue(bgColor) << 8) | GetBValue(bgColor);
+
+    // fix the four corners
+    for (int cy = 0; cy < radius; cy++) {
+        for (int cx = 0; cx < radius; cx++) {
+            // distance from corner center to pixel
+            int dx = radius - 1 - cx;
+            int dy = radius - 1 - cy;
+            if (dx * dx + dy * dy > radius * radius) {
+                // outside the rounded corner — replace with background
+                // top-left
+                pixels[cy * w + cx] = bg;
+                // top-right
+                pixels[cy * w + (w - 1 - cx)] = bg;
+                // bottom-left
+                pixels[(h - 1 - cy) * w + cx] = bg;
+                // bottom-right
+                pixels[(h - 1 - cy) * w + (w - 1 - cx)] = bg;
+            }
+        }
+    }
+
+    SetDIBits(hdc, hbm, 0, h, pixels, &bmi, DIB_RGB_COLORS);
+    free(pixels);
+    ReleaseDC(nullptr, hdc);
+}
+
+// outW/outH receive the actual captured size (may differ from GetWindowRect due to cropping)
+static HBITMAP CaptureWindowBmp(HWND hwnd, int* outW, int* outH) {
+    RECT fullRect;
+    if (!GetWindowRect(hwnd, &fullRect)) {
         return nullptr;
     }
-    int w = rect.right - rect.left;
-    int h = rect.bottom - rect.top;
-    if (w <= 0 || h <= 0) {
+    int fullW = fullRect.right - fullRect.left;
+    int fullH = fullRect.bottom - fullRect.top;
+    if (fullW <= 0 || fullH <= 0) {
         return nullptr;
     }
 
     HDC hdcWin = GetWindowDC(hwnd);
     HDC hdcMem = CreateCompatibleDC(hdcWin);
-    HBITMAP hbm = CreateCompatibleBitmap(hdcWin, w, h);
-    SelectObject(hdcMem, hbm);
+    HBITMAP hbmFull = CreateCompatibleBitmap(hdcWin, fullW, fullH);
+    SelectObject(hdcMem, hbmFull);
 
     // Try PrintWindow with PW_RENDERFULLCONTENT (0x2) first (Windows 8.1+)
     BOOL ok = PrintWindow(hwnd, hdcMem, 0x2);
     if (!ok) {
-        ok = BitBlt(hdcMem, 0, 0, w, h, hdcWin, 0, 0, SRCCOPY);
+        ok = BitBlt(hdcMem, 0, 0, fullW, fullH, hdcWin, 0, 0, SRCCOPY);
     }
 
     DeleteDC(hdcMem);
     ReleaseDC(hwnd, hdcWin);
 
-    if (ok) {
-        return hbm;
+    if (!ok) {
+        DeleteObject(hbmFull);
+        return nullptr;
     }
-    DeleteObject(hbm);
-    return nullptr;
+
+    // crop to visible frame bounds (excludes invisible resize/shadow border)
+    RECT visibleRect;
+    HRESULT hr = dwm::GetWindowAttribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &visibleRect, sizeof(visibleRect));
+    if (SUCCEEDED(hr)) {
+        int cropX = visibleRect.left - fullRect.left;
+        int cropY = visibleRect.top - fullRect.top;
+        int cropW = visibleRect.right - visibleRect.left;
+        int cropH = visibleRect.bottom - visibleRect.top;
+        if (cropX > 0 || cropY > 0 || cropW < fullW || cropH < fullH) {
+            HDC hdcScreen = GetDC(nullptr);
+            HDC hdcSrc = CreateCompatibleDC(hdcScreen);
+            HDC hdcDst = CreateCompatibleDC(hdcScreen);
+            HBITMAP hbmCropped = CreateCompatibleBitmap(hdcScreen, cropW, cropH);
+            SelectObject(hdcSrc, hbmFull);
+            SelectObject(hdcDst, hbmCropped);
+            BitBlt(hdcDst, 0, 0, cropW, cropH, hdcSrc, cropX, cropY, SRCCOPY);
+            DeleteDC(hdcSrc);
+            DeleteDC(hdcDst);
+            ReleaseDC(nullptr, hdcScreen);
+            DeleteObject(hbmFull);
+            hbmFull = hbmCropped;
+            fullW = cropW;
+            fullH = cropH;
+        }
+    }
+
+    // fix black corners from DWM rounded windows
+    DWM_WINDOW_CORNER_PREFERENCE cornerPref = DWMWCP_DEFAULT;
+    dwm::GetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
+    if (cornerPref == DWMWCP_DEFAULT || cornerPref == DWMWCP_ROUND || cornerPref == DWMWCP_ROUNDSMALL) {
+        COLORREF bgColor = GetSysColor(COLOR_WINDOW);
+        FixRoundedCorners(hbmFull, fullW, fullH, bgColor);
+    }
+
+    *outW = fullW;
+    *outH = fullH;
+    return hbmFull;
 }
 
 static TempStr GetWindowProcessNameTemp(HWND hwnd) {
@@ -268,14 +354,11 @@ static BOOL CALLBACK EnumCaptureWindowsProc(HWND hwnd, LPARAM lParam) {
     if (!ShouldCaptureWindow(hwnd, ctx->overlayHwnd)) {
         return TRUE;
     }
-    HBITMAP hbm = CaptureWindowBmp(hwnd);
+    int w = 0, h = 0;
+    HBITMAP hbm = CaptureWindowBmp(hwnd, &w, &h);
     if (!hbm) {
         return TRUE;
     }
-    RECT rect;
-    GetWindowRect(hwnd, &rect);
-    int w = rect.right - rect.left;
-    int h = rect.bottom - rect.top;
 
     CapturedScreenshot cs;
     cs.bmp = hbm;
