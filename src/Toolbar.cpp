@@ -355,9 +355,9 @@ void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
             }
             // update tooltip before SetTabDirty (which rebuilds tooltips via LayoutTabs)
             TabInfo* ti = win->tabsCtrl->GetTab(i);
-            if (ti && tab) {
+            if (ti && tab && tab->filePath) {
                 const char* path = tab->filePath;
-                if (dirty && path) {
+                if (dirty) {
                     TempStr tooltip = str::JoinTemp(path, _TRA(" (unsaved annotations)"));
                     str::ReplaceWithCopy(&ti->tooltip, tooltip);
                 } else {
