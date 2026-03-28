@@ -475,6 +475,25 @@ LRESULT CALLBACK ReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
             }
         }
     }
+    // allow window dragging from empty rebar area (main toolbar)
+    if (WM_LBUTTONDOWN == uMsg) {
+        auto win = FindMainWindowByHwnd(hWnd);
+        if (win && win->tabsInTitlebar) {
+            HWND hwndFrame = GetAncestor(hWnd, GA_ROOT);
+            ReleaseCapture();
+            SendMessageW(hwndFrame, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            return 0;
+        }
+    }
+    if (WM_LBUTTONDBLCLK == uMsg) {
+        auto win = FindMainWindowByHwnd(hWnd);
+        if (win && win->tabsInTitlebar) {
+            HWND hwndFrame = GetAncestor(hWnd, GA_ROOT);
+            WPARAM cmd = IsZoomed(hwndFrame) ? SC_RESTORE : SC_MAXIMIZE;
+            PostMessageW(hwndFrame, WM_SYSCOMMAND, cmd, 0);
+            return 0;
+        }
+    }
     if (WM_NCDESTROY == uMsg) {
         RemoveWindowSubclass(hWnd, ReBarWndProc, uIdSubclass);
     }
@@ -528,6 +547,33 @@ static LRESULT CALLBACK WndProcToolbar(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp
             FindTextOnThread(win, TextSearch::Direction::Forward, false);
         }
     }
+
+    // allow window dragging from empty toolbar areas
+    if (WM_LBUTTONDOWN == msg || WM_LBUTTONDBLCLK == msg) {
+        MainWindow* win = FindMainWindowByHwnd(hwnd);
+        if (win && win->tabsInTitlebar) {
+            POINT pt = {GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+            int idx = (int)SendMessageW(hwnd, TB_HITTEST, 0, (LPARAM)&pt);
+            if (idx < 0) {
+                // also check we're not over a child control (find box, page box)
+                POINT ptScreen = pt;
+                ClientToScreen(hwnd, &ptScreen);
+                HWND childAtPoint = ChildWindowFromPoint(hwnd, pt);
+                if (!childAtPoint || childAtPoint == hwnd) {
+                    HWND hwndFrame = GetAncestor(hwnd, GA_ROOT);
+                    if (WM_LBUTTONDBLCLK == msg) {
+                        WPARAM cmd = IsZoomed(hwndFrame) ? SC_RESTORE : SC_MAXIMIZE;
+                        PostMessageW(hwndFrame, WM_SYSCOMMAND, cmd, 0);
+                    } else {
+                        ReleaseCapture();
+                        SendMessageW(hwndFrame, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+                    }
+                    return 0;
+                }
+            }
+        }
+    }
+
     return CallWindowProc(DefWndProcToolbar, hwnd, msg, wp, lp);
 }
 
