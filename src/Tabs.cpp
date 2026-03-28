@@ -403,8 +403,7 @@ static void TabsContextMenu(ContextMenuEvent* ev) {
             break;
         }
         case CmdProperties: {
-            bool extended = false;
-            ShowProperties(win->hwndFrame, tabUnderMouse->ctrl, extended);
+            ShowProperties(win->hwndFrame, tabUnderMouse->ctrl);
             break;
         }
     }

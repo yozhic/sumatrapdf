@@ -6272,8 +6272,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdProperties: {
-            bool extended = false;
-            ShowProperties(win->hwndFrame, win->ctrl, extended);
+            ShowProperties(win->hwndFrame, win->ctrl);
             break;
         }
 

@@ -6,6 +6,8 @@
 #include "utils/ScopedWin.h"
 #include "utils/FileUtil.h"
 #include "utils/WinUtil.h"
+#include "utils/ThreadUtil.h"
+#include "utils/UITask.h"
 
 #include "wingui/UIModels.h"
 #include "wingui/Layout.h"
@@ -33,7 +35,7 @@
 #include "Theme.h"
 #include "DarkModeSubclass.h"
 
-void ShowProperties(HWND parent, DocController* ctrl, bool extended);
+void ShowProperties(HWND parent, DocController* ctrl);
 
 constexpr const WCHAR* kPropertiesWinClassName = L"SUMATRA_PDF_PROPERTIES";
 
@@ -45,15 +47,11 @@ struct PropertiesLayout {
     HWND hwndParent = nullptr;
     HWND hwndEdit = nullptr;
     Button* btnCopyToClipboard = nullptr;
-    Button* btnGetFonts = nullptr;
     str::Str propsText;
     Point initialPos;
 
     PropertiesLayout() = default;
-    ~PropertiesLayout() {
-        delete btnCopyToClipboard;
-        delete btnGetFonts;
-    }
+    ~PropertiesLayout() { delete btnCopyToClipboard; }
 };
 
 static Vec<PropertiesLayout*> gPropertiesWindows;
@@ -306,7 +304,7 @@ static void AppendPdfFileStructure(str::Str& out, DocController* ctrl) {
     if (str::IsEmpty(fstruct)) {
         bool isPDF = str::EndsWithI(ctrl->GetFilePath(), ".pdf");
         if (isPDF) {
-            AppendProp(out, _TRA("Fast Web View"), _TRA("No"));
+            AppendProp(out, str::JoinTemp(_TRA("Fast Web View"), ":"), _TRA("No"));
         }
         return;
     }
@@ -319,7 +317,7 @@ static void AppendPdfFileStructure(str::Str& out, DocController* ctrl) {
     if (parts.Contains("linearized")) {
         linearized = _TRA("Yes");
     }
-    AppendProp(out, _TRA("Fast Web View"), linearized);
+    AppendProp(out, str::JoinTemp(_TRA("Fast Web View"), ":"), linearized);
 
     if (parts.Contains("tagged")) {
         props.Append(_TRA("Tagged PDF"));
@@ -338,7 +336,7 @@ static void AppendPdfFileStructure(str::Str& out, DocController* ctrl) {
     AppendProp(out, _TRA("PDF Optimizations:"), val);
 }
 
-static void GetPropsText(DocController* ctrl, str::Str& out, bool extended) {
+static void GetPropsText(DocController* ctrl, str::Str& out) {
     ReportIf(!ctrl);
 
     const char* path = gPluginMode ? gPluginURL : ctrl->GetFilePath();
@@ -409,17 +407,6 @@ static void GetPropsText(DocController* ctrl, str::Str& out, bool extended) {
 
     strTemp = FormatPermissionsTemp(ctrl);
     AppendProp(out, _TRA("Denied Permissions:"), strTemp);
-
-    if (extended) {
-        // Note: FontList extraction can take a while
-        val = ctrl->GetPropertyTemp(kPropFontList);
-        if (val) {
-            out.Append("\n");
-            out.Append(_TRA("Fonts:"));
-            out.Append("\n");
-            out.Append(val);
-        }
-    }
 }
 
 static void SetEditText(HWND hwndEdit, const char* text) {
@@ -435,22 +422,6 @@ static void SetEditText(HWND hwndEdit, const char* text) {
     SendMessageW(hwndEdit, EM_SETSEL, 0, 0);
 }
 
-static void ShowExtendedProperties(PropertiesLayout* pl) {
-    if (!pl) {
-        return;
-    }
-    // check if already showing fonts
-    if (str::Find(pl->propsText.CStr(), _TRA("Fonts:"))) {
-        return;
-    }
-    MainWindow* win = FindMainWindowByHwnd(pl->hwndParent);
-    if (!win) {
-        return;
-    }
-    DestroyWindow(pl->hwnd);
-    ShowProperties(win->hwndFrame, win->ctrl, true);
-}
-
 static void CopyPropertiesToClipboard(PropertiesLayout* pl) {
     if (!pl) {
         return;
@@ -458,15 +429,62 @@ static void CopyPropertiesToClipboard(PropertiesLayout* pl) {
     CopyTextToClipboard(pl->propsText.CStr());
 }
 
+static void SizeToContent(PropertiesLayout* pl) {
+    HWND hwnd = pl->hwnd;
+    HWND hwndEdit = pl->hwndEdit;
+
+    HFONT font = (HFONT)SendMessageW(hwndEdit, WM_GETFONT, 0, 0);
+    HDC hdcEdit = GetDC(hwndEdit);
+    HGDIOBJ origFont = SelectObject(hdcEdit, font);
+    int maxLineDx = 0;
+    int nLines = 0;
+    const char* text = pl->propsText.CStr();
+    while (*text) {
+        const char* nl = str::FindChar(text, '\n');
+        int lineLen = nl ? (int)(nl - text) : str::Leni(text);
+        SIZE sz{};
+        TempWStr lineW = ToWStrTemp(text, (size_t)lineLen);
+        GetTextExtentPoint32W(hdcEdit, lineW, str::Leni(lineW), &sz);
+        if (sz.cx > maxLineDx) {
+            maxLineDx = sz.cx;
+        }
+        nLines++;
+        text = nl ? nl + 1 : text + lineLen;
+    }
+    maxLineDx += 16;
+
+    TEXTMETRICW tm{};
+    GetTextMetricsW(hdcEdit, &tm);
+    int lineHeight = tm.tmHeight + tm.tmExternalLeading;
+
+    SelectObject(hdcEdit, origFont);
+    ReleaseDC(hwndEdit, hdcEdit);
+
+    // add padding for scrollbar, border, window frame
+    int editPadding = GetSystemMetrics(SM_CXVSCROLL) + 2 * GetSystemMetrics(SM_CXEDGE) + 16;
+    int frameDx = GetSystemMetrics(SM_CXFRAME) * 2;
+    int wantedClientDx = maxLineDx + editPadding;
+    int wantedDx = wantedClientDx + frameDx;
+
+    // calculate height to fit all lines
+    int editBorderDy = 2 * GetSystemMetrics(SM_CYEDGE);
+    int frameDy = GetSystemMetrics(SM_CYFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION);
+    int wantedDy = (nLines + 3) * lineHeight + editBorderDy + kButtonAreaDy + frameDy;
+
+    // cap at 80% of screen
+    Rect work = GetWorkAreaRect(WindowRect(hwnd), hwnd);
+    int maxDx = (work.dx * 80) / 100;
+    int maxDy = (work.dy * 80) / 100;
+    wantedDx = std::min(wantedDx, maxDx);
+    wantedDy = std::min(wantedDy, maxDy);
+
+    Rect wRc = WindowRect(hwnd);
+    MoveWindow(hwnd, wRc.x, wRc.y, wantedDx, wantedDy, TRUE);
+}
+
 static void LayoutButtons(PropertiesLayout* pl) {
     Rect cRc = ClientRect(pl->hwnd);
     int btnY = cRc.dy - kButtonAreaDy + kButtonPadding;
-
-    if (pl->btnGetFonts) {
-        auto sz = pl->btnGetFonts->GetIdealSize();
-        Rect rc{kButtonPadding, btnY, sz.dx, sz.dy};
-        pl->btnGetFonts->SetBounds(rc);
-    }
 
     if (pl->btnCopyToClipboard) {
         auto sz = pl->btnCopyToClipboard->GetIdealSize();
@@ -494,11 +512,6 @@ static void PropertiesOnCommand(HWND hwnd, WPARAM wp) {
     switch (cmd) {
         case CmdCopySelection:
             CopyPropertiesToClipboard(pl);
-            break;
-
-        case CmdProperties:
-            // make a repeated Ctrl+D display some extended properties
-            ShowExtendedProperties(pl);
             break;
     }
 }
@@ -560,7 +573,53 @@ LRESULT CALLBACK WndProcProperties(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     return 0;
 }
 
-void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
+struct GetFontsResult {
+    HWND hwnd;
+    str::Str fontsText;
+};
+
+static void OnGetFontsFinished(GetFontsResult* result) {
+    PropertiesLayout* pl = FindPropertyWindowByHwnd(result->hwnd);
+    if (pl) {
+        // remove "Getting fonts information..." line
+        const char* marker = _TRA("Getting fonts information...");
+        const char* found = str::Find(pl->propsText.CStr(), marker);
+        if (found) {
+            int pos = (int)(found - pl->propsText.CStr());
+            if (pos > 0 && pl->propsText.CStr()[pos - 1] == '\n') {
+                pos--;
+            }
+            pl->propsText.RemoveAt(pos, pl->propsText.Size() - pos);
+        }
+        pl->propsText.Append(result->fontsText.CStr());
+        SetEditText(pl->hwndEdit, pl->propsText.CStr());
+        SizeToContent(pl);
+    }
+    delete result;
+}
+
+struct GetFontsData {
+    HWND hwnd;
+    DocController* ctrl;
+};
+
+static void GetFontsThread(GetFontsData* data) {
+    TempStr val = data->ctrl->GetPropertyTemp(kPropFontList);
+    auto result = new GetFontsResult;
+    result->hwnd = data->hwnd;
+    if (val) {
+        result->fontsText.Append("\n");
+        result->fontsText.Append(_TRA("Fonts:"));
+        result->fontsText.Append("\n");
+        result->fontsText.Append(val);
+    }
+    auto fn = MkFunc0<GetFontsResult>(OnGetFontsFinished, result);
+    uitask::Post(fn, "GetFontsFinished");
+    delete data;
+    DestroyTempAllocator();
+}
+
+void ShowProperties(HWND parent, DocController* ctrl) {
     PropertiesLayout* layoutData = FindPropertyWindowByHwnd(parent);
     if (layoutData) {
         SetActiveWindow(layoutData->hwnd);
@@ -573,7 +632,9 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
 
     layoutData = new PropertiesLayout();
     gPropertiesWindows.Append(layoutData);
-    GetPropsText(ctrl, layoutData->propsText, extended);
+    GetPropsText(ctrl, layoutData->propsText);
+    layoutData->propsText.Append("\n");
+    layoutData->propsText.Append(_TRA("Getting fonts information..."));
 
     HMODULE h = GetModuleHandleW(nullptr);
     WNDCLASSEX wcex = {};
@@ -623,55 +684,7 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
 
     SetEditText(hwndEdit, layoutData->propsText.CStr());
 
-    // estimate window size based on text content
-    {
-        HDC hdcEdit = GetDC(hwndEdit);
-        HGDIOBJ origFont = SelectObject(hdcEdit, font);
-        int maxLineDx = 0;
-        int nLines = 0;
-        const char* text = layoutData->propsText.CStr();
-        while (*text) {
-            const char* nl = str::FindChar(text, '\n');
-            int lineLen = nl ? (int)(nl - text) : str::Leni(text);
-            SIZE sz{};
-            TempWStr lineW = ToWStrTemp(text, (size_t)lineLen);
-            GetTextExtentPoint32W(hdcEdit, lineW, str::Leni(lineW), &sz);
-            if (sz.cx > maxLineDx) {
-                maxLineDx = sz.cx;
-            }
-            nLines++;
-            text = nl ? nl + 1 : text + lineLen;
-        }
-        maxLineDx += 16;
-
-        TEXTMETRICW tm{};
-        GetTextMetricsW(hdcEdit, &tm);
-        int lineHeight = tm.tmHeight + tm.tmExternalLeading;
-
-        SelectObject(hdcEdit, origFont);
-        ReleaseDC(hwndEdit, hdcEdit);
-
-        // add padding for scrollbar, border, window frame
-        int editPadding = GetSystemMetrics(SM_CXVSCROLL) + 2 * GetSystemMetrics(SM_CXEDGE) + 16;
-        int frameDx = GetSystemMetrics(SM_CXFRAME) * 2;
-        int wantedClientDx = maxLineDx + editPadding;
-        int wantedDx = wantedClientDx + frameDx;
-
-        // calculate height to fit all lines
-        int editBorderDy = 2 * GetSystemMetrics(SM_CYEDGE);
-        int frameDy = GetSystemMetrics(SM_CYFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION);
-        int wantedDy = (nLines + 3) * lineHeight + editBorderDy + kButtonAreaDy + frameDy;
-
-        // cap at 80% of screen
-        Rect work = GetWorkAreaRect(WindowRect(parent), hwnd);
-        int maxDx = (work.dx * 80) / 100;
-        int maxDy = (work.dy * 80) / 100;
-        wantedDx = std::min(wantedDx, maxDx);
-        wantedDy = std::min(wantedDy, maxDy);
-
-        Rect wRc = WindowRect(hwnd);
-        MoveWindow(hwnd, wRc.x, wRc.y, wantedDx, wantedDy, TRUE);
-    }
+    SizeToContent(layoutData);
 
     // create buttons
     {
@@ -684,18 +697,6 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
         b->Create(args);
         layoutData->btnCopyToClipboard = b;
         b->onClick = MkFunc0(CopyPropertiesToClipboard, layoutData);
-    }
-
-    if (!extended) {
-        Button::CreateArgs args;
-        args.parent = hwnd;
-        args.text = _TRA("Get Fonts Info");
-        args.isRtl = isRtl;
-
-        auto b = new Button();
-        b->Create(args);
-        layoutData->btnGetFonts = b;
-        b->onClick = MkFunc0(ShowExtendedProperties, layoutData);
     }
 
     LayoutButtons(layoutData);
@@ -716,4 +717,11 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
         DarkMode::setWindowEraseBgSubclass(hwnd);
     }
     ShowWindow(hwnd, SW_SHOW);
+
+    // start background font loading
+    auto data = new GetFontsData;
+    data->hwnd = hwnd;
+    data->ctrl = ctrl;
+    auto fn = MkFunc0<GetFontsData>(GetFontsThread, data);
+    RunAsync(fn, "GetFontsThread");
 }
