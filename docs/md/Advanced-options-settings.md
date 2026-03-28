@@ -563,6 +563,9 @@ TimeOfLastUpdateCheck = 0 0
 
 ; value required to determine recency for the OpenCount value in FileStates
 OpenCountWeek = 0
+
+; position of the document properties window
+PropWinPos = 0 0
 ```
 
 ## Syntax for color values

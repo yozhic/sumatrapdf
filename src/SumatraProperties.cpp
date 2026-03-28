@@ -12,6 +12,8 @@
 #include "wingui/WinGui.h"
 
 #include "Settings.h"
+#include "GlobalPrefs.h"
+#include "AppSettings.h"
 #include "DocProperties.h"
 #include "DocController.h"
 #include "EngineBase.h"
@@ -45,6 +47,7 @@ struct PropertiesLayout {
     Button* btnCopyToClipboard = nullptr;
     Button* btnGetFonts = nullptr;
     str::Str propsText;
+    Point initialPos;
 
     PropertiesLayout() = default;
     ~PropertiesLayout() {
@@ -535,6 +538,14 @@ LRESULT CALLBACK WndProcProperties(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         case WM_DESTROY:
             pl = FindPropertyWindowByHwnd(hwnd);
             ReportIf(!pl);
+            if (pl) {
+                Rect rc = WindowRect(hwnd);
+                Point pos = {rc.x, rc.y};
+                if (pos != pl->initialPos) {
+                    gGlobalPrefs->propWinPos = pos;
+                    SaveSettings();
+                }
+            }
             gPropertiesWindows.Remove(pl);
             delete pl;
             break;
@@ -675,7 +686,17 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
 
     LayoutButtons(layoutData);
 
-    CenterDialog(hwnd, parent);
+    Point savedPos = gGlobalPrefs->propWinPos;
+    if (!savedPos.IsEmpty()) {
+        SetWindowPos(hwnd, nullptr, savedPos.x, savedPos.y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+    } else {
+        CenterDialog(hwnd, parent);
+    }
+    HwndEnsureVisible(hwnd);
+    {
+        Rect rc = WindowRect(hwnd);
+        layoutData->initialPos = {rc.x, rc.y};
+    }
     if (UseDarkModeLib()) {
         DarkMode::setDarkWndSafe(hwnd);
         DarkMode::setWindowEraseBgSubclass(hwnd);

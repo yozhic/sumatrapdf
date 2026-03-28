@@ -29,7 +29,7 @@ interface Field {
   Type: Type;
   Default: any;
   Comment: string;
-  Internal: boolean;
+  NotSaved: boolean;
   CName: string;
   Expert: boolean;
   DocComment: string;
@@ -55,7 +55,7 @@ function mkField(name: string, typ: Type, def: any, comment: string): Field {
     Type: typ,
     Default: def,
     Comment: comment,
-    Internal: false,
+    NotSaved: false,
     CName: name !== "" ? toCName(name) : "",
     Expert: false,
     DocComment: comment,
@@ -70,8 +70,8 @@ function setExpert(f: Field): Field {
   return f;
 }
 
-function setInternal(f: Field): Field {
-  f.Internal = true;
+function notSaved(f: Field): Field {
+  f.NotSaved = true;
   return f;
 }
 
@@ -175,12 +175,17 @@ const windowPos: Field[] = [
   mkField("Dy", Int, 0, "height"),
 ];
 
+const pointPos: Field[] = [
+  mkField("X", Int, 0, "x coordinate"),
+  mkField("Y", Int, 0, "y coordinate"),
+];
+
 const keyboardShortcut: Field[] = [
   mkField("Cmd", Str, "", "command"),
   mkField("Key", Str, "", "keyboard shortcut (e.g. Ctrl-Alt-F)"),
   setVersion(mkField("Name", Str, null, "name shown in command palette"), "3.6"),
   setVersion(mkField("ToolbarText", Str, null, "if given, shows in toolbar"), "3.6"),
-  setInternal(setVersion(mkField("CmdId", Int, null, "command id"), "3.6")),
+  notSaved(setVersion(mkField("CmdId", Int, null, "command id"), "3.6")),
 ];
 
 const scrollPos: Field[] = [mkField("X", Float, 0, "x coordinate"), mkField("Y", Float, 0, "y coordinate")];
@@ -383,7 +388,7 @@ const favorite: Field[] = [
     null,
     "label for this page (only present if logical and physical page numbers are not the same)",
   ),
-  setInternal(mkField("MenuId", Int, 0, "id of this favorite in the menu (assigned by AppendFavMenuItems)")),
+  notSaved(mkField("MenuId", Int, 0, "id of this favorite in the menu (assigned by AppendFavMenuItems)")),
 ];
 
 const fileSettings: Field[] = [
@@ -496,7 +501,7 @@ const fileSettings: Field[] = [
     ),
     "data required to determine which parts of the table of contents have been expanded",
   ),
-  setInternal(
+  notSaved(
     mkField(
       "Thumbnail",
       { name: "", ctype: "RenderedBitmap *" },
@@ -504,11 +509,11 @@ const fileSettings: Field[] = [
       "thumbnails are saved as PNG files in sumatrapdfcache directory",
     ),
   ),
-  setInternal(
+  notSaved(
     mkField("Index", { name: "", ctype: "size_t" }, "0", "temporary value needed for FileHistory::cmpOpenCount"),
   ),
-  setInternal(mkField("Himl", { name: "", ctype: "HIMAGELIST" }, "NULL", "")),
-  setInternal(mkField("IconIdx", Int, -1, "")),
+  notSaved(mkField("Himl", { name: "", ctype: "HIMAGELIST" }, "NULL", "")),
+  notSaved(mkField("IconIdx", Int, -1, "")),
 ];
 
 const tabState: Field[] = [
@@ -739,7 +744,7 @@ const globalPrefs: Field[] = [
     ),
     "sequence of zoom levels when zooming in/out; all values must lie between 8.33 and 6400",
   ),
-  setInternal(mkCompactArray("ZoomLevelsCmdIds", Int, "", "")),
+  notSaved(mkCompactArray("ZoomLevelsCmdIds", Int, "", "")),
   setExpert(
     mkField(
       "ZoomIncrement",
@@ -849,13 +854,13 @@ const globalPrefs: Field[] = [
     mkField("OpenCountWeek", Int, 0, 'week count since 2011-01-01 needed to "age" openCount values in file history'),
     "value required to determine recency for the OpenCount value in FileStates",
   ),
-  setInternal(
+  notSaved(
     setStructName(
       mkCompactStruct("LastPrefUpdate", fileTime, "modification time of the preferences file when it was last read"),
       "FILETIME",
     ),
   ),
-  setInternal(
+  notSaved(
     mkField(
       "DefaultDisplayModeEnum",
       { name: "", ctype: "DisplayMode" },
@@ -863,8 +868,12 @@ const globalPrefs: Field[] = [
       "value of DefaultDisplayMode for internal usage",
     ),
   ),
-  setInternal(mkField("DefaultZoomFloat", Float, -1, "value of DefaultZoom for internal usage")),
-  setInternal(mkField("DefaultImageZoomFloat", Float, 0, "value of DefaultImageZoom for internal usage. 0 means not set")),
+  notSaved(mkField("DefaultZoomFloat", Float, -1, "value of DefaultZoom for internal usage")),
+  notSaved(mkField("DefaultImageZoomFloat", Float, 0, "value of DefaultImageZoom for internal usage. 0 means not set")),
+  setStructName(
+    mkCompactStruct("PropWinPos", pointPos, "position of the document properties window"),
+    "Point",
+  ),
   mkEmptyLine(),
   mkComment("Settings below are not recognized by the current version"),
 ];
@@ -1038,7 +1047,7 @@ function buildMetaData(struc: Field, built: Record<string, number>): string {
   const fullName = struc.StructName + suffix;
   const fields = struc.Default as Field[];
   for (const field of fields) {
-    if (field.Internal) continue;
+    if (field.NotSaved) continue;
     const dataLine: string[] = [];
     dataLine.push(`offsetof(${struc.StructName}, ${field.CName})`);
     dataLine.push(`SettingType::${field.Type.name}`);
@@ -1199,7 +1208,7 @@ function genStructHTML(struc: Field, indent: string): string {
 
   const fields = struc.Default as Field[];
   for (const field of fields) {
-    if (field.Internal || isComment(field)) continue;
+    if (field.NotSaved || isComment(field)) continue;
     const startIdx = lines.length;
     let comment = field.DocComment;
     if (field.Version !== "2.3") {
@@ -1286,7 +1295,7 @@ function genStructMarkdown(struc: Field, indent: string): string {
 
   const fields = struc.Default as Field[];
   for (const field of fields) {
-    if (field.Internal || isComment(field)) continue;
+    if (field.NotSaved || isComment(field)) continue;
     let comment = field.DocComment;
     if (field.Version !== "2.3") {
       comment += ` (introduced in version ${field.Version})`;
