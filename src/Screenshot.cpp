@@ -79,7 +79,12 @@ static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
     }
     HWND hwndOwner = GetWindow(hwnd, GW_OWNER);
     if (hwndOwner != nullptr && !(exStyle & WS_EX_APPWINDOW)) {
-        return false;
+        // owned window without WS_EX_APPWINDOW: accept if it has a caption
+        // (modal dialogs like config windows), reject otherwise
+        LONG_PTR style = GetWindowLongPtrW(hwnd, GWL_STYLE);
+        if ((style & WS_CAPTION) != WS_CAPTION) {
+            return false;
+        }
     }
     BOOL isCloaked = FALSE;
     if (SUCCEEDED(dwm::GetWindowAttribute(hwnd, DWMWA_CLOAKED, &isCloaked, sizeof(isCloaked)))) {
