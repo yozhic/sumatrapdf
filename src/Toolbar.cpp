@@ -494,7 +494,7 @@ static LRESULT CALLBACK WndProcEditBg(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
         RECT rc;
         GetClientRect(hwnd, &rc);
         COLORREF bgCol2 = ThemeControlBackgroundColor();
-        COLORREF col = IsLightColor(bgCol2) ? AdjustLightness2(bgCol2, -40) : AdjustLightness2(bgCol2, 40);
+        COLORREF col = AccentColor(bgCol2, 40);
         HBRUSH br = CreateSolidBrush(col);
         FrameRect(hdc, &rc, br);
         DeleteObject(br);

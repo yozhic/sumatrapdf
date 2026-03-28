@@ -222,8 +222,8 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setBackgroundColor(ThemeWindowBackgroundColor());
         DarkMode::setCtrlBackgroundColor(ThemeWindowControlBackgroundColor());
         COLORREF ctrlBg = ThemeWindowControlBackgroundColor();
-        COLORREF hotBg = IsLightColor(ctrlBg) ? AdjustLightness2(ctrlBg, -20) : AdjustLightness2(ctrlBg, 20);
-        COLORREF edgeCol = IsLightColor(ctrlBg) ? AdjustLightness2(ctrlBg, -40) : AdjustLightness2(ctrlBg, 40);
+        COLORREF hotBg = AccentColor(ctrlBg, 20);
+        COLORREF edgeCol = AccentColor(ctrlBg, 40);
         DarkMode::setHotBackgroundColor(hotBg);
         DarkMode::setTextColor(ThemeWindowTextColor());
         DarkMode::setDisabledTextColor(ThemeWindowTextDisabledColor());
@@ -291,14 +291,14 @@ void SetCurrentThemeFromSettings() {
     }
 }
 
-// if is dark, makes lighter, if light, makes darker
-static COLORREF AdjustLightOrDark(COLORREF col, float n) {
-    if (IsLightColor(col)) {
-        col = AdjustLightness2(col, -n);
-    } else {
-        col = AdjustLightness2(col, n);
+COLORREF AccentColor(COLORREF col, int light, int dark) {
+    if (dark == 0) {
+        dark = light;
     }
-    return col;
+    if (IsLightColor(col)) {
+        return AdjustLightness2(col, -light);
+    }
+    return AdjustLightness2(col, dark);
 }
 
 #define GetThemeCol(name, def) GetParsedCOLORREF(name, name##Parsed, def)
@@ -345,7 +345,7 @@ COLORREF ThemeDocumentColors(COLORREF& bg) {
         // this is probably not expected for custom colors but we used to do
         // it for built-in themes
         // so do it for legacy themes but not for custom themes or new Dark theme
-        bg = AdjustLightOrDark(bg, 8);
+        bg = AccentColor(bg, 8);
     }
     return text;
 }
@@ -411,7 +411,7 @@ COLORREF ThemeNotificationsTextColor() {
 COLORREF ThemeNotificationsHighlightColor() {
     if (gCurrentTheme->colorizeControls) {
         auto col = ThemeWindowBackgroundColor();
-        return AdjustLightOrDark(col, 20);
+        return AccentColor(col, 20);
     }
     return RgbToCOLORREF(0xFFEE70); // yellowish
 }
@@ -419,7 +419,7 @@ COLORREF ThemeNotificationsHighlightColor() {
 COLORREF ThemeNotificationsHighlightTextColor() {
     if (gCurrentTheme->colorizeControls) {
         auto col = ThemeWindowTextColor();
-        return AdjustLightOrDark(col, 20);
+        return AccentColor(col, 20);
     }
     return RgbToCOLORREF(0x8d0801); // reddish
 }

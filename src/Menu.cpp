@@ -2171,10 +2171,10 @@ void MenuCustomDrawItem(HWND hwnd, DRAWITEMSTRUCT* dis) {
         txtCol = ThemeWindowTextDisabledColor();
         if (isSelected) {
             // subtle highlight for disabled selected items
-            bgCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -10) : AdjustLightness2(bgCol, 10);
+            bgCol = AccentColor(bgCol, 10);
         }
     } else if (isSelected) {
-        bgCol = IsLightColor(bgCol) ? AdjustLightness2(bgCol, -40) : AdjustLightness2(bgCol, 40);
+        bgCol = AccentColor(bgCol, 40);
     }
 
     RECT rc = dis->rcItem;

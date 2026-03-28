@@ -31,18 +31,12 @@ static COLORREF ThemeTrackColor() {
 
 static COLORREF ThemeThumbColor() {
     COLORREF bg = ThemeControlBackgroundColor();
-    if (IsLightColor(bg)) {
-        return AdjustLightness2(bg, -100);
-    }
-    return AdjustLightness2(bg, 100);
+    return AccentColor(bg, 100);
 }
 
 static COLORREF ThemeThumbHoverColor() {
     COLORREF bg = ThemeControlBackgroundColor();
-    if (IsLightColor(bg)) {
-        return AdjustLightness2(bg, -140);
-    }
-    return AdjustLightness2(bg, 140);
+    return AccentColor(bg, 140);
 }
 
 static COLORREF ThemeArrowColor() {

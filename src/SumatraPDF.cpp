@@ -7031,11 +7031,7 @@ static void DrawCaptionButton(MainWindow* win, HDC hdc, ButtonInfo* bi) {
                 bgCol = isPushed ? Color(200, 196, 43, 28) : Color(255, 196, 43, 28);
             } else {
                 COLORREF hotBg = bgc;
-                if (IsLightColor(bgc)) {
-                    hotBg = isPushed ? AdjustLightness2(bgc, -40) : AdjustLightness2(bgc, -20);
-                } else {
-                    hotBg = isPushed ? AdjustLightness2(bgc, 40) : AdjustLightness2(bgc, 20);
-                }
+                hotBg = isPushed ? AccentColor(bgc, 40) : AccentColor(bgc, 20);
                 bgCol = GdiRgbFromCOLORREF(hotBg);
             }
             SolidBrush bgBr(bgCol);

@@ -212,13 +212,8 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
     COLORREF tabBgSelected = ThemeControlBackgroundColor();
     COLORREF tabBgHighlight;
     COLORREF tabBgBackground;
-    if (IsLightColor(tabBgSelected)) {
-        tabBgBackground = AdjustLightness2(tabBgSelected, -25);
-        tabBgHighlight = AdjustLightness2(tabBgSelected, -35);
-    } else {
-        tabBgBackground = AdjustLightness2(tabBgSelected, 25);
-        tabBgHighlight = AdjustLightness2(tabBgSelected, 35);
-    }
+    tabBgBackground = AccentColor(tabBgSelected, 25);
+    tabBgHighlight = AccentColor(tabBgSelected, 35);
 
     COLORREF tabBgCol;
     for (int i = 0; i < n; i++) {
