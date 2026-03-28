@@ -16,3 +16,11 @@ bool IsShowingToolbar(MainWindow*);
 void ShowOrHideToolbar(MainWindow*);
 void UpdateToolbarState(MainWindow*);
 void UpdateToolbarAfterThemeChange(MainWindow*);
+
+void CreateMenuBarRebar(MainWindow*);
+void DestroyMenuBarRebar(MainWindow*);
+void ShowMenuBarRebar(MainWindow*);
+void RebuildMenuBarButtons(MainWindow*);
+bool IsShowingMenuBarRebar(MainWindow*);
+bool HandleMenuBarCommand(MainWindow*, int cmdId);
+bool ActivateMenuBarByAccel(MainWindow*, WCHAR accel);

@@ -119,6 +119,8 @@ struct MainWindow {
 
     HWND hwndReBar = nullptr;
     HWND hwndToolbar = nullptr;
+    HWND hwndMenuReBar = nullptr;
+    HWND hwndMenuToolbar = nullptr;
     HWND hwndFindLabel = nullptr;
     HWND hwndFindEdit = nullptr;
     HWND hwndFindBg = nullptr;

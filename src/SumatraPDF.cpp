@@ -690,7 +690,14 @@ void RebuildMenuBarForWindow(MainWindow* win) {
     HMENU oldMenu = win->menu;
     win->menu = BuildMenu(win);
     if (!win->presentation && !win->isFullScreen && gGlobalPrefs->showMenubar) {
-        SetMenu(win->hwndFrame, win->menu);
+        if (win->tabsInTitlebar) {
+            // use rebar menu bar instead of native menu when tabs are in titlebar
+            if (IsShowingMenuBarRebar(win)) {
+                RebuildMenuBarButtons(win);
+            }
+        } else {
+            SetMenu(win->hwndFrame, win->menu);
+        }
     }
     FreeMenuOwnerDrawInfoData(oldMenu);
     DestroyMenu(oldMenu);
@@ -1620,9 +1627,8 @@ static MainWindow* CreateMainWindow() {
 
     ReportIf(win->menu);
     win->menu = BuildMenu(win);
-    if (gGlobalPrefs->showMenubar) {
-        SetMenu(win->hwndFrame, win->menu);
-    }
+    // menu bar is shown later, after SetTabsInTitlebar decides the mode:
+    // if tabsInTitlebar, we use a rebar menu bar; otherwise native SetMenu
     win->brControlBgColor = CreateSolidBrush(ThemeControlBackgroundColor());
 
     // suppress painting during window setup to avoid white flash with dark themes
@@ -1662,6 +1668,16 @@ static MainWindow* CreateMainWindow() {
     }
 
     SetTabsInTitlebar(win, gGlobalPrefs->useTabs);
+
+    // now show the menu bar in the appropriate style
+    if (gGlobalPrefs->showMenubar) {
+        if (win->tabsInTitlebar) {
+            CreateMenuBarRebar(win);
+        } else {
+            SetMenu(win->hwndFrame, win->menu);
+        }
+    }
+
     // TODO: this is hackish. in general we should divorce
     // layout re-calculations from MainWindow and creation of windows
     win->UpdateCanvasSize();
@@ -1679,6 +1695,9 @@ static MainWindow* CreateMainWindow() {
 
     // re-enable painting now that dark mode is configured
     SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
+
+    // show menu bar rebar now that layout is done
+    ShowMenuBarRebar(win);
 
     return win;
 }
@@ -3819,6 +3838,17 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
             rc.dy -= tabHeight;
         }
     }
+    if (IsShowingMenuBarRebar(win)) {
+        // RB_GETBARHEIGHT returns the band area height; add border pixels for WS_BORDER
+        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
+        int borderY = GetSystemMetrics(SM_CYBORDER);
+        menuBarDy += 2 * borderY;
+        if (updateToolbars) {
+            dh.SetWindowPos(win->hwndMenuReBar, nullptr, rc.x, rc.y, rc.dx, menuBarDy, SWP_NOZORDER);
+        }
+        rc.y += menuBarDy;
+        rc.dy -= menuBarDy;
+    }
     if (IsShowingToolbar(win)) {
         if (updateToolbars) {
             Rect rcRebar = WindowRect(win->hwndReBar);
@@ -4307,6 +4337,9 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
 
     SetMenu(win->hwndFrame, nullptr);
     ShowWindow(win->hwndReBar, SW_HIDE);
+    if (win->hwndMenuReBar) {
+        ShowWindow(win->hwndMenuReBar, SW_HIDE);
+    }
     win->tabsCtrl->SetIsVisible(false);
 
     // disable DWM rounded corners and border for true edge-to-edge fullscreen
@@ -4366,7 +4399,11 @@ void ExitFullScreen(MainWindow* win) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     }
     if (gGlobalPrefs->showMenubar) {
-        SetMenu(win->hwndFrame, win->menu);
+        if (win->tabsInTitlebar) {
+            CreateMenuBarRebar(win);
+        } else {
+            SetMenu(win->hwndFrame, win->menu);
+        }
     }
 
     // restore DWM rounded corners and border
@@ -4384,6 +4421,8 @@ void ExitFullScreen(MainWindow* win) {
     if (ClientRect(win->hwndFrame) == cr) {
         RelayoutFrame(win);
     }
+    // show menu bar rebar after layout positions it correctly
+    ShowMenuBarRebar(win);
 }
 
 void ToggleFullScreen(MainWindow* win, bool presentation) {
@@ -5144,7 +5183,11 @@ static void TransitionToNoTabs() {
         }
         if (!hasFiles) {
             for (MainWindow* w : gWindows) {
+                DestroyMenuBarRebar(w);
                 SetTabsInTitlebar(w, false);
+                if (gGlobalPrefs->showMenubar) {
+                    SetMenu(w->hwndFrame, w->menu);
+                }
                 w->RedrawAllIncludingNonClient();
             }
             return;
@@ -5159,6 +5202,7 @@ static void TransitionToNoTabs() {
         MainWindow* win;
         if (i == 0 && surviving) {
             win = surviving;
+            DestroyMenuBarRebar(win);
             SetTabsInTitlebar(win, false);
         } else {
             win = CreateAndShowMainWindow(nullptr);
@@ -5573,6 +5617,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
     if (cmdId >= 0xF000) {
         // handle system menu messages for the Window menu (needed for Tabs in Titlebar)
         return SendMessageW(hwnd, WM_SYSCOMMAND, wp, lp);
+    }
+
+    if (win && HandleMenuBarCommand(win, cmdId)) {
+        return 0;
     }
 
     if (CanAccessDisk()) {
@@ -6830,10 +6878,13 @@ void RelayoutCaption(MainWindow* win) {
     rc.x += tabHeight;
     rc.dx -= tabHeight;
 
+    bool showMenuBtn = !IsShowingMenuBarRebar(win);
     win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
-    win->captionBtn[CB_MENU].visible = true;
-    rc.x += tabHeight;
-    rc.dx -= tabHeight;
+    win->captionBtn[CB_MENU].visible = showMenuBtn;
+    if (showMenuBtn) {
+        rc.x += tabHeight;
+        rc.dx -= tabHeight;
+    }
 
     DeferWinPosHelper dh;
     dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
@@ -7277,6 +7328,12 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
 
         case WM_SYSCOMMAND:
             if (wp == SC_KEYMENU) {
+                if (IsShowingMenuBarRebar(win)) {
+                    // activate the rebar menu bar directly
+                    ActivateMenuBarByAccel(win, (WCHAR)lp);
+                    *callDef = false;
+                    return 0;
+                }
                 gMenuAccelPressed = (WCHAR)lp;
                 if (' ' == gMenuAccelPressed) {
                     auto pos = str::FindChar(_TRA("&Window"), '&');
@@ -7292,6 +7349,13 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
             break;
 
         case WM_INITMENUPOPUP:
+            // apply dark mode to popup menu window
+            if (UseDarkModeLib() && DarkMode::isEnabled()) {
+                HWND hMenu = FindWindow(UNDOCUMENTED_MENU_CLASS_NAME, nullptr);
+                if (hMenu) {
+                    DarkMode::setDarkTitleBarEx(hMenu, false);
+                }
+            }
             if (gMenuAccelPressed) {
                 HWND hMenu = FindWindow(UNDOCUMENTED_MENU_CLASS_NAME, nullptr);
                 if (hMenu) {
@@ -7363,6 +7427,13 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             break;
 
         case WM_INITMENUPOPUP:
+            // apply dark mode to popup menu window
+            if (UseDarkModeLib() && DarkMode::isEnabled()) {
+                HWND hMenuWnd = FindWindow(UNDOCUMENTED_MENU_CLASS_NAME, nullptr);
+                if (hMenuWnd) {
+                    DarkMode::setDarkTitleBarEx(hMenuWnd, false);
+                }
+            }
             // TODO: should I just build the menu from scratch every time?
             UpdateAppMenu(win, (HMENU)wp);
             break;

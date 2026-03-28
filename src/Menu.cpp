@@ -2314,19 +2314,22 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
     }
 
     if (win->tabsInTitlebar) {
-        // disable custom caption to make room for the regular menu bar
-        SetTabsInTitlebar(win, false);
-        SetMenu(hwnd, win->menu);
-        gGlobalPrefs->showMenubar = true;
+        // toggle rebar menu bar while keeping tabs in titlebar
+        bool isShowing = IsShowingMenuBarRebar(win);
+        if (isShowing) {
+            DestroyMenuBarRebar(win);
+            gGlobalPrefs->showMenubar = false;
+        } else {
+            CreateMenuBarRebar(win);
+            gGlobalPrefs->showMenubar = true;
+        }
+        // layout first so the rebar is positioned correctly, then show it
+        RelayoutWindow(win);
+        ShowMenuBarRebar(win);
         return;
     }
 
     bool hideMenu = GetMenu(hwnd) != nullptr;
     SetMenu(hwnd, hideMenu ? nullptr : win->menu);
     gGlobalPrefs->showMenubar = !hideMenu;
-
-    // if hiding menu and useTabs, restore tabs in titlebar
-    if (hideMenu && gGlobalPrefs->useTabs) {
-        SetTabsInTitlebar(win, true);
-    }
 }

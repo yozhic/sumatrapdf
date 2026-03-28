@@ -450,7 +450,7 @@ LRESULT CALLBACK ReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
         NMHDR* hdr = (NMHDR*)lParam;
         HWND chwnd = hdr->hwndFrom;
         if (hdr->code == NM_CUSTOMDRAW) {
-            if (win && win->hwndToolbar == chwnd) {
+            if (win && (win->hwndToolbar == chwnd || win->hwndMenuToolbar == chwnd)) {
                 NMTBCUSTOMDRAW* custDraw = (NMTBCUSTOMDRAW*)hdr;
                 switch (custDraw->nmcd.dwDrawStage) {
                     case CDDS_PREPAINT:
@@ -493,7 +493,9 @@ static LRESULT CALLBACK WndProcEditBg(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
         HDC hdc = GetDC(hwnd);
         RECT rc;
         GetClientRect(hwnd, &rc);
-        HBRUSH br = CreateSolidBrush(RGB(0xCC, 0xCC, 0xCC));
+        COLORREF bgCol2 = ThemeControlBackgroundColor();
+        COLORREF col = IsLightColor(bgCol2) ? AdjustLightness2(bgCol2, -40) : AdjustLightness2(bgCol2, 40);
+        HBRUSH br = CreateSolidBrush(col);
         FrameRect(hdc, &rc, br);
         DeleteObject(br);
         ReleaseDC(hwnd, hdc);
@@ -1233,4 +1235,237 @@ void ReCreateToolbar(MainWindow* win) {
     }
     CreateToolbar(win);
     RelayoutWindow(win);
+}
+
+// --- Menu bar as rebar control (used when tabs are in titlebar) ---
+
+constexpr int kMenuBarCmdFirst = 50000;
+constexpr int kMenuBarCmdLast = 50020;
+
+void RebuildMenuBarButtons(MainWindow* win) {
+    HWND hwndMb = win->hwndMenuToolbar;
+    if (!hwndMb) {
+        return;
+    }
+
+    // remove existing buttons
+    while (SendMessageW(hwndMb, TB_DELETEBUTTON, 0, 0)) {
+    }
+
+    HMENU menu = win->menu;
+    int count = GetMenuItemCount(menu);
+    if (count <= 0) {
+        return;
+    }
+
+    MENUITEMINFOW mii{};
+    mii.cbSize = sizeof(MENUITEMINFOW);
+    mii.fMask = MIIM_SUBMENU | MIIM_STRING;
+
+    for (int i = 0; i < count && i < (kMenuBarCmdLast - kMenuBarCmdFirst); i++) {
+        mii.dwTypeData = nullptr;
+        mii.cch = 0;
+        GetMenuItemInfoW(menu, i, TRUE, &mii);
+        if (!mii.hSubMenu || !mii.cch) {
+            continue;
+        }
+        mii.cch++;
+        AutoFreeWStr name(AllocArray<WCHAR>(mii.cch));
+        mii.dwTypeData = name;
+        GetMenuItemInfoW(menu, i, TRUE, &mii);
+
+        TBBUTTON b{};
+        b.iBitmap = I_IMAGENONE;
+        b.idCommand = kMenuBarCmdFirst + i;
+        b.fsState = TBSTATE_ENABLED;
+        b.fsStyle = BTNS_AUTOSIZE | BTNS_SHOWTEXT;
+        b.iString = (INT_PTR)name.Get();
+        SendMessageW(hwndMb, TB_ADDBUTTONS, 1, (LPARAM)&b);
+    }
+}
+
+void CreateMenuBarRebar(MainWindow* win) {
+    if (win->hwndMenuReBar) {
+        return;
+    }
+
+    bool isRtl = IsUIRtl();
+    HINSTANCE hinst = GetModuleHandle(nullptr);
+    HWND hwndParent = win->hwndFrame;
+
+    // create hidden; caller shows after RelayoutWindow positions it
+    DWORD style = WS_CHILD | WS_CLIPCHILDREN | WS_BORDER | RBS_VARHEIGHT | RBS_BANDBORDERS;
+    style |= CCS_NODIVIDER | CCS_NOPARENTALIGN;
+    DWORD exStyle = WS_EX_TOOLWINDOW;
+    if (isRtl) {
+        exStyle |= WS_EX_LAYOUTRTL;
+    }
+
+    win->hwndMenuReBar = CreateWindowExW(exStyle, REBARCLASSNAME, nullptr, style, 0, 0, 0, 0, hwndParent,
+                                         (HMENU)IDC_MENUBAR_REBAR, hinst, nullptr);
+    SetWindowSubclass(win->hwndMenuReBar, ReBarWndProc, 0, 0);
+
+    REBARINFO rbi{};
+    rbi.cbSize = sizeof(REBARINFO);
+    SendMessageW(win->hwndMenuReBar, RB_SETBARINFO, 0, (LPARAM)&rbi);
+
+    style = WS_CHILD | WS_CLIPSIBLINGS | TBSTYLE_FLAT | TBSTYLE_LIST;
+    style |= CCS_NODIVIDER | CCS_NOPARENTALIGN;
+    exStyle = 0;
+    if (isRtl) {
+        exStyle |= WS_EX_LAYOUTRTL;
+    }
+
+    win->hwndMenuToolbar = CreateWindowExW(exStyle, TOOLBARCLASSNAME, nullptr, style, 0, 0, 0, 0, win->hwndMenuReBar,
+                                           (HMENU)IDC_MENUBAR, hinst, nullptr);
+    SendMessageW(win->hwndMenuToolbar, TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);
+
+    if (!UseDarkModeLib() || !DarkMode::isEnabled()) {
+        if (!IsCurrentThemeDefault()) {
+            SetWindowTheme(win->hwndMenuToolbar, L"", L"");
+        }
+    }
+
+    HFONT font = GetMenuFont();
+    HwndSetFont(win->hwndMenuToolbar, font);
+
+    LRESULT tbExStyle = SendMessageW(win->hwndMenuToolbar, TB_GETEXTENDEDSTYLE, 0, 0);
+    tbExStyle |= TBSTYLE_EX_MIXEDBUTTONS;
+    SendMessageW(win->hwndMenuToolbar, TB_SETEXTENDEDSTYLE, 0, tbExStyle);
+
+    RebuildMenuBarButtons(win);
+
+    RECT rc;
+    LRESULT res = SendMessageW(win->hwndMenuToolbar, TB_GETITEMRECT, 0, (LPARAM)&rc);
+    if (!res) {
+        rc.left = rc.right = rc.top = rc.bottom = 0;
+    }
+
+    ShowWindow(win->hwndMenuToolbar, SW_SHOW);
+
+    REBARBANDINFOW rbBand{};
+    rbBand.cbSize = sizeof(REBARBANDINFOW);
+    rbBand.fMask = RBBIM_STYLE | RBBIM_CHILD | RBBIM_CHILDSIZE;
+    rbBand.fStyle = RBBS_FIXEDSIZE;
+    if (theme::IsAppThemed()) {
+        rbBand.fStyle |= RBBS_CHILDEDGE;
+    }
+    rbBand.hwndChild = win->hwndMenuToolbar;
+    rbBand.cxMinChild = 0;
+    rbBand.cyMinChild = (rc.bottom - rc.top) + 2 * rc.top;
+    rbBand.cx = 0;
+    SendMessageW(win->hwndMenuReBar, RB_INSERTBAND, (WPARAM)-1, (LPARAM)&rbBand);
+
+    if (UseDarkModeLib()) {
+        DarkMode::setWindowNotifyCustomDrawSubclass(win->hwndMenuReBar);
+        DarkMode::setChildCtrlsSubclassAndTheme(win->hwndMenuReBar);
+    }
+}
+
+void ShowMenuBarRebar(MainWindow* win) {
+    if (win->hwndMenuReBar) {
+        ShowWindow(win->hwndMenuReBar, SW_SHOW);
+    }
+}
+
+void DestroyMenuBarRebar(MainWindow* win) {
+    HwndDestroyWindowSafe(&win->hwndMenuToolbar);
+    HwndDestroyWindowSafe(&win->hwndMenuReBar);
+}
+
+bool IsShowingMenuBarRebar(MainWindow* win) {
+    if (!win->hwndMenuReBar) {
+        return false;
+    }
+    if (win->presentation || win->isFullScreen) {
+        return false;
+    }
+    return true;
+}
+
+bool HandleMenuBarCommand(MainWindow* win, int cmdId) {
+    if (cmdId < kMenuBarCmdFirst || cmdId >= kMenuBarCmdLast) {
+        return false;
+    }
+    if (!win->hwndMenuToolbar) {
+        return false;
+    }
+
+    int menuIdx = cmdId - kMenuBarCmdFirst;
+    HMENU subMenu = GetSubMenu(win->menu, menuIdx);
+    if (!subMenu) {
+        return true;
+    }
+
+    // get button rect in screen coordinates
+    RECT btnRect;
+    int btnIdx = (int)SendMessageW(win->hwndMenuToolbar, TB_COMMANDTOINDEX, cmdId, 0);
+    SendMessageW(win->hwndMenuToolbar, TB_GETITEMRECT, btnIdx, (LPARAM)&btnRect);
+    MapWindowPoints(win->hwndMenuToolbar, HWND_DESKTOP, (POINT*)&btnRect, 2);
+
+    UINT flags = TPM_LEFTALIGN | TPM_TOPALIGN;
+    if (IsUIRtl()) {
+        flags = TPM_RIGHTALIGN | TPM_TOPALIGN;
+    }
+    TrackPopupMenu(subMenu, flags, btnRect.left, btnRect.bottom, 0, win->hwndFrame, nullptr);
+
+    return true;
+}
+
+// Activate a menu bar button by accelerator key (Alt+letter).
+// If accel is 0, activate the first menu item.
+// Returns true if handled.
+bool ActivateMenuBarByAccel(MainWindow* win, WCHAR accel) {
+    if (!win->hwndMenuToolbar || !win->menu) {
+        return false;
+    }
+
+    int count = GetMenuItemCount(win->menu);
+    if (count <= 0) {
+        return false;
+    }
+
+    // if accel is 0 (bare Alt press), open the first menu
+    if (accel == 0) {
+        return HandleMenuBarCommand(win, kMenuBarCmdFirst);
+    }
+
+    // normalize to uppercase for matching
+    if (accel >= 'a' && accel <= 'z') {
+        accel -= 'a' - 'A';
+    }
+
+    // find the menu item whose text has &<accel>
+    MENUITEMINFOW mii{};
+    mii.cbSize = sizeof(MENUITEMINFOW);
+    mii.fMask = MIIM_STRING;
+
+    for (int i = 0; i < count && i < (kMenuBarCmdLast - kMenuBarCmdFirst); i++) {
+        mii.dwTypeData = nullptr;
+        mii.cch = 0;
+        GetMenuItemInfoW(win->menu, i, TRUE, &mii);
+        if (!mii.cch) {
+            continue;
+        }
+        mii.cch++;
+        AutoFreeWStr name(AllocArray<WCHAR>(mii.cch));
+        mii.dwTypeData = name;
+        GetMenuItemInfoW(win->menu, i, TRUE, &mii);
+
+        // look for &X where X matches accel
+        for (WCHAR* p = name.Get(); *p; p++) {
+            if (*p == '&' && p[1]) {
+                WCHAR ch = p[1];
+                if (ch >= 'a' && ch <= 'z') {
+                    ch -= 'a' - 'A';
+                }
+                if (ch == accel) {
+                    return HandleMenuBarCommand(win, kMenuBarCmdFirst + i);
+                }
+                break;
+            }
+        }
+    }
+
+    return false;
 }
