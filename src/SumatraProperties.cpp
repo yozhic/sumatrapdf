@@ -623,11 +623,12 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
 
     SetEditText(hwndEdit, layoutData->propsText.CStr());
 
-    // estimate window width based on longest line
+    // estimate window size based on text content
     {
         HDC hdcEdit = GetDC(hwndEdit);
         HGDIOBJ origFont = SelectObject(hdcEdit, font);
         int maxLineDx = 0;
+        int nLines = 0;
         const char* text = layoutData->propsText.CStr();
         while (*text) {
             const char* nl = str::FindChar(text, '\n');
@@ -638,9 +639,15 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
             if (sz.cx > maxLineDx) {
                 maxLineDx = sz.cx;
             }
+            nLines++;
             text = nl ? nl + 1 : text + lineLen;
         }
         maxLineDx += 16;
+
+        TEXTMETRICW tm{};
+        GetTextMetricsW(hdcEdit, &tm);
+        int lineHeight = tm.tmHeight + tm.tmExternalLeading;
+
         SelectObject(hdcEdit, origFont);
         ReleaseDC(hwndEdit, hdcEdit);
 
@@ -650,13 +657,20 @@ void ShowProperties(HWND parent, DocController* ctrl, bool extended) {
         int wantedClientDx = maxLineDx + editPadding;
         int wantedDx = wantedClientDx + frameDx;
 
+        // calculate height to fit all lines
+        int editBorderDy = 2 * GetSystemMetrics(SM_CYEDGE);
+        int frameDy = GetSystemMetrics(SM_CYFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION);
+        int wantedDy = (nLines + 3) * lineHeight + editBorderDy + kButtonAreaDy + frameDy;
+
         // cap at 80% of screen
         Rect work = GetWorkAreaRect(WindowRect(parent), hwnd);
         int maxDx = (work.dx * 80) / 100;
+        int maxDy = (work.dy * 80) / 100;
         wantedDx = std::min(wantedDx, maxDx);
+        wantedDy = std::min(wantedDy, maxDy);
 
         Rect wRc = WindowRect(hwnd);
-        MoveWindow(hwnd, wRc.x, wRc.y, wantedDx, wRc.dy, TRUE);
+        MoveWindow(hwnd, wRc.x, wRc.y, wantedDx, wantedDy, TRUE);
     }
 
     // create buttons
