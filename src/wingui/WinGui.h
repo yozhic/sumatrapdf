@@ -688,6 +688,7 @@ struct TabInfo {
     char* tooltip = nullptr;
     bool isPinned = false;
     bool canClose = true; // TODO: same as !isPinned?
+    bool isDirty = false;
     UINT_PTR userData = 0;
 
     TabInfo() = default;
@@ -815,6 +816,7 @@ struct TabsCtrl : Wnd {
     void SwapTabs(int idx1, int idx2);
 
     void SetTextAndTooltip(int idx, const char* text, const char* tooltip);
+    void SetTabDirty(int idx, bool isDirty);
 
     int TabCount();
 

@@ -235,7 +235,7 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
         gr = ToGdipRect(ti->r);
         gfx.FillRectangle(&br, gr);
 
-        if (ti->canClose && (i == tabUnderMouse || i == selectedIdx)) {
+        if (ti->canClose && (i == tabUnderMouse)) {
             r = ti->rClose;
             if (i == tabUnderMouse && overClose && closeCircleEnabled) {
                 // draw bacground of X
@@ -277,6 +277,25 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
         br.SetColor(GdipCol(textColor));
         TempWStr ws = ToWStrTemp(ti->text);
         gfx.DrawString(ws, -1, &f, rTxt, &sf, &br);
+
+        // draw red dot after tab text for dirty (unsaved) tabs
+        if (ti->isDirty) {
+            gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
+            // measure actual rendered text width (may be truncated with ellipsis)
+            Gdiplus::RectF bounds;
+            gfx.MeasureString(ws, -1, &f, rTxt, &sf, &bounds);
+            int dotRadius = DpiScale(hwnd, 3);
+            int dotX = (int)(bounds.X + bounds.Width) + dotRadius;
+            // clamp to not exceed the text area
+            int maxX = (int)(rTxt.X + rTxt.Width) - dotRadius * 2;
+            if (dotX > maxX) {
+                dotX = maxX;
+            }
+            int dotY = ti->r.y + (ti->r.dy - dotRadius * 2) / 2;
+            SolidBrush redBr(Color(255, 0xEE, 0x22, 0x22));
+            gfx.FillEllipse(&redBr, dotX, dotY, dotRadius * 2, dotRadius * 2);
+            gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+        }
     }
 }
 
@@ -783,6 +802,14 @@ void TabsCtrl::SetTextAndTooltip(int idx, const char* text, const char* tooltip)
     str::ReplaceWithCopy(&tab->text, text);
     str::ReplaceWithCopy(&tab->tooltip, tooltip);
     LayoutTabs();
+}
+
+void TabsCtrl::SetTabDirty(int idx, bool dirty) {
+    TabInfo* tab = GetTab(idx);
+    if (tab && tab->isDirty != dirty) {
+        tab->isDirty = dirty;
+        HwndScheduleRepaint(hwnd);
+    }
 }
 
 // returns userData because it's not owned by TabsCtrl

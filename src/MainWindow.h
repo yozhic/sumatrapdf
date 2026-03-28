@@ -128,7 +128,6 @@ struct MainWindow {
     HWND hwndPageEdit = nullptr;
     HWND hwndPageBg = nullptr;
     HWND hwndPageTotal = nullptr;
-    HWND hwndTbWarningMsg = nullptr;
 
     // state related to table of contents (PDF bookmarks etc.)
     HWND hwndTocBox = nullptr;

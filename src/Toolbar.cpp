@@ -319,37 +319,9 @@ void UpdateToolbarButtonsToolTipsForWindow(MainWindow* win) {
 #endif
 }
 
-static void UpdateWarningMessageHwnd(MainWindow* win, const char* s) {
-    // warning message is always the last fixed button in toolbar
-    int btnIdx = TotalButtonsCount() - 1;
-    bool hide = str::IsEmptyOrWhiteSpace(s);
-
-    HWND hwnd = win->hwndTbWarningMsg;
-    UpdateToolbarButtonStateByIdx(hwnd, btnIdx, hide, TBSTATE_HIDDEN);
-    if (hide) {
-        HwndSetText(hwnd, "");
-        return;
-    }
-
-    HwndSetText(hwnd, s);
-    Size size = HwndMeasureText(hwnd, s);
-    TbSetButtonDx(win->hwndToolbar, WarningMsgId, size.dx);
-    RECT r{};
-    TbGetRectByIdx(win->hwndToolbar, btnIdx, &r);
-    int x = r.left + DpiScale(win->hwndToolbar, 10);
-    int y = (r.bottom - size.dy) / 2;
-    MoveWindow(hwnd, x, y, size.dx, size.dy, TRUE);
-}
-
 // TODO: this is called too often
 // TODO: also set checked state instead of calling SetToolbarButtonCheckedState() all over
 void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
-    const char* warningMsg = "";
-    DisplayModel* dm = win->AsFixed();
-    if (dm && EngineHasUnsavedAnnotations(dm->GetEngine())) {
-        warningMsg = _TRA("You have unsaved annotations");
-    }
-
     HWND hwnd = win->hwndToolbar;
     int n = TotalButtonsCount();
     for (int i = 0; i < n; i++) {
@@ -371,7 +343,19 @@ void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
     if (setButtonsVisibility && NeedsFindUI(win)) {
         UpdateToolbarFindText(win);
     }
-    UpdateWarningMessageHwnd(win, warningMsg);
+
+    // update dirty (unsaved annotations) flag on each tab
+    if (win->tabsCtrl) {
+        int nTabs = win->TabCount();
+        for (int i = 0; i < nTabs; i++) {
+            WindowTab* tab = win->GetTab(i);
+            bool dirty = false;
+            if (tab && tab->AsFixed()) {
+                dirty = EngineHasUnsavedAnnotations(tab->AsFixed()->GetEngine());
+            }
+            win->tabsCtrl->SetTabDirty(i, dirty);
+        }
+    }
 }
 
 void SetToolbarButtonEnableState(MainWindow* win, int cmdId, bool isEnabled) {
@@ -511,13 +495,6 @@ static LRESULT CALLBACK WndProcToolbar(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp
         MainWindow* win = FindMainWindowByHwnd(hwndCtrl);
         if (!win) {
             return CallWindowProc(DefWndProcToolbar, hwnd, msg, wp, lp);
-        }
-        if (win->hwndTbWarningMsg == hwndCtrl) {
-            COLORREF col = RGB(0xff, 0x00, 0x00);
-            SetTextColor(hdc, col);
-            SetBkMode(hdc, TRANSPARENT);
-            auto br = GetStockBrush(NULL_BRUSH);
-            return (LRESULT)br;
         }
         {
             bool isBgCtrl = (win->hwndFindBg == hwndCtrl || win->hwndPageBg == hwndCtrl);
@@ -734,17 +711,6 @@ static void CreateFindBox(MainWindow* win, HFONT hfont, int iconDy) {
     win->hwndFindLabel = label;
     win->hwndFindEdit = find;
     win->hwndFindBg = findBg;
-}
-
-static void CreateInfoText(MainWindow* win, HFONT font) {
-    HMODULE hmod = GetModuleHandleW(nullptr);
-    DWORD style = WS_VISIBLE | WS_CHILD;
-    HWND labelInfo =
-        CreateWindowExW(0, WC_STATIC, L"", style, 0, 1, 0, 0, win->hwndToolbar, (HMENU) nullptr, hmod, nullptr);
-    SetWindowFont(labelInfo, font, FALSE);
-
-    win->hwndTbWarningMsg = labelInfo;
-    UpdateWarningMessageHwnd(win, "");
 }
 
 static WNDPROC DefWndProcPageBox = nullptr;
@@ -1144,7 +1110,6 @@ void CreateToolbar(MainWindow* win) {
     }
     SendMessageW(hwndToolbar, TB_ADDBUTTONS, kButtonsCount, (LPARAM)tbButtons);
 
-    // at least 1, for WarningMsgId
     gCustomButtonsCount = 0;
 
     char* text;
@@ -1162,8 +1127,6 @@ void CreateToolbar(MainWindow* win) {
         tbi.toolTip = text;
         gCustomButtons[gCustomButtonsCount++] = tbi;
     }
-    // info text for showing "unsaved annotations" text
-    gCustomButtons[gCustomButtonsCount++] = ToolbarButtonInfo{TbIcon::None, WarningMsgId, nullptr};
 
     TBBUTTON* buttons = AllocArrayTemp<TBBUTTON>(gCustomButtonsCount);
     for (int i = 0; i < gCustomButtonsCount; i++) {
@@ -1214,7 +1177,6 @@ void CreateToolbar(MainWindow* win) {
 
     CreatePageBox(win, font, iconSize);
     CreateFindBox(win, font, iconSize);
-    CreateInfoText(win, font);
 
     UpdateToolbarPageText(win, -1);
     UpdateToolbarFindText(win);
@@ -1229,7 +1191,6 @@ void ReCreateToolbar(MainWindow* win) {
         HwndDestroyWindowSafe(&win->hwndFindLabel);
         HwndDestroyWindowSafe(&win->hwndFindEdit);
         HwndDestroyWindowSafe(&win->hwndFindBg);
-        HwndDestroyWindowSafe(&win->hwndTbWarningMsg);
         HwndDestroyWindowSafe(&win->hwndToolbar);
         HwndDestroyWindowSafe(&win->hwndReBar);
     }
