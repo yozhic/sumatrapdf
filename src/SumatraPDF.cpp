@@ -3827,8 +3827,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
             int tabHeight = GetTabbarHeight(win->hwndFrame);
             int captionHeight = tabHeight;
             if (showingMenuBar) {
-                int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
-                menuBarDy += 2 * GetSystemMetrics(SM_CYBORDER);
+                int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0) + 1;
                 // check if there are actual file tabs to show
                 bool hasFileTabs = false;
                 for (WindowTab* tab : win->Tabs()) {
@@ -3857,9 +3856,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     }
     if (!win->tabsInTitlebar && IsShowingMenuBarRebar(win)) {
         // non-titlebar case: menu bar rebar below tabs
-        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
-        int borderY = GetSystemMetrics(SM_CYBORDER);
-        menuBarDy += 2 * borderY;
+        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0) + 1;
         if (updateToolbars) {
             dh.SetWindowPos(win->hwndMenuReBar, nullptr, rc.x, rc.y, rc.dx, menuBarDy, SWP_NOZORDER);
         }
@@ -6877,9 +6874,8 @@ void RelayoutCaption(MainWindow* win) {
         //   Row 2: tabs, [drag area]
         // Menu bar goes all the way to the top for compactness.
 
-        // Get menu bar natural height
-        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
-        menuBarDy += 2 * GetSystemMetrics(SM_CYBORDER);
+        // Get menu bar natural height; RB_GETBARHEIGHT underreports by 1px without WS_BORDER
+        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0) + 1;
 
         int row1Y = rc.y;
         int row2Y = rc.y + menuBarDy;
@@ -6903,11 +6899,11 @@ void RelayoutCaption(MainWindow* win) {
         win->captionBtn[CB_MINIMIZE].visible = true;
         rc.dx -= btnDx;
 
-        // Row 1 left: system menu (sized to match menu bar height)
-        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, row1Y, menuBarDy, menuBarDy};
+        // Row 1 left: system menu (sized to match window buttons)
+        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, row1Y, btnDx, btnDy};
         win->captionBtn[CB_SYSTEM_MENU].visible = true;
-        int row1X = rc.x + menuBarDy;
-        int row1Dx = rc.dx - menuBarDy;
+        int row1X = rc.x + btnDx;
+        int row1Dx = rc.dx - btnDx;
 
         // CB_MENU hidden when menu bar rebar is showing
         win->captionBtn[CB_MENU].rect = {row1X, row1Y, menuBarDy, menuBarDy};

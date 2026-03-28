@@ -450,7 +450,7 @@ LRESULT CALLBACK ReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
         NMHDR* hdr = (NMHDR*)lParam;
         HWND chwnd = hdr->hwndFrom;
         if (hdr->code == NM_CUSTOMDRAW) {
-            if (win && (win->hwndToolbar == chwnd || win->hwndMenuToolbar == chwnd)) {
+            if (win && win->hwndToolbar == chwnd) {
                 NMTBCUSTOMDRAW* custDraw = (NMTBCUSTOMDRAW*)hdr;
                 switch (custDraw->nmcd.dwDrawStage) {
                     case CDDS_PREPAINT:
@@ -1239,6 +1239,45 @@ void ReCreateToolbar(MainWindow* win) {
 
 // --- Menu bar as rebar control (used when tabs are in titlebar) ---
 
+static LRESULT CALLBACK MenuBarReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass,
+                                            DWORD_PTR dwRefData) {
+    if (WM_ERASEBKGND == uMsg) {
+        // always paint background with theme color to avoid gray strips in light theme
+        HDC hdc = (HDC)wParam;
+        RECT rect;
+        GetClientRect(hWnd, &rect);
+        COLORREF bgCol = ThemeControlBackgroundColor();
+        auto bgBrush = CreateSolidBrush(bgCol);
+        FillRect(hdc, &rect, bgBrush);
+        DeleteObject(bgBrush);
+        return 1;
+    }
+    if (WM_NOTIFY == uMsg) {
+        auto win = FindMainWindowByHwnd(hWnd);
+        NMHDR* hdr = (NMHDR*)lParam;
+        if (win && hdr->code == NM_CUSTOMDRAW && hdr->hwndFrom == win->hwndMenuToolbar) {
+            NMTBCUSTOMDRAW* custDraw = (NMTBCUSTOMDRAW*)hdr;
+            switch (custDraw->nmcd.dwDrawStage) {
+                case CDDS_PREPAINT:
+                    return CDRF_NOTIFYITEMDRAW;
+                case CDDS_ITEMPREPAINT: {
+                    auto col = ThemeWindowTextColor();
+                    UINT itemState = custDraw->nmcd.uItemState;
+                    if (itemState & CDIS_DISABLED) {
+                        col = ThemeWindowTextDisabledColor();
+                    }
+                    custDraw->clrText = col;
+                    return CDRF_DODEFAULT;
+                }
+            }
+        }
+    }
+    if (WM_NCDESTROY == uMsg) {
+        RemoveWindowSubclass(hWnd, MenuBarReBarWndProc, uIdSubclass);
+    }
+    return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+}
+
 constexpr int kMenuBarCmdFirst = 50000;
 constexpr int kMenuBarCmdLast = 50020;
 
@@ -1294,7 +1333,8 @@ void CreateMenuBarRebar(MainWindow* win) {
     HWND hwndParent = win->hwndFrame;
 
     // create hidden; caller shows after RelayoutWindow positions it
-    DWORD style = WS_CHILD | WS_CLIPCHILDREN | WS_BORDER | RBS_VARHEIGHT | RBS_BANDBORDERS;
+    // no WS_BORDER (avoids 1px gap) and no RBS_BANDBORDERS (avoids gray band separators)
+    DWORD style = WS_CHILD | WS_CLIPCHILDREN | RBS_VARHEIGHT;
     style |= CCS_NODIVIDER | CCS_NOPARENTALIGN;
     DWORD exStyle = WS_EX_TOOLWINDOW;
     if (isRtl) {
@@ -1303,7 +1343,7 @@ void CreateMenuBarRebar(MainWindow* win) {
 
     win->hwndMenuReBar = CreateWindowExW(exStyle, REBARCLASSNAME, nullptr, style, 0, 0, 0, 0, hwndParent,
                                          (HMENU)IDC_MENUBAR_REBAR, hinst, nullptr);
-    SetWindowSubclass(win->hwndMenuReBar, ReBarWndProc, 0, 0);
+    SetWindowSubclass(win->hwndMenuReBar, MenuBarReBarWndProc, 0, 0);
 
     REBARINFO rbi{};
     rbi.cbSize = sizeof(REBARINFO);
