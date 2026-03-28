@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-## SumatraPDF.exe clean
+## SumatraPDF clean
 
 Usage: `SumatraPDF audit [options] input.pdf [input2.pdf ...]`
 
