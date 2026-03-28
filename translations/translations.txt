@@ -1,5 +1,6 @@
 AppTranslator: SumatraPDF
-95a3c49732649a273e0f7320d96f3e289fe98fb8
+6686e7a9fafa6d88a585ec8eabebc2898a0137a5
+: (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -11,7 +12,7 @@ el:# Ιστορικό αρχείων
 hi:फ़ाइल इतिहास
 ja:# ファイル履歴
 ml:ഫയൽ ചരിത്രം
-nl:# Bestandsgeschiedenis
+nl:# Bestand Geschiedenis
 pl:# Historia plików
 ru:# История файлов
 sk:# História súboru
@@ -47,7 +48,7 @@ kr:%s 주석. Ctrl+클릭으로 편집
 lv:%s anotācija. Ctrl+klikšķis lai rediģētu.
 ml:%s വ്യാഖ്യാനം. എഡിറ്റ് ചെയ്യാൻ Ctrl ക്ലിക്ക് ചെയ്യുക.
 my:%s anotasi. Ctrl+klik untuk edit.
-nl:%s aantekening. Ctrl+klik om te bewerken
+nl:%s notatie. Ctrl+klik voor bewerken.
 pl:Adnotacja %s. Ctrl+kliknięcie, aby edytować.
 pt:Anotação %s. Ctrl + clique pra editar.
 ro:%s adnotare. Ctrl+clic să modifici
@@ -6863,6 +6864,7 @@ vn:Thu gọn tất cả
 :Collecting list of printers
 br:Coletando lista de impressoras
 de:Liste der Drucker zusammenstellen
+nl:Verzamel lijst van printers
 pl:Gromadzenie listy drukarek
 sk:Získava sa zoznam tlačiarní
 :Color:
@@ -9084,6 +9086,7 @@ vn:Ngày tạo:
 :Ctrl+Tab to navigate
 br:Ctrl+Tab pra navegar
 de:Strg+Tab zum Navigieren
+nl:Druk Ctrl+Tab voor navigeren
 pl:Ctrl+Tab, aby nawigować
 sk:Použite Ctrl+Tab na prechádzanie
 :Current file
@@ -10646,6 +10649,7 @@ vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
 :Enter to select
 br:Enter pra selecionar
 de:Enter zum Auswählen
+nl:Toets Enter voor selecteren
 pl:Enter, aby zaznaczyć
 sk:Enter na výber
 :Error
@@ -10760,6 +10764,7 @@ vn:Không mở %s được
 :Esc to close
 br:Esc pra fechar
 de:Esc zum Schließen
+nl:Esc voor sluiten
 pl:Esc, aby zamknąć
 sk:Esc na zatvorenie
 :Execute a program
@@ -14759,6 +14764,7 @@ vn:Dòng Bắt Đầu:
 :List Printers
 br:Listar Impressoras
 de:Drucker auflisten
+nl:Lijst Printers
 pl:Wyświetl drukarki
 sk:Zoznam tlačiarní
 :Loading %s ...
@@ -18738,6 +18744,7 @@ vn:Giới hạn vùng in
 :Printer '%s' doesn't exist
 br:A impressora "%s" não existe
 de:Drucker '%s' existiert nicht
+nl:Printer '%s' bestaat niet
 pl:Drukarka „%s” nie istnieje
 sk:Tlačiareň '%s' neexistuje
 :Printing in progress.
@@ -19304,16 +19311,19 @@ vn:Biên tập
 :Register Windows Previewer
 br:Registrar o Pré-Visualizador do Windows
 de:Windows-Vorschau registrieren
+nl:Registreer Windows Previewer
 pl:Zarejestruj podgląd Windows
 sk:Registrovať Windows Previewer
 :Register Windows Search Filter
 br:Registrar o Filtro de Busca do Windows
 de:Suchfilter in Windows registrieren
+nl:Registreer Windows Zoek Filter
 pl:Zarejestruj filtr wyszukiwania Windows
 sk:Registrovať Windows Search Filter
 :Release Ctrl to select
 br:Solte o Ctrl pra selecionar
 de:Strg loslassen, um auszuwählen
+nl:Laat Ctrl los voor selecteren
 pl:Puść Ctrl, aby zaznaczyć
 sk:Uvoľnením klávesu Ctrl vyberiete
 :Reload Document
@@ -21857,6 +21867,7 @@ tw:顯示記錄
 :Show PDF Info
 br:Mostrar a Informação do PDF
 de:PDF-Info anzeigen
+nl:Toon PDF Info
 pl:Pokaż informacje o PDF
 sk:Zobraziť informácie o PDF
 :Show Scr&ollbars
@@ -22387,6 +22398,7 @@ vn:Tập tin nguồn %s không có điểm đồng bộ
 :Space for sticky mode
 br:Barra de Espaço pro modo fixo
 de:Platz für Sticky‑Modus
+nl:Ruimte voor plak modus
 pl:Spacja dla trybu lepkiego
 sk:Medzerník pre trvalý režim
 :Square
@@ -23173,6 +23185,10 @@ uk:PDF з мітками
 uz:Belgilangan PDF
 vn:PDF được gắn thẻ
 :Take Screenshot
+br:Criar Screenshot
+de:Screenshot erstellen
+nl:Maak Screenshot
+pl:Zrób zrzut ekranu
 :Text Alignment:
 am:Գրվածքի հավասարեցում
 ar:محاذاة النص:
@@ -23932,6 +23948,7 @@ tw:切換功能表列
 :Toggle Overlay Scrollbar
 br:Alternar a Barra de Rolagem da Sobreposição
 de:Überlappende Bildlaufleiste ein-/ausblenden
+nl:Schuifbalk in/uitschakelen
 pl:Przełącz nakładkowy pasek przewijania
 sk:Prepnúť skrývanie posuvníka
 :Toggle Page Info
@@ -24003,6 +24020,7 @@ tw:切換工具列
 :Toggle Use Tabs
 br:Alternar o Uso das Abas
 de:Tabs ein-/ausblenden
+nl:Tabbladen In/Uitschakelen
 pl:Przełącz używanie kart
 sk:Prepnúť Použiť karty
 :Toggle Zoom
@@ -24099,11 +24117,13 @@ vn:Dịch với &DeepL
 :Un-register Windows Previewer
 br:Remover o registro do Pré-Visualizador do Windows
 de:Windows-Vorschau deaktivieren
+nl:Deactiveer de Windows Previewer registratie
 pl:Wyrejestruj podgląd Windows
 sk:Zrušiť registráciu Windows Previewer
 :Un-register Windows Search Filter
 br:Remover o registro do Filtro de Busca do Windows
 de:Suchfilter in Windows deaktivieren
+nl:Deactiveer Windows Zoek Filter
 pl:Wyrejestruj filtr wyszukiwania Windows
 sk:Zrušiť registráciu Windows Search Filter
 :Uninstall SumatraPDF
@@ -24959,62 +24979,6 @@ tw:您已擁有最新版本。
 uk:Ви вже маєте найновішу версію.
 uz:Sizda so'nggi versiya.
 vn:Bạn đang dùng phiên bản mới nhất.
-:You have unsaved annotations
-am:Դուք ունեք չպահված մեկնաբանություններ
-ar:لديك توضيحات غير محفوظة
-az:Yadda saxlanılmamış qeydləriniz var
-bg:Имате незаписан анотации
-br:Você tem anotações não salvas
-by:У вас ёсць незахаваныя заўвагі
-ca-xv:Teniu anotacions sense desar
-ca:Teniu anotacions sense desar
-cn:存在未保存的标注
-co:Avete annutazioni micca arregistrate
-cy:Mae gennych anodiadau heb eu cadw
-cz:Máte neuložené poznámky
-de:Sie haben ungespeicherte Anmerkungen.
-dk:Du har ikke-gemte annoteringer
-el:Έχετε μη αποθηκευμένους σχολιασμούς
-es:Hay anotaciones sin guardar
-et:Sul on salvestamata märkuseid
-eu:Gorde gabeko oharrak dituzu
-fa:شما علامت‌گذاری‌های ذخیره‌نشده دارید
-fi:Sinulla on tallentamattomia huomautuksia
-fo:Tú hevur ógoymdar viðmerkingar
-fr:Vous avez des annotations non sauvegardées
-ga:Tá nótaí mínithe nach bhfuil curtha i dtaisce agat
-gl:Tes anotacións sen gardar
-he:יש לך הערות שלא נשמרו
-hi:आपके पास बिना सहेजे गए एनोटेशन हैं
-hr:Imate nespremljene bilješke
-hu:Mentetlen megjegyzéseid vannak
-id:Kamu memiliki catatan yang belum tersimpan
-it:Ci sono delle annotazioni non salvate
-ja:未保存の注釈があります
-kr:저장하지 않은 주석이 있습니다.
-kw:Yma notenyansow anwithys dhis
-lt:Turite neišsaugotų anotacijų
-lv:Jums ir nesaglabātas anotācijas
-my:Anda mempunyai anotasi yang tidak disimpan
-nl:U heeft niet-opgeslagen aantekeningen
-no:Du har merknader som ikke er lagret
-pl:Masz niezapisane adnotacje
-pt:Existem anotações não guardadas
-ro:Aveți adnotări nesalvate
-ru:Аннотации не сохранены
-sat:ᱟᱢ ᱴᱷᱮᱱ ᱵᱟᱝᱥᱟᱧᱪᱟᱣ ᱠᱟᱱ ᱪᱤᱱᱦᱟᱹᱠᱚ ᱢᱮᱱᱟᱜ ᱠᱟᱫᱟ
-sk:Máte neuložené anotácie
-sl:Imaš neshranjene opombe
-sr-rs:Имате несачуване белешке
-sv:Du har osparade kommentarer
-ta:உங்களிடம் சேமிக்கப்படாத குறிப்புரைகள் உள்ளன
-th:คุณไม่ได้บันทึกคำอธิบายประกอบ
-tl:Mayroon kang mga hindi na-save na anotasyon
-tr:Kaydedilmemiş dipnotlarınız var
-tw:您有未儲存的註解
-uk:Анотації не збережено
-uz:Sizda saqlanmagan izohlar mavjud
-vn:Bạn có lưu chú chưa lưu
 :You have version '%s' and version '%s' is available.\nDo you want to install new version?
 am:Ձեր տարբերակն է՝ '%s', իսկ մատչելի է '%s' տարբերակը:\nՑանկանո՞ւմ եք տեղադրել նոր տարբերակը:
 ar:لديك الإصدار '%s' ويتوفر الإصدار '%s'.\nأتريد تثبيت الإصدار الجديد؟
@@ -25888,5 +25852,6 @@ vn:đang in tập tin
 :↑ ↓ to navigate
 br:↑ ↓ pra navegar
 de:↑ ↓ zum Navigieren
+nl:↑ ↓ voor navigeren
 pl:↑ ↓ aby nawigować
 sk:↑ ↓ na navigáciu

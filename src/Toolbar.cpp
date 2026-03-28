@@ -344,7 +344,7 @@ void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
         UpdateToolbarFindText(win);
     }
 
-    // update dirty (unsaved annotations) flag on each tab
+    // update dirty (unsaved annotations) flag and tooltip on each tab
     if (win->tabsCtrl) {
         int nTabs = win->TabCount();
         for (int i = 0; i < nTabs; i++) {
@@ -352,6 +352,17 @@ void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
             bool dirty = false;
             if (tab && tab->AsFixed()) {
                 dirty = EngineHasUnsavedAnnotations(tab->AsFixed()->GetEngine());
+            }
+            // update tooltip before SetTabDirty (which rebuilds tooltips via LayoutTabs)
+            TabInfo* ti = win->tabsCtrl->GetTab(i);
+            if (ti && tab) {
+                const char* path = tab->filePath;
+                if (dirty && path) {
+                    TempStr tooltip = str::JoinTemp(path, _TRA(" (unsaved annotations)"));
+                    str::ReplaceWithCopy(&ti->tooltip, tooltip);
+                } else {
+                    str::ReplaceWithCopy(&ti->tooltip, path);
+                }
             }
             win->tabsCtrl->SetTabDirty(i, dirty);
         }

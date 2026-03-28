@@ -808,7 +808,7 @@ void TabsCtrl::SetTabDirty(int idx, bool dirty) {
     TabInfo* tab = GetTab(idx);
     if (tab && tab->isDirty != dirty) {
         tab->isDirty = dirty;
-        HwndScheduleRepaint(hwnd);
+        LayoutTabs(); // rebuilds tooltips from current ti->tooltip values
     }
 }
 
