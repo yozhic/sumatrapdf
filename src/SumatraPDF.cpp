@@ -2827,6 +2827,9 @@ static bool MaybeSaveAnnotations(WindowTab* tab) {
             return true;
         case SaveChoice::SaveNew: {
             bool didSave = SaveAnnotationsToMaybeNewPdfFile(tab);
+            if (!didSave) {
+                tab->askedToSaveAnnotations = false;
+            }
             return didSave;
         }
         case SaveChoice::SaveExisting: {
