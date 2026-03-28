@@ -1387,8 +1387,8 @@ NO_INLINE static void PaintCurrentEditAnnotationMark(WindowTab* tab, HDC hdc, Di
         Gdiplus::Pen pen(&br, 4);
         gs.DrawRectangle(&pen, rect.x, rect.y, rect.dx, rect.dy);
     } else {
-        Gdiplus::Color gray(180, 128, 128, 128);
-        Gdiplus::Pen pen(gray, 2);
+        Gdiplus::Color blue(255, 0, 80, 200);
+        Gdiplus::Pen pen(blue, 2);
         pen.SetDashStyle(Gdiplus::DashStyleDot);
         gs.DrawRectangle(&pen, rect.x, rect.y, rect.dx, rect.dy);
     }
