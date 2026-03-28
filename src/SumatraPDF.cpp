@@ -3817,12 +3817,29 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
     // Tabbar and toolbar at the top
     if (!win->presentation && !win->isFullScreen) {
         if (win->tabsInTitlebar) {
+            bool showingMenuBar = IsShowingMenuBarRebar(win);
             // Add a visible gap above the caption for window dragging.
-            if (!IsZoomed(win->hwndFrame)) {
+            // Skip when menu bar is showing (it goes all the way to the top).
+            if (!IsZoomed(win->hwndFrame) && !showingMenuBar) {
                 rc.y += kCaptionTopPadding;
                 rc.dy -= kCaptionTopPadding;
             }
-            int captionHeight = GetTabbarHeight(win->hwndFrame);
+            int tabHeight = GetTabbarHeight(win->hwndFrame);
+            int captionHeight = tabHeight;
+            if (showingMenuBar) {
+                int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
+                menuBarDy += 2 * GetSystemMetrics(SM_CYBORDER);
+                // check if there are actual file tabs to show
+                bool hasFileTabs = false;
+                for (WindowTab* tab : win->Tabs()) {
+                    if (!tab->IsAboutTab()) {
+                        hasFileTabs = true;
+                        break;
+                    }
+                }
+                // menu bar row + optional tabs row
+                captionHeight = menuBarDy + (hasFileTabs ? tabHeight : 0);
+            }
             win->captionRect = {rc.x, rc.y, rc.dx, captionHeight};
             if (updateToolbars) {
                 RelayoutCaption(win);
@@ -3838,8 +3855,8 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
             rc.dy -= tabHeight;
         }
     }
-    if (IsShowingMenuBarRebar(win)) {
-        // RB_GETBARHEIGHT returns the band area height; add border pixels for WS_BORDER
+    if (!win->tabsInTitlebar && IsShowingMenuBarRebar(win)) {
+        // non-titlebar case: menu bar rebar below tabs
         int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
         int borderY = GetSystemMetrics(SM_CYBORDER);
         menuBarDy += 2 * borderY;
@@ -6851,44 +6868,122 @@ void RelayoutCaption(MainWindow* win) {
     }
     Rect rc = win->captionRect;
     bool maximized = IsZoomed(win->hwndFrame);
-
-    int btnDy = rc.y + rc.dy;
-    int btnDx = btnDy;
-
-    win->captionBtn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    win->captionBtn[CB_CLOSE].visible = true;
-    rc.dx -= btnDx;
-
-    win->captionBtn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    win->captionBtn[CB_RESTORE].visible = maximized;
-
-    win->captionBtn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    win->captionBtn[CB_MAXIMIZE].visible = !maximized;
-    rc.dx -= btnDx;
-
-    win->captionBtn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
-    win->captionBtn[CB_MINIMIZE].visible = true;
-    rc.dx -= btnDx;
-
+    bool showingMenuBar = IsShowingMenuBarRebar(win);
     int tabHeight = GetTabbarHeight(win->hwndFrame);
-    rc.y += rc.dy - tabHeight;
 
-    win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
-    win->captionBtn[CB_SYSTEM_MENU].visible = true;
-    rc.x += tabHeight;
-    rc.dx -= tabHeight;
+    if (showingMenuBar) {
+        // Two-row layout:
+        //   Row 1 (top): CB_SYSTEM_MENU, menu bar rebar, [drag area], min/max/close
+        //   Row 2: tabs, [drag area]
+        // Menu bar goes all the way to the top for compactness.
 
-    bool showMenuBtn = !IsShowingMenuBarRebar(win);
-    win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
-    win->captionBtn[CB_MENU].visible = showMenuBtn;
-    if (showMenuBtn) {
+        // Get menu bar natural height
+        int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0);
+        menuBarDy += 2 * GetSystemMetrics(SM_CYBORDER);
+
+        int row1Y = rc.y;
+        int row2Y = rc.y + menuBarDy;
+
+        // window buttons match menu bar size: dy = menuBarDy, dx = menuBarDy
+        int btnDy = menuBarDy;
+        int btnDx = menuBarDy;
+
+        win->captionBtn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, row1Y, btnDx, btnDy};
+        win->captionBtn[CB_CLOSE].visible = true;
+        rc.dx -= btnDx;
+
+        win->captionBtn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, row1Y, btnDx, btnDy};
+        win->captionBtn[CB_RESTORE].visible = maximized;
+
+        win->captionBtn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, row1Y, btnDx, btnDy};
+        win->captionBtn[CB_MAXIMIZE].visible = !maximized;
+        rc.dx -= btnDx;
+
+        win->captionBtn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, row1Y, btnDx, btnDy};
+        win->captionBtn[CB_MINIMIZE].visible = true;
+        rc.dx -= btnDx;
+
+        // Row 1 left: system menu (sized to match menu bar height)
+        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, row1Y, menuBarDy, menuBarDy};
+        win->captionBtn[CB_SYSTEM_MENU].visible = true;
+        int row1X = rc.x + menuBarDy;
+        int row1Dx = rc.dx - menuBarDy;
+
+        // CB_MENU hidden when menu bar rebar is showing
+        win->captionBtn[CB_MENU].rect = {row1X, row1Y, menuBarDy, menuBarDy};
+        win->captionBtn[CB_MENU].visible = false;
+
+        // Menu bar rebar in row 1 after system menu, natural width
+        int menuBarWidth = row1Dx; // default: fill available
+        if (win->hwndMenuToolbar) {
+            int btnCount = (int)SendMessageW(win->hwndMenuToolbar, TB_BUTTONCOUNT, 0, 0);
+            if (btnCount > 0) {
+                RECT lastBtn;
+                SendMessageW(win->hwndMenuToolbar, TB_GETITEMRECT, btnCount - 1, (LPARAM)&lastBtn);
+                int naturalWidth = lastBtn.right + GetSystemMetrics(SM_CXBORDER) * 2;
+                if (naturalWidth < row1Dx) {
+                    menuBarWidth = naturalWidth;
+                }
+            }
+        }
+
+        // check if there are actual file tabs to show
+        bool hasFileTabs = false;
+        for (WindowTab* tab : win->Tabs()) {
+            if (!tab->IsAboutTab()) {
+                hasFileTabs = true;
+                break;
+            }
+        }
+
+        DeferWinPosHelper dh;
+        dh.SetWindowPos(win->hwndMenuReBar, nullptr, row1X, row1Y, menuBarWidth, menuBarDy, SWP_NOZORDER);
+
+        if (hasFileTabs) {
+            // Row 2: tabs
+            win->tabsCtrl->SetIsVisible(true);
+            dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, row2Y, rc.dx, tabHeight, SWP_NOZORDER);
+        } else {
+            // no file tabs: hide tab bar, single-row caption
+            win->tabsCtrl->SetIsVisible(false);
+        }
+        dh.End();
+    } else {
+        // Single-row layout (original)
+        int btnDy = rc.y + rc.dy;
+        int btnDx = btnDy;
+
+        win->captionBtn[CB_CLOSE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+        win->captionBtn[CB_CLOSE].visible = true;
+        rc.dx -= btnDx;
+
+        win->captionBtn[CB_RESTORE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+        win->captionBtn[CB_RESTORE].visible = maximized;
+
+        win->captionBtn[CB_MAXIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+        win->captionBtn[CB_MAXIMIZE].visible = !maximized;
+        rc.dx -= btnDx;
+
+        win->captionBtn[CB_MINIMIZE].rect = {rc.x + rc.dx - btnDx, 0, btnDx, btnDy};
+        win->captionBtn[CB_MINIMIZE].visible = true;
+        rc.dx -= btnDx;
+
+        rc.y += rc.dy - tabHeight;
+
+        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+        win->captionBtn[CB_SYSTEM_MENU].visible = true;
         rc.x += tabHeight;
         rc.dx -= tabHeight;
-    }
 
-    DeferWinPosHelper dh;
-    dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
-    dh.End();
+        win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+        win->captionBtn[CB_MENU].visible = true;
+        rc.x += tabHeight;
+        rc.dx -= tabHeight;
+
+        DeferWinPosHelper dh;
+        dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
+        dh.End();
+    }
 
     UpdateTabWidth(win);
 
