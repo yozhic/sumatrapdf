@@ -3299,7 +3299,14 @@ static void DeleteCurrentFile(MainWindow* win) {
     }
     CloseCurrentTab(win, false);
     file::DeleteFileToTrash(path);
-    gFileHistory.MarkFileInexistent(path, true);
+    DeleteThumbnailForFile(path);
+    FileState* fs = gFileHistory.FindByPath(path);
+    if (fs) {
+        gFileHistory.Remove(fs);
+        DeleteFileState(fs);
+    }
+    SaveSettings();
+    win->RedrawAll(true);
 }
 
 static void RenameCurrentFile(MainWindow* win) {
