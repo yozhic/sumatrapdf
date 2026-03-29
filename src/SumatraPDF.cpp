@@ -5222,6 +5222,7 @@ static void TransitionToNoTabs() {
                 if (gGlobalPrefs->showMenubar) {
                     SetMenu(w->hwndFrame, w->menu);
                 }
+                ShowOrHideToolbar(w);
                 w->RedrawAllIncludingNonClient();
             }
             return;
