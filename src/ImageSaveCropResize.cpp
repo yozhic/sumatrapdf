@@ -43,6 +43,7 @@ constexpr int kImagePadding = 16;
 constexpr int kResizeEdgeThreshold = 2;
 constexpr int kDragHandleSize = 6;
 constexpr int kControlAreaDy = 100;
+constexpr int kPathLabelRowDy = 16 + 6; // label height + kRowPadding
 constexpr int kRowPadding = 6;
 constexpr int kButtonPadding = 8;
 
@@ -61,6 +62,7 @@ enum class DragEdge {
 
 struct ImageEditWindow {
     ImageEditMode mode = ImageEditMode::Crop;
+    bool fromRenderedBitmap = false;
 
     HWND hwnd = nullptr;
     HWND hwndParent = nullptr;
@@ -247,9 +249,13 @@ static void InvalidateImageArea(ImageEditWindow* ew) {
     InvalidateRect(ew->hwnd, &rc, FALSE);
 }
 
+static int GetControlAreaDy(ImageEditWindow* ew) {
+    return ew->fromRenderedBitmap ? (kControlAreaDy - kPathLabelRowDy) : kControlAreaDy;
+}
+
 static void CalcImageLayout(ImageEditWindow* ew) {
     Rect cRc = ClientRect(ew->hwnd);
-    ew->imgAreaH = cRc.dy - kControlAreaDy;
+    ew->imgAreaH = cRc.dy - GetControlAreaDy(ew);
     if (ew->imgAreaH < 10) {
         ew->imgAreaH = 10;
     }
@@ -665,13 +671,15 @@ static void LayoutControls(ImageEditWindow* ew) {
     int x = kButtonPadding;
     int w = cRc.dx - 2 * kButtonPadding;
 
-    // row 1: file path label, shifted right to align with edit text
-    int editBorder = GetSystemMetrics(SM_CXEDGE);
-    LRESULT margins = SendMessageW(ew->hwndDestEdit, EM_GETMARGINS, 0, 0);
-    int editLeftMargin = LOWORD(margins);
-    int labelShift = editBorder + editLeftMargin;
-    MoveWindow(ew->hwndPathLabel, x + labelShift, y, w - labelShift, 16, TRUE);
-    y += 16 + kRowPadding;
+    // row 1: file path label — skip if from RenderedBitmap
+    if (!ew->fromRenderedBitmap) {
+        int editBorder = GetSystemMetrics(SM_CXEDGE);
+        LRESULT margins = SendMessageW(ew->hwndDestEdit, EM_GETMARGINS, 0, 0);
+        int editLeftMargin = LOWORD(margins);
+        int labelShift = editBorder + editLeftMargin;
+        MoveWindow(ew->hwndPathLabel, x + labelShift, y, w - labelShift, 16, TRUE);
+        y += 16 + kRowPadding;
+    }
 
     // row 2: dest edit + browse button
     int browseW = 30;
@@ -1428,6 +1436,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
 
     auto* ew = new ImageEditWindow();
     ew->mode = mode;
+    ew->fromRenderedBitmap = fromRenderedBitmap;
     ew->filePath = filePath ? str::Dup(filePath) : nullptr;
     ew->srcBitmap = bmp;
     ew->imgW = imgW;
@@ -1456,7 +1465,8 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
 
     // calculate window size: image at 100% + padding + control area, clamped to screen
     int wantW = imgW + 2 * kImagePadding;
-    int wantH = imgH + 2 * kImagePadding + kControlAreaDy;
+    int controlDy = fromRenderedBitmap ? (kControlAreaDy - kPathLabelRowDy) : kControlAreaDy;
+    int wantH = imgH + 2 * kImagePadding + controlDy;
     // add window chrome
     RECT rc = {0, 0, wantW, wantH};
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
