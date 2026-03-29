@@ -442,7 +442,7 @@ Retry:
     prevProcId = *procId;
     UnmapViewOfFile(procId);
     CloseHandle(hMap);
-    while ((hwnd = FindWindowEx(HWND_DESKTOP, hwnd, FRAME_CLASS_NAME, nullptr)) != nullptr) {
+    while ((hwnd = FindWindowExW(HWND_DESKTOP, hwnd, FRAME_CLASS_NAME, nullptr)) != nullptr) {
         DWORD wndProcId;
         GetWindowThreadProcessId(hwnd, &wndProcId);
         if (wndProcId == prevProcId) {
@@ -2561,7 +2561,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     if (flags.printDialog || flags.stressTestPath || gPluginMode) {
         // TODO: pass print request through to previous instance?
     } else if (flags.reuseDdeInstance || flags.dde) {
-        existingHwnd = FindWindow(FRAME_CLASS_NAME, nullptr);
+        existingHwnd = FindWindowW(FRAME_CLASS_NAME, nullptr);
     } else if (gGlobalPrefs->reuseInstance || gGlobalPrefs->useTabs) {
         existingHwnd = existingInstanceHwnd;
     }
