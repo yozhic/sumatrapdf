@@ -2,10 +2,12 @@
    License: GPLv3 */
 
 struct MainWindow;
+struct RenderedBitmap;
 
 enum class ImageEditMode {
     Crop,
     Resize
 };
 
-void ShowImageEditWindow(MainWindow* win, ImageEditMode mode);
+void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePath = nullptr,
+                         RenderedBitmap* rbmp = nullptr);

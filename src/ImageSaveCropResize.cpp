@@ -1304,33 +1304,47 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     return 0;
 }
 
-void ShowImageEditWindow(MainWindow* win, ImageEditMode mode) {
+void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePath, RenderedBitmap* rbmp) {
     if (!win) {
         return;
     }
-    WindowTab* tab = win->CurrentTab();
-    if (!tab || !tab->filePath) {
-        return;
-    }
-    Kind engineType = tab->GetEngineType();
-    if (engineType != kindEngineImage) {
-        return;
-    }
-    EngineBase* engine = tab->GetEngine();
-    if (!engine) {
-        return;
-    }
 
-    // load the image
-    const char* filePath = tab->filePath;
-    ByteSlice data = file::ReadFile(filePath);
-    if (data.empty()) {
-        return;
-    }
-    Bitmap* bmp = BitmapFromData(data);
-    data.Free();
-    if (!bmp) {
-        return;
+    Bitmap* bmp = nullptr;
+    bool fromRenderedBitmap = (rbmp != nullptr);
+
+    if (fromRenderedBitmap) {
+        // create GDI+ bitmap from RenderedBitmap
+        HBITMAP hbmp = rbmp->GetBitmap();
+        if (!hbmp) {
+            return;
+        }
+        bmp = new Bitmap(hbmp, nullptr);
+        if (!bmp || bmp->GetWidth() == 0) {
+            delete bmp;
+            return;
+        }
+    } else {
+        // load from current tab's file
+        if (!filePath) {
+            WindowTab* tab = win->CurrentTab();
+            if (!tab || !tab->filePath) {
+                return;
+            }
+            Kind engineType = tab->GetEngineType();
+            if (engineType != kindEngineImage) {
+                return;
+            }
+            filePath = tab->filePath;
+        }
+        ByteSlice data = file::ReadFile(filePath);
+        if (data.empty()) {
+            return;
+        }
+        bmp = BitmapFromData(data);
+        data.Free();
+        if (!bmp) {
+            return;
+        }
     }
 
     int imgW = (int)bmp->GetWidth();
@@ -1342,7 +1356,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode) {
 
     auto* ew = new ImageEditWindow();
     ew->mode = mode;
-    ew->filePath = str::Dup(filePath);
+    ew->filePath = filePath ? str::Dup(filePath) : nullptr;
     ew->srcBitmap = bmp;
     ew->imgW = imgW;
     ew->imgH = imgH;
@@ -1408,14 +1422,17 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode) {
     ew->hFont = GetDefaultGuiFont();
 
     // create child controls
-    // row 1: file path label (read-only)
-    ew->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, 0, 0, 0,
-                        0, hwnd, nullptr, h, nullptr);
+    // row 1: file path label (read-only) — hidden when from RenderedBitmap
+    DWORD pathLabelStyle = WS_CHILD | SS_LEFT | SS_PATHELLIPSIS;
+    if (!fromRenderedBitmap) {
+        pathLabelStyle |= WS_VISIBLE;
+    }
+    ew->hwndPathLabel = CreateWindowExW(0, L"STATIC", filePath ? ToWStrTemp(filePath) : L"", pathLabelStyle, 0, 0, 0, 0,
+                                        hwnd, nullptr, h, nullptr);
     SendMessageW(ew->hwndPathLabel, WM_SETFONT, (WPARAM)ew->hFont, TRUE);
 
     // row 2: dest edit + browse
-    TempStr destPath = MakeUniqueFilePathTemp(filePath);
+    TempStr destPath = filePath ? MakeUniqueFilePathTemp(filePath) : str::DupTemp("");
     ew->hwndDestEdit = CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath),
                                        WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 0, 0, 0, 0, hwnd, nullptr, h, nullptr);
     SendMessageW(ew->hwndDestEdit, WM_SETFONT, (WPARAM)ew->hFont, TRUE);
