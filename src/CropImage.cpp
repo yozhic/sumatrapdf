@@ -341,10 +341,10 @@ static void LayoutControls(CropImageWindow* cw) {
     if (cw->btnSave && cw->btnCancel) {
         Size szSave = cw->btnSave->GetIdealSize();
         Size szCancel = cw->btnCancel->GetIdealSize();
-        int bx = cRc.dx - kButtonPadding - szSave.dx;
-        cw->btnSave->SetBounds({bx, y, szSave.dx, szSave.dy});
-        bx -= szCancel.dx + 4;
+        int bx = cRc.dx - kButtonPadding - szCancel.dx;
         cw->btnCancel->SetBounds({bx, y, szCancel.dx, szCancel.dy});
+        bx -= szSave.dx + 4;
+        cw->btnSave->SetBounds({bx, y, szSave.dx, szSave.dy});
     }
 }
 
@@ -830,7 +830,7 @@ void ShowCropImageWindow(MainWindow* win) {
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = "Save";
+        args.text = "Save Cropped";
         btn->Create(args);
         btn->onClick = MkFunc0<CropImageWindow>(OnSave, cw);
         cw->btnSave = btn;
