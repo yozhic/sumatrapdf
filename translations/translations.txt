@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-bed18c8eb9b54b79126b7b55b5e56019dd651e5c
+d2377331fbe895764b528eccf42afd095c2eb6df
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -790,9 +790,6 @@ tw:複製到剪貼簿(&C)
 uk:Скопіювати до буфера обміну
 uz:Buferga nusxalash
 vn:&Lưu Sao Chép
-:&Crop
-br:&Cortar
-pl:Przy&tnij
 :&Discard changes
 am:&Մերժել
 ar:أس&تبعد التغييرات
@@ -2865,9 +2862,7 @@ tw:從歷程記錄中移除(&R)
 uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
-:&Resize
-br:&Redimensionar
-pl:Zmień &rozmiar
+:&Save
 :&Save As...
 am:&Պահել որպես
 ar:&حفظ باسم...
@@ -5775,6 +5770,7 @@ vn:Bytes
 :C&opy To Clipboard
 br:C&opiar para a Área de Transferência
 pl:Kopiuj do sc&howka
+:C&rop
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -9026,10 +9022,10 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Crop
 :Crop Image
 br:Cortar Imagem
 pl:Przytnij obraz
-:Crop Resized
 :Ctrl+Tab to navigate
 br:Ctrl+Tab pra navegar
 co:Ctrl+Tabul. per navigà
@@ -19039,6 +19035,7 @@ tr:Özellikler...
 tw:內容...
 uk:Властивості...
 uz:Xususiyatlar...
+:R&esize
 :Re&name...
 am:Ան&վանափոխել...
 ar:إعادة ت&سمية...
@@ -19549,7 +19546,7 @@ nl:Heropen Laatst Gesloten
 pl:Otwórz ponownie ostatnio zamknięty
 sk:Znovu otvoriť naposledy zatvorené
 tw:重新開啟上次關閉的內容
-:Resize Cropped
+:Resize
 :Resize Image
 br:Redimensionar Imagem
 pl:Zmień rozmiar obrazu
@@ -20032,6 +20029,7 @@ pl:Zapisz plik jako...
 ru:Сохранить файл как...
 sk:Uložiť súbor ako…
 tw:將檔案另存新檔…
+:Save Image
 :Save Resized
 :Save S&hortcut...
 am:Պահել դ&յուրանցումը...

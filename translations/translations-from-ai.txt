@@ -36026,3 +36026,571 @@ vn:Dán ảnh từ bộ nhớ tạm
 vn:Thay đổi kích thước ảnh đã cắt
 :Save Resized
 vn:Lưu ảnh đã thay đổi kích thước
+:&Save
+am:አስቀምጥ
+:C&rop
+am:ቁረጥ
+:R&esize
+am:መጠን ቀይር
+:Save Image
+am:ምስል አስቀምጥ
+:&Save
+ar:حفظ
+:C&rop
+ar:قص
+:R&esize
+ar:تغيير الحجم
+:Save Image
+ar:حفظ الصورة
+:&Save
+br:Enrollañ
+:C&rop
+br:Didroc'hañ
+:R&esize
+br:Cheñch ment
+:Save Image
+br:Enrollañ ar skeudenn
+:&Save
+cn:保存
+:C&rop
+cn:裁剪
+:R&esize
+cn:调整大小
+:Save Image
+cn:保存图片
+:&Save
+co:Salvà
+:C&rop
+co:Ritaglià
+:R&esize
+co:Ridimensionà
+:Save Image
+co:Salvà l'Imagine
+:&Save
+de:Speichern
+:C&rop
+de:Zuschneiden
+:R&esize
+de:Größe ändern
+:Save Image
+de:Bild speichern
+:&Save
+el:Αποθήκευση
+:C&rop
+el:Περικοπή
+:R&esize
+el:Αλλαγή μεγέθους
+:Save Image
+el:Αποθήκευση εικόνας
+:&Save
+hi:सहेजें
+:C&rop
+hi:क्रॉप करें
+:R&esize
+hi:आकार बदलें
+:Save Image
+hi:छवि सहेजें
+:&Save
+ja:保存
+:C&rop
+ja:トリミング
+:R&esize
+ja:リサイズ
+:Save Image
+ja:画像を保存
+:&Save
+ml:സേവ് ചെയ്യുക
+:C&rop
+ml:ക്രോപ്പ് ചെയ്യുക
+:R&esize
+ml:വലുപ്പം മാറ്റുക
+:Save Image
+ml:ചിത്രം സേവ് ചെയ്യുക
+:&Save
+nl:Opslaan
+:C&rop
+nl:Bijsnijden
+:R&esize
+nl:Formaat wijzigen
+:Save Image
+nl:Afbeelding opslaan
+:&Save
+pl:Zapisz
+:C&rop
+pl:Przytnij
+:R&esize
+pl:Zmień rozmiar
+:Save Image
+pl:Zapisz obraz
+:&Save
+ru:Сохранить
+:C&rop
+ru:Обрезать
+:R&esize
+ru:Изменить размер
+:Save Image
+ru:Сохранить изображение
+:&Save
+sk:Uložiť
+:C&rop
+sk:Orezať
+:R&esize
+sk:Zmeniť veľkosť
+:Save Image
+sk:Uložiť obrázok
+:&Save
+sr-rs:Сачувај
+:C&rop
+sr-rs:Исеци
+:R&esize
+sr-rs:Промени величину
+:Save Image
+sr-rs:Сачувај слику
+:&Save
+tw:儲存
+:C&rop
+tw:裁切
+:R&esize
+tw:調整大小
+:Save Image
+tw:儲存圖片
+:&Save
+az:Yadda saxla
+:C&rop
+az:Kəs
+:R&esize
+az:Ölçüsünü dəyiş
+:Save Image
+az:Şəkli yadda saxla
+:&Save
+by:Захаваць
+:C&rop
+by:Абрэзаць
+:R&esize
+by:Змяніць памер
+:Save Image
+by:Захаваць выяву
+:&Save
+ca:Desa
+:C&rop
+ca:Retalla
+:R&esize
+ca:Redimensiona
+:Save Image
+ca:Desa la imatge
+:&Save
+cy:Cadw
+:C&rop
+cy:Tocio
+:R&esize
+cy:Newid Maint
+:Save Image
+cy:Cadw Delwedd
+:&Save
+cz:Uložit
+:C&rop
+cz:Oříznout
+:R&esize
+cz:Změnit velikost
+:Save Image
+cz:Uložit obrázek
+:&Save
+es:Guardar
+:C&rop
+es:Recortar
+:R&esize
+es:Redimensionar
+:Save Image
+es:Guardar imagen
+:&Save
+fa:ذخیره
+:C&rop
+fa:برش
+:R&esize
+fa:تغییر اندازه
+:Save Image
+fa:ذخیره تصویر
+:&Save
+fi:Tallenna
+:C&rop
+fi:Rajaa
+:R&esize
+fi:Muuta kokoa
+:Save Image
+fi:Tallenna kuva
+:&Save
+fo:Goym
+:C&rop
+fo:Avskera
+:R&esize
+fo:Broyt stødd
+:Save Image
+fo:Goym mynd
+:&Save
+fr:Enregistrer
+:C&rop
+fr:Recadrer
+:R&esize
+fr:Redimensionner
+:Save Image
+fr:Enregistrer l'image
+:&Save
+ga:Sábháil
+:C&rop
+ga:Bearr
+:R&esize
+ga:Athraigh Méid
+:Save Image
+ga:Sábháil Íomhá
+:&Save
+gl:Gardar
+:C&rop
+gl:Recortar
+:R&esize
+gl:Redimensionar
+:Save Image
+gl:Gardar imaxe
+:&Save
+he:שמור
+:C&rop
+he:חתוך
+:R&esize
+he:שנה גודל
+:Save Image
+he:שמור תמונה
+:&Save
+hu:Mentés
+:C&rop
+hu:Körbevágás
+:R&esize
+hu:Átméretezés
+:Save Image
+hu:Kép mentése
+:&Save
+id:Simpan
+:C&rop
+id:Potong
+:R&esize
+id:Ubah Ukuran
+:Save Image
+id:Simpan Gambar
+:&Save
+it:Salva
+:C&rop
+it:Ritaglia
+:R&esize
+it:Ridimensiona
+:Save Image
+it:Salva immagine
+:&Save
+kr:저장
+:C&rop
+kr:자르기
+:R&esize
+kr:크기 조정
+:Save Image
+kr:이미지 저장
+:&Save
+lv:Saglabāt
+:C&rop
+lv:Apgriezt
+:R&esize
+lv:Mainīt izmēru
+:Save Image
+lv:Saglabāt attēlu
+:&Save
+my:သိမ်းဆည်းမည်
+:C&rop
+my:ဖြတ်တောက်မည်
+:R&esize
+my:အရွယ်အစားပြောင်းမည်
+:Save Image
+my:ပုံသိမ်းဆည်းမည်
+:&Save
+pt:Guardar
+:C&rop
+pt:Recortar
+:R&esize
+pt:Redimensionar
+:Save Image
+pt:Guardar Imagem
+:&Save
+ro:Salvează
+:C&rop
+ro:Decupează
+:R&esize
+ro:Redimensionează
+:Save Image
+ro:Salvează imaginea
+:&Save
+sat:ᱥᱟᱧᱪᱟᱣ
+:C&rop
+sat:ᱠᱟᱴ
+:R&esize
+sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ
+:Save Image
+sat:ᱪᱤᱛᱟᱹᱨ ᱥᱟᱧᱪᱟᱣ
+:&Save
+sl:Shrani
+:C&rop
+sl:Obreži
+:R&esize
+sl:Spremeni velikost
+:Save Image
+sl:Shrani sliko
+:&Save
+sv:Spara
+:C&rop
+sv:Beskär
+:R&esize
+sv:Ändra storlek
+:Save Image
+sv:Spara bild
+:&Save
+ta:சேமி
+:C&rop
+ta:செதுக்கு
+:R&esize
+ta:அளவு மாற்று
+:Save Image
+ta:படத்தை சேமி
+:&Save
+tr:Kaydet
+:C&rop
+tr:Kırp
+:R&esize
+tr:Yeniden Boyutlandır
+:Save Image
+tr:Resmi Kaydet
+:&Save
+uz:Saqlash
+:C&rop
+uz:Qirqish
+:R&esize
+uz:O'lchamini o'zgartirish
+:Save Image
+uz:Rasmni saqlash
+:&Save
+af:Stoor
+:C&rop
+af:Snoei
+:R&esize
+af:Verstel grootte
+:Save Image
+af:Stoor prent
+:&Save
+bg:Запазване
+:C&rop
+bg:Изрязване
+:R&esize
+bg:Преоразмеряване
+:Save Image
+bg:Запазване на изображение
+:&Save
+bn:সংরক্ষণ করুন
+:C&rop
+bn:ক্রপ করুন
+:R&esize
+bn:আকার পরিবর্তন করুন
+:Save Image
+bn:ছবি সংরক্ষণ করুন
+:&Save
+bs:Spremi
+:C&rop
+bs:Obreži
+:R&esize
+bs:Promijeni veličinu
+:Save Image
+bs:Spremi sliku
+:&Save
+ca-xv:Desar
+:C&rop
+ca-xv:Retallar
+:R&esize
+ca-xv:Redimensionar
+:Save Image
+ca-xv:Desar imatge
+:&Save
+dk:Gem
+:C&rop
+dk:Beskær
+:R&esize
+dk:Tilpas størrelse
+:Save Image
+dk:Gem billede
+:&Save
+et:Salvesta
+:C&rop
+et:Kärbi
+:R&esize
+et:Muuda suurust
+:Save Image
+et:Salvesta pilt
+:&Save
+fy-nl:Bewarje
+:C&rop
+fy-nl:Besnij
+:R&esize
+fy-nl:Grutte oanpasse
+:Save Image
+fy-nl:Ofbylding bewarje
+:&Save
+hr:Spremi
+:C&rop
+hr:Obreži
+:R&esize
+hr:Promijeni veličinu
+:Save Image
+hr:Spremi sliku
+:&Save
+jv:Simpen
+:C&rop
+jv:Potong
+:R&esize
+jv:Ukur Maneh
+:Save Image
+jv:Simpen Gambar
+:&Save
+ka:შენახვა
+:C&rop
+ka:ამოჭრა
+:R&esize
+ka:ზომის შეცვლა
+:Save Image
+ka:სურათის შენახვა
+:&Save
+ku:Tomar kirin
+:C&rop
+ku:Birîn
+:R&esize
+ku:Mezinahî biguherîne
+:Save Image
+ku:Wêne tomar bike
+:&Save
+kw:Gwitha
+:C&rop
+kw:Kribel
+:R&esize
+kw:Dasvayntel
+:Save Image
+kw:Gwitha Skeusenn
+:&Save
+lt:Išsaugoti
+:C&rop
+lt:Apkarpyti
+:R&esize
+lt:Keisti dydį
+:Save Image
+lt:Išsaugoti paveikslėlį
+:&Save
+mk:Зачувај
+:C&rop
+mk:Исечи
+:R&esize
+mk:Промени големина
+:Save Image
+mk:Зачувај слика
+:&Save
+mm:သိမ်းဆည်းရန်
+:C&rop
+mm:ဖြတ်တောက်ရန်
+:R&esize
+mm:အရွယ်အစားပြောင်းရန်
+:Save Image
+mm:ရုပ်ပုံသိမ်းဆည်းရန်
+:&Save
+ne:सुरक्षित गर्नुहोस्
+:C&rop
+ne:काट्नुहोस्
+:R&esize
+ne:आकार परिवर्तन गर्नुहोस्
+:Save Image
+ne:छवि सुरक्षित गर्नुहोस्
+:&Save
+nn:Lagre
+:C&rop
+nn:Beskjer
+:R&esize
+nn:Endre storleik
+:Save Image
+nn:Lagre bilete
+:&Save
+no:Lagre
+:C&rop
+no:Beskjær
+:R&esize
+no:Endre størrelse
+:Save Image
+no:Lagre bilde
+:&Save
+pa:ਸੁਰੱਖਿਅਤ ਕਰੋ
+:C&rop
+pa:ਕੱਟੋ
+:R&esize
+pa:ਆਕਾਰ ਬਦਲੋ
+:Save Image
+pa:ਚਿੱਤਰ ਸੁਰੱਖਿਅਤ ਕਰੋ
+:&Save
+si:සුරකින්න
+:C&rop
+si:කපන්න
+:R&esize
+si:ප්‍රමාණය වෙනස් කරන්න
+:Save Image
+si:රූපය සුරකින්න
+:&Save
+sn:Chengetedza
+:C&rop
+sn:Cheka
+:R&esize
+sn:Chinja Saizi
+:Save Image
+sn:Chengetedza Mufananidzo
+:&Save
+sp-rs:Sačuvaj
+:C&rop
+sp-rs:Iseci
+:R&esize
+sp-rs:Promeni veličinu
+:Save Image
+sp-rs:Sačuvaj sliku
+:&Save
+sq:Ruaj
+:C&rop
+sq:Prit
+:R&esize
+sq:Ndrysho madhësinë
+:Save Image
+sq:Ruaj imazhin
+:&Save
+th:บันทึก
+:C&rop
+th:ครอบตัด
+:R&esize
+th:ปรับขนาด
+:Save Image
+th:บันทึกรูปภาพ
+:&Save
+tl:I-save
+:C&rop
+tl:I-crop
+:R&esize
+tl:Baguhin ang Laki
+:Save Image
+tl:I-save ang Larawan
+:&Save
+uk:Зберегти
+:C&rop
+uk:Обрізати
+:R&esize
+uk:Змінити розмір
+:Save Image
+uk:Зберегти зображення
+:&Save
+vn:Lưu
+:C&rop
+vn:Cắt
+:R&esize
+vn:Thay đổi kích thước
+:Save Image
+vn:Lưu ảnh

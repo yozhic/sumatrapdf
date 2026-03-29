@@ -1095,79 +1095,6 @@ tw:複製到剪貼簿(&C)
 uk:Скопіювати до буфера обміну
 uz:Buferga nusxalash
 vn:&Lưu Sao Chép
-:&Crop
-af:Sny
-am:መቁረጥ
-ar:قص
-az:Kəs
-bg:Изрязване
-bn:ক্রপ
-br:&Cortar
-bs:Obreži
-by:Абрэзаць
-ca:Retalla
-ca-xv:Retalla
-cn:裁剪
-co:Ritaglia
-cy:Tocio
-cz:Oříznout
-de:Zuschneiden
-dk:Beskær
-el:Περικοπή
-es:Recortar
-et:Kärbi
-eu:Moztu
-fa:برش
-fi:Rajaa
-fo:Skera
-fr:Rogner
-fy-nl:Bysnije
-ga:Bearr
-gl:Recortar
-he:חיתוך
-hi:क्रॉप करें
-hr:Obreži
-hu:Kivágás
-id:Potong
-it:Ritaglia
-ja:トリミング
-jv:Potong
-ka:ამოჭრა
-kr:자르기
-ku:Birrîn
-kw:Kribya
-lt:Apkarpyti
-lv:Apgriezt
-mk:Отсечи
-ml:ക്രോപ്പ് ചെയ്യുക
-mm:ဖြတ်တောက်ရန်
-my:ညှပ်ရန်
-ne:क्रप गर्नुहोस्
-nl:Bijsnijden
-nn:Beskjer
-no:Beskjær
-pa:ਕੱਟੋ
-pl:Przy&tnij
-pt:Recortar
-ro:Decupare
-ru:Обрезать
-sat:ᱠᱟᱛᱟᱨ
-si:කපන්න
-sk:Orezať
-sl:Obreži
-sn:Cheka
-sp-rs:Исеци
-sq:Prit
-sr-rs:Исеци
-sv:Beskär
-ta:செதுக்கு
-th:ครอบตัด
-tl:I-crop
-tr:Kırp
-tw:裁切
-uk:Обрізати
-uz:Kesish
-vn:Cắt ảnh
 :&Discard changes
 af:Verwerp veranderinge
 am:&Մերժել
@@ -3650,79 +3577,78 @@ tw:從歷程記錄中移除(&R)
 uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
-:&Resize
-af:Verander grootte
-am:መጠን መቀየር
-ar:تغيير الحجم
-az:Ölçüsünü dəyiş
-bg:Преоразмеряване
-bn:আকার পরিবর্তন
-br:&Redimensionar
-bs:Promijeni veličinu
-by:Змяніць памер
-ca:Redimensiona
-ca-xv:Redimensiona
-cn:调整大小
-co:Ridimensiona
-cy:Newid Maint
-cz:Změnit velikost
-de:Größe ändern
-dk:Tilpas størrelse
-el:Αλλαγή μεγέθους
-es:Redimensionar
-et:Muuda suurust
-eu:Aldatu tamaina
-fa:تغییر اندازه
-fi:Muuta kokoa
-fo:Broyt stødd
-fr:Redimensionner
-fy-nl:Grutte wizigje
-ga:Athraigh Méid
-gl:Redimensionar
-he:שינוי גודל
-hi:आकार बदलें
-hr:Promijeni veličinu
-hu:Átméretezés
-id:Ubah Ukuran
-it:Ridimensiona
-ja:リサイズ
-jv:Owahi Ukuran
-ka:ზომის შეცვლა
-kr:크기 조정
-ku:Mezinahiya Biguherîne
-kw:Dassysa
-lt:Keisti dydį
-lv:Mainīt izmēru
-mk:Промени големина
-ml:വലുപ്പം മാറ്റുക
-mm:အရွယ်အစားပြောင်းရန်
-my:အရွယ်အစားပြောင်းရန်
-ne:आकार परिवर्तन गर्नुहोस्
-nl:Formaat wijzigen
-nn:Endre storleik
-no:Endre størrelse
-pa:ਆਕਾਰ ਬਦਲੋ
-pl:Zmień &rozmiar
-pt:Redimensionar
-ro:Redimensionare
-ru:Изменить размер
-sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ
-si:ප්‍රමාණය වෙනස් කරන්න
-sk:Zmeniť veľkosť
-sl:Spremeni velikost
-sn:Chinja Saizi
-sp-rs:Промени величину
-sq:Ndrysho madhësinë
-sr-rs:Промени величину
-sv:Ändra storlek
-ta:அளவு மாற்று
-th:ปรับขนาด
-tl:Baguhin ang Laki
-tr:Yeniden Boyutlandır
-tw:調整大小
-uk:Змінити розмір
-uz:O'lchamini o'zgartirish
-vn:Thay đổi kích thước
+:&Save
+af:Stoor
+am:አስቀምጥ
+ar:حفظ
+az:Yadda saxla
+bg:Запазване
+bn:সংরক্ষণ করুন
+br:Enrollañ
+bs:Spremi
+by:Захаваць
+ca:Desa
+ca-xv:Desar
+cn:保存
+co:Salvà
+cy:Cadw
+cz:Uložit
+de:Speichern
+dk:Gem
+el:Αποθήκευση
+es:Guardar
+et:Salvesta
+fa:ذخیره
+fi:Tallenna
+fo:Goym
+fr:Enregistrer
+fy-nl:Bewarje
+ga:Sábháil
+gl:Gardar
+he:שמור
+hi:सहेजें
+hr:Spremi
+hu:Mentés
+id:Simpan
+it:Salva
+ja:保存
+jv:Simpen
+ka:შენახვა
+kr:저장
+ku:Tomar kirin
+kw:Gwitha
+lt:Išsaugoti
+lv:Saglabāt
+mk:Зачувај
+ml:സേവ് ചെയ്യുക
+mm:သိမ်းဆည်းရန်
+my:သိမ်းဆည်းမည်
+ne:सुरक्षित गर्नुहोस्
+nl:Opslaan
+nn:Lagre
+no:Lagre
+pa:ਸੁਰੱਖਿਅਤ ਕਰੋ
+pl:Zapisz
+pt:Guardar
+ro:Salvează
+ru:Сохранить
+sat:ᱥᱟᱧᱪᱟᱣ
+si:සුරකින්න
+sk:Uložiť
+sl:Shrani
+sn:Chengetedza
+sp-rs:Sačuvaj
+sq:Ruaj
+sr-rs:Сачувај
+sv:Spara
+ta:சேமி
+th:บันทึก
+tl:I-save
+tr:Kaydet
+tw:儲存
+uk:Зберегти
+uz:Saqlash
+vn:Lưu
 :&Save As...
 af:Stoor As...
 am:&Պահել որպես
@@ -7300,6 +7226,78 @@ tw:複製到剪貼簿
 uk:Копіювати в буфер обміну
 uz:Buferga nusxalash
 vn:Sao chép vào bộ nhớ tạm
+:C&rop
+af:Snoei
+am:ቁረጥ
+ar:قص
+az:Kəs
+bg:Изрязване
+bn:ক্রপ করুন
+br:Didroc'hañ
+bs:Obreži
+by:Абрэзаць
+ca:Retalla
+ca-xv:Retallar
+cn:裁剪
+co:Ritaglià
+cy:Tocio
+cz:Oříznout
+de:Zuschneiden
+dk:Beskær
+el:Περικοπή
+es:Recortar
+et:Kärbi
+fa:برش
+fi:Rajaa
+fo:Avskera
+fr:Recadrer
+fy-nl:Besnij
+ga:Bearr
+gl:Recortar
+he:חתוך
+hi:क्रॉप करें
+hr:Obreži
+hu:Körbevágás
+id:Potong
+it:Ritaglia
+ja:トリミング
+jv:Potong
+ka:ამოჭრა
+kr:자르기
+ku:Birîn
+kw:Kribel
+lt:Apkarpyti
+lv:Apgriezt
+mk:Исечи
+ml:ക്രോപ്പ് ചെയ്യുക
+mm:ဖြတ်တောက်ရန်
+my:ဖြတ်တောက်မည်
+ne:काट्नुहोस्
+nl:Bijsnijden
+nn:Beskjer
+no:Beskjær
+pa:ਕੱਟੋ
+pl:Przytnij
+pt:Recortar
+ro:Decupează
+ru:Обрезать
+sat:ᱠᱟᱴ
+si:කපන්න
+sk:Orezať
+sl:Obreži
+sn:Cheka
+sp-rs:Iseci
+sq:Prit
+sr-rs:Исеци
+sv:Beskär
+ta:செதுக்கு
+th:ครอบตัด
+tl:I-crop
+tr:Kırp
+tw:裁切
+uk:Обрізати
+uz:Qirqish
+vn:Cắt
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -12775,6 +12773,7 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Crop
 :Crop Image
 af:Sny Beeld
 am:ምስል መቁረጥ
@@ -12848,78 +12847,6 @@ tw:裁切圖片
 uk:Обрізати зображення
 uz:Rasmni kesish
 vn:Cắt ảnh
-:Crop Resized
-af:Sny Vergrote
-am:የተቆረጠ መጠን ተቀይሯል
-ar:اقتصاص المُعاد تحجيمه
-az:Ölçüsü Dəyişdirilmiş Şəkli Kəs
-bg:Изрязване на преоразмерено
-bn:আকার পরিবর্তিত ক্রপ করুন
-br:Troc'hañ ar stumm nevez
-bs:Obreži promijenjene veličine
-by:Абрэзаць зменены памер
-ca:Retallar redimensionat
-ca-xv:Retalla redimensionat
-cn:裁剪已调整大小
-co:Ritaglia Ridimensionatu
-cy:Tocio wedi'i Ailfeintio
-cz:Oříznout změněnou velikost
-de:Größe angepasst zuschneiden
-dk:Beskær tilpasset
-el:Περικοπή Αλλαγμένου Μεγέθους
-es:Recortar redimensionado
-et:Kärbi suurust muudetud
-fa:برش تغییر اندازه داده شده
-fi:Rajaa skaalattu
-fo:Skera støddbroytta
-fr:Recadrer redimensionné
-fy-nl:Bygesnien ferskaald
-ga:Bearr Athraithe Méid
-gl:Recortar redimensionado
-he:חתוך את התמונה שגודלה שונה
-hi:क्रॉप किए गए का आकार बदलें
-hr:Obrezana promijenjena veličina
-hu:Átméretezett kivágása
-id:Pangkas yang Diubah Ukurannya
-it:Ritaglia ridimensionata
-ja:リサイズ後にトリミング
-jv:Potong Sing Wis Diowahi Ukurane
-ka:ზომის შეცვლილის ამოჭრა
-kr:크기 조정된 이미지 자르기
-ku:Qirpandina Mezinahiyayî
-kw:Skav Dashevesys
-lt:Apkarpyti pakeisto dydžio
-lv:Apgriezt mainīta izmēra
-mk:Исечи со промена на големина
-ml:വലുപ്പം മാറ്റിയത് ക്രോപ്പ് ചെയ്യുക
-mm:အရွယ်အစားပြောင်းထားသည်ကို ဖြတ်တောက်ရန်
-my:အရွယ်အစားပြောင်းထားသည်ကို ဖြတ်တောက်ရန်
-ne:रिसाइज गरिएको क्रप गर्नुहोस्
-nl:Bijgesneden formaat wijzigen
-nn:Beskjer skalert
-no:Beskjær skalert
-pa:ਮੁੜ-ਆਕਾਰ ਕੀਤਾ ਕਰੌਪ ਕਰੋ
-pl:Przytnij przeskalowane
-pt:Cortar Redimensionado
-ro:Decupează redimensionată
-ru:Обрезать изменённое
-sat:ᱠᱨᱚᱯ ᱨᱤᱥᱟᱭᱤᱡᱽ
-si:ප්‍රමාණ වෙනස් කළ දෑ කපන්න
-sk:Orezať zmenené
-sl:Obreži spremenjeno velikost
-sn:Cheka Yakachinjwa Saizi
-sp-rs:Обрежи промењену величину
-sq:Prit të Ndryshuar Madhësinë
-sr-rs:Исеци промењену величину
-sv:Beskär storleksändrad
-ta:செதுக்கப்பட்டதை மறுஅளவிடு
-th:ครอบตัดที่ปรับขนาดแล้ว
-tl:I-crop ang Binago ang Laki
-tr:Yeniden Boyutlandırılmışı Kırp
-tw:裁切已調整大小
-uk:Обрізати змінене
-uz:O'lcham o'zgartirilganini kesish
-vn:Cắt ảnh đã thay đổi kích thước
 :Ctrl+Tab to navigate
 af:Ctrl+Tab om te navigeer
 am:ለማሰስ Ctrl+Tab
@@ -28759,6 +28686,78 @@ tw:內容...
 uk:Властивості...
 uz:Xususiyatlar...
 vn:Thuộc tính...
+:R&esize
+af:Verstel grootte
+am:መጠን ቀይር
+ar:تغيير الحجم
+az:Ölçüsünü dəyiş
+bg:Преоразмеряване
+bn:আকার পরিবর্তন করুন
+br:Cheñch ment
+bs:Promijeni veličinu
+by:Змяніць памер
+ca:Redimensiona
+ca-xv:Redimensionar
+cn:调整大小
+co:Ridimensionà
+cy:Newid Maint
+cz:Změnit velikost
+de:Größe ändern
+dk:Tilpas størrelse
+el:Αλλαγή μεγέθους
+es:Redimensionar
+et:Muuda suurust
+fa:تغییر اندازه
+fi:Muuta kokoa
+fo:Broyt stødd
+fr:Redimensionner
+fy-nl:Grutte oanpasse
+ga:Athraigh Méid
+gl:Redimensionar
+he:שנה גודל
+hi:आकार बदलें
+hr:Promijeni veličinu
+hu:Átméretezés
+id:Ubah Ukuran
+it:Ridimensiona
+ja:リサイズ
+jv:Ukur Maneh
+ka:ზომის შეცვლა
+kr:크기 조정
+ku:Mezinahî biguherîne
+kw:Dasvayntel
+lt:Keisti dydį
+lv:Mainīt izmēru
+mk:Промени големина
+ml:വലുപ്പം മാറ്റുക
+mm:အရွယ်အစားပြောင်းရန်
+my:အရွယ်အစားပြောင်းမည်
+ne:आकार परिवर्तन गर्नुहोस्
+nl:Formaat wijzigen
+nn:Endre storleik
+no:Endre størrelse
+pa:ਆਕਾਰ ਬਦਲੋ
+pl:Zmień rozmiar
+pt:Redimensionar
+ro:Redimensionează
+ru:Изменить размер
+sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ
+si:ප්‍රමාණය වෙනස් කරන්න
+sk:Zmeniť veľkosť
+sl:Spremeni velikost
+sn:Chinja Saizi
+sp-rs:Promeni veličinu
+sq:Ndrysho madhësinë
+sr-rs:Промени величину
+sv:Ändra storlek
+ta:அளவு மாற்று
+th:ปรับขนาด
+tl:Baguhin ang Laki
+tr:Yeniden Boyutlandır
+tw:調整大小
+uk:Змінити розмір
+uz:O'lchamini o'zgartirish
+vn:Thay đổi kích thước
 :Re&name...
 af:Hernoem...
 am:Ան&վանափոխել...
@@ -29854,78 +29853,7 @@ tw:重新開啟上次關閉的內容
 uk:Відкрити останній закритий
 uz:Oxirgi yopilganni qayta ochish
 vn:Mở lại tệp đã đóng gần nhất
-:Resize Cropped
-af:Verander Grootte Gesny
-am:የተቆረጠውን መጠን ቀይር
-ar:تغيير حجم المقتص
-az:Kəsilmiş Şəklin Ölçüsünü Dəyişdir
-bg:Преоразмери изрязаното
-bn:ক্রপ করা আকার পরিবর্তন করুন
-br:Cheñch ment ar pezh troc'het
-bs:Promijeni veličinu obrezanog
-by:Змяніць памер абрэзанага
-ca:Redimensionar retallat
-ca-xv:Redimensiona retallat
-cn:调整裁剪后大小
-co:Ridimensionà Ritagliatu
-cy:Ailfeintio wedi'i Docio
-cz:Změnit velikost oříznutého
-de:Zugeschnittenes skalieren
-dk:Tilpas beskåret
-el:Αλλαγή Μεγέθους Περικομμένου
-es:Redimensionar recortado
-et:Muuda kärbitud suurust
-fa:تغییر اندازه برش خورده
-fi:Skaalaa rajattu
-fo:Støddbroyt skorið
-fr:Redimensionner recadré
-fy-nl:Bygesnien ferskalje
-ga:Athraigh Méid Bearrtha
-gl:Redimensionar recortado
-he:שנה גודל של תמונה חתוכה
-hi:क्रॉप किए गए का आकार बदलें
-hr:Promijeni veličinu obrezanog
-hu:Kivágott átméretezése
-id:Ubah Ukuran yang Dipangkas
-it:Ridimensiona ritagliata
-ja:トリミング後にリサイズ
-jv:Owahi Ukuran Sing Wis Dipotong
-ka:ამოჭრილის ზომის შეცვლა
-kr:잘라낸 이미지 크기 조정
-ku:Mezinahiya Qirpandî
-kw:Dasheves Skavys
-lt:Keisti apkarpyto dydį
-lv:Mainīt apgrieztā izmēru
-mk:Промени големина на исечено
-ml:ക്രോപ്പ് ചെയ്തതിന്റെ വലുപ്പം മാറ്റുക
-mm:ဖြတ်တောက်ထားသည်ကို အရွယ်အစားပြောင်းရန်
-my:ဖြတ်တောက်ထားသည်ကို အရွယ်အစားပြောင်းရန်
-ne:क्रप गरिएको रिसाइज गर्नुहोस्
-nl:Formaat bijgesneden wijzigen
-nn:Skaler beskoren
-no:Skaler beskåret
-pa:ਕਰੌਪ ਕੀਤੇ ਨੂੰ ਮੁੜ-ਆਕਾਰ ਦਿਓ
-pl:Przeskaluj przycięte
-pt:Redimensionar Cortado
-ro:Redimensionează decupată
-ru:Изменить размер обрезанного
-sat:ᱠᱨᱚᱯ ᱠᱟᱱᱟ ᱨᱤᱥᱟᱭᱤᱡᱽ
-si:කපන ලද දෑ ප්‍රමාණ වෙනස් කරන්න
-sk:Zmeniť veľkosť orezaného
-sl:Spremeni velikost obrezanega
-sn:Chinja Saizi Ye Yakachekwa
-sp-rs:Промени величину обрезаног
-sq:Ndrysho Madhësinë e Pritës
-sr-rs:Промени величину исеченог
-sv:Ändra storlek på beskuren
-ta:செதுக்கியதை மறுஅளவிடு
-th:ปรับขนาดที่ครอบตัดแล้ว
-tl:Baguhin ang Laki ng Naka-crop
-tr:Kırpılmışı Yeniden Boyutlandır
-tw:調整裁切大小
-uk:Змінити розмір обрізаного
-uz:Kesilgan rasmni o'lchamini o'zgartirish
-vn:Thay đổi kích thước ảnh đã cắt
+:Resize
 :Resize Image
 af:Verander Beeld Grootte
 am:ምስል መጠን ቀይር
@@ -30948,6 +30876,78 @@ tw:將檔案另存新檔…
 uk:Зберегти файл як...
 uz:Faylni saqlash...
 vn:Lưu tệp thành...
+:Save Image
+af:Stoor prent
+am:ምስል አስቀምጥ
+ar:حفظ الصورة
+az:Şəkli yadda saxla
+bg:Запазване на изображение
+bn:ছবি সংরক্ষণ করুন
+br:Enrollañ ar skeudenn
+bs:Spremi sliku
+by:Захаваць выяву
+ca:Desa la imatge
+ca-xv:Desar imatge
+cn:保存图片
+co:Salvà l'Imagine
+cy:Cadw Delwedd
+cz:Uložit obrázek
+de:Bild speichern
+dk:Gem billede
+el:Αποθήκευση εικόνας
+es:Guardar imagen
+et:Salvesta pilt
+fa:ذخیره تصویر
+fi:Tallenna kuva
+fo:Goym mynd
+fr:Enregistrer l'image
+fy-nl:Ofbylding bewarje
+ga:Sábháil Íomhá
+gl:Gardar imaxe
+he:שמור תמונה
+hi:छवि सहेजें
+hr:Spremi sliku
+hu:Kép mentése
+id:Simpan Gambar
+it:Salva immagine
+ja:画像を保存
+jv:Simpen Gambar
+ka:სურათის შენახვა
+kr:이미지 저장
+ku:Wêne tomar bike
+kw:Gwitha Skeusenn
+lt:Išsaugoti paveikslėlį
+lv:Saglabāt attēlu
+mk:Зачувај слика
+ml:ചിത്രം സേവ് ചെയ്യുക
+mm:ရုပ်ပုံသိမ်းဆည်းရန်
+my:ပုံသိမ်းဆည်းမည်
+ne:छवि सुरक्षित गर्नुहोस्
+nl:Afbeelding opslaan
+nn:Lagre bilete
+no:Lagre bilde
+pa:ਚਿੱਤਰ ਸੁਰੱਖਿਅਤ ਕਰੋ
+pl:Zapisz obraz
+pt:Guardar Imagem
+ro:Salvează imaginea
+ru:Сохранить изображение
+sat:ᱪᱤᱛᱟᱹᱨ ᱥᱟᱧᱪᱟᱣ
+si:රූපය සුරකින්න
+sk:Uložiť obrázok
+sl:Shrani sliko
+sn:Chengetedza Mufananidzo
+sp-rs:Sačuvaj sliku
+sq:Ruaj imazhin
+sr-rs:Сачувај слику
+sv:Spara bild
+ta:படத்தை சேமி
+th:บันทึกรูปภาพ
+tl:I-save ang Larawan
+tr:Resmi Kaydet
+tw:儲存圖片
+uk:Зберегти зображення
+uz:Rasmni saqlash
+vn:Lưu ảnh
 :Save Resized
 af:Stoor Vergrote
 am:የተቀየረ መጠን አስቀምጥ
