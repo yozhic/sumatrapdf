@@ -201,6 +201,7 @@ export const commands = [
     "CmdScreenshot", "Take Screenshot",
     "CmdCropImage", "Crop Image",
     "CmdResizeImage", "Resize Image",
+    "CmdSaveImage", "Save Image",
     "CmdPasteClipboardImage", "Paste Image From Clipboard",
     "CmdNone", "Do nothing",
 ];

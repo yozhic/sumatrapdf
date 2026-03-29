@@ -5,6 +5,7 @@ struct MainWindow;
 struct RenderedBitmap;
 
 enum class ImageEditMode {
+    Save,
     Crop,
     Resize
 };

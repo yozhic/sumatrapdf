@@ -776,11 +776,15 @@ static MenuDef menuDefContextImage[] = {
         CmdCopyImage,
     },
     {
-        _TRN("&Crop"),
+        _TRN("&Save"),
+        CmdSaveImage,
+    },
+    {
+        _TRN("C&rop"),
         CmdCropImage,
     },
     {
-        _TRN("&Resize"),
+        _TRN("R&esize"),
         CmdResizeImage,
     },
     {
@@ -1810,6 +1814,9 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         if (!onImage && !isImageEngine) {
             MenuRemove(popup, CmdCopyImage);
         }
+        if (!onImage) {
+            MenuRemove(popup, CmdSaveImage);
+        }
         if (!isImageEngine && !onImage) {
             MenuRemove(popup, CmdCropImage);
             MenuRemove(popup, CmdResizeImage);
@@ -1940,17 +1947,22 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdSaveAnnotations:
         case CmdSaveAnnotationsNewFile:
         case CmdFavoriteAdd:
+        case CmdSaveImage:
         case CmdCropImage:
         case CmdResizeImage: {
             if (pageEl && pageEl->Is(kindPageElementImage)) {
                 RenderedBitmap* bmp = dm->GetEngine()->GetImageForPageElement(pageEl);
                 if (bmp) {
-                    // build dest path: <dir>/<basename>_page_<pageNo>.png
                     TempStr dir = path::GetDirTemp(filePath);
                     TempStr base = path::GetBaseNameTemp(filePath);
                     TempStr noExt = path::GetPathNoExtTemp(base);
                     TempStr destPath = path::JoinTemp(dir, str::FormatTemp("%s_page_%d.png", noExt, pageNoUnderCursor));
-                    ImageEditMode m = (cmdId == CmdCropImage) ? ImageEditMode::Crop : ImageEditMode::Resize;
+                    ImageEditMode m = ImageEditMode::Save;
+                    if (cmdId == CmdCropImage) {
+                        m = ImageEditMode::Crop;
+                    } else if (cmdId == CmdResizeImage) {
+                        m = ImageEditMode::Resize;
+                    }
                     ShowImageEditWindow(win, m, destPath, bmp);
                     delete bmp;
                 }
