@@ -1806,7 +1806,7 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     {
         bool onImage = pageEl && pageEl->Is(kindPageElementImage);
         bool isImageEngine = tab && tab->GetEngineType() == kindEngineImage;
-        if (!onImage) {
+        if (!onImage && !isImageEngine) {
             MenuRemove(popup, CmdCopyImage);
         }
         if (!isImageEngine) {
