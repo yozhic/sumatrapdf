@@ -785,6 +785,7 @@ function sumatrapdf_files()
   files_in_dir("src", {
     "regress/Regress.*",
     "Scratch.*",
+    "TestPlugin.cpp",
   })
   files_in_dir("src/testcode", {
     "test-app.h",
@@ -1292,13 +1293,6 @@ function test_util_files()
     "SumatraUnitTests.cpp",
     "tools/test_util.cpp"
   })
-end
-
-function plugin_test_files()
-  files {
-    "src/tools/plugin-test.cpp",
-    "src/CrashHandlerNoOp.cpp"
-  }
 end
 
 function pdf_preview_files()

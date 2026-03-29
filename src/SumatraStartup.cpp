@@ -92,11 +92,17 @@ static NO_INLINE bool MaybeMakePluginWindow(MainWindow* win, HWND hwndParent) {
     }
 
     auto hwndFrame = win->hwndFrame;
+
+    // first SetParent as top-level window (may fail but primes the window manager)
+    SetParent(hwndFrame, hwndParent);
+
+    // strip styles and set WS_CHILD
     long ws = GetWindowLong(hwndFrame, GWL_STYLE);
     ws &= ~(WS_POPUP | WS_BORDER | WS_CAPTION | WS_THICKFRAME);
     ws |= WS_CHILD;
     SetWindowLong(hwndFrame, GWL_STYLE, ws);
 
+    // second SetParent after WS_CHILD is set
     SetParent(hwndFrame, hwndParent);
     MoveWindow(hwndFrame, ClientRect(hwndParent));
     ShowWindow(hwndFrame, SW_SHOW);
@@ -2442,6 +2448,12 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         TestApp();
         return 0;
     }
+    if (flags.testPlugin) {
+        // in TestPlugin.cpp
+        extern void TestPlugin(const WCHAR* cmdLine);
+        TestPlugin(GetCommandLineW());
+        return 0;
+    }
 #endif
 
     if (MaybeMutool() != kNoMutool) {
@@ -2460,7 +2472,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 
     LoadSettings();
     UpdateGlobalPrefs(flags);
-    if (NeedsWindowEmbeddingHacks()) {
+    if (gMyWindowWasEmbedded) {
         gGlobalPrefs->useTabs = false;
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;

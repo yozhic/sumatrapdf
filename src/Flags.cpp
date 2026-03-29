@@ -25,20 +25,20 @@ enum class Arg {
     FullScreen = 12, InvertColors = 13, InvertColors2 = 14, Console = 15,
     Install = 16, UnInstall = 17, WithFilter = 18, WithSearch = 19,
     WithPreview = 20, Rand = 21, Regress = 22, Extract = 23,
-    Tester = 24, TestApp = 25, NewWindow = 26, Log = 27,
-    LogToFile = 28, CrashOnOpen = 29, ReuseInstance = 30, EscToExit = 31,
-    ArgEnumPrinters = 32, ListPrinters = 33, SleepMs = 34, PrintTo = 35,
-    PrintSettings = 36, InverseSearch = 37, ForwardSearch1 = 38, ForwardSearch2 = 39,
-    NamedDest = 40, NamedDest2 = 41, Page = 42, View = 43,
-    Zoom = 44, Scroll = 45, AppData = 46, Plugin = 47,
-    StressTest = 48, N = 49, Max = 50, MaxFiles = 51,
-    Render = 52, ExtractText = 53, Bench = 54, Dir = 55,
-    InstallDir = 56, Lang = 57, UpdateSelfTo = 58, ArgDeleteFile = 59,
-    BgCol = 60, BgCol2 = 61, FwdSearchOffset = 62, FwdSearchWidth = 63,
-    FwdSearchColor = 64, FwdSearchPermanent = 65, MangaMode = 66, Search = 67,
-    AllUsers = 68, AllUsers2 = 69, RunInstallNow = 70, Adobe = 71,
-    DDE = 72, EngineDump = 73, SetColorRange = 74, PreviewPipe = 75,
-    IFilterPipe = 76, TestPreviewPipe = 77,
+    Tester = 24, TestApp = 25, TestPlugin = 26, NewWindow = 27,
+    Log = 28, LogToFile = 29, CrashOnOpen = 30, ReuseInstance = 31,
+    EscToExit = 32, ArgEnumPrinters = 33, ListPrinters = 34, SleepMs = 35,
+    PrintTo = 36, PrintSettings = 37, InverseSearch = 38, ForwardSearch1 = 39,
+    ForwardSearch2 = 40, NamedDest = 41, NamedDest2 = 42, Page = 43,
+    View = 44, Zoom = 45, Scroll = 46, AppData = 47,
+    Plugin = 48, StressTest = 49, N = 50, Max = 51,
+    MaxFiles = 52, Render = 53, ExtractText = 54, Bench = 55,
+    Dir = 56, InstallDir = 57, Lang = 58, UpdateSelfTo = 59,
+    ArgDeleteFile = 60, BgCol = 61, BgCol2 = 62, FwdSearchOffset = 63,
+    FwdSearchWidth = 64, FwdSearchColor = 65, FwdSearchPermanent = 66, MangaMode = 67,
+    Search = 68, AllUsers = 69, AllUsers2 = 70, RunInstallNow = 71,
+    Adobe = 72, DDE = 73, EngineDump = 74, SetColorRange = 75,
+    PreviewPipe = 76, IFilterPipe = 77, TestPreviewPipe = 78,
 };
 
 static const char* gArgNames =
@@ -48,20 +48,20 @@ static const char* gArgNames =
     "fullscreen\0" "invertcolors\0" "invert-colors\0" "console\0"
     "install\0" "uninstall\0" "with-filter\0" "with-search\0"
     "with-preview\0" "rand\0" "regress\0" "x\0"
-    "tester\0" "testapp\0" "new-window\0" "log\0"
-    "log-to-file\0" "crash-on-open\0" "reuse-instance\0" "esc-to-exit\0"
-    "enum-printers\0" "list-printers\0" "sleep-ms\0" "print-to\0"
-    "print-settings\0" "inverse-search\0" "forward-search\0" "fwdsearch\0"
-    "nameddest\0" "named-dest\0" "page\0" "view\0"
-    "zoom\0" "scroll\0" "appdata\0" "plugin\0"
-    "stress-test\0" "n\0" "max\0" "max-files\0"
-    "render\0" "extract-text\0" "bench\0" "d\0"
-    "install-dir\0" "lang\0" "update-self-to\0" "delete-file\0"
-    "bgcolor\0" "bg-color\0" "fwdsearch-offset\0" "fwdsearch-width\0"
-    "fwdsearch-color\0" "fwdsearch-permanent\0" "manga-mode\0" "search\0"
-    "all-users\0" "allusers\0" "run-install-now\0" "a\0"
-    "dde\0" "engine-dump\0" "set-color-range\0" "preview-pipe\0"
-    "ifilter-pipe\0" "test-preview-pipe\0";
+    "tester\0" "testapp\0" "test-plugin\0" "new-window\0"
+    "log\0" "log-to-file\0" "crash-on-open\0" "reuse-instance\0"
+    "esc-to-exit\0" "enum-printers\0" "list-printers\0" "sleep-ms\0"
+    "print-to\0" "print-settings\0" "inverse-search\0" "forward-search\0"
+    "fwdsearch\0" "nameddest\0" "named-dest\0" "page\0"
+    "view\0" "zoom\0" "scroll\0" "appdata\0"
+    "plugin\0" "stress-test\0" "n\0" "max\0"
+    "max-files\0" "render\0" "extract-text\0" "bench\0"
+    "d\0" "install-dir\0" "lang\0" "update-self-to\0"
+    "delete-file\0" "bgcolor\0" "bg-color\0" "fwdsearch-offset\0"
+    "fwdsearch-width\0" "fwdsearch-color\0" "fwdsearch-permanent\0" "manga-mode\0"
+    "search\0" "all-users\0" "allusers\0" "run-install-now\0"
+    "a\0" "dde\0" "engine-dump\0" "set-color-range\0"
+    "preview-pipe\0" "ifilter-pipe\0" "test-preview-pipe\0";
 // clang-format on
 // @gen-end flags
 
@@ -410,6 +410,11 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
         if (arg == Arg::TestApp) {
             i.testApp = true;
             continue;
+        }
+        if (arg == Arg::TestPlugin) {
+            i.testPlugin = true;
+            // remaining args are for the plugin test
+            break;
         }
         if (arg == Arg::NewWindow) {
             i.inNewWindow = true;

@@ -29,6 +29,7 @@ const args = [
     "Extract", "x",
     "Tester", "tester",
     "TestApp", "testapp",
+    "TestPlugin", "test-plugin",
     "NewWindow", "new-window",
     "Log", "log",
     "LogToFile", "log-to-file",

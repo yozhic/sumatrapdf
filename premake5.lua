@@ -748,17 +748,6 @@ workspace "SumatraPDF"
 
 ---- executables
 
-  project "plugin-test"
-    kind "WindowedApp"
-    language "C++"
-    cppdialect "C++latest"
-    mixed_dbg_rel_conf()
-    entrypoint "WinMainCRTStartup"
-    includedirs { "src" }
-    plugin_test_files()
-    links { "utils", "mupdf" }
-    links { "shlwapi", "version", "comctl32", "wininet", "wintrust", "crypt32" }
-
   project "test_util"
     kind "ConsoleApp"
     language "C++"
