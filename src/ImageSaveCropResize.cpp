@@ -30,6 +30,8 @@
 
 #include "utils/Log.h"
 
+#include <wincodec.h>
+
 using Gdiplus::Bitmap;
 using Gdiplus::Color;
 using Gdiplus::Graphics;
@@ -49,21 +51,54 @@ constexpr int kButtonPadding = 8;
 
 struct ImageFormat {
     const char* label;
-    const WCHAR* mime;
+    const GUID* containerFormat; // WIC container format GUID
     const char* ext;
+    bool needsProbe; // if true, check if encoder is available before offering
+    bool available;  // set after probing
 };
 
 // clang-format off
 static ImageFormat gImageFormats[] = {
-    {"PNG",  L"image/png",  ".png"},
-    {"JPEG", L"image/jpeg", ".jpg"},
-    {"BMP",  L"image/bmp",  ".bmp"},
-    {"GIF",  L"image/gif",  ".gif"},
-    {"TIFF", L"image/tiff", ".tif"},
+    {"PNG",  &GUID_ContainerFormatPng,  ".png",  false, true},
+    {"JPEG", &GUID_ContainerFormatJpeg, ".jpg",  false, true},
+    {"BMP",  &GUID_ContainerFormatBmp,  ".bmp",  false, true},
+    {"GIF",  &GUID_ContainerFormatGif,  ".gif",  false, true},
+    {"TIFF", &GUID_ContainerFormatTiff, ".tif",  false, true},
+    {"WebP", &GUID_ContainerFormatWebp, ".webp", true,  false},
 };
 // clang-format on
 
 constexpr int kDefaultFormatIdx = 0; // PNG
+
+static bool gFormatsProbed = false;
+
+static void ProbeImageFormats() {
+    if (gFormatsProbed) {
+        return;
+    }
+    gFormatsProbed = true;
+
+    IWICImagingFactory* pFactory = nullptr;
+    HRESULT hr = CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, __uuidof(IWICImagingFactory),
+                                  (void**)&pFactory);
+    if (FAILED(hr) || !pFactory) {
+        return;
+    }
+
+    for (auto& fmt : gImageFormats) {
+        if (!fmt.needsProbe) {
+            continue;
+        }
+        IWICBitmapEncoder* pEncoder = nullptr;
+        hr = pFactory->CreateEncoder(*fmt.containerFormat, nullptr, &pEncoder);
+        if (SUCCEEDED(hr) && pEncoder) {
+            fmt.available = true;
+            pEncoder->Release();
+        }
+    }
+
+    pFactory->Release();
+}
 
 enum class DragEdge {
     None,
@@ -95,6 +130,7 @@ struct ImageEditWindow {
     Button* btnSwitchMode = nullptr;
     Button* btnSwitchMode2 = nullptr; // second switch button for Save mode
     DropDown* dropFormat = nullptr;
+    Vec<int> formatIndices; // maps dropdown index to gImageFormats index
 
     // source image
     char* filePath = nullptr;
@@ -226,11 +262,11 @@ static int GetSelectedFormatIdx(ImageEditWindow* ew) {
     if (!ew->dropFormat) {
         return kDefaultFormatIdx;
     }
-    int idx = ew->dropFormat->GetCurrentSelection();
-    if (idx < 0 || idx >= (int)dimof(gImageFormats)) {
+    int ddIdx = ew->dropFormat->GetCurrentSelection();
+    if (ddIdx < 0 || ddIdx >= ew->formatIndices.Size()) {
         return kDefaultFormatIdx;
     }
-    return idx;
+    return ew->formatIndices.at(ddIdx);
 }
 
 static void OnFormatChanged(ImageEditWindow* ew) {
@@ -791,6 +827,116 @@ static void OnBrowse(ImageEditWindow* ew) {
     }
 }
 
+// Save a GDI+ Bitmap using WIC. Supports all formats that have a WIC encoder installed,
+// including WebP on Windows 10+.
+static bool SaveBitmapWithWIC(Bitmap* bmp, const WCHAR* destPath, const GUID* containerFormat) {
+    if (!bmp || !destPath || !containerFormat) {
+        return false;
+    }
+
+    // get HBITMAP from GDI+ bitmap
+    HBITMAP hbmp = nullptr;
+    Gdiplus::Color bgColor(255, 255, 255, 255);
+    if (bmp->GetHBITMAP(bgColor, &hbmp) != Ok || !hbmp) {
+        return false;
+    }
+
+    bool ok = false;
+    IWICImagingFactory* pFactory = nullptr;
+    IWICBitmapEncoder* pEncoder = nullptr;
+    IWICBitmapFrameEncode* pFrame = nullptr;
+    IWICBitmap* pWicBitmap = nullptr;
+    IStream* pStream = nullptr;
+    IPropertyBag2* pProps = nullptr;
+
+    HRESULT hr = CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, __uuidof(IWICImagingFactory),
+                                  (void**)&pFactory);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pFactory->CreateBitmapFromHBITMAP(hbmp, nullptr, WICBitmapUsePremultipliedAlpha, &pWicBitmap);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = SHCreateStreamOnFileEx(destPath, STGM_CREATE | STGM_WRITE | STGM_SHARE_EXCLUSIVE, FILE_ATTRIBUTE_NORMAL, TRUE,
+                                nullptr, &pStream);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pFactory->CreateEncoder(*containerFormat, nullptr, &pEncoder);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pEncoder->Initialize(pStream, WICBitmapEncoderNoCache);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pEncoder->CreateNewFrame(&pFrame, &pProps);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pFrame->Initialize(pProps);
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    {
+        UINT w = 0, h = 0;
+        pWicBitmap->GetSize(&w, &h);
+        hr = pFrame->SetSize(w, h);
+        if (FAILED(hr)) {
+            goto Done;
+        }
+
+        WICPixelFormatGUID pixFmt = GUID_WICPixelFormat32bppBGRA;
+        hr = pFrame->SetPixelFormat(&pixFmt);
+        if (FAILED(hr)) {
+            goto Done;
+        }
+
+        hr = pFrame->WriteSource(pWicBitmap, nullptr);
+        if (FAILED(hr)) {
+            goto Done;
+        }
+    }
+
+    hr = pFrame->Commit();
+    if (FAILED(hr)) {
+        goto Done;
+    }
+
+    hr = pEncoder->Commit();
+    ok = SUCCEEDED(hr);
+
+Done:
+    if (pProps) {
+        pProps->Release();
+    }
+    if (pFrame) {
+        pFrame->Release();
+    }
+    if (pEncoder) {
+        pEncoder->Release();
+    }
+    if (pStream) {
+        pStream->Release();
+    }
+    if (pWicBitmap) {
+        pWicBitmap->Release();
+    }
+    if (pFactory) {
+        pFactory->Release();
+    }
+    DeleteObject(hbmp);
+    return ok;
+}
+
 static void OnSave(ImageEditWindow* ew) {
     if (!ew->srcBitmap) {
         return;
@@ -850,13 +996,11 @@ static void OnSave(ImageEditWindow* ew) {
         g.DrawImage(ew->srcBitmap, 0, 0, ew->newW, ew->newH);
     }
 
-    const WCHAR* mime = gImageFormats[fmtIdx].mime;
-    CLSID encoderClsid = GetEncoderClsid(mime);
     TempWStr destW = ToWStrTemp(dest);
-    Status status = result->Save(destW, &encoderClsid, nullptr);
+    bool saved = SaveBitmapWithWIC(result, destW, gImageFormats[fmtIdx].containerFormat);
     delete result;
 
-    if (status != Ok) {
+    if (!saved) {
         MessageBoxWarning(ew->hwnd, "Failed to save image", "Save Image");
         return;
     }
@@ -1394,6 +1538,8 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         return;
     }
 
+    ProbeImageFormats();
+
     Bitmap* bmp = nullptr;
     bool fromRenderedBitmap = (rbmp != nullptr);
 
@@ -1603,11 +1749,19 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         args.parent = hwnd;
         dd->Create(args);
         StrVec items;
-        for (auto& fmt : gImageFormats) {
-            items.Append(fmt.label);
+        int defaultDdIdx = 0;
+        for (int i = 0; i < (int)dimof(gImageFormats); i++) {
+            if (!gImageFormats[i].available) {
+                continue;
+            }
+            if (i == kDefaultFormatIdx) {
+                defaultDdIdx = ew->formatIndices.Size();
+            }
+            ew->formatIndices.Append(i);
+            items.Append(gImageFormats[i].label);
         }
         dd->SetItems(items);
-        dd->SetCurrentSelection(kDefaultFormatIdx);
+        dd->SetCurrentSelection(defaultDdIdx);
         dd->onSelectionChanged = MkFunc0<ImageEditWindow>(OnFormatChanged, ew);
         ew->dropFormat = dd;
     }
