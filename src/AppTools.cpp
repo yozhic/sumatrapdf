@@ -20,7 +20,7 @@
 #include "Version.h"
 #include "AppTools.h"
 
-extern bool gMyWindowWasEmbedded;
+bool NeedsWindowEmbeddingHacks();
 
 #include "utils/Log.h"
 
@@ -434,7 +434,7 @@ bool ExtendedEditWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM) {
     switch (msg) {
         case WM_LBUTTONDOWN:
             delayFocus = !HwndIsFocused(hwnd);
-            if (delayFocus && gMyWindowWasEmbedded) {
+            if (delayFocus && NeedsWindowEmbeddingHacks()) {
                 HWND hwndFg = GetForegroundWindow();
                 DWORD fgTid = hwndFg ? GetWindowThreadProcessId(hwndFg, nullptr) : 0;
                 DWORD ourTid = GetCurrentThreadId();

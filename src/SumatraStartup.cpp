@@ -2460,7 +2460,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 
     LoadSettings();
     UpdateGlobalPrefs(flags);
-    if (gMyWindowWasEmbedded) {
+    if (NeedsWindowEmbeddingHacks()) {
         gGlobalPrefs->useTabs = false;
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;
@@ -2588,8 +2588,7 @@ ContinueOpenWindow:
     gInitialSessionData = gGlobalPrefs->sessionData;
     gGlobalPrefs->sessionData = new Vec<SessionData*>();
 
-    restoreSession =
-        gGlobalPrefs->restoreSession && (gInitialSessionData->Size() > 0) && !gPluginMode && !gMyWindowWasEmbedded;
+    restoreSession = gGlobalPrefs->restoreSession && (gInitialSessionData->Size() > 0) && !NeedsWindowEmbeddingHacks();
     if (!gGlobalPrefs->useTabs && (existingInstanceHwnd != nullptr)) {
         // do not restore a session if tabs are disabled and SumatraPDF is already running
         // TODO: maybe disable restoring if tabs are disabled?

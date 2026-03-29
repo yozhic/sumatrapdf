@@ -118,6 +118,10 @@ bool gShowFrameRate = false;
 const char* gPluginURL = nullptr; // owned by Flags in WinMain
 bool gMyWindowWasEmbedded = false;
 
+bool NeedsWindowEmbeddingHacks() {
+    return gMyWindowWasEmbedded || gPluginMode;
+}
+
 static Kind kNotifPersistentWarning = "persistentWarning";
 static Kind kNotifZoom = "zoom";
 
@@ -1660,7 +1664,7 @@ static MainWindow* CreateMainWindow() {
         RegisterCanvasDropTarget(win->hwndCanvas);
     }
 
-    if (gWindows.IsEmpty() && !gMyWindowWasEmbedded) {
+    if (gWindows.IsEmpty() && !NeedsWindowEmbeddingHacks()) {
         RegisterScreenshotHotkey(win->hwndFrame);
     }
     gWindows.Append(win);
@@ -1677,7 +1681,7 @@ static MainWindow* CreateMainWindow() {
     SetTabsInTitlebar(win, gGlobalPrefs->useTabs);
 
     // now show the menu bar in the appropriate style
-    if (gGlobalPrefs->showMenubar && !gMyWindowWasEmbedded) {
+    if (gGlobalPrefs->showMenubar && !NeedsWindowEmbeddingHacks()) {
         if (win->tabsInTitlebar) {
             CreateMenuBarRebar(win);
         } else {
