@@ -1095,6 +1095,79 @@ tw:複製到剪貼簿(&C)
 uk:Скопіювати до буфера обміну
 uz:Buferga nusxalash
 vn:&Lưu Sao Chép
+:&Crop
+af:Sny
+am:መቁረጥ
+ar:قص
+az:Kəs
+bg:Изрязване
+bn:ক্রপ
+br:Didroc'hañ
+bs:Obreži
+by:Абрэзаць
+ca:Retalla
+ca-xv:Retalla
+cn:裁剪
+co:Ritaglia
+cy:Tocio
+cz:Oříznout
+de:Zuschneiden
+dk:Beskær
+el:Περικοπή
+es:Recortar
+et:Kärbi
+eu:Moztu
+fa:برش
+fi:Rajaa
+fo:Skera
+fr:Rogner
+fy-nl:Bysnije
+ga:Bearr
+gl:Recortar
+he:חיתוך
+hi:क्रॉप करें
+hr:Obreži
+hu:Kivágás
+id:Potong
+it:Ritaglia
+ja:トリミング
+jv:Potong
+ka:ამოჭრა
+kr:자르기
+ku:Birrîn
+kw:Kribya
+lt:Apkarpyti
+lv:Apgriezt
+mk:Отсечи
+ml:ക്രോപ്പ് ചെയ്യുക
+mm:ဖြတ်တောက်ရန်
+my:ညှပ်ရန်
+ne:क्रप गर्नुहोस्
+nl:Bijsnijden
+nn:Beskjer
+no:Beskjær
+pa:ਕੱਟੋ
+pl:Przytnij
+pt:Recortar
+ro:Decupare
+ru:Обрезать
+sat:ᱠᱟᱛᱟᱨ
+si:කපන්න
+sk:Orezať
+sl:Obreži
+sn:Cheka
+sp-rs:Исеци
+sq:Prit
+sr-rs:Исеци
+sv:Beskär
+ta:செதுக்கு
+th:ครอบตัด
+tl:I-crop
+tr:Kırp
+tw:裁切
+uk:Обрізати
+uz:Kesish
+vn:Cắt ảnh
 :&Discard changes
 af:Verwerp veranderinge
 am:&Մերժել
@@ -2044,6 +2117,79 @@ tw:螢光標示(&H)
 uk:Виділити
 uz:Ajratib ko‘rsatish
 vn:&Nổi Bật
+:&Image
+af:Beeld
+am:ምስል
+ar:صورة
+az:Şəkil
+bg:Изображение
+bn:ছবি
+br:Skeudenn
+bs:Slika
+by:Выява
+ca:Imatge
+ca-xv:Imatge
+cn:图像
+co:Imagine
+cy:Delwedd
+cz:Obrázek
+de:Bild
+dk:Billede
+el:Εικόνα
+es:Imagen
+et:Pilt
+eu:Irudia
+fa:تصویر
+fi:Kuva
+fo:Mynd
+fr:Image
+fy-nl:Ofbylding
+ga:Íomhá
+gl:Imaxe
+he:תמונה
+hi:चित्र
+hr:Slika
+hu:Kép
+id:Gambar
+it:Immagine
+ja:画像
+jv:Gambar
+ka:სურათი
+kr:이미지
+ku:Wêne
+kw:Imach
+lt:Vaizdas
+lv:Attēls
+mk:Слика
+ml:ചിത്രം
+mm:ရုပ်ပုံ
+my:ပုံ
+ne:छवि
+nl:Afbeelding
+nn:Bilete
+no:Bilde
+pa:ਚਿੱਤਰ
+pl:Obraz
+pt:Imagem
+ro:Imagine
+ru:Изображение
+sat:ᱪᱤᱛᱟᱹᱨ
+si:රූපය
+sk:Obrázok
+sl:Slika
+sn:Mufananidzo
+sp-rs:Слика
+sq:Imazh
+sr-rs:Слика
+sv:Bild
+ta:படம்
+th:รูปภาพ
+tl:Larawan
+tr:Resim
+tw:圖片
+uk:Зображення
+uz:Rasm
+vn:Hình ảnh
 :&Keyboard Shortcuts
 af:Sleutelbordkortpaaie
 am:&Հիմնաբառի դյուրանցումներ
@@ -3504,6 +3650,79 @@ tw:從歷程記錄中移除(&R)
 uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
+:&Resize
+af:Verander grootte
+am:መጠን መቀየር
+ar:تغيير الحجم
+az:Ölçüsünü dəyiş
+bg:Преоразмеряване
+bn:আকার পরিবর্তন
+br:Cheñch ment
+bs:Promijeni veličinu
+by:Змяніць памер
+ca:Redimensiona
+ca-xv:Redimensiona
+cn:调整大小
+co:Ridimensiona
+cy:Newid Maint
+cz:Změnit velikost
+de:Größe ändern
+dk:Tilpas størrelse
+el:Αλλαγή μεγέθους
+es:Redimensionar
+et:Muuda suurust
+eu:Aldatu tamaina
+fa:تغییر اندازه
+fi:Muuta kokoa
+fo:Broyt stødd
+fr:Redimensionner
+fy-nl:Grutte wizigje
+ga:Athraigh Méid
+gl:Redimensionar
+he:שינוי גודל
+hi:आकार बदलें
+hr:Promijeni veličinu
+hu:Átméretezés
+id:Ubah Ukuran
+it:Ridimensiona
+ja:リサイズ
+jv:Owahi Ukuran
+ka:ზომის შეცვლა
+kr:크기 조정
+ku:Mezinahiya Biguherîne
+kw:Dassysa
+lt:Keisti dydį
+lv:Mainīt izmēru
+mk:Промени големина
+ml:വലുപ്പം മാറ്റുക
+mm:အရွယ်အစားပြောင်းရန်
+my:အရွယ်အစားပြောင်းရန်
+ne:आकार परिवर्तन गर्नुहोस्
+nl:Formaat wijzigen
+nn:Endre storleik
+no:Endre størrelse
+pa:ਆਕਾਰ ਬਦਲੋ
+pl:Zmień rozmiar
+pt:Redimensionar
+ro:Redimensionare
+ru:Изменить размер
+sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ
+si:ප්‍රමාණය වෙනස් කරන්න
+sk:Zmeniť veľkosť
+sl:Spremeni velikost
+sn:Chinja Saizi
+sp-rs:Промени величину
+sq:Ndrysho madhësinë
+sr-rs:Промени величину
+sv:Ändra storlek
+ta:அளவு மாற்று
+th:ปรับขนาด
+tl:Baguhin ang Laki
+tr:Yeniden Boyutlandır
+tw:調整大小
+uk:Змінити розмір
+uz:O'lchamini o'zgartirish
+vn:Thay đổi kích thước
 :&Save As...
 af:Stoor As...
 am:&Պահել որպես
@@ -7008,6 +7227,79 @@ tw:位元組
 uk:Байт
 uz:Bayt
 vn:Bytes
+:C&opy To Clipboard
+af:Kopieer na knipbord
+am:ወደ ቅንጥብ ሰሌዳ ቅዳ
+ar:نسخ إلى الحافظة
+az:Buferə köçür
+bg:Копиране в клипборда
+bn:ক্লিপবোর্ডে কপি করুন
+br:Eilañ d'ar golver
+bs:Kopiraj u clipboard
+by:Капіяваць у буфер абмену
+ca:Copia al porta-retalls
+ca-xv:Copia al porta-retalls
+cn:复制到剪贴板
+co:Cupià in l'appunti
+cy:Copïo i'r Clipfwrdd
+cz:Kopírovat do schránky
+de:In Zwischenablage kopieren
+dk:Kopiér til udklipsholder
+el:Αντιγραφή στο πρόχειρο
+es:Copiar al portapapeles
+et:Kopeeri lõikelauale
+eu:Kopiatu arbelera
+fa:کپی به کلیپ‌بورد
+fi:Kopioi leikepöydälle
+fo:Avrita til klemmispjald
+fr:Copier dans le presse-papiers
+fy-nl:Kopiearje nei klembord
+ga:Cóipeáil go Gearrthaisce
+gl:Copiar ao portapapeis
+he:העתק ללוח
+hi:क्लिपबोर्ड पर कॉपी करें
+hr:Kopiraj u međuspremnik
+hu:Másolás vágólapra
+id:Salin ke Papan Klip
+it:Copia negli Appunti
+ja:クリップボードにコピー
+jv:Salin menyang Clipboard
+ka:ბუფერში კოპირება
+kr:클립보드에 복사
+ku:Kopî bike bo Clipboard
+kw:Dasskrifa dhe'n Klipbord
+lt:Kopijuoti į iškarpinę
+lv:Kopēt starpliktuvē
+mk:Копирај во клипборд
+ml:ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തുക
+mm:ကလစ်ဘုတ်သို့ကူးယူရန်
+my:ကလစ်ဘုတ်သို့ကူးယူရန်
+ne:क्लिपबोर्डमा प्रतिलिपि गर्नुहोस्
+nl:Kopiëren naar klembord
+nn:Kopier til utklippstavle
+no:Kopier til utklippstavle
+pa:ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ
+pl:Skopiuj do schowka
+pt:Copiar para Área de Transferência
+ro:Copiază în clipboard
+ru:Скопировать в буфер обмена
+sat:ᱠᱞᱤᱯᱵᱚᱨᱰ ᱨᱮ ᱱᱚᱠᱚᱞ ᱢᱮ
+si:ක්ලිප්බෝඩ් එකට පිටපත් කරන්න
+sk:Kopírovať do schránky
+sl:Kopiraj v odložišče
+sn:Kopera Ku Clipboard
+sp-rs:Копирај у клипборд
+sq:Kopjo në kujtesë
+sr-rs:Копирај у клипборд
+sv:Kopiera till urklipp
+ta:கிளிப்போர்டுக்கு நகலெடு
+th:คัดลอกไปยังคลิปบอร์ด
+tl:Kopyahin sa Clipboard
+tr:Panoya Kopyala
+tw:複製到剪貼簿
+uk:Копіювати в буфер обміну
+uz:Buferga nusxalash
+vn:Sao chép vào bộ nhớ tạm
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -9344,79 +9636,6 @@ tw:提供翻譯
 uk:Допоможіть перекласти
 uz:Tarjima qilish
 vn:Đóng góp dịch thuật
-:Copy &Image
-af:Kopieer Beeld
-am:Պատճենել &Նկարը
-ar:نسخ &الصورة
-az:&Şəkli kopyala
-bg:Копиране на &изображението
-bn:&ছবি কপি করুন
-br:Copiar &Imagem
-bs:Kopiraj &sliku
-by:Кап&іяваць Малюнак
-ca:Copia la &imatge
-ca-xv:Copia la &imatge
-cn:复制图片(&I)
-co:&Cupià a fiura
-cy:Copïo &Delwedd
-cz:Kopírovat &obrázek
-de:&Bild kopieren
-dk:Kopier &billede
-el:Αντιγραφή &εικόνας
-es:Copiar &imagen
-et:Kopeeri &pilt
-eu:Kopiatu &Irudia
-fa:رونوشت از &عکس
-fi:Kopioi &kuva
-fo:Kopiera &Mynd
-fr:Copier l'&image
-fy-nl:Ofbylding kopiearje
-ga:Macasamhlaigh an &Íomhá
-gl:Copiar a &imaxe
-he:העתק תמונה
-hi:&छवि नक़ल करें
-hr:Kopiraj Sl&iku
-hu:&Kép másolása
-id:Sal&in Gambar
-it:Copia &immagine
-ja:画像をコピー(&I)
-jv:Nyalin &Gambar
-ka:სურათის &კოპირება
-kr:이미지 복사(&I)
-ku:لەبەرگرتنەوەی &وێنە
-kw:Kopia &Skeusen
-lt:Kopijuoti &paveikslą
-lv:Kopēt &attēlu
-mk:Копирај &слика
-ml:&ചിത്രം പകർത്തുക
-mm:ပုံကူးယူရန်
-my:Salin &Imej
-ne:&छवि प्रतिलिपि बनाउनुहोस्
-nl:Afbeelding kopiëren
-nn:Kopier &bilete
-no:Kopier &Bilde
-pa:&ਤਸਵੀਰ ਕਾਪੀ ਕਰੋ
-pl:Kopiuj o&braz
-pt:Copiar &imagem
-ro:Copiere &Imagine
-ru:Скопировать &изображение
-sat:ᱪᱤᱛᱟᱹᱨ ᱱᱚᱠᱚᱞ ᱢᱮ
-si:රුපය ‌කොපි කරන්න
-sk:Kopírovať &obrázok
-sl:Kopiraj &sliko
-sn:kopa nemufananidzo
-sp-rs:Kopiraj sliku
-sq:Kopjoj &figurën
-sr-rs:Копирај &слику
-sv:Kop&iera bild
-ta:&படிமத்தைப் படியெடுத்திடுக
-th:คัดลอก &รูปภาพ
-tl:Kopyahin ang &Larawan
-tr:&Görüntüyü Kopyala
-tw:複製圖片(&I)
-uk:Скопіювати зображення
-uz:&Rasmni nusxa olish
-vn:Sao chép hình ảnh
 :Copy &Link Address
 af:Kopieer Skakel Adres
 am:Պատճենել &հղումը
@@ -9713,12 +9932,12 @@ vn:Sao chép đường dẫn tệp
 af:Kopieer Beeld
 am:Պատճենել պատկերը
 ar:نسخ الصورة
-az:Şəkli kopyala
-bg:Копиране на изображението
+az:Şəkli köçür
+bg:Копиране на изображение
 bn:ছবি কপি করুন
 br:Copiar Imagem
 bs:Kopiraj sliku
-by:Капіяваць Малюнак
+by:Капіяваць выяву
 ca:Copia la imatge
 ca-xv:Copia la imatge
 cn:复制图片
@@ -9726,61 +9945,61 @@ co:Cupià a fiura
 cy:Copïo Delwedd
 cz:Kopírovat obrázek
 de:Bild kopieren
-dk:Kopier billede
+dk:Kopiér billede
 el:Αντιγραφή εικόνας
 es:Copiar imagen
 et:Kopeeri pilt
-eu:Kopiatu Irudia
-fa:رونوشت از عکس
+eu:Kopiatu irudia
+fa:کپی تصویر
 fi:Kopioi kuva
-fo:Kopiera Mynd
+fo:Avrita mynd
 fr:Copier l'image
 fy-nl:Ofbylding kopiearje
-ga:Macasamhlaigh an Íomhá
-gl:Copiar a imaxe
+ga:Cóipeáil Íomhá
+gl:Copiar imaxe
 he:העתק תמונה
-hi:छवि नक़ल करें
-hr:Kopiraj Sliku
+hi:चित्र कॉपी करें
+hr:Kopiraj sliku
 hu:Kép másolása
 id:Salin Gambar
-it:Copia immagine
+it:Copia Immagine
 ja:画像をコピー
-jv:Nyalin Gambar
+jv:Salin Gambar
 ka:სურათის კოპირება
-kr:이미지 복사(I)
-ku:لەبەرگرتنەوەی وێنە
-kw:Kopia Skeusen
-lt:Kopijuoti paveikslą
+kr:이미지 복사
+ku:Wêne Kopî bike
+kw:Dasskrifa an Imach
+lt:Kopijuoti vaizdą
 lv:Kopēt attēlu
 mk:Копирај слика
 ml:ചിത്രം പകർത്തുക
 mm:ပုံကို ကူးယူရန်
-my:Salin Imej
-ne:छवि प्रतिलिपि बनाउनुहोस्
+my:ပုံကူးယူရန်
+ne:छवि प्रतिलिपि गर्नुहोस्
 nl:Kopieer Afbeelding
 nn:Kopier bilete
-no:Kopier Bilde
-pa:ਤਸਵੀਰ ਕਾਪੀ ਕਰੋ
+no:Kopier bilde
+pa:ਚਿੱਤਰ ਕਾਪੀ ਕਰੋ
 pl:Kopiuj obraz
-pt:Copiar imagem
-ro:Copiere Imagine
+pt:Copiar Imagem
+ro:Copiază imagine
 ru:Скопировать рисунок
 sat:ᱪᱤᱛᱟᱹᱨ ᱱᱚᱠᱚᱞ ᱢᱮ
-si:රුපය ‌කොපි කරන්න
+si:රූපය පිටපත් කරන්න
 sk:Kopírovať obrázok
 sl:Kopiraj sliko
-sn:kopa nemufananidzo
-sp-rs:Kopiraj sliku
-sq:Kopjoj figurën
+sn:Kopera Mufananidzo
+sp-rs:Копирај слику
+sq:Kopjo imazhin
 sr-rs:Копирај слику
 sv:Kopiera bild
-ta:படிமத்தைப் படியெடுத்திடுக
-th:คัดลอก รูปภาพ
+ta:படத்தை நகலெடு
+th:คัดลอกรูปภาพ
 tl:Kopyahin ang Larawan
-tr:Görüntüyü Kopyala
+tr:Resmi Kopyala
 tw:複製圖片
-uk:Скопіювати зображення
-uz:Rasmni nusxa olish
+uk:Копіювати зображення
+uz:Rasmni nusxalash
 vn:Sao chép hình ảnh
 :Copy Link Target
 af:Kopieer Skakelteiken

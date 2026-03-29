@@ -34628,3 +34628,691 @@ tl:Baguhin ang Laki ng Larawan
 uk:Змінити розмір зображення
 :Resize Image
 vn:Thay đổi kích thước hình ảnh
+:&Crop
+am:መቁረጥ
+:&Image
+am:ምስል
+:&Resize
+am:መጠን መቀየር
+:C&opy To Clipboard
+am:ወደ ቅንጥብ ሰሌዳ ቅዳ
+:&Crop
+ar:قص
+:&Image
+ar:صورة
+:&Resize
+ar:تغيير الحجم
+:C&opy To Clipboard
+ar:نسخ إلى الحافظة
+:Copy Image
+ar:نسخ الصورة
+:&Crop
+br:Didroc'hañ
+:&Image
+br:Skeudenn
+:&Resize
+br:Cheñch ment
+:C&opy To Clipboard
+br:Eilañ d'ar golver
+:&Crop
+cn:裁剪
+:&Image
+cn:图像
+:&Resize
+cn:调整大小
+:C&opy To Clipboard
+cn:复制到剪贴板
+:&Crop
+co:Ritaglia
+:&Image
+co:Imagine
+:&Resize
+co:Ridimensiona
+:C&opy To Clipboard
+co:Cupià in l'appunti
+:&Crop
+de:Zuschneiden
+:&Image
+de:Bild
+:&Resize
+de:Größe ändern
+:C&opy To Clipboard
+de:In Zwischenablage kopieren
+:&Crop
+el:Περικοπή
+:&Image
+el:Εικόνα
+:&Resize
+el:Αλλαγή μεγέθους
+:C&opy To Clipboard
+el:Αντιγραφή στο πρόχειρο
+:&Crop
+hi:क्रॉप करें
+:&Image
+hi:चित्र
+:&Resize
+hi:आकार बदलें
+:C&opy To Clipboard
+hi:क्लिपबोर्ड पर कॉपी करें
+:Copy Image
+hi:चित्र कॉपी करें
+:&Crop
+ja:トリミング
+:&Image
+ja:画像
+:&Resize
+ja:リサイズ
+:C&opy To Clipboard
+ja:クリップボードにコピー
+:&Crop
+ml:ക്രോപ്പ് ചെയ്യുക
+:&Image
+ml:ചിത്രം
+:&Resize
+ml:വലുപ്പം മാറ്റുക
+:C&opy To Clipboard
+ml:ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തുക
+:Copy Image
+ml:ചിത്രം പകർത്തുക
+:&Crop
+nl:Bijsnijden
+:&Image
+nl:Afbeelding
+:&Resize
+nl:Formaat wijzigen
+:C&opy To Clipboard
+nl:Kopiëren naar klembord
+:&Crop
+pl:Przytnij
+:&Image
+pl:Obraz
+:&Resize
+pl:Zmień rozmiar
+:C&opy To Clipboard
+pl:Skopiuj do schowka
+:&Crop
+ru:Обрезать
+:&Image
+ru:Изображение
+:&Resize
+ru:Изменить размер
+:C&opy To Clipboard
+ru:Скопировать в буфер обмена
+:&Crop
+sk:Orezať
+:&Image
+sk:Obrázok
+:&Resize
+sk:Zmeniť veľkosť
+:C&opy To Clipboard
+sk:Kopírovať do schránky
+:&Crop
+sr-rs:Исеци
+:&Image
+sr-rs:Слика
+:&Resize
+sr-rs:Промени величину
+:C&opy To Clipboard
+sr-rs:Копирај у клипборд
+:&Crop
+tw:裁切
+:&Image
+tw:圖片
+:&Resize
+tw:調整大小
+:C&opy To Clipboard
+tw:複製到剪貼簿
+:&Crop
+az:Kəs
+:&Image
+az:Şəkil
+:&Resize
+az:Ölçüsünü dəyiş
+:C&opy To Clipboard
+az:Buferə köçür
+:Copy Image
+az:Şəkli köçür
+:&Crop
+by:Абрэзаць
+:&Image
+by:Выява
+:&Resize
+by:Змяніць памер
+:C&opy To Clipboard
+by:Капіяваць у буфер абмену
+:Copy Image
+by:Капіяваць выяву
+:&Crop
+ca:Retalla
+:&Image
+ca:Imatge
+:&Resize
+ca:Redimensiona
+:C&opy To Clipboard
+ca:Copia al porta-retalls
+:Copy Image
+ca:Copia la imatge
+:&Crop
+cy:Tocio
+:&Image
+cy:Delwedd
+:&Resize
+cy:Newid Maint
+:C&opy To Clipboard
+cy:Copïo i'r Clipfwrdd
+:Copy Image
+cy:Copïo Delwedd
+:&Crop
+cz:Oříznout
+:&Image
+cz:Obrázek
+:&Resize
+cz:Změnit velikost
+:C&opy To Clipboard
+cz:Kopírovat do schránky
+:Copy Image
+cz:Kopírovat obrázek
+:&Crop
+es:Recortar
+:&Image
+es:Imagen
+:&Resize
+es:Redimensionar
+:C&opy To Clipboard
+es:Copiar al portapapeles
+:Copy Image
+es:Copiar imagen
+:&Crop
+fa:برش
+:&Image
+fa:تصویر
+:&Resize
+fa:تغییر اندازه
+:C&opy To Clipboard
+fa:کپی به کلیپ‌بورد
+:Copy Image
+fa:کپی تصویر
+:&Crop
+fi:Rajaa
+:&Image
+fi:Kuva
+:&Resize
+fi:Muuta kokoa
+:C&opy To Clipboard
+fi:Kopioi leikepöydälle
+:Copy Image
+fi:Kopioi kuva
+:&Crop
+fo:Skera
+:&Image
+fo:Mynd
+:&Resize
+fo:Broyt stødd
+:C&opy To Clipboard
+fo:Avrita til klemmispjald
+:Copy Image
+fo:Avrita mynd
+:&Crop
+fr:Rogner
+:&Image
+fr:Image
+:&Resize
+fr:Redimensionner
+:C&opy To Clipboard
+fr:Copier dans le presse-papiers
+:Copy Image
+fr:Copier l'image
+:&Crop
+ga:Bearr
+:&Image
+ga:Íomhá
+:&Resize
+ga:Athraigh Méid
+:C&opy To Clipboard
+ga:Cóipeáil go Gearrthaisce
+:Copy Image
+ga:Cóipeáil Íomhá
+:&Crop
+gl:Recortar
+:&Image
+gl:Imaxe
+:&Resize
+gl:Redimensionar
+:C&opy To Clipboard
+gl:Copiar ao portapapeis
+:Copy Image
+gl:Copiar imaxe
+:&Crop
+he:חיתוך
+:&Image
+he:תמונה
+:&Resize
+he:שינוי גודל
+:C&opy To Clipboard
+he:העתק ללוח
+:Copy Image
+he:העתק תמונה
+:&Crop
+hu:Kivágás
+:&Image
+hu:Kép
+:&Resize
+hu:Átméretezés
+:C&opy To Clipboard
+hu:Másolás vágólapra
+:Copy Image
+hu:Kép másolása
+:&Crop
+id:Potong
+:&Image
+id:Gambar
+:&Resize
+id:Ubah Ukuran
+:C&opy To Clipboard
+id:Salin ke Papan Klip
+:Copy Image
+id:Salin Gambar
+:&Crop
+it:Ritaglia
+:&Image
+it:Immagine
+:&Resize
+it:Ridimensiona
+:C&opy To Clipboard
+it:Copia negli Appunti
+:Copy Image
+it:Copia Immagine
+:&Crop
+kr:자르기
+:&Image
+kr:이미지
+:&Resize
+kr:크기 조정
+:C&opy To Clipboard
+kr:클립보드에 복사
+:Copy Image
+kr:이미지 복사
+:&Crop
+lv:Apgriezt
+:&Image
+lv:Attēls
+:&Resize
+lv:Mainīt izmēru
+:C&opy To Clipboard
+lv:Kopēt starpliktuvē
+:Copy Image
+lv:Kopēt attēlu
+:&Crop
+my:ညှပ်ရန်
+:&Image
+my:ပုံ
+:&Resize
+my:အရွယ်အစားပြောင်းရန်
+:C&opy To Clipboard
+my:ကလစ်ဘုတ်သို့ကူးယူရန်
+:Copy Image
+my:ပုံကူးယူရန်
+:&Crop
+pt:Recortar
+:&Image
+pt:Imagem
+:&Resize
+pt:Redimensionar
+:C&opy To Clipboard
+pt:Copiar para Área de Transferência
+:Copy Image
+pt:Copiar Imagem
+:&Crop
+ro:Decupare
+:&Image
+ro:Imagine
+:&Resize
+ro:Redimensionare
+:C&opy To Clipboard
+ro:Copiază în clipboard
+:Copy Image
+ro:Copiază imagine
+:&Crop
+sat:ᱠᱟᱛᱟᱨ
+:&Image
+sat:ᱪᱤᱛᱟᱹᱨ
+:&Resize
+sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ
+:C&opy To Clipboard
+sat:ᱠᱞᱤᱯᱵᱚᱨᱰ ᱨᱮ ᱱᱚᱠᱚᱞ ᱢᱮ
+:Copy Image
+sat:ᱪᱤᱛᱟᱹᱨ ᱱᱚᱠᱚᱞ ᱢᱮ
+:&Crop
+sl:Obreži
+:&Image
+sl:Slika
+:&Resize
+sl:Spremeni velikost
+:C&opy To Clipboard
+sl:Kopiraj v odložišče
+:Copy Image
+sl:Kopiraj sliko
+:&Crop
+sv:Beskär
+:&Image
+sv:Bild
+:&Resize
+sv:Ändra storlek
+:C&opy To Clipboard
+sv:Kopiera till urklipp
+:Copy Image
+sv:Kopiera bild
+:&Crop
+ta:செதுக்கு
+:&Image
+ta:படம்
+:&Resize
+ta:அளவு மாற்று
+:C&opy To Clipboard
+ta:கிளிப்போர்டுக்கு நகலெடு
+:Copy Image
+ta:படத்தை நகலெடு
+:&Crop
+tr:Kırp
+:&Image
+tr:Resim
+:&Resize
+tr:Yeniden Boyutlandır
+:C&opy To Clipboard
+tr:Panoya Kopyala
+:Copy Image
+tr:Resmi Kopyala
+:&Crop
+uz:Kesish
+:&Image
+uz:Rasm
+:&Resize
+uz:O'lchamini o'zgartirish
+:C&opy To Clipboard
+uz:Buferga nusxalash
+:Copy Image
+uz:Rasmni nusxalash
+:&Crop
+af:Sny
+:&Image
+af:Beeld
+:&Resize
+af:Verander grootte
+:C&opy To Clipboard
+af:Kopieer na knipbord
+:&Crop
+bg:Изрязване
+:&Image
+bg:Изображение
+:&Resize
+bg:Преоразмеряване
+:C&opy To Clipboard
+bg:Копиране в клипборда
+:Copy Image
+bg:Копиране на изображение
+:&Crop
+bn:ক্রপ
+:&Image
+bn:ছবি
+:&Resize
+bn:আকার পরিবর্তন
+:C&opy To Clipboard
+bn:ক্লিপবোর্ডে কপি করুন
+:Copy Image
+bn:ছবি কপি করুন
+:&Crop
+bs:Obreži
+:&Image
+bs:Slika
+:&Resize
+bs:Promijeni veličinu
+:C&opy To Clipboard
+bs:Kopiraj u clipboard
+:Copy Image
+bs:Kopiraj sliku
+:&Crop
+ca-xv:Retalla
+:&Image
+ca-xv:Imatge
+:&Resize
+ca-xv:Redimensiona
+:C&opy To Clipboard
+ca-xv:Copia al porta-retalls
+:Copy Image
+ca-xv:Copia la imatge
+:&Crop
+dk:Beskær
+:&Image
+dk:Billede
+:&Resize
+dk:Tilpas størrelse
+:C&opy To Clipboard
+dk:Kopiér til udklipsholder
+:Copy Image
+dk:Kopiér billede
+:&Crop
+et:Kärbi
+:&Image
+et:Pilt
+:&Resize
+et:Muuda suurust
+:C&opy To Clipboard
+et:Kopeeri lõikelauale
+:Copy Image
+et:Kopeeri pilt
+:&Crop
+eu:Moztu
+:&Image
+eu:Irudia
+:&Resize
+eu:Aldatu tamaina
+:C&opy To Clipboard
+eu:Kopiatu arbelera
+:Copy Image
+eu:Kopiatu irudia
+:&Crop
+fy-nl:Bysnije
+:&Image
+fy-nl:Ofbylding
+:&Resize
+fy-nl:Grutte wizigje
+:C&opy To Clipboard
+fy-nl:Kopiearje nei klembord
+:&Crop
+hr:Obreži
+:&Image
+hr:Slika
+:&Resize
+hr:Promijeni veličinu
+:C&opy To Clipboard
+hr:Kopiraj u međuspremnik
+:Copy Image
+hr:Kopiraj sliku
+:&Crop
+jv:Potong
+:&Image
+jv:Gambar
+:&Resize
+jv:Owahi Ukuran
+:C&opy To Clipboard
+jv:Salin menyang Clipboard
+:Copy Image
+jv:Salin Gambar
+:&Crop
+ka:ამოჭრა
+:&Image
+ka:სურათი
+:&Resize
+ka:ზომის შეცვლა
+:C&opy To Clipboard
+ka:ბუფერში კოპირება
+:Copy Image
+ka:სურათის კოპირება
+:&Crop
+ku:Birrîn
+:&Image
+ku:Wêne
+:&Resize
+ku:Mezinahiya Biguherîne
+:C&opy To Clipboard
+ku:Kopî bike bo Clipboard
+:Copy Image
+ku:Wêne Kopî bike
+:&Crop
+kw:Kribya
+:&Image
+kw:Imach
+:&Resize
+kw:Dassysa
+:C&opy To Clipboard
+kw:Dasskrifa dhe'n Klipbord
+:Copy Image
+kw:Dasskrifa an Imach
+:&Crop
+lt:Apkarpyti
+:&Image
+lt:Vaizdas
+:&Resize
+lt:Keisti dydį
+:C&opy To Clipboard
+lt:Kopijuoti į iškarpinę
+:Copy Image
+lt:Kopijuoti vaizdą
+:&Crop
+mk:Отсечи
+:&Image
+mk:Слика
+:&Resize
+mk:Промени големина
+:C&opy To Clipboard
+mk:Копирај во клипборд
+:Copy Image
+mk:Копирај слика
+:&Crop
+mm:ဖြတ်တောက်ရန်
+:&Image
+mm:ရုပ်ပုံ
+:&Resize
+mm:အရွယ်အစားပြောင်းရန်
+:C&opy To Clipboard
+mm:ကလစ်ဘုတ်သို့ကူးယူရန်
+:&Crop
+ne:क्रप गर्नुहोस्
+:&Image
+ne:छवि
+:&Resize
+ne:आकार परिवर्तन गर्नुहोस्
+:C&opy To Clipboard
+ne:क्लिपबोर्डमा प्रतिलिपि गर्नुहोस्
+:Copy Image
+ne:छवि प्रतिलिपि गर्नुहोस्
+:&Crop
+nn:Beskjer
+:&Image
+nn:Bilete
+:&Resize
+nn:Endre storleik
+:C&opy To Clipboard
+nn:Kopier til utklippstavle
+:Copy Image
+nn:Kopier bilete
+:&Crop
+no:Beskjær
+:&Image
+no:Bilde
+:&Resize
+no:Endre størrelse
+:C&opy To Clipboard
+no:Kopier til utklippstavle
+:Copy Image
+no:Kopier bilde
+:&Crop
+pa:ਕੱਟੋ
+:&Image
+pa:ਚਿੱਤਰ
+:&Resize
+pa:ਆਕਾਰ ਬਦਲੋ
+:C&opy To Clipboard
+pa:ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ
+:Copy Image
+pa:ਚਿੱਤਰ ਕਾਪੀ ਕਰੋ
+:&Crop
+si:කපන්න
+:&Image
+si:රූපය
+:&Resize
+si:ප්‍රමාණය වෙනස් කරන්න
+:C&opy To Clipboard
+si:ක්ලිප්බෝඩ් එකට පිටපත් කරන්න
+:Copy Image
+si:රූපය පිටපත් කරන්න
+:&Crop
+sn:Cheka
+:&Image
+sn:Mufananidzo
+:&Resize
+sn:Chinja Saizi
+:C&opy To Clipboard
+sn:Kopera Ku Clipboard
+:Copy Image
+sn:Kopera Mufananidzo
+:&Crop
+sp-rs:Исеци
+:&Image
+sp-rs:Слика
+:&Resize
+sp-rs:Промени величину
+:C&opy To Clipboard
+sp-rs:Копирај у клипборд
+:Copy Image
+sp-rs:Копирај слику
+:&Crop
+sq:Prit
+:&Image
+sq:Imazh
+:&Resize
+sq:Ndrysho madhësinë
+:C&opy To Clipboard
+sq:Kopjo në kujtesë
+:Copy Image
+sq:Kopjo imazhin
+:&Crop
+th:ครอบตัด
+:&Image
+th:รูปภาพ
+:&Resize
+th:ปรับขนาด
+:C&opy To Clipboard
+th:คัดลอกไปยังคลิปบอร์ด
+:Copy Image
+th:คัดลอกรูปภาพ
+:&Crop
+tl:I-crop
+:&Image
+tl:Larawan
+:&Resize
+tl:Baguhin ang Laki
+:C&opy To Clipboard
+tl:Kopyahin sa Clipboard
+:Copy Image
+tl:Kopyahin ang Larawan
+:&Crop
+uk:Обрізати
+:&Image
+uk:Зображення
+:&Resize
+uk:Змінити розмір
+:C&opy To Clipboard
+uk:Копіювати в буфер обміну
+:Copy Image
+uk:Копіювати зображення
+:&Crop
+vn:Cắt ảnh
+:&Image
+vn:Hình ảnh
+:&Resize
+vn:Thay đổi kích thước
+:C&opy To Clipboard
+vn:Sao chép vào bộ nhớ tạm
+:Copy Image
+vn:Sao chép hình ảnh

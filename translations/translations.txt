@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-5cab9a1bf3b3e5a46a7e66ab1070f931095d7212
+e5c473da0ff283b1afd983c9b7563ede1620961d
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -790,6 +790,7 @@ tw:複製到剪貼簿(&C)
 uk:Скопіювати до буфера обміну
 uz:Buferga nusxalash
 vn:&Lưu Sao Chép
+:&Crop
 :&Discard changes
 am:&Մերժել
 ar:أس&تبعد التغييرات
@@ -1616,6 +1617,7 @@ tw:螢光標示(&H)
 uk:Виділити
 uz:Ajratib ko‘rsatish
 vn:&Nổi Bật
+:&Image
 :&Keyboard Shortcuts
 am:&Հիմնաբառի դյուրանցումներ
 ar:اختصارات &لوحة المفاتيح
@@ -2859,6 +2861,7 @@ tw:從歷程記錄中移除(&R)
 uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
+:&Resize
 :&Save As...
 am:&Պահել որպես
 ar:&حفظ باسم...
@@ -5763,6 +5766,7 @@ tw:位元組
 uk:Байт
 uz:Bayt
 vn:Bytes
+:C&opy To Clipboard
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -7466,76 +7470,6 @@ tw:提供翻譯
 uk:Допоможіть перекласти
 uz:Tarjima qilish
 vn:Đóng góp dịch thuật
-:Copy &Image
-am:Պատճենել &Նկարը
-ar:نسخ &الصورة
-az:&Şəkli kopyala
-bg:Копиране на &изображението
-bn:&ছবি কপি করুন
-br:Copiar &Imagem
-bs:Kopiraj &sliku
-by:Кап&іяваць Малюнак
-ca-xv:Copia la &imatge
-ca:Copia la &imatge
-cn:复制图片(&I)
-co:&Cupià a fiura
-cy:Copïo &Delwedd
-cz:Kopírovat &obrázek
-de:&Bild kopieren
-dk:Kopier &billede
-el:Αντιγραφή &εικόνας
-es:Copiar &imagen
-et:Kopeeri &pilt
-eu:Kopiatu &Irudia
-fa:رونوشت از &عکس
-fi:Kopioi &kuva
-fo:Kopiera &Mynd
-fr:Copier l'&image
-ga:Macasamhlaigh an &Íomhá
-gl:Copiar a &imaxe
-he:העתק תמונה
-hi:&छवि नक़ल करें
-hr:Kopiraj Sl&iku
-hu:&Kép másolása
-id:Sal&in Gambar
-it:Copia &immagine
-ja:画像をコピー(&I)
-jv:Nyalin &Gambar
-ka:სურათის &კოპირება
-kr:이미지 복사(&I)
-ku:لەبەرگرتنەوەی &وێنە
-kw:Kopia &Skeusen
-lt:Kopijuoti &paveikslą
-lv:Kopēt &attēlu
-mk:Копирај &слика
-ml:&ചിത്രം പകർത്തുക
-my:Salin &Imej
-ne:&छवि प्रतिलिपि बनाउनुहोस्
-nl:Afbeelding kopiëren
-nn:Kopier &bilete
-no:Kopier &Bilde
-pa:&ਤਸਵੀਰ ਕਾਪੀ ਕਰੋ
-pl:Kopiuj o&braz
-pt:Copiar &imagem
-ro:Copiere &Imagine
-ru:Скопировать &изображение
-sat:ᱪᱤᱛᱟᱹᱨ ᱱᱚᱠᱚᱞ ᱢᱮ
-si:රුපය ‌කොපි කරන්න
-sk:Kopírovať &obrázok
-sl:Kopiraj &sliko
-sn:kopa nemufananidzo
-sp-rs:Kopiraj sliku
-sq:Kopjoj &figurën
-sr-rs:Копирај &слику
-sv:Kop&iera bild
-ta:&படிமத்தைப் படியெடுத்திடுக
-th:คัดลอก &รูปภาพ
-tl:Kopyahin ang &Larawan
-tr:&Görüntüyü Kopyala
-tw:複製圖片(&I)
-uk:Скопіювати зображення
-uz:&Rasmni nusxa olish
-vn:Sao chép hình ảnh
 :Copy &Link Address
 am:Պատճենել &հղումը
 ar:نسخ &رابط العنوان
