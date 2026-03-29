@@ -40,6 +40,7 @@ constexpr const WCHAR* kCropImageWinClassName = L"SUMATRA_PDF_CROP_IMAGE";
 constexpr int kMinWindowWidth = 640;
 constexpr int kImagePadding = 8;
 constexpr int kResizeEdgeThreshold = 2;
+constexpr int kDragHandleSize = 6;
 constexpr int kControlAreaDy = 100;
 constexpr int kRowPadding = 6;
 constexpr int kButtonPadding = 8;
@@ -52,8 +53,7 @@ struct CropImageWindow {
     HWND hwndPathLabel = nullptr;
     HWND hwndDestEdit = nullptr;
     HWND hwndBrowseBtn = nullptr;
-    HWND hwndSrcSizeLabel = nullptr;
-    HWND hwndCropInfoLabel = nullptr;
+    HWND hwndInfoLabel = nullptr;
     Button* btnCancel = nullptr;
     Button* btnSave = nullptr;
 
@@ -87,7 +87,8 @@ struct CropImageWindow {
         TopLeft,
         TopRight,
         BottomLeft,
-        BottomRight
+        BottomRight,
+        Move
     };
     DragEdge dragEdge = DragEdge::None;
     POINT dragStart{};
@@ -150,9 +151,22 @@ static int ImageToDisplayY(CropImageWindow* cw, int iy) {
     return cw->imgDisplayY + (int)((float)iy * cw->imgDisplayH / cw->imgH);
 }
 
+static void LayoutControls(CropImageWindow* cw);
+
+static void UpdateSaveButtonText(CropImageWindow* cw) {
+    WCHAR destW[MAX_PATH + 1]{};
+    GetWindowTextW(cw->hwndDestEdit, destW, MAX_PATH);
+    TempStr dest = ToUtf8Temp(destW);
+    const char* text = file::Exists(dest) ? "Overwrite With Cropped" : "Save Cropped";
+    cw->btnSave->SetText(text);
+    // re-layout since button width may have changed
+    LayoutControls(cw);
+}
+
 static void UpdateCropInfoLabel(CropImageWindow* cw) {
-    TempStr s = str::FormatTemp("(%d,%d) - (%d,%d)", cw->cropX, cw->cropY, cw->cropW, cw->cropH);
-    SetWindowTextA(cw->hwndCropInfoLabel, s);
+    TempStr s =
+        str::FormatTemp("%dx%d => %dx%d @ %d,%d", cw->imgW, cw->imgH, cw->cropW, cw->cropH, cw->cropX, cw->cropY);
+    SetWindowTextA(cw->hwndInfoLabel, s);
 }
 
 // invalidate only the image area, not the control area below
@@ -236,6 +250,10 @@ static CropImageWindow::DragEdge HitTestCropEdge(CropImageWindow* cw, int mx, in
     if (onBottom && inHorzRange) {
         return CropImageWindow::DragEdge::Bottom;
     }
+    // inside the crop rect = move
+    if (mx > left + t && mx < right - t && my > top + t && my < bottom - t) {
+        return CropImageWindow::DragEdge::Move;
+    }
     return CropImageWindow::DragEdge::None;
 }
 
@@ -253,6 +271,8 @@ static HCURSOR GetCursorForEdge(CropImageWindow::DragEdge edge) {
         case CropImageWindow::DragEdge::TopRight:
         case CropImageWindow::DragEdge::BottomLeft:
             return LoadCursor(nullptr, IDC_SIZENESW);
+        case CropImageWindow::DragEdge::Move:
+            return LoadCursor(nullptr, IDC_SIZEALL);
         default:
             return LoadCursor(nullptr, IDC_ARROW);
     }
@@ -313,6 +333,31 @@ static void PaintCropImage(CropImageWindow* cw, HDC hdc) {
     Gdiplus::Pen pen(Color(255, 255, 255), 1.0f);
     pen.SetDashStyle(Gdiplus::DashStyleDash);
     g.DrawRectangle(&pen, cropDispX, cropDispY, cropDispR - cropDispX, cropDispB - cropDispY);
+
+    // draw drag handles at corners and edge midpoints
+    int hs = kDragHandleSize;
+    int hh = hs / 2;
+    int midX = (cropDispX + cropDispR) / 2;
+    int midY = (cropDispY + cropDispB) / 2;
+
+    Gdiplus::SolidBrush handleBrush(Color(255, 255, 255, 255));
+    Gdiplus::Pen handlePen(Color(255, 0, 0, 0), 1);
+
+    auto drawHandle = [&](int cx, int cy) {
+        g.FillRectangle(&handleBrush, cx - hh, cy - hh, hs, hs);
+        g.DrawRectangle(&handlePen, cx - hh, cy - hh, hs, hs);
+    };
+
+    // corners
+    drawHandle(cropDispX, cropDispY);
+    drawHandle(cropDispR, cropDispY);
+    drawHandle(cropDispX, cropDispB);
+    drawHandle(cropDispR, cropDispB);
+    // edge midpoints
+    drawHandle(midX, cropDispY);
+    drawHandle(midX, cropDispB);
+    drawHandle(cropDispX, midY);
+    drawHandle(cropDispR, midY);
 }
 
 static void LayoutControls(CropImageWindow* cw) {
@@ -336,8 +381,7 @@ static void LayoutControls(CropImageWindow* cw) {
     y += 22 + kRowPadding;
 
     // row 3: src size, crop info, cancel, save
-    MoveWindow(cw->hwndSrcSizeLabel, x, y + 4, 100, 16, TRUE);
-    MoveWindow(cw->hwndCropInfoLabel, x + 104, y + 4, 200, 16, TRUE);
+    MoveWindow(cw->hwndInfoLabel, x, y + 4, 350, 16, TRUE);
 
     if (cw->btnSave && cw->btnCancel) {
         Size szSave = cw->btnSave->GetIdealSize();
@@ -591,6 +635,23 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     edge == CropImageWindow::DragEdge::BottomRight) {
                     nh = cw->dragCropH + imgDy;
                 }
+                if (edge == CropImageWindow::DragEdge::Move) {
+                    nx = cw->dragCropX + imgDx;
+                    ny = cw->dragCropY + imgDy;
+                    // clamp to image bounds
+                    if (nx < 0) {
+                        nx = 0;
+                    }
+                    if (ny < 0) {
+                        ny = 0;
+                    }
+                    if (nx + nw > cw->imgW) {
+                        nx = cw->imgW - nw;
+                    }
+                    if (ny + nh > cw->imgH) {
+                        ny = cw->imgH - nh;
+                    }
+                }
 
                 // enforce minimum size and bounds
                 if (nw < 1) {
@@ -690,6 +751,12 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             // browse button
             if ((HWND)lp == cw->hwndBrowseBtn && code == BN_CLICKED) {
                 OnBrowse(cw);
+                UpdateSaveButtonText(cw);
+                return 0;
+            }
+            // dest edit changed
+            if ((HWND)lp == cw->hwndDestEdit && code == EN_CHANGE) {
+                UpdateSaveButtonText(cw);
                 return 0;
             }
             break;
@@ -822,15 +889,10 @@ void ShowCropImageWindow(MainWindow* win) {
     SendMessageW(cw->hwndBrowseBtn, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
 
     // row 3: src size label, crop info label
-    TempStr srcSizeStr = str::FormatTemp("(%d,%d)", imgW, imgH);
-    cw->hwndSrcSizeLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(srcSizeStr), WS_CHILD | WS_VISIBLE | SS_LEFT, 0, 0,
-                                           0, 0, hwnd, nullptr, h, nullptr);
-    SendMessageW(cw->hwndSrcSizeLabel, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
-
-    TempStr cropInfoStr = str::FormatTemp("(%d,%d) - (%d,%d)", 0, 0, imgW, imgH);
-    cw->hwndCropInfoLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(cropInfoStr), WS_CHILD | WS_VISIBLE | SS_LEFT, 0,
-                                            0, 0, 0, hwnd, nullptr, h, nullptr);
-    SendMessageW(cw->hwndCropInfoLabel, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
+    TempStr infoStr = str::FormatTemp("%dx%d => %dx%d @ %d,%d", imgW, imgH, imgW, imgH, 0, 0);
+    cw->hwndInfoLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(infoStr), WS_CHILD | WS_VISIBLE | SS_LEFT, 0, 0, 0, 0,
+                                        hwnd, nullptr, h, nullptr);
+    SendMessageW(cw->hwndInfoLabel, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
 
     // buttons
     {
@@ -854,6 +916,7 @@ void ShowCropImageWindow(MainWindow* win) {
 
     CalcImageLayout(cw);
     LayoutControls(cw);
+    UpdateSaveButtonText(cw);
 
     CenterDialog(hwnd, win->hwndFrame);
     HwndEnsureVisible(hwnd);
