@@ -165,7 +165,7 @@ static void UpdateSaveButtonText(CropImageWindow* cw) {
 }
 
 static TempStr FormatCropInfoTemp(int srcW, int srcH, int cropW, int cropH, int cropX, int cropY) {
-    return str::FormatTemp("%dx%d => %dx%d @ %d,%d", srcW, srcH, cropW, cropH, cropX, cropY);
+    return str::FormatTemp("%d x %d => %d x %d @ %d , %d", srcW, srcH, cropW, cropH, cropX, cropY);
 }
 
 static void UpdateCropInfoLabel(CropImageWindow* cw) {

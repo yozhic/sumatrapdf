@@ -158,7 +158,7 @@ static void UpdateSaveButtonText(ResizeImageWindow* rw) {
 static TempStr FormatResizeInfoTemp(int srcW, int srcH, int newW, int newH) {
     float pctW = (srcW > 0) ? (float)newW * 100.0f / srcW : 0.0f;
     float pctH = (srcH > 0) ? (float)newH * 100.0f / srcH : 0.0f;
-    return str::FormatTemp("%dx%d => %dx%d (%.2f%%,%.2f%%)", srcW, srcH, newW, newH, pctW, pctH);
+    return str::FormatTemp("%d x %d => %d x %d (%.2f%% x %.2f%%)", srcW, srcH, newW, newH, pctW, pctH);
 }
 
 static void UpdateInfoLabel(ResizeImageWindow* rw) {
