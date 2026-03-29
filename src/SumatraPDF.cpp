@@ -7611,7 +7611,9 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
                 }
             }
             // TODO: should I just build the menu from scratch every time?
-            UpdateAppMenu(win, (HMENU)wp);
+            if (win) {
+                UpdateAppMenu(win, (HMENU)wp);
+            }
             break;
 
         case WM_HOTKEY:
