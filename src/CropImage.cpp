@@ -788,7 +788,7 @@ void ShowCropImageWindow(MainWindow* win) {
     cw->hwndParent = win->hwndFrame;
 
     // create font
-    cw->hFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
+    cw->hFont = GetDefaultGuiFont();
 
     // create child controls
     // row 1: file path label (read-only)
