@@ -886,6 +886,8 @@ static void OnSwitchMode(ImageEditWindow* ew) {
     UpdateSaveButtonText(ew);
     UpdateInfoLabel(ew);
     InvalidateImageArea(ew);
+    // restore focus to main window so arrow keys keep working
+    SetFocus(ew->hwnd);
 }
 
 LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
@@ -1164,82 +1166,105 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_KEYDOWN: {
             ew = FindImageEditWindowByHwnd(hwnd);
-            if (!ew || ew->mode != ImageEditMode::Crop) {
+            if (!ew) {
                 break;
             }
-            // use the latched hover edge (set on mouse move, persists through arrow nudges)
-            auto edge = ew->hoverEdge;
-            if (edge == DragEdge::None) {
-                break;
+            if (ew->mode == ImageEditMode::Resize) {
+                // left/right change width, up/down change height
+                if (wp == VK_LEFT) {
+                    ew->newW -= 1;
+                } else if (wp == VK_RIGHT) {
+                    ew->newW += 1;
+                } else if (wp == VK_UP) {
+                    ew->newH += 1;
+                } else if (wp == VK_DOWN) {
+                    ew->newH -= 1;
+                } else {
+                    break;
+                }
+                if (ew->newW < 1) {
+                    ew->newW = 1;
+                }
+                if (ew->newH < 1) {
+                    ew->newH = 1;
+                }
+                UpdateInfoLabel(ew);
+                InvalidateImageArea(ew);
+                return 0;
             }
-            int dx = 0, dy = 0;
-            if (wp == VK_LEFT) {
-                dx = -1;
-            } else if (wp == VK_RIGHT) {
-                dx = 1;
-            } else if (wp == VK_UP) {
-                dy = -1;
-            } else if (wp == VK_DOWN) {
-                dy = 1;
-            } else {
-                break;
-            }
-            if (edge == DragEdge::Move) {
-                // move entire crop rectangle
-                ew->cropX += dx;
-                ew->cropY += dy;
-                if (ew->cropX < 0) {
-                    ew->cropX = 0;
+            // crop mode: need hoverEdge and directional deltas
+            {
+                auto edge = ew->hoverEdge;
+                if (edge == DragEdge::None) {
+                    break;
                 }
-                if (ew->cropY < 0) {
-                    ew->cropY = 0;
+                int dx = 0, dy = 0;
+                if (wp == VK_LEFT) {
+                    dx = -1;
+                } else if (wp == VK_RIGHT) {
+                    dx = 1;
+                } else if (wp == VK_UP) {
+                    dy = -1;
+                } else if (wp == VK_DOWN) {
+                    dy = 1;
                 }
-                if (ew->cropX + ew->cropW > ew->imgW) {
-                    ew->cropX = ew->imgW - ew->cropW;
-                }
-                if (ew->cropY + ew->cropH > ew->imgH) {
-                    ew->cropY = ew->imgH - ew->cropH;
-                }
-            } else {
-                // nudge individual edge
-                if (dx != 0 && (edge == DragEdge::Left || edge == DragEdge::TopLeft || edge == DragEdge::BottomLeft)) {
+                if (edge == DragEdge::Move) {
                     ew->cropX += dx;
-                    ew->cropW -= dx;
-                }
-                if (dx != 0 &&
-                    (edge == DragEdge::Right || edge == DragEdge::TopRight || edge == DragEdge::BottomRight)) {
-                    ew->cropW += dx;
-                }
-                if (dy != 0 && (edge == DragEdge::Top || edge == DragEdge::TopLeft || edge == DragEdge::TopRight)) {
                     ew->cropY += dy;
-                    ew->cropH -= dy;
+                    if (ew->cropX < 0) {
+                        ew->cropX = 0;
+                    }
+                    if (ew->cropY < 0) {
+                        ew->cropY = 0;
+                    }
+                    if (ew->cropX + ew->cropW > ew->imgW) {
+                        ew->cropX = ew->imgW - ew->cropW;
+                    }
+                    if (ew->cropY + ew->cropH > ew->imgH) {
+                        ew->cropY = ew->imgH - ew->cropH;
+                    }
+                } else {
+                    // nudge individual edge
+                    if (dx != 0 &&
+                        (edge == DragEdge::Left || edge == DragEdge::TopLeft || edge == DragEdge::BottomLeft)) {
+                        ew->cropX += dx;
+                        ew->cropW -= dx;
+                    }
+                    if (dx != 0 &&
+                        (edge == DragEdge::Right || edge == DragEdge::TopRight || edge == DragEdge::BottomRight)) {
+                        ew->cropW += dx;
+                    }
+                    if (dy != 0 && (edge == DragEdge::Top || edge == DragEdge::TopLeft || edge == DragEdge::TopRight)) {
+                        ew->cropY += dy;
+                        ew->cropH -= dy;
+                    }
+                    if (dy != 0 &&
+                        (edge == DragEdge::Bottom || edge == DragEdge::BottomLeft || edge == DragEdge::BottomRight)) {
+                        ew->cropH += dy;
+                    }
+                    // clamp
+                    if (ew->cropX < 0) {
+                        ew->cropW += ew->cropX;
+                        ew->cropX = 0;
+                    }
+                    if (ew->cropY < 0) {
+                        ew->cropH += ew->cropY;
+                        ew->cropY = 0;
+                    }
+                    if (ew->cropW < 1) {
+                        ew->cropW = 1;
+                    }
+                    if (ew->cropH < 1) {
+                        ew->cropH = 1;
+                    }
+                    if (ew->cropX + ew->cropW > ew->imgW) {
+                        ew->cropW = ew->imgW - ew->cropX;
+                    }
+                    if (ew->cropY + ew->cropH > ew->imgH) {
+                        ew->cropH = ew->imgH - ew->cropY;
+                    }
                 }
-                if (dy != 0 &&
-                    (edge == DragEdge::Bottom || edge == DragEdge::BottomLeft || edge == DragEdge::BottomRight)) {
-                    ew->cropH += dy;
-                }
-                // clamp
-                if (ew->cropX < 0) {
-                    ew->cropW += ew->cropX;
-                    ew->cropX = 0;
-                }
-                if (ew->cropY < 0) {
-                    ew->cropH += ew->cropY;
-                    ew->cropY = 0;
-                }
-                if (ew->cropW < 1) {
-                    ew->cropW = 1;
-                }
-                if (ew->cropH < 1) {
-                    ew->cropH = 1;
-                }
-                if (ew->cropX + ew->cropW > ew->imgW) {
-                    ew->cropW = ew->imgW - ew->cropX;
-                }
-                if (ew->cropY + ew->cropH > ew->imgH) {
-                    ew->cropH = ew->imgH - ew->cropY;
-                }
-            }
+            } // end crop mode block
             UpdateInfoLabel(ew);
             InvalidateImageArea(ew);
             return 0;
