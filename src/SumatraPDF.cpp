@@ -1658,7 +1658,7 @@ static MainWindow* CreateMainWindow() {
         DragAcceptFiles(win->hwndCanvas, TRUE);
     }
 
-    if (gWindows.IsEmpty()) {
+    if (gWindows.IsEmpty() && !gMyWindowWasEmbedded) {
         RegisterScreenshotHotkey(win->hwndFrame);
     }
     gWindows.Append(win);
@@ -1675,10 +1675,8 @@ static MainWindow* CreateMainWindow() {
     SetTabsInTitlebar(win, gGlobalPrefs->useTabs);
 
     // now show the menu bar in the appropriate style
-    if (gGlobalPrefs->showMenubar) {
-        if (win->tabsInTitlebar || gMyWindowWasEmbedded) {
-            // use rebar menu bar: always for tabs-in-titlebar,
-            // and for embedded windows where native SetMenu doesn't work on WS_CHILD
+    if (gGlobalPrefs->showMenubar && !gMyWindowWasEmbedded) {
+        if (win->tabsInTitlebar) {
             CreateMenuBarRebar(win);
         } else {
             SetMenu(win->hwndFrame, win->menu);
@@ -7498,9 +7496,15 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;
         gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
+        // clean up conflicting window styles that confuse focus/activation
+        // when our window is reparented as WS_CHILD
+        long ws = GetWindowLong(hwnd, GWL_STYLE);
+        ws &= ~(WS_POPUP | WS_BORDER | WS_CAPTION | WS_THICKFRAME);
+        ws |= WS_CHILD;
+        SetWindowLong(hwnd, GWL_STYLE, ws);
         SetTabsInTitlebar(win, false);
-        // don't use SetMenu() — native menu doesn't work on WS_CHILD windows
-        // keep the rebar menu bar which is laid out in RelayoutFrame
+        DestroyMenuBarRebar(win);
+        SetMenu(hwnd, nullptr);
         UpdateTabWidth(win);
         RelayoutWindow(win);
     }
