@@ -769,6 +769,25 @@ static MenuDef menuDefCreateAnnotUnderCursor[] = {
 };
 //] ACCESSKEY_GROUP Context Menu (Create annot under cursor)
 
+static MenuDef menuDefContextImage[] = {
+    {
+        _TRN("C&opy To Clipboard"),
+        CmdCopyImage,
+    },
+    {
+        _TRN("&Crop"),
+        CmdCropImage,
+    },
+    {
+        _TRN("&Resize"),
+        CmdResizeImage,
+    },
+    {
+        nullptr,
+        0,
+    },
+};
+
 //[ ACCESSKEY_GROUP Context Menu (Content)
 static MenuDef menuDefContext[] = {
     {
@@ -792,8 +811,8 @@ static MenuDef menuDefContext[] = {
         CmdCopyComment,
     },
     {
-        _TRN("Copy &Image"),
-        CmdCopyImage,
+        _TRN("&Image"),
+        (UINT_PTR)menuDefContextImage,
     },
     // note: strings cannot be "" or else items are not there
     {
@@ -1784,8 +1803,28 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     if (!pageEl || !pageEl->Is(kindPageElementComment) || !value) {
         MenuRemove(popup, CmdCopyComment);
     }
-    if (!pageEl || !pageEl->Is(kindPageElementImage)) {
-        MenuRemove(popup, CmdCopyImage);
+    {
+        bool onImage = pageEl && pageEl->Is(kindPageElementImage);
+        bool isImageEngine = tab && tab->GetEngineType() == kindEngineImage;
+        if (!onImage) {
+            MenuRemove(popup, CmdCopyImage);
+        }
+        if (!isImageEngine) {
+            MenuRemove(popup, CmdCropImage);
+            MenuRemove(popup, CmdResizeImage);
+        }
+        // remove the Image submenu entirely if no items left
+        if (!onImage && !isImageEngine) {
+            // find and remove the submenu by scanning top-level items
+            int n = GetMenuItemCount(popup);
+            for (int j = 0; j < n; j++) {
+                HMENU sub = GetSubMenu(popup, j);
+                if (sub && GetMenuItemCount(sub) == 0) {
+                    RemoveMenu(popup, j, MF_BYPOSITION);
+                    break;
+                }
+            }
+        }
     }
 
     bool isFullScreen = win->isFullScreen || win->presentation;
@@ -1900,6 +1939,8 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdSaveAnnotations:
         case CmdSaveAnnotationsNewFile:
         case CmdFavoriteAdd:
+        case CmdCropImage:
+        case CmdResizeImage:
         case CmdToggleFullscreen: {
             // handle in FrameOnCommand() in SumatraPDF.cpp
             HwndSendCommand(win->hwndFrame, cmdId);
