@@ -134,6 +134,7 @@ static i32 gCommandsNoActivate[] = {
     CmdShowPdfInfo,
     CmdListPrinters,
     CmdCropImage,
+    CmdResizeImage,
     // TOOD: probably more
     0,
 };

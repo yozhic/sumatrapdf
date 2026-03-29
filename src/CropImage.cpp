@@ -736,7 +736,7 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     return TRUE;
                 }
             }
-            break;
+            return DefWindowProc(hwnd, msg, wp, lp);
         }
 
         case WM_CHAR:

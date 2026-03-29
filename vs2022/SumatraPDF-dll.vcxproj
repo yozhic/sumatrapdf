@@ -1140,6 +1140,7 @@ cd ../out/rel64_prefast_asan &amp; ..\..\bin\MakeLZSA.exe InstallerData.dat libm
     <ClInclude Include="..\src\RegistryPreview.h" />
     <ClInclude Include="..\src\RegistrySearchFilter.h" />
     <ClInclude Include="..\src\RenderCache.h" />
+    <ClInclude Include="..\src\ResizeImage.h" />
     <ClInclude Include="..\src\Scratch.h" />
     <ClInclude Include="..\src\Screenshot.h" />
     <ClInclude Include="..\src\SearchAndDDE.h" />
@@ -1246,6 +1247,7 @@ cd ../out/rel64_prefast_asan &amp; ..\..\bin\MakeLZSA.exe InstallerData.dat libm
     <ClCompile Include="..\src\RegistryPreview.cpp" />
     <ClCompile Include="..\src\RegistrySearchFilter.cpp" />
     <ClCompile Include="..\src\RenderCache.cpp" />
+    <ClCompile Include="..\src\ResizeImage.cpp" />
     <ClCompile Include="..\src\Scratch.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

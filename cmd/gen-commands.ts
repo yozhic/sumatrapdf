@@ -200,6 +200,7 @@ export const commands = [
     "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",
     "CmdScreenshot", "Take Screenshot",
     "CmdCropImage", "Crop Image",
+    "CmdResizeImage", "Resize Image",
     "CmdNone", "Do nothing",
 ];
 

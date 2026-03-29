@@ -74,7 +74,8 @@ enum {
     CmdDebugTestApp = 387, CmdDebugShowNotif = 388, CmdDebugStartStressTest = 389,
     CmdDebugTogglePredictiveRender = 390, CmdDebugToggleRtl = 391, CmdToggleAntiAlias = 392,
     CmdListPrinters = 393, CmdToggleWindowsPreviewer = 394, CmdToggleWindowsSearchFilter = 395,
-    CmdScreenshot = 396, CmdCropImage = 397, CmdNone = 398,
+    CmdScreenshot = 396, CmdCropImage = 397, CmdResizeImage = 398,
+    CmdNone = 399,
 
     /* range for file history */
     CmdFileHistoryFirst,

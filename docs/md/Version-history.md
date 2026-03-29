@@ -19,6 +19,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdScreenshot` (`Take Screenshot` in `Ctrl + k` [command palette](Command-Palette.md)) to capture screenshots of the desktop and all visible windows, saved as PNG files in `Screenshots` sub-directory of SumatraPDF data directory
 - you can drag&drop images from a browser onto SumatraPDF window. We'll download it to Downloads folder and open
 - add `CmdCropImage` (`Crop Image`) command for cropping images when viewing image files
+- add `CmdResizeImage` (`Resize Image`) command for resizing images when viewing image files
 
 ## 3.6 (2026-03-17)
 

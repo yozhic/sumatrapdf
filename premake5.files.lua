@@ -720,6 +720,7 @@ function sumatrapdf_files()
     "Commands.*",
     "CrashHandler.*",
     "CropImage.*",
+    "ResizeImage.*",
     "DisplayMode.*",
     "DisplayModel.*",
     "DocController.h",
