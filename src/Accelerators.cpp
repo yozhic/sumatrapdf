@@ -448,7 +448,7 @@ again:
             // 4 Either ALT key is pressed.
             BYTE shiftState = HIBYTE(key);
             BYTE k = LOBYTE(key);
-            logf("mapped char 0x%x as %d (0x%x), shift state: %d\n", (int)wc, (int)k, (int)k, (int)shiftState);
+            // logf("mapped char 0x%x as %d (0x%x), shift state: %d\n", (int)wc, (int)k, (int)k, (int)shiftState);
             key = (SHORT)k;
             if (shiftState & 0x1) {
                 accel.fVirt |= (FSHIFT | FVIRTKEY);

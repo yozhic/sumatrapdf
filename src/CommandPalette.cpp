@@ -1385,7 +1385,11 @@ bool CommandPaletteWnd::Create(MainWindow* win, const char* prefix, int smartTab
 }
 
 void RunCommandPalette(MainWindow* win, const char* prefix, int smartTabAdvance) {
-    ReportIf(gCommandPaletteWnd);
+    if (gCommandPaletteWnd) {
+        // already open — just focus it
+        HwndSetFocus(gCommandPaletteHwnd);
+        return;
+    }
 
     auto wnd = new CommandPaletteWnd();
     auto fn = MkFunc1Void<Wnd::DestroyEvent*>(OnDestroy);

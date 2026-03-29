@@ -160,11 +160,6 @@ Gdiplus::Color GdipCol(COLORREF c) {
     return GdiRgbFromCOLORREF(c);
 }
 
-// if true, on hover we paint the background of tab close (X) button
-constexpr bool closeCircleEnabled = true;
-constexpr float closePenWidth = 1.0f;
-constexpr COLORREF circleColor = RgbToCOLORREF(0xC13535);
-
 bool TabsCtrl::IsValidIdx(int idx) {
     return idx >= 0 && idx < TabCount();
 }
@@ -237,30 +232,12 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
 
         if (ti->canClose && (i == tabUnderMouse)) {
             r = ti->rClose;
-            if (i == tabUnderMouse && overClose && closeCircleEnabled) {
-                // draw bacground of X
-                Rect cr = r;
-                cr.Inflate(3, 3);
-                gr = ToGdipRect(cr);
-                br.SetColor(GdipCol(circleColor));
-                gfx.FillRectangle(&br, gr);
-            }
-
-            // draw X with a lighter color
-            gfx.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
-            gfx.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
-            Color closeCol = GdipCol(textColor);
-            closeCol = Color(128 + 64, closeCol.GetR(), closeCol.GetG(), closeCol.GetB());
-            br.SetColor(closeCol);
-            Pen penX(&br, closePenWidth);
-            Gdiplus::Point p1(r.x, r.y);
-            Gdiplus::Point p2(r.x + r.dx, r.y + r.dy);
-            gfx.DrawLine(&penX, p1, p2);
-            p1 = {r.x + r.dx, r.y};
-            p2 = {r.x, r.y + r.dy};
-            gfx.DrawLine(&penX, p1, p2);
-            gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
-            gfx.SetCompositingMode(Gdiplus::CompositingModeSourceCopy);
+            DrawCloseButtonArgs closeArgs;
+            closeArgs.hdc = hdc;
+            closeArgs.r = r;
+            closeArgs.r.Inflate(3, 3);
+            closeArgs.isHover = overClose;
+            DrawCloseButton(closeArgs);
         }
 
         // draw text
