@@ -288,7 +288,7 @@ void MainWindow::UpdateCanvasSize() {
 
 Size MainWindow::GetViewPortSize() const {
     Size size = canvasRc.Size();
-    ReportDebugIf(size.IsEmpty());
+    // can be empty transiently during RelayoutFrame / EndDeferWindowPos
 
     DWORD style = GetWindowLong(hwndCanvas, GWL_STYLE);
     if ((style & WS_VSCROLL)) {
