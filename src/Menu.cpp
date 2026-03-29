@@ -44,6 +44,7 @@
 #include "Toolbar.h"
 #include "EditAnnotations.h"
 #include "Accelerators.h"
+#include "ImageSaveCropResize.h"
 #include "Menu.h"
 
 #include "utils/Log.h"
@@ -1809,7 +1810,7 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         if (!onImage && !isImageEngine) {
             MenuRemove(popup, CmdCopyImage);
         }
-        if (!isImageEngine) {
+        if (!isImageEngine && !onImage) {
             MenuRemove(popup, CmdCropImage);
             MenuRemove(popup, CmdResizeImage);
         }
@@ -1940,7 +1941,23 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdSaveAnnotationsNewFile:
         case CmdFavoriteAdd:
         case CmdCropImage:
-        case CmdResizeImage:
+        case CmdResizeImage: {
+            if (pageEl && pageEl->Is(kindPageElementImage)) {
+                RenderedBitmap* bmp = dm->GetEngine()->GetImageForPageElement(pageEl);
+                if (bmp) {
+                    // build dest path: <dir>/<basename>_page_<pageNo>.png
+                    TempStr dir = path::GetDirTemp(filePath);
+                    TempStr base = path::GetBaseNameTemp(filePath);
+                    TempStr noExt = path::GetPathNoExtTemp(base);
+                    TempStr destPath = path::JoinTemp(dir, str::FormatTemp("%s_page_%d.png", noExt, pageNoUnderCursor));
+                    ImageEditMode m = (cmdId == CmdCropImage) ? ImageEditMode::Crop : ImageEditMode::Resize;
+                    ShowImageEditWindow(win, m, destPath, bmp);
+                    delete bmp;
+                }
+            } else {
+                HwndSendCommand(win->hwndFrame, cmdId);
+            }
+        } break;
         case CmdToggleFullscreen: {
             // handle in FrameOnCommand() in SumatraPDF.cpp
             HwndSendCommand(win->hwndFrame, cmdId);
