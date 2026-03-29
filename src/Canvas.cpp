@@ -10,7 +10,11 @@
 #include "utils/UITask.h"
 #include "utils/WinUtil.h"
 #include "utils/ScopedWin.h"
+#include "utils/ThreadUtil.h"
+#include "utils/HttpUtil.h"
+#include "utils/GuessFileType.h"
 #include <algorithm>
+#include <shlobj.h>
 
 #include "wingui/UIModels.h"
 #include "wingui/Layout.h"
@@ -2565,6 +2569,322 @@ static void OnDropFiles(MainWindow* win, HDROP hDrop, bool dragFinish) {
         }
         StartLoadDocument(&args);
     }
+}
+
+// returns true if url looks like it could be an image URL
+static bool IsImageUrl(const char* url) {
+    // strip query string / fragment for extension check
+    const char* q = str::FindChar(url, '?');
+    const char* h = str::FindChar(url, '#');
+    int len = str::Leni(url);
+    if (q && (int)(q - url) < len) {
+        len = (int)(q - url);
+    }
+    if (h && (int)(h - url) < len) {
+        len = (int)(h - url);
+    }
+    // check for common image extensions
+    const char* exts[] = {".png",  ".jpg",  ".jpeg", ".gif", ".bmp", ".tiff", ".tif",
+                          ".webp", ".avif", ".heic", ".jxr", ".jp2", ".tga"};
+    for (auto ext : exts) {
+        int extLen = str::Leni(ext);
+        if (len >= extLen) {
+            TempStr ending = str::DupTemp(url + len - extLen, extLen);
+            if (str::EqI(ending, ext)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// Get the user's Downloads folder path
+static TempStr GetDownloadsDirTemp() {
+    WCHAR* pathW = nullptr;
+    HRESULT hr = SHGetKnownFolderPath(FOLDERID_Downloads, 0, nullptr, &pathW);
+    if (FAILED(hr) || !pathW) {
+        CoTaskMemFree(pathW);
+        return nullptr;
+    }
+    TempStr res = ToUtf8Temp(pathW);
+    CoTaskMemFree(pathW);
+    return res;
+}
+
+// Extract a file name from a URL (last path component, without query/fragment)
+static TempStr FileNameFromUrlTemp(const char* url) {
+    // skip past scheme
+    const char* s = str::FindChar(url, '/');
+    if (s && s[1] == '/') {
+        s += 2; // skip "//"
+    }
+    // find last '/' before any '?' or '#'
+    const char* lastSlash = nullptr;
+    const char* p = s ? s : url;
+    while (*p && *p != '?' && *p != '#') {
+        if (*p == '/') {
+            lastSlash = p;
+        }
+        p++;
+    }
+    if (!lastSlash) {
+        return nullptr;
+    }
+    int nameLen = (int)(p - lastSlash - 1);
+    if (nameLen <= 0) {
+        return nullptr;
+    }
+    return str::DupTemp(lastSlash + 1, nameLen);
+}
+
+struct DownloadAndOpenUrlData {
+    char* url;
+    HWND hwndCanvas;
+};
+
+static void DownloadAndOpenUrl(DownloadAndOpenUrlData* data) {
+    TempStr url = data->url;
+    HWND hwndCanvas = data->hwndCanvas;
+
+    TempStr downloadsDir = GetDownloadsDirTemp();
+    if (!downloadsDir) {
+        logf("DownloadAndOpenUrl: failed to get Downloads folder\n");
+        free(data->url);
+        delete data;
+        return;
+    }
+
+    TempStr fileName = FileNameFromUrlTemp(url);
+    if (!fileName) {
+        // generate a fallback name
+        fileName = str::DupTemp("dropped_image.png");
+    }
+
+    TempStr destPath = path::JoinTemp(downloadsDir, fileName);
+
+    // avoid overwriting: if file exists, add a numeric suffix
+    if (file::Exists(destPath)) {
+        TempStr ext = path::GetExtTemp(destPath);
+        TempStr base = str::DupTemp(fileName, str::Leni(fileName) - str::Leni(ext));
+        for (int i = 1; i < 1000; i++) {
+            TempStr newName = str::FormatTemp("%s_%d%s", base, i, ext);
+            destPath = path::JoinTemp(downloadsDir, newName);
+            if (!file::Exists(destPath)) {
+                break;
+            }
+        }
+    }
+
+    logf("DownloadAndOpenUrl: downloading '%s' to '%s'\n", url, destPath);
+
+    Func1<HttpProgress*> emptyProgress;
+    bool ok = HttpGetToFile(url, destPath, emptyProgress);
+    if (!ok) {
+        logf("DownloadAndOpenUrl: download failed for '%s'\n", url);
+        free(data->url);
+        delete data;
+        return;
+    }
+
+    // verify the downloaded file is a supported image type
+    Kind kind = GuessFileTypeFromName(destPath);
+    if (!IsEngineImageSupportedFileType(kind)) {
+        logf("DownloadAndOpenUrl: downloaded file is not a supported image type: '%s'\n", destPath);
+        file::Delete(destPath);
+        free(data->url);
+        delete data;
+        return;
+    }
+
+    // open the file on the UI thread
+    char* pathDup = str::Dup(destPath);
+    auto fn = MkFunc0<char>(
+        [](char* path) {
+            MainWindow* win = FindMainWindowByHwnd(GetForegroundWindow());
+            if (!win && !gWindows.IsEmpty()) {
+                win = gWindows.at(0);
+            }
+            if (win) {
+                LoadArgs args(path, win);
+                StartLoadDocument(&args);
+            }
+            free(path);
+        },
+        pathDup);
+    uitask::Post(fn, "DownloadAndOpenUrl");
+
+    free(data->url);
+    delete data;
+}
+
+// Extract text from IDataObject (tries CF_UNICODETEXT, then CF_TEXT)
+static TempStr GetTextFromDataObject(IDataObject* dataObj) {
+    FORMATETC fmtUnicode = {CF_UNICODETEXT, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+    STGMEDIUM medium{};
+    HRESULT hr = dataObj->GetData(&fmtUnicode, &medium);
+    if (SUCCEEDED(hr) && medium.hGlobal) {
+        WCHAR* w = (WCHAR*)GlobalLock(medium.hGlobal);
+        TempStr res = w ? ToUtf8Temp(w) : nullptr;
+        GlobalUnlock(medium.hGlobal);
+        ReleaseStgMedium(&medium);
+        return res;
+    }
+    FORMATETC fmtAnsi = {CF_TEXT, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+    hr = dataObj->GetData(&fmtAnsi, &medium);
+    if (SUCCEEDED(hr) && medium.hGlobal) {
+        char* s = (char*)GlobalLock(medium.hGlobal);
+        TempStr res = s ? str::DupTemp(s) : nullptr;
+        GlobalUnlock(medium.hGlobal);
+        ReleaseStgMedium(&medium);
+        return res;
+    }
+    return nullptr;
+}
+
+// Check if IDataObject contains a URL (registered format "UniformResourceLocatorW" or "UniformResourceLocator")
+static TempStr GetUrlFromDataObject(IDataObject* dataObj) {
+    // try wide URL format first
+    static CLIPFORMAT cfUrlW = (CLIPFORMAT)RegisterClipboardFormatW(L"UniformResourceLocatorW");
+    if (cfUrlW) {
+        FORMATETC fmt = {cfUrlW, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+        STGMEDIUM medium{};
+        HRESULT hr = dataObj->GetData(&fmt, &medium);
+        if (SUCCEEDED(hr) && medium.hGlobal) {
+            WCHAR* w = (WCHAR*)GlobalLock(medium.hGlobal);
+            TempStr res = w ? ToUtf8Temp(w) : nullptr;
+            GlobalUnlock(medium.hGlobal);
+            ReleaseStgMedium(&medium);
+            if (res && (str::StartsWithI(res, "http://") || str::StartsWithI(res, "https://"))) {
+                return res;
+            }
+        }
+    }
+    // try ANSI URL format
+    static CLIPFORMAT cfUrl = (CLIPFORMAT)RegisterClipboardFormatW(L"UniformResourceLocator");
+    if (cfUrl) {
+        FORMATETC fmt = {cfUrl, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+        STGMEDIUM medium{};
+        HRESULT hr = dataObj->GetData(&fmt, &medium);
+        if (SUCCEEDED(hr) && medium.hGlobal) {
+            char* s = (char*)GlobalLock(medium.hGlobal);
+            TempStr res = s ? str::DupTemp(s) : nullptr;
+            GlobalUnlock(medium.hGlobal);
+            ReleaseStgMedium(&medium);
+            if (res && (str::StartsWithI(res, "http://") || str::StartsWithI(res, "https://"))) {
+                return res;
+            }
+        }
+    }
+    return nullptr;
+}
+
+static bool DataObjectHasFiles(IDataObject* dataObj) {
+    FORMATETC fmt = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+    return dataObj->QueryGetData(&fmt) == S_OK;
+}
+
+static bool DataObjectHasUrl(IDataObject* dataObj) {
+    TempStr url = GetUrlFromDataObject(dataObj);
+    if (url && IsImageUrl(url)) {
+        return true;
+    }
+    // also check plain text that looks like an image URL
+    TempStr text = GetTextFromDataObject(dataObj);
+    if (text && (str::StartsWithI(text, "http://") || str::StartsWithI(text, "https://")) && IsImageUrl(text)) {
+        return true;
+    }
+    return false;
+}
+
+class CanvasDropTarget : public IDropTarget {
+    LONG refCount = 1;
+    HWND hwnd = nullptr;
+
+  public:
+    explicit CanvasDropTarget(HWND h) : hwnd(h) {}
+
+    STDMETHODIMP QueryInterface(REFIID riid, void** ppv) override {
+        if (riid == IID_IUnknown || riid == IID_IDropTarget) {
+            *ppv = this;
+            AddRef();
+            return S_OK;
+        }
+        *ppv = nullptr;
+        return E_NOINTERFACE;
+    }
+    ULONG STDMETHODCALLTYPE AddRef() override { return InterlockedIncrement(&refCount); }
+    ULONG STDMETHODCALLTYPE Release() override {
+        LONG r = InterlockedDecrement(&refCount);
+        if (r == 0) {
+            delete this;
+        }
+        return r;
+    }
+
+    STDMETHODIMP DragEnter(IDataObject* dataObj, __unused DWORD grfKeyState, __unused POINTL pt,
+                           DWORD* pdwEffect) override {
+        if (DataObjectHasFiles(dataObj) || DataObjectHasUrl(dataObj)) {
+            *pdwEffect = DROPEFFECT_COPY;
+        } else {
+            *pdwEffect = DROPEFFECT_NONE;
+        }
+        return S_OK;
+    }
+
+    STDMETHODIMP DragOver(__unused DWORD grfKeyState, __unused POINTL pt, DWORD* pdwEffect) override {
+        *pdwEffect = DROPEFFECT_COPY;
+        return S_OK;
+    }
+
+    STDMETHODIMP DragLeave() override { return S_OK; }
+
+    STDMETHODIMP Drop(IDataObject* dataObj, DWORD grfKeyState, __unused POINTL pt, DWORD* pdwEffect) override {
+        *pdwEffect = DROPEFFECT_COPY;
+
+        // first try file drops (CF_HDROP)
+        FORMATETC fmtHDrop = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+        STGMEDIUM medium{};
+        HRESULT hr = dataObj->GetData(&fmtHDrop, &medium);
+        if (SUCCEEDED(hr) && medium.hGlobal) {
+            HDROP hDrop = (HDROP)medium.hGlobal;
+            MainWindow* win = FindMainWindowByHwnd(hwnd);
+            if (win) {
+                OnDropFiles(win, hDrop, false);
+            }
+            ReleaseStgMedium(&medium);
+            return S_OK;
+        }
+
+        // try URL drop
+        TempStr url = GetUrlFromDataObject(dataObj);
+        if (!url) {
+            // fall back to plain text
+            TempStr text = GetTextFromDataObject(dataObj);
+            if (text && (str::StartsWithI(text, "http://") || str::StartsWithI(text, "https://"))) {
+                url = text;
+            }
+        }
+
+        if (url && IsImageUrl(url)) {
+            auto data = new DownloadAndOpenUrlData();
+            data->url = str::Dup(url);
+            data->hwndCanvas = hwnd;
+            auto fn = MkFunc0<DownloadAndOpenUrlData>([](DownloadAndOpenUrlData* d) { DownloadAndOpenUrl(d); }, data);
+            RunAsync(fn, "DownloadAndOpenUrl");
+        }
+
+        return S_OK;
+    }
+};
+
+void RegisterCanvasDropTarget(HWND hwndCanvas) {
+    auto* dt = new CanvasDropTarget(hwndCanvas);
+    RegisterDragDrop(hwndCanvas, dt);
+    dt->Release(); // RegisterDragDrop AddRef'd it
+}
+
+void RevokeCanvasDropTarget(HWND hwndCanvas) {
+    RevokeDragDrop(hwndCanvas);
 }
 
 LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {

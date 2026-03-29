@@ -1655,7 +1655,7 @@ static MainWindow* CreateMainWindow() {
     CreateSidebar(win);
     UpdateFindbox(win);
     if (CanAccessDisk() && !gPluginMode) {
-        DragAcceptFiles(win->hwndCanvas, TRUE);
+        RegisterCanvasDropTarget(win->hwndCanvas);
     }
 
     if (gWindows.IsEmpty() && !gMyWindowWasEmbedded) {
@@ -1765,7 +1765,7 @@ void DeleteMainWindow(MainWindow* win) {
 
     DeletePropertiesWindow(win->hwndFrame);
     ImageList_Destroy((HIMAGELIST)SendMessageW(win->hwndToolbar, TB_GETIMAGELIST, 0, 0));
-    DragAcceptFiles(win->hwndCanvas, FALSE);
+    RevokeCanvasDropTarget(win->hwndCanvas);
 
     ReportIf(win->findThread && WaitForSingleObject(win->findThread, 0) == WAIT_TIMEOUT);
     ReportIf(win->printThread && WaitForSingleObject(win->printThread, 0) == WAIT_TIMEOUT);
