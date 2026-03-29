@@ -90,6 +90,7 @@ extern Flags* gCli;
 extern bool gShowFrameRate;
 
 extern const char* gPluginURL;
+extern bool gMyWindowWasEmbedded;
 extern Favorites gFavorites;
 extern WNDPROC DefWndProcCloseButton;
 extern RenderCache* gRenderCache;

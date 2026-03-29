@@ -114,6 +114,7 @@ bool gShowFrameRate = false;
 // fullscreen are disabled, so that SumatraPDF can be displayed
 // embedded (e.g. in a web browser)
 const char* gPluginURL = nullptr; // owned by Flags in WinMain
+bool gMyWindowWasEmbedded = false;
 
 static Kind kNotifPersistentWarning = "persistentWarning";
 static Kind kNotifZoom = "zoom";
@@ -7487,6 +7488,18 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
     MainWindow* win = FindMainWindowByHwnd(hwnd);
 
     // DbgLogMsg("frame:", hwnd, msg, wp, lp);
+    // detect when an external host (e.g. Total Commander's lister) embeds us
+    // by reparenting our window as WS_CHILD
+    if (win && !gMyWindowWasEmbedded && (GetWindowLong(hwnd, GWL_STYLE) & WS_CHILD)) {
+        gMyWindowWasEmbedded = true;
+        gGlobalPrefs->useTabs = false;
+        gGlobalPrefs->restoreSession = false;
+        gGlobalPrefs->rememberOpenedFiles = false;
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
+        SetTabsInTitlebar(win, false);
+        UpdateTabWidth(win);
+        RelayoutWindow(win);
+    }
     if (win && win->tabsInTitlebar) {
         bool callDefault = true;
         LRESULT res = CustomCaptionFrameProc(hwnd, msg, wp, lp, &callDefault, win);

@@ -2220,6 +2220,20 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         logf("'%s'\n  ver %s\n", s, UPDATE_CHECK_VERA);
     }
 
+    {
+        DWORD parentPid = 0;
+        TempStr parentPath = GetParentProcessPath(&parentPid);
+        if (parentPath) {
+            logf("parent process: pid=%d, path='%s'\n", (int)parentPid, parentPath);
+            const char* name = path::GetBaseNameTemp(parentPath);
+            if (str::StartsWithI(name, "TOTALCMD")) {
+                gMyWindowWasEmbedded = true;
+            }
+        } else {
+            logf("parent process: pid=%d, path unknown\n", (int)parentPid);
+        }
+    }
+
     if (!gIsAsanBuild) {
         TempStr symDir = GetCrashInfoDirTemp();
         TempStr crashDumpPath = path::JoinTemp(symDir, "sumatrapdfcrash.dmp");
@@ -2446,6 +2460,12 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 
     LoadSettings();
     UpdateGlobalPrefs(flags);
+    if (gMyWindowWasEmbedded) {
+        gGlobalPrefs->useTabs = false;
+        gGlobalPrefs->restoreSession = false;
+        gGlobalPrefs->rememberOpenedFiles = false;
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
+    }
     SetCurrentLang(flags.lang ? flags.lang : gGlobalPrefs->uiLanguage);
     FileWatcherInit();
 
@@ -2568,7 +2588,8 @@ ContinueOpenWindow:
     gInitialSessionData = gGlobalPrefs->sessionData;
     gGlobalPrefs->sessionData = new Vec<SessionData*>();
 
-    restoreSession = gGlobalPrefs->restoreSession && (gInitialSessionData->Size() > 0) && !gPluginMode;
+    restoreSession =
+        gGlobalPrefs->restoreSession && (gInitialSessionData->Size() > 0) && !gPluginMode && !gMyWindowWasEmbedded;
     if (!gGlobalPrefs->useTabs && (existingInstanceHwnd != nullptr)) {
         // do not restore a session if tabs are disabled and SumatraPDF is already running
         // TODO: maybe disable restoring if tabs are disabled?
