@@ -5271,6 +5271,7 @@ static void TransitionToTabs() {
     if (!hasFiles) {
         for (MainWindow* w : gWindows) {
             SetTabsInTitlebar(w, true);
+            ShowOrHideToolbar(w);
             w->RedrawAllIncludingNonClient();
         }
         return;
