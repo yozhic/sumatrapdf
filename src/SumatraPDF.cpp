@@ -1676,7 +1676,9 @@ static MainWindow* CreateMainWindow() {
 
     // now show the menu bar in the appropriate style
     if (gGlobalPrefs->showMenubar) {
-        if (win->tabsInTitlebar) {
+        if (win->tabsInTitlebar || gMyWindowWasEmbedded) {
+            // use rebar menu bar: always for tabs-in-titlebar,
+            // and for embedded windows where native SetMenu doesn't work on WS_CHILD
             CreateMenuBarRebar(win);
         } else {
             SetMenu(win->hwndFrame, win->menu);
@@ -7497,6 +7499,8 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         gGlobalPrefs->rememberOpenedFiles = false;
         gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
         SetTabsInTitlebar(win, false);
+        // don't use SetMenu() — native menu doesn't work on WS_CHILD windows
+        // keep the rebar menu bar which is laid out in RelayoutFrame
         UpdateTabWidth(win);
         RelayoutWindow(win);
     }
