@@ -321,8 +321,12 @@ static void LayoutControls(CropImageWindow* cw) {
     int x = kButtonPadding;
     int w = cRc.dx - 2 * kButtonPadding;
 
-    // row 1: file path label
-    MoveWindow(cw->hwndPathLabel, x, y, w, 16, TRUE);
+    // row 1: file path label, shifted right to align with edit text
+    int editBorder = GetSystemMetrics(SM_CXEDGE);
+    LRESULT margins = SendMessageW(cw->hwndDestEdit, EM_GETMARGINS, 0, 0);
+    int editLeftMargin = LOWORD(margins);
+    int labelShift = editBorder + editLeftMargin;
+    MoveWindow(cw->hwndPathLabel, x + labelShift, y, w - labelShift, 16, TRUE);
     y += 16 + kRowPadding;
 
     // row 2: dest edit + browse button
