@@ -35316,3 +35316,713 @@ vn:Thay đổi kích thước
 vn:Sao chép vào bộ nhớ tạm
 :Copy Image
 vn:Sao chép hình ảnh
+:Crop Resized
+am:የተቆረጠ መጠን ተቀይሯል
+:Overwrite With Resized
+am:በተቀየረ መጠን ላይ ደርብ
+:Paste Image From Clipboard
+am:ምስል ከቅንጥብ ሰሌዳ ለጥፍ
+:Resize Cropped
+am:የተቆረጠውን መጠን ቀይር
+:Save Resized
+am:የተቀየረ መጠን አስቀምጥ
+:Crop Resized
+ar:اقتصاص المُعاد تحجيمه
+:Overwrite With Resized
+ar:استبدال بالمُعاد تحجيمه
+:Paste Image From Clipboard
+ar:لصق صورة من الحافظة
+:Resize Cropped
+ar:تغيير حجم المقتص
+:Save Resized
+ar:حفظ المُعاد تحجيمه
+:Crop Resized
+br:Troc'hañ ar stumm nevez
+:Overwrite With Resized
+br:Flastriñ gant ar stumm nevez
+:Paste Image From Clipboard
+br:Pегañ ar skeudenn eus ar golver
+:Resize Cropped
+br:Cheñch ment ar pezh troc'het
+:Save Resized
+br:Enrollañ ar stumm nevez
+:Crop Resized
+cn:裁剪已调整大小
+:Overwrite With Resized
+cn:用已调整大小覆盖
+:Paste Image From Clipboard
+cn:从剪贴板粘贴图像
+:Resize Cropped
+cn:调整裁剪后大小
+:Save Resized
+cn:保存已调整大小
+:Crop Resized
+co:Ritaglia Ridimensionatu
+:Overwrite With Resized
+co:Rimpiazzà cù u Ridimensionatu
+:Paste Image From Clipboard
+co:Incullà l'Imagine da u Preme-papei
+:Resize Cropped
+co:Ridimensionà Ritagliatu
+:Save Resized
+co:Salvà Ridimensionatu
+:Crop Resized
+de:Größe angepasst zuschneiden
+:Overwrite With Resized
+de:Mit Größe angepasst überschreiben
+:Paste Image From Clipboard
+de:Bild aus Zwischenablage einfügen
+:Resize Cropped
+de:Zugeschnittenes skalieren
+:Save Resized
+de:Größe angepasst speichern
+:Crop Resized
+el:Περικοπή Αλλαγμένου Μεγέθους
+:Overwrite With Resized
+el:Αντικατάσταση Με Αλλαγμένο Μέγεθος
+:Paste Image From Clipboard
+el:Επικόλληση Εικόνας Από Πρόχειρο
+:Resize Cropped
+el:Αλλαγή Μεγέθους Περικομμένου
+:Save Resized
+el:Αποθήκευση Αλλαγμένου Μεγέθους
+:Crop Resized
+hi:क्रॉप किए गए का आकार बदलें
+:Overwrite With Resized
+hi:आकार बदले गए से अधिलेखित करें
+:Paste Image From Clipboard
+hi:क्लिपबोर्ड से छवि चिपकाएं
+:Resize Cropped
+hi:क्रॉप किए गए का आकार बदलें
+:Save Resized
+hi:आकार बदली गई को सहेजें
+:Crop Resized
+ja:リサイズ後にトリミング
+:Overwrite With Resized
+ja:リサイズして上書き
+:Paste Image From Clipboard
+ja:クリップボードから画像を貼り付け
+:Resize Cropped
+ja:トリミング後にリサイズ
+:Save Resized
+ja:リサイズして保存
+:Crop Resized
+ml:വലുപ്പം മാറ്റിയത് ക്രോപ്പ് ചെയ്യുക
+:Overwrite With Resized
+ml:വലുപ്പം മാറ്റിയത് കൊണ്ട് മാറ്റിയെഴുതുക
+:Paste Image From Clipboard
+ml:ക്ലിപ്പ്ബോർഡിൽ നിന്ന് ചിത്രം ഒട്ടിക്കുക
+:Resize Cropped
+ml:ക്രോപ്പ് ചെയ്തതിന്റെ വലുപ്പം മാറ്റുക
+:Save Resized
+ml:വലുപ്പം മാറ്റിയത് സംരക്ഷിക്കുക
+:Crop Resized
+nl:Bijgesneden formaat wijzigen
+:Overwrite With Resized
+nl:Overschrijven met aangepast formaat
+:Paste Image From Clipboard
+nl:Afbeelding plakken vanaf klembord
+:Resize Cropped
+nl:Formaat bijgesneden wijzigen
+:Save Resized
+nl:Aangepast formaat opslaan
+:Crop Resized
+pl:Przytnij przeskalowane
+:Overwrite With Resized
+pl:Nadpisz przeskalowanym
+:Paste Image From Clipboard
+pl:Wklej obraz ze schowka
+:Resize Cropped
+pl:Przeskaluj przycięte
+:Save Resized
+pl:Zapisz przeskalowane
+:Crop Resized
+ru:Обрезать изменённое
+:Overwrite With Resized
+ru:Перезаписать изменённым
+:Paste Image From Clipboard
+ru:Вставить изображение из буфера обмена
+:Resize Cropped
+ru:Изменить размер обрезанного
+:Save Resized
+ru:Сохранить изменённое
+:Crop Resized
+sk:Orezať zmenené
+:Overwrite With Resized
+sk:Prepísať zmeneným
+:Paste Image From Clipboard
+sk:Vložiť obrázok zo schránky
+:Resize Cropped
+sk:Zmeniť veľkosť orezaného
+:Save Resized
+sk:Uložiť zmenené
+:Crop Resized
+sr-rs:Исеци промењену величину
+:Overwrite With Resized
+sr-rs:Препиши промењеном величином
+:Paste Image From Clipboard
+sr-rs:Налепи слику из клипборда
+:Resize Cropped
+sr-rs:Промени величину исеченог
+:Save Resized
+sr-rs:Сачувај промењену величину
+:Crop Resized
+tw:裁切已調整大小
+:Overwrite With Resized
+tw:以調整大小覆寫
+:Paste Image From Clipboard
+tw:從剪貼簿貼上圖片
+:Resize Cropped
+tw:調整裁切大小
+:Save Resized
+tw:儲存已調整大小
+:Crop Resized
+az:Ölçüsü Dəyişdirilmiş Şəkli Kəs
+:Overwrite With Resized
+az:Ölçüsü Dəyişdirilmiş ilə Üzərinə Yaz
+:Paste Image From Clipboard
+az:Şəkli Mübadilə Buferindən Yapışdır
+:Resize Cropped
+az:Kəsilmiş Şəklin Ölçüsünü Dəyişdir
+:Save Resized
+az:Ölçüsü Dəyişdirilmiş Şəkli Saxla
+:Crop Resized
+by:Абрэзаць зменены памер
+:Overwrite With Resized
+by:Перазапісаць змененым памерам
+:Paste Image From Clipboard
+by:Уставіць выяву з буфера абмену
+:Resize Cropped
+by:Змяніць памер абрэзанага
+:Save Resized
+by:Захаваць змененым памерам
+:Crop Resized
+ca:Retallar redimensionat
+:Overwrite With Resized
+ca:Sobreescriure amb redimensionat
+:Paste Image From Clipboard
+ca:Enganxar imatge del porta-retalls
+:Resize Cropped
+ca:Redimensionar retallat
+:Save Resized
+ca:Desar redimensionat
+:Crop Resized
+cy:Tocio wedi'i Ailfeintio
+:Overwrite With Resized
+cy:Trosysgrifo gyda'r Un wedi'i Ailfeintio
+:Paste Image From Clipboard
+cy:Gludo Delwedd o'r Clipfwrdd
+:Resize Cropped
+cy:Ailfeintio wedi'i Docio
+:Save Resized
+cy:Cadw wedi'i Ailfeintio
+:Crop Resized
+cz:Oříznout změněnou velikost
+:Overwrite With Resized
+cz:Přepsat změněnou velikostí
+:Paste Image From Clipboard
+cz:Vložit obrázek ze schránky
+:Resize Cropped
+cz:Změnit velikost oříznutého
+:Save Resized
+cz:Uložit změněnou velikost
+:Crop Resized
+es:Recortar redimensionado
+:Overwrite With Resized
+es:Sobrescribir con redimensionado
+:Paste Image From Clipboard
+es:Pegar imagen desde portapapeles
+:Resize Cropped
+es:Redimensionar recortado
+:Save Resized
+es:Guardar redimensionado
+:Crop Resized
+fa:برش تغییر اندازه داده شده
+:Overwrite With Resized
+fa:بازنویسی با تغییر اندازه
+:Paste Image From Clipboard
+fa:چسباندن تصویر از کلیپ‌بورد
+:Resize Cropped
+fa:تغییر اندازه برش خورده
+:Save Resized
+fa:ذخیره تغییر اندازه داده شده
+:Crop Resized
+fi:Rajaa skaalattu
+:Overwrite With Resized
+fi:Korvaa skaalatulla
+:Paste Image From Clipboard
+fi:Liitä kuva leikepöydältä
+:Resize Cropped
+fi:Skaalaa rajattu
+:Save Resized
+fi:Tallenna skaalattu
+:Crop Resized
+fo:Skera støddbroytta
+:Overwrite With Resized
+fo:Yvurskriva við støddbroytta
+:Paste Image From Clipboard
+fo:Innrita mynd frá klemmuspjaldi
+:Resize Cropped
+fo:Støddbroyt skorið
+:Save Resized
+fo:Goym støddbroytta
+:Crop Resized
+fr:Recadrer redimensionné
+:Overwrite With Resized
+fr:Écraser avec redimensionné
+:Paste Image From Clipboard
+fr:Coller l'image depuis le presse-papiers
+:Resize Cropped
+fr:Redimensionner recadré
+:Save Resized
+fr:Enregistrer redimensionné
+:Crop Resized
+ga:Bearr Athraithe Méid
+:Overwrite With Resized
+ga:Forscríobh le hAthraigh Méid
+:Paste Image From Clipboard
+ga:Greamaigh Íomhá ón Ghearrthaisce
+:Resize Cropped
+ga:Athraigh Méid Bearrtha
+:Save Resized
+ga:Sábháil Athraithe Méid
+:Crop Resized
+gl:Recortar redimensionado
+:Overwrite With Resized
+gl:Sobrescribir con redimensionado
+:Paste Image From Clipboard
+gl:Pegar imaxe desde o portapapeis
+:Resize Cropped
+gl:Redimensionar recortado
+:Save Resized
+gl:Gardar redimensionado
+:Crop Resized
+he:חתוך את התמונה שגודלה שונה
+:Overwrite With Resized
+he:החלף בתמונה שגודלה שונה
+:Paste Image From Clipboard
+he:הדבק תמונה מלוח העריכה
+:Resize Cropped
+he:שנה גודל של תמונה חתוכה
+:Save Resized
+he:שמור תמונה שגודלה שונה
+:Crop Resized
+hu:Átméretezett kivágása
+:Overwrite With Resized
+hu:Felülírás átméretezett képpel
+:Paste Image From Clipboard
+hu:Kép beillesztése a vágólapról
+:Resize Cropped
+hu:Kivágott átméretezése
+:Save Resized
+hu:Átméretezett mentése
+:Crop Resized
+id:Pangkas yang Diubah Ukurannya
+:Overwrite With Resized
+id:Timpa dengan yang Diubah Ukurannya
+:Paste Image From Clipboard
+id:Tempel Gambar dari Papan Klip
+:Resize Cropped
+id:Ubah Ukuran yang Dipangkas
+:Save Resized
+id:Simpan yang Diubah Ukurannya
+:Crop Resized
+it:Ritaglia ridimensionata
+:Overwrite With Resized
+it:Sovrascrivi con ridimensionata
+:Paste Image From Clipboard
+it:Incolla immagine dagli appunti
+:Resize Cropped
+it:Ridimensiona ritagliata
+:Save Resized
+it:Salva ridimensionata
+:Crop Resized
+kr:크기 조정된 이미지 자르기
+:Overwrite With Resized
+kr:크기 조정된 이미지로 덮어쓰기
+:Paste Image From Clipboard
+kr:클립보드에서 이미지 붙여넣기
+:Resize Cropped
+kr:잘라낸 이미지 크기 조정
+:Save Resized
+kr:크기 조정된 이미지 저장
+:Crop Resized
+lv:Apgriezt mainīta izmēra
+:Overwrite With Resized
+lv:Pārrakstīt ar mainīta izmēra
+:Paste Image From Clipboard
+lv:Ielīmēt attēlu no starpliktuves
+:Resize Cropped
+lv:Mainīt apgrieztā izmēru
+:Save Resized
+lv:Saglabāt mainīta izmēra
+:Crop Resized
+my:အရွယ်အစားပြောင်းထားသည်ကို ဖြတ်တောက်ရန်
+:Overwrite With Resized
+my:အရွယ်အစားပြောင်းထားသည်ဖြင့် ထပ်ရေးရန်
+:Paste Image From Clipboard
+my:ကလစ်ဘုတ်မှ ပုံကို ကူးထည့်ရန်
+:Resize Cropped
+my:ဖြတ်တောက်ထားသည်ကို အရွယ်အစားပြောင်းရန်
+:Save Resized
+my:အရွယ်အစားပြောင်းထားသည်ကို သိမ်းဆည်းရန်
+:Crop Resized
+pt:Cortar Redimensionado
+:Overwrite With Resized
+pt:Sobrescrever Com Redimensionado
+:Paste Image From Clipboard
+pt:Colar Imagem da Área de Transferência
+:Resize Cropped
+pt:Redimensionar Cortado
+:Save Resized
+pt:Salvar Redimensionado
+:Crop Resized
+ro:Decupează redimensionată
+:Overwrite With Resized
+ro:Suprascrie cu redimensionată
+:Paste Image From Clipboard
+ro:Lipește imagine din clipboard
+:Resize Cropped
+ro:Redimensionează decupată
+:Save Resized
+ro:Salvează redimensionată
+:Crop Resized
+sat:ᱠᱨᱚᱯ ᱨᱤᱥᱟᱭᱤᱡᱽ
+:Overwrite With Resized
+sat:ᱨᱤᱥᱟᱭᱤᱡᱽ ᱥᱟᱶ ᱚᱵᱷᱟᱨᱨᱟᱭᱤᱴ
+:Paste Image From Clipboard
+sat:ᱠᱞᱤᱯᱵᱚᱨᱰ ᱠᱷᱚᱱ ᱪᱤᱛᱟᱹᱨ ᱯᱮᱥᱴ ᱢᱮ
+:Resize Cropped
+sat:ᱠᱨᱚᱯ ᱠᱟᱱᱟ ᱨᱤᱥᱟᱭᱤᱡᱽ
+:Save Resized
+sat:ᱨᱤᱥᱟᱭᱤᱡᱽ ᱥᱟᱺᱪᱟᱣ ᱢᱮ
+:Crop Resized
+sl:Obreži spremenjeno velikost
+:Overwrite With Resized
+sl:Prepiši s spremenjeno velikostjo
+:Paste Image From Clipboard
+sl:Prilepi sliko iz odložišča
+:Resize Cropped
+sl:Spremeni velikost obrezanega
+:Save Resized
+sl:Shrani spremenjeno velikost
+:Crop Resized
+sv:Beskär storleksändrad
+:Overwrite With Resized
+sv:Skriv över med storleksändrad
+:Paste Image From Clipboard
+sv:Klistra in bild från urklipp
+:Resize Cropped
+sv:Ändra storlek på beskuren
+:Save Resized
+sv:Spara storleksändrad
+:Crop Resized
+ta:செதுக்கப்பட்டதை மறுஅளவிடு
+:Overwrite With Resized
+ta:மறுஅளவிடப்பட்டதால் மேலெழுது
+:Paste Image From Clipboard
+ta:ஒட்டுப்பலகையிலிருந்து படத்தை ஒட்டு
+:Resize Cropped
+ta:செதுக்கியதை மறுஅளவிடு
+:Save Resized
+ta:மறுஅளவிடப்பட்டதை சேமி
+:Crop Resized
+tr:Yeniden Boyutlandırılmışı Kırp
+:Overwrite With Resized
+tr:Yeniden Boyutlandırılmış ile Üzerine Yaz
+:Paste Image From Clipboard
+tr:Panodan Resim Yapıştır
+:Resize Cropped
+tr:Kırpılmışı Yeniden Boyutlandır
+:Save Resized
+tr:Yeniden Boyutlandırılmışı Kaydet
+:Crop Resized
+uz:O'lcham o'zgartirilganini kesish
+:Overwrite With Resized
+uz:O'lcham o'zgartirilgan bilan almashtirish
+:Paste Image From Clipboard
+uz:Klipborddan rasmni joylashtirish
+:Resize Cropped
+uz:Kesilgan rasmni o'lchamini o'zgartirish
+:Save Resized
+uz:O'lcham o'zgartirilganini saqlash
+:Crop Resized
+af:Sny Vergrote
+:Overwrite With Resized
+af:Oorskryf Met Vergrote
+:Paste Image From Clipboard
+af:Plak Beeld Vanaf Knipbord
+:Resize Cropped
+af:Verander Grootte Gesny
+:Save Resized
+af:Stoor Vergrote
+:Crop Resized
+bg:Изрязване на преоразмерено
+:Overwrite With Resized
+bg:Презапиши с преоразмерено
+:Paste Image From Clipboard
+bg:Постави изображение от клипборда
+:Resize Cropped
+bg:Преоразмери изрязаното
+:Save Resized
+bg:Запази преоразмереното
+:Crop Resized
+bn:আকার পরিবর্তিত ক্রপ করুন
+:Overwrite With Resized
+bn:আকার পরিবর্তিত দিয়ে প্রতিস্থাপন করুন
+:Paste Image From Clipboard
+bn:ক্লিপবোর্ড থেকে ছবি পেস্ট করুন
+:Resize Cropped
+bn:ক্রপ করা আকার পরিবর্তন করুন
+:Save Resized
+bn:আকার পরিবর্তিত সংরক্ষণ করুন
+:Crop Resized
+bs:Obreži promijenjene veličine
+:Overwrite With Resized
+bs:Prepiši sa promijenjenom veličinom
+:Paste Image From Clipboard
+bs:Zalijepi sliku iz međuspremnika
+:Resize Cropped
+bs:Promijeni veličinu obrezanog
+:Save Resized
+bs:Sačuvaj promijenjene veličine
+:Crop Resized
+ca-xv:Retalla redimensionat
+:Overwrite With Resized
+ca-xv:Sobreescriu amb redimensionat
+:Paste Image From Clipboard
+ca-xv:Enganxa imatge del porta-retalls
+:Resize Cropped
+ca-xv:Redimensiona retallat
+:Save Resized
+ca-xv:Desa redimensionat
+:Crop Resized
+dk:Beskær tilpasset
+:Overwrite With Resized
+dk:Overskriv med tilpasset
+:Paste Image From Clipboard
+dk:Indsæt billede fra udklipsholder
+:Resize Cropped
+dk:Tilpas beskåret
+:Save Resized
+dk:Gem tilpasset
+:Crop Resized
+et:Kärbi suurust muudetud
+:Overwrite With Resized
+et:Kirjuta üle suurust muudetuga
+:Paste Image From Clipboard
+et:Kleebi pilt lõikelaual
+:Resize Cropped
+et:Muuda kärbitud suurust
+:Save Resized
+et:Salvesta suurust muudetud
+:Crop Resized
+fy-nl:Bygesnien ferskaald
+:Overwrite With Resized
+fy-nl:Oerskriuwe mei ferskaald
+:Paste Image From Clipboard
+fy-nl:Ofbylding plakke fan klamboerd
+:Resize Cropped
+fy-nl:Bygesnien ferskalje
+:Save Resized
+fy-nl:Ferskaald bewarje
+:Crop Resized
+hr:Obrezana promijenjena veličina
+:Overwrite With Resized
+hr:Prepiši s promijenjenom veličinom
+:Paste Image From Clipboard
+hr:Zalijepi sliku iz međuspremnika
+:Resize Cropped
+hr:Promijeni veličinu obrezanog
+:Save Resized
+hr:Spremi promijenjenu veličinu
+:Crop Resized
+jv:Potong Sing Wis Diowahi Ukurane
+:Overwrite With Resized
+jv:Timpa Nganggo Sing Wis Diowahi Ukurane
+:Paste Image From Clipboard
+jv:Tempel Gambar Saka Clipboard
+:Resize Cropped
+jv:Owahi Ukuran Sing Wis Dipotong
+:Save Resized
+jv:Simpen Sing Wis Diowahi Ukurane
+:Crop Resized
+ka:ზომის შეცვლილის ამოჭრა
+:Overwrite With Resized
+ka:ზომის შეცვლილით გადაწერა
+:Paste Image From Clipboard
+ka:გამოსახულების ჩასმა ბუფერიდან
+:Resize Cropped
+ka:ამოჭრილის ზომის შეცვლა
+:Save Resized
+ka:ზომის შეცვლილის შენახვა
+:Crop Resized
+ku:Qirpandina Mezinahiyayî
+:Overwrite With Resized
+ku:Li Ser Binivîsîne bi Mezinahiyayî
+:Paste Image From Clipboard
+ku:Wêne ji Clipboard Pêve Bike
+:Resize Cropped
+ku:Mezinahiya Qirpandî
+:Save Resized
+ku:Mezinahiyayî Tomar Bike
+:Crop Resized
+kw:Skav Dashevesys
+:Overwrite With Resized
+kw:Gorskrifa Gans Dashevesys
+:Paste Image From Clipboard
+kw:Pesta Skeusen Dhyworth Klyppforgh
+:Resize Cropped
+kw:Dasheves Skavys
+:Save Resized
+kw:Gwitha Dashevesys
+:Crop Resized
+lt:Apkarpyti pakeisto dydžio
+:Overwrite With Resized
+lt:Perrašyti pakeisto dydžio
+:Paste Image From Clipboard
+lt:Įklijuoti vaizdą iš mainų srities
+:Resize Cropped
+lt:Keisti apkarpyto dydį
+:Save Resized
+lt:Išsaugoti pakeisto dydžio
+:Crop Resized
+mk:Исечи со промена на големина
+:Overwrite With Resized
+mk:Препиши со промена на големина
+:Paste Image From Clipboard
+mk:Залепи слика од клипборд
+:Resize Cropped
+mk:Промени големина на исечено
+:Save Resized
+mk:Зачувај со промена на големина
+:Crop Resized
+mm:အရွယ်အစားပြောင်းထားသည်ကို ဖြတ်တောက်ရန်
+:Overwrite With Resized
+mm:အရွယ်အစားပြောင်းထားသည်ဖြင့် အစားထိုးရန်
+:Paste Image From Clipboard
+mm:ကလစ်ဘုတ်မှ ပုံကို ကူးချရန်
+:Resize Cropped
+mm:ဖြတ်တောက်ထားသည်ကို အရွယ်အစားပြောင်းရန်
+:Save Resized
+mm:အရွယ်အစားပြောင်းထားသည်ကို သိမ်းဆည်းရန်
+:Crop Resized
+ne:रिसाइज गरिएको क्रप गर्नुहोस्
+:Overwrite With Resized
+ne:रिसाइज गरिएकोसँग अधिलेखन गर्नुहोस्
+:Paste Image From Clipboard
+ne:क्लिपबोर्डबाट छवि टाँस्नुहोस्
+:Resize Cropped
+ne:क्रप गरिएको रिसाइज गर्नुहोस्
+:Save Resized
+ne:रिसाइज गरिएको बचत गर्नुहोस्
+:Crop Resized
+nn:Beskjer skalert
+:Overwrite With Resized
+nn:Overskriv med skalert
+:Paste Image From Clipboard
+nn:Lim inn bilete frå utklippstavle
+:Resize Cropped
+nn:Skaler beskoren
+:Save Resized
+nn:Lagre skalert
+:Crop Resized
+no:Beskjær skalert
+:Overwrite With Resized
+no:Overskriv med skalert
+:Paste Image From Clipboard
+no:Lim inn bilde fra utklippstavle
+:Resize Cropped
+no:Skaler beskåret
+:Save Resized
+no:Lagre skalert
+:Crop Resized
+pa:ਮੁੜ-ਆਕਾਰ ਕੀਤਾ ਕਰੌਪ ਕਰੋ
+:Overwrite With Resized
+pa:ਮੁੜ-ਆਕਾਰ ਕੀਤੇ ਨਾਲ ਓਵਰਰਾਈਟ ਕਰੋ
+:Paste Image From Clipboard
+pa:ਕਲਿੱਪਬੋਰਡ ਤੋਂ ਚਿੱਤਰ ਪੇਸਟ ਕਰੋ
+:Resize Cropped
+pa:ਕਰੌਪ ਕੀਤੇ ਨੂੰ ਮੁੜ-ਆਕਾਰ ਦਿਓ
+:Save Resized
+pa:ਮੁੜ-ਆਕਾਰ ਕੀਤਾ ਸੁਰੱਖਿਅਤ ਕਰੋ
+:Crop Resized
+si:ප්‍රමාණ වෙනස් කළ දෑ කපන්න
+:Overwrite With Resized
+si:ප්‍රමාණ වෙනස් කළ දෑ මගින් උඩින් ලියන්න
+:Paste Image From Clipboard
+si:පසුරු පුවරුවෙන් රූපය අලවන්න
+:Resize Cropped
+si:කපන ලද දෑ ප්‍රමාණ වෙනස් කරන්න
+:Save Resized
+si:ප්‍රමාණ වෙනස් කළ දෑ සුරකින්න
+:Crop Resized
+sn:Cheka Yakachinjwa Saizi
+:Overwrite With Resized
+sn:Nyora Pamusoro Neye Yakachinjwa Saizi
+:Paste Image From Clipboard
+sn:Namatidza Mufananidzo Kubva Ku Clipboard
+:Resize Cropped
+sn:Chinja Saizi Ye Yakachekwa
+:Save Resized
+sn:Chengetedza Yakachinjwa Saizi
+:Crop Resized
+sp-rs:Обрежи промењену величину
+:Overwrite With Resized
+sp-rs:Препиши промењеном величином
+:Paste Image From Clipboard
+sp-rs:Налепи слику из клипборда
+:Resize Cropped
+sp-rs:Промени величину обрезаног
+:Save Resized
+sp-rs:Сачувај промењену величину
+:Crop Resized
+sq:Prit të Ndryshuar Madhësinë
+:Overwrite With Resized
+sq:Mbishkruaj me të Ndryshuar Madhësinë
+:Paste Image From Clipboard
+sq:Ngjit Imazh nga Clipboard
+:Resize Cropped
+sq:Ndrysho Madhësinë e Pritës
+:Save Resized
+sq:Ruaj të Ndryshuar Madhësinë
+:Crop Resized
+th:ครอบตัดที่ปรับขนาดแล้ว
+:Overwrite With Resized
+th:เขียนทับด้วยภาพที่ปรับขนาดแล้ว
+:Paste Image From Clipboard
+th:วางภาพจากคลิปบอร์ด
+:Resize Cropped
+th:ปรับขนาดที่ครอบตัดแล้ว
+:Save Resized
+th:บันทึกที่ปรับขนาดแล้ว
+:Crop Resized
+tl:I-crop ang Binago ang Laki
+:Overwrite With Resized
+tl:Palitan ng Binago ang Laki
+:Paste Image From Clipboard
+tl:Idikit ang Larawan Mula sa Clipboard
+:Resize Cropped
+tl:Baguhin ang Laki ng Naka-crop
+:Save Resized
+tl:I-save ang Binago ang Laki
+:Crop Resized
+uk:Обрізати змінене
+:Overwrite With Resized
+uk:Перезаписати зміненим
+:Paste Image From Clipboard
+uk:Вставити зображення з буфера обміну
+:Resize Cropped
+uk:Змінити розмір обрізаного
+:Save Resized
+uk:Зберегти змінене
+:Crop Resized
+vn:Cắt ảnh đã thay đổi kích thước
+:Overwrite With Resized
+vn:Ghi đè bằng ảnh đã thay đổi kích thước
+:Paste Image From Clipboard
+vn:Dán ảnh từ bộ nhớ tạm
+:Resize Cropped
+vn:Thay đổi kích thước ảnh đã cắt
+:Save Resized
+vn:Lưu ảnh đã thay đổi kích thước

@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-e5c473da0ff283b1afd983c9b7563ede1620961d
+bed18c8eb9b54b79126b7b55b5e56019dd651e5c
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -791,6 +791,8 @@ uk:Скопіювати до буфера обміну
 uz:Buferga nusxalash
 vn:&Lưu Sao Chép
 :&Crop
+br:&Cortar
+pl:Przy&tnij
 :&Discard changes
 am:&Մերժել
 ar:أس&تبعد التغييرات
@@ -1618,6 +1620,8 @@ uk:Виділити
 uz:Ajratib ko‘rsatish
 vn:&Nổi Bật
 :&Image
+br:&Imagem
+pl:&Obraz
 :&Keyboard Shortcuts
 am:&Հիմնաբառի դյուրանցումներ
 ar:اختصارات &لوحة المفاتيح
@@ -2862,6 +2866,8 @@ uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
 :&Resize
+br:&Redimensionar
+pl:Zmień &rozmiar
 :&Save As...
 am:&Պահել որպես
 ar:&حفظ باسم...
@@ -5767,6 +5773,8 @@ uk:Байт
 uz:Bayt
 vn:Bytes
 :C&opy To Clipboard
+br:C&opiar para a Área de Transferência
+pl:Kopiuj do sc&howka
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -9019,6 +9027,9 @@ uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
 :Crop Image
+br:Cortar Imagem
+pl:Przytnij obraz
+:Crop Resized
 :Ctrl+Tab to navigate
 br:Ctrl+Tab pra navegar
 co:Ctrl+Tabul. per navigà
@@ -13067,6 +13078,8 @@ uk:GB
 uz:GB
 vn:GB
 :Getting fonts information...
+br:Obtendo informações de fontes...
+pl:Pobieranie informacji o czcionkach...
 :Go to Page...
 am:Անցնել էջին...
 br:Ir para a Página...
@@ -17045,6 +17058,9 @@ ru:Параметры...
 sk:Možnosti…
 tw:選項…
 :Overwrite With Cropped
+br:Sobregravar com Cortado
+pl:Zastąp przyciętym
+:Overwrite With Resized
 :P&roperties
 am:Հ&ատկություններ
 ar:الخصائص
@@ -17905,6 +17921,7 @@ tw:PalmDoc 文件
 uk:Документи PalmDoc
 uz:PalmDoc ho'jjatlari
 vn:Tài liệu PalmDoc
+:Paste Image From Clipboard
 :Pin Selected Document
 am:Ամրացնել ընտրված փաստաթուղթը
 br:Fixar Documento Selecionado
@@ -19532,7 +19549,10 @@ nl:Heropen Laatst Gesloten
 pl:Otwórz ponownie ostatnio zamknięty
 sk:Znovu otvoriť naposledy zatvorené
 tw:重新開啟上次關閉的內容
+:Resize Cropped
 :Resize Image
+br:Redimensionar Imagem
+pl:Zmień rozmiar obrazu
 :Rotate &Left
 am:Պտտել &ձախ
 ar:دوّ&ر يسارا
@@ -19942,6 +19962,8 @@ tw:儲存附件...
 uk:Зберегти вкладення...
 uz:Ilovani saqlash...
 :Save Cropped
+br:Salvar Cortado
+pl:Zapisz przycięty
 :Save Embedded File...
 am:Պահել ներկառուցված ֆայլը...
 ar:حفظ الملف المدمج
@@ -20010,6 +20032,7 @@ pl:Zapisz plik jako...
 ru:Сохранить файл как...
 sk:Uložiť súbor ako…
 tw:將檔案另存新檔…
+:Save Resized
 :Save S&hortcut...
 am:Պահել դ&յուրանցումը...
 ar:احفظ الا&ختصار...

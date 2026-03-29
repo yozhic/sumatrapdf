@@ -206,7 +206,7 @@ static void UpdateSaveButtonText(ImageEditWindow* ew) {
     if (ew->mode == ImageEditMode::Crop) {
         text = file::Exists(dest) ? _TRA("Overwrite With Cropped") : _TRA("Save Cropped");
     } else {
-        text = file::Exists(dest) ? "Overwrite With Resized" : "Save Resized";
+        text = file::Exists(dest) ? _TRA("Overwrite With Resized") : _TRA("Save Resized");
     }
     ew->btnSave->SetText(text);
     // re-layout since button width may have changed
@@ -786,14 +786,14 @@ static void OnSave(ImageEditWindow* ew) {
         Gdiplus::Rect srcRect(ew->cropX, ew->cropY, ew->cropW, ew->cropH);
         result = ew->srcBitmap->Clone(srcRect, ew->srcBitmap->GetPixelFormat());
         if (!result) {
-            MessageBoxWarning(ew->hwnd, "Failed to create cropped image", "Crop Image");
+            MessageBoxWarning(ew->hwnd, "Failed to create cropped image", _TRA("Crop Image"));
             return;
         }
     } else {
         // create resized bitmap
         result = new Bitmap(ew->newW, ew->newH, ew->srcBitmap->GetPixelFormat());
         if (!result) {
-            MessageBoxWarning(ew->hwnd, "Failed to create resized image", "Resize Image");
+            MessageBoxWarning(ew->hwnd, "Failed to create resized image", _TRA("Resize Image"));
             return;
         }
         Graphics g(result);
@@ -811,7 +811,7 @@ static void OnSave(ImageEditWindow* ew) {
     if (status != Ok) {
         const char* errMsg =
             (ew->mode == ImageEditMode::Crop) ? "Failed to save cropped image" : "Failed to save resized image";
-        const char* title = (ew->mode == ImageEditMode::Crop) ? _TRA("Crop Image") : "Resize Image";
+        const char* title = (ew->mode == ImageEditMode::Crop) ? _TRA("Crop Image") : _TRA("Resize Image");
         MessageBoxWarning(ew->hwnd, errMsg, title);
         return;
     }
@@ -861,8 +861,8 @@ static void OnSwitchMode(ImageEditWindow* ew) {
         ew->mode = ImageEditMode::Resize;
         ew->newW = ew->imgW;
         ew->newH = ew->imgH;
-        SetWindowTextW(ew->hwnd, L"Resize Image");
-        ew->btnSwitchMode->SetText("Crop Resized");
+        HwndSetText(ew->hwnd, _TRA("Resize Image"));
+        ew->btnSwitchMode->SetText(_TRA("Crop Resized"));
     } else {
         // create new bitmap at the resized dimensions
         if (ew->newW > 0 && ew->newH > 0 && (ew->newW != ew->imgW || ew->newH != ew->imgH)) {
@@ -880,8 +880,8 @@ static void OnSwitchMode(ImageEditWindow* ew) {
         ew->cropY = 0;
         ew->cropW = ew->imgW;
         ew->cropH = ew->imgH;
-        SetWindowTextW(ew->hwnd, L"Crop Image");
-        ew->btnSwitchMode->SetText("Resize Cropped");
+        HwndSetText(ew->hwnd, _TRA("Crop Image"));
+        ew->btnSwitchMode->SetText(_TRA("Resize Cropped"));
     }
     UpdateSaveButtonText(ew);
     UpdateInfoLabel(ew);
