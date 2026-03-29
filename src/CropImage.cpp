@@ -37,6 +37,7 @@ using Gdiplus::Status;
 
 constexpr const WCHAR* kCropImageWinClassName = L"SUMATRA_PDF_CROP_IMAGE";
 
+constexpr int kMinWindowWidth = 640;
 constexpr int kImagePadding = 8;
 constexpr int kResizeEdgeThreshold = 2;
 constexpr int kControlAreaDy = 100;
@@ -755,6 +756,9 @@ void ShowCropImageWindow(MainWindow* win) {
     RECT rc = {0, 0, wantW, wantH};
     AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
     int winW = rc.right - rc.left;
+    if (winW < kMinWindowWidth) {
+        winW = kMinWindowWidth;
+    }
     int winH = rc.bottom - rc.top;
     // clamp to screen
     HMONITOR hMon = MonitorFromWindow(win->hwndFrame, MONITOR_DEFAULTTONEAREST);
