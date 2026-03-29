@@ -7496,12 +7496,6 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;
         gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
-        // clean up conflicting window styles that confuse focus/activation
-        // when our window is reparented as WS_CHILD
-        long ws = GetWindowLong(hwnd, GWL_STYLE);
-        ws &= ~(WS_POPUP | WS_BORDER | WS_CAPTION | WS_THICKFRAME);
-        ws |= WS_CHILD;
-        SetWindowLong(hwnd, GWL_STYLE, ws);
         SetTabsInTitlebar(win, false);
         DestroyMenuBarRebar(win);
         SetMenu(hwnd, nullptr);
