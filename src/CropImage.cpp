@@ -531,8 +531,18 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             return 0;
         }
 
-        case WM_ERASEBKGND:
+        case WM_ERASEBKGND: {
+            cw = FindCropWindowByHwnd(hwnd);
+            if (cw) {
+                // paint control area background, skip image area (double-buffered)
+                HDC hdc = (HDC)wp;
+                RECT crc;
+                GetClientRect(hwnd, &crc);
+                RECT ctrlRc = {0, cw->imgAreaH, crc.right, crc.bottom};
+                FillRect(hdc, &ctrlRc, GetSysColorBrush(COLOR_BTNFACE));
+            }
             return 1;
+        }
 
         case WM_CTLCOLORSTATIC: {
             HDC hdcStatic = (HDC)wp;
