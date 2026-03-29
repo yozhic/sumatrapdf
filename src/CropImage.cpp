@@ -812,7 +812,8 @@ void ShowCropImageWindow(MainWindow* win) {
     SendMessageW(cw->hwndPathLabel, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
 
     // row 2: dest edit + browse
-    cw->hwndDestEdit = CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(filePath),
+    TempStr destPath = MakeUniqueFilePathTemp(filePath);
+    cw->hwndDestEdit = CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath),
                                        WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 0, 0, 0, 0, hwnd, nullptr, h, nullptr);
     SendMessageW(cw->hwndDestEdit, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
 

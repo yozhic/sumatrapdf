@@ -45,6 +45,7 @@ Type GetType(const char* path);
 
 TempStr GetTempFilePathTemp(const char* filePrefix = nullptr);
 TempStr GetPathInExeDirTemp(const char* fileName = nullptr);
+TempStr MakeUniqueFilePathTemp(const char* path);
 
 namespace file {
 

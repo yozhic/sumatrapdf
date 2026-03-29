@@ -132,6 +132,8 @@ static i32 gCommandsNoActivate[] = {
     CmdNewWindow,
     CmdDuplicateInNewWindow,
     CmdShowPdfInfo,
+    CmdListPrinters,
+    CmdCropImage,
     // TOOD: probably more
     0,
 };
