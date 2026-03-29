@@ -902,9 +902,22 @@ void TakeScreenshots() {
     SetFocus(hwnd);
 }
 
+static bool IsOtherSumatraProcessRunning() {
+    DWORD myPid = GetCurrentProcessId();
+    HWND hwnd = nullptr;
+    while ((hwnd = FindWindowEx(HWND_DESKTOP, hwnd, L"SUMATRA_PDF_FRAME", nullptr)) != nullptr) {
+        DWORD pid;
+        GetWindowThreadProcessId(hwnd, &pid);
+        if (pid != myPid) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void RegisterScreenshotHotkey(HWND hwnd) {
     BOOL ok = RegisterHotKey(hwnd, kScreenshotHotkeyId, 0, VK_SNAPSHOT);
-    if (!ok) {
+    if (!ok && !IsOtherSumatraProcessRunning()) {
         MaybeDelayedWarningNotification("Couldn't register PrtScr global hotkey for taking screenshots");
     }
 }
