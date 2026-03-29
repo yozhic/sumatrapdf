@@ -138,9 +138,6 @@
     <ClInclude Include="..\src\CrashHandler.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\CropImage.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\DisplayMode.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -198,6 +195,9 @@
     <ClInclude Include="..\src\HtmlFormatter.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ImageSaveCropResize.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\Installer.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -241,9 +241,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\RenderCache.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ResizeImage.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scratch.h">
@@ -437,9 +434,6 @@
     <ClCompile Include="..\src\CrashHandler.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\CropImage.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\DisplayMode.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -509,6 +503,9 @@
     <ClCompile Include="..\src\HtmlFormatter.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ImageSaveCropResize.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Installer.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -558,9 +555,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\RenderCache.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\ResizeImage.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scratch.cpp">

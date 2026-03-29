@@ -74,8 +74,7 @@
 #include "SearchAndDDE.h"
 #include "Selection.h"
 #include "Screenshot.h"
-#include "CropImage.h"
-#include "ResizeImage.h"
+#include "ImageSaveCropResize.h"
 #include "StressTesting.h"
 #include "HomePage.h"
 #include "OverlayScrollbar.h"
@@ -5823,11 +5822,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdCropImage:
-            ShowCropImageWindow(win);
+            ShowImageEditWindow(win, ImageEditMode::Crop);
             break;
 
         case CmdResizeImage:
-            ShowResizeImageWindow(win);
+            ShowImageEditWindow(win, ImageEditMode::Resize);
             break;
 
         case CmdListPrinters: {
