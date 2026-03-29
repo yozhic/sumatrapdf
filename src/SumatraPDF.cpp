@@ -762,7 +762,11 @@ void ControllerCallbackHandler::RenderThumbnail(DisplayModel* dm, Size size, con
     }
     pageRect = engine->Transform(pageRect, 1, 1.0f, 0, true);
 
+    // always render thumbnails with anti-aliasing for quality
+    bool savedAntiAlias = engine->disableAntiAlias;
+    engine->disableAntiAlias = false;
     gRenderCache->Render(dm, 1, 0, zoom, pageRect, *saveThumbnail);
+    engine->disableAntiAlias = savedAntiAlias;
 }
 
 struct CreateThumbnailData {
