@@ -47,6 +47,24 @@ constexpr int kPathLabelRowDy = 16 + 6; // label height + kRowPadding
 constexpr int kRowPadding = 6;
 constexpr int kButtonPadding = 8;
 
+struct ImageFormat {
+    const char* label;
+    const WCHAR* mime;
+    const char* ext;
+};
+
+// clang-format off
+static ImageFormat gImageFormats[] = {
+    {"PNG",  L"image/png",  ".png"},
+    {"JPEG", L"image/jpeg", ".jpg"},
+    {"BMP",  L"image/bmp",  ".bmp"},
+    {"GIF",  L"image/gif",  ".gif"},
+    {"TIFF", L"image/tiff", ".tif"},
+};
+// clang-format on
+
+constexpr int kDefaultFormatIdx = 0; // PNG
+
 enum class DragEdge {
     None,
     Left,
@@ -76,6 +94,7 @@ struct ImageEditWindow {
     Button* btnSave = nullptr;
     Button* btnSwitchMode = nullptr;
     Button* btnSwitchMode2 = nullptr; // second switch button for Save mode
+    DropDown* dropFormat = nullptr;
 
     // source image
     char* filePath = nullptr;
@@ -124,6 +143,7 @@ struct ImageEditWindow {
         delete btnSave;
         delete btnSwitchMode;
         delete btnSwitchMode2;
+        delete dropFormat;
     }
 };
 
@@ -201,6 +221,34 @@ static int ImageToDisplayH(ImageEditWindow* ew, int ih) {
 }
 
 static void LayoutControls(ImageEditWindow* ew);
+
+static int GetSelectedFormatIdx(ImageEditWindow* ew) {
+    if (!ew->dropFormat) {
+        return kDefaultFormatIdx;
+    }
+    int idx = ew->dropFormat->GetCurrentSelection();
+    if (idx < 0 || idx >= (int)dimof(gImageFormats)) {
+        return kDefaultFormatIdx;
+    }
+    return idx;
+}
+
+static void OnFormatChanged(ImageEditWindow* ew) {
+    int idx = GetSelectedFormatIdx(ew);
+    const char* newExt = gImageFormats[idx].ext;
+    // update the extension in the dest path
+    WCHAR destW[MAX_PATH + 1]{};
+    GetWindowTextW(ew->hwndDestEdit, destW, MAX_PATH);
+    TempStr dest = ToUtf8Temp(destW);
+    if (!str::IsEmpty(dest)) {
+        TempStr oldExt = path::GetExtTemp(dest);
+        int baseLen = str::Leni(dest) - str::Leni(oldExt);
+        TempStr base = str::DupTemp(dest, baseLen);
+        TempStr newDest = str::FormatTemp("%s%s", base, newExt);
+        SetWindowTextW(ew->hwndDestEdit, ToWStrTemp(newDest));
+    }
+    SetFocus(ew->hwnd);
+}
 
 static void UpdateSaveButtonText(ImageEditWindow* ew) {
     WCHAR destW[MAX_PATH + 1]{};
@@ -692,7 +740,7 @@ static void LayoutControls(ImageEditWindow* ew) {
 
     if (ew->btnSave && ew->btnCancel) {
         int bx = cRc.dx - kButtonPadding;
-        // right-to-left: Cancel, SwitchMode2, SwitchMode, Save
+        // right-to-left: Cancel, SwitchMode2, SwitchMode, Format, Save
         Size szCancel = ew->btnCancel->GetIdealSize();
         bx -= szCancel.dx;
         ew->btnCancel->SetBounds({bx, y, szCancel.dx, szCancel.dy});
@@ -705,6 +753,13 @@ static void LayoutControls(ImageEditWindow* ew) {
             Size szSwitch = ew->btnSwitchMode->GetIdealSize();
             bx -= szSwitch.dx + 4;
             ew->btnSwitchMode->SetBounds({bx, y, szSwitch.dx, szSwitch.dy});
+        }
+        if (ew->dropFormat) {
+            Size szDrop = ew->dropFormat->GetIdealSize();
+            bx -= szDrop.dx + 4;
+            // vertically center dropdown with buttons
+            int dropY = y + (szCancel.dy - szDrop.dy) / 2;
+            ew->dropFormat->SetBounds({bx, dropY, szDrop.dx, szDrop.dy});
         }
         Size szSave = ew->btnSave->GetIdealSize();
         bx -= szSave.dx + 4;
@@ -736,65 +791,6 @@ static void OnBrowse(ImageEditWindow* ew) {
     }
 }
 
-static bool IsKnownImageExt(const char* ext) {
-    const char* exts[] = {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".tif"};
-    for (auto e : exts) {
-        if (str::EqI(ext, e)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-static const WCHAR* GetEncoderMimeForExt(const char* ext) {
-    if (str::EqI(ext, ".png")) {
-        return L"image/png";
-    }
-    if (str::EqI(ext, ".jpg") || str::EqI(ext, ".jpeg")) {
-        return L"image/jpeg";
-    }
-    if (str::EqI(ext, ".bmp")) {
-        return L"image/bmp";
-    }
-    if (str::EqI(ext, ".gif")) {
-        return L"image/gif";
-    }
-    if (str::EqI(ext, ".tiff") || str::EqI(ext, ".tif")) {
-        return L"image/tiff";
-    }
-    // default to PNG
-    return L"image/png";
-}
-
-// Get the file extension that matches the source image format.
-// Returns the source extension if it's a known image format, otherwise ".png".
-static const char* GetMatchingExt(const char* srcExt) {
-    if (IsKnownImageExt(srcExt)) {
-        return srcExt;
-    }
-    return ".png";
-}
-
-// Ensure dest path has an extension matching a supported image format.
-// If the extension is unknown, replace it (or append) with one derived from the source file.
-static TempStr EnsureImageExtTemp(const char* dest, const char* srcFilePath) {
-    TempStr destExt = path::GetExtTemp(dest);
-    if (IsKnownImageExt(destExt)) {
-        return str::DupTemp(dest);
-    }
-    // use source file's extension if it's known, otherwise default to .png
-    TempStr srcExt = path::GetExtTemp(srcFilePath);
-    const char* ext = GetMatchingExt(srcExt);
-    if (str::IsEmpty(destExt)) {
-        // no extension at all - append
-        return str::FormatTemp("%s%s", dest, ext);
-    }
-    // has an unrecognized extension - replace it
-    int baseLen = str::Leni(dest) - str::Leni(destExt);
-    TempStr base = str::DupTemp(dest, baseLen);
-    return str::FormatTemp("%s%s", base, ext);
-}
-
 static void OnSave(ImageEditWindow* ew) {
     if (!ew->srcBitmap) {
         return;
@@ -813,8 +809,18 @@ static void OnSave(ImageEditWindow* ew) {
         return;
     }
 
-    // ensure the destination has a valid image extension
-    TempStr dest = EnsureImageExtTemp(rawDest, ew->filePath);
+    // ensure extension matches selected format
+    int fmtIdx = GetSelectedFormatIdx(ew);
+    const char* fmtExt = gImageFormats[fmtIdx].ext;
+    TempStr destExt = path::GetExtTemp(rawDest);
+    TempStr dest;
+    if (str::EqI(destExt, fmtExt)) {
+        dest = str::DupTemp(rawDest);
+    } else {
+        int baseLen = str::Leni(rawDest) - str::Leni(destExt);
+        TempStr base = str::DupTemp(rawDest, baseLen);
+        dest = str::FormatTemp("%s%s", base, fmtExt);
+    }
 
     Bitmap* result = nullptr;
     if (ew->mode == ImageEditMode::Save) {
@@ -844,8 +850,7 @@ static void OnSave(ImageEditWindow* ew) {
         g.DrawImage(ew->srcBitmap, 0, 0, ew->newW, ew->newH);
     }
 
-    TempStr ext = path::GetExtTemp(dest);
-    const WCHAR* mime = GetEncoderMimeForExt(ext);
+    const WCHAR* mime = gImageFormats[fmtIdx].mime;
     CLSID encoderClsid = GetEncoderClsid(mime);
     TempWStr destW = ToWStrTemp(dest);
     Status status = result->Save(destW, &encoderClsid, nullptr);
@@ -1589,6 +1594,22 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnSwitchMode2, ew);
         ew->btnSwitchMode2 = btn;
+    }
+
+    // format dropdown
+    {
+        auto* dd = new DropDown();
+        DropDown::CreateArgs args;
+        args.parent = hwnd;
+        dd->Create(args);
+        StrVec items;
+        for (auto& fmt : gImageFormats) {
+            items.Append(fmt.label);
+        }
+        dd->SetItems(items);
+        dd->SetCurrentSelection(kDefaultFormatIdx);
+        dd->onSelectionChanged = MkFunc0<ImageEditWindow>(OnFormatChanged, ew);
+        ew->dropFormat = dd;
     }
 
     CalcImageLayout(ew);

@@ -479,7 +479,7 @@ void RenderCache::RequestRendering(DisplayModel* dm, int pageNo) {
 
 /* Render a bitmap for page <pageNo> in <dm>. */
 void RenderCache::RequestRendering(DisplayModel* dm, int pageNo, TilePosition tile, bool clearQueueForPage) {
-    //logvf("RenderCache::RequestRendering: pageNo %d\n", pageNo);
+    // logvf("RenderCache::RequestRendering: pageNo %d\n", pageNo);
     ScopedCritSec scope(&requestAccess);
     ReportIf(!dm);
     if (!dm || dm->pauseRendering) {

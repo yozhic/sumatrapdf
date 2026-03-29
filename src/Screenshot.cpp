@@ -68,7 +68,7 @@ static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
         return false;
     }
     WCHAR className[256];
-    if (GetClassNameW(hwnd, className, 256) > 0 ) {
+    if (GetClassNameW(hwnd, className, 256) > 0) {
         if (str::Eq(className, L"Progman") || str::Eq(className, L"WorkerW")) {
             return false;
         }
