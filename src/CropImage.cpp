@@ -157,6 +157,14 @@ static void UpdateCropInfoLabel(CropImageWindow* cw) {
     SetWindowTextA(cw->hwndCropInfoLabel, s);
 }
 
+// invalidate only the image area, not the control area below
+static void InvalidateImageArea(CropImageWindow* cw) {
+    RECT rc = {0, 0, 0, 0};
+    GetClientRect(cw->hwnd, &rc);
+    rc.bottom = cw->imgAreaH;
+    InvalidateRect(cw->hwnd, &rc, FALSE);
+}
+
 static void CalcImageLayout(CropImageWindow* cw) {
     Rect cRc = ClientRect(cw->hwnd);
     cw->imgAreaH = cRc.dy - kControlAreaDy;
@@ -255,15 +263,10 @@ static HCURSOR GetCursorForEdge(CropImageWindow::DragEdge edge) {
 static void PaintCropImage(CropImageWindow* cw, HDC hdc) {
     Rect cRc = ClientRect(cw->hwnd);
 
-    // fill background
+    // fill image area background
     HBRUSH bgBrush = (HBRUSH)GetStockObject(DKGRAY_BRUSH);
     RECT rcImg = {0, 0, cRc.dx, cw->imgAreaH};
     FillRect(hdc, &rcImg, bgBrush);
-
-    // fill control area
-    HBRUSH ctrlBrush = GetSysColorBrush(COLOR_BTNFACE);
-    RECT rcCtrl = {0, cw->imgAreaH, cRc.dx, cRc.dy};
-    FillRect(hdc, &rcCtrl, ctrlBrush);
 
     if (!cw->srcBitmap || cw->imgDisplayW <= 0 || cw->imgDisplayH <= 0) {
         return;
@@ -501,7 +504,7 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (cw) {
                 CalcImageLayout(cw);
                 LayoutControls(cw);
-                InvalidateRect(hwnd, nullptr, TRUE);
+                InvalidateImageArea(cw);
             }
             return 0;
         }
@@ -511,13 +514,17 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (cw) {
                 PAINTSTRUCT ps;
                 HDC hdc = BeginPaint(hwnd, &ps);
-                // double-buffer
+                // double-buffer only the image area to avoid flicker
                 Rect cRc = ClientRect(hwnd);
+                int paintH = cw->imgAreaH;
+                if (paintH > cRc.dy) {
+                    paintH = cRc.dy;
+                }
                 HDC memDC = CreateCompatibleDC(hdc);
-                HBITMAP memBmp = CreateCompatibleBitmap(hdc, cRc.dx, cRc.dy);
+                HBITMAP memBmp = CreateCompatibleBitmap(hdc, cRc.dx, paintH);
                 HBITMAP oldBmp = (HBITMAP)SelectObject(memDC, memBmp);
                 PaintCropImage(cw, memDC);
-                BitBlt(hdc, 0, 0, cRc.dx, cRc.dy, memDC, 0, 0, SRCCOPY);
+                BitBlt(hdc, 0, 0, cRc.dx, paintH, memDC, 0, 0, SRCCOPY);
                 SelectObject(memDC, oldBmp);
                 DeleteObject(memBmp);
                 DeleteDC(memDC);
@@ -596,7 +603,7 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 cw->cropW = nw;
                 cw->cropH = nh;
                 UpdateCropInfoLabel(cw);
-                InvalidateRect(hwnd, nullptr, FALSE);
+                InvalidateImageArea(cw);
             } else {
                 auto edge = HitTestCropEdge(cw, mx, my);
                 SetCursor(GetCursorForEdge(edge));
@@ -762,8 +769,8 @@ void ShowCropImageWindow(MainWindow* win) {
         winH = screenH;
     }
 
-    HWND hwnd = CreateWindowExW(0, kCropImageWinClassName, L"Crop Image", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
-                                CW_USEDEFAULT, winW, winH, nullptr, nullptr, h, nullptr);
+    HWND hwnd = CreateWindowExW(0, kCropImageWinClassName, L"Crop Image", WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+                                CW_USEDEFAULT, CW_USEDEFAULT, winW, winH, nullptr, nullptr, h, nullptr);
     if (!hwnd) {
         gCropWindows.Remove(cw);
         delete cw;
