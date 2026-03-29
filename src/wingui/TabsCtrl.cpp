@@ -71,7 +71,7 @@ void TabsCtrl::LayoutTabs() {
     tabSize = {dx, dy};
     // logfa("TabsCtrl::Layout size: (%d, %d), tab size: (%d, %d)\n", rect.dx, rect.dy, tabSize.dx, tabSize.dy);
 
-    int closeDy = DpiScale(hwnd, 8);
+    int closeDy = DpiScale(hwnd, 16);
     int closeDx = closeDy;
     int closeY = (dy - closeDy) / 2;
     // logfa("  closeDx: %d, closeDy: %d\n", closeDx, closeDy);
@@ -235,7 +235,6 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             DrawCloseButtonArgs closeArgs;
             closeArgs.hdc = hdc;
             closeArgs.r = r;
-            closeArgs.r.Inflate(3, 3);
             closeArgs.isHover = overClose;
             DrawCloseButton(closeArgs);
         }
