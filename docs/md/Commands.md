@@ -252,6 +252,7 @@ CmdForgetSelectedDocument,,Remove Selected Document From History,
 CmdListPrinters,,List Printers,ver 3.7+
 CmdOptions,,Options...,
 CmdScreenshot,,Take Screenshot,ver 3.7+
+CmdCropImage,,Crop Image,ver 3.7+
 CmdShowLog,,Show Logs,
 ```
 

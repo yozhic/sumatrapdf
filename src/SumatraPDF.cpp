@@ -74,6 +74,7 @@
 #include "SearchAndDDE.h"
 #include "Selection.h"
 #include "Screenshot.h"
+#include "CropImage.h"
 #include "StressTesting.h"
 #include "HomePage.h"
 #include "OverlayScrollbar.h"
@@ -5814,6 +5815,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdScreenshot:
             TakeScreenshots();
+            break;
+
+        case CmdCropImage:
+            ShowCropImageWindow(win);
             break;
 
         case CmdListPrinters: {

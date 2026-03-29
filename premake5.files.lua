@@ -719,6 +719,7 @@ function sumatrapdf_files()
     "CommandPalette.*",
     "Commands.*",
     "CrashHandler.*",
+    "CropImage.*",
     "DisplayMode.*",
     "DisplayModel.*",
     "DocController.h",
