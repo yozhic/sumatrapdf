@@ -1730,8 +1730,8 @@ MainWindow* CreateAndShowMainWindow(SessionData* data, bool showWin) {
     if (!win) {
         return nullptr;
     }
-    // CreateMainWindow shouldn't change the windowState value
-    ReportIf(windowState != gGlobalPrefs->windowState);
+    // CreateMainWindow can inadvertently change windowState (e.g. via layout); restore it
+    gGlobalPrefs->windowState = windowState;
 
     if (data) {
         windowState = data->windowState;
