@@ -8,21 +8,6 @@ function files_in_dir(dir, files_in_dir)
   files(paths)
 end
 
-function preview_test_files()
-  files_in_dir("src/utils", {
-    "BaseUtil.*",
-    "StrconvUtil.*",
-    "StrFormat.*",
-    "StrUtil.*",
-    "StrVec.*",
-    "TempAllocator.*",
-  })
-  files {
-    "src/tools/preview_test.cpp",
-    "src/CrashHandlerNoOp.cpp",
-  }
-end
-
 function makelzsa_files()
   files_in_dir("src/utils", {
     "BaseUtil.*",
@@ -786,6 +771,7 @@ function sumatrapdf_files()
     "regress/Regress.*",
     "Scratch.*",
     "TestPlugin.cpp",
+    "TestPreview.cpp",
   })
   files_in_dir("src/testcode", {
     "test-app.h",

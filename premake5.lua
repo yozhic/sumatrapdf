@@ -822,17 +822,6 @@ workspace "SumatraPDF"
     links { "utils", "unrar", "libmupdf", "chm" }
     links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-  project "PdfPreviewTest"
-    kind "ConsoleApp"
-    language "C++"
-    cppdialect "C++latest"
-    mixed_dbg_rel_conf()
-    disablewarnings { "4838" }
-    includedirs { "src" }
-    preview_test_files()
-    links { "gdiplus", "comctl32", "shlwapi", "Version", "Ole32" }
-    dependson { "PdfPreview" }
-
   -- a single static executable
   project "SumatraPDF"
     kind "WindowedApp"

@@ -87,6 +87,7 @@ struct Flags {
     int testPageNo = 0;
     bool testApp = false;
     bool testPlugin = false;
+    bool testPreview = false;
     char* dde = nullptr;
     bool engineDump = false; // -engine-dump
 

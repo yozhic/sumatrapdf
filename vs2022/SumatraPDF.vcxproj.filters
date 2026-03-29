@@ -605,6 +605,9 @@
     <ClCompile Include="..\src\TestPlugin.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\TestPreview.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\Tester.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -885,6 +888,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\run-tests.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\test-plugin.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\trans-dl.ts">

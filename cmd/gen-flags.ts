@@ -30,6 +30,7 @@ const args = [
     "Tester", "tester",
     "TestApp", "testapp",
     "TestPlugin", "test-plugin",
+    "TestPreview", "test-preview",
     "NewWindow", "new-window",
     "Log", "log",
     "LogToFile", "log-to-file",
