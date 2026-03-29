@@ -69,18 +69,19 @@ static SeqStrings gCommandNames =
     "CmdInvertColors\0" "CmdTogglePageInfo\0" "CmdToggleZoom\0"
     "CmdNavigateBack\0" "CmdNavigateForward\0" "CmdToggleCursorPosition\0"
     "CmdOpenNextFileInFolder\0" "CmdOpenPrevFileInFolder\0" "CmdCommandPalette\0"
-    "CmdShowLog\0" "CmdShowPdfInfo\0" "CmdClearHistory\0"
-    "CmdReopenLastClosedFile\0" "CmdNextTab\0" "CmdPrevTab\0"
-    "CmdNextTabSmart\0" "CmdPrevTabSmart\0" "CmdMoveTabLeft\0"
-    "CmdMoveTabRight\0" "CmdSelectNextTheme\0" "CmdToggleFrequentlyRead\0"
-    "CmdInvokeInverseSearch\0" "CmdExec\0" "CmdViewWithExternalViewer\0"
-    "CmdSelectionHandler\0" "CmdSetTheme\0" "CmdToggleInverseSearch\0"
-    "CmdDebugCorruptMemory\0" "CmdDebugCrashMe\0" "CmdDebugDownloadSymbols\0"
-    "CmdDebugTestApp\0" "CmdDebugShowNotif\0" "CmdDebugStartStressTest\0"
-    "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0" "CmdToggleAntiAlias\0"
-    "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0"
-    "CmdScreenshot\0" "CmdCropImage\0" "CmdResizeImage\0"
-    "CmdSaveImage\0" "CmdPasteClipboardImage\0" "CmdNone\0" "\0";
+    "CmdShowLog\0" "CmdShowPdfInfo\0" "CmdShowErrors\0"
+    "CmdClearHistory\0" "CmdReopenLastClosedFile\0" "CmdNextTab\0"
+    "CmdPrevTab\0" "CmdNextTabSmart\0" "CmdPrevTabSmart\0"
+    "CmdMoveTabLeft\0" "CmdMoveTabRight\0" "CmdSelectNextTheme\0"
+    "CmdToggleFrequentlyRead\0" "CmdInvokeInverseSearch\0" "CmdExec\0"
+    "CmdViewWithExternalViewer\0" "CmdSelectionHandler\0" "CmdSetTheme\0"
+    "CmdToggleInverseSearch\0" "CmdDebugCorruptMemory\0" "CmdDebugCrashMe\0"
+    "CmdDebugDownloadSymbols\0" "CmdDebugTestApp\0" "CmdDebugShowNotif\0"
+    "CmdDebugStartStressTest\0" "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0"
+    "CmdToggleAntiAlias\0" "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0"
+    "CmdToggleWindowsSearchFilter\0" "CmdScreenshot\0" "CmdCropImage\0"
+    "CmdResizeImage\0" "CmdSaveImage\0" "CmdPasteClipboardImage\0"
+    "CmdNone\0" "\0";
 
 static i32 gCommandIds[] = {
     CmdOpenFile, CmdClose, CmdCloseCurrentDocument,
@@ -138,18 +139,19 @@ static i32 gCommandIds[] = {
     CmdInvertColors, CmdTogglePageInfo, CmdToggleZoom,
     CmdNavigateBack, CmdNavigateForward, CmdToggleCursorPosition,
     CmdOpenNextFileInFolder, CmdOpenPrevFileInFolder, CmdCommandPalette,
-    CmdShowLog, CmdShowPdfInfo, CmdClearHistory,
-    CmdReopenLastClosedFile, CmdNextTab, CmdPrevTab,
-    CmdNextTabSmart, CmdPrevTabSmart, CmdMoveTabLeft,
-    CmdMoveTabRight, CmdSelectNextTheme, CmdToggleFrequentlyRead,
-    CmdInvokeInverseSearch, CmdExec, CmdViewWithExternalViewer,
-    CmdSelectionHandler, CmdSetTheme, CmdToggleInverseSearch,
-    CmdDebugCorruptMemory, CmdDebugCrashMe, CmdDebugDownloadSymbols,
-    CmdDebugTestApp, CmdDebugShowNotif, CmdDebugStartStressTest,
-    CmdDebugTogglePredictiveRender, CmdDebugToggleRtl, CmdToggleAntiAlias,
-    CmdListPrinters, CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter,
-    CmdScreenshot, CmdCropImage, CmdResizeImage,
-    CmdSaveImage, CmdPasteClipboardImage, CmdNone,
+    CmdShowLog, CmdShowPdfInfo, CmdShowErrors,
+    CmdClearHistory, CmdReopenLastClosedFile, CmdNextTab,
+    CmdPrevTab, CmdNextTabSmart, CmdPrevTabSmart,
+    CmdMoveTabLeft, CmdMoveTabRight, CmdSelectNextTheme,
+    CmdToggleFrequentlyRead, CmdInvokeInverseSearch, CmdExec,
+    CmdViewWithExternalViewer, CmdSelectionHandler, CmdSetTheme,
+    CmdToggleInverseSearch, CmdDebugCorruptMemory, CmdDebugCrashMe,
+    CmdDebugDownloadSymbols, CmdDebugTestApp, CmdDebugShowNotif,
+    CmdDebugStartStressTest, CmdDebugTogglePredictiveRender, CmdDebugToggleRtl,
+    CmdToggleAntiAlias, CmdListPrinters, CmdToggleWindowsPreviewer,
+    CmdToggleWindowsSearchFilter, CmdScreenshot, CmdCropImage,
+    CmdResizeImage, CmdSaveImage, CmdPasteClipboardImage,
+    CmdNone,
 };
 
 SeqStrings gCommandDescriptions =
@@ -208,18 +210,19 @@ SeqStrings gCommandDescriptions =
     "Invert Colors\0" "Toggle Page Info\0" "Toggle Zoom\0"
     "Navigate Back\0" "Navigate Forward\0" "Toggle Cursor Position\0"
     "Open Next File In Folder\0" "Open Previous File In Folder\0" "Command Palette\0"
-    "Show Logs\0" "Show PDF Info\0" "Clear History\0"
-    "Reopen Last Closed\0" "Next Tab\0" "Previous Tab\0"
-    "Smart Next Tab\0" "Smart Next Tab\0" "Move Tab Left\0"
-    "Move Tab Right\0" "Select next theme\0" "Toggle Frequently Read\0"
-    "Invoke Inverse Search\0" "Execute a program\0" "View With Custom External Viewer\0"
-    "Launch a browser or run command with selection\0" "Set theme\0" "Toggle Inverse Search\0"
-    "Debug: Corrupt Memory\0" "Debug: Crash Me\0" "Debug: Download Symbols\0"
-    "Debug: Test App\0" "Debug: Show Notification\0" "Debug: Start Stress Test\0"
-    "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0" "Toggle Anti-Alias Rendering\0"
-    "List Printers\0" "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0"
-    "Take Screenshot\0" "Crop Image\0" "Resize Image\0"
-    "Save Image\0" "Paste Image From Clipboard\0" "Do nothing\0" "\0";
+    "Show Logs\0" "Show PDF Info\0" "Show Errors\0"
+    "Clear History\0" "Reopen Last Closed\0" "Next Tab\0"
+    "Previous Tab\0" "Smart Next Tab\0" "Smart Next Tab\0"
+    "Move Tab Left\0" "Move Tab Right\0" "Select next theme\0"
+    "Toggle Frequently Read\0" "Invoke Inverse Search\0" "Execute a program\0"
+    "View With Custom External Viewer\0" "Launch a browser or run command with selection\0" "Set theme\0"
+    "Toggle Inverse Search\0" "Debug: Corrupt Memory\0" "Debug: Crash Me\0"
+    "Debug: Download Symbols\0" "Debug: Test App\0" "Debug: Show Notification\0"
+    "Debug: Start Stress Test\0" "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0"
+    "Toggle Anti-Alias Rendering\0" "List Printers\0" "Toggle Windows Previewer\0"
+    "Toggle Windows Search Filter\0" "Take Screenshot\0" "Crop Image\0"
+    "Resize Image\0" "Save Image\0" "Paste Image From Clipboard\0"
+    "Do nothing\0" "\0";
 // clang-format on
 // @gen-end cmd-c
 

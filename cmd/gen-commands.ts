@@ -170,6 +170,7 @@ export const commands = [
     "CmdCommandPalette", "Command Palette",
     "CmdShowLog", "Show Logs",
     "CmdShowPdfInfo", "Show PDF Info",
+    "CmdShowErrors", "Show Errors",
     "CmdClearHistory", "Clear History",
     "CmdReopenLastClosedFile", "Reopen Last Closed",
     "CmdNextTab", "Next Tab",

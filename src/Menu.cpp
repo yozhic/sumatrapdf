@@ -869,6 +869,10 @@ static MenuDef menuDefContext[] = {
         CmdSaveAnnotations,
     },
     {
+        _TRN("Show Errors"),
+        CmdShowErrors,
+    },
+    {
         _TRN("E&xit Fullscreen"),
         CmdToggleFullscreen, // only seen in full-screen mode
     },
@@ -1835,6 +1839,10 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         }
     }
 
+    if (!engine || engine->errors.Size() == 0) {
+        MenuRemove(popup, CmdShowErrors);
+    }
+
     bool isFullScreen = win->isFullScreen || win->presentation;
     if (!isFullScreen) {
         MenuRemove(popup, CmdToggleFullscreen);
@@ -1995,6 +2003,14 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         }
         case CmdFavoriteDel: {
             DelFavorite(filePath, pageNoUnderCursor);
+            break;
+        }
+        case CmdShowErrors: {
+            if (engine && engine->errors.Size() > 0) {
+                char* text = Join(&engine->errors, "\n");
+                ShowTextInWindow("Errors", text);
+                str::Free(text);
+            }
             break;
         }
     }

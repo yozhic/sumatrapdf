@@ -379,6 +379,8 @@ class EngineBase {
     bool disableAntiAlias = false;
     int pageCount = -1;
 
+    StrVec errors;
+
     // TODO: migrate other engines to use this
     AutoFreeStr fileNameBase;
 

@@ -21,6 +21,8 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdCropImage` (`Crop Image`) command for cropping images when viewing image files
 - add `CmdResizeImage` (`Resize Image`) command for resizing images when viewing image files
 - `Ctrl + V` pastes image from clipboard, saves as PNG in Downloads folder and opens it
+- Can save images in different formats: PNG, JPEG, BMP, GIF, TIFF.
+- add `Show Errors` in right-click context menu for PDF documents that have mupdf warnings/errors
 
 ## 3.6 (2026-03-17)
 
