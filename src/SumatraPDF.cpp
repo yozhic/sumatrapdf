@@ -3,6 +3,7 @@
 
 #include "utils/BaseUtil.h"
 #include "utils/StrFormat.h"
+#include <shlobj.h>
 #include "utils/ScopedWin.h"
 #include "utils/WinDynCalls.h"
 #include "utils/CryptoUtil.h"
@@ -5643,6 +5644,52 @@ static void SetAnnotCreateArgs(AnnotCreateArgs& args, CustomCommand* cmd) {
     }
 }
 
+static void PasteImageFromClipboard(MainWindow* win) {
+    if (!OpenClipboard(nullptr)) {
+        return;
+    }
+    HBITMAP hbmp = (HBITMAP)GetClipboardData(CF_BITMAP);
+    if (!hbmp) {
+        CloseClipboard();
+        return;
+    }
+    // create GDI+ bitmap from clipboard HBITMAP
+    Gdiplus::Bitmap gdipBmp(hbmp, nullptr);
+    CloseClipboard();
+
+    if (gdipBmp.GetWidth() == 0 || gdipBmp.GetHeight() == 0) {
+        return;
+    }
+
+    // get Downloads folder
+    WCHAR* downloadsW = nullptr;
+    HRESULT hr = SHGetKnownFolderPath(FOLDERID_Downloads, 0, nullptr, &downloadsW);
+    if (FAILED(hr) || !downloadsW) {
+        CoTaskMemFree(downloadsW);
+        return;
+    }
+    TempStr downloadsDir = ToUtf8Temp(downloadsW);
+    CoTaskMemFree(downloadsW);
+
+    // generate unique path: clipboard.png, clipboard.1.png, etc.
+    TempStr basePath = path::JoinTemp(downloadsDir, "clipboard.png");
+    TempStr destPath = MakeUniqueFilePathTemp(basePath);
+
+    // save as PNG
+    CLSID pngClsid = GetEncoderClsid(L"image/png");
+    TempWStr destW = ToWStrTemp(destPath);
+    Gdiplus::Status status = gdipBmp.Save(destW, &pngClsid, nullptr);
+    if (status != Gdiplus::Ok) {
+        return;
+    }
+
+    // load the saved file
+    if (win) {
+        LoadArgs args(destPath, win);
+        StartLoadDocument(&args);
+    }
+}
+
 static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     int cmdId = LOWORD(wp);
     bool openAnnotationEdit = false;
@@ -5827,6 +5874,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdResizeImage:
             ShowImageEditWindow(win, ImageEditMode::Resize);
+            break;
+
+        case CmdPasteClipboardImage:
+            PasteImageFromClipboard(win);
             break;
 
         case CmdListPrinters: {

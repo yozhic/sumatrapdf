@@ -80,7 +80,7 @@ static SeqStrings gCommandNames =
     "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0" "CmdToggleAntiAlias\0"
     "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0"
     "CmdScreenshot\0" "CmdCropImage\0" "CmdResizeImage\0"
-    "CmdNone\0" "\0";
+    "CmdPasteClipboardImage\0" "CmdNone\0" "\0";
 
 static i32 gCommandIds[] = {
     CmdOpenFile, CmdClose, CmdCloseCurrentDocument,
@@ -149,7 +149,7 @@ static i32 gCommandIds[] = {
     CmdDebugTogglePredictiveRender, CmdDebugToggleRtl, CmdToggleAntiAlias,
     CmdListPrinters, CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter,
     CmdScreenshot, CmdCropImage, CmdResizeImage,
-    CmdNone,
+    CmdPasteClipboardImage, CmdNone,
 };
 
 SeqStrings gCommandDescriptions =
@@ -219,7 +219,7 @@ SeqStrings gCommandDescriptions =
     "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0" "Toggle Anti-Alias Rendering\0"
     "List Printers\0" "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0"
     "Take Screenshot\0" "Crop Image\0" "Resize Image\0"
-    "Do nothing\0" "\0";
+    "Paste Image From Clipboard\0" "Do nothing\0" "\0";
 // clang-format on
 // @gen-end cmd-c
 

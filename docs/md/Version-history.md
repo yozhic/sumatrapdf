@@ -20,6 +20,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - you can drag&drop images from a browser onto SumatraPDF window. We'll download it to Downloads folder and open
 - add `CmdCropImage` (`Crop Image`) command for cropping images when viewing image files
 - add `CmdResizeImage` (`Resize Image`) command for resizing images when viewing image files
+- `Ctrl + V` pastes image from clipboard, saves as PNG in Downloads folder and opens it
 
 ## 3.6 (2026-03-17)
 
