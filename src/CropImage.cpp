@@ -25,6 +25,7 @@
 #include "SumatraConfig.h"
 #include "Theme.h"
 #include "DarkModeSubclass.h"
+#include "Translations.h"
 #include "CropImage.h"
 
 #include "utils/Log.h"
@@ -157,15 +158,18 @@ static void UpdateSaveButtonText(CropImageWindow* cw) {
     WCHAR destW[MAX_PATH + 1]{};
     GetWindowTextW(cw->hwndDestEdit, destW, MAX_PATH);
     TempStr dest = ToUtf8Temp(destW);
-    const char* text = file::Exists(dest) ? "Overwrite With Cropped" : "Save Cropped";
+    const char* text = file::Exists(dest) ? _TRA("Overwrite With Cropped") : _TRA("Save Cropped");
     cw->btnSave->SetText(text);
     // re-layout since button width may have changed
     LayoutControls(cw);
 }
 
+static TempStr FormatCropInfoTemp(int srcW, int srcH, int cropW, int cropH, int cropX, int cropY) {
+    return str::FormatTemp("%dx%d => %dx%d @ %d,%d", srcW, srcH, cropW, cropH, cropX, cropY);
+}
+
 static void UpdateCropInfoLabel(CropImageWindow* cw) {
-    TempStr s =
-        str::FormatTemp("%dx%d => %dx%d @ %d,%d", cw->imgW, cw->imgH, cw->cropW, cw->cropH, cw->cropX, cw->cropY);
+    TempStr s = FormatCropInfoTemp(cw->imgW, cw->imgH, cw->cropW, cw->cropH, cw->cropX, cw->cropY);
     SetWindowTextA(cw->hwndInfoLabel, s);
 }
 
@@ -507,7 +511,7 @@ static void OnSave(CropImageWindow* cw) {
     delete cropped;
 
     if (status != Ok) {
-        MessageBoxWarning(cw->hwnd, "Failed to save cropped image", "Crop Image");
+        MessageBoxWarning(cw->hwnd, "Failed to save cropped image", _TRA("Crop Image"));
         return;
     }
 
@@ -889,7 +893,7 @@ void ShowCropImageWindow(MainWindow* win) {
     SendMessageW(cw->hwndBrowseBtn, WM_SETFONT, (WPARAM)cw->hFont, TRUE);
 
     // row 3: src size label, crop info label
-    TempStr infoStr = str::FormatTemp("%dx%d => %dx%d @ %d,%d", imgW, imgH, imgW, imgH, 0, 0);
+    TempStr infoStr = FormatCropInfoTemp(imgW, imgH, imgW, imgH, 0, 0);
     cw->hwndInfoLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(infoStr), WS_CHILD | WS_VISIBLE | SS_LEFT, 0, 0, 0, 0,
                                         hwnd, nullptr, h, nullptr);
     SendMessageW(cw->hwndInfoLabel, WM_SETFONT, (WPARAM)cw->hFont, TRUE);

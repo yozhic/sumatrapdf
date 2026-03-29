@@ -33908,3 +33908,579 @@ uk: (незбережені анотації)
 vn: (chú thích chưa lưu)
 : (unsaved annotations)
 tw: (未儲存的註解)
+:Crop Image
+am:ምስል መቁረጥ
+:Getting fonts information...
+am:የፊደል መረጃ በማግኘት ላይ...
+:Overwrite With Cropped
+am:በተቆረጠው ላይ መተካት
+:Save Cropped
+am:የተቆረጠውን ማስቀመጥ
+:Crop Image
+ar:قص الصورة
+:Getting fonts information...
+ar:جارٍ الحصول على معلومات الخطوط...
+:Overwrite With Cropped
+ar:استبدال بالصورة المقصوصة
+:Save Cropped
+ar:حفظ المقصوصة
+:Crop Image
+br:Diwanañ ar skeudenn
+:Getting fonts information...
+br:O kaout titouroù ar fontoù...
+:Overwrite With Cropped
+br:Flastrañ gant an hini diwanaet
+:Save Cropped
+br:Enrollañ an hini diwanaet
+:Crop Image
+cn:裁剪图片
+:Getting fonts information...
+cn:正在获取字体信息...
+:Overwrite With Cropped
+cn:用裁剪后的图片覆盖
+:Save Cropped
+cn:保存裁剪
+:Crop Image
+co:Ritaglia l'imaghjina
+:Getting fonts information...
+co:Ottenimentu di l'infurmazioni nantu à e fonti...
+:Overwrite With Cropped
+co:Rimpiazzà cù a ritugliata
+:Save Cropped
+co:Salvà a ritugliata
+:Crop Image
+de:Bild zuschneiden
+:Getting fonts information...
+de:Schriftinformationen werden abgerufen...
+:Overwrite With Cropped
+de:Mit zugeschnittenem Bild überschreiben
+:Save Cropped
+de:Zugeschnittenes speichern
+:Crop Image
+el:Περικοπή εικόνας
+:Getting fonts information...
+el:Λήψη πληροφοριών γραμματοσειρών...
+:Overwrite With Cropped
+el:Αντικατάσταση με περικομμένη
+:Save Cropped
+el:Αποθήκευση περικομμένης
+:Crop Image
+hi:छवि क्रॉप करें
+:Getting fonts information...
+hi:फ़ॉन्ट जानकारी प्राप्त की जा रही है...
+:Overwrite With Cropped
+hi:क्रॉप की गई से अधिलेखित करें
+:Save Cropped
+hi:क्रॉप की गई सहेजें
+:Crop Image
+ja:画像をトリミング
+:Getting fonts information...
+ja:フォント情報を取得中...
+:Overwrite With Cropped
+ja:トリミング後で上書き
+:Save Cropped
+ja:トリミング後を保存
+:Crop Image
+ml:ചിത്രം ക്രോപ്പ് ചെയ്യുക
+:Getting fonts information...
+ml:ഫോണ്ട് വിവരങ്ങൾ ലഭിക്കുന്നു...
+:Overwrite With Cropped
+ml:ക്രോപ്പ് ചെയ്തത് ഉപയോഗിച്ച് തിരുത്തിയെഴുതുക
+:Save Cropped
+ml:ക്രോപ്പ് ചെയ്തത് സംരക്ഷിക്കുക
+:Crop Image
+nl:Afbeelding bijsnijden
+:Getting fonts information...
+nl:Lettertype-informatie ophalen...
+:Overwrite With Cropped
+nl:Overschrijven met bijgesneden
+:Save Cropped
+nl:Bijgesneden opslaan
+:Crop Image
+pl:Przytnij obraz
+:Getting fonts information...
+pl:Pobieranie informacji o czcionkach...
+:Overwrite With Cropped
+pl:Nadpisz przyciętym
+:Save Cropped
+pl:Zapisz przycięty
+:Crop Image
+ru:Обрезать изображение
+:Getting fonts information...
+ru:Получение информации о шрифтах...
+:Overwrite With Cropped
+ru:Перезаписать обрезанным
+:Save Cropped
+ru:Сохранить обрезанное
+:Crop Image
+sk:Orezať obrázok
+:Getting fonts information...
+sk:Získavanie informácií o písmach...
+:Overwrite With Cropped
+sk:Prepísať orezaným
+:Save Cropped
+sk:Uložiť orezaný
+:Crop Image
+sr-rs:Исеци слику
+:Getting fonts information...
+sr-rs:Преузимање информација о фонтовима...
+:Overwrite With Cropped
+sr-rs:Препиши исеченом
+:Save Cropped
+sr-rs:Сачувај исечено
+:Crop Image
+tw:裁切圖片
+:Getting fonts information...
+tw:正在取得字型資訊...
+:Overwrite With Cropped
+tw:以裁切後的圖片覆蓋
+:Save Cropped
+tw:儲存裁切後的圖片
+:Crop Image
+az:Şəkli Kəs
+:Getting fonts information...
+az:Şrift məlumatları əldə edilir...
+:Overwrite With Cropped
+az:Kəsilmiş ilə Əvəz Et
+:Save Cropped
+az:Kəsilmişi Saxla
+:Crop Image
+by:Абрэзаць выяву
+:Getting fonts information...
+by:Атрыманне інфармацыі пра шрыфты...
+:Overwrite With Cropped
+by:Перазапісаць абрэзанай
+:Save Cropped
+by:Захаваць абрэзанае
+:Crop Image
+ca:Retalla la imatge
+:Getting fonts information...
+ca:Obtenint informació de les fonts...
+:Overwrite With Cropped
+ca:Sobreescriu amb la retallada
+:Save Cropped
+ca:Desa la retallada
+:Crop Image
+cy:Tocio Delwedd
+:Getting fonts information...
+cy:Yn cael gwybodaeth am ffontiau...
+:Overwrite With Cropped
+cy:Trosysgrifennu Gyda'r Ddelwedd wedi'i Thocio
+:Save Cropped
+cy:Cadw'r Ddelwedd wedi'i Thocio
+:Crop Image
+cz:Oříznout obrázek
+:Getting fonts information...
+cz:Získávání informací o písmech...
+:Overwrite With Cropped
+cz:Přepsat oříznutým
+:Save Cropped
+cz:Uložit oříznuté
+:Crop Image
+es:Recortar imagen
+:Getting fonts information...
+es:Obteniendo información de fuentes...
+:Overwrite With Cropped
+es:Sobrescribir con recortada
+:Save Cropped
+es:Guardar recortada
+:Crop Image
+fa:برش تصویر
+:Getting fonts information...
+fa:دریافت اطلاعات فونت‌ها...
+:Overwrite With Cropped
+fa:بازنویسی با تصویر برش خورده
+:Save Cropped
+fa:ذخیره برش خورده
+:Crop Image
+fi:Rajaa kuva
+:Getting fonts information...
+fi:Haetaan fonttien tietoja...
+:Overwrite With Cropped
+fi:Korvaa rajatulla
+:Save Cropped
+fi:Tallenna rajattu
+:Crop Image
+fo:Skera mynd
+:Getting fonts information...
+fo:Fái upplýsingar um stavsnið...
+:Overwrite With Cropped
+fo:Yvirskriva við skerdu
+:Save Cropped
+fo:Goym skerdu
+:Crop Image
+fr:Recadrer l'image
+:Getting fonts information...
+fr:Récupération des informations sur les polices...
+:Overwrite With Cropped
+fr:Écraser avec l'image recadrée
+:Save Cropped
+fr:Enregistrer l'image recadrée
+:Crop Image
+ga:Bearr Íomhá
+:Getting fonts information...
+ga:Ag fáil eolais faoi chlónna...
+:Overwrite With Cropped
+ga:Forscríobh leis an gCeann Bearrtha
+:Save Cropped
+ga:Sábháil Bearrtha
+:Crop Image
+gl:Recortar imaxe
+:Getting fonts information...
+gl:Obtendo información das fontes...
+:Overwrite With Cropped
+gl:Sobrescribir coa recortada
+:Save Cropped
+gl:Gardar recortada
+:Crop Image
+he:חיתוך תמונה
+:Getting fonts information...
+he:מקבל מידע על גופנים...
+:Overwrite With Cropped
+he:החלף בתמונה החתוכה
+:Save Cropped
+he:שמור תמונה חתוכה
+:Crop Image
+hu:Kép körülvágása
+:Getting fonts information...
+hu:Betűtípus információk lekérése...
+:Overwrite With Cropped
+hu:Felülírás a körülvágottal
+:Save Cropped
+hu:Körülvágott mentése
+:Crop Image
+id:Potong Gambar
+:Getting fonts information...
+id:Mendapatkan informasi font...
+:Overwrite With Cropped
+id:Timpa Dengan Hasil Potongan
+:Save Cropped
+id:Simpan Hasil Potongan
+:Crop Image
+it:Ritaglia immagine
+:Getting fonts information...
+it:Recupero informazioni caratteri...
+:Overwrite With Cropped
+it:Sovrascrivi con ritagliata
+:Save Cropped
+it:Salva ritagliata
+:Crop Image
+kr:이미지 자르기
+:Getting fonts information...
+kr:글꼴 정보 가져오는 중...
+:Overwrite With Cropped
+kr:자른 이미지로 덮어쓰기
+:Save Cropped
+kr:자른 이미지 저장
+:Crop Image
+lv:Apgriezt attēlu
+:Getting fonts information...
+lv:Iegūst fontu informāciju...
+:Overwrite With Cropped
+lv:Pārrakstīt ar apgriezto
+:Save Cropped
+lv:Saglabāt apgriezto
+:Crop Image
+my:ပုံကို ဖြတ်တောက်ရန်
+:Getting fonts information...
+my:စာလုံးပုံစံ အချက်อလက်များ ရယူနေသည်...
+:Overwrite With Cropped
+my:ဖြတ်တောက်ထားသည်ဖြင့် အစားထိုးရန်
+:Save Cropped
+my:ဖြတ်တောက်ထားသည်ကို သိမ်းဆည်းရန်
+:Crop Image
+pt:Cortar Imagem
+:Getting fonts information...
+pt:Obtendo informações das fontes...
+:Overwrite With Cropped
+pt:Sobrescrever com Recortada
+:Save Cropped
+pt:Salvar Recortada
+:Crop Image
+ro:Decupează imaginea
+:Getting fonts information...
+ro:Se obțin informații despre fonturi...
+:Overwrite With Cropped
+ro:Suprascrie cu decupată
+:Save Cropped
+ro:Salvează decupată
+:Crop Image
+sat:ᱪᱤᱛᱟᱹᱨ ᱠᱨᱚᱯ ᱢᱮ
+:Getting fonts information...
+sat:ᱪᱤᱠᱤ ᱠᱚᱣᱟᱜ ᱵᱤᱵᱨᱚᱬ ᱧᱟᱢᱚᱜ ᱠᱟᱱᱟ...
+:Overwrite With Cropped
+sat:ᱠᱨᱚᱯ ᱠᱟᱱ ᱥᱟᱶ ᱫᱚᱦᱲᱟ ᱚᱞ ᱢᱮ
+:Save Cropped
+sat:ᱠᱨᱚᱯ ᱠᱟᱱ ᱥᱟᱺᱪᱟᱣ ᱢᱮ
+:Crop Image
+sl:Obreži sliko
+:Getting fonts information...
+sl:Pridobivanje informacij o pisavah...
+:Overwrite With Cropped
+sl:Prepiši z obrezano
+:Save Cropped
+sl:Shrani obrezano
+:Crop Image
+sv:Beskär bild
+:Getting fonts information...
+sv:Hämtar teckensnittsinformation...
+:Overwrite With Cropped
+sv:Skriv över med beskuren
+:Save Cropped
+sv:Spara beskuren
+:Crop Image
+ta:படத்தை செதுக்கு
+:Getting fonts information...
+ta:எழுத்துரு தகவல்களைப் பெறுகிறது...
+:Overwrite With Cropped
+ta:செதுக்கியதை மேலெழுது
+:Save Cropped
+ta:செதுக்கியதைச் சேமி
+:Crop Image
+tr:Resmi Kırp
+:Getting fonts information...
+tr:Yazı tipi bilgileri alınıyor...
+:Overwrite With Cropped
+tr:Kırpılmış Haliyle Üzerine Yaz
+:Save Cropped
+tr:Kırpılmışı Kaydet
+:Crop Image
+uz:Rasmni kesish
+:Getting fonts information...
+uz:Shriftlar haqida ma'lumot olinmoqda...
+:Overwrite With Cropped
+uz:Kesilgan bilan almashtirish
+:Save Cropped
+uz:Kesilganni saqlash
+:Crop Image
+af:Sny Beeld
+:Getting fonts information...
+af:Kry lettertipe inligting...
+:Overwrite With Cropped
+af:Oorskryf Met Gesnyde
+:Save Cropped
+af:Stoor Gesnyde
+:Crop Image
+bg:Изрязване на изображение
+:Getting fonts information...
+bg:Получаване на информация за шрифтовете...
+:Overwrite With Cropped
+bg:Презапиши с изрязаното
+:Save Cropped
+bg:Запази изрязаното
+:Crop Image
+bn:ছবি ক্রপ করুন
+:Getting fonts information...
+bn:ফন্টের তথ্য পাওয়া যাচ্ছে...
+:Overwrite With Cropped
+bn:ক্রপ করা দিয়ে প্রতিস্থাপন করুন
+:Save Cropped
+bn:ক্রপ করা সংরক্ষণ করুন
+:Crop Image
+bs:Obreži sliku
+:Getting fonts information...
+bs:Preuzimanje informacija o fontovima...
+:Overwrite With Cropped
+bs:Prepiši obrezanom
+:Save Cropped
+bs:Sačuvaj obrezano
+:Crop Image
+ca-xv:Retalla la imatge
+:Getting fonts information...
+ca-xv:S'està obtenint la informació de les fonts...
+:Overwrite With Cropped
+ca-xv:Sobreescriu amb la retallada
+:Save Cropped
+ca-xv:Desa la retallada
+:Crop Image
+dk:Beskær billede
+:Getting fonts information...
+dk:Henter skrifttypeinformation...
+:Overwrite With Cropped
+dk:Overskriv med beskåret
+:Save Cropped
+dk:Gem beskåret
+:Crop Image
+et:Kärbi pilt
+:Getting fonts information...
+et:Fonditeabe hankimine...
+:Overwrite With Cropped
+et:Kirjuta üle kärbitud pildiga
+:Save Cropped
+et:Salvesta kärbitud
+:Crop Image
+eu:Moztu irudia
+:Getting fonts information...
+eu:Letra-tipoen informazioa eskuratzen...
+:Overwrite With Cropped
+eu:Gainidatzi moztutakoarekin
+:Save Cropped
+eu:Gorde moztua
+:Crop Image
+fy-nl:Ofbylding bysnije
+:Getting fonts information...
+fy-nl:Lettertype-ynformaasje ophelle...
+:Overwrite With Cropped
+fy-nl:Oerskreaune mei bysnijd
+:Save Cropped
+fy-nl:Bysnijd bewarje
+:Crop Image
+hr:Obreži sliku
+:Getting fonts information...
+hr:Dohvaćanje informacija o fontovima...
+:Overwrite With Cropped
+hr:Prepiši s obrezanom
+:Save Cropped
+hr:Spremi obrezano
+:Crop Image
+jv:Potong Gambar
+:Getting fonts information...
+jv:Njupuk informasi font...
+:Overwrite With Cropped
+jv:Timpa Nganggo Sing Wis Dipotong
+:Save Cropped
+jv:Simpen Sing Dipotong
+:Crop Image
+ka:სურათის ამოჭრა
+:Getting fonts information...
+ka:შრიფტების ინფორმაციის მიღება...
+:Overwrite With Cropped
+ka:თავზე გადაწერა ამოჭრილით
+:Save Cropped
+ka:ამოჭრილის შენახვა
+:Crop Image
+ku:Wêneyê Jêbibire
+:Getting fonts information...
+ku:Agahiyên tîpan tên standin...
+:Overwrite With Cropped
+ku:Bi Jêbirrî Binivîsîne
+:Save Cropped
+ku:Jêbirrî Tomar Bike
+:Crop Image
+kw:Krampya Imach
+:Getting fonts information...
+kw:Ow kavoes kedhlow a vontow...
+:Overwrite With Cropped
+kw:Gorskrifans gans Krampys
+:Save Cropped
+kw:Gwitha Krampys
+:Crop Image
+lt:Apkarpyti vaizdą
+:Getting fonts information...
+lt:Gaunama informacija apie šriftus...
+:Overwrite With Cropped
+lt:Perrašyti apkarpytu
+:Save Cropped
+lt:Išsaugoti apkarpytą
+:Crop Image
+mk:Отсечи слика
+:Getting fonts information...
+mk:Добивање информации за фонтови...
+:Overwrite With Cropped
+mk:Препиши со отсечена
+:Save Cropped
+mk:Зачувај отсечена
+:Crop Image
+mm:ပုံကို ဖြတ်တောက်ရန်
+:Getting fonts information...
+mm:ဖောင့်အချက်အလက်များ ရယူနေသည်...
+:Overwrite With Cropped
+mm:ဖြတ်တောက်ထားသောပုံဖြင့် အစားထိုးရန်
+:Save Cropped
+mm:ဖြတ်တောက်ထားသောပုံကို သိမ်းဆည်းရန်
+:Crop Image
+ne:तस्बिर क्रप गर्नुहोस्
+:Getting fonts information...
+ne:फन्ट जानकारी प्राप्त गर्दै...
+:Overwrite With Cropped
+ne:क्रप गरिएकोसँग अधिलेखन गर्नुहोस्
+:Save Cropped
+ne:क्रप गरिएको सुरक्षित गर्नुहोस्
+:Crop Image
+nn:Beskjer bilete
+:Getting fonts information...
+nn:Hentar skriftinformasjon...
+:Overwrite With Cropped
+nn:Overskriv med beskore
+:Save Cropped
+nn:Lagre beskore
+:Crop Image
+no:Beskjær bilde
+:Getting fonts information...
+no:Henter skriftinformasjon...
+:Overwrite With Cropped
+no:Overskriv med beskåret
+:Save Cropped
+no:Lagre beskåret
+:Crop Image
+pa:ਚਿੱਤਰ ਕਰੋਪ ਕਰੋ
+:Getting fonts information...
+pa:ਫੌਂਟ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...
+:Overwrite With Cropped
+pa:ਕਰੋਪ ਕੀਤੇ ਨਾਲ ਓਵਰਰਾਈਟ ਕਰੋ
+:Save Cropped
+pa:ਕਰੋਪ ਕੀਤਾ ਸੇਵ ਕਰੋ
+:Crop Image
+si:රූපය කපන්න
+:Getting fonts information...
+si:අකුරු තොරතුරු ලබා ගනිමින්...
+:Overwrite With Cropped
+si:කපන ලද එකෙන් උඩින් ලියන්න
+:Save Cropped
+si:කපන ලද එක සුරකින්න
+:Crop Image
+sn:Cheka Mufananidzo
+:Getting fonts information...
+sn:Kutora ruzivo rwefonti...
+:Overwrite With Cropped
+sn:Nyora Pamusoro Neakachekwa
+:Save Cropped
+sn:Chengetedza Yakachekwa
+:Crop Image
+sp-rs:Исеци слику
+:Getting fonts information...
+sp-rs:Преузимање информација о фонтовима...
+:Overwrite With Cropped
+sp-rs:Препиши исеченом
+:Save Cropped
+sp-rs:Сачувај исечено
+:Crop Image
+sq:Prit Imazhin
+:Getting fonts information...
+sq:Duke marrë informacion mbi shkronjat...
+:Overwrite With Cropped
+sq:Mbishkruaj me të Pritën
+:Save Cropped
+sq:Ruaj të Pritën
+:Crop Image
+th:ครอบตัดรูปภาพ
+:Getting fonts information...
+th:กำลังรับข้อมูลฟอนต์...
+:Overwrite With Cropped
+th:เขียนทับด้วยรูปที่ครอบตัด
+:Save Cropped
+th:บันทึกรูปที่ครอบตัด
+:Crop Image
+tl:I-crop ang Larawan
+:Getting fonts information...
+tl:Kinukuha ang impormasyon ng mga font...
+:Overwrite With Cropped
+tl:Palitan ng Naka-crop
+:Save Cropped
+tl:I-save ang Naka-crop
+:Crop Image
+uk:Обрізати зображення
+:Getting fonts information...
+uk:Отримання інформації про шрифти...
+:Overwrite With Cropped
+uk:Перезаписати обрізаним
+:Save Cropped
+uk:Зберегти обрізане
+:Crop Image
+vn:Cắt ảnh
+:Getting fonts information...
+vn:Đang lấy thông tin phông chữ...
+:Overwrite With Cropped
+vn:Ghi đè bằng ảnh đã cắt
+:Save Cropped
+vn:Lưu ảnh đã cắt

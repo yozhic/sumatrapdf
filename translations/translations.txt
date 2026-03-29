@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-6686e7a9fafa6d88a585ec8eabebc2898a0137a5
+4cb178ceec2b1cdb8fff1519437ff65ed820a620
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -6863,6 +6863,7 @@ uz:Barchasini yig‘ish
 vn:Thu gọn tất cả
 :Collecting list of printers
 br:Coletando lista de impressoras
+co:Racolta di a lista di e stampette
 de:Liste der Drucker zusammenstellen
 nl:Verzamel lijst van printers
 pl:Gromadzenie listy drukarek
@@ -9083,12 +9084,14 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Crop Image
 :Ctrl+Tab to navigate
 br:Ctrl+Tab pra navegar
+co:Ctrl+Tabul. per navigà
 de:Strg+Tab zum Navigieren
 nl:Druk Ctrl+Tab voor navigeren
 pl:Ctrl+Tab, aby nawigować
-sk:Použite Ctrl+Tab na prechádzanie
+sk:Použite Ctrl+Tab – prechádzať
 :Current file
 am:Ընթացիկ ֆայլը
 ar:الملف الحالي
@@ -10648,6 +10651,7 @@ uz:PDF-hujjatni ikki marta bosganda ishga tushadigan buyruq satrini kiriting:
 vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
 :Enter to select
 br:Enter pra selecionar
+co:« Entrée » per selezziunà
 de:Enter zum Auswählen
 nl:Toets Enter voor selecteren
 pl:Enter, aby zaznaczyć
@@ -10763,10 +10767,11 @@ uz:%s yuklab olish xatosi
 vn:Không mở %s được
 :Esc to close
 br:Esc pra fechar
+co:Scap. per chjode
 de:Esc zum Schließen
 nl:Esc voor sluiten
 pl:Esc, aby zamknąć
-sk:Esc na zatvorenie
+sk:Esc – zavrieť
 :Execute a program
 am:Կատարել ծրագիր
 br:Executar um programa
@@ -13127,58 +13132,7 @@ tw:GB
 uk:GB
 uz:GB
 vn:GB
-:Get Fonts Info
-am:Տառատեսակների մասին
-ar:عرض معلومات الخطوط
-az:Şriftlər haqqında məlumat
-bg:Информация за шрифта
-br:Obter Informações da Fonte
-by:Атрымаць інфармацыю аб шрыфтах
-ca:Obteniu informació sobre la tipografia
-cn:显示字体信息
-co:Ottene infurmazioni di grafie
-cy:Derbyn Manylion Ffontiau
-cz:Použitá písma
-de:Schriftarten-Infos abrufen
-dk:Få skrifttype information
-el:Πληροφορίες γραμματοσειρών
-es:Información sobre las fuentes
-et:Hangi fondi infot
-eu:Lortu hizkien argibideak
-fa:دریافت اطلاعات فونت
-fi:Hanki fonttien tiedot
-fo:Heinta Info um Skriftsløg
-fr:Infos sur les polices
-ga:Faigh eolas maidir le na clófhoirne
-gl:Obter información do tipo de letra
-he:קבל מידע על גופנים
-hi:फ़ॉन्ट जानकारी प्राप्त करें
-hr:Informacije o fontovima
-hu:Betűkészlet információk lekérése
-id:Dapatkan Info Font
-it:Ottieni informazioni sui font
-ja:フォント情報を取得
-kr:글꼴 정보 확인
-lv:Iegūt fontu informāciju
-my:Dapatkan Maklumat Fon
-nl:Informatie over lettertypen ophalen
-no:Hent skrifttypeinformasjon
-pl:Uzyskaj informacje o czcionkach
-pt:Informações da fonte
-ro:Primeşte informații despre fonturi
-ru:Получить информацию о шрифтах
-sat:ᱪᱤᱠᱤ ᱵᱤᱵᱨᱚᱬ ᱵᱟᱲᱟᱭ ᱢᱮ
-sk:Získať informácie o písmach
-sl:Pridobi informacije o pisavah
-sr-rs:Информације о фонтовима
-sv:Hämta information om typsnitt
-ta:எழுத்துருக்களைப் பற்றிய தகவல்களைப் பெறுக
-tl:Kumuha ng impormasyon ng mga font
-tr:Yazı tipi bilgisi
-tw:字型資訊
-uk:Отримати інформацію про шрифти
-uz:Shriftlar haqida ma’lumot olish
-vn:Lấy Thông Tin Fonts
+:Getting fonts information...
 :Go to Page...
 am:Անցնել էջին...
 br:Ir para a Página...
@@ -14763,6 +14717,7 @@ uz:Qator boshi:
 vn:Dòng Bắt Đầu:
 :List Printers
 br:Listar Impressoras
+co:Lista di e stampette
 de:Drucker auflisten
 nl:Lijst Printers
 pl:Wyświetl drukarki
@@ -17155,6 +17110,7 @@ pl:Opcje...
 ru:Параметры...
 sk:Možnosti…
 tw:選項…
+:Overwrite With Cropped
 :P&roperties
 am:Հ&ատկություններ
 ar:الخصائص
@@ -18743,6 +18699,7 @@ uz:Chop etish diapazoni
 vn:Giới hạn vùng in
 :Printer '%s' doesn't exist
 br:A impressora "%s" não existe
+co:A stampetta « %s » ùn esiste
 de:Drucker '%s' existiert nicht
 nl:Printer '%s' bestaat niet
 pl:Drukarka „%s” nie istnieje
@@ -19310,18 +19267,21 @@ uz:Tahrirlash
 vn:Biên tập
 :Register Windows Previewer
 br:Registrar o Pré-Visualizador do Windows
+co:Arregistrà a fighjulata Windows
 de:Windows-Vorschau registrieren
 nl:Registreer Windows Previewer
 pl:Zarejestruj podgląd Windows
 sk:Registrovať Windows Previewer
 :Register Windows Search Filter
 br:Registrar o Filtro de Busca do Windows
+co:Arregistrà u filtru di ricerca Windows
 de:Suchfilter in Windows registrieren
 nl:Registreer Windows Zoek Filter
 pl:Zarejestruj filtr wyszukiwania Windows
 sk:Registrovať Windows Search Filter
 :Release Ctrl to select
 br:Solte o Ctrl pra selecionar
+co:Rilascià Ctrl per selezziunà
 de:Strg loslassen, um auszuwählen
 nl:Laat Ctrl los voor selecteren
 pl:Puść Ctrl, aby zaznaczyć
@@ -20046,6 +20006,7 @@ tr:Eki kaydet
 tw:儲存附件...
 uk:Зберегти вкладення...
 uz:Ilovani saqlash...
+:Save Cropped
 :Save Embedded File...
 am:Պահել ներկառուցված ֆայլը...
 ar:حفظ الملف المدمج
@@ -21866,6 +21827,7 @@ sk:Zobraziť logy
 tw:顯示記錄
 :Show PDF Info
 br:Mostrar a Informação do PDF
+co:Affissà l’infurmazione nant’à u PDF
 de:PDF-Info anzeigen
 nl:Toon PDF Info
 pl:Pokaż informacje o PDF
@@ -22397,6 +22359,7 @@ uz:%s manba faylida sinxronlanish nuqtasi yo'q
 vn:Tập tin nguồn %s không có điểm đồng bộ
 :Space for sticky mode
 br:Barra de Espaço pro modo fixo
+co:Spazziu per u modu appiccicante
 de:Platz für Sticky‑Modus
 nl:Ruimte voor plak modus
 pl:Spacja dla trybu lepkiego
@@ -23186,9 +23149,11 @@ uz:Belgilangan PDF
 vn:PDF được gắn thẻ
 :Take Screenshot
 br:Criar Screenshot
+co:Catturà una fiura di u screnu
 de:Screenshot erstellen
 nl:Maak Screenshot
 pl:Zrób zrzut ekranu
+sk:Urobiť snímku obrazovky
 :Text Alignment:
 am:Գրվածքի հավասարեցում
 ar:محاذاة النص:
@@ -23947,6 +23912,7 @@ sk:Prepnúť panel s ponukami
 tw:切換功能表列
 :Toggle Overlay Scrollbar
 br:Alternar a Barra de Rolagem da Sobreposição
+co:Attivà o disattivà a barra di sfilarata d’accavalcatura
 de:Überlappende Bildlaufleiste ein-/ausblenden
 nl:Schuifbalk in/uitschakelen
 pl:Przełącz nakładkowy pasek przewijania
@@ -24019,6 +23985,7 @@ sk:Prepnúť panel nástrojov
 tw:切換工具列
 :Toggle Use Tabs
 br:Alternar o Uso das Abas
+co:Attivà o disattivà l’unghjette d’impiegu
 de:Tabs ein-/ausblenden
 nl:Tabbladen In/Uitschakelen
 pl:Przełącz używanie kart
@@ -24116,12 +24083,14 @@ uz:&DeepL bilan tarjima qilish
 vn:Dịch với &DeepL
 :Un-register Windows Previewer
 br:Remover o registro do Pré-Visualizador do Windows
+co:Disarregistrà a fighjulata Windows
 de:Windows-Vorschau deaktivieren
 nl:Deactiveer de Windows Previewer registratie
 pl:Wyrejestruj podgląd Windows
 sk:Zrušiť registráciu Windows Previewer
 :Un-register Windows Search Filter
 br:Remover o registro do Filtro de Busca do Windows
+co:Disarregistrà u filtru di ricerca Windows
 de:Suchfilter in Windows deaktivieren
 nl:Deactiveer Windows Zoek Filter
 pl:Wyrejestruj filtr wyszukiwania Windows
@@ -25851,7 +25820,8 @@ uz:hujjatni chop etish
 vn:đang in tập tin
 :↑ ↓ to navigate
 br:↑ ↓ pra navegar
+co:↑ ↓ per navigà
 de:↑ ↓ zum Navigieren
 nl:↑ ↓ voor navigeren
 pl:↑ ↓ aby nawigować
-sk:↑ ↓ na navigáciu
+sk:↑ ↓ – navigovať

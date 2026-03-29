@@ -8627,7 +8627,7 @@ by:Збор спіса прынтэраў
 ca:Recollint la llista d'impressores
 ca-xv:Recopilant llista d'impressores
 cn:正在收集打印机列表
-co:Raccolta di a lista di stampanti
+co:Racolta di a lista di e stampette
 cy:Casglu rhestr o argraffwyr
 cz:Získávání seznamu tiskáren
 de:Liste der Drucker zusammenstellen
@@ -12556,6 +12556,79 @@ tw:建立日期:
 uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
+:Crop Image
+af:Sny Beeld
+am:ምስል መቁረጥ
+ar:قص الصورة
+az:Şəkli Kəs
+bg:Изрязване на изображение
+bn:ছবি ক্রপ করুন
+br:Diwanañ ar skeudenn
+bs:Obreži sliku
+by:Абрэзаць выяву
+ca:Retalla la imatge
+ca-xv:Retalla la imatge
+cn:裁剪图片
+co:Ritaglia l'imaghjina
+cy:Tocio Delwedd
+cz:Oříznout obrázek
+de:Bild zuschneiden
+dk:Beskær billede
+el:Περικοπή εικόνας
+es:Recortar imagen
+et:Kärbi pilt
+eu:Moztu irudia
+fa:برش تصویر
+fi:Rajaa kuva
+fo:Skera mynd
+fr:Recadrer l'image
+fy-nl:Ofbylding bysnije
+ga:Bearr Íomhá
+gl:Recortar imaxe
+he:חיתוך תמונה
+hi:छवि क्रॉप करें
+hr:Obreži sliku
+hu:Kép körülvágása
+id:Potong Gambar
+it:Ritaglia immagine
+ja:画像をトリミング
+jv:Potong Gambar
+ka:სურათის ამოჭრა
+kr:이미지 자르기
+ku:Wêneyê Jêbibire
+kw:Krampya Imach
+lt:Apkarpyti vaizdą
+lv:Apgriezt attēlu
+mk:Отсечи слика
+ml:ചിത്രം ക്രോപ്പ് ചെയ്യുക
+mm:ပုံကို ဖြတ်တောက်ရန်
+my:ပုံကို ဖြတ်တောက်ရန်
+ne:तस्बिर क्रप गर्नुहोस्
+nl:Afbeelding bijsnijden
+nn:Beskjer bilete
+no:Beskjær bilde
+pa:ਚਿੱਤਰ ਕਰੋਪ ਕਰੋ
+pl:Przytnij obraz
+pt:Cortar Imagem
+ro:Decupează imaginea
+ru:Обрезать изображение
+sat:ᱪᱤᱛᱟᱹᱨ ᱠᱨᱚᱯ ᱢᱮ
+si:රූපය කපන්න
+sk:Orezať obrázok
+sl:Obreži sliko
+sn:Cheka Mufananidzo
+sp-rs:Исеци слику
+sq:Prit Imazhin
+sr-rs:Исеци слику
+sv:Beskär bild
+ta:படத்தை செதுக்கு
+th:ครอบตัดรูปภาพ
+tl:I-crop ang Larawan
+tr:Resmi Kırp
+tw:裁切圖片
+uk:Обрізати зображення
+uz:Rasmni kesish
+vn:Cắt ảnh
 :Ctrl+Tab to navigate
 af:Ctrl+Tab om te navigeer
 am:ለማሰስ Ctrl+Tab
@@ -12569,7 +12642,7 @@ by:Ctrl+Tab для навігацыі
 ca:Ctrl+Tab per navegar
 ca-xv:Ctrl+Tab per navegar
 cn:Ctrl+Tab 导航
-co:Ctrl+Tab per navigà
+co:Ctrl+Tabul. per navigà
 cy:Ctrl+Tab i lywio
 cz:Ctrl+Tab pro navigaci
 de:Strg+Tab zum Navigieren
@@ -12614,7 +12687,7 @@ ro:Ctrl+Tab pentru navigare
 ru:Ctrl+Tab для навигации
 sat:Ctrl+Tab ᱛᱮ ᱥᱮᱱᱚᱜ
 si:සංචලනය සඳහා Ctrl+Tab
-sk:Použite Ctrl+Tab na prechádzanie
+sk:Použite Ctrl+Tab – prechádzať
 sl:Ctrl+Tab za navigacijo
 sn:Ctrl+Tab kufambisa
 sp-rs:Ctrl+Tab za navigaciju
@@ -15197,7 +15270,7 @@ by:Enter для выбару
 ca:Enter per seleccionar
 ca-xv:Enter per seleccionar
 cn:回车选择
-co:Enter per selezziunà
+co:« Entrée » per selezziunà
 cy:Enter i ddewis
 cz:Enter pro výběr
 de:Enter zum Auswählen
@@ -15416,7 +15489,7 @@ by:Esc для закрыцця
 ca:Esc per tancar
 ca-xv:Esc per tancar
 cn:Esc 关闭
-co:Esc per chjude
+co:Scap. per chjode
 cy:Esc i gau
 cz:Esc pro zavření
 de:Esc zum Schließen
@@ -15461,7 +15534,7 @@ ro:Esc pentru închidere
 ru:Esc для закрытия
 sat:Esc ᱛᱮ ᱵᱚᱸᱫᱚᱭ
 si:වසා දැමීමට Esc
-sk:Esc na zatvorenie
+sk:Esc – zavrieť
 sl:Esc za zaprtje
 sn:Esc kuvhara
 sp-rs:Esc za zatvaranje
@@ -18542,79 +18615,79 @@ tw:GB
 uk:GB
 uz:GB
 vn:GB
-:Get Fonts Info
-af:Kry Fonte Inligting
-am:Տառատեսակների մասին
-ar:عرض معلومات الخطوط
-az:Şriftlər haqqında məlumat
-bg:Информация за шрифта
-bn:ফন্টের তথ্য পান
-br:Obter Informações da Fonte
-bs:Dobij informacije o fontovima
-by:Атрымаць інфармацыю аб шрыфтах
-ca:Obteniu informació sobre la tipografia
-ca-xv:Obtén informació de les fonts
-cn:显示字体信息
-co:Ottene infurmazioni di grafie
-cy:Derbyn Manylion Ffontiau
-cz:Použitá písma
-de:Schriftarten-Infos abrufen
-dk:Få skrifttype information
-el:Πληροφορίες γραμματοσειρών
-es:Información sobre las fuentes
-et:Hangi fondi infot
-eu:Lortu hizkien argibideak
-fa:دریافت اطلاعات فونت
-fi:Hanki fonttien tiedot
-fo:Heinta Info um Skriftsløg
-fr:Infos sur les polices
-fy-nl:Lettertype-ynformaasje ophelje
-ga:Faigh eolas maidir le na clófhoirne
-gl:Obter información do tipo de letra
-he:קבל מידע על גופנים
-hi:फ़ॉन्ट जानकारी प्राप्त करें
-hr:Informacije o fontovima
-hu:Betűkészlet információk lekérése
-id:Dapatkan Info Font
-it:Ottieni informazioni sui font
-ja:フォント情報を取得
-jv:Jupuk Info Fon
-ka:შრიფტების ინფორმაციის მიღება
-kr:글꼴 정보 확인
-ku:وەرگرتنی زانیاری فۆنتەکان
-kw:Kavoes Kedhlow Fontyow
-lt:Gauti šriftų informaciją
-lv:Iegūt fontu informāciju
-mk:Информации за фонтови
-ml:ഫോണ്ടുകളുടെ വിവരങ്ങൾ നേടുക
-mm:ဖောင့်အချက်အလက်ရယူရန်
-my:Dapatkan Maklumat Fon
-ne:फन्ट जानकारी प्राप्त गर्नुहोस्
-nl:Informatie over lettertypen ophalen
-nn:Hent skriftinfo
-no:Hent skrifttypeinformasjon
-pa:ਫੌਂਟਸ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰੋ
-pl:Uzyskaj informacje o czcionkach
-pt:Informações da fonte
-ro:Primeşte informații despre fonturi
-ru:Получить информацию о шрифтах
-sat:ᱪᱤᱠᱤ ᱵᱤᱵᱨᱚᱬ ᱵᱟᱲᱟᱭ ᱢᱮ
-si:අකුරු තොරතුරු ලබාගන්න
-sk:Získať informácie o písmach
-sl:Pridobi informacije o pisavah
-sn:Wana Ruzivo rweMafonti
-sp-rs:Добави информације о фонтовима
-sq:Merr Informacion mbi Fontet
-sr-rs:Информације о фонтовима
-sv:Hämta information om typsnitt
-ta:எழுத்துருக்களைப் பற்றிய தகவல்களைப் பெறுக
-th:รับข้อมูลฟอนต์
-tl:Kumuha ng impormasyon ng mga font
-tr:Yazı tipi bilgisi
-tw:字型資訊
-uk:Отримати інформацію про шрифти
-uz:Shriftlar haqida ma’lumot olish
-vn:Lấy Thông Tin Fonts
+:Getting fonts information...
+af:Kry lettertipe inligting...
+am:የፊደል መረጃ በማግኘት ላይ...
+ar:جارٍ الحصول على معلومات الخطوط...
+az:Şrift məlumatları əldə edilir...
+bg:Получаване на информация за шрифтовете...
+bn:ফন্টের তথ্য পাওয়া যাচ্ছে...
+br:O kaout titouroù ar fontoù...
+bs:Preuzimanje informacija o fontovima...
+by:Атрыманне інфармацыі пра шрыфты...
+ca:Obtenint informació de les fonts...
+ca-xv:S'està obtenint la informació de les fonts...
+cn:正在获取字体信息...
+co:Ottenimentu di l'infurmazioni nantu à e fonti...
+cy:Yn cael gwybodaeth am ffontiau...
+cz:Získávání informací o písmech...
+de:Schriftinformationen werden abgerufen...
+dk:Henter skrifttypeinformation...
+el:Λήψη πληροφοριών γραμματοσειρών...
+es:Obteniendo información de fuentes...
+et:Fonditeabe hankimine...
+eu:Letra-tipoen informazioa eskuratzen...
+fa:دریافت اطلاعات فونت‌ها...
+fi:Haetaan fonttien tietoja...
+fo:Fái upplýsingar um stavsnið...
+fr:Récupération des informations sur les polices...
+fy-nl:Lettertype-ynformaasje ophelle...
+ga:Ag fáil eolais faoi chlónna...
+gl:Obtendo información das fontes...
+he:מקבל מידע על גופנים...
+hi:फ़ॉन्ट जानकारी प्राप्त की जा रही है...
+hr:Dohvaćanje informacija o fontovima...
+hu:Betűtípus információk lekérése...
+id:Mendapatkan informasi font...
+it:Recupero informazioni caratteri...
+ja:フォント情報を取得中...
+jv:Njupuk informasi font...
+ka:შრიფტების ინფორმაციის მიღება...
+kr:글꼴 정보 가져오는 중...
+ku:Agahiyên tîpan tên standin...
+kw:Ow kavoes kedhlow a vontow...
+lt:Gaunama informacija apie šriftus...
+lv:Iegūst fontu informāciju...
+mk:Добивање информации за фонтови...
+ml:ഫോണ്ട് വിവരങ്ങൾ ലഭിക്കുന്നു...
+mm:ဖောင့်အချက်အလက်များ ရယူနေသည်...
+my:စာလုံးပုံစံ အချက်อလက်များ ရယူနေသည်...
+ne:फन्ट जानकारी प्राप्त गर्दै...
+nl:Lettertype-informatie ophalen...
+nn:Hentar skriftinformasjon...
+no:Henter skriftinformasjon...
+pa:ਫੌਂਟ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...
+pl:Pobieranie informacji o czcionkach...
+pt:Obtendo informações das fontes...
+ro:Se obțin informații despre fonturi...
+ru:Получение информации о шрифтах...
+sat:ᱪᱤᱠᱤ ᱠᱚᱣᱟᱜ ᱵᱤᱵᱨᱚᱬ ᱧᱟᱢᱚᱜ ᱠᱟᱱᱟ...
+si:අකුරු තොරතුරු ලබා ගනිමින්...
+sk:Získavanie informácií o písmach...
+sl:Pridobivanje informacij o pisavah...
+sn:Kutora ruzivo rwefonti...
+sp-rs:Преузимање информација о фонтовима...
+sq:Duke marrë informacion mbi shkronjat...
+sr-rs:Преузимање информација о фонтовима...
+sv:Hämtar teckensnittsinformation...
+ta:எழுத்துரு தகவல்களைப் பெறுகிறது...
+th:กำลังรับข้อมูลฟอนต์...
+tl:Kinukuha ang impormasyon ng mga font...
+tr:Yazı tipi bilgileri alınıyor...
+tw:正在取得字型資訊...
+uk:Отримання інформації про шрифти...
+uz:Shriftlar haqida ma'lumot olinmoqda...
+vn:Đang lấy thông tin phông chữ...
 :Go to Page...
 af:Gaan na Bladsy...
 am:Անցնել էջին...
@@ -21183,7 +21256,7 @@ by:Спіс прынтэраў
 ca:Llista d'impressores
 ca-xv:Llistar impressores
 cn:打印机列表
-co:Lista Stampanti
+co:Lista di e stampette
 cy:Rhestru Argraffwyr
 cz:Seznam tiskáren
 de:Drucker auflisten
@@ -25550,6 +25623,79 @@ tw:選項…
 uk:Опції...
 uz:Parametrlar...
 vn:Tuỳ chọn
+:Overwrite With Cropped
+af:Oorskryf Met Gesnyde
+am:በተቆረጠው ላይ መተካት
+ar:استبدال بالصورة المقصوصة
+az:Kəsilmiş ilə Əvəz Et
+bg:Презапиши с изрязаното
+bn:ক্রপ করা দিয়ে প্রতিস্থাপন করুন
+br:Flastrañ gant an hini diwanaet
+bs:Prepiši obrezanom
+by:Перазапісаць абрэзанай
+ca:Sobreescriu amb la retallada
+ca-xv:Sobreescriu amb la retallada
+cn:用裁剪后的图片覆盖
+co:Rimpiazzà cù a ritugliata
+cy:Trosysgrifennu Gyda'r Ddelwedd wedi'i Thocio
+cz:Přepsat oříznutým
+de:Mit zugeschnittenem Bild überschreiben
+dk:Overskriv med beskåret
+el:Αντικατάσταση με περικομμένη
+es:Sobrescribir con recortada
+et:Kirjuta üle kärbitud pildiga
+eu:Gainidatzi moztutakoarekin
+fa:بازنویسی با تصویر برش خورده
+fi:Korvaa rajatulla
+fo:Yvirskriva við skerdu
+fr:Écraser avec l'image recadrée
+fy-nl:Oerskreaune mei bysnijd
+ga:Forscríobh leis an gCeann Bearrtha
+gl:Sobrescribir coa recortada
+he:החלף בתמונה החתוכה
+hi:क्रॉप की गई से अधिलेखित करें
+hr:Prepiši s obrezanom
+hu:Felülírás a körülvágottal
+id:Timpa Dengan Hasil Potongan
+it:Sovrascrivi con ritagliata
+ja:トリミング後で上書き
+jv:Timpa Nganggo Sing Wis Dipotong
+ka:თავზე გადაწერა ამოჭრილით
+kr:자른 이미지로 덮어쓰기
+ku:Bi Jêbirrî Binivîsîne
+kw:Gorskrifans gans Krampys
+lt:Perrašyti apkarpytu
+lv:Pārrakstīt ar apgriezto
+mk:Препиши со отсечена
+ml:ക്രോപ്പ് ചെയ്തത് ഉപയോഗിച്ച് തിരുത്തിയെഴുതുക
+mm:ဖြတ်တောက်ထားသောပုံဖြင့် အစားထိုးရန်
+my:ဖြတ်တောက်ထားသည်ဖြင့် အစားထိုးရန်
+ne:क्रप गरिएकोसँग अधिलेखन गर्नुहोस्
+nl:Overschrijven met bijgesneden
+nn:Overskriv med beskore
+no:Overskriv med beskåret
+pa:ਕਰੋਪ ਕੀਤੇ ਨਾਲ ਓਵਰਰਾਈਟ ਕਰੋ
+pl:Nadpisz przyciętym
+pt:Sobrescrever com Recortada
+ro:Suprascrie cu decupată
+ru:Перезаписать обрезанным
+sat:ᱠᱨᱚᱯ ᱠᱟᱱ ᱥᱟᱶ ᱫᱚᱦᱲᱟ ᱚᱞ ᱢᱮ
+si:කපන ලද එකෙන් උඩින් ලියන්න
+sk:Prepísať orezaným
+sl:Prepiši z obrezano
+sn:Nyora Pamusoro Neakachekwa
+sp-rs:Препиши исеченом
+sq:Mbishkruaj me të Pritën
+sr-rs:Препиши исеченом
+sv:Skriv över med beskuren
+ta:செதுக்கியதை மேலெழுது
+th:เขียนทับด้วยรูปที่ครอบตัด
+tl:Palitan ng Naka-crop
+tr:Kırpılmış Haliyle Üzerine Yaz
+tw:以裁切後的圖片覆蓋
+uk:Перезаписати обрізаним
+uz:Kesilgan bilan almashtirish
+vn:Ghi đè bằng ảnh đã cắt
 :P&roperties
 af:Eienskappe
 am:Հ&ատկություններ
@@ -27680,7 +27826,7 @@ by:Прынтар '%s' не існуе
 ca:La impressora '%s' no existeix
 ca-xv:La impressora '%s' no existeix
 cn:打印机 '%s' 不存在
-co:A stampante '%s' ùn esiste micca
+co:A stampetta « %s » ùn esiste
 cy:Nid yw'r argraffydd '%s' yn bodoli
 cz:Tiskárna '%s' neexistuje
 de:Drucker '%s' existiert nicht
@@ -28483,7 +28629,7 @@ by:Зарэгістраваць прагляднік Windows
 ca:Registra el visualitzador de Windows
 ca-xv:Registrar el Previsualizador de Windows
 cn:注册 Windows 预览器
-co:Arregistrà u Previsualizatore Windows
+co:Arregistrà a fighjulata Windows
 cy:Cofrestru Rhagolygydd Windows
 cz:Registrovat Windows Previewer
 de:Windows-Vorschau registrieren
@@ -28556,7 +28702,7 @@ by:Зарэгістраваць фільтр пошуку Windows
 ca:Registra el filtre de cerca de Windows
 ca-xv:Registrar el Filtre de Cerca de Windows
 cn:注册 Windows 搜索筛选器
-co:Arregistrà u Filtru di Ricerca Windows
+co:Arregistrà u filtru di ricerca Windows
 cy:Cofrestru Hidlydd Chwilio Windows
 cz:Registrovat filtr Windows Search
 de:Suchfilter in Windows registrieren
@@ -28629,7 +28775,7 @@ by:Адпусціце Ctrl для выбару
 ca:Allibera Ctrl per seleccionar
 ca-xv:Allibera Ctrl per seleccionar
 cn:释放 Ctrl 选择
-co:Liberà Ctrl per selezziunà
+co:Rilascià Ctrl per selezziunà
 cy:Rhyddhau Ctrl i ddewis
 cz:Uvolněte Ctrl pro výběr
 de:Strg loslassen, um auszuwählen
@@ -30003,6 +30149,79 @@ tw:儲存附件...
 uk:Зберегти вкладення...
 uz:Ilovani saqlash...
 vn:Lưu tệp đính kèm...
+:Save Cropped
+af:Stoor Gesnyde
+am:የተቆረጠውን ማስቀመጥ
+ar:حفظ المقصوصة
+az:Kəsilmişi Saxla
+bg:Запази изрязаното
+bn:ক্রপ করা সংরক্ষণ করুন
+br:Enrollañ an hini diwanaet
+bs:Sačuvaj obrezano
+by:Захаваць абрэзанае
+ca:Desa la retallada
+ca-xv:Desa la retallada
+cn:保存裁剪
+co:Salvà a ritugliata
+cy:Cadw'r Ddelwedd wedi'i Thocio
+cz:Uložit oříznuté
+de:Zugeschnittenes speichern
+dk:Gem beskåret
+el:Αποθήκευση περικομμένης
+es:Guardar recortada
+et:Salvesta kärbitud
+eu:Gorde moztua
+fa:ذخیره برش خورده
+fi:Tallenna rajattu
+fo:Goym skerdu
+fr:Enregistrer l'image recadrée
+fy-nl:Bysnijd bewarje
+ga:Sábháil Bearrtha
+gl:Gardar recortada
+he:שמור תמונה חתוכה
+hi:क्रॉप की गई सहेजें
+hr:Spremi obrezano
+hu:Körülvágott mentése
+id:Simpan Hasil Potongan
+it:Salva ritagliata
+ja:トリミング後を保存
+jv:Simpen Sing Dipotong
+ka:ამოჭრილის შენახვა
+kr:자른 이미지 저장
+ku:Jêbirrî Tomar Bike
+kw:Gwitha Krampys
+lt:Išsaugoti apkarpytą
+lv:Saglabāt apgriezto
+mk:Зачувај отсечена
+ml:ക്രോപ്പ് ചെയ്തത് സംരക്ഷിക്കുക
+mm:ဖြတ်တောက်ထားသောပုံကို သိမ်းဆည်းရန်
+my:ဖြတ်တောက်ထားသည်ကို သိမ်းဆည်းရန်
+ne:क्रप गरिएको सुरक्षित गर्नुहोस्
+nl:Bijgesneden opslaan
+nn:Lagre beskore
+no:Lagre beskåret
+pa:ਕਰੋਪ ਕੀਤਾ ਸੇਵ ਕਰੋ
+pl:Zapisz przycięty
+pt:Salvar Recortada
+ro:Salvează decupată
+ru:Сохранить обрезанное
+sat:ᱠᱨᱚᱯ ᱠᱟᱱ ᱥᱟᱺᱪᱟᱣ ᱢᱮ
+si:කපන ලද එක සුරකින්න
+sk:Uložiť orezaný
+sl:Shrani obrezano
+sn:Chengetedza Yakachekwa
+sp-rs:Сачувај исечено
+sq:Ruaj të Pritën
+sr-rs:Сачувај исечено
+sv:Spara beskuren
+ta:செதுக்கியதைச் சேமி
+th:บันทึกรูปที่ครอบตัด
+tl:I-save ang Naka-crop
+tr:Kırpılmışı Kaydet
+tw:儲存裁切後的圖片
+uk:Зберегти обрізане
+uz:Kesilganni saqlash
+vn:Lưu ảnh đã cắt
 :Save Embedded File...
 af:Stoor Ingeslote Lêer...
 am:Պահել ներկառուցված ֆայլը...
@@ -33739,7 +33958,7 @@ by:Паказаць інфармацыю пра PDF
 ca:Mostra informació del PDF
 ca-xv:Mostra la informació del PDF
 cn:显示PDF信息
-co:Affissà l'infurmazione PDF
+co:Affissà l’infurmazione nant’à u PDF
 cy:Dangos Gwybodaeth PDF
 cz:Zobrazit informace o PDF
 de:PDF-Info anzeigen
@@ -34542,7 +34761,7 @@ by:Прабел для рэжыму фіксацыі
 ca:Espai per mode fixat
 ca-xv:Espai per mode fix
 cn:空格切换粘滞模式
-co:Spaziu per u modu fissu
+co:Spazziu per u modu appiccicante
 cy:Bwlch ar gyfer modd gludiog
 cz:Mezerník pro trvalý režim
 de:Platz für Sticky‑Modus
@@ -35491,7 +35710,7 @@ by:Зрабіць здымак экрана
 ca:Fes una captura de pantalla
 ca-xv:Fes captura de pantalla
 cn:截屏
-co:Piglià una cattura di schermu
+co:Catturà una fiura di u screnu
 cy:Cymryd Sgrinlun
 cz:Pořídit snímek obrazovky
 de:Screenshot erstellen
@@ -37170,7 +37389,7 @@ by:Пераключыць накладны паласу пракруткі
 ca:Commuta la barra de desplaçament superposada
 ca-xv:Commuta la barra de desplaçament superposada
 cn:切换覆盖滚动条
-co:Attivà/Disattivà a Barra di Scurrimentu Soprapposta
+co:Attivà o disattivà a barra di sfilarata d’accavalcatura
 cy:Toglo Bar Sgrolio Troshaen
 cz:Přepnout překryvný posuvník
 de:Überlappende Bildlaufleiste ein-/ausblenden
@@ -37681,7 +37900,7 @@ by:Пераключыць выкарыстанне ўкладак
 ca:Commuta l'ús de pestanyes
 ca-xv:Commuta l'ús de pestanyes
 cn:切换使用标签页
-co:Attivà/Disattivà l'Usu di Tabulazioni
+co:Attivà o disattivà l’unghjette d’impiegu
 cy:Toglo Defnyddio Tabiau
 cz:Přepnout použití záložek
 de:Tabs ein-/ausblenden
@@ -38046,7 +38265,7 @@ by:Адрэгістраваць прагляднік Windows
 ca:Desregistra el visualitzador de Windows
 ca-xv:Desregistrar el Previsualizador de Windows
 cn:注销 Windows 预览器
-co:Disarregistrà u Previsualizatore Windows
+co:Disarregistrà a fighjulata Windows
 cy:Dad-gofrestru Rhagolygydd Windows
 cz:Odregistrovat Windows Previewer
 de:Windows-Vorschau deaktivieren
@@ -38119,7 +38338,7 @@ by:Адрэгістраваць фільтр пошуку Windows
 ca:Desregistra el filtre de cerca de Windows
 ca-xv:Desregistrar el Filtre de Cerca de Windows
 cn:注销 Windows 搜索筛选器
-co:Disarregistrà u Filtru di Ricerca Windows
+co:Disarregistrà u filtru di ricerca Windows
 cy:Dad-gofrestru Hidlydd Chwilio Windows
 cz:Odregistrovat filtr Windows Search
 de:Suchfilter in Windows deaktivieren
@@ -41595,7 +41814,7 @@ ro:↑ ↓ pentru navigare
 ru:↑ ↓ для навигации
 sat:↑ ↓ ᱛᱮ ᱥᱮᱱᱚᱜ
 si:සංචලනය සඳහා ↑ ↓
-sk:↑ ↓ na navigáciu
+sk:↑ ↓ – navigovať
 sl:↑ ↓ za navigacijo
 sn:↑ ↓ kufambisa
 sp-rs:↑ ↓ za navigaciju
