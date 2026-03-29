@@ -419,7 +419,20 @@ static void OnSave(CropImageWindow* cw) {
         return;
     }
 
+    // load the saved image
+    HWND hwndParent = cw->hwndParent;
+    char* savedPath = str::Dup(dest);
     DestroyWindow(cw->hwnd);
+
+    MainWindow* win = FindMainWindowByHwnd(hwndParent);
+    if (!win && !gWindows.IsEmpty()) {
+        win = gWindows.at(0);
+    }
+    if (win) {
+        LoadArgs args(savedPath, win);
+        StartLoadDocument(&args);
+    }
+    free(savedPath);
 }
 
 static void OnCancel(CropImageWindow* cw) {
