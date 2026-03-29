@@ -196,6 +196,109 @@ static void CalcImageLayout(ResizeImageWindow* rw) {
     rw->imgDisplayY = kImagePadding + (availH - rw->imgDisplayH) / 2;
 }
 
+// Grow the window if the new-size rectangle exceeds the image display area.
+// Tries to grow in the direction of the drag, moving the window if needed,
+// but stops at screen edges.
+static void GrowWindowIfNeeded(ResizeImageWindow* rw, ResizeImageWindow::DragEdge edge) {
+    // calculate how much display space the new size needs
+    int neededDispW = ImageToDisplayW(rw, rw->newW) + 2 * kImagePadding;
+    int neededDispH = ImageToDisplayH(rw, rw->newH) + 2 * kImagePadding;
+
+    Rect cRc = ClientRect(rw->hwnd);
+    int availW = cRc.dx;
+    int availH = rw->imgAreaH;
+
+    int extraW = neededDispW - availW;
+    int extraH = neededDispH - availH;
+    if (extraW <= 0 && extraH <= 0) {
+        return;
+    }
+    if (extraW < 0) {
+        extraW = 0;
+    }
+    if (extraH < 0) {
+        extraH = 0;
+    }
+
+    // get screen work area
+    HMONITOR hMon = MonitorFromWindow(rw->hwnd, MONITOR_DEFAULTTONEAREST);
+    MONITORINFO mi = {sizeof(mi)};
+    GetMonitorInfo(hMon, &mi);
+    int screenL = mi.rcWork.left;
+    int screenT = mi.rcWork.top;
+    int screenR = mi.rcWork.right;
+    int screenB = mi.rcWork.bottom;
+
+    RECT winRc;
+    GetWindowRect(rw->hwnd, &winRc);
+    int winX = winRc.left;
+    int winY = winRc.top;
+    int winW = winRc.right - winRc.left;
+    int winH = winRc.bottom - winRc.top;
+
+    int newWinW = winW + extraW;
+    int newWinH = winH + extraH;
+
+    // don't exceed screen size
+    int maxW = screenR - screenL;
+    int maxH = screenB - screenT;
+    if (newWinW > maxW) {
+        newWinW = maxW;
+    }
+    if (newWinH > maxH) {
+        newWinH = maxH;
+    }
+
+    int deltaW = newWinW - winW;
+    int deltaH = newWinH - winH;
+    if (deltaW <= 0 && deltaH <= 0) {
+        return;
+    }
+
+    int newX = winX;
+    int newY = winY;
+
+    // determine grow direction based on which edge is being dragged
+    bool growLeft = (edge == ResizeImageWindow::DragEdge::Left || edge == ResizeImageWindow::DragEdge::TopLeft ||
+                     edge == ResizeImageWindow::DragEdge::BottomLeft);
+    bool growUp = (edge == ResizeImageWindow::DragEdge::Top || edge == ResizeImageWindow::DragEdge::TopLeft ||
+                   edge == ResizeImageWindow::DragEdge::TopRight);
+
+    if (growLeft && deltaW > 0) {
+        newX = winX - deltaW;
+        if (newX < screenL) {
+            newX = screenL;
+        }
+    } else if (deltaW > 0) {
+        // grow right - check we don't go past screen edge
+        if (newX + newWinW > screenR) {
+            newX = screenR - newWinW;
+            if (newX < screenL) {
+                newX = screenL;
+            }
+        }
+    }
+
+    if (growUp && deltaH > 0) {
+        newY = winY - deltaH;
+        if (newY < screenT) {
+            newY = screenT;
+        }
+    } else if (deltaH > 0) {
+        // grow down
+        if (newY + newWinH > screenB) {
+            newY = screenB - newWinH;
+            if (newY < screenT) {
+                newY = screenT;
+            }
+        }
+    }
+
+    SetWindowPos(rw->hwnd, nullptr, newX, newY, newWinW, newWinH, SWP_NOZORDER);
+    // recalc layout after window resize
+    CalcImageLayout(rw);
+}
+
 static ResizeImageWindow::DragEdge HitTestResizeEdge(ResizeImageWindow* rw, int mx, int my) {
     // the "new size" rectangle, centered in the display area
     int dispNewW = ImageToDisplayW(rw, rw->newW);
@@ -608,6 +711,7 @@ LRESULT CALLBACK WndProcResizeImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
                 rw->newW = nw;
                 rw->newH = nh;
+                GrowWindowIfNeeded(rw, edge);
                 UpdateInfoLabel(rw);
                 InvalidateImageArea(rw);
             } else {
