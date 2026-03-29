@@ -368,6 +368,16 @@ static void OnBrowse(CropImageWindow* cw) {
     }
 }
 
+static bool IsKnownImageExt(const char* ext) {
+    const char* exts[] = {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".tif"};
+    for (auto e : exts) {
+        if (str::EqI(ext, e)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 static const WCHAR* GetEncoderMimeForExt(const char* ext) {
     if (str::EqI(ext, ".png")) {
         return L"image/png";
@@ -388,17 +398,49 @@ static const WCHAR* GetEncoderMimeForExt(const char* ext) {
     return L"image/png";
 }
 
+// Get the file extension that matches the source image format.
+// Returns the source extension if it's a known image format, otherwise ".png".
+static const char* GetMatchingExt(const char* srcExt) {
+    if (IsKnownImageExt(srcExt)) {
+        return srcExt;
+    }
+    return ".png";
+}
+
+// Ensure dest path has an extension matching a supported image format.
+// If the extension is unknown, replace it (or append) with one derived from the source file.
+static TempStr EnsureImageExtTemp(const char* dest, const char* srcFilePath) {
+    TempStr destExt = path::GetExtTemp(dest);
+    if (IsKnownImageExt(destExt)) {
+        return str::DupTemp(dest);
+    }
+    // use source file's extension if it's known, otherwise default to .png
+    TempStr srcExt = path::GetExtTemp(srcFilePath);
+    const char* ext = GetMatchingExt(srcExt);
+    if (str::IsEmpty(destExt)) {
+        // no extension at all - append
+        return str::FormatTemp("%s%s", dest, ext);
+    }
+    // has an unrecognized extension - replace it
+    int baseLen = str::Leni(dest) - str::Leni(destExt);
+    TempStr base = str::DupTemp(dest, baseLen);
+    return str::FormatTemp("%s%s", base, ext);
+}
+
 static void OnSave(CropImageWindow* cw) {
     if (!cw->srcBitmap || cw->cropW <= 0 || cw->cropH <= 0) {
         return;
     }
 
-    WCHAR destW[MAX_PATH + 1]{};
-    GetWindowTextW(cw->hwndDestEdit, destW, MAX_PATH);
-    TempStr dest = ToUtf8Temp(destW);
-    if (str::IsEmpty(dest)) {
+    WCHAR rawDestW[MAX_PATH + 1]{};
+    GetWindowTextW(cw->hwndDestEdit, rawDestW, MAX_PATH);
+    TempStr rawDest = ToUtf8Temp(rawDestW);
+    if (str::IsEmpty(rawDest)) {
         return;
     }
+
+    // ensure the destination has a valid image extension
+    TempStr dest = EnsureImageExtTemp(rawDest, cw->filePath);
 
     // create cropped bitmap
     Gdiplus::Rect srcRect(cw->cropX, cw->cropY, cw->cropW, cw->cropH);
@@ -411,6 +453,7 @@ static void OnSave(CropImageWindow* cw) {
     TempStr ext = path::GetExtTemp(dest);
     const WCHAR* mime = GetEncoderMimeForExt(ext);
     CLSID encoderClsid = GetEncoderClsid(mime);
+    TempWStr destW = ToWStrTemp(dest);
     Status status = cropped->Save(destW, &encoderClsid, nullptr);
     delete cropped;
 
