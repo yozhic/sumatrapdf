@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-4cb178ceec2b1cdb8fff1519437ff65ed820a620
+5cab9a1bf3b3e5a46a7e66ab1070f931095d7212
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -19598,6 +19598,7 @@ nl:Heropen Laatst Gesloten
 pl:Otwórz ponownie ostatnio zamknięty
 sk:Znovu otvoriť naposledy zatvorené
 tw:重新開啟上次關閉的內容
+:Resize Image
 :Rotate &Left
 am:Պտտել &ձախ
 ar:دوّ&ر يسارا

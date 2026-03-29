@@ -29419,6 +29419,79 @@ tw:重新開啟上次關閉的內容
 uk:Відкрити останній закритий
 uz:Oxirgi yopilganni qayta ochish
 vn:Mở lại tệp đã đóng gần nhất
+:Resize Image
+af:Verander Beeld Grootte
+am:ምስል መጠን ቀይር
+ar:تغيير حجم الصورة
+az:Şəklin Ölçüsünü Dəyişdir
+bg:Преоразмеряване на изображение
+bn:ছবির আকার পরিবর্তন করুন
+br:Adventañ ar skeudenn
+bs:Promijeni veličinu slike
+by:Змяніць памер выявы
+ca:Redimensiona la imatge
+ca-xv:Redimensionar imatge
+cn:调整图片大小
+co:Ridimensionà l'imaghjina
+cy:Newid Maint Delwedd
+cz:Změnit velikost obrázku
+de:Bild skalieren
+dk:Tilpas billedstørrelse
+el:Αλλαγή μεγέθους εικόνας
+es:Redimensionar imagen
+et:Muuda pildi suurust
+eu:Aldatu irudiaren tamaina
+fa:تغییر اندازه تصویر
+fi:Muuta kuvan kokoa
+fo:Endra stødd á mynd
+fr:Redimensionner l'image
+fy-nl:Ofbylding feroarje
+ga:Athraigh Méid Íomhá
+gl:Redimensionar imaxe
+he:שינוי גודל תמונה
+hi:छवि का आकार बदलें
+hr:Promijeni veličinu slike
+hu:Kép átméretezése
+id:Ubah Ukuran Gambar
+it:Ridimensiona immagine
+ja:画像のサイズ変更
+jv:Owahi Ukuran Gambar
+ka:სურათის ზომის შეცვლა
+kr:이미지 크기 조정
+ku:قەبارەی وێنە بگۆڕە
+kw:Dasvanna Imach
+lt:Keisti vaizdo dydį
+lv:Mainīt attēla izmēru
+mk:Промени големина на слика
+ml:ചിത്രം പുനഃക്രമീകരിക്കുക
+mm:ပုံအရွယ်အစားပြောင်းရန်
+my:ပုံအရွယ်အစားပြောင်းရန်
+ne:तस्बिर रिसाइज गर्नुहोस्
+nl:Afbeelding vergroten/verkleinen
+nn:Endre storleik på bilete
+no:Endre bildestørrelse
+pa:ਚਿੱਤਰ ਦਾ ਆਕਾਰ ਬਦਲੋ
+pl:Zmień rozmiar obrazu
+pt:Redimensionar Imagem
+ro:Redimensionează imaginea
+ru:Изменить размер изображения
+sat:ᱪᱤᱛᱟᱹᱨ ᱨᱤᱥᱟᱭᱤᱡᱽ
+si:රූපය ප්‍රමාණය වෙනස් කරන්න
+sk:Zmeniť veľkosť obrázka
+sl:Spremeni velikost slike
+sn:Chinja Saizi Yemufananidzo
+sp-rs:Promeni veličinu slike
+sq:Ndrysho Madhësinë e Imazhit
+sr-rs:Промени величину слике
+sv:Ändra bildstorlek
+ta:படத்தின் அளவை மாற்று
+th:ปรับขนาดรูปภาพ
+tl:Baguhin ang Laki ng Larawan
+tr:Resmi Yeniden Boyutlandır
+tw:調整圖片大小
+uk:Змінити розмір зображення
+uz:Rasmni o'lchamini o'zgartirish
+vn:Thay đổi kích thước hình ảnh
 :Rotate &Left
 af:Roteer Links
 am:Պտտել &ձախ

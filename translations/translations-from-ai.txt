@@ -34484,3 +34484,147 @@ vn:Đang lấy thông tin phông chữ...
 vn:Ghi đè bằng ảnh đã cắt
 :Save Cropped
 vn:Lưu ảnh đã cắt
+:Resize Image
+am:ምስል መጠን ቀይር
+:Resize Image
+ar:تغيير حجم الصورة
+:Resize Image
+br:Adventañ ar skeudenn
+:Resize Image
+cn:调整图片大小
+:Resize Image
+co:Ridimensionà l'imaghjina
+:Resize Image
+de:Bild skalieren
+:Resize Image
+el:Αλλαγή μεγέθους εικόνας
+:Resize Image
+hi:छवि का आकार बदलें
+:Resize Image
+ja:画像のサイズ変更
+:Resize Image
+ml:ചിത്രം പുനഃക്രമീകരിക്കുക
+:Resize Image
+nl:Afbeelding vergroten/verkleinen
+:Resize Image
+pl:Zmień rozmiar obrazu
+:Resize Image
+ru:Изменить размер изображения
+:Resize Image
+sk:Zmeniť veľkosť obrázka
+:Resize Image
+sr-rs:Промени величину слике
+:Resize Image
+tw:調整圖片大小
+:Resize Image
+az:Şəklin Ölçüsünü Dəyişdir
+:Resize Image
+by:Змяніць памер выявы
+:Resize Image
+ca:Redimensiona la imatge
+:Resize Image
+cy:Newid Maint Delwedd
+:Resize Image
+cz:Změnit velikost obrázku
+:Resize Image
+es:Redimensionar imagen
+:Resize Image
+fa:تغییر اندازه تصویر
+:Resize Image
+fi:Muuta kuvan kokoa
+:Resize Image
+fo:Endra stødd á mynd
+:Resize Image
+fr:Redimensionner l'image
+:Resize Image
+ga:Athraigh Méid Íomhá
+:Resize Image
+gl:Redimensionar imaxe
+:Resize Image
+he:שינוי גודל תמונה
+:Resize Image
+hu:Kép átméretezése
+:Resize Image
+id:Ubah Ukuran Gambar
+:Resize Image
+it:Ridimensiona immagine
+:Resize Image
+kr:이미지 크기 조정
+:Resize Image
+lv:Mainīt attēla izmēru
+:Resize Image
+my:ပုံအရွယ်အစားပြောင်းရန်
+:Resize Image
+pt:Redimensionar Imagem
+:Resize Image
+ro:Redimensionează imaginea
+:Resize Image
+sat:ᱪᱤᱛᱟᱹᱨ ᱨᱤᱥᱟᱭᱤᱡᱽ
+:Resize Image
+sl:Spremeni velikost slike
+:Resize Image
+sv:Ändra bildstorlek
+:Resize Image
+ta:படத்தின் அளவை மாற்று
+:Resize Image
+tr:Resmi Yeniden Boyutlandır
+:Resize Image
+uz:Rasmni o'lchamini o'zgartirish
+:Resize Image
+af:Verander Beeld Grootte
+:Resize Image
+bg:Преоразмеряване на изображение
+:Resize Image
+bn:ছবির আকার পরিবর্তন করুন
+:Resize Image
+bs:Promijeni veličinu slike
+:Resize Image
+ca-xv:Redimensionar imatge
+:Resize Image
+dk:Tilpas billedstørrelse
+:Resize Image
+et:Muuda pildi suurust
+:Resize Image
+eu:Aldatu irudiaren tamaina
+:Resize Image
+fy-nl:Ofbylding feroarje
+:Resize Image
+hr:Promijeni veličinu slike
+:Resize Image
+jv:Owahi Ukuran Gambar
+:Resize Image
+ka:სურათის ზომის შეცვლა
+:Resize Image
+ku:قەبارەی وێنە بگۆڕە
+:Resize Image
+kw:Dasvanna Imach
+:Resize Image
+lt:Keisti vaizdo dydį
+:Resize Image
+mk:Промени големина на слика
+:Resize Image
+mm:ပုံအရွယ်အစားပြောင်းရန်
+:Resize Image
+ne:तस्बिर रिसाइज गर्नुहोस्
+:Resize Image
+nn:Endre storleik på bilete
+:Resize Image
+no:Endre bildestørrelse
+:Resize Image
+pa:ਚਿੱਤਰ ਦਾ ਆਕਾਰ ਬਦਲੋ
+:Resize Image
+si:රූපය ප්‍රමාණය වෙනස් කරන්න
+:Resize Image
+sn:Chinja Saizi Yemufananidzo
+:Resize Image
+sp-rs:Promeni veličinu slike
+:Resize Image
+sq:Ndrysho Madhësinë e Imazhit
+:Resize Image
+th:ปรับขนาดรูปภาพ
+:Resize Image
+tl:Baguhin ang Laki ng Larawan
+:Resize Image
+uk:Змінити розмір зображення
+:Resize Image
+vn:Thay đổi kích thước hình ảnh
