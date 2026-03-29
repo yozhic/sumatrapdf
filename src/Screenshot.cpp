@@ -12,6 +12,10 @@
 #include "Notifications.h"
 #include "AppTools.h"
 #include "Screenshot.h"
+#include "ImageSaveCropResize.h"
+
+struct MainWindow;
+extern Vec<MainWindow*> gWindows;
 
 static const WCHAR* kScreenshotOverlayClassName = L"SumatraScreenshotOverlay";
 static bool gScreenshotClassRegistered = false;
@@ -113,17 +117,6 @@ static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
         }
     }
     return true;
-}
-
-static bool SaveHBitmapAsPng(HBITMAP hBitmap, const char* filePath) {
-    if (!hBitmap || !filePath) {
-        return false;
-    }
-    Gdiplus::Bitmap gbmp(hBitmap, nullptr);
-    CLSID pngEncId = GetEncoderClsid(L"image/png");
-    TempWStr filePathW = ToWStrTemp(filePath);
-    Gdiplus::Status status = gbmp.Save(filePathW, &pngEncId, nullptr);
-    return status == Gdiplus::Ok;
 }
 
 static HBITMAP CaptureDesktop() {
@@ -509,13 +502,15 @@ static void SaveSelectedScreenshot(ScreenshotOverlayData* data) {
     if (!filePath) {
         return;
     }
-    SaveHBitmapAsPng(cs.bmp, filePath);
-    logf("Screenshot: saved to '%s'\n", filePath);
 
-    // Open saved screenshot in SumatraPDF
-    TempStr exePath = GetSelfExePathTemp();
-    TempStr cmdLine = str::FormatTemp("\"%s\"", filePath);
-    CreateProcessHelper(exePath, cmdLine);
+    MainWindow* win = gWindows.Size() > 0 ? gWindows[0] : nullptr;
+    if (!win) {
+        return;
+    }
+    HBITMAP hbmpCopy = (HBITMAP)CopyImage(cs.bmp, IMAGE_BITMAP, cs.origW, cs.origH, 0);
+    RenderedBitmap* rbmp = new RenderedBitmap(hbmpCopy, Size(cs.origW, cs.origH));
+    ShowImageEditWindow(win, ImageEditMode::Save, filePath, rbmp);
+    delete rbmp;
 }
 
 // Premultiply alpha for a pixel: component = component * alpha / 255
