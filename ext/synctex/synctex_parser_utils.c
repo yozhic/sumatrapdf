@@ -287,7 +287,7 @@ synctex_bool_t _synctex_is_equivalent_file_name(const char* lhs, const char* rhs
     // e.g., 936 for Simplified Chinese GBK, 1252 for Western European, etc.
     // while the variable lhs is UTF-8 encoded. Therefore, a conversion is needed.
     const char* rhs_alloc = ConvertLocalToUTF8(rhs_sys);
-    const char* rhs = rhs_alloc;
+    const char* rhs = rhs_alloc ? rhs_alloc : rhs_sys;
     /*  Remove the leading regex '(\./+)*' in both rhs and lhs */
     synctex_ignore_leading_dot_slash_in_path(&lhs);
     synctex_ignore_leading_dot_slash_in_path(&rhs);
