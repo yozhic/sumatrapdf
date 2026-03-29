@@ -104,9 +104,6 @@ struct CropImageWindow {
         free(filePath);
         delete btnCancel;
         delete btnSave;
-        if (hFont) {
-            DeleteObject(hFont);
-        }
     }
 };
 
@@ -537,6 +534,12 @@ LRESULT CALLBACK WndProcCropImage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         case WM_ERASEBKGND:
             return 1;
 
+        case WM_CTLCOLORSTATIC: {
+            HDC hdcStatic = (HDC)wp;
+            SetBkMode(hdcStatic, TRANSPARENT);
+            return (LRESULT)GetSysColorBrush(COLOR_BTNFACE);
+        }
+
         case WM_MOUSEMOVE: {
             cw = FindCropWindowByHwnd(hwnd);
             if (!cw) {
@@ -785,9 +788,7 @@ void ShowCropImageWindow(MainWindow* win) {
     cw->hwndParent = win->hwndFrame;
 
     // create font
-    HDC hdc = GetDC(hwnd);
-    cw->hFont = CreateSimpleFont(hdc, "Segoe UI", 12);
-    ReleaseDC(hwnd, hdc);
+    cw->hFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
 
     // create child controls
     // row 1: file path label (read-only)
