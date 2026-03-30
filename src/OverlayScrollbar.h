@@ -21,11 +21,11 @@ struct OverlayScrollbar {
     };
 
     enum class State {
-        Hidden,          // not active, not shown
-        SmartInvisible,  // active but auto-hidden (Smart mode)
-        SmartThin,       // shown thin (Smart mode)
-        SmartThick,      // shown thick (Smart mode)
-        AlwaysThick,     // always shown thick (Thick mode)
+        Hidden,         // not active, not shown
+        SmartInvisible, // active but auto-hidden (Smart mode)
+        SmartThin,      // shown thin (Smart mode)
+        SmartThick,     // shown thick (Smart mode)
+        AlwaysThick,    // always shown thick (Thick mode)
     };
 
     HWND hwnd = nullptr;      // the scrollbar top-level window

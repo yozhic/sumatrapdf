@@ -280,8 +280,7 @@ const char* scrollMsgStr(USHORT msg) {
 static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay =
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollV);
+    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollV);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -410,8 +409,7 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
 static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay =
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollH);
+    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollH);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;

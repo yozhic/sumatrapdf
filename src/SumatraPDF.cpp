@@ -951,7 +951,8 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
 
     if (useOverlay) {
         if (!win->overlayScrollV) {
-            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Smart);
+            win->overlayScrollV =
+                OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Smart);
         }
         if (showVScroll && showScrollbar) {
             OverlayScrollbarShow(win->overlayScrollV, true);
@@ -2474,10 +2475,11 @@ void UpdateFixedPageScrollbarsVisibility() {
         return;
     }
 #endif
-    bool showScrollbars = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    bool showOverlayScrollbar =
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && !gGlobalPrefs->fixedPageUI.hideScrollbars;
     for (MainWindow* w : gWindows) {
-        OverlayScrollbarShow(w->overlayScrollV, showScrollbars);
-        OverlayScrollbarShow(w->overlayScrollH, showScrollbars);
+        OverlayScrollbarShow(w->overlayScrollV, showOverlayScrollbar);
+        OverlayScrollbarShow(w->overlayScrollH, showOverlayScrollbar);
     }
     RerenderFixedPage();
 }
