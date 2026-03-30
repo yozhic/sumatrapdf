@@ -849,7 +849,9 @@ void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
     }
     sb->enabled = show;
     if (show) {
-        ShowScrollbarWindow(sb, false);
+        if (!sb->isThick && !sb->isThin) {
+            ShowScrollbarWindow(sb, false);
+        }
     } else {
         HideScrollbarWindow(sb);
     }
