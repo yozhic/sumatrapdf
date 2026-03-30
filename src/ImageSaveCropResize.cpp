@@ -14,6 +14,7 @@
 #include "wingui/WinGui.h"
 
 #include "Settings.h"
+#include "GlobalPrefs.h"
 #include "DocController.h"
 #include "EngineBase.h"
 #include "EngineAll.h"
@@ -127,8 +128,8 @@ struct ImageEditWindow {
     HWND hwndInfoLabel = nullptr;
     Button* btnCancel = nullptr;
     Button* btnSave = nullptr;
-    Button* btnSwitchMode = nullptr;
-    Button* btnSwitchMode2 = nullptr; // second switch button for Save mode
+    Button* btnCrop = nullptr;   // "Crop" or "Apply Crop"
+    Button* btnResize = nullptr; // "Resize" or "Apply Resize"
     DropDown* dropFormat = nullptr;
     Vec<int> formatIndices; // maps dropdown index to gImageFormats index
 
@@ -177,8 +178,8 @@ struct ImageEditWindow {
         free(filePath);
         delete btnCancel;
         delete btnSave;
-        delete btnSwitchMode;
-        delete btnSwitchMode2;
+        delete btnCrop;
+        delete btnResize;
         delete dropFormat;
     }
 };
@@ -290,14 +291,7 @@ static void UpdateSaveButtonText(ImageEditWindow* ew) {
     WCHAR destW[MAX_PATH + 1]{};
     GetWindowTextW(ew->hwndDestEdit, destW, MAX_PATH);
     TempStr dest = ToUtf8Temp(destW);
-    const char* text;
-    if (ew->mode == ImageEditMode::Save) {
-        text = file::Exists(dest) ? "Overwrite" : "Save";
-    } else if (ew->mode == ImageEditMode::Crop) {
-        text = file::Exists(dest) ? _TRA("Overwrite With Cropped") : _TRA("Save Cropped");
-    } else {
-        text = file::Exists(dest) ? _TRA("Overwrite With Resized") : _TRA("Save Resized");
-    }
+    const char* text = file::Exists(dest) ? _TRN("Overwrite") : _TRN("Save");
     ew->btnSave->SetText(text);
     // re-layout since button width may have changed
     LayoutControls(ew);
@@ -775,19 +769,19 @@ static void LayoutControls(ImageEditWindow* ew) {
     // layout buttons first to know where info label must stop
     int bx = cRc.dx - kButtonPadding;
     if (ew->btnSave && ew->btnCancel) {
-        // right-to-left: Cancel, SwitchMode2, SwitchMode, Format, Save
+        // right-to-left: Cancel, Resize, Crop, [Format], Save
         Size szCancel = ew->btnCancel->GetIdealSize();
         bx -= szCancel.dx;
         ew->btnCancel->SetBounds({bx, y, szCancel.dx, szCancel.dy});
-        if (ew->btnSwitchMode2 && IsWindowVisible(ew->btnSwitchMode2->hwnd)) {
-            Size szSwitch2 = ew->btnSwitchMode2->GetIdealSize();
-            bx -= szSwitch2.dx + 4;
-            ew->btnSwitchMode2->SetBounds({bx, y, szSwitch2.dx, szSwitch2.dy});
+        if (ew->btnResize) {
+            Size szResize = ew->btnResize->GetIdealSize();
+            bx -= szResize.dx + 4;
+            ew->btnResize->SetBounds({bx, y, szResize.dx, szResize.dy});
         }
-        if (ew->btnSwitchMode) {
-            Size szSwitch = ew->btnSwitchMode->GetIdealSize();
-            bx -= szSwitch.dx + 4;
-            ew->btnSwitchMode->SetBounds({bx, y, szSwitch.dx, szSwitch.dy});
+        if (ew->btnCrop) {
+            Size szCrop = ew->btnCrop->GetIdealSize();
+            bx -= szCrop.dx + 4;
+            ew->btnCrop->SetBounds({bx, y, szCrop.dx, szCrop.dy});
         }
         if (ew->dropFormat) {
             Size szDrop = ew->dropFormat->GetIdealSize();
@@ -1050,38 +1044,82 @@ static void ReplaceSrcBitmap(ImageEditWindow* ew, Bitmap* newBmp) {
     CalcImageLayout(ew);
 }
 
+static bool IsCropChanged(ImageEditWindow* ew) {
+    return ew->cropX != 0 || ew->cropY != 0 || ew->cropW != ew->imgW || ew->cropH != ew->imgH;
+}
+
+static bool IsResizeChanged(ImageEditWindow* ew) {
+    return ew->newW != ew->imgW || ew->newH != ew->imgH;
+}
+
 static void UpdateModeButtons(ImageEditWindow* ew) {
-    if (ew->mode == ImageEditMode::Save) {
-        ew->btnSwitchMode->SetText("Crop");
-        if (ew->btnSwitchMode2) {
-            ShowWindow(ew->btnSwitchMode2->hwnd, SW_SHOW);
-            ew->btnSwitchMode2->SetText("Resize");
-        }
-    } else if (ew->mode == ImageEditMode::Crop) {
-        ew->btnSwitchMode->SetText(_TRA("Resize"));
-        if (ew->btnSwitchMode2) {
-            ShowWindow(ew->btnSwitchMode2->hwnd, SW_HIDE);
-        }
+    if (ew->mode == ImageEditMode::Crop) {
+        ew->btnCrop->SetText(_TRN("Apply Crop"));
+        ew->btnCrop->SetIsEnabled(IsCropChanged(ew));
+        ew->btnResize->SetText(_TRN("Resize"));
+        ew->btnResize->SetIsEnabled(true);
+    } else if (ew->mode == ImageEditMode::Resize) {
+        ew->btnCrop->SetText(_TRN("Crop"));
+        ew->btnCrop->SetIsEnabled(true);
+        ew->btnResize->SetText(_TRN("Apply Resize"));
+        ew->btnResize->SetIsEnabled(IsResizeChanged(ew));
     } else {
-        ew->btnSwitchMode->SetText(_TRA("Crop"));
-        if (ew->btnSwitchMode2) {
-            ShowWindow(ew->btnSwitchMode2->hwnd, SW_HIDE);
-        }
+        // Save mode
+        ew->btnCrop->SetText(_TRN("Crop"));
+        ew->btnCrop->SetIsEnabled(true);
+        ew->btnResize->SetText(_TRN("Resize"));
+        ew->btnResize->SetIsEnabled(true);
+    }
+}
+
+static void ApplyCrop(ImageEditWindow* ew) {
+    if (!IsCropChanged(ew)) {
+        return;
+    }
+    if (ew->cropW <= 0 || ew->cropH <= 0) {
+        return;
+    }
+    Gdiplus::Rect srcRect(ew->cropX, ew->cropY, ew->cropW, ew->cropH);
+    Bitmap* cropped = ew->srcBitmap->Clone(srcRect, ew->srcBitmap->GetPixelFormat());
+    if (cropped) {
+        ReplaceSrcBitmap(ew, cropped);
+        ew->cropX = 0;
+        ew->cropY = 0;
+        ew->cropW = ew->imgW;
+        ew->cropH = ew->imgH;
+        UpdateModeButtons(ew);
+        UpdateInfoLabel(ew);
+        LayoutControls(ew);
+        InvalidateImageArea(ew);
+    }
+}
+
+static void ApplyResize(ImageEditWindow* ew) {
+    if (!IsResizeChanged(ew)) {
+        return;
+    }
+    if (ew->newW <= 0 || ew->newH <= 0) {
+        return;
+    }
+    Bitmap* resized = new Bitmap(ew->newW, ew->newH, ew->srcBitmap->GetPixelFormat());
+    if (resized) {
+        Graphics g(resized);
+        g.SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
+        g.DrawImage(ew->srcBitmap, 0, 0, ew->newW, ew->newH);
+        ReplaceSrcBitmap(ew, resized);
+        ew->newW = ew->imgW;
+        ew->newH = ew->imgH;
+        UpdateModeButtons(ew);
+        UpdateInfoLabel(ew);
+        LayoutControls(ew);
+        InvalidateImageArea(ew);
     }
 }
 
 static void SwitchToCropMode(ImageEditWindow* ew) {
-    // if coming from resize, apply the resize first
-    if (ew->mode == ImageEditMode::Resize) {
-        if (ew->newW > 0 && ew->newH > 0 && (ew->newW != ew->imgW || ew->newH != ew->imgH)) {
-            Bitmap* resized = new Bitmap(ew->newW, ew->newH, ew->srcBitmap->GetPixelFormat());
-            if (resized) {
-                Graphics g(resized);
-                g.SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
-                g.DrawImage(ew->srcBitmap, 0, 0, ew->newW, ew->newH);
-                ReplaceSrcBitmap(ew, resized);
-            }
-        }
+    // apply pending resize before switching
+    if (ew->mode == ImageEditMode::Resize && IsResizeChanged(ew)) {
+        ApplyResize(ew);
     }
     ew->mode = ImageEditMode::Crop;
     ew->cropX = 0;
@@ -1092,21 +1130,15 @@ static void SwitchToCropMode(ImageEditWindow* ew) {
     UpdateModeButtons(ew);
     UpdateSaveButtonText(ew);
     UpdateInfoLabel(ew);
+    LayoutControls(ew);
     InvalidateImageArea(ew);
     SetFocus(ew->hwnd);
 }
 
 static void SwitchToResizeMode(ImageEditWindow* ew) {
-    // if coming from crop, apply the crop first
-    if (ew->mode == ImageEditMode::Crop) {
-        if (ew->cropW > 0 && ew->cropH > 0 &&
-            (ew->cropX != 0 || ew->cropY != 0 || ew->cropW != ew->imgW || ew->cropH != ew->imgH)) {
-            Gdiplus::Rect srcRect(ew->cropX, ew->cropY, ew->cropW, ew->cropH);
-            Bitmap* cropped = ew->srcBitmap->Clone(srcRect, ew->srcBitmap->GetPixelFormat());
-            if (cropped) {
-                ReplaceSrcBitmap(ew, cropped);
-            }
-        }
+    // apply pending crop before switching
+    if (ew->mode == ImageEditMode::Crop && IsCropChanged(ew)) {
+        ApplyCrop(ew);
     }
     ew->mode = ImageEditMode::Resize;
     ew->newW = ew->imgW;
@@ -1115,21 +1147,25 @@ static void SwitchToResizeMode(ImageEditWindow* ew) {
     UpdateModeButtons(ew);
     UpdateSaveButtonText(ew);
     UpdateInfoLabel(ew);
+    LayoutControls(ew);
     InvalidateImageArea(ew);
     SetFocus(ew->hwnd);
 }
 
-static void OnSwitchMode(ImageEditWindow* ew) {
+static void OnCropButton(ImageEditWindow* ew) {
     if (ew->mode == ImageEditMode::Crop) {
-        SwitchToResizeMode(ew);
+        ApplyCrop(ew);
     } else {
         SwitchToCropMode(ew);
     }
 }
 
-static void OnSwitchMode2(ImageEditWindow* ew) {
-    // only used in Save mode — switches to Resize
-    SwitchToResizeMode(ew);
+static void OnResizeButton(ImageEditWindow* ew) {
+    if (ew->mode == ImageEditMode::Resize) {
+        ApplyResize(ew);
+    } else {
+        SwitchToResizeMode(ew);
+    }
 }
 
 LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
@@ -1378,6 +1414,7 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (ew && ew->isDragging) {
                 ew->isDragging = false;
                 ReleaseCapture();
+                UpdateModeButtons(ew);
             }
             return 0;
         }
@@ -1403,7 +1440,7 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         }
 
         case WM_CHAR:
-            if (VK_ESCAPE == wp) {
+            if (VK_ESCAPE == wp && gGlobalPrefs->escToExit) {
                 DestroyWindow(hwnd);
             }
             break;
@@ -1433,6 +1470,7 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     ew->newH = 1;
                 }
                 UpdateInfoLabel(ew);
+                UpdateModeButtons(ew);
                 InvalidateImageArea(ew);
                 return 0;
             }
@@ -1510,6 +1548,7 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 }
             } // end crop mode block
             UpdateInfoLabel(ew);
+            UpdateModeButtons(ew);
             InvalidateImageArea(ew);
             return 0;
         }
@@ -1712,7 +1751,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = "Cancel";
+        args.text = _TRN("Cancel");
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnCancel, ew);
         ew->btnCancel = btn;
@@ -1721,13 +1760,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        if (mode == ImageEditMode::Save) {
-            args.text = "Save";
-        } else if (mode == ImageEditMode::Crop) {
-            args.text = "Save Cropped";
-        } else {
-            args.text = "Save Resized";
-        }
+        args.text = _TRN("Save");
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnSave, ew);
         ew->btnSave = btn;
@@ -1736,25 +1769,19 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        if (mode == ImageEditMode::Save) {
-            args.text = "Crop";
-        } else if (mode == ImageEditMode::Crop) {
-            args.text = "Resize Cropped";
-        } else {
-            args.text = "Crop Resized";
-        }
+        args.text = _TRN("Crop");
         btn->Create(args);
-        btn->onClick = MkFunc0<ImageEditWindow>(OnSwitchMode, ew);
-        ew->btnSwitchMode = btn;
+        btn->onClick = MkFunc0<ImageEditWindow>(OnCropButton, ew);
+        ew->btnCrop = btn;
     }
-    if (mode == ImageEditMode::Save) {
+    {
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = "Resize";
+        args.text = _TRN("Resize");
         btn->Create(args);
-        btn->onClick = MkFunc0<ImageEditWindow>(OnSwitchMode2, ew);
-        ew->btnSwitchMode2 = btn;
+        btn->onClick = MkFunc0<ImageEditWindow>(OnResizeButton, ew);
+        ew->btnResize = btn;
     }
 
     // format dropdown
@@ -1782,6 +1809,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
     }
 
     CalcImageLayout(ew);
+    UpdateModeButtons(ew);
     LayoutControls(ew);
     UpdateSaveButtonText(ew);
 
