@@ -217,9 +217,11 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
     for (int i = 0; i < n; i++) {
         // Get the correct colors based on the state and the current theme
         tabBgCol = tabBgBackground;
-        if (selectedIdx == i) {
+        bool isSelected = selectedIdx == i;
+        bool isUnderMouse = tabUnderMouse == i;
+        if (isSelected) {
             tabBgCol = tabBgSelected;
-        } else if (tabUnderMouse == i) {
+        } else if (isUnderMouse) {
             tabBgCol = tabBgHighlight;
         }
 
@@ -239,12 +241,11 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             gfx.FillRectangle(&dbgBr, ToGdipRect(ti->rCloseHit));
         }
 
-        if (ti->canClose && ((i == tabUnderMouse) || (i == selectedIdx))) {
-            r = ti->rClose;
+        if (ti->canClose && (isUnderMouse || isSelected)) {
             DrawCloseButtonArgs closeArgs;
             closeArgs.hdc = hdc;
-            closeArgs.r = r;
-            closeArgs.isHover = overClose;
+            closeArgs.r = ti->rClose;
+            closeArgs.isHover = overClose && isUnderMouse;
             DrawCloseButton(closeArgs);
         }
 
