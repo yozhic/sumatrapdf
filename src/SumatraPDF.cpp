@@ -6121,9 +6121,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             if (!win->IsDocLoaded()) {
                 return 0;
             }
+            bool isCont = IsContinuous(win->ctrl->GetDisplayMode());
             int currentPos = GetScrollPos(win->hwndCanvas, SB_VERT);
             SendMessageW(win->hwndCanvas, WM_VSCROLL, SB_HALF_PAGEUP, 0);
-            if (GetScrollPos(win->hwndCanvas, SB_VERT) == currentPos) {
+            if (isCont && GetScrollPos(win->hwndCanvas, SB_VERT) == currentPos) {
                 win->ctrl->GoToPrevPage(true);
             }
         } break;
@@ -6195,9 +6196,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             if (!win->IsDocLoaded()) {
                 return 0;
             }
+            bool isCont = IsContinuous(win->ctrl->GetDisplayMode());
             int currentPos = GetScrollPos(win->hwndCanvas, SB_VERT);
             SendMessageW(win->hwndCanvas, WM_VSCROLL, SB_HALF_PAGEDOWN, 0);
-            if (GetScrollPos(win->hwndCanvas, SB_VERT) == currentPos) {
+            if (isCont && GetScrollPos(win->hwndCanvas, SB_VERT) == currentPos) {
                 win->ctrl->GoToNextPage();
             }
         } break;
