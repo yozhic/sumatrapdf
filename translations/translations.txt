@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-d37b288fcf32810cbfefe0ad62d96b2d54d66c03
+8709f05a83507adcb087de04f172e8070011b43b
 : (unsaved annotations)
 :# File History
 am:# Ֆայլի պատմություն
@@ -821,7 +821,7 @@ hi:परिवर्तनों को निरस्त करें
 hr:&Odbaci promjene
 hu:Változtatások elvetése
 id:Abaikan perubahan
-it:Esci
+it:Ignora le modifiche ed esci
 ja:変更を破棄(&D)
 kr:변경사항 취소(&D)
 kw:&Tewlel chanjyow
@@ -1619,6 +1619,7 @@ uz:Ajratib ko‘rsatish
 vn:&Nổi Bật
 :&Image
 br:&Imagem
+it:&Immagine
 pl:&Obraz
 :&Keyboard Shortcuts
 am:&Հիմնաբառի դյուրանցումներ
@@ -2864,6 +2865,9 @@ uk:&Видалити з історії
 uz:Tarixdan o‘chirish
 vn:&Xoá Khỏi Lịch Sử
 :&Save
+br:&Salvar
+it:&Salva
+pl:Za&pisz
 :&Save As...
 am:&Պահել որպես
 ar:&حفظ باسم...
@@ -3255,7 +3259,7 @@ hi:&मुद्रांक
 hr:&Pečat
 hu:Bélyeg
 id:&Stempel
-it:&Stamp
+it:&Timbro
 ja:スタンプ(&S)
 kr:스탬프(&S)
 kw:&Stampa
@@ -4820,6 +4824,8 @@ tw:應用程式:
 uk:Прикладна програма:
 uz:Dastur:
 vn:Ứng dụng:
+:Apply Crop
+:Apply Resize
 :Are you sure you want to uninstall SumatraPDF?
 af:Is jy seker jy wil SumatraPDF oninstalleer?
 am:Համոզվա՞ծ եք, որ ցանկանում եք ջնջել SumatraPDF-ը:
@@ -5775,8 +5781,12 @@ uz:Bayt
 vn:Bytes
 :C&opy To Clipboard
 br:C&opiar para a Área de Transferência
+it:C&opia negli Appunti
 pl:Kopiuj do sc&howka
 :C&rop
+br:C&ortar
+it:&Ritaglia
+pl:Przy&tnij
 :CHM documents
 af:CHM dokumente
 am:CHM փաստաթղթեր
@@ -6160,7 +6170,7 @@ hi:भाषा बदलें (Change Language)
 hr:Promijeni jezik (Change Language)
 hu:Nyelv kiválasztása (Change Language)
 id:Ubah Bahasa (Change Language)
-it:Lingua interfaccia utente (UI Language)
+it:Cambia lingua
 ja:言語を変更 (Change Language)
 jv:Ganti Basa
 ka:ენის შეცვლა (Change Language)
@@ -6884,6 +6894,7 @@ vn:Thu gọn tất cả
 br:Coletando lista de impressoras
 co:Racolta di a lista di e stampette
 de:Liste der Drucker zusammenstellen
+it:Creazione elenco stampanti
 nl:Verzamel lijst van printers
 pl:Gromadzenie listy drukarek
 sk:Získava sa zoznam tlačiarní
@@ -9057,13 +9068,18 @@ uk:Створено:
 uz:Yaratilgan:
 vn:Ngày tạo:
 :Crop
+br:Cortar
+it:Ritaglia
+pl:Przytnij
 :Crop Image
 br:Cortar Imagem
+it:Ritaglia immagine
 pl:Przytnij obraz
 :Ctrl+Tab to navigate
-br:Ctrl+Tab pra navegar
+br:Ctrl + Tab pra navegar
 co:Ctrl+Tabul. per navigà
 de:Strg+Tab zum Navigieren
+it:Ctrl+Tab per navigare
 nl:Druk Ctrl+Tab voor navigeren
 pl:Ctrl+Tab, aby nawigować
 sk:Použite Ctrl+Tab – prechádzať
@@ -9521,7 +9537,7 @@ sk:Ladenie: Testovať aplikáciu
 tw:除錯：測試應用程式
 :Debug: Toggle Predictive Rendering
 am:Վրիպազերծում. Միացնել/անջատել կանխատեսող արտապատկերումը
-br:Debug: Alternar Renderização Preditiva
+br:Debug: Ativar/Desativar a Renderização Preditiva
 cn:调试：切换预测性渲染
 co:Spannatura : Attivà o disattivà a restituzione di predizzione
 de:Debug: Vorschau-Rendering umschalten
@@ -9532,7 +9548,7 @@ sk:Ladenie: Prepnúť prediktívne vykresľovanie
 tw:除錯：切換預測性渲染
 :Debug: Toggle Rtl
 am:Վրիպազերծում. աջից անջատել/անջատել
-br:Debug: Alternar Rtl
+br:Debug: Ativar/Desativar Rtl
 cn:调试：切换从右向左模式
 co:Spannatura : Attivà o disattivà Rtl
 de:Debug: RTL umschalten
@@ -10636,6 +10652,7 @@ vn:Nhập dòng lệnh gọi khi bạn nhấp đúp vào tập tin PDF:
 br:Enter pra selecionar
 co:« Entrée » per selezziunà
 de:Enter zum Auswählen
+it:Invio per selezionare
 nl:Toets Enter voor selecteren
 pl:Enter, aby zaznaczyć
 sk:Enter na výber
@@ -10752,6 +10769,7 @@ vn:Không mở %s được
 br:Esc pra fechar
 co:Scap. per chjode
 de:Esc zum Schließen
+it:Esc per chiudere
 nl:Esc voor sluiten
 pl:Esc, aby zamknąć
 sk:Esc – zavrieť
@@ -13124,6 +13142,7 @@ uz:GB
 vn:GB
 :Getting fonts information...
 br:Obtendo informações de fontes...
+it:Recupero informazioni caratteri...
 pl:Pobieranie informacji o czcionkach...
 :Go to Page...
 am:Անցնել էջին...
@@ -14723,6 +14742,7 @@ vn:Dòng Bắt Đầu:
 br:Listar Impressoras
 co:Lista di e stampette
 de:Drucker auflisten
+it:Elenco stampanti
 nl:Lijst Printers
 pl:Wyświetl drukarki
 sk:Zoznam tlačiarní
@@ -17137,10 +17157,7 @@ pl:Opcje...
 ru:Параметры...
 sk:Možnosti…
 tw:選項…
-:Overwrite With Cropped
-br:Sobregravar com Cortado
-pl:Zastąp przyciętym
-:Overwrite With Resized
+:Overwrite
 :P&roperties
 am:Հ&ատկություններ
 ar:الخصائص
@@ -18002,6 +18019,9 @@ uk:Документи PalmDoc
 uz:PalmDoc ho'jjatlari
 vn:Tài liệu PalmDoc
 :Paste Image From Clipboard
+br:Colar Imagem da Área de Transferência
+it:Incolla immagine dagli Appunti
+pl:Wklej obraz ze schowka
 :Pin Selected Document
 am:Ամրացնել ընտրված փաստաթուղթը
 br:Fixar Documento Selecionado
@@ -18737,6 +18757,7 @@ vn:Giới hạn vùng in
 br:A impressora "%s" não existe
 co:A stampetta « %s » ùn esiste
 de:Drucker '%s' existiert nicht
+it:La stampante'%s' non esiste
 nl:Printer '%s' bestaat niet
 pl:Drukarka „%s” nie istnieje
 sk:Tlačiareň '%s' neexistuje
@@ -19125,6 +19146,9 @@ tw:內容...
 uk:Властивості...
 uz:Xususiyatlar...
 :R&esize
+br:R&edimensionar
+it:Ridim&ensiona
+pl:Z&mień rozmiar
 :Re&name...
 am:Ան&վանափոխել...
 ar:إعادة ت&سمية...
@@ -19307,6 +19331,7 @@ vn:Biên tập
 br:Registrar o Pré-Visualizador do Windows
 co:Arregistrà a fighjulata Windows
 de:Windows-Vorschau registrieren
+it:Registra visualizzatore anteprime di Windows
 nl:Registreer Windows Previewer
 pl:Zarejestruj podgląd Windows
 sk:Registrovať Windows Previewer
@@ -19314,6 +19339,7 @@ sk:Registrovať Windows Previewer
 br:Registrar o Filtro de Busca do Windows
 co:Arregistrà u filtru di ricerca Windows
 de:Suchfilter in Windows registrieren
+it:Registra filtro ricerca di Windows
 nl:Registreer Windows Zoek Filter
 pl:Zarejestruj filtr wyszukiwania Windows
 sk:Registrovať Windows Search Filter
@@ -19321,6 +19347,7 @@ sk:Registrovať Windows Search Filter
 br:Solte o Ctrl pra selecionar
 co:Rilascià Ctrl per selezziunà
 de:Strg loslassen, um auszuwählen
+it:Rilascia Ctrl per selezionare
 nl:Laat Ctrl los voor selecteren
 pl:Puść Ctrl, aby zaznaczyć
 sk:Uvoľnením klávesu Ctrl vyberiete
@@ -19641,8 +19668,12 @@ pl:Otwórz ponownie ostatnio zamknięty
 sk:Znovu otvoriť naposledy zatvorené
 tw:重新開啟上次關閉的內容
 :Resize
+br:Redimensionar
+it:Ridimensiona
+pl:Zmień rozmiar
 :Resize Image
 br:Redimensionar Imagem
+it:Ridimensiona immagine
 pl:Zmień rozmiar obrazu
 :Rotate &Left
 am:Պտտել &ձախ
@@ -19939,6 +19970,7 @@ tw:SVG 文件
 uk:SVG документи
 uz:SVG hujjatlari
 vn:Các Tài Liệu SVG
+:Save
 :Save Annotations to a new PDF
 am:Պահպանեք ծանոթագրությունները նոր PDF ֆայլում
 br:Salvar as Anotações num PDF novo
@@ -20055,9 +20087,6 @@ tr:Eki kaydet
 tw:儲存附件...
 uk:Зберегти вкладення...
 uz:Ilovani saqlash...
-:Save Cropped
-br:Salvar Cortado
-pl:Zapisz przycięty
 :Save Embedded File...
 am:Պահել ներկառուցված ֆայլը...
 ar:حفظ الملف المدمج
@@ -20128,7 +20157,9 @@ ru:Сохранить файл как...
 sk:Uložiť súbor ako…
 tw:將檔案另存新檔…
 :Save Image
-:Save Resized
+br:Salvar Imagem
+it:Salva immagine
+pl:Zapisz obraz
 :Save S&hortcut...
 am:Պահել դ&յուրանցումը...
 ar:احفظ الا&ختصار...
@@ -20551,7 +20582,7 @@ sk:Posunúť o polovicu strany nadol
 tw:向下捲動半頁
 :Scroll Down By Page
 am:Գլորել ներքև ըստ էջի
-br:Rolar Baixo Uma Página pra Baixo
+br:Rolar Uma Página pra Baixo
 cn:向下滚动一页
 co:Fà sfilà inghjò d’una pagina
 de:Seitenweise nach unten scrollen
@@ -20575,7 +20606,7 @@ sk:Posunúť doľava
 tw:向左捲動
 :Scroll Left By Page
 am:Գլորել ձախ էջով
-br:Rolar para a Esquerda Uma Página
+br:Rolar Uma Página pra Esquerda
 cn:向左滚动一页
 co:Fà sfilà à manca d’una pagina
 de:Seitenweise nach links scrollen
@@ -20599,7 +20630,7 @@ sk:Posunúť doprava
 tw:向右捲動
 :Scroll Right By Page
 am:Էջ առ էջ աջ ոլորել
-br:Rolar para a Direita Uma Página
+br:Rolar Uma Página pra Direita
 cn:向右滚动一页
 co:Fà sfilà à diritta d’una pagina
 de:Seitenweise nach rechts scrollen
@@ -20623,7 +20654,7 @@ sk:Posunúť hore
 tw:向上捲動
 :Scroll Up By Half Page
 am:Գլորել վերև կես էջով
-br:Rolar para Cima Meia Página
+br:Rolar Meia Página pra Cima
 cn:向上滚动半页
 co:Fà sfilà insù d’una mezapagina
 de:Eine halbe Seite nach oben scrollen
@@ -20635,7 +20666,7 @@ sk:Posunúť o polovicu strany hore
 tw:向上捲動半頁
 :Scroll Up By Page
 am:Վերև գլորել ըստ էջի
-br:Rolar para Cima Uma Página
+br:Rolar Uma Página pra Cima
 cn:向上滚动一页
 co:Fà sfilà insù d’una pagina
 de:Seitenweise nach oben scrollen
@@ -21812,6 +21843,9 @@ ru:Показать свойства документа...
 sk:Zobraziť vlastnosti dokumentu…
 tw:顯示文件內容…
 :Show Errors
+br:Mostrar Erros
+it:Mostra errori
+pl:Pokaż błędy
 :Show Favorites
 am:Ցուցադրել ընտրյալները
 ar:إظهار المفضلة
@@ -21908,6 +21942,7 @@ tw:顯示記錄
 br:Mostrar a Informação do PDF
 co:Affissà l’infurmazione nant’à u PDF
 de:PDF-Info anzeigen
+it:Mostra info PDF
 nl:Toon PDF Info
 pl:Pokaż informacje o PDF
 sk:Zobraziť informácie o PDF
@@ -22442,6 +22477,7 @@ vn:Tập tin nguồn %s không có điểm đồng bộ
 br:Barra de Espaço pro modo fixo
 co:Spazziu per u modu appiccicante
 de:Platz für Sticky‑Modus
+it:Spazio per modalità adesiva
 nl:Ruimte voor plak modus
 pl:Spacja dla trybu lepkiego
 sk:Medzerník pre trvalý režim
@@ -23232,6 +23268,7 @@ vn:PDF được gắn thẻ
 br:Criar Screenshot
 co:Catturà una fiura di u screnu
 de:Screenshot erstellen
+it:Cattura schermata
 nl:Maak Screenshot
 pl:Zrób zrzut ekranu
 sk:Urobiť snímku obrazovky
@@ -23884,7 +23921,7 @@ sk:Prepnúť vykresľovanie s vyhladzovaním
 tw:切換消除鋸齒渲染
 :Toggle Bookmarks
 am:Միացնել/անջատել էջանիշները
-br:Ativar/Desativar Favoritos
+br:Ativar/Desativar os Favoritos
 cn:切换书签
 co:Attivà o disattivà l’indette
 de:Lesezeichen umschalten
@@ -23955,6 +23992,9 @@ pl:Przełącz tryb pełnoekranowy
 sk:Prepnúť zobrazenie na celú obrazovku
 tw:切換全螢幕
 :Toggle Hide Scrollbar
+br:Ativar/Desativar a Ocultação da Barra de Rolagem
+it:Commuta Nascondi barra scorrimento
+pl:Przełącz ukrywanie paska przewijania
 :Toggle Inverse Search
 am:Միացնել/անջատել հակադարձ որոնումը
 br:Ativar/Desativar a Busca Invertida
@@ -23968,6 +24008,8 @@ pl:Przełącz odwrotne wyszukiwanie
 sk:Prepnúť inverzné vyhľadávanie
 tw:切換反向搜尋
 :Toggle Lazy Loading
+br:Ativar/Desativar o Carregamento Lento
+pl:Przełącz leniwe ładowanie
 :Toggle Manga Mode
 am:Միացնել/անջատել մանգայի ռեժիմը
 br:Exibir/Ocultar o Modo Mangá
@@ -24006,9 +24048,10 @@ pl:Przełącz pasek menu
 sk:Prepnúť panel s ponukami
 tw:切換功能表列
 :Toggle Overlay Scrollbar
-br:Alternar a Barra de Rolagem da Sobreposição
+br:AtivarDesativar a Barra de Rolagem da Sobreposição
 co:Attivà o disattivà a barra di sfilarata d’accavalcatura
 de:Überlappende Bildlaufleiste ein-/ausblenden
+it:Commuta Barra scorrimento sovrapposizione
 nl:Schuifbalk in/uitschakelen
 pl:Przełącz nakładkowy pasek przewijania
 sk:Prepnúť skrývanie posuvníka
@@ -24025,6 +24068,9 @@ pl:Przełącz informacje o stronie
 sk:Prepnúť informácie o strane
 tw:切換頁面資訊
 :Toggle Scrollbar In Single Page
+br:Ativar/Desativar a Barra de Rolagem na Página Única
+it:Commuta Barra scorrimento su pagina singola
+pl:Przełącz pasek przewijania na pojedynczej stronie
 :Toggle Scrollbars
 am:Միացնել/անջատել սահող գոտիները
 br:Exibir/Ocultar Barras de Rolagem
@@ -24062,6 +24108,9 @@ pl:Przełącz pokazywanie odnośników
 sk:Prepnúť Zobraziť odkazy
 tw:切換顯示連結
 :Toggle Smooth Scroll
+br:Ativar/Desativar a Rolagem Suave
+it:Commuta Scorrimento attenuato
+pl:Przełącz płynne przewijanie
 :Toggle Table Of Contents
 am:Բովանդակության ցանկը միացնել/անջատել
 br:Ativar/Desativar a Tabela de Conteúdos
@@ -24087,9 +24136,10 @@ pl:Przełącz pasek narzędzi
 sk:Prepnúť panel nástrojov
 tw:切換工具列
 :Toggle Use Tabs
-br:Alternar o Uso das Abas
+br:Ativar/Desativar o Uso das Abas
 co:Attivà o disattivà l’unghjette d’impiegu
 de:Tabs ein-/ausblenden
+it:Commuta Usa schede
 nl:Tabbladen In/Uitschakelen
 pl:Przełącz używanie kart
 sk:Prepnúť Použiť karty
@@ -24191,6 +24241,7 @@ vn:Dịch với &DeepL
 br:Remover o registro do Pré-Visualizador do Windows
 co:Disarregistrà a fighjulata Windows
 de:Windows-Vorschau deaktivieren
+it:Annulla registrazione visualizzatore anteprime di Windows
 nl:Deactiveer de Windows Previewer registratie
 pl:Wyrejestruj podgląd Windows
 sk:Zrušiť registráciu Windows Previewer
@@ -24198,6 +24249,7 @@ sk:Zrušiť registráciu Windows Previewer
 br:Remover o registro do Filtro de Busca do Windows
 co:Disarregistrà u filtru di ricerca Windows
 de:Suchfilter in Windows deaktivieren
+it:Annulla registrazione filtro ricerca di WIndows
 nl:Deactiveer Windows Zoek Filter
 pl:Wyrejestruj filtr wyszukiwania Windows
 sk:Zrušiť registráciu Windows Search Filter

@@ -1209,9 +1209,15 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
             highlightRects[i].right = strOriginX + szEnd.cx;
         }
 
-        // draw yellow background rectangles for matches (skip when selected)
+        // draw highlight background rectangles for matches (skip when selected)
         if (!ev->selected) {
-            HBRUSH hbrHighlight = CreateSolidBrush(RGB(255, 255, 0));
+            COLORREF highlightCol;
+            if (IsCurrentThemeDefault()) {
+                highlightCol = RGB(255, 255, 0); // yellow for default theme
+            } else {
+                highlightCol = AccentColor(ThemeMainWindowBackgroundColor(), 60);
+            }
+            HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
             for (int i = 0; i < nRanges; i++) {
                 FillRect(hdc, &highlightRects[i], hbrHighlight);
             }

@@ -37588,3 +37588,591 @@ vn:Bật/tắt tải chậm
 vn:Ẩn/hiện thanh cuộn ở trang đơn
 :Toggle Smooth Scroll
 vn:Bật/tắt cuộn mượt
+:Apply Crop
+am:ክሮፕ ተግብር
+:Apply Resize
+am:መጠን ለውጥ ተግብር
+:Overwrite
+am:በላዩ ላይ ጻፍ
+:Save
+am:አስቀምጥ
+:Apply Crop
+ar:تطبيق الاقتصاص
+:Apply Resize
+ar:تطبيق تغيير الحجم
+:Overwrite
+ar:استبدال
+:Save
+ar:حفظ
+:Apply Crop
+br:Arloañ ar c'hrennañ
+:Apply Resize
+br:Arloañ an adventañ
+:Overwrite
+br:Flastrañ
+:Apply Crop
+cn:应用裁剪
+:Apply Resize
+cn:应用调整大小
+:Overwrite
+cn:覆盖
+:Save
+cn:保存
+:Apply Crop
+co:Applicà u ritagliu
+:Apply Resize
+co:Applicà u ridimensionamentu
+:Overwrite
+co:Soprascrive
+:Save
+co:Salvà
+:Apply Crop
+de:Zuschnitt anwenden
+:Apply Resize
+de:Größenänderung anwenden
+:Overwrite
+de:Überschreiben
+:Save
+de:Speichern
+:Apply Crop
+el:Εφαρμογή Περικοπής
+:Apply Resize
+el:Εφαρμογή Αλλαγής Μεγέθους
+:Overwrite
+el:Αντικατάσταση
+:Save
+el:Αποθήκευση
+:Apply Crop
+hi:क्रॉप लागू करें
+:Apply Resize
+hi:आकार बदलाव लागू करें
+:Overwrite
+hi:अधिलेखित करें
+:Save
+hi:सहेजें
+:Apply Crop
+it:Applica ritaglio
+:Apply Resize
+it:Applica ridimensionamento
+:Overwrite
+it:Sovrascrivi
+:Apply Crop
+ja:切り抜きを適用
+:Apply Resize
+ja:サイズ変更を適用
+:Overwrite
+ja:上書き
+:Save
+ja:保存
+:Apply Crop
+ml:ക്രോപ്പ് പ്രയോഗിക്കുക
+:Apply Resize
+ml:വലുപ്പം മാറ്റൽ പ്രയോഗിക്കുക
+:Overwrite
+ml:പുനരാലേഖനം ചെയ്യുക
+:Save
+ml:സംരക്ഷിക്കുക
+:Apply Crop
+nl:Bijsnijden toepassen
+:Apply Resize
+nl:Formaat wijzigen toepassen
+:Overwrite
+nl:Overschrijven
+:Save
+nl:Opslaan
+:Apply Crop
+pl:Zastosuj kadrowanie
+:Apply Resize
+pl:Zastosuj zmianę rozmiaru
+:Overwrite
+pl:Nadpisz
+:Apply Crop
+ru:Применить обрезку
+:Apply Resize
+ru:Применить изменение размера
+:Overwrite
+ru:Перезаписать
+:Save
+ru:Сохранить
+:Apply Crop
+sk:Použiť orezanie
+:Apply Resize
+sk:Použiť zmenu veľkosti
+:Overwrite
+sk:Prepísať
+:Save
+sk:Uložiť
+:Apply Crop
+sr-rs:Primeni isecanje
+:Apply Resize
+sr-rs:Primeni promenu veličine
+:Overwrite
+sr-rs:Prepiši
+:Save
+sr-rs:Sačuvaj
+:Apply Crop
+tw:套用裁切
+:Apply Resize
+tw:套用調整大小
+:Overwrite
+tw:覆寫
+:Save
+tw:儲存
+:Apply Crop
+az:Kəsməni tətbiq et
+:Apply Resize
+az:Ölçü dəyişikliyini tətbiq et
+:Overwrite
+az:Üzərinə yaz
+:Save
+az:Yadda saxla
+:Apply Crop
+by:Прымяніць абрэзку
+:Apply Resize
+by:Прымяніць змену памеру
+:Overwrite
+by:Перазапісаць
+:Save
+by:Захаваць
+:Apply Crop
+ca:Aplicar retall
+:Apply Resize
+ca:Aplicar redimensió
+:Overwrite
+ca:Sobreescriure
+:Save
+ca:Desar
+:Apply Crop
+cy:Cymhwyso Tocio
+:Apply Resize
+cy:Cymhwyso Newid Maint
+:Overwrite
+cy:Trosysgrifo
+:Save
+cy:Cadw
+:Apply Crop
+cz:Použít ořez
+:Apply Resize
+cz:Použít změnu velikosti
+:Overwrite
+cz:Přepsat
+:Save
+cz:Uložit
+:Apply Crop
+es:Aplicar recorte
+:Apply Resize
+es:Aplicar redimensión
+:Overwrite
+es:Sobrescribir
+:Save
+es:Guardar
+:Apply Crop
+fa:اعمال برش
+:Apply Resize
+fa:اعمال تغییر اندازه
+:Overwrite
+fa:بازنویسی
+:Save
+fa:ذخیره
+:Apply Crop
+fi:Käytä rajausta
+:Apply Resize
+fi:Käytä koon muutosta
+:Overwrite
+fi:Korvaa
+:Save
+fi:Tallenna
+:Apply Crop
+fo:Brúka avklipping
+:Apply Resize
+fo:Brúka støddartillagað
+:Overwrite
+fo:Skriv yvir
+:Save
+fo:Goym
+:Apply Crop
+fr:Appliquer le recadrage
+:Apply Resize
+fr:Appliquer le redimensionnement
+:Overwrite
+fr:Écraser
+:Save
+fr:Enregistrer
+:Apply Crop
+ga:Cuir Bearradh i bhFeidhm
+:Apply Resize
+ga:Cuir Athrú Méide i bhFeidhm
+:Overwrite
+ga:Forscríobh
+:Save
+ga:Sábháil
+:Apply Crop
+gl:Aplicar recorte
+:Apply Resize
+gl:Aplicar redimensionamento
+:Overwrite
+gl:Sobrescribir
+:Save
+gl:Gardar
+:Apply Crop
+he:החל חיתוך
+:Apply Resize
+he:החל שינוי גודל
+:Overwrite
+he:החלף
+:Save
+he:שמור
+:Apply Crop
+hu:Vágás alkalmazása
+:Apply Resize
+hu:Átméretezés alkalmazása
+:Overwrite
+hu:Felülírás
+:Save
+hu:Mentés
+:Apply Crop
+id:Terapkan Potong
+:Apply Resize
+id:Terapkan Ubah Ukuran
+:Overwrite
+id:Timpa
+:Save
+id:Simpan
+:Apply Crop
+kr:자르기 적용
+:Apply Resize
+kr:크기 조정 적용
+:Overwrite
+kr:덮어쓰기
+:Save
+kr:저장
+:Apply Crop
+lv:Lietot apgriešanu
+:Apply Resize
+lv:Lietot izmēra maiņu
+:Overwrite
+lv:Pārrakstīt
+:Save
+lv:Saglabāt
+:Apply Crop
+my:ဖြတ်တောက်မှုကို အသုံးပြုရန်
+:Apply Resize
+my:အရွယ်အစားပြောင်းလဲမှုကို အသုံးပြုရန်
+:Overwrite
+my:ထပ်ရေးရန်
+:Save
+my:သိမ်းရန်
+:Apply Crop
+pt:Aplicar Recorte
+:Apply Resize
+pt:Aplicar Redimensionamento
+:Overwrite
+pt:Sobrescrever
+:Save
+pt:Salvar
+:Apply Crop
+ro:Aplică decupare
+:Apply Resize
+ro:Aplică redimensionare
+:Overwrite
+ro:Suprascrie
+:Save
+ro:Salvează
+:Apply Crop
+sat:ᱠᱟᱴ ᱞᱟᱜᱩ ᱢᱮ
+:Apply Resize
+sat:ᱢᱟᱯ ᱵᱚᱫᱚᱞ ᱞᱟᱜᱩ ᱢᱮ
+:Overwrite
+sat:ᱪᱮᱛᱟᱱ ᱨᱮ ᱚᱞ
+:Save
+sat:ᱥᱟᱺᱪᱟᱣ ᱢᱮ
+:Apply Crop
+sl:Uporabi obrezavo
+:Apply Resize
+sl:Uporabi spremembo velikosti
+:Overwrite
+sl:Prepiši
+:Save
+sl:Shrani
+:Apply Crop
+sv:Verkställ beskärning
+:Apply Resize
+sv:Verkställ storleksändring
+:Overwrite
+sv:Skriv över
+:Save
+sv:Spara
+:Apply Crop
+ta:செதுக்கலைப் பயன்படுத்து
+:Apply Resize
+ta:அளவு மாற்றத்தைப் பயன்படுத்து
+:Overwrite
+ta:மேலெழுது
+:Save
+ta:சேமி
+:Apply Crop
+tr:Kırpmayı Uygula
+:Apply Resize
+tr:Yeniden Boyutlandırmayı Uygula
+:Overwrite
+tr:Üzerine Yaz
+:Save
+tr:Kaydet
+:Apply Crop
+uz:Kesishni qo'llash
+:Apply Resize
+uz:O'lchamni o'zgartirishni qo'llash
+:Overwrite
+uz:Ustidan yozish
+:Save
+uz:Saqlash
+:Apply Crop
+af:Pas Snoei Toe
+:Apply Resize
+af:Pas Grootteverandering Toe
+:Overwrite
+af:Oorskryf
+:Save
+af:Stoor
+:Apply Crop
+bg:Приложи изрязване
+:Apply Resize
+bg:Приложи преоразмеряване
+:Overwrite
+bg:Презапиши
+:Save
+bg:Запази
+:Apply Crop
+bn:ক্রপ প্রয়োগ করুন
+:Apply Resize
+bn:রিসাইজ প্রয়োগ করুন
+:Overwrite
+bn:ওভাররাইট
+:Save
+bn:সংরক্ষণ করুন
+:Apply Crop
+bs:Primijeni obrezivanje
+:Apply Resize
+bs:Primijeni promjenu veličine
+:Overwrite
+bs:Prepiši
+:Save
+bs:Sačuvaj
+:Apply Crop
+ca-xv:Aplicar retall
+:Apply Resize
+ca-xv:Aplicar redimensió
+:Overwrite
+ca-xv:Sobreescriure
+:Save
+ca-xv:Desar
+:Apply Crop
+dk:Anvend beskæring
+:Apply Resize
+dk:Anvend størrelsesændring
+:Overwrite
+dk:Overskriv
+:Save
+dk:Gem
+:Apply Crop
+et:Rakenda kärpimine
+:Apply Resize
+et:Rakenda suuruse muutmine
+:Overwrite
+et:Kirjuta üle
+:Save
+et:Salvesta
+:&Save
+eu:Gorde
+:Apply Crop
+eu:Aplikatu mozketa
+:Apply Resize
+eu:Aplikatu tamaina-aldaketa
+:C&rop
+eu:Moztu
+:Overwrite
+eu:Gainidatzi
+:Paste Image From Clipboard
+eu:Itsatsi irudia arbelean
+:R&esize
+eu:Aldatu tamaina
+:Save Image
+eu:Gorde irudia
+:Show Errors
+eu:Erakutsi erroreak
+:Toggle Hide Scrollbar
+eu:Txandakatu ezkutatu korritzeko barra
+:Toggle Lazy Loading
+eu:Txandakatu karga alferra
+:Toggle Scrollbar In Single Page
+eu:Txandakatu korritzeko barra orrialde bakarrean
+:Toggle Smooth Scroll
+eu:Txandakatu korritze leuna
+:Apply Crop
+fy-nl:Besnij tapasse
+:Apply Resize
+fy-nl:Formaat feroarje tapasse
+:Overwrite
+fy-nl:Oerskriuwe
+:Save
+fy-nl:Bewarje
+:Apply Crop
+hr:Primijeni obrezivanje
+:Apply Resize
+hr:Primijeni promjenu veličine
+:Overwrite
+hr:Prepiši
+:Save
+hr:Spremi
+:Apply Crop
+jv:Terapake Pangethok
+:Apply Resize
+jv:Terapake Owah Ukuran
+:Overwrite
+jv:Timpa
+:Save
+jv:Simpen
+:Apply Crop
+ka:კადრირების გამოყენება
+:Apply Resize
+ka:ზომის შეცვლის გამოყენება
+:Overwrite
+ka:გადაწერა
+:Save
+ka:შენახვა
+:Apply Crop
+ku:Birrînê Bisepîne
+:Apply Resize
+ku:Guhertina Mezinahiyê Bisepîne
+:Overwrite
+ku:Li Ser Binivîse
+:Save
+ku:Tomar Bike
+:Apply Crop
+kw:Omgelmi Trega
+:Apply Resize
+kw:Omgelmi Dashevysyans
+:Overwrite
+kw:Gorskrifa
+:Save
+kw:Gwitha
+:Apply Crop
+lt:Taikyti apkarpymą
+:Apply Resize
+lt:Taikyti dydžio keitimą
+:Overwrite
+lt:Perrašyti
+:Save
+lt:Išsaugoti
+:Apply Crop
+mk:Примени сечење
+:Apply Resize
+mk:Примени промена на големина
+:Overwrite
+mk:Препиши
+:Save
+mk:Зачувај
+:Apply Crop
+mm:ဖြတ်တောက်မှုကို အသုံးပြုရန်
+:Apply Resize
+mm:အရွယ်အစားပြောင်းလဲမှုကို အသုံးပြုရန်
+:Overwrite
+mm:ထပ်ရေးသားရန်
+:Save
+mm:သိမ်းဆည်းရန်
+:Apply Crop
+ne:क्रप लागू गर्नुहोस्
+:Apply Resize
+ne:रिसाइज लागू गर्नुहोस्
+:Overwrite
+ne:अधिलेखन गर्नुहोस्
+:Save
+ne:सुरक्षित गर्नुहोस्
+:Apply Crop
+nn:Bruk beskjering
+:Apply Resize
+nn:Bruk storleiksendring
+:Overwrite
+nn:Skriv over
+:Save
+nn:Lagre
+:Apply Crop
+no:Bruk beskjæring
+:Apply Resize
+no:Bruk endring av størrelse
+:Overwrite
+no:Overskriv
+:Save
+no:Lagre
+:Apply Crop
+pa:ਕਰੌਪ ਲਾਗੂ ਕਰੋ
+:Apply Resize
+pa:ਰੀਸਾਈਜ਼ ਲਾਗੂ ਕਰੋ
+:Overwrite
+pa:ਓਵਰਰਾਈਟ ਕਰੋ
+:Save
+pa:ਸੇਵ ਕਰੋ
+:Apply Crop
+si:කප්පාදුව යොදන්න
+:Apply Resize
+si:ප්‍රමාණය වෙනස් කිරීම යොදන්න
+:Overwrite
+si:උඩින් ලියන්න
+:Save
+si:සුරකින්න
+:Apply Crop
+sn:Shandisa Kucheka
+:Apply Resize
+sn:Shandisa Kuchinja Saizi
+:Overwrite
+sn:Nyora Pamusoro
+:Save
+sn:Chengetedza
+:Apply Crop
+sp-rs:Primeni isecanje
+:Apply Resize
+sp-rs:Primeni promenu veličine
+:Overwrite
+sp-rs:Prepiši
+:Save
+sp-rs:Sačuvaj
+:Apply Crop
+sq:Apliko Prerjen
+:Apply Resize
+sq:Apliko Ndryshimin e Madhësisë
+:Overwrite
+sq:Mbishkruaj
+:Save
+sq:Ruaj
+:Apply Crop
+th:ใช้การครอบตัด
+:Apply Resize
+th:ใช้การปรับขนาด
+:Overwrite
+th:เขียนทับ
+:Save
+th:บันทึก
+:Apply Crop
+tl:Ilapat ang Crop
+:Apply Resize
+tl:Ilapat ang Resize
+:Overwrite
+tl:Palitan
+:Save
+tl:I-save
+:Apply Crop
+uk:Застосувати обрізання
+:Apply Resize
+uk:Застосувати зміну розміру
+:Overwrite
+uk:Перезаписати
+:Save
+uk:Зберегти
+:Apply Crop
+vn:Áp dụng Cắt
+:Apply Resize
+vn:Áp dụng Thay đổi Kích thước
+:Overwrite
+vn:Ghi đè
+:Save
+vn:Lưu
