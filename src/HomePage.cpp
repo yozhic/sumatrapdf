@@ -1121,7 +1121,7 @@ void DrawHomePage(MainWindow* win, HDC hdc) {
     bool showScrollbarV = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && l.totalContentDy > l.thumbsVisibleDy;
     if (showScrollbarV) {
         if (!win->overlayScrollV) {
-            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Vert);
+            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert);
         }
         SCROLLINFO si{};
         si.cbSize = sizeof(si);

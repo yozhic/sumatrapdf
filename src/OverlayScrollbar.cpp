@@ -52,7 +52,7 @@ static int ScaledWidth(OverlayScrollbar* sb, bool thick) {
 }
 
 static bool IsVert(OverlayScrollbar* sb) {
-    return sb->type == ScrollbarType::Vert;
+    return sb->type == OverlayScrollbar::Type::Vert;
 }
 
 // Get the track rect in client coords of the scrollbar window
@@ -704,7 +704,7 @@ static void RegisterScrollbarClass() {
     gScrollbarClassRegistered = true;
 }
 
-OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, ScrollbarType type) {
+OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type) {
     RegisterScrollbarClass();
 
     auto* sb = new OverlayScrollbar();

@@ -7,15 +7,15 @@
 extern int gThickVisibilityDistance;
 extern bool gOverlayScrollbarSuppressThick;
 
-enum class ScrollbarType {
-    Vert,
-    Horz,
-};
-
 struct OverlayScrollbar {
+    enum class Type {
+        Vert,
+        Horz,
+    };
+
     HWND hwnd = nullptr;      // the scrollbar top-level window
     HWND hwndOwner = nullptr; // positioned relative to this window; receives scroll messages
-    ScrollbarType type = ScrollbarType::Vert;
+    Type type = Type::Vert;
 
     // scroll state (mirrors SCROLLINFO)
     int nMin = 0;
@@ -50,7 +50,7 @@ struct OverlayScrollbar {
     static constexpr UINT_PTR kTimerRepeatScroll = 2;
 };
 
-OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, ScrollbarType type);
+OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type);
 void OverlayScrollbarDestroy(OverlayScrollbar* sb);
 
 // Same API as SetScrollInfo / GetScrollInfo
