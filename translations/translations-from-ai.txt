@@ -36594,3 +36594,997 @@ vn:Cắt
 vn:Thay đổi kích thước
 :Save Image
 vn:Lưu ảnh
+:Crop
+am:መቁረጥ
+:Resize
+am:መጠን መቀየር
+:Show Errors
+am:ስህተቶችን አሳይ
+:Toggle Hide Scrollbar
+am:የማሸብለያ አሞሌ መደበቂያን ቀያይር
+:Toggle Lazy Loading
+am:የዘገየ መጫን ቀያይር
+:Toggle Scrollbar In Single Page
+am:በነጠላ ገጽ ውስጥ የማሸብለያ አሞሌ ቀያይር
+:Toggle Smooth Scroll
+am:ለስላሳ ማሸብለያን ቀያይር
+:Crop
+ar:قص
+:Resize
+ar:تغيير الحجم
+:Show Errors
+ar:إظهار الأخطاء
+:Toggle Hide Scrollbar
+ar:تبديل إخفاء شريط التمرير
+:Toggle Lazy Loading
+ar:تبديل التحميل الكسول
+:Toggle Scrollbar In Single Page
+ar:تبديل شريط التمرير في صفحة واحدة
+:Toggle Smooth Scroll
+ar:تبديل التمرير السلس
+:Crop
+br:Troc'hañ
+:Resize
+br:Adventañ
+:Show Errors
+br:Diskouez ar fazioù
+:Toggle Hide Scrollbar
+br:Kemmañ kuzhat ar varenn-dibunañ
+:Toggle Lazy Loading
+br:Kemmañ ar c'hargañ gorrek
+:Toggle Scrollbar In Single Page
+br:Kemmañ ar varenn-dibunañ er bajenn unel
+:Toggle Smooth Scroll
+br:Kemmañ an dibunañ flour
+:Crop
+cn:裁剪
+:Resize
+cn:调整大小
+:Show Errors
+cn:显示错误
+:Toggle Hide Scrollbar
+cn:切换隐藏滚动条
+:Toggle Lazy Loading
+cn:切换延迟加载
+:Toggle Scrollbar In Single Page
+cn:切换单页滚动条
+:Toggle Smooth Scroll
+cn:切换平滑滚动
+:Crop
+co:Ritaglia
+:Resize
+co:Ridimensiona
+:Show Errors
+co:Mustrà l'Errori
+:Toggle Hide Scrollbar
+co:Attivà/Disattivà a Barra di Scorsa
+:Toggle Lazy Loading
+co:Attivà/Disattivà u Caricamentu Differitu
+:Toggle Scrollbar In Single Page
+co:Attivà/Disattivà a Barra di Scorsa in Pagina Unica
+:Toggle Smooth Scroll
+co:Attivà/Disattivà u Scorsu Fluidu
+:Crop
+de:Zuschneiden
+:Resize
+de:Größe ändern
+:Show Errors
+de:Fehler anzeigen
+:Toggle Hide Scrollbar
+de:Bildlaufleiste ein-/ausblenden
+:Toggle Lazy Loading
+de:Lazy Loading umschalten
+:Toggle Scrollbar In Single Page
+de:Bildlaufleiste auf Einzelseite umschalten
+:Toggle Smooth Scroll
+de:Weiches Scrollen umschalten
+:Crop
+el:Περικοπή
+:Resize
+el:Αλλαγή μεγέθους
+:Show Errors
+el:Εμφάνιση σφαλμάτων
+:Toggle Hide Scrollbar
+el:Εναλλαγή απόκρυψης γραμμής κύλισης
+:Toggle Lazy Loading
+el:Εναλλαγή τεμπέλικης φόρτωσης
+:Toggle Scrollbar In Single Page
+el:Εναλλαγή γραμμής κύλισης σε μονή σελίδα
+:Toggle Smooth Scroll
+el:Εναλλαγή ομαλής κύλισης
+:Crop
+hi:क्रॉप करें
+:Resize
+hi:आकार बदलें
+:Show Errors
+hi:त्रुटियाँ दिखाएं
+:Toggle Hide Scrollbar
+hi:स्क्रॉलबार छिपाना टॉगल करें
+:Toggle Lazy Loading
+hi:लेज़ी लोडिंग टॉगल करें
+:Toggle Scrollbar In Single Page
+hi:सिंगल पेज में स्क्रॉलबार टॉगल करें
+:Toggle Smooth Scroll
+hi:स्मूथ स्क्रॉल टॉगल करें
+:Crop
+it:Ritaglia
+:Resize
+it:Ridimensiona
+:Show Errors
+it:Mostra Errori
+:Toggle Hide Scrollbar
+it:Attiva/Disattiva Nascondi Barra di Scorrimento
+:Toggle Lazy Loading
+it:Attiva/Disattiva Caricamento Lazy
+:Toggle Scrollbar In Single Page
+it:Attiva/Disattiva Barra di Scorrimento in Pagina Singola
+:Toggle Smooth Scroll
+it:Attiva/Disattiva Scorrimento Fluido
+:Crop
+ja:トリミング
+:Resize
+ja:リサイズ
+:Show Errors
+ja:エラーを表示
+:Toggle Hide Scrollbar
+ja:スクロールバーの表示/非表示を切り替え
+:Toggle Lazy Loading
+ja:遅延読み込みの切り替え
+:Toggle Scrollbar In Single Page
+ja:単一ページでのスクロールバー表示を切り替え
+:Toggle Smooth Scroll
+ja:スムーズスクロールの切り替え
+:Crop
+ml:ക്രോപ്പ് ചെയ്യുക
+:Resize
+ml:വലുപ്പം മാറ്റുക
+:Show Errors
+ml:പിശകുകൾ കാണിക്കുക
+:Toggle Hide Scrollbar
+ml:സ്ക്രോൾബാർ മറയ്ക്കൽ ടോഗിൾ ചെയ്യുക
+:Toggle Lazy Loading
+ml:ലേസി ലോഡിംഗ് ടോഗിൾ ചെയ്യുക
+:Toggle Scrollbar In Single Page
+ml:ഒറ്റ പേജിൽ സ്ക്രോൾബാർ ടോഗിൾ ചെയ്യുക
+:Toggle Smooth Scroll
+ml:സ്മൂത്ത് സ്ക്രോൾ ടോഗിൾ ചെയ്യുക
+:Crop
+nl:Bijsnijden
+:Resize
+nl:Formaat wijzigen
+:Show Errors
+nl:Fouten weergeven
+:Toggle Hide Scrollbar
+nl:Schuifbalk verbergen in-/uitschakelen
+:Toggle Lazy Loading
+nl:Lui laden in-/uitschakelen
+:Toggle Scrollbar In Single Page
+nl:Schuifbalk op enkele pagina in-/uitschakelen
+:Toggle Smooth Scroll
+nl:Vloeiend scrollen in-/uitschakelen
+:Crop
+pl:Przytnij
+:Resize
+pl:Zmień rozmiar
+:Show Errors
+pl:Pokaż błędy
+:Toggle Hide Scrollbar
+pl:Przełącz ukrywanie paska przewijania
+:Toggle Lazy Loading
+pl:Przełącz leniwe ładowanie
+:Toggle Scrollbar In Single Page
+pl:Przełącz pasek przewijania na pojedynczej stronie
+:Toggle Smooth Scroll
+pl:Przełącz płynne przewijanie
+:Crop
+ru:Обрезать
+:Resize
+ru:Изменить размер
+:Show Errors
+ru:Показать ошибки
+:Toggle Hide Scrollbar
+ru:Переключить скрытие полосы прокрутки
+:Toggle Lazy Loading
+ru:Переключить отложенную загрузку
+:Toggle Scrollbar In Single Page
+ru:Переключить полосу прокрутки на одной странице
+:Toggle Smooth Scroll
+ru:Переключить плавную прокрутку
+:Crop
+sk:Orezať
+:Resize
+sk:Zmeniť veľkosť
+:Show Errors
+sk:Zobraziť chyby
+:Toggle Hide Scrollbar
+sk:Prepnúť skrytie posuvníka
+:Toggle Lazy Loading
+sk:Prepnúť lenivé načítavanie
+:Toggle Scrollbar In Single Page
+sk:Prepnúť posuvník na jednej stránke
+:Toggle Smooth Scroll
+sk:Prepnúť plynulé posúvanie
+:Crop
+sr-rs:Исеци
+:Resize
+sr-rs:Промени величину
+:Show Errors
+sr-rs:Прикажи грешке
+:Toggle Hide Scrollbar
+sr-rs:Укључи/искључи сакривање траке за скроловање
+:Toggle Lazy Loading
+sr-rs:Укључи/искључи одложено учитавање
+:Toggle Scrollbar In Single Page
+sr-rs:Укључи/искључи траку за скроловање на једној страници
+:Toggle Smooth Scroll
+sr-rs:Укључи/искључи глатко скроловање
+:Crop
+tw:裁切
+:Resize
+tw:調整大小
+:Show Errors
+tw:顯示錯誤
+:Toggle Hide Scrollbar
+tw:切換隱藏捲軸
+:Toggle Lazy Loading
+tw:切換延遲載入
+:Toggle Scrollbar In Single Page
+tw:切換單頁捲軸
+:Toggle Smooth Scroll
+tw:切換平滑捲動
+:Crop
+az:Kəs
+:Resize
+az:Ölçüsünü dəyiş
+:Show Errors
+az:Xətaları göstər
+:Toggle Hide Scrollbar
+az:Sürüşdürmə panelini gizlətməyi aç/bağla
+:Toggle Lazy Loading
+az:Lazy Loading-i aç/bağla
+:Toggle Scrollbar In Single Page
+az:Tək səhifədə sürüşdürmə panelini aç/bağla
+:Toggle Smooth Scroll
+az:Hamar sürüşdürməni aç/bağla
+:Crop
+by:Абрэзаць
+:Resize
+by:Змяніць памер
+:Show Errors
+by:Паказаць памылкі
+:Toggle Hide Scrollbar
+by:Пераключыць хаванне паласы пракруткі
+:Toggle Lazy Loading
+by:Пераключыць адкладзеную загрузку
+:Toggle Scrollbar In Single Page
+by:Пераключыць паласу пракруткі на адной старонцы
+:Toggle Smooth Scroll
+by:Пераключыць плаўную пракрутку
+:Crop
+ca:Retalla
+:Resize
+ca:Redimensiona
+:Show Errors
+ca:Mostra errors
+:Toggle Hide Scrollbar
+ca:Commuta amagar barra de desplaçament
+:Toggle Lazy Loading
+ca:Commuta càrrega diferida
+:Toggle Scrollbar In Single Page
+ca:Commuta barra de desplaçament en pàgina única
+:Toggle Smooth Scroll
+ca:Commuta desplaçament suau
+:Crop
+cy:Tocio
+:Resize
+cy:Newid Maint
+:Show Errors
+cy:Dangos Gwallau
+:Toggle Hide Scrollbar
+cy:Toglo Cuddio Bar Sgrolio
+:Toggle Lazy Loading
+cy:Toglo Llwytho Diog
+:Toggle Scrollbar In Single Page
+cy:Toglo Bar Sgrolio mewn Tudalen Sengl
+:Toggle Smooth Scroll
+cy:Toglo Sgrolio Llyfn
+:Crop
+cz:Oříznout
+:Resize
+cz:Změnit velikost
+:Show Errors
+cz:Zobrazit chyby
+:Toggle Hide Scrollbar
+cz:Přepnout skrytí posuvníku
+:Toggle Lazy Loading
+cz:Přepnout líné načítání
+:Toggle Scrollbar In Single Page
+cz:Přepnout posuvník na jedné stránce
+:Toggle Smooth Scroll
+cz:Přepnout plynulé posouvání
+:Crop
+es:Recortar
+:Resize
+es:Redimensionar
+:Show Errors
+es:Mostrar errores
+:Toggle Hide Scrollbar
+es:Alternar ocultar barra de desplazamiento
+:Toggle Lazy Loading
+es:Alternar carga diferida
+:Toggle Scrollbar In Single Page
+es:Alternar barra de desplazamiento en página única
+:Toggle Smooth Scroll
+es:Alternar desplazamiento suave
+:Crop
+fa:برش
+:Resize
+fa:تغییر اندازه
+:Show Errors
+fa:نمایش خطاها
+:Toggle Hide Scrollbar
+fa:تغییر وضعیت مخفی کردن نوار اسکرول
+:Toggle Lazy Loading
+fa:تغییر وضعیت بارگذاری تنبل
+:Toggle Scrollbar In Single Page
+fa:تغییر وضعیت نوار اسکرول در صفحه واحد
+:Toggle Smooth Scroll
+fa:تغییر وضعیت اسکرول نرم
+:Crop
+fi:Rajaa
+:Resize
+fi:Muuta kokoa
+:Show Errors
+fi:Näytä virheet
+:Toggle Hide Scrollbar
+fi:Piilota/näytä vierityspalkki
+:Toggle Lazy Loading
+fi:Laiska lataus päälle/pois
+:Toggle Scrollbar In Single Page
+fi:Vierityspalkki yhdellä sivulla päälle/pois
+:Toggle Smooth Scroll
+fi:Pehmeä vieritys päälle/pois
+:Crop
+fo:Skera
+:Resize
+fo:Broyt stødd
+:Show Errors
+fo:Vís villa
+:Toggle Hide Scrollbar
+fo:Skift at fela rullustiku
+:Toggle Lazy Loading
+fo:Skift sein innlesing
+:Toggle Scrollbar In Single Page
+fo:Skift rullustiku í einstakari síðu
+:Toggle Smooth Scroll
+fo:Skift mjúka rulling
+:Crop
+fr:Rogner
+:Resize
+fr:Redimensionner
+:Show Errors
+fr:Afficher les erreurs
+:Toggle Hide Scrollbar
+fr:Basculer masquer la barre de défilement
+:Toggle Lazy Loading
+fr:Basculer le chargement différé
+:Toggle Scrollbar In Single Page
+fr:Basculer la barre de défilement en page unique
+:Toggle Smooth Scroll
+fr:Basculer le défilement fluide
+:Crop
+ga:Bearr
+:Resize
+ga:Athraigh Méid
+:Show Errors
+ga:Taispeáin Earráidí
+:Toggle Hide Scrollbar
+ga:Scoránaigh Scrollbharra a Cheilt
+:Toggle Lazy Loading
+ga:Scoránaigh Luchtú Leisciúil
+:Toggle Scrollbar In Single Page
+ga:Scoránaigh Scrollbharra i Leathanach Aonair
+:Toggle Smooth Scroll
+ga:Scoránaigh Scrollú Mín
+:Crop
+gl:Recortar
+:Resize
+gl:Redimensionar
+:Show Errors
+gl:Mostrar erros
+:Toggle Hide Scrollbar
+gl:Alternar ocultar barra de desprazamento
+:Toggle Lazy Loading
+gl:Alternar carga preguiceira
+:Toggle Scrollbar In Single Page
+gl:Alternar barra de desprazamento en páxina única
+:Toggle Smooth Scroll
+gl:Alternar desprazamento suave
+:Crop
+he:חיתוך
+:Resize
+he:שינוי גודל
+:Show Errors
+he:הצג שגיאות
+:Toggle Hide Scrollbar
+he:החלף הסתרת פס גלילה
+:Toggle Lazy Loading
+he:החלף טעינה עצלה
+:Toggle Scrollbar In Single Page
+he:החלף פס גלילה בעמוד בודד
+:Toggle Smooth Scroll
+he:החלף גלילה חלקה
+:Crop
+hu:Vágás
+:Resize
+hu:Átméretezés
+:Show Errors
+hu:Hibák megjelenítése
+:Toggle Hide Scrollbar
+hu:Görgetősáv elrejtésének váltása
+:Toggle Lazy Loading
+hu:Lusta betöltés váltása
+:Toggle Scrollbar In Single Page
+hu:Görgetősáv váltása egyoldalas nézetben
+:Toggle Smooth Scroll
+hu:Sima görgetés váltása
+:Crop
+id:Potong
+:Resize
+id:Ubah Ukuran
+:Show Errors
+id:Tampilkan Kesalahan
+:Toggle Hide Scrollbar
+id:Alihkan Sembunyikan Scrollbar
+:Toggle Lazy Loading
+id:Alihkan Pemuatan Lambat
+:Toggle Scrollbar In Single Page
+id:Alihkan Scrollbar di Halaman Tunggal
+:Toggle Smooth Scroll
+id:Alihkan Gulir Halus
+:Crop
+kr:자르기
+:Resize
+kr:크기 조정
+:Show Errors
+kr:오류 표시
+:Toggle Hide Scrollbar
+kr:스크롤바 숨기기 전환
+:Toggle Lazy Loading
+kr:지연 로딩 전환
+:Toggle Scrollbar In Single Page
+kr:단일 페이지에서 스크롤바 전환
+:Toggle Smooth Scroll
+kr:부드러운 스크롤 전환
+:Crop
+lv:Apgriezt
+:Resize
+lv:Mainīt izmēru
+:Show Errors
+lv:Rādīt kļūdas
+:Toggle Hide Scrollbar
+lv:Pārslēgt ritjoslas paslēpšanu
+:Toggle Lazy Loading
+lv:Pārslēgt slinko ielādi
+:Toggle Scrollbar In Single Page
+lv:Pārslēgt ritjoslu vienā lapā
+:Toggle Smooth Scroll
+lv:Pārslēgt gludu ritināšanu
+:Crop
+my:ဖြတ်တောက်ရန်
+:Resize
+my:အရွယ်အစားပြောင်းရန်
+:Show Errors
+my:အမှားများပြရန်
+:Toggle Hide Scrollbar
+my:လှိမ့်ဘားဖျောက်ခြင်းဖွင့်ပိတ်ရန်
+:Toggle Lazy Loading
+my:နှေးကွေးတင်ခြင်းဖွင့်ပိတ်ရန်
+:Toggle Scrollbar In Single Page
+my:စာမျက်နှာတစ်ခုတည်းတွင် လှိမ့်ဘားဖွင့်ပိတ်ရန်
+:Toggle Smooth Scroll
+my:ချောမွေ့စွာလှိမ့်ခြင်းဖွင့်ပိတ်ရန်
+:Crop
+pt:Recortar
+:Resize
+pt:Redimensionar
+:Show Errors
+pt:Mostrar Erros
+:Toggle Hide Scrollbar
+pt:Alternar Ocultar Barra de Rolagem
+:Toggle Lazy Loading
+pt:Alternar Carregamento Sob Demanda
+:Toggle Scrollbar In Single Page
+pt:Alternar Barra de Rolagem em Página Única
+:Toggle Smooth Scroll
+pt:Alternar Rolagem Suave
+:Crop
+ro:Decupare
+:Resize
+ro:Redimensionare
+:Show Errors
+ro:Afișează erori
+:Toggle Hide Scrollbar
+ro:Comutare ascundere bară de derulare
+:Toggle Lazy Loading
+ro:Comutare încărcare leneșă
+:Toggle Scrollbar In Single Page
+ro:Comutare bară de derulare în pagină unică
+:Toggle Smooth Scroll
+ro:Comutare derulare lină
+:Crop
+sat:काटॅ
+:Resize
+sat:आकार बदला
+:Show Errors
+sat:भूल देखाव
+:Toggle Hide Scrollbar
+sat:स्क्रोलबार लुकाव टॉगल
+:Toggle Lazy Loading
+sat:लेजी लोडिंग टॉगल
+:Toggle Scrollbar In Single Page
+sat:एकेल पेज मे स्क्रोलबार टॉगल
+:Toggle Smooth Scroll
+sat:स्मूथ स्क्रोल टॉगल
+:Crop
+sl:Obreži
+:Resize
+sl:Spremeni velikost
+:Show Errors
+sl:Prikaži napake
+:Toggle Hide Scrollbar
+sl:Preklopi skrivanje drsnika
+:Toggle Lazy Loading
+sl:Preklopi leno nalaganje
+:Toggle Scrollbar In Single Page
+sl:Preklopi drsnik na eni strani
+:Toggle Smooth Scroll
+sl:Preklopi gladko drsenje
+:Crop
+sv:Beskär
+:Resize
+sv:Ändra storlek
+:Show Errors
+sv:Visa fel
+:Toggle Hide Scrollbar
+sv:Växla dölj rullningslist
+:Toggle Lazy Loading
+sv:Växla lat laddning
+:Toggle Scrollbar In Single Page
+sv:Växla rullningslist i enkel sida
+:Toggle Smooth Scroll
+sv:Växla mjuk rullning
+:Crop
+ta:செதுக்கு
+:Resize
+ta:அளவு மாற்று
+:Show Errors
+ta:பிழைகளைக் காட்டு
+:Toggle Hide Scrollbar
+ta:உருள்பட்டையை மறை/காட்டு
+:Toggle Lazy Loading
+ta:சோம்பேறி ஏற்றுதலை நிலைமாற்று
+:Toggle Scrollbar In Single Page
+ta:ஒற்றைப் பக்கத்தில் உருள்பட்டையை நிலைமாற்று
+:Toggle Smooth Scroll
+ta:மென்மையான உருளலை நிலைமாற்று
+:Crop
+tr:Kırp
+:Resize
+tr:Yeniden Boyutlandır
+:Show Errors
+tr:Hataları Göster
+:Toggle Hide Scrollbar
+tr:Kaydırma Çubuğunu Gizlemeyi Aç/Kapat
+:Toggle Lazy Loading
+tr:Tembel Yüklemeyi Aç/Kapat
+:Toggle Scrollbar In Single Page
+tr:Tek Sayfada Kaydırma Çubuğunu Aç/Kapat
+:Toggle Smooth Scroll
+tr:Yumuşak Kaydırmayı Aç/Kapat
+:Crop
+uz:Kesish
+:Resize
+uz:O'lchamini o'zgartirish
+:Show Errors
+uz:Xatolarni ko'rsatish
+:Toggle Hide Scrollbar
+uz:Aylantirish panelini yashirish
+:Toggle Lazy Loading
+uz:Sekin yuklashni yoqish/o'chirish
+:Toggle Scrollbar In Single Page
+uz:Bitta sahifada aylantirish panelini yoqish/o'chirish
+:Toggle Smooth Scroll
+uz:Silliq aylantirish rejimini yoqish/o'chirish
+:Crop
+af:Sny
+:Resize
+af:Verander grootte
+:Show Errors
+af:Wys foute
+:Toggle Hide Scrollbar
+af:Wissel versteek rolbalk
+:Toggle Lazy Loading
+af:Wissel lui laai
+:Toggle Scrollbar In Single Page
+af:Wissel rolbalk in enkele bladsy
+:Toggle Smooth Scroll
+af:Wissel gladde rol
+:Crop
+bg:Изрязване
+:Resize
+bg:Преоразмеряване
+:Show Errors
+bg:Покажи грешки
+:Toggle Hide Scrollbar
+bg:Превключи скриване на лентата за превъртане
+:Toggle Lazy Loading
+bg:Превключи отложено зареждане
+:Toggle Scrollbar In Single Page
+bg:Превключи лентата за превъртане в единична страница
+:Toggle Smooth Scroll
+bg:Превключи плавно превъртане
+:Crop
+bn:ক্রপ করুন
+:Resize
+bn:রিসাইজ করুন
+:Show Errors
+bn:ত্রুটি দেখান
+:Toggle Hide Scrollbar
+bn:স্ক্রলবার লুকানো টগল করুন
+:Toggle Lazy Loading
+bn:লেজি লোডিং টগল করুন
+:Toggle Scrollbar In Single Page
+bn:একক পৃষ্ঠায় স্ক্রলবার টগল করুন
+:Toggle Smooth Scroll
+bn:মসৃণ স্ক্রল টগল করুন
+:Crop
+bs:Izreži
+:Resize
+bs:Promijeni veličinu
+:Show Errors
+bs:Prikaži greške
+:Toggle Hide Scrollbar
+bs:Uključi/isključi sakrivanje trake za pomeranje
+:Toggle Lazy Loading
+bs:Uključi/isključi odgođeno učitavanje
+:Toggle Scrollbar In Single Page
+bs:Uključi/isključi traku za pomeranje na jednoj stranici
+:Toggle Smooth Scroll
+bs:Uključi/isključi glatko pomeranje
+:Crop
+ca-xv:Retalla
+:Resize
+ca-xv:Redimensiona
+:Show Errors
+ca-xv:Mostra errors
+:Toggle Hide Scrollbar
+ca-xv:Commuta amaga barra de desplaçament
+:Toggle Lazy Loading
+ca-xv:Commuta càrrega lazy
+:Toggle Scrollbar In Single Page
+ca-xv:Commuta barra de desplaçament en pàgina única
+:Toggle Smooth Scroll
+ca-xv:Commuta desplaçament suau
+:Crop
+dk:Beskær
+:Resize
+dk:Tilpas størrelse
+:Show Errors
+dk:Vis fejl
+:Toggle Hide Scrollbar
+dk:Skift skjul rullebjælke
+:Toggle Lazy Loading
+dk:Skift lazy loading
+:Toggle Scrollbar In Single Page
+dk:Skift rullebjælke på enkelt side
+:Toggle Smooth Scroll
+dk:Skift glat rulning
+:Crop
+et:Kärbi
+:Resize
+et:Muuda suurust
+:Show Errors
+et:Kuva vead
+:Toggle Hide Scrollbar
+et:Lülita kerimisriba peitmine
+:Toggle Lazy Loading
+et:Lülita laisk laadimine
+:Toggle Scrollbar In Single Page
+et:Lülita kerimisriba ühel lehel
+:Toggle Smooth Scroll
+et:Lülita sujuv kerimine
+:Crop
+fy-nl:Bysnije
+:Resize
+fy-nl:Grutte oanpasse
+:Show Errors
+fy-nl:Flaters toane
+:Toggle Hide Scrollbar
+fy-nl:Scrollbalke ferstopje oan/út
+:Toggle Lazy Loading
+fy-nl:Lui laden oan/út
+:Toggle Scrollbar In Single Page
+fy-nl:Scrollbalke yn inkele side oan/út
+:Toggle Smooth Scroll
+fy-nl:Soepel scrollen oan/út
+:Crop
+hr:Obreži
+:Resize
+hr:Promijeni veličinu
+:Show Errors
+hr:Prikaži greške
+:Toggle Hide Scrollbar
+hr:Uključi/isključi skrivanje trake pomicanja
+:Toggle Lazy Loading
+hr:Uključi/isključi odgođeno učitavanje
+:Toggle Scrollbar In Single Page
+hr:Uključi/isključi traku pomicanja na jednoj stranici
+:Toggle Smooth Scroll
+hr:Uključi/isključi glatko pomicanje
+:Crop
+jv:Potong
+:Resize
+jv:Ukur Maneh
+:Show Errors
+jv:Tuduhake Kesalahan
+:Toggle Hide Scrollbar
+jv:Alih Ndhelikake Scrollbar
+:Toggle Lazy Loading
+jv:Alih Lazy Loading
+:Toggle Scrollbar In Single Page
+jv:Alih Scrollbar ing Kaca Tunggal
+:Toggle Smooth Scroll
+jv:Alih Smooth Scroll
+:Crop
+ka:ამოჭრა
+:Resize
+ka:ზომის შეცვლა
+:Show Errors
+ka:შეცდომების ჩვენება
+:Toggle Hide Scrollbar
+ka:გადართვა დამალვა გადახვევის ზოლი
+:Toggle Lazy Loading
+ka:ლენივი ჩატვირთვის გადართვა
+:Toggle Scrollbar In Single Page
+ka:გადართვა გადახვევის ზოლი ერთ გვერდზე
+:Toggle Smooth Scroll
+ka:გლუვი გადახვევის გადართვა
+:Crop
+ku:Birrîn
+:Resize
+ku:Mezinahî biguherîne
+:Show Errors
+ku:Çewtiyan nîşan bide
+:Toggle Hide Scrollbar
+ku:Barê scrollê veşêre/nîşan bide
+:Toggle Lazy Loading
+ku:Barkirina dereng veke/bigire
+:Toggle Scrollbar In Single Page
+ku:Barê scrollê di rûpela yek de veke/bigire
+:Toggle Smooth Scroll
+ku:Scrollkirina nerm veke/bigire
+:Crop
+kw:Trohhe
+:Resize
+kw:Dasvynas
+:Show Errors
+kw:Diskwedhes Gowlow
+:Toggle Hide Scrollbar
+kw:Kelmya/Diskudha an Bar Rolya
+:Toggle Lazy Loading
+kw:Kelmya/Diskudha Kargans Dinerthek
+:Toggle Scrollbar In Single Page
+kw:Kelmya/Diskudha an Bar Rolya yn Folen Sensel
+:Toggle Smooth Scroll
+kw:Kelmya/Diskudha Rolya Leven
+:Crop
+lt:Apkirpti
+:Resize
+lt:Keisti dydį
+:Show Errors
+lt:Rodyti klaidas
+:Toggle Hide Scrollbar
+lt:Perjungti slankjuostės slėpimą
+:Toggle Lazy Loading
+lt:Perjungti atidėtą įkėlimą
+:Toggle Scrollbar In Single Page
+lt:Perjungti slankjuostę viename puslapyje
+:Toggle Smooth Scroll
+lt:Perjungti sklandų slinkimą
+:Crop
+mk:Отсечи
+:Resize
+mk:Промени големина
+:Show Errors
+mk:Прикажи грешки
+:Toggle Hide Scrollbar
+mk:Вклучи/исклучи сокривање на лизгачот
+:Toggle Lazy Loading
+mk:Вклучи/исклучи одложено вчитување
+:Toggle Scrollbar In Single Page
+mk:Вклучи/исклучи лизгач на единечна страница
+:Toggle Smooth Scroll
+mk:Вклучи/исклучи мазно лизгање
+:Crop
+mm:ဖြတ်တောက်ရန်
+:Resize
+mm:အရွယ်အစားပြောင်းရန်
+:Show Errors
+mm:အမှားများပြရန်
+:Toggle Hide Scrollbar
+mm:လှိမ့်ဘားဖျောက်ရန်/ပြရန်
+:Toggle Lazy Loading
+mm:တဖြည်းဖြည်းတင်ခြင်း ဖွင့်ရန်/ပိတ်ရန်
+:Toggle Scrollbar In Single Page
+mm:စာမျက်နှာတစ်ခုတည်းတွင် လှိမ့်ဘား ဖွင့်ရန်/ပိတ်ရန်
+:Toggle Smooth Scroll
+mm:ချောမွေ့စွာလှိမ့်ခြင်း ဖွင့်ရန်/ပိတ်ရန်
+:Crop
+ne:काट्नुहोस्
+:Resize
+ne:आकार परिवर्तन गर्नुहोस्
+:Show Errors
+ne:त्रुटिहरू देखाउनुहोस्
+:Toggle Hide Scrollbar
+ne:स्क्रोलबार लुकाउने टगल गर्नुहोस्
+:Toggle Lazy Loading
+ne:अल्छी लोडिङ टगल गर्नुहोस्
+:Toggle Scrollbar In Single Page
+ne:एकल पृष्ठमा स्क्रोलबार टगल गर्नुहोस्
+:Toggle Smooth Scroll
+ne:सहज स्क्रोल टगल गर्नुहोस्
+:Crop
+nn:Beskjer
+:Resize
+nn:Endre storleik
+:Show Errors
+nn:Vis feil
+:Toggle Hide Scrollbar
+nn:Veksle skjul rullefelt
+:Toggle Lazy Loading
+nn:Veksle lat lasting
+:Toggle Scrollbar In Single Page
+nn:Veksle rullefelt i einskildside
+:Toggle Smooth Scroll
+nn:Veksle jamn rulling
+:Crop
+no:Beskjær
+:Resize
+no:Endre størrelse
+:Show Errors
+no:Vis feil
+:Toggle Hide Scrollbar
+no:Veksle skjul rullefelt
+:Toggle Lazy Loading
+no:Veksle lat lasting
+:Toggle Scrollbar In Single Page
+no:Veksle rullefelt i enkeltside
+:Toggle Smooth Scroll
+no:Veksle jevn rulling
+:Crop
+pa:ਕੱਟੋ
+:Resize
+pa:ਮੁੜ ਆਕਾਰ ਦਿਓ
+:Show Errors
+pa:ਗਲਤੀਆਂ ਦਿਖਾਓ
+:Toggle Hide Scrollbar
+pa:ਸਕ੍ਰੋਲਬਾਰ ਲੁਕਾਉਣਾ ਬਦਲੋ
+:Toggle Lazy Loading
+pa:ਲੇਜ਼ੀ ਲੋਡਿੰਗ ਬਦਲੋ
+:Toggle Scrollbar In Single Page
+pa:ਸਿੰਗਲ ਪੇਜ ਵਿੱਚ ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
+:Toggle Smooth Scroll
+pa:ਸਮੂਥ ਸਕ੍ਰੋਲ ਬਦਲੋ
+:Crop
+si:කපන්න
+:Resize
+si:ප්‍රමාණය වෙනස් කරන්න
+:Show Errors
+si:දෝෂ පෙන්වන්න
+:Toggle Hide Scrollbar
+si:අනුචලන තීරුව සැඟවීම ටොගල් කරන්න
+:Toggle Lazy Loading
+si:ලේසි ලෝඩින් ටොගල් කරන්න
+:Toggle Scrollbar In Single Page
+si:තනි පිටුවේ අනුචලන තීරුව ටොගල් කරන්න
+:Toggle Smooth Scroll
+si:සුමට අනුචලනය ටොගල් කරන්න
+:Crop
+sn:Cheka
+:Resize
+sn:Chinja saizi
+:Show Errors
+sn:Ratidza Kukanganisa
+:Toggle Hide Scrollbar
+sn:Vhura/Vhara Bha Rekukwezveredza
+:Toggle Lazy Loading
+sn:Vhura/Vhara Kurodha Zvishoma Nezvishoma
+:Toggle Scrollbar In Single Page
+sn:Vhura/Vhara Bha Rekukwezveredza Mupeji Rimwe
+:Toggle Smooth Scroll
+sn:Vhura/Vhara Kukwezveredza Zvakanaka
+:Crop
+sp-rs:Исеци
+:Resize
+sp-rs:Промени величину
+:Show Errors
+sp-rs:Прикажи грешке
+:Toggle Hide Scrollbar
+sp-rs:Сакриј/прикажи траку за скроловање
+:Toggle Lazy Loading
+sp-rs:Укључи/искључи одложено учитавање
+:Toggle Scrollbar In Single Page
+sp-rs:Укључи/искључи траку за скроловање на једној страници
+:Toggle Smooth Scroll
+sp-rs:Укључи/искључи глатко скроловање
+:Crop
+sq:Prit
+:Resize
+sq:Ndrysho madhësinë
+:Show Errors
+sq:Shfaq gabimet
+:Toggle Hide Scrollbar
+sq:Aktivizo/Çaktivizo fshehjen e shiritit të rrëshqitjes
+:Toggle Lazy Loading
+sq:Aktivizo/Çaktivizo ngarkimin e vonuar
+:Toggle Scrollbar In Single Page
+sq:Aktivizo/Çaktivizo shiritin e rrëshqitjes në faqe të vetme
+:Toggle Smooth Scroll
+sq:Aktivizo/Çaktivizo rrëshqitjen e butë
+:Crop
+th:ครอบตัด
+:Resize
+th:ปรับขนาด
+:Show Errors
+th:แสดงข้อผิดพลาด
+:Toggle Hide Scrollbar
+th:สลับการซ่อนแถบเลื่อน
+:Toggle Lazy Loading
+th:สลับการโหลดแบบ Lazy
+:Toggle Scrollbar In Single Page
+th:สลับแถบเลื่อนในหน้าเดียว
+:Toggle Smooth Scroll
+th:สลับการเลื่อนแบบนุ่มนวล
+:Crop
+tl:Gupit
+:Resize
+tl:Baguhin ang Laki
+:Show Errors
+tl:Ipakita ang mga Error
+:Toggle Hide Scrollbar
+tl:I-toggle ang Pagtago ng Scrollbar
+:Toggle Lazy Loading
+tl:I-toggle ang Lazy Loading
+:Toggle Scrollbar In Single Page
+tl:I-toggle ang Scrollbar sa Isang Pahina
+:Toggle Smooth Scroll
+tl:I-toggle ang Smooth Scroll
+:Crop
+uk:Обрізати
+:Resize
+uk:Змінити розмір
+:Show Errors
+uk:Показати помилки
+:Toggle Hide Scrollbar
+uk:Перемкнути приховування смуги прокрутки
+:Toggle Lazy Loading
+uk:Перемкнути ледаче завантаження
+:Toggle Scrollbar In Single Page
+uk:Перемкнути смугу прокрутки на одній сторінці
+:Toggle Smooth Scroll
+uk:Перемкнути плавне прокручування
+:Crop
+vn:Cắt ảnh
+:Resize
+vn:Thay đổi kích thước
+:Show Errors
+vn:Hiển thị lỗi
+:Toggle Hide Scrollbar
+vn:Ẩn/hiện thanh cuộn
+:Toggle Lazy Loading
+vn:Bật/tắt tải chậm
+:Toggle Scrollbar In Single Page
+vn:Ẩn/hiện thanh cuộn ở trang đơn
+:Toggle Smooth Scroll
+vn:Bật/tắt cuộn mượt
