@@ -772,10 +772,9 @@ static void LayoutControls(ImageEditWindow* ew) {
     y += 22 + kRowPadding;
 
     // row 3: info label, cancel, save
-    MoveWindow(ew->hwndInfoLabel, x, y + 4, 350, 16, TRUE);
-
+    // layout buttons first to know where info label must stop
+    int bx = cRc.dx - kButtonPadding;
     if (ew->btnSave && ew->btnCancel) {
-        int bx = cRc.dx - kButtonPadding;
         // right-to-left: Cancel, SwitchMode2, SwitchMode, Format, Save
         Size szCancel = ew->btnCancel->GetIdealSize();
         bx -= szCancel.dx;
@@ -801,6 +800,22 @@ static void LayoutControls(ImageEditWindow* ew) {
         bx -= szSave.dx + 4;
         ew->btnSave->SetBounds({bx, y, szSave.dx, szSave.dy});
     }
+
+    // size info label to its text, but don't overlap buttons
+    HDC hdc = GetDC(ew->hwndInfoLabel);
+    HFONT oldFont = (HFONT)SelectObject(hdc, ew->hFont);
+    char buf[256];
+    int textLen = GetWindowTextA(ew->hwndInfoLabel, buf, dimof(buf));
+    SIZE textSize{};
+    GetTextExtentPoint32A(hdc, buf, textLen, &textSize);
+    SelectObject(hdc, oldFont);
+    ReleaseDC(ew->hwndInfoLabel, hdc);
+    int maxLabelW = bx - x - 8;
+    int labelW = std::min((int)textSize.cx + 8, maxLabelW);
+    if (labelW < 0) {
+        labelW = 0;
+    }
+    MoveWindow(ew->hwndInfoLabel, x, y + 4, labelW, 16, TRUE);
 }
 
 static void OnBrowse(ImageEditWindow* ew) {
