@@ -101,6 +101,10 @@ ReuseInstance = true
 ; sessions) (introduced in version 2.5)
 ShowMenubar = true
 
+; if true, show the menu bar when using tabs (useTabs = true) (introduced in
+; version 3.7)
+ShowMenubarWithTabs = false
+
 ; if true, we show the toolbar at the top of the window
 ShowToolbar = true
 

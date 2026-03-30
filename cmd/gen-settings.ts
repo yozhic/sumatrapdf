@@ -662,6 +662,15 @@ const globalPrefs: Field[] = [
     ),
     "2.5",
   ),
+  setVersion(
+    mkField(
+      "ShowMenubarWithTabs",
+      Bool,
+      false,
+      "if true, show the menu bar when using tabs (useTabs = true)",
+    ),
+    "3.7",
+  ),
   mkField("ShowToolbar", Bool, true, "if true, we show the toolbar at the top of the window"),
   mkField("ShowFavorites", Bool, false, "if true, we show the Favorites sidebar"),
   mkField(

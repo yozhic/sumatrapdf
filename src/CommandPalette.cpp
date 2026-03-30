@@ -465,7 +465,8 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         } break;
         case CmdToggleMenuBar: {
             isToggle = true;
-            newIsOn = !gGlobalPrefs->showMenubar;
+            bool visible = gGlobalPrefs->useTabs ? gGlobalPrefs->showMenubarWithTabs : gGlobalPrefs->showMenubar;
+            newIsOn = !visible;
         } break;
         case CmdToggleBookmarks:
         case CmdToggleTableOfContents: {

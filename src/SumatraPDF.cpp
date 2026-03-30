@@ -693,10 +693,17 @@ static void UpdateWindowRtlLayout(MainWindow* win) {
     win->RedrawAll(true);
 }
 
+static bool IsMenubarVisible() {
+    if (gGlobalPrefs->useTabs) {
+        return gGlobalPrefs->showMenubarWithTabs;
+    }
+    return gGlobalPrefs->showMenubar;
+}
+
 void RebuildMenuBarForWindow(MainWindow* win) {
     HMENU oldMenu = win->menu;
     win->menu = BuildMenu(win);
-    if (!win->presentation && !win->isFullScreen && gGlobalPrefs->showMenubar) {
+    if (!win->presentation && !win->isFullScreen && IsMenubarVisible()) {
         if (win->tabsInTitlebar) {
             // use rebar menu bar instead of native menu when tabs are in titlebar
             if (IsShowingMenuBarRebar(win)) {
@@ -1682,7 +1689,7 @@ static MainWindow* CreateMainWindow() {
     SetTabsInTitlebar(win, gGlobalPrefs->useTabs);
 
     // now show the menu bar in the appropriate style
-    if (gGlobalPrefs->showMenubar && !NeedsWindowEmbeddingHacks()) {
+    if (IsMenubarVisible() && !NeedsWindowEmbeddingHacks()) {
         if (win->tabsInTitlebar) {
             CreateMenuBarRebar(win);
         } else {
@@ -4438,7 +4445,7 @@ void ExitFullScreen(MainWindow* win) {
     if (gGlobalPrefs->showToolbar) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     }
-    if (gGlobalPrefs->showMenubar) {
+    if (IsMenubarVisible()) {
         if (win->tabsInTitlebar) {
             CreateMenuBarRebar(win);
         } else {
@@ -5225,7 +5232,7 @@ static void TransitionToNoTabs() {
             for (MainWindow* w : gWindows) {
                 DestroyMenuBarRebar(w);
                 SetTabsInTitlebar(w, false);
-                if (gGlobalPrefs->showMenubar) {
+                if (IsMenubarVisible()) {
                     SetMenu(w->hwndFrame, w->menu);
                 }
                 ShowOrHideToolbar(w);
@@ -6036,7 +6043,6 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdToggleUseTabs:
             gGlobalPrefs->useTabs = !gGlobalPrefs->useTabs;
-            gGlobalPrefs->showMenubar = !gGlobalPrefs->useTabs;
             if (gGlobalPrefs->useTabs) {
                 uitask::Post(MkFunc0Void(TransitionToTabs));
             } else {
@@ -7730,7 +7736,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
 
         case WM_SYSCOMMAND:
             // temporarily show the menu bar if it has been hidden
-            if (wp == SC_KEYMENU && win && !gGlobalPrefs->showMenubar) {
+            if (wp == SC_KEYMENU && win && !IsMenubarVisible()) {
                 ToggleMenuBar(win, true);
             }
             return DefWindowProc(hwnd, msg, wp, lp);
@@ -7742,7 +7748,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         case WM_EXITMENULOOP:
             gOverlayScrollbarSuppressThick = false;
             // hide the menu bar again if it was shown only temporarily
-            if (!wp && win && !gGlobalPrefs->showMenubar) {
+            if (!wp && win && !IsMenubarVisible()) {
                 SetMenu(hwnd, nullptr);
             }
             return DefWindowProc(hwnd, msg, wp, lp);

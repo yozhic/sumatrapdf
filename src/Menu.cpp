@@ -2405,9 +2405,11 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
         if (isShowing) {
             DestroyMenuBarRebar(win);
             gGlobalPrefs->showMenubar = false;
+            gGlobalPrefs->showMenubarWithTabs = false;
         } else {
             CreateMenuBarRebar(win);
             gGlobalPrefs->showMenubar = true;
+            gGlobalPrefs->showMenubarWithTabs = true;
         }
         // layout first so the rebar is positioned correctly, then show it
         RelayoutWindow(win);
@@ -2418,4 +2420,5 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
     bool hideMenu = GetMenu(hwnd) != nullptr;
     SetMenu(hwnd, hideMenu ? nullptr : win->menu);
     gGlobalPrefs->showMenubar = !hideMenu;
+    gGlobalPrefs->showMenubarWithTabs = !hideMenu;
 }
