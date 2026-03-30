@@ -7554,7 +7554,9 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
     // DbgLogMsg("frame:", hwnd, msg, wp, lp);
     // detect when an external host (e.g. Total Commander's lister) embeds us
     // by reparenting our window as WS_CHILD
-    if (win && !gMyWindowWasEmbedded && (GetWindowLong(hwnd, GWL_STYLE) & WS_CHILD)) {
+    bool isChildWindow = IsWindowStyleSet(hwnd, WS_CHILD);
+    if (win && !gMyWindowWasEmbedded && isChildWindow) {
+        logf("Detected window embedded in another window\n");
         gMyWindowWasEmbedded = true;
         gGlobalPrefs->useTabs = false;
         gGlobalPrefs->restoreSession = false;
