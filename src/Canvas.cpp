@@ -281,7 +281,7 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
     bool useOverlay =
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollV && win->overlayScrollV->enabled;
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollV);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -411,7 +411,7 @@ static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
     bool useOverlay =
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollH && win->overlayScrollH->enabled;
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollH);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;

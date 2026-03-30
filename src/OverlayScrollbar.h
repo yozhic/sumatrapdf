@@ -13,9 +13,25 @@ struct OverlayScrollbar {
         Horz,
     };
 
+    // Smart: thin/thick transitions based on mouse proximity
+    // Thick: always shown thick, no transitions
+    enum class Mode {
+        Smart,
+        Thick,
+    };
+
+    enum class State {
+        Hidden,          // not active, not shown
+        SmartInvisible,  // active but auto-hidden (Smart mode)
+        SmartThin,       // shown thin (Smart mode)
+        SmartThick,      // shown thick (Smart mode)
+        AlwaysThick,     // always shown thick (Thick mode)
+    };
+
     HWND hwnd = nullptr;      // the scrollbar top-level window
     HWND hwndOwner = nullptr; // positioned relative to this window; receives scroll messages
     Type type = Type::Vert;
+    Mode mode = Mode::Smart;
 
     // scroll state (mirrors SCROLLINFO)
     int nMin = 0;
@@ -33,9 +49,7 @@ struct OverlayScrollbar {
     int hideAfterMouseStopMs = 3000; // hide after mouse stops moving
 
     // internal state
-    bool enabled = false;    // whether scrolling is needed (set by Show)
-    bool isThick = false;    // currently showing thick version
-    bool isThin = false;     // currently showing thin version
+    State state = State::Hidden;
     bool isDragging = false; // user is dragging the thumb
     int dragStartY = 0;      // mouse Y (or X for horz) when drag started
     int dragStartPos = 0;    // nPos when drag started
@@ -50,7 +64,8 @@ struct OverlayScrollbar {
     static constexpr UINT_PTR kTimerRepeatScroll = 2;
 };
 
-OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type);
+OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type,
+                                         OverlayScrollbar::Mode mode = OverlayScrollbar::Mode::Smart);
 void OverlayScrollbarDestroy(OverlayScrollbar* sb);
 
 // Same API as SetScrollInfo / GetScrollInfo
@@ -62,3 +77,6 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb);
 
 // Show/hide
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show);
+
+// returns true if scrollbar is visible (thin, thick, or always thick)
+bool IsOverlayScrollbarVisible(OverlayScrollbar* sb);

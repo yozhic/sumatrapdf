@@ -46,6 +46,21 @@ static constexpr int kMinThumbSize = 20;
 static constexpr BYTE kAlphaThin = 180;
 static constexpr BYTE kAlphaThick = 220;
 
+using State = OverlayScrollbar::State;
+
+static bool IsThick(OverlayScrollbar* sb) {
+    return sb->state == State::SmartThick || sb->state == State::AlwaysThick;
+}
+
+static bool IsVisible(OverlayScrollbar* sb) {
+    return sb->state == State::SmartThin || sb->state == State::SmartThick || sb->state == State::AlwaysThick;
+}
+
+// scrollbar is active: shown or auto-hidden but ready to appear
+static bool IsActive(OverlayScrollbar* sb) {
+    return sb->state != State::Hidden;
+}
+
 static int ScaledWidth(OverlayScrollbar* sb, bool thick) {
     int w = thick ? sb->thickWidth : sb->thinWidth;
     return DpiScale(sb->hwndOwner, w);
@@ -60,7 +75,7 @@ static Rect GetTrackRect(OverlayScrollbar* sb) {
     RECT rc;
     GetClientRect(sb->hwnd, &rc);
     int arrowSize = 0;
-    if (sb->isThick) {
+    if (IsThick(sb)) {
         arrowSize = IsVert(sb) ? (rc.right - rc.left) : (rc.bottom - rc.top);
     }
     if (IsVert(sb)) {
@@ -205,7 +220,7 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
 
     memset(bits, 0, (size_t)w * h * 4);
 
-    BYTE alpha = sb->isThick ? kAlphaThick : kAlphaThin;
+    BYTE alpha = IsThick(sb) ? kAlphaThick : kAlphaThin;
 
     auto premultiply = [](COLORREF c, BYTE a) -> DWORD {
         BYTE r = (BYTE)MulDiv(GetRValue(c), a, 255);
@@ -228,14 +243,14 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
         }
     };
 
-    if (sb->isThick) {
+    if (IsThick(sb)) {
         fillRect(Rect(0, 0, w, h), ThemeTrackColor());
     }
 
     Rect thumbRc = GetThumbRect(sb);
     COLORREF thumbCol = sb->mouseOverThumb ? ThemeThumbHoverColor() : ThemeThumbColor();
 
-    if (!sb->isThick) {
+    if (!IsThick(sb)) {
         int thinW = ScaledWidth(sb, false);
         if (IsVert(sb)) {
             thumbRc.x = (w - thinW) / 2;
@@ -247,7 +262,7 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
     }
     fillRect(thumbRc, thumbCol);
 
-    if (sb->isThick) {
+    if (IsThick(sb)) {
         Rect arrowTop = GetArrowTopRect(sb);
         Rect arrowBot = GetArrowBottomRect(sb);
 
@@ -342,20 +357,38 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
     ReleaseDC(nullptr, hdcScreen);
 }
 
+static void SetState(OverlayScrollbar* sb, State newState) {
+    if (sb->state == newState) {
+        return;
+    }
+    bool wasVisible = IsVisible(sb);
+    sb->state = newState;
+    bool nowVisible = IsVisible(sb);
+
+    OverlayScrollbarUpdatePos(sb);
+    if (nowVisible) {
+        ShowWindow(sb->hwnd, SW_SHOWNOACTIVATE);
+        PaintScrollbar(sb);
+    } else {
+        sb->mouseOverThumb = false;
+        ShowWindow(sb->hwnd, SW_HIDE);
+    }
+
+    KillTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide);
+    if (newState == State::SmartThin) {
+        SetTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide, sb->showAfterScrollMs, nullptr);
+    }
+}
+
 static void ShowScrollbarWindow(OverlayScrollbar* sb, bool thick) {
     // Don't revert to thin while user is dragging the thumb
     if (sb->isDragging && !thick) {
         return;
     }
-    sb->isThick = thick;
-    sb->isThin = !thick;
-    OverlayScrollbarUpdatePos(sb);
-    ShowWindow(sb->hwnd, SW_SHOWNOACTIVATE);
-    PaintScrollbar(sb);
-
-    KillTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide);
-    if (!thick) {
-        SetTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide, sb->showAfterScrollMs, nullptr);
+    if (sb->mode == OverlayScrollbar::Mode::Thick) {
+        SetState(sb, State::AlwaysThick);
+    } else {
+        SetState(sb, thick ? State::SmartThick : State::SmartThin);
     }
 }
 
@@ -364,11 +397,10 @@ static void HideScrollbarWindow(OverlayScrollbar* sb) {
     if (sb->isDragging) {
         return;
     }
-    sb->isThick = false;
-    sb->isThin = false;
-    sb->mouseOverThumb = false;
-    ShowWindow(sb->hwnd, SW_HIDE);
-    KillTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide);
+    if (sb->mode == OverlayScrollbar::Mode::Thick) {
+        return; // never hide in Thick mode
+    }
+    SetState(sb, State::SmartInvisible);
 }
 
 // ---- Global mouse tracking ----
@@ -387,7 +419,7 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
             continue;
         }
 
-        if (!sb->enabled) {
+        if (!IsActive(sb)) {
             continue;
         }
 
@@ -395,7 +427,7 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
         bool ownerActive = IsOrIsParentOf(hwndForeground, sb->hwndOwner);
         if (!ownerActive) {
             // If we were showing, hide
-            if (sb->isThick || sb->isThin) {
+            if (IsVisible(sb)) {
                 if (!sb->isDragging) {
                     HideScrollbarWindow(sb);
                 }
@@ -425,7 +457,7 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
 
         if (overScrollbar) {
             // Mouse is over the scrollbar area - show thick
-            if (!sb->isThick) {
+            if (!IsThick(sb)) {
                 ShowScrollbarWindow(sb, true);
             }
             // Update thumb hover state
@@ -439,21 +471,21 @@ static void CALLBACK MouseTrackTimerProc(HWND, UINT, UINT_PTR, DWORD) {
             }
         } else if (closeToScrollbar && overOwner) {
             // Near scrollbar and over owner - show thick
-            if (!sb->isThick) {
+            if (!IsThick(sb)) {
                 ShowScrollbarWindow(sb, true);
             }
         } else if (overOwner && mouseMoved) {
             // Mouse is over owner and moving, but not near scrollbar - show thin
-            if (sb->isThick) {
+            if (IsThick(sb)) {
                 // Transition from thick to thin
                 ShowScrollbarWindow(sb, false);
-            } else if (!sb->isThin) {
+            } else if (sb->state != State::SmartThin) {
                 ShowScrollbarWindow(sb, false);
             }
             // Reset the auto-hide timer since mouse is moving
             KillTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide);
             SetTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide, sb->hideAfterMouseStopMs, nullptr);
-        } else if (sb->isThick && !overOwner) {
+        } else if (IsThick(sb) && !overOwner) {
             // Mouse left the owner area while thick - transition to hidden
             HideScrollbarWindow(sb);
         }
@@ -542,7 +574,7 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
 
             // Thumb hover is handled by the global tracker, but also handle here
             // for responsiveness when already thick
-            if (sb->isThick) {
+            if (IsThick(sb)) {
                 Rect thumbRc = GetThumbRect(sb);
                 bool wasOver = sb->mouseOverThumb;
                 sb->mouseOverThumb = thumbRc.Contains(Point(mx, my));
@@ -558,7 +590,7 @@ static LRESULT CALLBACK WndProcOverlayScrollbar(HWND hwnd, UINT msg, WPARAM wp, 
             int my = GET_Y_LPARAM(lp);
             SetCapture(hwnd);
 
-            if (sb->isThick) {
+            if (IsThick(sb)) {
                 Rect arrowTop = GetArrowTopRect(sb);
                 Rect arrowBot = GetArrowBottomRect(sb);
                 Point pt(mx, my);
@@ -704,13 +736,13 @@ static void RegisterScrollbarClass() {
     gScrollbarClassRegistered = true;
 }
 
-OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type) {
+OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type type, OverlayScrollbar::Mode mode) {
     RegisterScrollbarClass();
 
     auto* sb = new OverlayScrollbar();
     sb->hwndOwner = hwndOwner;
     sb->type = type;
-
+    sb->mode = mode;
     DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE;
     DWORD style = WS_POPUP;
 
@@ -769,7 +801,7 @@ void OverlayScrollbarSetInfo(OverlayScrollbar* sb, const SCROLLINFO* si, bool re
     }
 
     if (redraw && changed) {
-        if (sb->isThick || sb->isThin) {
+        if (IsVisible(sb)) {
             PaintScrollbar(sb);
         } else {
             ShowScrollbarWindow(sb, false);
@@ -804,19 +836,19 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     RECT ownerRc;
     GetWindowRect(sb->hwndOwner, &ownerRc);
 
-    int scrollW = ScaledWidth(sb, sb->isThick);
+    int scrollW = ScaledWidth(sb, IsThick(sb));
     int x, y, w, h;
 
     // Check if the sibling scrollbar (other orientation, same owner) is thick
     bool siblingThick = false;
     for (auto* other : gAllScrollbars) {
-        if (other != sb && other->hwndOwner == sb->hwndOwner && other->enabled && other->isThick) {
+        if (other != sb && other->hwndOwner == sb->hwndOwner && IsThick(other)) {
             siblingThick = true;
             break;
         }
     }
     int siblingInset = 0;
-    if (sb->isThick && siblingThick) {
+    if (IsThick(sb) && siblingThick) {
         siblingInset = scrollW;
     }
 
@@ -833,7 +865,7 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     }
 
     LONG_PTR exStyle = GetWindowLongPtrW(sb->hwnd, GWL_EXSTYLE);
-    if (sb->isThick || sb->isThin) {
+    if (IsVisible(sb)) {
         exStyle &= ~WS_EX_TRANSPARENT;
     } else {
         exStyle |= WS_EX_TRANSPARENT;
@@ -847,12 +879,20 @@ void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
     if (!sb) {
         return;
     }
-    sb->enabled = show;
     if (show) {
-        if (!sb->isThick && !sb->isThin) {
+        if (!IsActive(sb)) {
             ShowScrollbarWindow(sb, false);
+        } else if (IsVisible(sb) && !IsWindowVisible(sb->hwnd)) {
+            // re-show if window was temporarily hidden (e.g. during relayout)
+            OverlayScrollbarUpdatePos(sb);
+            ShowWindow(sb->hwnd, SW_SHOWNOACTIVATE);
+            PaintScrollbar(sb);
         }
     } else {
-        HideScrollbarWindow(sb);
+        SetState(sb, State::Hidden);
     }
+}
+
+bool IsOverlayScrollbarVisible(OverlayScrollbar* sb) {
+    return sb && IsVisible(sb);
 }

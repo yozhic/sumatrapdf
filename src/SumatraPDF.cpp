@@ -904,7 +904,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
             win->overlayScrollH = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Horz);
         }
         if (showHScroll) {
-            win->overlayScrollH->enabled = true;
+            OverlayScrollbarShow(win->overlayScrollH, true);
             OverlayScrollbarSetInfo(win->overlayScrollH, &si, TRUE);
         } else {
             OverlayScrollbarShow(win->overlayScrollH, false);
@@ -951,10 +951,10 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
 
     if (useOverlay) {
         if (!win->overlayScrollV) {
-            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert);
+            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Thick);
         }
         if (showVScroll && showScrollbar) {
-            win->overlayScrollV->enabled = true;
+            OverlayScrollbarShow(win->overlayScrollV, true);
             OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
         } else {
             OverlayScrollbarShow(win->overlayScrollV, false);
@@ -3835,10 +3835,10 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
 
     // hide overlay scrollbars before relayout so they don't appear outside
     // the window while child windows are being repositioned
-    if (win->overlayScrollV && (win->overlayScrollV->isThick || win->overlayScrollV->isThin)) {
+    if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
         ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
     }
-    if (win->overlayScrollH && (win->overlayScrollH->isThick || win->overlayScrollH->isThin)) {
+    if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
         ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
     }
 
