@@ -23,6 +23,9 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - `Ctrl + V` pastes image from clipboard, saves as PNG in Downloads folder and opens it
 - Can save images in different formats: PNG, JPEG, BMP, GIF, TIFF.
 - add `Show Errors` in right-click context menu for PDF documents that have mupdf warnings/errors
+- add `CmdToggleSmoothScroll` (`Toggle Smooth Scroll`) command to toggle `SmoothScroll` advanced setting
+- add `CmdToggleHideScrollbar` (`Toggle Hide Scrollbar`) command to toggle `HideScrollbar` advanced setting
+- add `CmdToggleScrollbarInSinglePage` (`Toggle Scrollbar In Single Page`) command to toggle `ScrollbarInSinglePage` advanced setting
 
 ## 3.6 (2026-03-17)
 

@@ -198,6 +198,7 @@ export const commands = [
     "CmdToggleAntiAlias", "Toggle Anti-Alias Rendering",
     "CmdToggleSmoothScroll", "Toggle Smooth Scroll",
     "CmdToggleHideScrollbar", "Toggle Hide Scrollbar",
+    "CmdToggleScrollbarInSinglePage", "Toggle Scrollbar In Single Page",
     "CmdListPrinters", "List Printers",
     "CmdToggleWindowsPreviewer", "Toggle Windows Previewer",
     "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",

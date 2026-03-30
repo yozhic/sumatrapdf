@@ -1118,7 +1118,8 @@ void DrawHomePage(MainWindow* win, HDC hdc) {
     DrawHomePageLayout(l);
 
     // update overlay scrollbar for home page if thumbnails overflow visible area
-    if (gGlobalPrefs->fixedPageUI.useOverlayScrollbar && l.totalContentDy > l.thumbsVisibleDy) {
+    bool showScrollbarV = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && l.totalContentDy > l.thumbsVisibleDy;
+    if (showScrollbarV) {
         if (!win->overlayScrollV) {
             win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Vert);
         }
@@ -1131,11 +1132,9 @@ void DrawHomePage(MainWindow* win, HDC hdc) {
         si.nPos = win->homePageScrollY;
         win->overlayScrollV->enabled = true;
         OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
-        // show thin scrollbar briefly to indicate content is scrollable
-        OverlayScrollbarShow(win->overlayScrollV, true);
-    } else if (win->overlayScrollV) {
-        OverlayScrollbarShow(win->overlayScrollV, false);
     }
+    // show thin scrollbar briefly to indicate content is scrollable
+    OverlayScrollbarShow(win->overlayScrollV, showScrollbarV);
 }
 
 void HomePageOnVScroll(MainWindow* win, WPARAM wp) {

@@ -2469,12 +2469,8 @@ void UpdateFixedPageScrollbarsVisibility() {
 #endif
     bool showScrollbars = !gGlobalPrefs->fixedPageUI.hideScrollbars;
     for (MainWindow* w : gWindows) {
-        if (w->overlayScrollV) {
-            OverlayScrollbarShow(w->overlayScrollV, showScrollbars);
-        }
-        if (w->overlayScrollH) {
-            OverlayScrollbarShow(w->overlayScrollH, showScrollbars);
-        }
+        OverlayScrollbarShow(w->overlayScrollV, showScrollbars);
+        OverlayScrollbarShow(w->overlayScrollH, showScrollbars);
     }
     RerenderFixedPage();
 }
@@ -6606,6 +6602,12 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdToggleHideScrollbar:
             OnMenuViewShowHideScrollbars();
+            break;
+
+        case CmdToggleScrollbarInSinglePage:
+            gGlobalPrefs->scrollbarInSinglePage = !gGlobalPrefs->scrollbarInSinglePage;
+            UpdateFixedPageScrollbarsVisibility();
+            SaveSettings();
             break;
 
         case CmdNavigateBack:
