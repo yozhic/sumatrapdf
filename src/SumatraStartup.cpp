@@ -119,15 +119,18 @@ static bool RegisterWinClass() {
 
     HMODULE h = GetModuleHandleW(nullptr);
     WCHAR* iconName = MAKEINTRESOURCEW(GetAppIconID());
+    HBRUSH bgBrush = CreateSolidBrush(ThemeMainWindowBackgroundColor());
     FillWndClassEx(wcex, FRAME_CLASS_NAME, WndProcSumatraFrame);
     // remove CS_HREDRAW | CS_VREDRAW to avoid full invalidation on every resize
     wcex.style = 0;
     wcex.hIcon = LoadIconW(h, iconName);
+    wcex.hbrBackground = bgBrush;
     atom = RegisterClassEx(&wcex);
 
     FillWndClassEx(wcex, CANVAS_CLASS_NAME, WndProcCanvas);
     // remove CS_HREDRAW | CS_VREDRAW to avoid full invalidation on resize
     wcex.style = CS_DBLCLKS;
+    wcex.hbrBackground = bgBrush;
     atom = RegisterClassEx(&wcex);
 
     return true;

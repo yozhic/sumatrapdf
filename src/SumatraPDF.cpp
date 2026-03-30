@@ -951,7 +951,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
 
     if (useOverlay) {
         if (!win->overlayScrollV) {
-            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Thick);
+            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Smart);
         }
         if (showVScroll && showScrollbar) {
             OverlayScrollbarShow(win->overlayScrollV, true);
@@ -7861,6 +7861,14 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
 
         case WM_ERASEBKGND:
             LogRedraw("WM_ERASEBKGND", hwnd);
+            if (win && win->tabsInTitlebar && !IsCurrentThemeDefault()) {
+                HDC hdc = (HDC)wp;
+                RECT rc;
+                GetClientRect(hwnd, &rc);
+                HBRUSH br = CreateSolidBrush(ThemeMainWindowBackgroundColor());
+                FillRect(hdc, &rc, br);
+                DeleteObject(br);
+            }
             return TRUE;
 
         default:
