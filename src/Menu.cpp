@@ -1426,6 +1426,13 @@ HMENU BuildMenuFromDef(MenuDef* menuDef, HMENU menu, BuildMenuCtx* ctx) {
         // hacky but works: small number is command id, large is submenu (a pointer)
         bool isSubMenu = md.idOrSubmenu > CmdLast + 10000;
 
+        // handle separators before command state checks
+        // (separators have idOrSubmenu=0 which would match the 0 sentinel in removal lists)
+        if (str::Eq(md.title, kMenuSeparator)) {
+            AppendMenuW(menu, MF_SEPARATOR, kMenuSeparatorID, nullptr);
+            continue;
+        }
+
         auto [removeMenu, disableMenu] = GetCommandIdState(ctx, cmdId);
         if (ctx) {
             removeMenu |= !ctx->isCursorOnPage && (subMenuDef == menuDefCreateAnnotUnderCursor);
@@ -1433,12 +1440,6 @@ HMENU BuildMenuFromDef(MenuDef* menuDef, HMENU menu, BuildMenuCtx* ctx) {
         }
         removeMenu |= ((subMenuDef == menuDefDebug) && !ShowDebugMenu());
         if (removeMenu) {
-            continue;
-        }
-
-        // prevent two consecutive separators
-        if (str::Eq(md.title, kMenuSeparator)) {
-            AppendMenuW(menu, MF_SEPARATOR, kMenuSeparatorID, nullptr);
             continue;
         }
 
