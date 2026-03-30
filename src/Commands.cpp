@@ -79,10 +79,10 @@ static SeqStrings gCommandNames =
     "CmdDebugDownloadSymbols\0" "CmdDebugTestApp\0" "CmdDebugShowNotif\0"
     "CmdDebugStartStressTest\0" "CmdDebugTogglePredictiveRender\0" "CmdDebugToggleRtl\0"
     "CmdToggleAntiAlias\0" "CmdToggleSmoothScroll\0" "CmdToggleHideScrollbar\0"
-    "CmdToggleScrollbarInSinglePage\0" "CmdListPrinters\0" "CmdToggleWindowsPreviewer\0"
-    "CmdToggleWindowsSearchFilter\0" "CmdScreenshot\0" "CmdCropImage\0"
-    "CmdResizeImage\0" "CmdSaveImage\0" "CmdPasteClipboardImage\0"
-    "CmdNone\0" "\0";
+    "CmdToggleScrollbarInSinglePage\0" "CmdToggleLazyLoading\0" "CmdListPrinters\0"
+    "CmdToggleWindowsPreviewer\0" "CmdToggleWindowsSearchFilter\0" "CmdScreenshot\0"
+    "CmdCropImage\0" "CmdResizeImage\0" "CmdSaveImage\0"
+    "CmdPasteClipboardImage\0" "CmdNone\0" "\0";
 
 static i32 gCommandIds[] = {
     CmdOpenFile, CmdClose, CmdCloseCurrentDocument,
@@ -150,10 +150,10 @@ static i32 gCommandIds[] = {
     CmdDebugDownloadSymbols, CmdDebugTestApp, CmdDebugShowNotif,
     CmdDebugStartStressTest, CmdDebugTogglePredictiveRender, CmdDebugToggleRtl,
     CmdToggleAntiAlias, CmdToggleSmoothScroll, CmdToggleHideScrollbar,
-    CmdToggleScrollbarInSinglePage, CmdListPrinters, CmdToggleWindowsPreviewer,
-    CmdToggleWindowsSearchFilter, CmdScreenshot, CmdCropImage,
-    CmdResizeImage, CmdSaveImage, CmdPasteClipboardImage,
-    CmdNone,
+    CmdToggleScrollbarInSinglePage, CmdToggleLazyLoading, CmdListPrinters,
+    CmdToggleWindowsPreviewer, CmdToggleWindowsSearchFilter, CmdScreenshot,
+    CmdCropImage, CmdResizeImage, CmdSaveImage,
+    CmdPasteClipboardImage, CmdNone,
 };
 
 SeqStrings gCommandDescriptions =
@@ -222,10 +222,10 @@ SeqStrings gCommandDescriptions =
     "Debug: Download Symbols\0" "Debug: Test App\0" "Debug: Show Notification\0"
     "Debug: Start Stress Test\0" "Debug: Toggle Predictive Rendering\0" "Debug: Toggle Rtl\0"
     "Toggle Anti-Alias Rendering\0" "Toggle Smooth Scroll\0" "Toggle Hide Scrollbar\0"
-    "Toggle Scrollbar In Single Page\0" "List Printers\0" "Toggle Windows Previewer\0"
-    "Toggle Windows Search Filter\0" "Take Screenshot\0" "Crop Image\0"
-    "Resize Image\0" "Save Image\0" "Paste Image From Clipboard\0"
-    "Do nothing\0" "\0";
+    "Toggle Scrollbar In Single Page\0" "Toggle Lazy Loading\0" "List Printers\0"
+    "Toggle Windows Previewer\0" "Toggle Windows Search Filter\0" "Take Screenshot\0"
+    "Crop Image\0" "Resize Image\0" "Save Image\0"
+    "Paste Image From Clipboard\0" "Do nothing\0" "\0";
 // clang-format on
 // @gen-end cmd-c
 

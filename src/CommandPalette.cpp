@@ -102,6 +102,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdToggleSmoothScroll,
     CmdToggleHideScrollbar,
     CmdToggleScrollbarInSinglePage,
+    CmdToggleLazyLoading,
     CmdToggleFullscreen,
     CmdToggleMenuBar,
     CmdToggleToolbar,
@@ -522,6 +523,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         case CmdToggleScrollbarInSinglePage: {
             isToggle = true;
             newIsOn = !gGlobalPrefs->scrollbarInSinglePage;
+        } break;
+        case CmdToggleLazyLoading: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->lazyLoading;
         } break;
         case CmdToggleUseTabs: {
             isToggle = true;

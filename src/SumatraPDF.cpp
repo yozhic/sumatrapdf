@@ -6610,6 +6610,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
 
+        case CmdToggleLazyLoading:
+            gGlobalPrefs->lazyLoading = !gGlobalPrefs->lazyLoading;
+            SaveSettings();
+            break;
+
         case CmdNavigateBack:
             if (ctrl) {
                 ctrl->Navigate(-1);

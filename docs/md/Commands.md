@@ -279,6 +279,7 @@ CmdToggleAntiAlias,,Toggle Anti-Alias Rendering,"Toggle anti-alias rendering in 
 CmdToggleSmoothScroll,,Toggle Smooth Scroll,"Toggle SmoothScroll advanced setting, ver 3.7+"
 CmdToggleHideScrollbar,,Toggle Hide Scrollbar,"Toggle HideScrollbar advanced setting, ver 3.7+"
 CmdToggleScrollbarInSinglePage,,Toggle Scrollbar In Single Page,"Toggle ScrollbarInSinglePage advanced setting, ver 3.7+"
+CmdToggleLazyLoading,,Toggle Lazy Loading,"Toggle LazyLoading advanced setting, ver 3.7+"
 CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only available when SumatraPDF is installed. Registers or un-registers the PDF preview handler for Windows Explorer preview pane, ver 3.7+"
 CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only available when SumatraPDF is installed. Registers or un-registers the PDF search filter for Windows Search indexing, ver 3.7+"
 ```
