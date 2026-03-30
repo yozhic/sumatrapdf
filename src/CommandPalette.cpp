@@ -422,11 +422,7 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
 }
 
 static TempStr ConvertPathForDisplayTemp(const char* s) {
-    TempStr name = path::GetBaseNameTemp(s);
-    TempStr dir = path::GetDirTemp(s);
-    TempStr res = str::JoinTemp(name, "  (", dir);
-    res = str::JoinTemp(res, ")");
-    return res;
+    return path::GetBaseNameTemp(s);
 }
 
 static TempStr RemovePrefixFromString(const char* s) {
@@ -1108,14 +1104,16 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
     const char* itemText = m->Item(ev->itemIndex);
     ItemDataCP* data = m->Data(ev->itemIndex);
 
-    // get accelerator string for commands
-    TempStr accelStr = nullptr;
+    // get right-side string: accelerator for commands, directory for file history
+    TempStr rightStr = nullptr;
     if (data->cmdId != 0) {
         // AppendAccelKeyToMenuStringTemp returns "\tCtrl + X" or original string if no accel
         TempStr withAccel = AppendAccelKeyToMenuStringTemp((TempStr) "", data->cmdId);
         if (withAccel && withAccel[0] == '\t') {
-            accelStr = withAccel + 1; // skip the tab character
+            rightStr = withAccel + 1; // skip the tab character
         }
+    } else if (data->filePath) {
+        rightStr = path::GetDirTemp(data->filePath);
     }
 
     // set text color and background mode
@@ -1234,18 +1232,33 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
         DrawTextW(hdc, itemTextW, -1, &rc, fmt);
     }
 
-    // draw accelerator on the opposite side from the command name
-    if (accelStr && accelStr[0]) {
-        WCHAR* accelStrW = ToWStrTemp(accelStr);
-        uint fmtAccel = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
+    // draw right-side text (shortcut or directory), truncated to avoid overlapping left text
+    if (rightStr && rightStr[0]) {
+        WCHAR* rightStrW = ToWStrTemp(rightStr);
+        int gap = DpiScale(lb->hwnd, 8);
+
+        // measure left text width
+        WCHAR* itemTextW2 = ToWStrTemp(itemText);
+        SIZE szLeft{};
+        GetTextExtentPoint32W(hdc, itemTextW2, str::Leni(itemText), &szLeft);
+        int leftEnd = rc.left + szLeft.cx + gap;
+
+        RECT rcRight = rc;
+        uint fmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX | DT_END_ELLIPSIS;
         if (isRtl) {
-            rc.left += DpiScale(lb->hwnd, 8);
-            fmtAccel |= DT_LEFT | DT_RTLREADING;
+            rcRight.right = rc.right - szLeft.cx - gap;
+            fmt |= DT_LEFT | DT_RTLREADING;
         } else {
-            rc.right -= DpiScale(lb->hwnd, 8);
-            fmtAccel |= DT_RIGHT;
+            rcRight.left = leftEnd;
+            rcRight.right -= gap;
+            fmt |= DT_RIGHT;
         }
-        DrawTextW(hdc, accelStrW, -1, &rc, fmtAccel);
+        if (rcRight.left < rcRight.right) {
+            COLORREF rightCol = AccentColor(colText, 80);
+            SetTextColor(hdc, rightCol);
+            DrawTextW(hdc, rightStrW, -1, &rcRight, fmt);
+            SetTextColor(hdc, colText);
+        }
     }
 
     if (oldFont) {
