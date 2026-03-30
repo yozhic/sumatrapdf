@@ -1700,7 +1700,7 @@ static MainWindow* CreateMainWindow() {
     // TODO: this is hackish. in general we should divorce
     // layout re-calculations from MainWindow and creation of windows
     win->UpdateCanvasSize();
-    if (UseDarkModeLib()) {
+    if (UseDarkModeLib() && !IsCurrentThemeDefault()) {
         DarkMode::setDarkTitleBarEx(win->hwndFrame, true);
         DarkMode::setChildCtrlsSubclassAndTheme(win->hwndFrame);
         DarkMode::removeTabCtrlSubclass(win->tabsCtrl->hwnd);
