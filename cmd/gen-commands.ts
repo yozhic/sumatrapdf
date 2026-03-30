@@ -197,6 +197,7 @@ export const commands = [
     "CmdDebugToggleRtl", "Debug: Toggle Rtl",
     "CmdToggleAntiAlias", "Toggle Anti-Alias Rendering",
     "CmdToggleSmoothScroll", "Toggle Smooth Scroll",
+    "CmdToggleHideScrollbar", "Toggle Hide Scrollbar",
     "CmdListPrinters", "List Printers",
     "CmdToggleWindowsPreviewer", "Toggle Windows Previewer",
     "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",

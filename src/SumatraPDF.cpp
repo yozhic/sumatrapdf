@@ -2467,6 +2467,15 @@ void UpdateFixedPageScrollbarsVisibility() {
         return;
     }
 #endif
+    bool showScrollbars = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    for (MainWindow* w : gWindows) {
+        if (w->overlayScrollV) {
+            OverlayScrollbarShow(w->overlayScrollV, showScrollbars);
+        }
+        if (w->overlayScrollH) {
+            OverlayScrollbarShow(w->overlayScrollH, showScrollbars);
+        }
+    }
     RerenderFixedPage();
 }
 
@@ -6594,6 +6603,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
         }
+
+        case CmdToggleHideScrollbar:
+            OnMenuViewShowHideScrollbars();
+            break;
 
         case CmdNavigateBack:
             if (ctrl) {
