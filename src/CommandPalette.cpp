@@ -1085,8 +1085,12 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
     COLORREF colBg = IsSpecialColor(lb->bgColor) ? GetSysColor(COLOR_WINDOW) : lb->bgColor;
     COLORREF colText = IsSpecialColor(lb->textColor) ? GetSysColor(COLOR_WINDOWTEXT) : lb->textColor;
     if (ev->selected) {
-        colBg = GetSysColor(COLOR_HIGHLIGHT);
-        colText = GetSysColor(COLOR_HIGHLIGHTTEXT);
+        if (false && IsCurrentThemeDefault()) {
+            colBg = GetSysColor(COLOR_HIGHLIGHT);
+            colText = GetSysColor(COLOR_HIGHLIGHTTEXT);
+        } else {
+            colBg = AccentColor(colBg, 30);
+        }
     }
 
     // fill background
@@ -1209,13 +1213,13 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
             highlightRects[i].right = strOriginX + szEnd.cx;
         }
 
-        // draw highlight background rectangles for matches (skip when selected)
-        if (!ev->selected) {
+        // draw highlight background rectangles for matches
+        {
             COLORREF highlightCol;
             if (IsCurrentThemeDefault()) {
                 highlightCol = RGB(255, 255, 0); // yellow for default theme
             } else {
-                highlightCol = AccentColor(ThemeMainWindowBackgroundColor(), 60);
+                highlightCol = AccentColor(colBg, 40);
             }
             HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
             for (int i = 0; i < nRanges; i++) {
