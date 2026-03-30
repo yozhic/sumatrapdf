@@ -933,24 +933,25 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
         }
         showVScroll = (viewPort.dy < canvas.dy);
     }
-    if (hideScrollbar) {
-        showVScroll = false;
-    }
+    bool showScrollbar = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    BOOL showWinScrollbar = showScrollbar && !useOverlay;
+    BOOL showOverScrollbar = showScrollbar && useOverlay;
+
+    // even when not shown, we use windows logic to adjust scroll position
+    // so we always set the scrollbar info
+    ShowScrollBar(win->hwndCanvas, SB_VERT, showWinScrollbar);
+    SetScrollInfo(win->hwndCanvas, SB_VERT, &si, showWinScrollbar);
+
     if (useOverlay) {
-        ShowScrollBar(win->hwndCanvas, SB_VERT, FALSE);
-        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
         if (!win->overlayScrollV) {
             win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, ScrollbarType::Vert);
         }
-        if (showVScroll) {
+        if (showVScroll && showScrollbar) {
             win->overlayScrollV->enabled = true;
             OverlayScrollbarSetInfo(win->overlayScrollV, &si, TRUE);
         } else {
             OverlayScrollbarShow(win->overlayScrollV, false);
         }
-    } else {
-        ShowScrollBar(win->hwndCanvas, SB_VERT, showVScroll);
-        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
     }
 }
 

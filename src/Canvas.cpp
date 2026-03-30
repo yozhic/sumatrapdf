@@ -259,10 +259,29 @@ void UpdateDeltaPerLine() {
 
 ///// methods needed for FixedPageUI canvases with document loaded /////
 
+const char* scrollMsgStr(USHORT msg) {
+    switch (msg) {
+        case SB_LINEDOWN:
+            return "SB_LINEDOWN";
+        case SB_LINEUP:
+            return "SB_LINEUP";
+        case SB_HALF_PAGEDOWN:
+            return "SB_HALF_PAGEDOWN";
+        case SB_HALF_PAGEUP:
+            return "SB_HALF_PAGEUP";
+        case SB_PAGEDOWN:
+            return "SB_PAGEDOWN";
+        case SB_PAGEUP:
+            return "SB_PAGEUP";
+    }
+    return str::FormatTemp("%d", (int)msg);
+}
+
 static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollV;
+    bool useOverlay =
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollV && win->overlayScrollV->enabled;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -272,14 +291,26 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
         GetScrollInfo(win->hwndCanvas, SB_VERT, &si);
     }
 
-    int currPos = si.nPos;
+    USHORT msg = LOWORD(wp);
     auto* ctrl = win->ctrl;
-    bool isSinglePageMode = gGlobalPrefs->scrollbarInSinglePage && (ctrl->GetDisplayMode() == DisplayMode::SinglePage);
+    bool dmIsSinglePage = (ctrl->GetDisplayMode() == DisplayMode::SinglePage);
+    // scrollbarInSinglePage is false by default
+    // if true, we show scrollbar in single page mode and make its position correspond to page number, so user can
+    // scroll through pages using scrollbar even in single page mode
+    bool singlePageWithScrollbar = gGlobalPrefs->scrollbarInSinglePage && dmIsSinglePage;
 
-    if (isSinglePageMode) {
+    int lineHeight = DpiScale(win->hwndCanvas, 16);
+    bool isFitPage = (kZoomFitPage == ctrl->GetZoomVirtual());
+    if (!IsContinuous(ctrl->GetDisplayMode()) && isFitPage) {
+        lineHeight = 1;
+    }
+    // logf("OnVscroll: msg=%s, min: %d, max: %d, nPage: %d, pos: %d, fit page: %d, lineHeight: %d,
+    // singlePageWithScrollbar: %d\n", scrollMsgStr(msg), si.nMin,
+    //      si.nMax, si.nPage, si.nPos, isFitPage ? 1 : 0, lineHeight, singlePageWithScrollbar);
+
+    if (singlePageWithScrollbar) {
         // In SinglePage mode, scrollbar position directly corresponds to page number
-        USHORT msg = LOWORD(wp);
-        int targetPage = currPos + 1; // Convert 0-based position to 1-based page number
+        int targetPage = ctrl->CurrentPageNo();
 
         switch (msg) {
             case SB_TOP:
@@ -319,19 +350,16 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
     }
 
     // Original logic for other display modes
-    int lineHeight = DpiScale(win->hwndCanvas, 16);
-    bool isFitPage = (kZoomFitPage == ctrl->GetZoomVirtual());
-    if (!IsContinuous(ctrl->GetDisplayMode()) && isFitPage) {
-        lineHeight = 1;
-    }
 
-    USHORT msg = LOWORD(wp);
+    int currPos = si.nPos;
+    int halfPage = si.nPage / 2;
     switch (msg) {
         case SB_TOP:
             si.nPos = si.nMin;
             break;
         case SB_BOTTOM:
             si.nPos = si.nMax;
+
             break;
         case SB_LINEUP:
             si.nPos -= lineHeight;
@@ -340,10 +368,10 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
             si.nPos += lineHeight;
             break;
         case SB_HALF_PAGEUP:
-            si.nPos -= si.nPage / 2;
+            si.nPos -= halfPage;
             break;
         case SB_HALF_PAGEDOWN:
-            si.nPos += si.nPage / 2;
+            si.nPos += halfPage;
             break;
         case SB_PAGEUP:
             si.nPos -= si.nPage;
@@ -355,19 +383,17 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
             si.nPos = si.nTrackPos;
             break;
     }
+    // logf("OnVScroll: nPos: %d\n", si.nPos);
 
     // Set the position and then retrieve it.  Due to adjustments
     // by Windows it may not be the same as the value set.
     si.fMask = SIF_POS;
-    SetScrollInfo(win->hwndCanvas, SB_VERT, &si, TRUE);
+    bool showScrollbar = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    BOOL showWinScrollbar = showScrollbar && !useOverlay;
+    BOOL showOverScrollbar = showScrollbar && useOverlay;
+    SetScrollInfo(win->hwndCanvas, SB_VERT, &si, showWinScrollbar);
     GetScrollInfo(win->hwndCanvas, SB_VERT, &si);
-    if (useOverlay) {
-        SCROLLINFO siUpdate{};
-        siUpdate.cbSize = sizeof(siUpdate);
-        siUpdate.fMask = SIF_POS;
-        siUpdate.nPos = si.nPos;
-        OverlayScrollbarSetInfo(win->overlayScrollV, &siUpdate, TRUE);
-    }
+    OverlayScrollbarSetInfo(win->overlayScrollV, &si, showOverScrollbar);
 
     // If the position has changed or we're dealing with a touchpad scroll event,
     // scroll the window and update it
@@ -384,7 +410,8 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
 static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollH;
+    bool useOverlay =
+        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && win->overlayScrollH && win->overlayScrollH->enabled;
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -426,11 +453,7 @@ static void OnHScroll(MainWindow* win, WPARAM wp) {
     SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
     GetScrollInfo(win->hwndCanvas, SB_HORZ, &si);
     if (useOverlay) {
-        SCROLLINFO siUpdate{};
-        siUpdate.cbSize = sizeof(siUpdate);
-        siUpdate.fMask = SIF_POS;
-        siUpdate.nPos = si.nPos;
-        OverlayScrollbarSetInfo(win->overlayScrollH, &siUpdate, TRUE);
+        OverlayScrollbarSetInfo(win->overlayScrollH, &si, TRUE);
     }
 
     // If the position has changed or we're dealing with a touchpad scroll event,
