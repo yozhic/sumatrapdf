@@ -840,26 +840,28 @@ static void RegisterScreenshotOverlayClass() {
 void TakeScreenshots() {
     RegisterScreenshotOverlayClass();
 
-    // Remember the foreground window before we create our overlay
+    // Remember the foreground window and capture screenshots before creating
+    // our overlay window to avoid disturbing what's on screen
     HWND hwndForeground = GetForegroundWindow();
+
+    auto* data = new ScreenshotOverlayData();
+    CaptureAllScreenshots(data, nullptr);
 
     int screenW = GetSystemMetrics(SM_CXSCREEN);
     int screenH = GetSystemMetrics(SM_CYSCREEN);
 
-    // Create a hidden overlay window first, then capture, then size and show
     DWORD exStyle = WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_LAYERED;
     DWORD style = WS_POPUP;
     HWND hwnd = CreateWindowExW(exStyle, kScreenshotOverlayClassName, nullptr, style, 0, 0, 1, 1, nullptr, nullptr,
                                 GetModuleHandleW(nullptr), nullptr);
     if (!hwnd) {
         logf("Screenshot: failed to create overlay window\n");
+        FreeCapturedScreenshots(data);
+        delete data;
         return;
     }
 
-    auto* data = new ScreenshotOverlayData();
     SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)data);
-
-    CaptureAllScreenshots(data, hwnd);
 
     if (data->captures.IsEmpty()) {
         logf("Screenshot: no windows captured\n");
