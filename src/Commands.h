@@ -73,10 +73,10 @@ enum {
     CmdToggleInverseSearch = 384, CmdDebugCorruptMemory = 385, CmdDebugCrashMe = 386,
     CmdDebugDownloadSymbols = 387, CmdDebugTestApp = 388, CmdDebugShowNotif = 389,
     CmdDebugStartStressTest = 390, CmdDebugTogglePredictiveRender = 391, CmdDebugToggleRtl = 392,
-    CmdToggleAntiAlias = 393, CmdListPrinters = 394, CmdToggleWindowsPreviewer = 395,
-    CmdToggleWindowsSearchFilter = 396, CmdScreenshot = 397, CmdCropImage = 398,
-    CmdResizeImage = 399, CmdSaveImage = 400, CmdPasteClipboardImage = 401,
-    CmdNone = 402,
+    CmdToggleAntiAlias = 393, CmdToggleSmoothScroll = 394, CmdListPrinters = 395,
+    CmdToggleWindowsPreviewer = 396, CmdToggleWindowsSearchFilter = 397, CmdScreenshot = 398,
+    CmdCropImage = 399, CmdResizeImage = 400, CmdSaveImage = 401,
+    CmdPasteClipboardImage = 402, CmdNone = 403,
 
     /* range for file history */
     CmdFileHistoryFirst,

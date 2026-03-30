@@ -99,6 +99,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugTogglePredictiveRender,
     CmdDebugToggleRtl,
     CmdToggleAntiAlias,
+    CmdToggleSmoothScroll,
     CmdToggleFullscreen,
     CmdToggleMenuBar,
     CmdToggleToolbar,
@@ -507,6 +508,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         case CmdToggleAntiAlias: {
             isToggle = true;
             newIsOn = gGlobalPrefs->disableAntiAlias;
+        } break;
+        case CmdToggleSmoothScroll: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->smoothScroll;
         } break;
         case CmdToggleUseTabs: {
             isToggle = true;
