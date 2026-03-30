@@ -77,6 +77,7 @@ void TabsCtrl::LayoutTabs() {
     // logfa("  closeDx: %d, closeDy: %d\n", closeDx, closeDy);
 
     bool isRtl = HwndIsRtl(hwnd);
+    int closePad = 8; // padding between close circle and tab edge
 
     HFONT hfont = GetFont();
     int x = isRtl ? rect.dx : 0;
@@ -87,11 +88,13 @@ void TabsCtrl::LayoutTabs() {
         if (isRtl) {
             xEnd = x - dx;
             ti->r = {xEnd, 0, dx, dy};
-            ti->rClose = {xEnd + 8, closeY, closeDx, closeDy};
+            ti->rClose = {xEnd + closePad, closeY, closeDx, closeDy};
+            ti->rCloseHit = {xEnd, 0, closeDx + 2 * closePad, dy};
         } else {
             xEnd = x + dx;
             ti->r = {x, 0, dx, dy};
-            ti->rClose = {xEnd - closeDx - 8, closeY, closeDx, closeDy};
+            ti->rClose = {xEnd - closeDx - closePad, closeY, closeDx, closeDy};
+            ti->rCloseHit = {xEnd - closeDx - 2 * closePad, 0, closeDx + 2 * closePad, dy};
         }
         ti->titleSize = HwndMeasureText(hwnd, ti->text, hfont);
         int y = (dy - ti->titleSize.dy) / 2;
@@ -143,7 +146,7 @@ TabsCtrl::MouseState TabsCtrl::TabStateFromMousePosition(const Point& p) {
             continue;
         }
         res.tabIdx = i;
-        res.overClose = ti->rClose.Contains(pt);
+        res.overClose = ti->rCloseHit.Contains(pt);
         res.tabInfo = ti;
         Rect rightHalf = r;
         int halfDx = r.dx / 2;
@@ -230,7 +233,13 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
         gr = ToGdipRect(ti->r);
         gfx.FillRectangle(&br, gr);
 
-        if (ti->canClose && (i == tabUnderMouse)) {
+        // debug: paint close hit area in light green
+        if (false && ti->canClose && (i == tabUnderMouse)) {
+            Gdiplus::SolidBrush dbgBr(Gdiplus::Color(80, 0, 255, 0));
+            gfx.FillRectangle(&dbgBr, ToGdipRect(ti->rCloseHit));
+        }
+
+        if (ti->canClose && ((i == tabUnderMouse) || (i == selectedIdx))) {
             r = ti->rClose;
             DrawCloseButtonArgs closeArgs;
             closeArgs.hdc = hdc;

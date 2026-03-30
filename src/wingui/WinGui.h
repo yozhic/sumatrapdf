@@ -696,7 +696,8 @@ struct TabInfo {
 
     // for internal use
     Rect r;
-    Rect rClose;
+    Rect rClose;    // visual close button
+    Rect rCloseHit; // expanded hit test area for close
     Size titleSize;
     Point titlePos;
 };
