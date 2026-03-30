@@ -3,6 +3,7 @@
 
 #include "utils/BaseUtil.h"
 #include "utils/Dpi.h"
+#include "utils/GdiPlusUtil.h"
 #include "utils/WinUtil.h"
 
 #include "OverlayScrollbar.h"
@@ -75,13 +76,16 @@ static Rect GetTrackRect(OverlayScrollbar* sb) {
     RECT rc;
     GetClientRect(sb->hwnd, &rc);
     int arrowSize = 0;
+    int gap = 0;
     if (IsThick(sb)) {
         arrowSize = IsVert(sb) ? (rc.right - rc.left) : (rc.bottom - rc.top);
+        gap = DpiScale(sb->hwndOwner, 2);
     }
+    int total = arrowSize + gap;
     if (IsVert(sb)) {
-        return Rect(0, arrowSize, rc.right - rc.left, (rc.bottom - rc.top) - 2 * arrowSize);
+        return Rect(0, total, rc.right - rc.left, (rc.bottom - rc.top) - 2 * total);
     }
-    return Rect(arrowSize, 0, (rc.right - rc.left) - 2 * arrowSize, rc.bottom - rc.top);
+    return Rect(total, 0, (rc.right - rc.left) - 2 * total, rc.bottom - rc.top);
 }
 
 // Calculate thumb rect within the track
@@ -263,82 +267,66 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
     fillRect(thumbRc, thumbCol);
 
     if (IsThick(sb)) {
+        // draw arrows using GDI+ for anti-aliasing
+        Gdiplus::Graphics gfx(hdcMem);
+        gfx.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+
+        COLORREF arrowCol = ThemeArrowColor();
+        BYTE ar = (BYTE)MulDiv(GetRValue(arrowCol), alpha, 255);
+        BYTE ag = (BYTE)MulDiv(GetGValue(arrowCol), alpha, 255);
+        BYTE ab = (BYTE)MulDiv(GetBValue(arrowCol), alpha, 255);
+        Gdiplus::Pen pen(Gdiplus::Color(alpha, ar, ag, ab), 1.5f);
+        pen.SetStartCap(Gdiplus::LineCapRound);
+        pen.SetEndCap(Gdiplus::LineCapRound);
+        pen.SetLineJoin(Gdiplus::LineJoinRound);
+
         Rect arrowTop = GetArrowTopRect(sb);
         Rect arrowBot = GetArrowBottomRect(sb);
-
-        DWORD arrowPixel = premultiply(ThemeArrowColor(), alpha);
-        DWORD* pixels = (DWORD*)bits;
+        // inset from track edge so arrows don't crowd the thumb
+        int inset = IsVert(sb) ? arrowTop.dx / 5 : arrowTop.dy / 5;
 
         if (IsVert(sb)) {
-            int cx = arrowTop.x + arrowTop.dx / 2;
-            int cy = arrowTop.y + arrowTop.dy / 2;
-            int sz = arrowTop.dx / 4;
-            // Up-pointing triangle: point at top, base at bottom
-            for (int dy2 = -sz; dy2 <= sz; dy2++) {
-                int halfW = (dy2 + sz) / 2;
-                int yy = cy + dy2;
-                if (yy < 0 || yy >= h) {
-                    continue;
-                }
-                for (int dx2 = -halfW; dx2 <= halfW; dx2++) {
-                    int xx = cx + dx2;
-                    if (xx >= 0 && xx < w) {
-                        pixels[yy * w + xx] = arrowPixel;
-                    }
-                }
-            }
+            int sz = arrowTop.dx / 5;
+            // up chevron
+            float cx = (float)(arrowTop.x + arrowTop.dx / 2);
+            float cy = (float)(arrowTop.y + arrowTop.dy / 2) + (float)inset / 2;
+            Gdiplus::PointF upPts[3] = {
+                {cx - sz, cy + sz / 2.0f},
+                {cx, cy - sz / 2.0f},
+                {cx + sz, cy + sz / 2.0f},
+            };
+            gfx.DrawLines(&pen, upPts, 3);
 
-            // Down-pointing triangle: base at top, point at bottom
-            cx = arrowBot.x + arrowBot.dx / 2;
-            cy = arrowBot.y + arrowBot.dy / 2;
-            for (int dy2 = -sz; dy2 <= sz; dy2++) {
-                int halfW = (sz - dy2) / 2;
-                int yy = cy + dy2;
-                if (yy < 0 || yy >= h) {
-                    continue;
-                }
-                for (int dx2 = -halfW; dx2 <= halfW; dx2++) {
-                    int xx = cx + dx2;
-                    if (xx >= 0 && xx < w) {
-                        pixels[yy * w + xx] = arrowPixel;
-                    }
-                }
-            }
+            // down chevron
+            cx = (float)(arrowBot.x + arrowBot.dx / 2);
+            cy = (float)(arrowBot.y + arrowBot.dy / 2) - (float)inset / 2;
+            Gdiplus::PointF downPts[3] = {
+                {cx - sz, cy - sz / 2.0f},
+                {cx, cy + sz / 2.0f},
+                {cx + sz, cy - sz / 2.0f},
+            };
+            gfx.DrawLines(&pen, downPts, 3);
         } else {
-            int cx = arrowTop.x + arrowTop.dx / 2;
-            int cy = arrowTop.y + arrowTop.dy / 2;
-            int sz = arrowTop.dy / 4;
-            // Left-pointing triangle: point at left, base at right
-            for (int dx2 = -sz; dx2 <= sz; dx2++) {
-                int halfH = (dx2 + sz) / 2;
-                int xx = cx + dx2;
-                if (xx < 0 || xx >= w) {
-                    continue;
-                }
-                for (int dy2 = -halfH; dy2 <= halfH; dy2++) {
-                    int yy = cy + dy2;
-                    if (yy >= 0 && yy < h) {
-                        pixels[yy * w + xx] = arrowPixel;
-                    }
-                }
-            }
+            int sz = arrowTop.dy / 5;
+            // left chevron
+            float cx = (float)(arrowTop.x + arrowTop.dx / 2) + (float)inset / 2;
+            float cy = (float)(arrowTop.y + arrowTop.dy / 2);
+            Gdiplus::PointF leftPts[3] = {
+                {cx + sz / 2.0f, cy - sz},
+                {cx - sz / 2.0f, cy},
+                {cx + sz / 2.0f, cy + sz},
+            };
+            gfx.DrawLines(&pen, leftPts, 3);
 
-            // Right-pointing triangle: base at left, point at right
-            cx = arrowBot.x + arrowBot.dx / 2;
-            cy = arrowBot.y + arrowBot.dy / 2;
-            for (int dx2 = -sz; dx2 <= sz; dx2++) {
-                int halfH = (sz - dx2) / 2;
-                int xx = cx + dx2;
-                if (xx < 0 || xx >= w) {
-                    continue;
-                }
-                for (int dy2 = -halfH; dy2 <= halfH; dy2++) {
-                    int yy = cy + dy2;
-                    if (yy >= 0 && yy < h) {
-                        pixels[yy * w + xx] = arrowPixel;
-                    }
-                }
-            }
+            // right chevron
+            cx = (float)(arrowBot.x + arrowBot.dx / 2) - (float)inset / 2;
+            cy = (float)(arrowBot.y + arrowBot.dy / 2);
+            Gdiplus::PointF rightPts[3] = {
+                {cx - sz / 2.0f, cy - sz},
+                {cx + sz / 2.0f, cy},
+                {cx - sz / 2.0f, cy + sz},
+            };
+            gfx.DrawLines(&pen, rightPts, 3);
         }
     }
 
