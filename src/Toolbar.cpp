@@ -1114,7 +1114,10 @@ void CreateToolbar(MainWindow* win) {
     HINSTANCE hinst = GetModuleHandle(nullptr);
     HWND hwndParent = win->hwndFrame;
 
-    DWORD style = WS_CHILD | WS_CLIPCHILDREN | WS_BORDER | RBS_VARHEIGHT | RBS_BANDBORDERS;
+    DWORD style = WS_CHILD | WS_CLIPCHILDREN | RBS_VARHEIGHT;
+    if (IsCurrentThemeDefault()) {
+        style |= WS_BORDER | RBS_BANDBORDERS;
+    }
     style |= CCS_NODIVIDER | CCS_NOPARENTALIGN | WS_VISIBLE;
     DWORD exStyle = WS_EX_TOOLWINDOW;
     if (isRtl) exStyle |= WS_EX_LAYOUTRTL;
@@ -1128,6 +1131,9 @@ void CreateToolbar(MainWindow* win) {
     rbi.fMask = 0;
     rbi.himl = (HIMAGELIST) nullptr;
     SendMessageW(win->hwndReBar, RB_SETBARINFO, 0, (LPARAM)&rbi);
+    if (!IsCurrentThemeDefault()) {
+        SendMessageW(win->hwndReBar, RB_SETBKCOLOR, 0, ThemeControlBackgroundColor());
+    }
 
     style = WS_CHILD | WS_CLIPSIBLINGS | TBSTYLE_TOOLTIPS | TBSTYLE_FLAT;
     style |= TBSTYLE_LIST | CCS_NODIVIDER | CCS_NOPARENTALIGN;
@@ -1213,7 +1219,7 @@ void CreateToolbar(MainWindow* win) {
     rbBand.cbSize = sizeof(REBARBANDINFOW);
     rbBand.fMask = RBBIM_STYLE | RBBIM_CHILD | RBBIM_CHILDSIZE;
     rbBand.fStyle = RBBS_FIXEDSIZE;
-    if (theme::IsAppThemed()) {
+    if (theme::IsAppThemed() && IsCurrentThemeDefault()) {
         rbBand.fStyle |= RBBS_CHILDEDGE;
     }
     rbBand.hbmBack = nullptr;
@@ -1304,6 +1310,24 @@ static LRESULT CALLBACK MenuBarReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam,
     return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
+static LRESULT CALLBACK MenuBarToolbarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass,
+                                              DWORD_PTR dwRefData) {
+    if (WM_ERASEBKGND == uMsg) {
+        HDC hdc = (HDC)wParam;
+        RECT rect;
+        GetClientRect(hWnd, &rect);
+        COLORREF bgCol = ThemeControlBackgroundColor();
+        auto bgBrush = CreateSolidBrush(bgCol);
+        FillRect(hdc, &rect, bgBrush);
+        DeleteObject(bgBrush);
+        return 1;
+    }
+    if (WM_NCDESTROY == uMsg) {
+        RemoveWindowSubclass(hWnd, MenuBarToolbarWndProc, uIdSubclass);
+    }
+    return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+}
+
 constexpr int kMenuBarCmdFirst = 50000;
 constexpr int kMenuBarCmdLast = 50020;
 
@@ -1374,6 +1398,7 @@ void CreateMenuBarRebar(MainWindow* win) {
     REBARINFO rbi{};
     rbi.cbSize = sizeof(REBARINFO);
     SendMessageW(win->hwndMenuReBar, RB_SETBARINFO, 0, (LPARAM)&rbi);
+    SendMessageW(win->hwndMenuReBar, RB_SETBKCOLOR, 0, ThemeControlBackgroundColor());
 
     style = WS_CHILD | WS_CLIPSIBLINGS | TBSTYLE_FLAT | TBSTYLE_LIST;
     style |= CCS_NODIVIDER | CCS_NOPARENTALIGN;
@@ -1384,6 +1409,7 @@ void CreateMenuBarRebar(MainWindow* win) {
 
     win->hwndMenuToolbar = CreateWindowExW(exStyle, TOOLBARCLASSNAME, nullptr, style, 0, 0, 0, 0, win->hwndMenuReBar,
                                            (HMENU)IDC_MENUBAR, hinst, nullptr);
+    SetWindowSubclass(win->hwndMenuToolbar, MenuBarToolbarWndProc, 0, 0);
     SendMessageW(win->hwndMenuToolbar, TB_BUTTONSTRUCTSIZE, (WPARAM)sizeof(TBBUTTON), 0);
 
     if (!UseDarkModeLib() || !DarkMode::isEnabled()) {
@@ -1413,9 +1439,6 @@ void CreateMenuBarRebar(MainWindow* win) {
     rbBand.cbSize = sizeof(REBARBANDINFOW);
     rbBand.fMask = RBBIM_STYLE | RBBIM_CHILD | RBBIM_CHILDSIZE;
     rbBand.fStyle = RBBS_FIXEDSIZE;
-    if (theme::IsAppThemed()) {
-        rbBand.fStyle |= RBBS_CHILDEDGE;
-    }
     rbBand.hwndChild = win->hwndMenuToolbar;
     rbBand.cxMinChild = 0;
     rbBand.cyMinChild = (rc.bottom - rc.top) + 2 * rc.top;

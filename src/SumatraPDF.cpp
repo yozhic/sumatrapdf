@@ -7948,6 +7948,12 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
                 HBRUSH br = CreateSolidBrush(ThemeMainWindowBackgroundColor());
                 FillRect(hdc, &rc, br);
                 DeleteObject(br);
+                if (!win->captionRect.IsEmpty()) {
+                    RECT rcCaption = ToRECT(win->captionRect);
+                    HBRUSH brCaption = CreateSolidBrush(ThemeControlBackgroundColor());
+                    FillRect(hdc, &rcCaption, brCaption);
+                    DeleteObject(brCaption);
+                }
             }
             return TRUE;
 
