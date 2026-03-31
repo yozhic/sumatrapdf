@@ -682,8 +682,17 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             return 0;
         }
 
-        case WM_ERASEBKGND:
+        case WM_ERASEBKGND: {
+            // just paint with the background color to avoid flickering, we will paint the tabs in WM_PAINT
+            if (!IsCurrentThemeDefault()) {
+                HDC hdc = (HDC)wp;
+                RECT rc = ClientRECT(hwnd);
+                HBRUSH hbr = CreateSolidBrush(ThemeControlBackgroundColor());
+                FillRect(hdc, &rc, hbr);
+                DeleteObject(hbr);
+            }
             return TRUE; // we handled it so don't erase
+        }
 
         case WM_NCPAINT:
             return 0; // prevent native tab control from drawing its edge
