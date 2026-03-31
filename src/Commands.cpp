@@ -631,7 +631,7 @@ CustomCommand* CreateCommandFromDefinition(const char* definition) {
     const char* cmd = parts[0];
     int cmdId = GetCommandIdByName(cmd);
     if (cmdId < 0) {
-        MaybeDelayedWarningNotification("Error parsing Shortcuts: unknown cmd name in '%s'\n", definition);
+        MaybeDelayedWarningNotification("Error parsing Shortcuts in advanced settings. Unknown cmd name '%s'\n", definition);
         return nullptr;
     }
     if (parts.Size() == 1) {
