@@ -333,6 +333,7 @@ static void RestoreTabOnStartup(MainWindow* win, TabState* state, bool lazyLoad 
     logf("RestoreTabOnStartup: state->filePath: '%s'\n", state->filePath);
     LoadArgs args(state->filePath, win);
     args.noSavePrefs = true;
+    args.showWin = false;
     if (lazyLoad) {
         args.tabState = state;
     }

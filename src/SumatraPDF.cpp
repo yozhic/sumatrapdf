@@ -1741,6 +1741,7 @@ void ShowMainWindow(MainWindow* win, int windowState) {
         ShowWindow(win->hwndFrame, SW_SHOW);
     }
     UpdateWindow(win->hwndFrame);
+    UpdateToolbarFindText(win);
     HwndEnsureVisible(win->hwndFrame);
 
     if (gWindows.Size() == 1 && (true || IsDebuggerPresent())) {

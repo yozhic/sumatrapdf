@@ -414,7 +414,9 @@ void UpdateFindbox(MainWindow* win) {
     SetWindowStyle(win->hwndPageBg, SS_WHITERECT, false);
 
     InvalidateRect(win->hwndToolbar, nullptr, TRUE);
-    UpdateWindow(win->hwndToolbar);
+    if (IsWindowVisible(win->hwndFrame)) {
+        UpdateWindow(win->hwndToolbar);
+    }
 
     auto cursorId = win->IsDocLoaded() ? IDC_IBEAM : IDC_ARROW;
     SetClassLongPtrW(win->hwndFindEdit, GCLP_HCURSOR, (LONG_PTR)GetCachedCursor(cursorId));
@@ -662,6 +664,12 @@ static LRESULT CALLBACK WndProcEditSearch(HWND hwnd, UINT msg, WPARAM wp, LPARAM
 
 void UpdateToolbarFindText(MainWindow* win) {
     if (!win->hwndToolbar) {
+        return;
+    }
+    if (!IsWindowVisible(win->hwndFrame)) {
+        HwndSetVisibility(win->hwndFindLabel, false);
+        HwndSetVisibility(win->hwndFindBg, false);
+        HwndSetVisibility(win->hwndFindEdit, false);
         return;
     }
     bool showUI = NeedsFindUI(win);
