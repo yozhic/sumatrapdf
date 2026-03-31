@@ -358,7 +358,7 @@ void ToolbarUpdateStateForWindow(MainWindow* win, bool setButtonsVisibility) {
             if (ti && tab && tab->filePath) {
                 const char* path = tab->filePath;
                 if (dirty) {
-                    TempStr tooltip = str::JoinTemp(path, _TRA(" (unsaved annotations)"));
+                    TempStr tooltip = str::JoinTemp(path, " ", _TRA("(unsaved annotations)"));
                     str::ReplaceWithCopy(&ti->tooltip, tooltip);
                 } else {
                     str::ReplaceWithCopy(&ti->tooltip, path);
