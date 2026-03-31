@@ -1204,6 +1204,16 @@ static void UpdateUiForCurrentTab(MainWindow* win) {
 
     // TODO: match either the toolbar (if shown) or background
     HwndScheduleRepaint(win->tabsCtrl->hwnd); // TODO: was RepaintNow() ?
+    if (win->tabsInTitlebar) {
+        RECT r = ToRECT(win->captionRect);
+        InvalidateRect(win->hwndFrame, &r, TRUE);
+        if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
+            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
+        if (win->tabsCtrl->IsVisible()) {
+            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE);
+        }
+    }
 
     bool onlyNumbers = !win->ctrl || !win->ctrl->HasPageLabels();
     SetWindowStyle(win->hwndPageEdit, ES_NUMBER, onlyNumbers);
@@ -1735,6 +1745,17 @@ void ShowMainWindow(MainWindow* win, int windowState) {
 
     if (gWindows.Size() == 1 && (true || IsDebuggerPresent())) {
         HwndToForeground(win->hwndFrame);
+    }
+
+    if (win->tabsInTitlebar) {
+        RECT r = ToRECT(win->captionRect);
+        InvalidateRect(win->hwndFrame, &r, TRUE);
+        if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
+            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
+        if (win->tabsCtrl && win->tabsCtrl->IsVisible()) {
+            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE);
+        }
     }
 
     if (WIN_STATE_FULLSCREEN == windowState) {
@@ -3846,8 +3867,11 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
     }
 
-    // suppress intermediate repaints during relayout
-    SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
+    bool suppressIntermediateRedraws = !win->suppressFrameRedraw;
+    if (suppressIntermediateRedraws) {
+        // suppress intermediate repaints during relayout
+        SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
+    }
 
     DeferWinPosHelper dh;
 
@@ -3969,10 +3993,22 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
 
     dh.End();
 
-    // re-enable redraw and invalidate once
-    SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
-    InvalidateRect(win->hwndCanvas, nullptr, FALSE);
-    RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);
+    if (suppressIntermediateRedraws) {
+        // re-enable redraw and invalidate once
+        SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
+        InvalidateRect(win->hwndCanvas, nullptr, FALSE);
+        RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);
+    }
+    if (updateToolbars && win->tabsInTitlebar) {
+        RECT r = ToRECT(win->captionRect);
+        InvalidateRect(win->hwndFrame, &r, TRUE);
+        if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
+            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
+        if (win->tabsCtrl && win->tabsCtrl->IsVisible()) {
+            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE);
+        }
+    }
 
     // TODO: if a document with ToC and a broken document are loaded
     //       and the first document is closed with the ToC still visible,
@@ -3982,6 +4018,24 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
         // (and SetSidebarVisibility relies on this for initialization)
         UpdateTocSelection(win, win->ctrl->CurrentPageNo());
     }
+}
+
+static void BeginFrameRedrawSuppression(MainWindow* win) {
+    if (win->suppressFrameRedraw) {
+        return;
+    }
+    win->suppressFrameRedraw = true;
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, FALSE, 0);
+}
+
+static void EndFrameRedrawSuppression(MainWindow* win) {
+    if (!win->suppressFrameRedraw) {
+        return;
+    }
+    win->suppressFrameRedraw = false;
+    SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
+    InvalidateRect(win->hwndCanvas, nullptr, FALSE);
+    RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_FRAME);
 }
 
 static void UpdateOverlayScrollbarPositions(MainWindow* win) {
@@ -4372,6 +4426,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     // ToC and Favorites sidebars are hidden when entering presentation mode
     // TODO: make showFavorites a per-window pref
     bool showFavoritesTmp = gGlobalPrefs->showFavorites;
+    BeginFrameRedrawSuppression(win);
     if (presentation && (win->tocVisible || gGlobalPrefs->showFavorites)) {
         SetSidebarVisibility(win, false, false, false);
     }
@@ -4409,6 +4464,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     HwndSetFocus(win->hwndFrame);
     // restore gGlobalPrefs->showFavorites changed by SetSidebarVisibility()
     gGlobalPrefs->showFavorites = showFavoritesTmp;
+    EndFrameRedrawSuppression(win);
 
     if (gGlobalPrefs->preventSleepInFullscreen) {
         SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
@@ -4441,6 +4497,7 @@ void ExitFullScreen(MainWindow* win) {
         win->isFullScreen = false;
     }
 
+    BeginFrameRedrawSuppression(win);
     bool tocVisible = win->CurrentTab() && win->CurrentTab()->showToc;
     SetSidebarVisibility(win, tocVisible, gGlobalPrefs->showFavorites, false);
 
@@ -4475,6 +4532,7 @@ void ExitFullScreen(MainWindow* win) {
     }
     // show menu bar rebar after layout positions it correctly
     ShowMenuBarRebar(win);
+    EndFrameRedrawSuppression(win);
 }
 
 void ToggleFullScreen(MainWindow* win, bool presentation) {
@@ -5001,6 +5059,18 @@ void SetSidebarVisibility(MainWindow* win, bool tocVisible, bool showFavorites, 
 
     if (relayout) {
         RelayoutFrame(win, false);
+        if (tocVisible) {
+            RedrawWindow(win->hwndTocBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
+        if (showFavorites) {
+            RedrawWindow(win->hwndFavBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
+        if (tocVisible || showFavorites) {
+            InvalidateRect(win->sidebarSplitter->hwnd, nullptr, TRUE);
+        }
+        if (tocVisible && showFavorites) {
+            InvalidateRect(win->favSplitter->hwnd, nullptr, TRUE);
+        }
     }
 }
 
