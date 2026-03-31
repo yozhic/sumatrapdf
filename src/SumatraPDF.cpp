@@ -1633,6 +1633,8 @@ static void UpdateToolbarSidebarText(MainWindow* win) {
     win->favLabelWithClose->SetLabel(_TRA("Favorites"));
 }
 
+static void UpdateWindowFrameBorderColor(MainWindow* win);
+
 static MainWindow* CreateMainWindow() {
     Rect windowPos = gGlobalPrefs->windowPos;
     if (!windowPos.IsEmpty()) {
@@ -1662,6 +1664,7 @@ static MainWindow* CreateMainWindow() {
 
     ReportIf(nullptr != FindMainWindowByHwnd(hwndFrame));
     MainWindow* win = new MainWindow(hwndFrame);
+    UpdateWindowFrameBorderColor(win);
 
     // don't add a WS_EX_STATICEDGE so that the scrollbars touch the
     // screen's edge when maximized (cf. Fitts' law) and there are
@@ -1845,6 +1848,14 @@ void DeleteMainWindow(MainWindow* win) {
     delete win;
 }
 
+static COLORREF DwmFrameBorderColorForCurrentTheme() {
+    return IsCurrentThemeDefault() ? (COLORREF)DWMWA_COLOR_DEFAULT : ThemeControlBackgroundColor();
+}
+
+static void UpdateWindowFrameBorderColor(MainWindow* win) {
+    dwm::SetWindowBorderColor(win->hwndFrame, DwmFrameBorderColorForCurrentTheme());
+}
+
 void UpdateAfterThemeChange() {
     for (auto win : gWindows) {
         DeleteObject(win->brControlBgColor);
@@ -1861,6 +1872,7 @@ void UpdateAfterThemeChange() {
             DarkMode::setWindowMenuBarSubclass(win->hwndFrame);
             // DarkMode::setDarkTooltips(win->infotip->hwnd, (int)DarkMode::ToolTipsType::tooltip);
         }
+        UpdateWindowFrameBorderColor(win);
         // TODO: this only rerenders canvas, not frame, even with
         // includingNonClientArea == true.
         MainWindowRerender(win, true);
@@ -4480,6 +4492,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     }
     win->tabsCtrl->SetIsVisible(false);
 
+    UpdateWindowFrameBorderColor(win);
     // disable DWM rounded corners and border for true edge-to-edge fullscreen
     dwm::SetWindowRoundedCorners(win->hwndFrame, false);
 
@@ -4548,6 +4561,7 @@ void ExitFullScreen(MainWindow* win) {
 
     // restore DWM rounded corners and border
     dwm::SetWindowRoundedCorners(win->hwndFrame, true);
+    UpdateWindowFrameBorderColor(win);
 
     Rect cr = ClientRect(win->hwndFrame);
     SetWindowLong(win->hwndFrame, GWL_STYLE, win->nonFullScreenWindowStyle);

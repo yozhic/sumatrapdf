@@ -164,6 +164,7 @@ namespace dwm {
 HRESULT ExtendFrameIntoClientArea(HWND hwnd, const MARGINS* pMarInset);
 HRESULT GetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
 HRESULT SetWindowAttribute(HWND hwnd, DWORD dwAttribute, void* pvAttribute, DWORD cbAttribute);
+void SetWindowBorderColor(HWND hwnd, COLORREF color);
 void SetWindowRoundedCorners(HWND hwnd, bool rounded);
 
 }; // namespace dwm
