@@ -595,6 +595,10 @@ int SyncTex::RebuildIndexIfNeeded() {
 
     if (path_nonascii) {
         TempStr tempPathSyncGz = CopyGzToTempFile(pathSyncGz);
+        if (!tempPathSyncGz) {
+            logfa("SyncTex::RebuildIndexIfNeeded: unable to copy '.synctex.gz' to a temp file.\n");
+            return PDFSYNCERR_SYNCFILE_CANNOT_BE_OPENED;
+        }
         TempStr tempathNoExt = path::GetPathNoExtTemp(tempPathSyncGz);
         TempStr temppathSync = str::JoinTemp(tempathNoExt, ".synctex");
         scanner = synctex_scanner_new_with_output_file(temppathSync, nullptr, 1);
