@@ -217,6 +217,7 @@ struct MainWindow {
     bool isFullScreen = false;
     PresentationMode presentation = PM_DISABLED;
     int windowStateBeforePresentation = 0;
+    bool suppressFrameRedraw = false;
 
     long nonFullScreenWindowStyle = 0;
     Rect nonFullScreenFrameRect;
