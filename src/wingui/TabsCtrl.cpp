@@ -600,7 +600,7 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 SetSelected(tabUnderMouse);
                 TriggerSelectionChanged(this);
             }
-            TabInfo* ti = GetTab(GetSelected());
+            TabInfo* ti = GetTab(tabUnderMouse);
             if (ti->isPinned) {
                 return 0;
             }
