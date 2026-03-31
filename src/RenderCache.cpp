@@ -778,6 +778,11 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
             req.renderCb->Call(bmp);
             // req.renderCb = (RenderingCallback*)1; // will crash if accessed again, which should not happen
         } else {
+            if (!bmp) {
+                req.dm->RepaintDisplay();
+                ResetTempAllocator();
+                continue;
+            }
             // don't replace colors for individual images
             if (bmp && !engine->IsImageCollection()) {
                 UpdateBitmapColors(bmp->GetBitmap(), cache->textColor, cache->backgroundColor);
