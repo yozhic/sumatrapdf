@@ -3971,7 +3971,8 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sideb
 
     // re-enable redraw and invalidate once
     SendMessageW(win->hwndFrame, WM_SETREDRAW, TRUE, 0);
-    RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_FRAME);
+    InvalidateRect(win->hwndCanvas, nullptr, FALSE);
+    RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);
 
     // TODO: if a document with ToC and a broken document are loaded
     //       and the first document is closed with the ToC still visible,
