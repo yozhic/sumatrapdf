@@ -2391,7 +2391,8 @@ void LoadModelIntoTab(WindowTab* tab) {
             }
         }
     }
-    win->RedrawAll(true);
+    InvalidateRect(win->hwndCanvas, nullptr, FALSE);
+    UpdateWindow(win->hwndCanvas);
 }
 
 enum class MeasurementUnit {
@@ -7410,8 +7411,12 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
                 win->captionBtn[i].inactive = wp == FALSE;
             }
             if (!IsIconic(hwnd)) {
-                uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN;
-                RedrawWindow(hwnd, nullptr, nullptr, flags);
+                RECT rc = ToRECT(win->captionRect);
+                if (IsCurrentThemeDefault()) {
+                    rc.bottom += NON_CLIENT_BAND;
+                }
+                uint flags = RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW;
+                RedrawWindow(hwnd, &rc, nullptr, flags);
                 *callDef = false;
                 return TRUE;
             }

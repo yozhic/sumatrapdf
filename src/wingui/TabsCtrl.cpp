@@ -863,7 +863,21 @@ int TabsCtrl::SetSelected(int idx) {
 }
 
 void TabsCtrl::SetHighlighted(int idx) {
+    int oldSelectedIdx = GetSelected();
+    if (IsValidIdx(tabForceShowSelected)) {
+        oldSelectedIdx = tabForceShowSelected;
+    }
+    int newSelectedIdx = GetSelected();
+    if (IsValidIdx(idx)) {
+        newSelectedIdx = idx;
+    }
+    if (tabForceShowSelected == idx) {
+        return;
+    }
     tabForceShowSelected = idx;
+    if (oldSelectedIdx == newSelectedIdx) {
+        return;
+    }
     HwndRepaintNow(hwnd);
 }
 

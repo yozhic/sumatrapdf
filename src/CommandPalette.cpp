@@ -728,6 +728,7 @@ void CommandPaletteWnd::SwitchToFileHistory() {
 CommandPaletteWnd* gCommandPaletteWnd = nullptr;
 HWND gCommandPaletteHwnd = nullptr;
 static HWND gHwndToActivateOnClose = nullptr;
+static WindowTab* gTabToSelectOnClose = nullptr;
 
 void SafeDeleteCommandPaletteWnd() {
     if (!gCommandPaletteWnd) {
@@ -741,6 +742,13 @@ void SafeDeleteCommandPaletteWnd() {
     if (gHwndToActivateOnClose) {
         SetActiveWindow(gHwndToActivateOnClose);
         gHwndToActivateOnClose = nullptr;
+    }
+    if (gTabToSelectOnClose) {
+        WindowTab* tab = gTabToSelectOnClose;
+        gTabToSelectOnClose = nullptr;
+        if (tab->win && IsMainWindowValid(tab->win) && tab->win->GetTabIdx(tab) >= 0) {
+            SelectTabInWindow(tab);
+        }
     }
 }
 
@@ -1027,9 +1035,7 @@ void CommandPaletteWnd::ExecuteCurrentSelection() {
     WindowTab* tab = data->tab;
     if (tab != nullptr) {
         MainWindow* mainWin = tab->win;
-        if (mainWin->CurrentTab() != tab) {
-            SelectTabInWindow(tab);
-        }
+        gTabToSelectOnClose = tab;
         gHwndToActivateOnClose = mainWin->hwndFrame;
         ScheduleDelete();
         return;
