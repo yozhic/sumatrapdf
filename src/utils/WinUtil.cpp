@@ -2161,6 +2161,10 @@ bool HwndHasCaption(HWND hwnd) {
 }
 
 void HwndSetVisibility(HWND hwnd, bool visible) {
+    bool isVisible = IsWindowVisible(hwnd);
+    if (isVisible == visible) {
+        return;
+    }
     ShowWindow(hwnd, visible ? SW_SHOW : SW_HIDE);
 }
 
