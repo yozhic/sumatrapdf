@@ -260,7 +260,7 @@ void StartLogToFile(const char* path, bool removeIfExists) {
     ReportIf(gLogFilePath);
     gLogFilePath = str::Dup(path);
     if (removeIfExists) {
-        remove(path);
+        file::Delete(path);
     }
 }
 

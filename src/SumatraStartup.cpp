@@ -2311,6 +2311,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         if (flags.logFile) {
             dir::CreateForFile(flags.logFile);
             logFilePath = flags.logFile;
+            logFilePath = path::NormalizeTemp(logFilePath);
         } else {
             logFilePath = GetLogFilePathTemp();
         }
@@ -2759,7 +2760,6 @@ Exit:
         // (as recommended for a quick exit)
         ::ExitProcess(exitCode);
     }
-    str::Free(logFilePath);
 
     if (gInitialSessionData) {
         FreeSessionDataVec(gInitialSessionData);
