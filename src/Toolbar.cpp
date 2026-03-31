@@ -10,6 +10,7 @@ extern "C" {
 #include "utils/WinDynCalls.h"
 #include "utils/Dpi.h"
 #include "utils/WinUtil.h"
+#include "utils/BitManip.h"
 
 #include "wingui/UIModels.h"
 
@@ -1336,6 +1337,80 @@ static LRESULT CALLBACK MenuBarToolbarWndProc(HWND hWnd, UINT uMsg, WPARAM wPara
 constexpr int kMenuBarCmdFirst = 50000;
 constexpr int kMenuBarCmdLast = 50020;
 
+struct MenuBarPopupNav {
+    MainWindow* win = nullptr;
+    HMENU rootMenu = nullptr;
+    HMENU currentMenu = nullptr;
+    UINT currentFlags = 0;
+    int nextMenuIdx = -1;
+};
+
+static MenuBarPopupNav gMenuBarPopupNav;
+
+static bool ShouldSwitchCustomMenuBarPopup(UINT vk) {
+    if (!gMenuBarPopupNav.win || !gMenuBarPopupNav.rootMenu) {
+        return false;
+    }
+    if (!gMenuBarPopupNav.currentMenu || gMenuBarPopupNav.currentMenu != gMenuBarPopupNav.rootMenu) {
+        return false;
+    }
+    if (bit::IsMaskSet(gMenuBarPopupNav.currentFlags, (UINT)MF_POPUP)) {
+        return false;
+    }
+
+    int menuCount = GetMenuItemCount(gMenuBarPopupNav.win->menu);
+    if (menuCount <= 1) {
+        return false;
+    }
+
+    int step = 0;
+    if (vk == VK_LEFT) {
+        step = -1;
+    } else if (vk == VK_RIGHT) {
+        step = 1;
+    }
+    if (step == 0) {
+        return false;
+    }
+
+    gMenuBarPopupNav.nextMenuIdx += step;
+    if (gMenuBarPopupNav.nextMenuIdx < 0) {
+        gMenuBarPopupNav.nextMenuIdx = menuCount - 1;
+    } else if (gMenuBarPopupNav.nextMenuIdx >= menuCount) {
+        gMenuBarPopupNav.nextMenuIdx = 0;
+    }
+    return true;
+}
+
+static LRESULT CALLBACK MenuBarMsgFilterHook(int code, WPARAM wParam, LPARAM lParam) {
+    if (code == MSGF_MENU && gMenuBarPopupNav.win) {
+        MSG* msg = (MSG*)lParam;
+        if ((msg->message == WM_KEYDOWN || msg->message == WM_SYSKEYDOWN) &&
+            ShouldSwitchCustomMenuBarPopup((UINT)msg->wParam)) {
+            EndMenu();
+            return 1;
+        }
+    }
+    return CallNextHookEx(nullptr, code, wParam, lParam);
+}
+
+void UpdateCustomMenuBarMenuSelect(MainWindow* win, WPARAM wp, LPARAM lp) {
+    if (gMenuBarPopupNav.win != win) {
+        return;
+    }
+
+    UINT flags = HIWORD(wp);
+    HMENU menu = (HMENU)lp;
+    if (flags == 0xFFFF && !menu) {
+        gMenuBarPopupNav.currentMenu = nullptr;
+        gMenuBarPopupNav.currentFlags = 0;
+        return;
+    }
+
+    gMenuBarPopupNav.currentMenu = menu;
+    gMenuBarPopupNav.currentFlags = flags;
+}
+
 void RebuildMenuBarButtons(MainWindow* win) {
     HWND hwndMb = win->hwndMenuToolbar;
     if (!hwndMb) {
@@ -1485,23 +1560,45 @@ bool HandleMenuBarCommand(MainWindow* win, int cmdId) {
         return false;
     }
 
+    int menuCount = GetMenuItemCount(win->menu);
     int menuIdx = cmdId - kMenuBarCmdFirst;
-    HMENU subMenu = GetSubMenu(win->menu, menuIdx);
-    if (!subMenu) {
-        return true;
-    }
-
-    // get button rect in screen coordinates
-    RECT btnRect;
-    int btnIdx = (int)SendMessageW(win->hwndMenuToolbar, TB_COMMANDTOINDEX, cmdId, 0);
-    SendMessageW(win->hwndMenuToolbar, TB_GETITEMRECT, btnIdx, (LPARAM)&btnRect);
-    MapWindowPoints(win->hwndMenuToolbar, HWND_DESKTOP, (POINT*)&btnRect, 2);
-
     UINT flags = TPM_LEFTALIGN | TPM_TOPALIGN;
     if (IsUIRtl()) {
         flags = TPM_RIGHTALIGN | TPM_TOPALIGN;
     }
-    TrackPopupMenu(subMenu, flags, btnRect.left, btnRect.bottom, 0, win->hwndFrame, nullptr);
+
+    for (;;) {
+        HMENU subMenu = GetSubMenu(win->menu, menuIdx);
+        if (!subMenu) {
+            return true;
+        }
+
+        // get button rect in screen coordinates
+        RECT btnRect;
+        int btnCmdId = kMenuBarCmdFirst + menuIdx;
+        int btnIdx = (int)SendMessageW(win->hwndMenuToolbar, TB_COMMANDTOINDEX, btnCmdId, 0);
+        SendMessageW(win->hwndMenuToolbar, TB_GETITEMRECT, btnIdx, (LPARAM)&btnRect);
+        MapWindowPoints(win->hwndMenuToolbar, HWND_DESKTOP, (POINT*)&btnRect, 2);
+
+        gMenuBarPopupNav.win = win;
+        gMenuBarPopupNav.rootMenu = subMenu;
+        gMenuBarPopupNav.currentMenu = subMenu;
+        gMenuBarPopupNav.currentFlags = 0;
+        gMenuBarPopupNav.nextMenuIdx = menuIdx;
+
+        HHOOK hook = SetWindowsHookExW(WH_MSGFILTER, MenuBarMsgFilterHook, nullptr, GetCurrentThreadId());
+        TrackPopupMenu(subMenu, flags, btnRect.left, btnRect.bottom, 0, win->hwndFrame, nullptr);
+        if (hook) {
+            UnhookWindowsHookEx(hook);
+        }
+
+        int nextMenuIdx = gMenuBarPopupNav.nextMenuIdx;
+        gMenuBarPopupNav = {};
+        if (nextMenuIdx == menuIdx || menuCount <= 1) {
+            break;
+        }
+        menuIdx = nextMenuIdx;
+    }
 
     return true;
 }

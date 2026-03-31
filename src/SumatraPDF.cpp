@@ -7842,6 +7842,12 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             }
             return DefWindowProc(hwnd, msg, wp, lp);
 
+        case WM_MENUSELECT:
+            if (win) {
+                UpdateCustomMenuBarMenuSelect(win, wp, lp);
+            }
+            return DefWindowProc(hwnd, msg, wp, lp);
+
         case WM_SYSCOMMAND:
             // temporarily show the menu bar if it has been hidden
             if (wp == SC_KEYMENU && win && !IsMenubarVisible()) {

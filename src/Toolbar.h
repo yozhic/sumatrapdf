@@ -24,3 +24,4 @@ void RebuildMenuBarButtons(MainWindow*);
 bool IsShowingMenuBarRebar(MainWindow*);
 bool HandleMenuBarCommand(MainWindow*, int cmdId);
 bool ActivateMenuBarByAccel(MainWindow*, WCHAR accel);
+void UpdateCustomMenuBarMenuSelect(MainWindow*, WPARAM, LPARAM);
