@@ -1418,10 +1418,10 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         win->AsFixed()->SetScrollState(ss);
     }
 
-    win->RedrawAll(true);
     TabsOnChangedDoc(win);
 
     if (!win->IsDocLoaded()) {
+        win->RedrawAll(true);
         return;
     }
 
@@ -1441,6 +1441,8 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
     // This should only happen after everything else is ready
     if ((args->isNewWindow || args->placeWindow) && args->showWin && showAsFullScreen) {
         EnterFullScreen(win);
+    } else {
+        win->RedrawAll(false);
     }
     if (!args->isNewWindow && win->presentation && win->ctrl) {
         win->ctrl->SetInPresentation(true);
