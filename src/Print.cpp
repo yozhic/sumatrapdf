@@ -1091,6 +1091,7 @@ void PrintCurrentFile(MainWindow* win, bool waitForCompletion) {
         return;
     }
     auto engine = dm->GetEngine();
+    EngineBase* pinnedEngine = nullptr;
     ReportIf(!engine);
     if (!engine) {
         return;
@@ -1168,6 +1169,8 @@ void PrintCurrentFile(MainWindow* win, bool waitForCompletion) {
     if (!engine) {
         goto Exit;
     }
+    pinnedEngine = engine;
+    pinnedEngine->AddRef();
     rotation = dm->GetRotation();
     nPages = dm->PageCount();
 
@@ -1248,7 +1251,8 @@ void PrintCurrentFile(MainWindow* win, bool waitForCompletion) {
     }
 
     sel = printSelection ? win->CurrentTab()->selectionOnPage : nullptr;
-    pd = new PrintData(engine, printer, ranges, advanced, rotation, sel);
+    pd = new PrintData(pinnedEngine, printer, ranges, advanced, rotation, sel);
+    SafeEngineRelease(&pinnedEngine);
 
     if (!waitForCompletion && !pd->failedEngineClone) {
         PrintToDeviceOnThread(win, pd);
@@ -1258,6 +1262,7 @@ void PrintCurrentFile(MainWindow* win, bool waitForCompletion) {
     }
 
 Exit:
+    SafeEngineRelease(&pinnedEngine);
     free(ppr);
     GlobalFree(pdex.hDevNames);
     GlobalFree(pdex.hDevMode);
