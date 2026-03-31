@@ -4372,7 +4372,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     // TODO: make showFavorites a per-window pref
     bool showFavoritesTmp = gGlobalPrefs->showFavorites;
     if (presentation && (win->tocVisible || gGlobalPrefs->showFavorites)) {
-        SetSidebarVisibility(win, false, false);
+        SetSidebarVisibility(win, false, false, false);
     }
 
     long ws = GetWindowLong(win->hwndFrame, GWL_STYLE);
@@ -4441,7 +4441,7 @@ void ExitFullScreen(MainWindow* win) {
     }
 
     bool tocVisible = win->CurrentTab() && win->CurrentTab()->showToc;
-    SetSidebarVisibility(win, tocVisible, gGlobalPrefs->showFavorites);
+    SetSidebarVisibility(win, tocVisible, gGlobalPrefs->showFavorites, false);
 
     if (win->tabsVisible) {
         win->tabsCtrl->SetIsVisible(true);
@@ -4950,7 +4950,7 @@ static void OnFavSplitterMove(Splitter::MoveEvent* ev) {
     RelayoutFrame(win, false, rToc.dx);
 }
 
-void SetSidebarVisibility(MainWindow* win, bool tocVisible, bool showFavorites) {
+void SetSidebarVisibility(MainWindow* win, bool tocVisible, bool showFavorites, bool relayout) {
     if (gPluginMode || !CanAccessDisk()) {
         showFavorites = false;
     }
@@ -4998,7 +4998,9 @@ void SetSidebarVisibility(MainWindow* win, bool tocVisible, bool showFavorites) 
     HwndSetVisibility(win->hwndFavBox, showFavorites);
     win->favSplitter->isLive = true;
 
-    RelayoutFrame(win, false);
+    if (relayout) {
+        RelayoutFrame(win, false);
+    }
 }
 
 // if url-encoded s is bigger than a reasonable URL path,
