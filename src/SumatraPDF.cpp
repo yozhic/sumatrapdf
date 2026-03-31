@@ -3204,8 +3204,8 @@ static void SaveCurrentFileAs(MainWindow* win) {
         }
     }
 
-    ReportIf(!srcFileName);
     if (!srcFileName) {
+        ShowTemporaryNotification(win->hwndCanvas, _TRA("File path not available"), kNotif5SecsTimeOut);
         return;
     }
 
@@ -3290,6 +3290,7 @@ static void SaveCurrentFileAs(MainWindow* win) {
         }
     }
     if (!srcFileName) {
+        ShowTemporaryNotification(win->hwndCanvas, _TRA("File path not available"), kNotif5SecsTimeOut);
         return;
     }
     defExt = ctrl->GetDefaultFileExt();
