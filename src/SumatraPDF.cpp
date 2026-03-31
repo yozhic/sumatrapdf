@@ -700,6 +700,45 @@ static bool IsMenubarVisible() {
     return gGlobalPrefs->showMenubar;
 }
 
+static bool MenuBarButtonsNeedRebuild(HMENU oldMenu, HMENU newMenu) {
+    int oldCount = oldMenu ? GetMenuItemCount(oldMenu) : 0;
+    int newCount = newMenu ? GetMenuItemCount(newMenu) : 0;
+    if (oldCount != newCount) {
+        return true;
+    }
+    MENUITEMINFOW oldMii{};
+    oldMii.cbSize = sizeof(MENUITEMINFOW);
+    oldMii.fMask = MIIM_SUBMENU | MIIM_STRING;
+    MENUITEMINFOW newMii = oldMii;
+    for (int i = 0; i < newCount; i++) {
+        oldMii.dwTypeData = nullptr;
+        oldMii.cch = 0;
+        newMii.dwTypeData = nullptr;
+        newMii.cch = 0;
+        GetMenuItemInfoW(oldMenu, i, TRUE, &oldMii);
+        GetMenuItemInfoW(newMenu, i, TRUE, &newMii);
+        if (!!oldMii.hSubMenu != !!newMii.hSubMenu || oldMii.cch != newMii.cch) {
+            return true;
+        }
+        if (oldMii.cch == 0) {
+            continue;
+        }
+
+        oldMii.cch++;
+        newMii.cch++;
+        AutoFreeWStr oldName(AllocArray<WCHAR>(oldMii.cch));
+        AutoFreeWStr newName(AllocArray<WCHAR>(newMii.cch));
+        oldMii.dwTypeData = oldName;
+        newMii.dwTypeData = newName;
+        GetMenuItemInfoW(oldMenu, i, TRUE, &oldMii);
+        GetMenuItemInfoW(newMenu, i, TRUE, &newMii);
+        if (!str::Eq(oldName, newName)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void RebuildMenuBarForWindow(MainWindow* win) {
     HMENU oldMenu = win->menu;
     win->menu = BuildMenu(win);
@@ -707,7 +746,9 @@ void RebuildMenuBarForWindow(MainWindow* win) {
         if (win->tabsInTitlebar) {
             // use rebar menu bar instead of native menu when tabs are in titlebar
             if (IsShowingMenuBarRebar(win)) {
-                RebuildMenuBarButtons(win);
+                if (MenuBarButtonsNeedRebuild(oldMenu, win->menu)) {
+                    RebuildMenuBarButtons(win);
+                }
             }
         } else {
             SetMenu(win->hwndFrame, win->menu);
@@ -1201,19 +1242,6 @@ static void UpdateUiForCurrentTab(MainWindow* win) {
     UpdateFindbox(win);
 
     HwndSetText(win->hwndFrame, win->CurrentTab()->frameTitle);
-
-    // TODO: match either the toolbar (if shown) or background
-    HwndScheduleRepaint(win->tabsCtrl->hwnd); // TODO: was RepaintNow() ?
-    if (win->tabsInTitlebar) {
-        RECT r = ToRECT(win->captionRect);
-        InvalidateRect(win->hwndFrame, &r, TRUE);
-        if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
-            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
-        }
-        if (win->tabsCtrl->IsVisible()) {
-            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE);
-        }
-    }
 
     bool onlyNumbers = !win->ctrl || !win->ctrl->HasPageLabels();
     SetWindowStyle(win->hwndPageEdit, ES_NUMBER, onlyNumbers);

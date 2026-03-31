@@ -396,7 +396,12 @@ void ShowOrHideToolbar(MainWindow* win) {
     if (win->presentation || win->isFullScreen) {
         return;
     }
-    if (IsShowingToolbar(win)) {
+    bool showToolbar = IsShowingToolbar(win);
+    bool isVisible = IsWindowVisible(win->hwndReBar);
+    if (showToolbar == isVisible) {
+        return;
+    }
+    if (showToolbar) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     } else {
         // Move the focus out of the toolbar
