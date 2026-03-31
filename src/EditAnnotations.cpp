@@ -319,8 +319,10 @@ EditAnnotationsWindow::~EditAnnotationsWindow() {
 
     if (tab->selectedAnnotation != nullptr) {
         tab->selectedAnnotation = nullptr;
-        MainWindowRerender(tab->win);
-        ToolbarUpdateStateForWindow(tab->win, false);
+        if (!tab->win->isBeingClosed) {
+            MainWindowRerender(tab->win);
+            ToolbarUpdateStateForWindow(tab->win, false);
+        }
     }
     delete mainLayout;
 }
