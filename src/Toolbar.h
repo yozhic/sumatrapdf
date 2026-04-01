@@ -12,7 +12,7 @@ void UpdateToolbarPageText(MainWindow*, int pageCount, bool updateOnly = false);
 void UpdateFindbox(MainWindow*);
 void SetToolbarButtonEnableState(MainWindow*, int cmdId, bool isEnabled);
 void SetToolbarButtonCheckedState(MainWindow*, int cmdId, bool isChecked);
-bool IsShowingToolbar(MainWindow*);
+bool ShouldShowToolbar(MainWindow*);
 void ShowOrHideToolbar(MainWindow*);
 void UpdateToolbarState(MainWindow*);
 void UpdateToolbarAfterThemeChange(MainWindow*);

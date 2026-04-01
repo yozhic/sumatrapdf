@@ -214,6 +214,7 @@ struct MainWindow {
     // home page thumbnail scrolling
     int homePageScrollY = 0;
 
+    bool isToolbarVisible = false;
     bool isFullScreen = false;
     PresentationMode presentation = PM_DISABLED;
     int windowStateBeforePresentation = 0;

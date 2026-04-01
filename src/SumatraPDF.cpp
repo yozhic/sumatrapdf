@@ -4002,7 +4002,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         rc.y += menuBarDy;
         rc.dy -= menuBarDy;
     }
-    if (IsShowingToolbar(win)) {
+    if (win->isToolbarVisible) {
         if (updateToolbars) {
             Rect rcRebar = WindowRect(win->hwndReBar);
             dh.SetWindowPos(win->hwndReBar, nullptr, rc.x, rc.y, rc.dx, rcRebar.dy, SWP_NOZORDER);
@@ -4011,6 +4011,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         rc.y += rcRebar.dy;
         rc.dy -= rcRebar.dy;
     }
+    ShowWindow(win->hwndReBar, win->isToolbarVisible ? SW_SHOW : SW_HIDE);
 
     // ToC and Favorites sidebars at the left
     bool showFavorites = gGlobalPrefs->showFavorites && !gPluginMode && CanAccessDisk();
@@ -4088,6 +4089,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     }
     if (tocVisible && showFavorites) {
         InvalidateRect(win->favSplitter->hwnd, nullptr, TRUE);
+    }
+    if (win->isToolbarVisible) {
+        RedrawWindow(win->hwndReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
     if (updateToolbars && win->tabsInTitlebar) {
         RECT r = ToRECT(win->captionRect);
@@ -4531,6 +4535,7 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     }
 
     SetMenu(win->hwndFrame, nullptr);
+    win->isToolbarVisible = false;
     ShowWindow(win->hwndReBar, SW_HIDE);
     if (win->hwndMenuReBar) {
         ShowWindow(win->hwndMenuReBar, SW_HIDE);
@@ -4600,7 +4605,8 @@ void ExitFullScreen(MainWindow* win) {
     if (win->tabsVisible) {
         win->tabsCtrl->SetIsVisible(true);
     }
-    if (gGlobalPrefs->showToolbar) {
+    win->isToolbarVisible = ShouldShowToolbar(win);
+    if (win->isToolbarVisible) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     }
     if (IsMenubarVisible()) {

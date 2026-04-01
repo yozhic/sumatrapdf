@@ -379,7 +379,7 @@ void SetToolbarButtonEnableState(MainWindow* win, int cmdId, bool isEnabled) {
         UpdateToolbarButtonStateByIdx(win->hwndToolbar, idx, isEnabled, TBSTATE_ENABLED);
     }
 }
-bool IsShowingToolbar(MainWindow* win) {
+bool ShouldShowToolbar(MainWindow* win) {
     if (!gGlobalPrefs->showToolbar) {
         return false;
     }
@@ -394,22 +394,16 @@ bool IsShowingToolbar(MainWindow* win) {
 }
 
 void ShowOrHideToolbar(MainWindow* win) {
-    if (win->presentation || win->isFullScreen) {
+    bool show = ShouldShowToolbar(win);
+    if (show == win->isToolbarVisible) {
         return;
     }
-    bool showToolbar = IsShowingToolbar(win);
-    bool isVisible = IsWindowVisible(win->hwndReBar);
-    if (showToolbar == isVisible) {
-        return;
-    }
-    if (showToolbar) {
-        ShowWindow(win->hwndReBar, SW_SHOW);
-    } else {
+    win->isToolbarVisible = show;
+    if (!show) {
         // Move the focus out of the toolbar
         if (HwndIsFocused(win->hwndFindEdit) || HwndIsFocused(win->hwndPageEdit)) {
             HwndSetFocus(win->hwndFrame);
         }
-        ShowWindow(win->hwndReBar, SW_HIDE);
     }
     RelayoutWindow(win);
 }
