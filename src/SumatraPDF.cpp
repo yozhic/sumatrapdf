@@ -4077,6 +4077,18 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         InvalidateRect(win->hwndCanvas, nullptr, FALSE);
         RedrawWindow(win->hwndFrame, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME);
     }
+    if (tocVisible) {
+        RedrawWindow(win->hwndTocBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+    }
+    if (showFavorites) {
+        RedrawWindow(win->hwndFavBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+    }
+    if (tocVisible || showFavorites) {
+        InvalidateRect(win->sidebarSplitter->hwnd, nullptr, TRUE);
+    }
+    if (tocVisible && showFavorites) {
+        InvalidateRect(win->favSplitter->hwnd, nullptr, TRUE);
+    }
     if (updateToolbars && win->tabsInTitlebar) {
         RECT r = ToRECT(win->captionRect);
         InvalidateRect(win->hwndFrame, &r, TRUE);
