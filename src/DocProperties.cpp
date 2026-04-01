@@ -32,7 +32,7 @@ const char* gAllProps[] = {
      kPropPdfVersion,
      kPropPdfProducer,
      kPropPdfFileStructure,
-    nullptr,
+     nullptr,
 };
 // clang-format off
 
@@ -59,7 +59,7 @@ char* GetPropValueTemp(const Props& props, const char* name) {
     if (idx < 0) {
         return nullptr;
     }
-    char* v = props.At(idx);
+    char* v = props.At(idx + 1);
     return v;
 }
 

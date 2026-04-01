@@ -288,21 +288,16 @@ static const char* propToName[] = {
 // clang-format on
 
 static void AppendPropTranslated(str::Str& out, const char* propName, const char* val) {
+    if (!val) return;
     const char* s = GetMatchingString(propToName, propName);
     ReportIf(!s);
     const char* trans = trans::GetTranslation(s);
     AppendProp(out, trans, val);
 }
 
-static void AppendPropTranslated(str::Str& out, DocController* ctrl, const char* propName) {
-    TempStr val = ctrl->GetPropertyTemp(propName);
-    AppendPropTranslated(out, propName, val);
-}
-
-static void AppendPdfFileStructure(str::Str& out, DocController* ctrl) {
-    TempStr fstruct = ctrl->GetPropertyTemp(kPropPdfFileStructure);
+static void AppendPdfFileStructure(str::Str& out, const char* fstruct, const char* filePath) {
     if (str::IsEmpty(fstruct)) {
-        bool isPDF = str::EndsWithI(ctrl->GetFilePath(), ".pdf");
+        bool isPDF = str::EndsWithI(filePath, ".pdf");
         if (isPDF) {
             AppendProp(out, str::JoinTemp(_TRA("Fast Web View"), ":"), _TRA("No"));
         }
@@ -336,6 +331,35 @@ static void AppendPdfFileStructure(str::Str& out, DocController* ctrl) {
     AppendProp(out, _TRA("PDF Optimizations:"), val);
 }
 
+static void GetAllProps(DocController* ctrl, Props& propsOut) {
+    DisplayModel* dm = ctrl->AsFixed();
+    if (dm) {
+        EngineBase* engine = dm->GetEngine();
+        engine->GetProperties(propsOut);
+    } else {
+        for (int i = 0; gAllProps[i]; i++) {
+            TempStr val = ctrl->GetPropertyTemp(gAllProps[i]);
+            propsOut.Append(gAllProps[i]);
+            propsOut.Append(val);
+        }
+    }
+}
+
+void AppendDateProp(str::Str& out, const char* key, const char* val, bool isPdfDate) {
+    SYSTEMTIME date;
+    int timeZone = 0;
+    bool ok = false;
+    if (!val) return;
+    if (isPdfDate) {
+        ok = PdfDateParseA(val, &date, &timeZone);
+    } else {
+        ok = IsoDateParse(val, &date, &timeZone);
+    }
+    if (!ok) return;
+    TempStr dateStr = FormatSystemTimeTemp(date, timeZone);
+    AppendProp(out, key, dateStr);
+}
+
 static void GetPropsText(DocController* ctrl, str::Str& out) {
     ReportIf(!ctrl);
 
@@ -361,41 +385,25 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
         AppendProp(out, _TRA("File Size:"), strTemp);
     }
 
-    AppendPropTranslated(out, ctrl, kPropTitle);
-    AppendPropTranslated(out, ctrl, kPropSubject);
-    AppendPropTranslated(out, ctrl, kPropAuthor);
-    AppendPropTranslated(out, ctrl, kPropCopyright);
+    Props props;
+    GetAllProps(ctrl, props);
 
-    TempStr val = ctrl->GetPropertyTemp(kPropCreationDate);
-    SYSTEMTIME date;
-    int timeZone = 0;
-    bool ok = false;
-    if (val && dm && kindEngineMupdf == dm->engineType) {
-        ok = PdfDateParseA(val, &date, &timeZone);
-    } else {
-        ok = IsoDateParse(val, &date, &timeZone);
-    }
-    if (ok) {
-        strTemp = FormatSystemTimeTemp(date, timeZone);
-        AppendProp(out, _TRA("Created:"), strTemp);
-    }
+    AppendPropTranslated(out, kPropTitle, GetPropValueTemp(props, kPropTitle));
+    AppendPropTranslated(out, kPropSubject, GetPropValueTemp(props, kPropSubject));
+    AppendPropTranslated(out, kPropAuthor, GetPropValueTemp(props, kPropAuthor));
+    AppendPropTranslated(out, kPropCopyright, GetPropValueTemp(props, kPropCopyright));
 
-    val = ctrl->GetPropertyTemp(kPropModificationDate);
-    if (val && dm && kindEngineMupdf == dm->engineType) {
-        ok = PdfDateParseA(val, &date, &timeZone);
-    } else {
-        ok = IsoDateParse(val, &date, &timeZone);
-    }
-    if (ok) {
-        strTemp = FormatSystemTimeTemp(date, timeZone);
-        AppendProp(out, _TRA("Modified:"), strTemp);
-    }
+    bool isPdfDate = dm && kindEngineMupdf == dm->engineType;
+    char* val = GetPropValueTemp(props, kPropCreationDate);
+    AppendDateProp(out, _TRA("Created:"), val, isPdfDate);
+    val = GetPropValueTemp(props, kPropModificationDate);
+    AppendDateProp(out, _TRA("Modified:"), val, isPdfDate);
 
-    AppendPropTranslated(out, ctrl, kPropCreatorApp);
-    AppendPropTranslated(out, ctrl, kPropPdfProducer);
-    AppendPropTranslated(out, ctrl, kPropPdfVersion);
+    AppendPropTranslated(out, kPropCreatorApp, GetPropValueTemp(props, kPropCreatorApp));
+    AppendPropTranslated(out, kPropPdfProducer, GetPropValueTemp(props, kPropPdfProducer));
+    AppendPropTranslated(out, kPropPdfVersion, GetPropValueTemp(props, kPropPdfVersion));
 
-    AppendPdfFileStructure(out, ctrl);
+    AppendPdfFileStructure(out, GetPropValueTemp(props, kPropPdfFileStructure), ctrl->GetFilePath());
 
     strTemp = str::FormatTemp("%d", ctrl->PageCount());
     AppendProp(out, _TRA("Number of Pages:"), strTemp);
