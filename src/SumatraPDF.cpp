@@ -1733,7 +1733,17 @@ static MainWindow* CreateMainWindow() {
         touch::SetGestureConfig(win->hwndCanvas, 0, 1, &gc, sizeof(GESTURECONFIG));
     }
 
-    SetTabsInTitlebar(win, gGlobalPrefs->useTabs);
+    // Set tabsInTitlebar state without SWP_FRAMECHANGED; the frame change
+    // is deferred to ShowMainWindow so the shell sees a normal frame during
+    // the first ShowWindow and creates the taskbar button.
+    {
+        bool inTitleBar = gGlobalPrefs->useTabs;
+        win->tabsInTitlebar = inTitleBar;
+        win->tabsCtrl->inTitleBar = inTitleBar;
+        if (inTitleBar) {
+            RelayoutCaption(win);
+        }
+    }
 
     // now show the menu bar in the appropriate style
     if (IsMenubarVisible() && !NeedsWindowEmbeddingHacks()) {
@@ -1774,6 +1784,15 @@ void ShowMainWindow(MainWindow* win, int windowState) {
     } else {
         ShowWindow(win->hwndFrame, SW_SHOW);
     }
+
+    // Fire the deferred SWP_FRAMECHANGED for custom caption (tabsInTitlebar).
+    // Must happen after ShowWindow so the shell sees a visible window and
+    // creates the taskbar button before we remove the standard frame.
+    if (win->tabsInTitlebar) {
+        uint flags = SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE;
+        SetWindowPos(win->hwndFrame, nullptr, 0, 0, 0, 0, flags);
+    }
+
     // Hidden startup windows can miss the final titlebar/menu-bar geometry
     // until they become visible. Force one relayout before the first paint.
     RelayoutFrame(win);
