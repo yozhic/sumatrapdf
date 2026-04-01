@@ -1955,7 +1955,11 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdToggleScrollbars:
         case CmdSaveAnnotations:
         case CmdSaveAnnotationsNewFile:
-        case CmdFavoriteAdd:
+        case CmdFavoriteAdd: {
+            HwndSendCommand(win->hwndFrame, cmdId);
+            break;
+        }
+
         case CmdSaveImage:
         case CmdCropImage:
         case CmdResizeImage: {
