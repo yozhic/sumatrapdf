@@ -34,6 +34,10 @@ static void OnPaintAbout(MainWindow* win) {
     auto t = TimeGet();
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint(win->hwndCanvas, &ps);
+    if (!win->buffer) {
+        EndPaint(win->hwndCanvas, &ps);
+        return;
+    }
     HDC bufDC = win->buffer->GetDC();
     GlobalPrefs* prefs = gGlobalPrefs;
     bool hasPerms = HasPermission(Perm::SavePreferences | Perm::DiskAccess);
