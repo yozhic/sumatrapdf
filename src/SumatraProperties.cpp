@@ -284,6 +284,26 @@ static const char* propToName[] = {
     kPropPdfProducer, _TRN("PDF Producer:"),
     kPropPdfVersion, _TRN("PDF Version:"),
     kPropFiles, _TRN("Files:"),
+    kPropKeywords, _TRN("Keywords:"),
+    kPropEncryption, _TRN("Encryption:"),
+    kPropImageSize, _TRN("Image Size:"),
+    kPropDpi, _TRN("DPI:"),
+    kPropComment, _TRN("Comment:"),
+    kPropCameraMake, _TRN("Camera Make:"),
+    kPropCameraModel, _TRN("Camera Model:"),
+    kPropDateOriginal, _TRN("Date Original:"),
+    kPropExposureTime, _TRN("Exposure Time:"),
+    kPropFNumber, _TRN("F-Number:"),
+    kPropIsoSpeed, _TRN("ISO Speed:"),
+    kPropFocalLength, _TRN("Focal Length:"),
+    kPropFocalLength35mm, _TRN("Focal Length (35mm):"),
+    kPropFlash, _TRN("Flash:"),
+    kPropOrientation, _TRN("Orientation:"),
+    kPropExposureProgram, _TRN("Exposure Program:"),
+    kPropMeteringMode, _TRN("Metering Mode:"),
+    kPropWhiteBalance, _TRN("White Balance:"),
+    kPropExposureBias, _TRN("Exposure Bias:"),
+    kPropBitsPerSample, _TRN("Bits Per Sample:"),
     nullptr,
 };
 // clang-format on
@@ -416,6 +436,46 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
         AppendProp(out, _TRA("Page Size:"), strTemp);
     }
     AppendPropTranslated(out, kPropFiles, GetPropValueTemp(props, kPropFiles));
+
+    // clang-format off
+    // properties already shown above, skip when appending remaining
+    static const char* handledProps[] = {
+        kPropTitle, kPropSubject, kPropAuthor, kPropCopyright,
+        kPropCreationDate, kPropModificationDate,
+        kPropCreatorApp, kPropPdfProducer, kPropPdfVersion,
+        kPropPdfFileStructure, kPropFiles,
+        kPropUnsupportedFeatures, kPropFontList,
+        nullptr,
+    };
+    // clang-format on
+
+    // append any remaining properties not already shown
+    int nProps = PropsCount(props);
+    for (int i = 0; i < nProps; i++) {
+        char* propName = props.At(i * 2);
+        char* propVal = props.At(i * 2 + 1);
+        if (str::IsEmpty(propVal)) {
+            continue;
+        }
+        bool handled = false;
+        for (int j = 0; handledProps[j]; j++) {
+            if (str::Eq(propName, handledProps[j])) {
+                handled = true;
+                break;
+            }
+        }
+        if (handled) {
+            continue;
+        }
+        const char* s = GetMatchingString(propToName, propName);
+        if (s) {
+            const char* trans = trans::GetTranslation(s);
+            AppendProp(out, trans, propVal);
+        } else {
+            TempStr label = str::FormatTemp("%s:", propName);
+            AppendProp(out, label, propVal);
+        }
+    }
 }
 
 static void SetEditText(HWND hwndEdit, const char* text) {
