@@ -40,9 +40,8 @@ struct OverlayScrollbar {
     int nPos = 0;
     int nTrackPos = 0;
 
-    // widths in pixels (before DPI scaling)
-    int thinWidth = 4;
-    int thickWidth = 14;
+    int thinWidth = 0;
+    int thickWidth = 0;
 
     // auto-hide timing (milliseconds)
     int showAfterScrollMs = 5000;    // how long to show thin bar after scroll info update

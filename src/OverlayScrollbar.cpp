@@ -65,8 +65,7 @@ static bool IsActive(OverlayScrollbar* sb) {
 }
 
 static int ScaledWidth(OverlayScrollbar* sb, bool thick) {
-    int w = thick ? sb->thickWidth : sb->thinWidth;
-    return DpiScale(sb->hwndOwner, w);
+    return thick ? sb->thickWidth : sb->thinWidth;
 }
 
 static bool IsVert(OverlayScrollbar* sb) {
@@ -778,6 +777,12 @@ OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type 
     sb->hwndOwner = hwndOwner;
     sb->type = type;
     sb->mode = mode;
+    sb->thinWidth = DpiScale(hwndOwner, 4);
+    sb->thickWidth = DpiScale(hwndOwner, 16);
+    int sysWidth = IsVert(sb) ? GetSystemMetrics(SM_CXVSCROLL) : GetSystemMetrics(SM_CYHSCROLL);
+    if (sysWidth > 0) {
+        sb->thickWidth = sysWidth;
+    }
     DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE;
     DWORD style = WS_POPUP;
 
