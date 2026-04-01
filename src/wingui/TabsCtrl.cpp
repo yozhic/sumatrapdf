@@ -25,6 +25,10 @@ MainWindow* FindMainWindowByHwnd(HWND hwnd);
 
 Kind kindTabs = "tabs";
 
+// non-selected tabs narrower than this hide their close button so that
+// clicks drag/select instead of accidentally closing the tab
+constexpr int kMinTabWidthForClose = 64;
+
 using Gdiplus::Bitmap;
 using Gdiplus::Color;
 using Gdiplus::CompositingQualityHighQuality;
@@ -146,7 +150,9 @@ TabsCtrl::MouseState TabsCtrl::TabStateFromMousePosition(const Point& p) {
             continue;
         }
         res.tabIdx = i;
-        res.overClose = ti->rCloseHit.Contains(pt);
+        bool isSelected = (i == GetSelected());
+        bool closeActive = isSelected || r.dx >= kMinTabWidthForClose;
+        res.overClose = closeActive && ti->rCloseHit.Contains(pt);
         res.tabInfo = ti;
         Rect rightHalf = r;
         int halfDx = r.dx / 2;
@@ -241,7 +247,8 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             gfx.FillRectangle(&dbgBr, ToGdipRect(ti->rCloseHit));
         }
 
-        if (ti->canClose && (isUnderMouse || isSelected)) {
+        bool closeVisible = ti->canClose && (isSelected || (isUnderMouse && ti->r.dx >= kMinTabWidthForClose));
+        if (closeVisible) {
             DrawCloseButtonArgs closeArgs;
             closeArgs.hdc = hdc;
             closeArgs.r = ti->rClose;
