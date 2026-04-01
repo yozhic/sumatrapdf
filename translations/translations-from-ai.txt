@@ -41494,3 +41494,147 @@ vn:Chế Độ Đo Sáng:
 vn:Hướng:
 :White Balance:
 vn:Cân Bằng Trắng:
+:Toggle Tabs MRU Order
+am:ትሮችን MRU ቅደም ተራ ቀያይር
+:Toggle Tabs MRU Order
+ar:تبديل ترتيب علامات التبويب حسب الأحدث استخدامًا
+:Toggle Tabs MRU Order
+br:Kemmañ urzh MRU an ivinelloù
+:Toggle Tabs MRU Order
+cn:切换标签页 MRU 顺序
+:Toggle Tabs MRU Order
+co:Attivà l'ordine MRU di e schede
+:Toggle Tabs MRU Order
+de:Tab-MRU-Reihenfolge umschalten
+:Toggle Tabs MRU Order
+el:Εναλλαγή σειράς καρτελών MRU
+:Toggle Tabs MRU Order
+hi:टैब MRU क्रम टॉगल करें
+:Toggle Tabs MRU Order
+it:Attiva/disattiva ordine MRU schede
+:Toggle Tabs MRU Order
+ja:タブのMRU順序を切り替え
+:Toggle Tabs MRU Order
+ml:ടാബുകളുടെ MRU ക്രമം മാറ്റുക
+:Toggle Tabs MRU Order
+nl:Schakel volgorde van recentelijk gebruikte tabbladen om
+:Toggle Tabs MRU Order
+pl:Przełącz kolejność kart MRU
+:Toggle Tabs MRU Order
+ru:Переключить порядок вкладок MRU
+:Toggle Tabs MRU Order
+sk:Prepnúť poradie kariet MRU
+:Toggle Tabs MRU Order
+sr-rs:Промени редослед картица према последњем коришћењу
+:Toggle Tabs MRU Order
+tw:切換分頁 MRU 順序
+:Toggle Tabs MRU Order
+az:Tabların MRU Sırasını Dəyiş
+:Toggle Tabs MRU Order
+by:Пераключыць парадак укладак MRU
+:Toggle Tabs MRU Order
+ca:Commuta l'ordre MRU de les pestanyes
+:Toggle Tabs MRU Order
+cy:Toglo Trefn MRU Tabiau
+:Toggle Tabs MRU Order
+cz:Přepnout pořadí karet MRU
+:Toggle Tabs MRU Order
+es:Alternar orden MRU de pestañas
+:Toggle Tabs MRU Order
+fa:تغییر ترتیب تب‌ها بر اساس آخرین استفاده
+:Toggle Tabs MRU Order
+fi:Vaihda välilehtien MRU-järjestys
+:Toggle Tabs MRU Order
+fo:Skift fanablað MRU raðfesting
+:Toggle Tabs MRU Order
+fr:Basculer l'ordre MRU des onglets
+:Toggle Tabs MRU Order
+ga:Scoránaigh Ord MRU na gCluaisíní
+:Toggle Tabs MRU Order
+gl:Alternar orde MRU das pestanas
+:Toggle Tabs MRU Order
+he:החלף סדר כרטיסיות לפי שימוש אחרון
+:Toggle Tabs MRU Order
+hu:Lapok MRU sorrendjének váltása
+:Toggle Tabs MRU Order
+id:Alihkan Urutan MRU Tab
+:Toggle Tabs MRU Order
+kr:탭 MRU 순서 전환
+:Toggle Tabs MRU Order
+lv:Pārslēgt ciļņu MRU secību
+:Toggle Tabs MRU Order
+my:တက်ဗ်များ MRU အစဉ်အလိုက် ပြောင်းလဲရန်
+:Toggle Tabs MRU Order
+pt:Alternar Ordem MRU das Abas
+:Toggle Tabs MRU Order
+ro:Comutare ordine file MRU
+:Toggle Tabs MRU Order
+sat:ᱴᱮᱵᱽ MRU ᱚᱨᱰᱚᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
+:Toggle Tabs MRU Order
+sl:Preklopi vrstni red zavihkov MRU
+:Toggle Tabs MRU Order
+sv:Växla flikar MRU-ordning
+:Toggle Tabs MRU Order
+ta:தாவல்கள் MRU வரிசையை நிலைமாற்று
+:Toggle Tabs MRU Order
+tr:Sekme MRU Sırasını Değiştir
+:Toggle Tabs MRU Order
+uz:Tablarning MRU tartibini almashtirish
+:Toggle Tabs MRU Order
+af:Wissel Oortjies MRU Volgorde
+:Toggle Tabs MRU Order
+bg:Превключване на реда на табовете MRU
+:Toggle Tabs MRU Order
+bn:ট্যাব MRU ক্রম টগল করুন
+:Toggle Tabs MRU Order
+bs:Prebaci redoslijed kartica MRU
+:Toggle Tabs MRU Order
+ca-xv:Commuta l'ordre MRU de les pestanyes
+:Toggle Tabs MRU Order
+dk:Skift faner MRU-rækkefølge
+:Toggle Tabs MRU Order
+et:Lülita vahekaartide MRU järjekord
+:Toggle Tabs MRU Order
+eu:Txandakatu fitxen MRU ordena
+:Toggle Tabs MRU Order
+fy-nl:Wikselje tabblêden MRU-folchoarder
+:Toggle Tabs MRU Order
+hr:Uključi/isključi MRU redoslijed kartica
+:Toggle Tabs MRU Order
+jv:Ngalih Urutan Tab MRU
+:Toggle Tabs MRU Order
+ka:ჩანართების MRU მიმდევრობის გადართვა
+:Toggle Tabs MRU Order
+ku:Rêza MRU ya Hilpekan Veguherîne
+:Toggle Tabs MRU Order
+kw:Keschanj Urvudh MRU Tabys
+:Toggle Tabs MRU Order
+lt:Perjungti kortelių MRU tvarką
+:Toggle Tabs MRU Order
+mk:Вклучи/исклучи MRU редослед на јазичињата
+:Toggle Tabs MRU Order
+mm:တက်ဘ်များ MRU အစီအစဉ် ပြောင်းလဲရန်
+:Toggle Tabs MRU Order
+ne:ट्याबहरू MRU क्रम टगल गर्नुहोस्
+:Toggle Tabs MRU Order
+nn:Veksle fane-MRU-rekkjefølgje
+:Toggle Tabs MRU Order
+no:Bytt faner MRU-rekkefølge
+:Toggle Tabs MRU Order
+pa:ਟੈਬ MRU ਕ੍ਰਮ ਬਦਲੋ
+:Toggle Tabs MRU Order
+si:ටැබ MRU අනුපිළිවෙල ටොගල් කරන්න
+:Toggle Tabs MRU Order
+sn:Chinja Kurongeka Kwemadhimikisi MRU
+:Toggle Tabs MRU Order
+sp-rs:Промени редослед картица по последњем коришћењу
+:Toggle Tabs MRU Order
+sq:Ndrysho Rendin MRU të Skedave
+:Toggle Tabs MRU Order
+th:สลับลำดับแท็บ MRU
+:Toggle Tabs MRU Order
+tl:I-toggle ang Pagkakasunud-sunod ng Tabs ayon sa MRU
+:Toggle Tabs MRU Order
+uk:Перемкнути порядок вкладок MRU
+:Toggle Tabs MRU Order
+vn:Chuyển đổi thứ tự tab MRU

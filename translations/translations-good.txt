@@ -6869,7 +6869,7 @@ ar:البتات لكل عينة:
 az:Nümunə Başına Bitlər:
 bg:Битове на извадка:
 bn:প্রতি নমুনায় বিট:
-br:Bitoù dre standilhon:
+br:Bits por Amostra:
 bs:Bitova po uzorku:
 by:Бітаў на выбарку:
 ca:Bits per mostra:
@@ -6914,13 +6914,13 @@ nl:Bits per sample:
 nn:Bitar per prøve:
 no:Bits per prøve:
 pa:ਬਿੱਟ ਪ੍ਰਤੀ ਸੈਂਪਲ:
-pl:Bitów na próbkę:
+pl:Bity na próbkę:
 pt:Bits Por Amostra:
 ro:Biți per eșantion:
 ru:Бит на образец:
 sat:ᱱᱚᱢᱩᱱᱟ ᱞᱮᱠᱟᱛᱮ ᱵᱤᱴ:
 si:නියැදියකට බිට්:
-sk:Bitov na vzorku:
+sk:Bitov na jednu vzorku:
 sl:Bitov na vzorec:
 sn:Mabhiti Pachikamu:
 sp-rs:Bitova po uzorku:
@@ -7599,7 +7599,7 @@ ar:صانع الكاميرا:
 az:Kamera İstehsalçısı:
 bg:Производител на камера:
 bn:ক্যামেরা নির্মাতা:
-br:Groaer ar c'hamera:
+br:Fabricante da Câmera:
 bs:Proizvođač kamere:
 by:Вытворца камеры:
 ca:Fabricant de la càmera:
@@ -7644,7 +7644,7 @@ nl:Cameramerk:
 nn:Kameraprodusent:
 no:Kameraprodusent:
 pa:ਕੈਮਰਾ ਬਣਾਉਣ ਵਾਲਾ:
-pl:Producent aparatu:
+pl:Marka aparatu:
 pt:Fabricante da Câmara:
 ro:Producător cameră:
 ru:Производитель камеры:
@@ -7672,7 +7672,7 @@ ar:طراز الكاميرا:
 az:Kamera Modeli:
 bg:Модел на камера:
 bn:ক্যামেরা মডেল:
-br:Patrom ar c'hamera:
+br:Modelo da Câmera:
 bs:Model kamere:
 by:Мадэль камеры:
 ca:Model de càmera:
@@ -9570,7 +9570,7 @@ ar:تعليق:
 az:Şərh:
 bg:Коментар:
 bn:মন্তব্য:
-br:Evezhiadenn:
+br:Comentário:
 bs:Komentar:
 by:Каментарый:
 ca:Comentari:
@@ -13877,7 +13877,7 @@ ar:التاريخ الأصلي:
 az:Orijinal Tarix:
 bg:Оригинална дата:
 bn:মূল তারিখ:
-br:Deiziad orin:
+br:Data Original:
 bs:Originalni datum:
 by:Зыходная дата:
 ca:Data original:
@@ -13928,7 +13928,7 @@ ro:Data originală:
 ru:Дата съемки:
 sat:ᱟᱥᱚᱞ ᱢᱟᱹᱦᱤᱛ:
 si:මුල් දිනය:
-sk:Dátum originálu:
+sk:Dátum vytvorenia:
 sl:Izvirni datum:
 sn:Zuva Rekutanga:
 sp-rs:Originalni datum:
@@ -15921,7 +15921,7 @@ ar:التشفير:
 az:Şifrələmə:
 bg:Шифроване:
 bn:এনক্রিপশন:
-br:Enrinegañ:
+br:Criptografia:
 bs:Enkripcija:
 by:Шыфраванне:
 ca:Encriptació:
@@ -16724,7 +16724,7 @@ ar:انحياز التعريض:
 az:Ekspozisiya Tənziməsi:
 bg:Компенсация на експозицията:
 bn:এক্সপোজার বায়াস:
-br:Dilerc'hiadur an disklêriadur:
+br:Tendência da Exposição:
 bs:Kompenzacija ekspozicije:
 by:Зрух экспазіцыі:
 ca:Compensació d'exposició:
@@ -16769,13 +16769,13 @@ nl:Belichtingscorrectie:
 nn:Eksponeringskorrigering:
 no:Eksponeringskompensasjon:
 pa:ਐਕਸਪੋਜ਼ਰ ਬਾਇਸ:
-pl:Kompensacja ekspozycji:
+pl:Błąd ekspozycji:
 pt:Compensação de Exposição:
 ro:Compensare expunere:
 ru:Компенсация экспозиции:
 sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱵᱟᱭᱟᱥ:
 si:නිරාවරණ පක්ෂග්‍රාහිත්වය:
-sk:Korekcia expozície:
+sk:Odchýlka expozície:
 sl:Kompenzacija osvetlitve:
 sn:Rusaruro Rwekuratidzira:
 sp-rs:Kompenzacija ekspozicije:
@@ -16797,7 +16797,7 @@ ar:برنامج التعريض:
 az:Ekspozisiya Proqramı:
 bg:Програма на експозиция:
 bn:এক্সপোজার প্রোগ্রাম:
-br:Programa disklêriadur:
+br:Programa de Exposição:
 bs:Program ekspozicije:
 by:Праграма экспазіцыі:
 ca:Programa d'exposició:
@@ -16848,7 +16848,7 @@ ro:Program expunere:
 ru:Программа экспозиции:
 sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱯᱨᱳᱜᱨᱟᱢ:
 si:නිරාවරණ වැඩසටහන:
-sk:Program expozície:
+sk:Expozičný program:
 sl:Program osvetlitve:
 sn:Chirongwa Chekuratidzira:
 sp-rs:Program ekspozicije:
@@ -16870,7 +16870,7 @@ ar:وقت التعريض:
 az:Ekspozisiya Müddəti:
 bg:Време на експозиция:
 bn:এক্সপোজার সময়:
-br:Amzer disklêriadur:
+br:Tempo de Exposição:
 bs:Vrijeme ekspozicije:
 by:Час экспазіцыі:
 ca:Temps d'exposició:
@@ -16915,7 +16915,7 @@ nl:Belichtingstijd:
 nn:Eksponeringstid:
 no:Eksponeringstid:
 pa:ਐਕਸਪੋਜ਼ਰ ਸਮਾਂ:
-pl:Czas naświetlania:
+pl:Czas ekspozycji:
 pt:Tempo de Exposição:
 ro:Timp expunere:
 ru:Время экспозиции:
@@ -17162,7 +17162,7 @@ ar:رقم الفتحة:
 az:F-Nömrəsi:
 bg:F-число:
 bn:এফ-নম্বর:
-br:Niver F:
+br:Número-F:
 bs:F-broj:
 by:Дыяфрагма:
 ca:Obertura:
@@ -17207,7 +17207,7 @@ nl:F-getal:
 nn:F-tal:
 no:Blenderåpning:
 pa:F-ਨੰਬਰ:
-pl:Przysłona:
+pl:Liczba przysłony:
 pt:Número F:
 ro:Număr F:
 ru:Диафрагма:
@@ -18235,7 +18235,7 @@ ro:Calea fișierului nu este disponibilă
 ru:Путь к файлу недоступен
 sat:ᱨᱮᱫ ᱦᱚᱨ ᱵᱟᱹᱱᱩᱜ-ᱟ
 si:ගොනු පථය ලබා ගත නොහැක
-sk:Cesta k súboru nie je dostupná
+sk:Cesta k súboru je nedostupná
 sl:Pot do datoteke ni na voljo
 sn:Nzira yefaira haiwanikwe
 sp-rs:Putanja fajla nije dostupna
@@ -18330,7 +18330,7 @@ ar:الملفات:
 az:Fayllar:
 bg:Файлове:
 bn:ফাইল:
-br:Restroù:
+br:Arquivos:
 bs:Datoteke:
 by:Файлы:
 ca:Fitxers:
@@ -19644,7 +19644,7 @@ ar:الفلاش:
 az:Flaş:
 bg:Светкавица:
 bn:ফ্ল্যাশ:
-br:Gwalarn:
+br:Flash:
 bs:Bljeskalica:
 by:Успышка:
 ca:Flaix:
@@ -19717,7 +19717,7 @@ ar:البعد البؤري (35 ملم):
 az:Fokus Məsafəsi (35mm):
 bg:Фокусно разстояние (35mm):
 bn:ফোকাল দৈর্ঘ্য (৩৫মিমি):
-br:Hed ar fokalenn (35mm):
+br:Tamanho do Foco (35 mm):
 bs:Žižna daljina (35mm):
 by:Фокусная адлегласць (35мм):
 ca:Longitud focal (35mm):
@@ -19762,13 +19762,13 @@ nl:Brandpuntsafstand (35mm):
 nn:Brennvidde (35mm):
 no:Brennvidde (35mm):
 pa:ਫੋਕਲ ਲੰਬਾਈ (35mm):
-pl:Ogniskowa (35mm):
+pl:Ogniskowa (35 mm):
 pt:Distância Focal (35mm):
 ro:Distanță focală (35mm):
 ru:Фокусное расстояние (35мм):
 sat:ᱯᱷᱳᱠᱟᱞ ᱡᱤᱞᱤᱧ (35mm):
 si:නාභීය දිග (35mm):
-sk:Ohnisková vzdialenosť (35mm):
+sk:Ohnisková vzdialenosť (35 mm):
 sl:Goriščna razdalja (35mm):
 sn:Kureba Kwekutarisa (35mm):
 sp-rs:Žižna daljina (35mm):
@@ -19790,7 +19790,7 @@ ar:البعد البؤري:
 az:Fokus Məsafəsi:
 bg:Фокусно разстояние:
 bn:ফোকাল দৈর্ঘ্য:
-br:Hed ar fokalenn:
+br:Tamanho do Foco:
 bs:Žižna daljina:
 by:Фокусная адлегласць:
 ca:Longitud focal:
@@ -21177,7 +21177,7 @@ ar:سرعة ISO:
 az:ISO Sürəti:
 bg:ISO светлочувствителност:
 bn:আইএসও গতি:
-br:Tizh ISO:
+br:Velocidade da ISO:
 bs:ISO brzina:
 by:Хуткасць ISO:
 ca:Sensibilitat ISO:
@@ -21228,7 +21228,7 @@ ro:Sensibilitate ISO:
 ru:Светочувствительность ISO:
 sat:ISO ᱞᱚᱜᱚᱱ:
 si:ISO වේගය:
-sk:Citlivosť ISO:
+sk:Rýchlosť ISO:
 sl:ISO občutljivost:
 sn:Kumhanya ISO:
 sp-rs:ISO osetljivost:
@@ -21323,7 +21323,7 @@ ar:حجم الصورة:
 az:Şəkil Ölçüsü:
 bg:Размер на изображение:
 bn:ছবির আকার:
-br:Ment ar skeudenn:
+br:Tamanho da Imagem:
 bs:Veličina slike:
 by:Памер выявы:
 ca:Mida de la imatge:
@@ -21374,7 +21374,7 @@ ro:Dimensiune imagine:
 ru:Размер изображения:
 sat:ᱪᱤᱛᱟᱹᱨ ᱢᱟᱯ:
 si:රූප ප්‍රමාණය:
-sk:Veľkosť obrázka:
+sk:Rozmery obrázka:
 sl:Velikost slike:
 sn:Saizi Yemufananidzo:
 sp-rs:Veličina slike:
@@ -22418,7 +22418,7 @@ ar:الكلمات المفتاحية:
 az:Açar Sözlər:
 bg:Ключови думи:
 bn:কীওয়ার্ড:
-br:Gerioù-alc'hwez:
+br:Palavras-Chave:
 bs:Ključne riječi:
 by:Ключавыя словы:
 ca:Paraules clau:
@@ -23513,7 +23513,7 @@ ar:وضع القياس:
 az:Ölçmə Rejimi:
 bg:Режим на измерване:
 bn:মিটারিং মোড:
-br:Doare ar muzuliadur:
+br:Modo de Medição:
 bs:Način mjerenja:
 by:Рэжым вымярэння:
 ca:Mode de mesura:
@@ -27528,7 +27528,7 @@ ar:الاتجاه:
 az:Oriyentasiya:
 bg:Ориентация:
 bn:দিকবিন্যাস:
-br:Reteradur:
+br:Orientação:
 bs:Orijentacija:
 by:Арыентацыя:
 ca:Orientació:
@@ -40515,6 +40515,79 @@ tw:切換目錄
 uk:Перемкнути зміст
 uz:Mundarijani yoqish/o'chirish
 vn:Bật/tắt mục lục
+:Toggle Tabs MRU Order
+af:Wissel Oortjies MRU Volgorde
+am:ትሮችን MRU ቅደም ተራ ቀያይር
+ar:تبديل ترتيب علامات التبويب حسب الأحدث استخدامًا
+az:Tabların MRU Sırasını Dəyiş
+bg:Превключване на реда на табовете MRU
+bn:ট্যাব MRU ক্রম টগল করুন
+br:Kemmañ urzh MRU an ivinelloù
+bs:Prebaci redoslijed kartica MRU
+by:Пераключыць парадак укладак MRU
+ca:Commuta l'ordre MRU de les pestanyes
+ca-xv:Commuta l'ordre MRU de les pestanyes
+cn:切换标签页 MRU 顺序
+co:Attivà l'ordine MRU di e schede
+cy:Toglo Trefn MRU Tabiau
+cz:Přepnout pořadí karet MRU
+de:Tab-MRU-Reihenfolge umschalten
+dk:Skift faner MRU-rækkefølge
+el:Εναλλαγή σειράς καρτελών MRU
+es:Alternar orden MRU de pestañas
+et:Lülita vahekaartide MRU järjekord
+eu:Txandakatu fitxen MRU ordena
+fa:تغییر ترتیب تب‌ها بر اساس آخرین استفاده
+fi:Vaihda välilehtien MRU-järjestys
+fo:Skift fanablað MRU raðfesting
+fr:Basculer l'ordre MRU des onglets
+fy-nl:Wikselje tabblêden MRU-folchoarder
+ga:Scoránaigh Ord MRU na gCluaisíní
+gl:Alternar orde MRU das pestanas
+he:החלף סדר כרטיסיות לפי שימוש אחרון
+hi:टैब MRU क्रम टॉगल करें
+hr:Uključi/isključi MRU redoslijed kartica
+hu:Lapok MRU sorrendjének váltása
+id:Alihkan Urutan MRU Tab
+it:Attiva/disattiva ordine MRU schede
+ja:タブのMRU順序を切り替え
+jv:Ngalih Urutan Tab MRU
+ka:ჩანართების MRU მიმდევრობის გადართვა
+kr:탭 MRU 순서 전환
+ku:Rêza MRU ya Hilpekan Veguherîne
+kw:Keschanj Urvudh MRU Tabys
+lt:Perjungti kortelių MRU tvarką
+lv:Pārslēgt ciļņu MRU secību
+mk:Вклучи/исклучи MRU редослед на јазичињата
+ml:ടാബുകളുടെ MRU ക്രമം മാറ്റുക
+mm:တက်ဘ်များ MRU အစီအစဉ် ပြောင်းလဲရန်
+my:တက်ဗ်များ MRU အစဉ်အလိုက် ပြောင်းလဲရန်
+ne:ट्याबहरू MRU क्रम टगल गर्नुहोस्
+nl:Schakel volgorde van recentelijk gebruikte tabbladen om
+nn:Veksle fane-MRU-rekkjefølgje
+no:Bytt faner MRU-rekkefølge
+pa:ਟੈਬ MRU ਕ੍ਰਮ ਬਦਲੋ
+pl:Przełącz kolejność kart MRU
+pt:Alternar Ordem MRU das Abas
+ro:Comutare ordine file MRU
+ru:Переключить порядок вкладок MRU
+sat:ᱴᱮᱵᱽ MRU ᱚᱨᱰᱚᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
+si:ටැබ MRU අනුපිළිවෙල ටොගල් කරන්න
+sk:Prepnúť poradie kariet MRU
+sl:Preklopi vrstni red zavihkov MRU
+sn:Chinja Kurongeka Kwemadhimikisi MRU
+sp-rs:Промени редослед картица по последњем коришћењу
+sq:Ndrysho Rendin MRU të Skedave
+sr-rs:Промени редослед картица према последњем коришћењу
+sv:Växla flikar MRU-ordning
+ta:தாவல்கள் MRU வரிசையை நிலைமாற்று
+th:สลับลำดับแท็บ MRU
+tl:I-toggle ang Pagkakasunud-sunod ng Tabs ayon sa MRU
+tr:Sekme MRU Sırasını Değiştir
+tw:切換分頁 MRU 順序
+uk:Перемкнути порядок вкладок MRU
+uz:Tablarning MRU tartibini almashtirish
+vn:Chuyển đổi thứ tự tab MRU
 :Toggle Toolbar
 af:Wissel Nutsbalk
 am:Գործիքագոտու միացում/անջատում
@@ -41982,7 +42055,7 @@ ar:توازن الأبيض:
 az:Ağ Balans:
 bg:Баланс на бялото:
 bn:হোয়াইট ব্যালেন্স:
-br:Kempouez ar gwenn:
+br:Equilíbrio dos Brancos:
 bs:Balans bijele:
 by:Баланс белага:
 ca:Balanç de blancs:

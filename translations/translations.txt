@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-03286e13f424533fb3f0cb8288c0117a05fdd5e5
+0fb86034622ab15925d530272b7cbb3254970d15
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -5400,6 +5400,9 @@ uk:Колір фону
 uz:Fon rangi:
 vn:Màu nền
 :Bits Per Sample:
+br:Bits por Amostra:
+pl:Bity na próbkę:
+sk:Bitov na jednu vzorku:
 :Book View
 am:Գրքի տեսքով
 ar:عرض الكتاب
@@ -5889,7 +5892,13 @@ uk:Документи CHM
 uz:CHM hujjatlari
 vn:Tập tin CHM
 :Camera Make:
+br:Fabricante da Câmera:
+pl:Marka aparatu:
+sk:Výrobca fotoaparátu:
 :Camera Model:
+br:Modelo da Câmera:
+pl:Model aparatu:
+sk:Model fotoaparátu:
 :Can't connect to the Internet (error %#x).
 am:Հնարավոր չէ կապակցել (սխալ %#x)։
 ar:لم يتم التمكن من الإتصال بالإنترنت (%#x خطأ).
@@ -7116,6 +7125,9 @@ uk:Палітра команд
 uz:Buyruqlar paneli
 vn:Lệnh
 :Comment:
+br:Comentário:
+pl:Komentarz:
+sk:Komentár:
 :Compatibility
 am:Համատեղելիությունը
 ar:التوافق
@@ -9315,6 +9327,9 @@ uk:Нетиповий масштаб...
 uz:Maxsus kattalashtirish...
 vn:Thiết Lập &Phóng...
 :DPI:
+br:DPI:
+pl:DPI:
+sk:DPI:
 :Dark
 am:Մուգ
 ar:مظلم
@@ -9451,6 +9466,9 @@ uk:Темніша
 uz:To‘qroq
 vn:Tối hơn
 :Date Original:
+br:Data Original:
+pl:Data oryginału:
+sk:Dátum vytvorenia:
 :Date:
 am:Ամսաթիվ՝
 ar:التاريخ:
@@ -10487,6 +10505,9 @@ sk:Vložiť…
 sr-rs:Угради...
 tw:内嵌…
 :Encryption:
+br:Criptografia:
+pl:Szyfrowanie:
+sk:Šifrovanie:
 :Enter password
 af:Tik Wagwoord In
 am:Գրեք գաղտնաբառը
@@ -10909,8 +10930,17 @@ uk:Розгорнути всі
 uz:Barchasini kengaytirish
 vn:Mở Rộng Tất Cả
 :Exposure Bias:
+br:Tendência da Exposição:
+pl:Błąd ekspozycji:
+sk:Odchýlka expozície:
 :Exposure Program:
+br:Programa de Exposição:
+pl:Program ekspozycji:
+sk:Expozičný program:
 :Exposure Time:
+br:Tempo de Exposição:
+pl:Czas ekspozycji:
+sk:Čas expozície:
 :F&avorites
 am:Ը&նտրյալներ
 ar:المفضلة
@@ -11081,6 +11111,9 @@ uk:Повноекранний
 uz:To‘liq ekran
 vn:Toàn Màn Hình
 :F-Number:
+br:Número-F:
+pl:Liczba przysłony:
+sk:Clonové číslo:
 :Facing
 af:Teenoor
 am:Երկու էջ
@@ -11900,6 +11933,7 @@ vn:Kích thước:
 :File path not available
 br:O caminho do arquivo não está disponível
 pl:Ścieżka do pliku niedostępna
+sk:Cesta k súboru je nedostupná
 :File:
 am:Ֆայլ՝
 ar:الملف:
@@ -11972,6 +12006,9 @@ uk:Файл:
 uz:Fayl:
 vn:Tập tin:
 :Files:
+br:Arquivos:
+pl:Pliki:
+sk:Súbory:
 :Fin&d...
 am:Գտն&ել...
 ar:ال&بحث...
@@ -12858,8 +12895,17 @@ uk:Вмістити на сторінку
 uz:Bitta betga moslash
 vn:Vừa một trang đơn
 :Flash:
+br:Flash:
+pl:Lampa błyskowa:
+sk:Blesk:
 :Focal Length (35mm):
+br:Tamanho do Foco (35 mm):
+pl:Ogniskowa (35 mm):
+sk:Ohnisková vzdialenosť (35 mm):
 :Focal Length:
+br:Tamanho do Foco:
+pl:Ogniskowa:
+sk:Ohnisková vzdialenosť:
 :Fonts:
 am:Տառատեսաներ.
 ar:الخطوط:
@@ -13589,6 +13635,9 @@ ru:Главная
 sk:Domov
 tw:首頁
 :ISO Speed:
+br:Velocidade da ISO:
+pl:Czułość ISO:
+sk:Rýchlosť ISO:
 :Icon:
 am:Պատկերակ.
 ar:الأيقونة:
@@ -13646,6 +13695,9 @@ uk:Значок:
 uz:Ikonka:
 vn:Biểu Tượng:
 :Image Size:
+br:Tamanho da Imagem:
+pl:Rozmiar obrazu:
+sk:Rozmery obrázka:
 :Image files (*.%s)
 am:Պատկերի ֆայլեր (*.%s)
 ar:ملفات الصور (*.%s)
@@ -14414,6 +14466,9 @@ uk:KB
 uz:KB
 vn:KB
 :Keywords:
+br:Palavras-Chave:
+pl:Słowa kluczowe:
+sk:Kľúčové slová:
 :Last Page
 am:Վերջին էջ
 br:Última Página
@@ -15112,6 +15167,9 @@ tr:Web Sitesinde Kullanım Klavuzu
 tw:線上說明
 uz:Veb-saytda qo‘llanma
 :Metering Mode:
+br:Modo de Medição:
+pl:Tryb pomiaru:
+sk:Režim merania:
 :Mobi documents
 am:XPS ֆայլեր
 ar:مستندات Mobi
@@ -17226,6 +17284,9 @@ ru:Параметры...
 sk:Možnosti…
 tw:選項…
 :Orientation:
+br:Orientação:
+pl:Orientacja:
+sk:Orientácia:
 :Overwrite
 br:Sobrescrever
 de:Überschreiben
@@ -24237,6 +24298,7 @@ nl:Inhoudsopgave Tonen/Verbergen
 pl:Przełącz spis treści
 sk:Prepnúť Obsah
 tw:切換目錄
+:Toggle Tabs MRU Order
 :Toggle Toolbar
 am:Գործիքագոտու միացում/անջատում
 br:Ativar/Desativar a Barra de Ferramentas
@@ -25047,6 +25109,9 @@ uk:Застереження
 uz:Diqqat
 vn:Cảnh báo
 :White Balance:
+br:Equilíbrio dos Brancos:
+pl:Balans bieli:
+sk:Vyváženie bielej:
 :XPS documents
 am:XPS ֆայլեր
 ar:مستندات XPS
