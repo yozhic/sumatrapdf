@@ -1656,7 +1656,8 @@ static MainWindow* CreateMainWindow() {
     int dx = windowPos.dx;
     int dy = windowPos.dy;
     HINSTANCE h = GetModuleHandle(nullptr);
-    HWND hwndFrame = CreateWindowExW(0, clsName, title, style, x, y, dx, dy, nullptr, nullptr, h, nullptr);
+    HWND hwndFrame =
+        CreateWindowExW(WS_EX_APPWINDOW, clsName, title, style, x, y, dx, dy, nullptr, nullptr, h, nullptr);
     if (!hwndFrame) {
         return nullptr;
     }

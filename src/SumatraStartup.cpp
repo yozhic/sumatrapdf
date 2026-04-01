@@ -936,6 +936,13 @@ void StartDeleteStaleFiles() {
     RunAsync(fn, "DeleteStaleFilesThread");
 }
 
+// static void FocusMainWindowOnStartup(MainWindow* win) {
+//     if (!win || !IsWindow(win->hwndFrame)) {
+//         return;
+//     }
+//     win->Focus();
+// }
+
 // non-admin process cannot send DDE messages to admin process
 // so when that happens we need to alert the user
 // TODO: maybe a better fix is to re-launch ourselves as admin?
@@ -2742,9 +2749,13 @@ ContinueOpenWindow:
 
     StartAsyncUpdateCheck(win, UpdateCheck::Automatic);
 
-    BringWindowToTop(win->hwndFrame);
+    if (IsDebuggerPresent()) {
+        // helps when running from 10x under debugger
+        BringWindowToTop(win->hwndFrame);
+    }
 
     StartDeleteStaleFiles();
+    // uitask::Post(MkFunc0(FocusMainWindowOnStartup, win), "FocusMainWindowOnStartup");
 
     exitCode = RunMessageLoop();
     SafeCloseHandle(&hMutex);
