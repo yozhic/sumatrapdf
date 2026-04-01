@@ -1035,6 +1035,27 @@ static void OnCancel(ImageEditWindow* ew) {
 }
 
 static void UpdateInfoLabel(ImageEditWindow* ew);
+static void UpdateModeButtons(ImageEditWindow* ew);
+
+static void SwitchToSaveMode(ImageEditWindow* ew) {
+    ew->mode = ImageEditMode::Save;
+    ew->isDragging = false;
+    ew->dragEdge = DragEdge::None;
+    ew->hoverEdge = DragEdge::None;
+    ew->cropX = 0;
+    ew->cropY = 0;
+    ew->cropW = ew->imgW;
+    ew->cropH = ew->imgH;
+    ew->newW = ew->imgW;
+    ew->newH = ew->imgH;
+    SetWindowTextW(ew->hwnd, L"Save Image");
+    UpdateModeButtons(ew);
+    UpdateSaveButtonText(ew);
+    UpdateInfoLabel(ew);
+    LayoutControls(ew);
+    InvalidateImageArea(ew);
+    SetFocus(ew->hwnd);
+}
 
 static void ReplaceSrcBitmap(ImageEditWindow* ew, Bitmap* newBmp) {
     delete ew->srcBitmap;
@@ -1166,6 +1187,43 @@ static void OnResizeButton(ImageEditWindow* ew) {
     } else {
         SwitchToResizeMode(ew);
     }
+}
+
+static Bitmap* CreateBitmapForClipboard(ImageEditWindow* ew) {
+    if (!ew || !ew->srcBitmap) {
+        return nullptr;
+    }
+    if (ew->mode == ImageEditMode::Crop && ew->cropW > 0 && ew->cropH > 0) {
+        Gdiplus::Rect srcRect(ew->cropX, ew->cropY, ew->cropW, ew->cropH);
+        return ew->srcBitmap->Clone(srcRect, ew->srcBitmap->GetPixelFormat());
+    }
+    if (ew->mode == ImageEditMode::Resize && ew->newW > 0 && ew->newH > 0 &&
+        (ew->newW != ew->imgW || ew->newH != ew->imgH)) {
+        Bitmap* resized = new Bitmap(ew->newW, ew->newH, ew->srcBitmap->GetPixelFormat());
+        if (!resized) {
+            return nullptr;
+        }
+        Graphics g(resized);
+        g.SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
+        g.DrawImage(ew->srcBitmap, 0, 0, ew->newW, ew->newH);
+        return resized;
+    }
+    return ew->srcBitmap->Clone(0, 0, ew->imgW, ew->imgH, ew->srcBitmap->GetPixelFormat());
+}
+
+static bool CopyEditedImageToClipboard(ImageEditWindow* ew) {
+    Bitmap* bmp = CreateBitmapForClipboard(ew);
+    if (!bmp) {
+        return false;
+    }
+    HBITMAP tmp = nullptr;
+    Status status = bmp->GetHBITMAP((Gdiplus::ARGB)0xffffffff, &tmp);
+    delete bmp;
+    if (status != Ok || !tmp) {
+        return false;
+    }
+    ScopedGdiObj<HBITMAP> hbmp(tmp);
+    return CopyImageToClipboard(tmp, false);
 }
 
 LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
@@ -1440,8 +1498,8 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         }
 
         case WM_CHAR:
-            if (VK_ESCAPE == wp && gGlobalPrefs->escToExit) {
-                DestroyWindow(hwnd);
+            if (VK_ESCAPE == wp) {
+                return 0;
             }
             break;
 
@@ -1449,6 +1507,18 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             ew = FindImageEditWindowByHwnd(hwnd);
             if (!ew) {
                 break;
+            }
+            if ((GetKeyState(VK_CONTROL) & 0x8000) != 0 && wp == 'C') {
+                CopyEditedImageToClipboard(ew);
+                return 0;
+            }
+            if (wp == VK_ESCAPE) {
+                if (ew->mode != ImageEditMode::Save) {
+                    SwitchToSaveMode(ew);
+                } else if (gGlobalPrefs->escToExit) {
+                    DestroyWindow(hwnd);
+                }
+                return 0;
             }
             if (ew->mode == ImageEditMode::Resize) {
                 // left/right change width, up/down change height
