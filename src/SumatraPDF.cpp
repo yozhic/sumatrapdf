@@ -4550,8 +4550,8 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
         SetSidebarVisibility(win, false, false, false);
     }
 
-    SetMenu(win->hwndFrame, nullptr);
     win->isToolbarVisible = false;
+    SetMenu(win->hwndFrame, nullptr);
     ShowWindow(win->hwndReBar, SW_HIDE);
     if (win->hwndMenuReBar) {
         ShowWindow(win->hwndMenuReBar, SW_HIDE);
