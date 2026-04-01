@@ -908,7 +908,7 @@ void CreateFavorites(MainWindow* win) {
     args.parent = win->hwndFavBox;
     args.font = GetAppTreeFont();
     args.fullRowSelect = true;
-    args.exStyle = WS_EX_STATICEDGE;
+    args.exStyle = 0;
     args.isRtl = IsUIRtl();
 
     auto fn = MkFunc1Void(FavTreeContextMenu);

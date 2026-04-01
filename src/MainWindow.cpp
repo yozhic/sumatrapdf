@@ -686,7 +686,6 @@ void UpdateControlsColors(MainWindow* win) {
     // logfa("retrieved doc colors in tree control: 0x%x 0x%x\n", treeTxtCol, treeBgCol);
 
     COLORREF splitterCol = ThemeControlBackgroundColor();
-    bool flatTreeWnd = true;
 
     {
         auto tocTreeView = win->tocTreeView;
@@ -694,9 +693,6 @@ void UpdateControlsColors(MainWindow* win) {
 
         win->tocLabelWithClose->SetColors(txtCol, bgCol);
         win->sidebarSplitter->SetColors(kColorNoChange, splitterCol);
-        SetWindowExStyle(tocTreeView->hwnd, WS_EX_STATICEDGE, !flatTreeWnd);
-        uint flags = SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED;
-        SetWindowPos(tocTreeView->hwnd, nullptr, 0, 0, 0, 0, flags);
     }
 
     auto favTreeView = win->favTreeView;
@@ -704,10 +700,6 @@ void UpdateControlsColors(MainWindow* win) {
         favTreeView->SetColors(txtCol, bgCol);
         win->favLabelWithClose->SetColors(txtCol, bgCol);
         win->favSplitter->SetColors(kColorNoChange, splitterCol);
-
-        SetWindowExStyle(favTreeView->hwnd, WS_EX_STATICEDGE, !flatTreeWnd);
-        uint flags = SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED;
-        SetWindowPos(favTreeView->hwnd, nullptr, 0, 0, 0, 0, flags);
     }
     // TODO: more work needed to to ensure consistent look of the ebook window:
     // - change the tree item text color
