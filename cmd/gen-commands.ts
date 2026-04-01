@@ -240,11 +240,11 @@ function generateEnum(): string {
   lines.push("    CmdSeparator = CmdFirst,");
   lines.push("");
 
-  // emit command names with explicit values, 3 per line
-  for (let i = 0; i < names.length; i += 3) {
-    const chunk = names.slice(i, i + 3);
-    const parts = chunk.map((name, j) => `${name} = ${201 + i + j}`);
-    lines.push(`    ${parts.join(", ")},`);
+  let firstCmdId = 201;
+  for (let i = 0; i < names.length; i++) {
+    let cmd = names[i];
+    let id = firstCmdId + i;
+    lines.push(`    ${cmd} = ${id},`);
   }
 
   lines.push("");
@@ -283,22 +283,18 @@ function generateArrays(): string {
 
   // gCommandNames: SeqStrings (null-separated, double-null terminated)
   lines.push("static SeqStrings gCommandNames =");
-  for (let i = 0; i < names.length; i += 3) {
-    const chunk = names.slice(i, i + 3);
+  for (let i = 0; i < names.length; i++) {
+    const chunk = names.slice(i, i + 1);
     const parts = chunk.map((s) => `"${s}\\0"`).join(" ");
-    const isLast = i + 3 >= names.length;
-    if (isLast) {
-      lines.push(`    ${parts} "\\0";`);
-    } else {
-      lines.push(`    ${parts}`);
-    }
+    lines.push(`    ${parts}`);
   }
+  lines.push(`    "\\0";`);
   lines.push("");
 
   // gCommandIds
   lines.push("static i32 gCommandIds[] = {");
-  for (let i = 0; i < names.length; i += 3) {
-    const chunk = names.slice(i, i + 3).join(", ");
+  for (let i = 0; i < names.length; i++) {
+    const chunk = names.slice(i, i + 1).join(", ");
     lines.push(`    ${chunk},`);
   }
   lines.push("};");
@@ -306,23 +302,23 @@ function generateArrays(): string {
 
   // gCommandDescriptions
   lines.push("SeqStrings gCommandDescriptions =");
-  for (let i = 0; i < descs.length; i += 3) {
-    const chunk = descs.slice(i, i + 3);
+  for (let i = 0; i < descs.length; i++) {
+    const chunk = descs.slice(i, i + 1);
     const parts = chunk.map((s) => `"${s}\\0"`).join(" ");
-    const isLast = i + 3 >= descs.length;
-    if (isLast) {
-      lines.push(`    ${parts} "\\0";`);
-    } else {
-      lines.push(`    ${parts}`);
-    }
+    lines.push(`    ${parts}`);
   }
-
+  lines.push(`    "\\0";`);
   lines.push("// clang-format on");
 
   return lines.join("\n");
 }
 
-function replaceBetweenMarkers(content: string, startMarker: string, endMarker: string, generated: string): string {
+function replaceBetweenMarkers(
+  content: string,
+  startMarker: string,
+  endMarker: string,
+  generated: string,
+): string {
   const startIdx = content.indexOf(startMarker);
   const endIdx = content.indexOf(endMarker);
   if (startIdx < 0 || endIdx < 0) {
@@ -343,12 +339,22 @@ function main() {
   let cppContent = readFileSync(cppPath, "utf-8");
 
   const enumCode = generateEnum();
-  headerContent = replaceBetweenMarkers(headerContent, "// @gen-start cmd-enum", "// @gen-end cmd-enum", enumCode);
+  headerContent = replaceBetweenMarkers(
+    headerContent,
+    "// @gen-start cmd-enum",
+    "// @gen-end cmd-enum",
+    enumCode,
+  );
   writeFileSync(headerPath, headerContent, "utf-8");
   console.log("Generated enum in src/Commands.h");
 
   const arraysCode = generateArrays();
-  cppContent = replaceBetweenMarkers(cppContent, "// @gen-start cmd-c", "// @gen-end cmd-c", arraysCode);
+  cppContent = replaceBetweenMarkers(
+    cppContent,
+    "// @gen-start cmd-c",
+    "// @gen-end cmd-c",
+    arraysCode,
+  );
   writeFileSync(cppPath, cppContent, "utf-8");
   console.log("Generated arrays in src/Commands.cpp");
 }
