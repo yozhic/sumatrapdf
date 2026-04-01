@@ -8068,6 +8068,9 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return MA_ACTIVATE;
 
         case WM_ERASEBKGND:
+            // not sure why it's needed but it causes
+            // flash of caption area in choco theme when resizing sidebar
+#if 0
             LogRedraw("WM_ERASEBKGND", hwnd);
             if (win && win->tabsInTitlebar && !IsCurrentThemeDefault()) {
                 HDC hdc = (HDC)wp;
@@ -8083,6 +8086,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
                     DeleteObject(brCaption);
                 }
             }
+#endif
             return TRUE;
 
         default:
