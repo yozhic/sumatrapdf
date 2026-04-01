@@ -4513,24 +4513,22 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
         win->isFullScreen = true;
     }
 
-    // ToC and Favorites sidebars are hidden when entering presentation mode
-    // TODO: make showFavorites a per-window pref
-    bool showFavoritesTmp = gGlobalPrefs->showFavorites;
-    BeginFrameRedrawSuppression(win);
-    if (presentation && (win->tocVisible || gGlobalPrefs->showFavorites)) {
-        SetSidebarVisibility(win, false, false, false);
-    }
-
+    // Save window style and rect before hiding anything, since
+    // SetMenu(nullptr) can alter the window style bits.
     long ws = GetWindowLong(win->hwndFrame, GWL_STYLE);
     if (!presentation || !win->isFullScreen) {
         win->nonFullScreenWindowStyle = ws;
     }
-    // remove window styles that add to non-client area
-    ws &= ~(WS_CAPTION | WS_THICKFRAME);
-    ws |= WS_MAXIMIZE;
-
     win->nonFullScreenFrameRect = WindowRect(win->hwndFrame);
-    Rect rect = GetFullscreenRect(win->hwndFrame);
+
+    // Hide sidebar and toolbar before suppressing redraws so the hides
+    // take visual effect immediately, preventing a flash of sidebar at
+    // fullscreen size during the transition.
+    // TODO: make showFavorites a per-window pref
+    bool showFavoritesTmp = gGlobalPrefs->showFavorites;
+    if (presentation && (win->tocVisible || gGlobalPrefs->showFavorites)) {
+        SetSidebarVisibility(win, false, false, false);
+    }
 
     SetMenu(win->hwndFrame, nullptr);
     ShowWindow(win->hwndReBar, SW_HIDE);
@@ -4538,6 +4536,13 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
         ShowWindow(win->hwndMenuReBar, SW_HIDE);
     }
     win->tabsCtrl->SetIsVisible(false);
+
+    BeginFrameRedrawSuppression(win);
+
+    // remove window styles that add to non-client area
+    ws &= ~(WS_CAPTION | WS_THICKFRAME);
+    ws |= WS_MAXIMIZE;
+    Rect rect = GetFullscreenRect(win->hwndFrame);
 
     UpdateWindowFrameBorderColor(win);
     // disable DWM rounded corners and border for true edge-to-edge fullscreen
