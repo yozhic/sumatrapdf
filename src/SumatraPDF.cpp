@@ -135,6 +135,8 @@ bool gSupressNextAltMenuTrigger = false;
 bool gCrashOnOpen = false;
 bool gRedrawLog = false;
 
+static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sidebarDx = -1);
+
 static const char* HwndName(HWND hwnd) {
     WCHAR cls[64]{};
     GetClassNameW(hwnd, cls, dimof(cls));
@@ -1771,6 +1773,9 @@ void ShowMainWindow(MainWindow* win, int windowState) {
     } else {
         ShowWindow(win->hwndFrame, SW_SHOW);
     }
+    // Hidden startup windows can miss the final titlebar/menu-bar geometry
+    // until they become visible. Force one relayout before the first paint.
+    RelayoutFrame(win);
     UpdateWindow(win->hwndFrame);
     UpdateToolbarFindText(win);
     HwndEnsureVisible(win->hwndFrame);
@@ -1782,11 +1787,13 @@ void ShowMainWindow(MainWindow* win, int windowState) {
     if (win->tabsInTitlebar) {
         RECT r = ToRECT(win->captionRect);
         InvalidateRect(win->hwndFrame, &r, TRUE);
+        RedrawWindow(win->hwndFrame, &r, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME);
         if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
-            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
+            RedrawWindow(win->hwndMenuReBar, nullptr, nullptr,
+                         RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
         }
         if (win->tabsCtrl && win->tabsCtrl->IsVisible()) {
-            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE);
+            RedrawWindow(win->tabsCtrl->hwnd, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_UPDATENOW);
         }
     }
 
@@ -3874,7 +3881,7 @@ constexpr int kTocMinDy = 100;
 
 constexpr int kFrameBorderSize = 1;
 
-static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sidebarDx = -1) {
+static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     Rect rc = ClientRect(win->hwndFrame);
     // don't relayout while the window is minimized
     if (rc.IsEmpty()) {
