@@ -6878,7 +6878,7 @@ cn:每样本位数:
 co:Bits per campione:
 cy:Didau Fesul Sampl:
 cz:Bitů na vzorek:
-de:Bits pro Sample:
+de:Bittiefe:
 dk:Bit pr. prøve:
 el:Bits ανά δείγμα:
 es:Bits por Muestra:
@@ -7608,7 +7608,7 @@ cn:相机制造商:
 co:Marca di a camera:
 cy:Gwneuthurwr Camera:
 cz:Výrobce fotoaparátu:
-de:Kamerahersteller:
+de:Kameramarke:
 dk:Kameramærke:
 el:Κατασκευαστής κάμερας:
 es:Marca de Cámara:
@@ -17171,7 +17171,7 @@ cn:光圈值:
 co:Numeru F:
 cy:Rhif-F:
 cz:Clonové číslo:
-de:Blende:
+de:F-Nummer:
 dk:F-nummer:
 el:Διάφραγμα:
 es:Número F:
@@ -19726,7 +19726,7 @@ cn:焦距 (35mm):
 co:Lunghezza focale (35mm):
 cy:Hyd Ffocal (35mm):
 cz:Ohnisková vzdálenost (35mm):
-de:Brennweite (35mm):
+de:Brennweite (35 mm):
 dk:Brændvidde (35mm):
 el:Εστιακή απόσταση (35mm):
 es:Distancia Focal (35mm):
@@ -22427,7 +22427,7 @@ cn:关键词:
 co:Parolle chjave:
 cy:Allweddeiriau:
 cz:Klíčová slova:
-de:Stichwörter:
+de:Schlüsselwörter:
 dk:Nøgleord:
 el:Λέξεις-κλειδιά:
 es:Palabras Clave:
@@ -23522,7 +23522,7 @@ cn:测光模式:
 co:Modu di misurazione:
 cy:Modd Mesur:
 cz:Režim měření:
-de:Messmethode:
+de:Messmodus:
 dk:Måletilstand:
 el:Λειτουργία φωτομέτρησης:
 es:Modo de Medición:
@@ -40531,7 +40531,7 @@ cn:切换标签页 MRU 顺序
 co:Attivà l'ordine MRU di e schede
 cy:Toglo Trefn MRU Tabiau
 cz:Přepnout pořadí karet MRU
-de:Tab-MRU-Reihenfolge umschalten
+de:Reihenfolge der zuletzt verwendeten Tabs umkehren
 dk:Skift faner MRU-rækkefølge
 el:Εναλλαγή σειράς καρτελών MRU
 es:Alternar orden MRU de pestañas
@@ -40567,7 +40567,7 @@ nl:Schakel volgorde van recentelijk gebruikte tabbladen om
 nn:Veksle fane-MRU-rekkjefølgje
 no:Bytt faner MRU-rekkefølge
 pa:ਟੈਬ MRU ਕ੍ਰਮ ਬਦਲੋ
-pl:Przełącz kolejność kart MRU
+pl:Przełącz kolejność ostatnio używanych kart
 pt:Alternar Ordem MRU das Abas
 ro:Comutare ordine file MRU
 ru:Переключить порядок вкладок MRU

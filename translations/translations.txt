@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-0fb86034622ab15925d530272b7cbb3254970d15
+c34a6c24c7275730039e340ada16af5741976cf3
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -5401,6 +5401,7 @@ uz:Fon rangi:
 vn:Màu nền
 :Bits Per Sample:
 br:Bits por Amostra:
+de:Bittiefe:
 pl:Bity na próbkę:
 sk:Bitov na jednu vzorku:
 :Book View
@@ -5893,10 +5894,12 @@ uz:CHM hujjatlari
 vn:Tập tin CHM
 :Camera Make:
 br:Fabricante da Câmera:
+de:Kameramarke:
 pl:Marka aparatu:
 sk:Výrobca fotoaparátu:
 :Camera Model:
 br:Modelo da Câmera:
+de:Kameramodell:
 pl:Model aparatu:
 sk:Model fotoaparátu:
 :Can't connect to the Internet (error %#x).
@@ -7126,6 +7129,7 @@ uz:Buyruqlar paneli
 vn:Lệnh
 :Comment:
 br:Comentário:
+de:Kommentar:
 pl:Komentarz:
 sk:Komentár:
 :Compatibility
@@ -9328,6 +9332,7 @@ uz:Maxsus kattalashtirish...
 vn:Thiết Lập &Phóng...
 :DPI:
 br:DPI:
+de:DPI:
 pl:DPI:
 sk:DPI:
 :Dark
@@ -9467,6 +9472,7 @@ uz:To‘qroq
 vn:Tối hơn
 :Date Original:
 br:Data Original:
+de:Originaldatum:
 pl:Data oryginału:
 sk:Dátum vytvorenia:
 :Date:
@@ -10506,6 +10512,7 @@ sr-rs:Угради...
 tw:内嵌…
 :Encryption:
 br:Criptografia:
+de:Verschlüsselung:
 pl:Szyfrowanie:
 sk:Šifrovanie:
 :Enter password
@@ -10931,14 +10938,17 @@ uz:Barchasini kengaytirish
 vn:Mở Rộng Tất Cả
 :Exposure Bias:
 br:Tendência da Exposição:
+de:Belichtungskorrektur:
 pl:Błąd ekspozycji:
 sk:Odchýlka expozície:
 :Exposure Program:
 br:Programa de Exposição:
+de:Belichtungsprogramm:
 pl:Program ekspozycji:
 sk:Expozičný program:
 :Exposure Time:
 br:Tempo de Exposição:
+de:Belichtungszeit:
 pl:Czas ekspozycji:
 sk:Čas expozície:
 :F&avorites
@@ -11112,6 +11122,7 @@ uz:To‘liq ekran
 vn:Toàn Màn Hình
 :F-Number:
 br:Número-F:
+de:F-Nummer:
 pl:Liczba przysłony:
 sk:Clonové číslo:
 :Facing
@@ -11932,6 +11943,7 @@ uz:Fayl hajmi:
 vn:Kích thước:
 :File path not available
 br:O caminho do arquivo não está disponível
+de:Dateipfad nicht verfügbar
 pl:Ścieżka do pliku niedostępna
 sk:Cesta k súboru je nedostupná
 :File:
@@ -12007,6 +12019,7 @@ uz:Fayl:
 vn:Tập tin:
 :Files:
 br:Arquivos:
+de:Dateien:
 pl:Pliki:
 sk:Súbory:
 :Fin&d...
@@ -12896,14 +12909,17 @@ uz:Bitta betga moslash
 vn:Vừa một trang đơn
 :Flash:
 br:Flash:
+de:Blitz:
 pl:Lampa błyskowa:
 sk:Blesk:
 :Focal Length (35mm):
 br:Tamanho do Foco (35 mm):
+de:Brennweite (35 mm):
 pl:Ogniskowa (35 mm):
 sk:Ohnisková vzdialenosť (35 mm):
 :Focal Length:
 br:Tamanho do Foco:
+de:Brennweite:
 pl:Ogniskowa:
 sk:Ohnisková vzdialenosť:
 :Fonts:
@@ -13636,6 +13652,7 @@ sk:Domov
 tw:首頁
 :ISO Speed:
 br:Velocidade da ISO:
+de:ISO-Empfindlichkeit:
 pl:Czułość ISO:
 sk:Rýchlosť ISO:
 :Icon:
@@ -13696,6 +13713,7 @@ uz:Ikonka:
 vn:Biểu Tượng:
 :Image Size:
 br:Tamanho da Imagem:
+de:Bildgröße:
 pl:Rozmiar obrazu:
 sk:Rozmery obrázka:
 :Image files (*.%s)
@@ -14467,6 +14485,7 @@ uz:KB
 vn:KB
 :Keywords:
 br:Palavras-Chave:
+de:Schlüsselwörter:
 pl:Słowa kluczowe:
 sk:Kľúčové slová:
 :Last Page
@@ -15168,6 +15187,7 @@ tw:線上說明
 uz:Veb-saytda qo‘llanma
 :Metering Mode:
 br:Modo de Medição:
+de:Messmodus:
 pl:Tryb pomiaru:
 sk:Režim merania:
 :Mobi documents
@@ -17285,6 +17305,7 @@ sk:Možnosti…
 tw:選項…
 :Orientation:
 br:Orientação:
+de:Ausrichtung:
 pl:Orientacja:
 sk:Orientácia:
 :Overwrite
@@ -24299,6 +24320,8 @@ pl:Przełącz spis treści
 sk:Prepnúť Obsah
 tw:切換目錄
 :Toggle Tabs MRU Order
+de:Reihenfolge der zuletzt verwendeten Tabs umkehren
+pl:Przełącz kolejność ostatnio używanych kart
 :Toggle Toolbar
 am:Գործիքագոտու միացում/անջատում
 br:Ativar/Desativar a Barra de Ferramentas
@@ -25110,6 +25133,7 @@ uz:Diqqat
 vn:Cảnh báo
 :White Balance:
 br:Equilíbrio dos Brancos:
+de:Weißabgleich:
 pl:Balans bieli:
 sk:Vyváženie bielej:
 :XPS documents
