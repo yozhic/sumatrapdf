@@ -4030,9 +4030,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     ShowWindow(win->hwndReBar, win->isToolbarVisible ? SW_SHOW : SW_HIDE);
 
     // ToC and Favorites sidebars at the left
-    bool showFavorites = gGlobalPrefs->showFavorites && !gPluginMode && CanAccessDisk();
+    bool favVisible = gGlobalPrefs->showFavorites && !gPluginMode && CanAccessDisk();
     bool tocVisible = win->tocVisible;
-    if (tocVisible || showFavorites) {
+    if (tocVisible || favVisible) {
         Size toc = ClientRect(win->hwndTocBox).Size();
         if (sidebarDx > 0) {
             toc = Size(sidebarDx, rc.y);
@@ -4048,7 +4048,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
 
         toc.dy = 0;
         if (tocVisible) {
-            if (!showFavorites) {
+            if (!favVisible) {
                 toc.dy = rc.dy;
             } else {
                 toc.dy = gGlobalPrefs->tocDy;
@@ -4060,20 +4060,20 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
             }
         }
 
-        if (tocVisible && showFavorites) {
+        if (tocVisible && favVisible) {
             toc.dy = limitValue(toc.dy, kTocMinDy, rc.dy - kTocMinDy);
         }
 
         if (tocVisible) {
             Rect rToc(rc.TL(), toc);
             dh.MoveWindow(win->hwndTocBox, rToc);
-            if (showFavorites) {
+            if (favVisible) {
                 Rect rSplitV(rc.x, rc.y + toc.dy, toc.dx, kSplitterDy);
                 dh.MoveWindow(win->favSplitter->hwnd, rSplitV);
                 toc.dy += kSplitterDy;
             }
         }
-        if (showFavorites) {
+        if (favVisible) {
             Rect rFav(rc.x, rc.y + toc.dy, toc.dx, rc.dy - toc.dy);
             dh.MoveWindow(win->hwndFavBox, rFav);
         }
@@ -4097,13 +4097,13 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     if (tocVisible) {
         RedrawWindow(win->hwndTocBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
-    if (showFavorites) {
+    if (favVisible) {
         RedrawWindow(win->hwndFavBox, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
-    if (tocVisible || showFavorites) {
+    if (tocVisible || favVisible) {
         InvalidateRect(win->sidebarSplitter->hwnd, nullptr, TRUE);
     }
-    if (tocVisible && showFavorites) {
+    if (tocVisible && favVisible) {
         InvalidateRect(win->favSplitter->hwnd, nullptr, TRUE);
     }
     if (win->isToolbarVisible) {
