@@ -160,6 +160,18 @@ LRESULT Splitter::WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
         if (SplitterType::Vert == type) {
             curId = IDC_SIZEWE;
         }
+        if (!mouseTracking) {
+            TRACKMOUSEEVENT tme{};
+            tme.cbSize = sizeof(tme);
+            tme.dwFlags = TME_LEAVE;
+            tme.hwndTrack = hwnd;
+            TrackMouseEvent(&tme);
+            mouseTracking = true;
+        }
+        if (!isMouseOver) {
+            isMouseOver = true;
+            HwndScheduleRepaint(hwnd);
+        }
         if (hwnd == GetCapture()) {
             Splitter::MoveEvent arg;
             arg.w = this;
@@ -175,8 +187,21 @@ LRESULT Splitter::WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
         return 0;
     }
 
+    if (WM_MOUSELEAVE == msg) {
+        mouseTracking = false;
+        if (isMouseOver) {
+            isMouseOver = false;
+            HwndScheduleRepaint(hwnd);
+        }
+        return 0;
+    }
+
     if (WM_PAINT == msg) {
-        OnSplitterPaint(hwnd, bgColor);
+        COLORREF col = bgColor;
+        if (isMouseOver) {
+            col = AccentColor(bgColor, 30);
+        }
+        OnSplitterPaint(hwnd, col);
         return 0;
     }
 
