@@ -2307,6 +2307,12 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     }
 #endif
 
+    // in debug build, default
+    if (gIsDebugBuild) {
+        if (!flags.logFile) {
+            flags.logFile = str::DupTemp("sumlog.txt");
+        }
+    }
     if (flags.log && !noLogHere) {
         if (flags.logFile) {
             dir::CreateForFile(flags.logFile);
@@ -2318,7 +2324,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         if (logFilePath) {
             StartLogToFile(logFilePath, true);
         }
-        gRedrawLog = true;
+        // gRedrawLog = true;
     }
 
 #if defined(DEBUG)
