@@ -283,6 +283,7 @@ static const char* propToName[] = {
     kPropCreatorApp, _TRN("Application:"),
     kPropPdfProducer, _TRN("PDF Producer:"),
     kPropPdfVersion, _TRN("PDF Version:"),
+    kPropFiles, _TRN("Files:"),
     nullptr,
 };
 // clang-format on
@@ -402,6 +403,8 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
     AppendPropTranslated(out, kPropCreatorApp, GetPropValueTemp(props, kPropCreatorApp));
     AppendPropTranslated(out, kPropPdfProducer, GetPropValueTemp(props, kPropPdfProducer));
     AppendPropTranslated(out, kPropPdfVersion, GetPropValueTemp(props, kPropPdfVersion));
+    strTemp = FormatPermissionsTemp(ctrl);
+    AppendProp(out, _TRA("Denied Permissions:"), strTemp);
 
     AppendPdfFileStructure(out, GetPropValueTemp(props, kPropPdfFileStructure), ctrl->GetFilePath());
 
@@ -412,9 +415,7 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
         strTemp = FormatPageSizeTemp(dm->GetEngine(), ctrl->CurrentPageNo(), dm->GetRotation());
         AppendProp(out, _TRA("Page Size:"), strTemp);
     }
-
-    strTemp = FormatPermissionsTemp(ctrl);
-    AppendProp(out, _TRA("Denied Permissions:"), strTemp);
+    AppendPropTranslated(out, kPropFiles, GetPropValueTemp(props, kPropFiles));
 }
 
 static void SetEditText(HWND hwndEdit, const char* text) {

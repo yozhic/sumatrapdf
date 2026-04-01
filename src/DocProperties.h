@@ -13,6 +13,9 @@ extern const char* kPropFontList;
 extern const char* kPropPdfVersion;
 extern const char* kPropPdfProducer;
 extern const char* kPropPdfFileStructure;
+extern const char* kPropFiles;
+extern const char* kPropKeywords;
+extern const char* kPropEncryption;
 
 extern const char* gAllProps[];
 

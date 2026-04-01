@@ -17,6 +17,9 @@ const char* kPropFontList = "fontList";
 const char* kPropPdfVersion = "pdfVersion";
 const char* kPropPdfProducer = "pdfProducer";
 const char* kPropPdfFileStructure = "pdfFileStructure";
+const char* kPropFiles = "files";
+const char* kPropKeywords = "keywords";
+const char* kPropEncryption = "encryption";
 
 // clang-format off
 const char* gAllProps[] = {

@@ -3559,6 +3559,36 @@ TempStr EngineMupdf::GetPropertyTemp(const char* name) {
     return res;
 };
 
+static TempStr LookupMetadataTemp(fz_context* ctx, fz_document* doc, const char* key) {
+    char buf[1024]{};
+    int n = fz_lookup_metadata(ctx, doc, key, buf, (int)dimof(buf));
+    if (n <= 0) {
+        return nullptr;
+    }
+    if (n > (int)dimof(buf)) {
+        n = (int)dimof(buf) - 1;
+        buf[n] = 0;
+    }
+    return str::DupTemp(buf, (size_t)n - 1);
+}
+
+void EngineMupdf::GetProperties(StrVec& keyValOut) {
+    EngineBase::GetProperties(keyValOut);
+
+    auto ctx = Ctx();
+    ScopedCritSec ctxScope(ctxAccess);
+
+    TempStr val = LookupMetadataTemp(ctx, _doc, "info:Keywords");
+    if (val) {
+        AddProp(keyValOut, kPropKeywords, val);
+    }
+
+    val = LookupMetadataTemp(ctx, _doc, "encryption");
+    if (val) {
+        AddProp(keyValOut, kPropEncryption, val);
+    }
+}
+
 ByteSlice EngineMupdf::GetFileData() {
     auto ctx = Ctx();
 

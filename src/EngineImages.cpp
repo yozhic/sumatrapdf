@@ -496,6 +496,7 @@ class EngineImage : public EngineImages {
     EngineBase* Clone() override;
 
     TempStr GetPropertyTemp(const char* name) override;
+    void GetProperties(StrVec& keyValOut) override;
 
     static EngineBase* CreateFromFile(const char* fileName);
     static EngineBase* CreateFromStream(IStream* stream);
@@ -691,6 +692,15 @@ TempStr EngineImage::GetPropertyTemp(const char* name) {
         return GetImagePropertyTemp(image, PropertyTagSoftwareUsed);
     }
     return nullptr;
+}
+
+void EngineImage::GetProperties(StrVec& keyValOut) {
+    EngineBase::GetProperties(keyValOut);
+
+    TempStr val = GetImagePropertyTemp(image, PropertyTagXPKeywords);
+    if (val) {
+        AddProp(keyValOut, kPropKeywords, val);
+    }
 }
 
 Bitmap* EngineImage::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
@@ -1095,6 +1105,7 @@ class EngineCbx : public EngineImages {
     EngineBase* Clone() override;
 
     TempStr GetPropertyTemp(const char* name) override;
+    void GetProperties(StrVec& keyValOut) override;
 
     TocTree* GetToc() override;
 
@@ -1317,6 +1328,23 @@ TempStr EngineCbx::GetPropertyTemp(const char* name) {
     }
 
     return nullptr;
+}
+
+void EngineCbx::GetProperties(StrVec& keyValOut) {
+    EngineBase::GetProperties(keyValOut);
+
+    str::Str filesStr;
+    auto& fileInfos = cbxFile->GetFileInfos();
+    size_t n = fileInfos.size();
+    for (size_t i = 0; i < n; i++) {
+        auto* fi = fileInfos[i];
+        if (str::IsEmpty(fi->name)) {
+            continue;
+        }
+        filesStr.AppendChar('\n');
+        filesStr.Append(fi->name);
+    }
+    AddProp(keyValOut, kPropFiles, filesStr.CStr());
 }
 
 Bitmap* EngineCbx::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
