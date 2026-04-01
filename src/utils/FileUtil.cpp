@@ -836,6 +836,20 @@ bool DeleteZoneIdentifier(const char* filePath) {
     return Delete(path);
 }
 
+bool Rename(const char* newPath, const char* oldPath) {
+    if (!newPath || !oldPath) {
+        return false;
+    }
+    WCHAR* newPathW = ToWStrTemp(newPath);
+    WCHAR* oldPathW = ToWStrTemp(oldPath);
+    BOOL ok = MoveFileW(oldPathW, newPathW);
+    if (!ok) {
+        LogLastError();
+        return false;
+    }
+    return true;
+}
+
 } // namespace file
 
 namespace dir {

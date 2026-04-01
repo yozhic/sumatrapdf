@@ -2708,13 +2708,24 @@ static void DownloadAndOpenUrl(DownloadAndOpenUrlData* data) {
     }
 
     // verify the downloaded file is a supported image type
-    Kind kind = GuessFileTypeFromName(destPath);
+    Kind kind = GuessFileTypeFromContent(destPath);
     if (!IsEngineImageSupportedFileType(kind)) {
         logf("DownloadAndOpenUrl: downloaded file is not a supported image type: '%s'\n", destPath);
         file::Delete(destPath);
         free(data->url);
         delete data;
         return;
+    }
+
+    // ensure it has a good extension, some urls are like:
+    // https://pbs.twimg.com/media/HEwit7bbQAAWiIO?format=jpg&name=large
+    const char* ext = GetExtForKind(kind);
+    if (!str::EndsWithI(destPath, ext)) {
+        TempStr newDest = str::JoinTemp(destPath, ext);
+        ok = file::Rename(newDest, destPath);
+        if (ok) {
+            destPath = newDest;
+        }
     }
 
     // open the file on the UI thread
@@ -2741,25 +2752,26 @@ static void DownloadAndOpenUrl(DownloadAndOpenUrlData* data) {
 // Extract text from IDataObject (tries CF_UNICODETEXT, then CF_TEXT)
 static TempStr GetTextFromDataObject(IDataObject* dataObj) {
     FORMATETC fmtUnicode = {CF_UNICODETEXT, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+    FORMATETC fmtAnsi = {CF_TEXT, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
     STGMEDIUM medium{};
     HRESULT hr = dataObj->GetData(&fmtUnicode, &medium);
+    TempStr res;
     if (SUCCEEDED(hr) && medium.hGlobal) {
         WCHAR* w = (WCHAR*)GlobalLock(medium.hGlobal);
-        TempStr res = w ? ToUtf8Temp(w) : nullptr;
-        GlobalUnlock(medium.hGlobal);
-        ReleaseStgMedium(&medium);
-        return res;
+        res = w ? ToUtf8Temp(w) : nullptr;
+        goto Cleanup;
     }
-    FORMATETC fmtAnsi = {CF_TEXT, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
     hr = dataObj->GetData(&fmtAnsi, &medium);
     if (SUCCEEDED(hr) && medium.hGlobal) {
         char* s = (char*)GlobalLock(medium.hGlobal);
-        TempStr res = s ? str::DupTemp(s) : nullptr;
-        GlobalUnlock(medium.hGlobal);
-        ReleaseStgMedium(&medium);
-        return res;
+        res = s ? str::DupTemp(s) : nullptr;
+        goto Cleanup;
     }
     return nullptr;
+Cleanup:
+    GlobalUnlock(medium.hGlobal);
+    ReleaseStgMedium(&medium);
+    return res;
 }
 
 // Check if IDataObject contains a URL (registered format "UniformResourceLocatorW" or "UniformResourceLocator")
@@ -2886,7 +2898,7 @@ class CanvasDropTarget : public IDropTarget {
             }
         }
 
-        if (url && IsImageUrl(url)) {
+        if (url) {
             auto data = new DownloadAndOpenUrlData();
             data->url = str::Dup(url);
             data->hwndCanvas = hwnd;
