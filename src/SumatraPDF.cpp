@@ -6246,6 +6246,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             }
             break;
 
+        case CmdToggleTabsMru:
+            gGlobalPrefs->tabsMru = !gGlobalPrefs->tabsMru;
+            break;
+
         case CmdSaveAnnotations: {
             SaveAnnotationsToExistingFile(tab);
             break;

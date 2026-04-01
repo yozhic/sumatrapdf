@@ -227,6 +227,8 @@ struct CommandPaletteWnd : Wnd {
     LRESULT WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) override;
 
     void CollectStrings(MainWindow*);
+    void CollectTabsRegular(MainWindow*, WindowTab* currTab);
+    void CollectTabsMru(MainWindow*, WindowTab* currTab);
     void FilterStringsForQuery(const char*, StrVecCP&);
 
     bool Create(MainWindow* win, const char* prefix, int smartTabAdvance);
@@ -529,6 +531,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
             isToggle = true;
             newIsOn = !gGlobalPrefs->useTabs;
         } break;
+        case CmdToggleTabsMru: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->tabsMru;
+        } break;
         case CmdToggleZoom: {
             // TODO: this toggles via different values
         } break;
@@ -565,6 +571,60 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
     }
 
     return s;
+}
+
+static void AppendTab(StrVecCP& tabs, WindowTab* tab, WindowTab* currTab, int& currTabIdx) {
+    ItemDataCP data;
+    data.tab = tab;
+    if (tab->IsAboutTab()) {
+        tabs.Append(_TRA("Home"), data);
+    } else {
+        auto name = path::GetBaseNameTemp(tab->filePath);
+        tabs.Append(name, data);
+    }
+    if (tab == currTab) {
+        currTabIdx = tabs.Size() - 1;
+        logf("currTabIdx: %d\n", currTabIdx);
+    }
+}
+
+void CommandPaletteWnd::CollectTabsRegular(MainWindow* mainWin, WindowTab* currTab) {
+    currTabIdx = 0;
+    tabs.Reset();
+    for (MainWindow* w : gWindows) {
+        for (WindowTab* tab : w->Tabs()) {
+            AppendTab(tabs, tab, currTab, currTabIdx);
+        }
+    }
+}
+
+void CommandPaletteWnd::CollectTabsMru(MainWindow* mainWin, WindowTab* currTab) {
+    currTabIdx = 0;
+    tabs.Reset();
+    // first add tabs in MRU order from selection history
+    Vec<WindowTab*>* history = mainWin->tabSelectionHistory;
+    if (history) {
+        // history is oldest-first, iterate in reverse for MRU order
+        for (int i = history->Size() - 1; i >= 0; i--) {
+            WindowTab* tab = history->At(i);
+            AppendTab(tabs, tab, currTab, currTabIdx);
+        }
+    }
+    // add any tabs not in the history (e.g. current tab, tabs from other windows)
+    for (MainWindow* w : gWindows) {
+        for (WindowTab* tab : w->Tabs()) {
+            bool alreadyAdded = false;
+            for (int i = 0; i < tabs.Size(); i++) {
+                if (tabs.AtData(i)->tab == tab) {
+                    alreadyAdded = true;
+                    break;
+                }
+            }
+            if (!alreadyAdded) {
+                AppendTab(tabs, tab, currTab, currTabIdx);
+            }
+        }
+    }
 }
 
 void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
@@ -637,24 +697,10 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
 
     ctx.hasToc = mainWin->ctrl && mainWin->ctrl->HasToc();
 
-    // append paths of opened files
-    currTabIdx = 0;
-    tabs.Reset();
-    for (MainWindow* w : gWindows) {
-        for (WindowTab* tab : w->Tabs()) {
-            ItemDataCP data;
-            data.tab = tab;
-            if (tab->IsAboutTab()) {
-                tabs.Append(_TRA("Home"), data);
-                continue;
-            }
-            auto name = path::GetBaseNameTemp(tab->filePath);
-            tabs.Append(name, data);
-            if (tab == currTab) {
-                currTabIdx = tabs.Size() - 1;
-                logf("currTabIdx: %d\n", currTabIdx);
-            }
-        }
+    if (smartTabMode && gGlobalPrefs->tabsMru) {
+        CollectTabsMru(mainWin, currTab);
+    } else {
+        CollectTabsRegular(mainWin, currTab);
     }
 
     // append paths of files from history, excluding

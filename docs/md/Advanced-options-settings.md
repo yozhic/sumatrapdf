@@ -177,6 +177,10 @@ UseSysColors = false
 ; version 3.0)
 UseTabs = true
 
+; if true, Ctrl+Tab and Ctrl+Shift+Tab show the tab switcher in most recently
+; used order instead of tab-strip order
+TabsMru = false
+
 ; sequence of zoom levels when zooming in/out; all values must lie between 8.33
 ; and 6400
 ZoomLevels = 

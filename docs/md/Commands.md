@@ -81,6 +81,7 @@ CmdToggleScrollbars,,Toggle Scrollbars,
 CmdToggleOverlayScrollbar,,Toggle Overlay Scrollbar,ver 3.7+
 CmdToggleToolbar,F8,Toggle Toolbar,
 CmdToggleUseTabs,,Toggle Use Tabs,"Toggle UseTabs setting, only affects new windows, ver 3.7+"
+CmdToggleTabsMru,,Toggle Tabs MRU Order,"Toggle TabsMru setting: Ctrl+Tab switches tabs in most recently used order, ver 3.7+"
 CmdToggleFrequentlyRead,,Toggle Frequently Read,ver 3.5+
 CmdSelectNextTheme,,Select Next Theme,ver 3.5+
 CmdToggleLinks,,Toggle Show Links,"Toggle drawing blue rectangle around links, ver 3.6+"
