@@ -936,12 +936,12 @@ void StartDeleteStaleFiles() {
     RunAsync(fn, "DeleteStaleFilesThread");
 }
 
-// static void FocusMainWindowOnStartup(MainWindow* win) {
-//     if (!win || !IsWindow(win->hwndFrame)) {
-//         return;
-//     }
-//     win->Focus();
-// }
+ static void FocusMainWindowOnStartup(MainWindow* win) {
+     if (!win || !IsWindow(win->hwndFrame)) {
+         return;
+     }
+     win->Focus();
+ }
 
 // non-admin process cannot send DDE messages to admin process
 // so when that happens we need to alert the user
@@ -2751,11 +2751,12 @@ ContinueOpenWindow:
 
     if (IsDebuggerPresent()) {
         // helps when running from 10x under debugger
-        BringWindowToTop(win->hwndFrame);
+        //BringWindowToTop(win->hwndFrame);
     }
 
     StartDeleteStaleFiles();
-    // uitask::Post(MkFunc0(FocusMainWindowOnStartup, win), "FocusMainWindowOnStartup");
+    // TODO: don't know why I need this but I do if RememberOpenedFiles = false
+    uitask::Post(MkFunc0(FocusMainWindowOnStartup, win), "FocusMainWindowOnStartup");
 
     exitCode = RunMessageLoop();
     SafeCloseHandle(&hMutex);
