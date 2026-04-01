@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-8bcc22ffd4e3c56c0a4b3f23a1c00a0c09534edd
+03286e13f424533fb3f0cb8288c0117a05fdd5e5
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -5399,6 +5399,7 @@ tw:背景顏色:
 uk:Колір фону
 uz:Fon rangi:
 vn:Màu nền
+:Bits Per Sample:
 :Book View
 am:Գրքի տեսքով
 ar:عرض الكتاب
@@ -5887,6 +5888,8 @@ tw:CHM 文件
 uk:Документи CHM
 uz:CHM hujjatlari
 vn:Tập tin CHM
+:Camera Make:
+:Camera Model:
 :Can't connect to the Internet (error %#x).
 am:Հնարավոր չէ կապակցել (սխալ %#x)։
 ar:لم يتم التمكن من الإتصال بالإنترنت (%#x خطأ).
@@ -7112,6 +7115,7 @@ tw:命令面板
 uk:Палітра команд
 uz:Buyruqlar paneli
 vn:Lệnh
+:Comment:
 :Compatibility
 am:Համատեղելիությունը
 ar:التوافق
@@ -9310,6 +9314,7 @@ tw:自訂縮放(&Z)...
 uk:Нетиповий масштаб...
 uz:Maxsus kattalashtirish...
 vn:Thiết Lập &Phóng...
+:DPI:
 :Dark
 am:Մուգ
 ar:مظلم
@@ -9445,6 +9450,7 @@ tw:更暗
 uk:Темніша
 uz:To‘qroq
 vn:Tối hơn
+:Date Original:
 :Date:
 am:Ամսաթիվ՝
 ar:التاريخ:
@@ -10480,6 +10486,7 @@ pl:Osadź...
 sk:Vložiť…
 sr-rs:Угради...
 tw:内嵌…
+:Encryption:
 :Enter password
 af:Tik Wagwoord In
 am:Գրեք գաղտնաբառը
@@ -10901,6 +10908,9 @@ tw:全部展開
 uk:Розгорнути всі
 uz:Barchasini kengaytirish
 vn:Mở Rộng Tất Cả
+:Exposure Bias:
+:Exposure Program:
+:Exposure Time:
 :F&avorites
 am:Ը&նտրյալներ
 ar:المفضلة
@@ -11070,6 +11080,7 @@ tw:全螢幕模式(&U)
 uk:Повноекранний
 uz:To‘liq ekran
 vn:Toàn Màn Hình
+:F-Number:
 :Facing
 af:Teenoor
 am:Երկու էջ
@@ -11887,6 +11898,8 @@ uk:Розмір файла:
 uz:Fayl hajmi:
 vn:Kích thước:
 :File path not available
+br:O caminho do arquivo não está disponível
+pl:Ścieżka do pliku niedostępna
 :File:
 am:Ֆայլ՝
 ar:الملف:
@@ -11958,6 +11971,7 @@ tw:檔案:
 uk:Файл:
 uz:Fayl:
 vn:Tập tin:
+:Files:
 :Fin&d...
 am:Գտն&ել...
 ar:ال&بحث...
@@ -12843,6 +12857,9 @@ tw:符合單頁
 uk:Вмістити на сторінку
 uz:Bitta betga moslash
 vn:Vừa một trang đơn
+:Flash:
+:Focal Length (35mm):
+:Focal Length:
 :Fonts:
 am:Տառատեսաներ.
 ar:الخطوط:
@@ -13571,6 +13588,7 @@ pl:Startowa
 ru:Главная
 sk:Domov
 tw:首頁
+:ISO Speed:
 :Icon:
 am:Պատկերակ.
 ar:الأيقونة:
@@ -13627,6 +13645,7 @@ tw:圖示:
 uk:Значок:
 uz:Ikonka:
 vn:Biểu Tượng:
+:Image Size:
 :Image files (*.%s)
 am:Պատկերի ֆայլեր (*.%s)
 ar:ملفات الصور (*.%s)
@@ -14394,6 +14413,7 @@ tw:KB
 uk:KB
 uz:KB
 vn:KB
+:Keywords:
 :Last Page
 am:Վերջին էջ
 br:Última Página
@@ -15091,6 +15111,7 @@ sv:Manual på webbsida
 tr:Web Sitesinde Kullanım Klavuzu
 tw:線上說明
 uz:Veb-saytda qo‘llanma
+:Metering Mode:
 :Mobi documents
 am:XPS ֆայլեր
 ar:مستندات Mobi
@@ -17204,6 +17225,7 @@ pl:Opcje...
 ru:Параметры...
 sk:Možnosti…
 tw:選項…
+:Orientation:
 :Overwrite
 br:Sobrescrever
 de:Überschreiben
@@ -25024,6 +25046,7 @@ tw:警告
 uk:Застереження
 uz:Diqqat
 vn:Cảnh báo
+:White Balance:
 :XPS documents
 am:XPS ֆայլեր
 ar:مستندات XPS

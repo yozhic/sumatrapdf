@@ -38470,3 +38470,3027 @@ tl:Hindi available ang file path
 uk:Шлях до файлу недоступний
 :File path not available
 vn:Đường dẫn tệp không khả dụng
+:Bits Per Sample:
+am:ቢትስ በናሙና:
+:Camera Make:
+am:የካሜራ አምራች:
+:Camera Model:
+am:የካሜራ ሞዴል:
+:Comment:
+am:አስተያየት:
+:DPI:
+am:ዲፒአይ:
+:Date Original:
+am:የመጀመሪያ ቀን:
+:Encryption:
+am:ምስጠራ:
+:Exposure Bias:
+am:የተጋላጭነት አድሎአዊነት:
+:Exposure Program:
+am:የተጋላጭነት ፕሮግራም:
+:Exposure Time:
+am:የተጋላጭነት ጊዜ:
+:F-Number:
+am:ኤፍ-ቁጥር:
+:Files:
+am:ፋይሎች:
+:Flash:
+am:ፍላሽ:
+:Focal Length (35mm):
+am:የትኩረት ርዝመት (35ሚሜ):
+:Focal Length:
+am:የትኩረት ርዝመት:
+:ISO Speed:
+am:አይ ኤስ ኦ ፍጥነት:
+:Image Size:
+am:የምስል መጠን:
+:Keywords:
+am:ቁልፍ ቃላት:
+:Metering Mode:
+am:የመለኪያ ሁኔታ:
+:Orientation:
+am:አቅጣጫ:
+:White Balance:
+am:ነጭ ሚዛን:
+:Bits Per Sample:
+ar:البتات لكل عينة:
+:Camera Make:
+ar:صانع الكاميرا:
+:Camera Model:
+ar:طراز الكاميرا:
+:Comment:
+ar:تعليق:
+:DPI:
+ar:نقطة لكل بوصة:
+:Date Original:
+ar:التاريخ الأصلي:
+:Encryption:
+ar:التشفير:
+:Exposure Bias:
+ar:انحياز التعريض:
+:Exposure Program:
+ar:برنامج التعريض:
+:Exposure Time:
+ar:وقت التعريض:
+:F-Number:
+ar:رقم الفتحة:
+:Files:
+ar:الملفات:
+:Flash:
+ar:الفلاش:
+:Focal Length (35mm):
+ar:البعد البؤري (35 ملم):
+:Focal Length:
+ar:البعد البؤري:
+:ISO Speed:
+ar:سرعة ISO:
+:Image Size:
+ar:حجم الصورة:
+:Keywords:
+ar:الكلمات المفتاحية:
+:Metering Mode:
+ar:وضع القياس:
+:Orientation:
+ar:الاتجاه:
+:White Balance:
+ar:توازن الأبيض:
+:Bits Per Sample:
+br:Bitoù dre standilhon:
+:Camera Make:
+br:Groaer ar c'hamera:
+:Camera Model:
+br:Patrom ar c'hamera:
+:Comment:
+br:Evezhiadenn:
+:DPI:
+br:DPI:
+:Date Original:
+br:Deiziad orin:
+:Encryption:
+br:Enrinegañ:
+:Exposure Bias:
+br:Dilerc'hiadur an disklêriadur:
+:Exposure Program:
+br:Programa disklêriadur:
+:Exposure Time:
+br:Amzer disklêriadur:
+:F-Number:
+br:Niver F:
+:Files:
+br:Restroù:
+:Flash:
+br:Gwalarn:
+:Focal Length (35mm):
+br:Hed ar fokalenn (35mm):
+:Focal Length:
+br:Hed ar fokalenn:
+:ISO Speed:
+br:Tizh ISO:
+:Image Size:
+br:Ment ar skeudenn:
+:Keywords:
+br:Gerioù-alc'hwez:
+:Metering Mode:
+br:Doare ar muzuliadur:
+:Orientation:
+br:Reteradur:
+:White Balance:
+br:Kempouez ar gwenn:
+:Bits Per Sample:
+cn:每样本位数:
+:Camera Make:
+cn:相机制造商:
+:Camera Model:
+cn:相机型号:
+:Comment:
+cn:注释:
+:DPI:
+cn:DPI:
+:Date Original:
+cn:拍摄日期:
+:Encryption:
+cn:加密:
+:Exposure Bias:
+cn:曝光补偿:
+:Exposure Program:
+cn:曝光程序:
+:Exposure Time:
+cn:曝光时间:
+:F-Number:
+cn:光圈值:
+:Files:
+cn:文件:
+:Flash:
+cn:闪光灯:
+:Focal Length (35mm):
+cn:焦距 (35mm):
+:Focal Length:
+cn:焦距:
+:ISO Speed:
+cn:ISO 速度:
+:Image Size:
+cn:图像大小:
+:Keywords:
+cn:关键词:
+:Metering Mode:
+cn:测光模式:
+:Orientation:
+cn:方向:
+:White Balance:
+cn:白平衡:
+:Bits Per Sample:
+co:Bits per campione:
+:Camera Make:
+co:Marca di a camera:
+:Camera Model:
+co:Mudellu di a camera:
+:Comment:
+co:Cummentu:
+:DPI:
+co:DPI:
+:Date Original:
+co:Data originale:
+:Encryption:
+co:Criptatura:
+:Exposure Bias:
+co:Compensazione di l'esposizione:
+:Exposure Program:
+co:Prugramma d'esposizione:
+:Exposure Time:
+co:Tempu d'esposizione:
+:F-Number:
+co:Numeru F:
+:Files:
+co:Schedarii:
+:Flash:
+co:Flash:
+:Focal Length (35mm):
+co:Lunghezza focale (35mm):
+:Focal Length:
+co:Lunghezza focale:
+:ISO Speed:
+co:Velocità ISO:
+:Image Size:
+co:Dimensione di l'imaghjina:
+:Keywords:
+co:Parolle chjave:
+:Metering Mode:
+co:Modu di misurazione:
+:Orientation:
+co:Orientazione:
+:White Balance:
+co:Balance di u biancu:
+:Bits Per Sample:
+de:Bits pro Sample:
+:Camera Make:
+de:Kamerahersteller:
+:Camera Model:
+de:Kameramodell:
+:Comment:
+de:Kommentar:
+:DPI:
+de:DPI:
+:Date Original:
+de:Originaldatum:
+:Encryption:
+de:Verschlüsselung:
+:Exposure Bias:
+de:Belichtungskorrektur:
+:Exposure Program:
+de:Belichtungsprogramm:
+:Exposure Time:
+de:Belichtungszeit:
+:F-Number:
+de:Blende:
+:Files:
+de:Dateien:
+:Flash:
+de:Blitz:
+:Focal Length (35mm):
+de:Brennweite (35mm):
+:Focal Length:
+de:Brennweite:
+:ISO Speed:
+de:ISO-Empfindlichkeit:
+:Image Size:
+de:Bildgröße:
+:Keywords:
+de:Stichwörter:
+:Metering Mode:
+de:Messmethode:
+:Orientation:
+de:Ausrichtung:
+:White Balance:
+de:Weißabgleich:
+:Bits Per Sample:
+el:Bits ανά δείγμα:
+:Camera Make:
+el:Κατασκευαστής κάμερας:
+:Camera Model:
+el:Μοντέλο κάμερας:
+:Comment:
+el:Σχόλιο:
+:DPI:
+el:DPI:
+:Date Original:
+el:Ημερομηνία πρωτοτύπου:
+:Encryption:
+el:Κρυπτογράφηση:
+:Exposure Bias:
+el:Μετατόπιση έκθεσης:
+:Exposure Program:
+el:Πρόγραμμα έκθεσης:
+:Exposure Time:
+el:Χρόνος έκθεσης:
+:F-Number:
+el:Διάφραγμα:
+:Files:
+el:Αρχεία:
+:Flash:
+el:Φλας:
+:Focal Length (35mm):
+el:Εστιακή απόσταση (35mm):
+:Focal Length:
+el:Εστιακή απόσταση:
+:ISO Speed:
+el:Ταχύτητα ISO:
+:Image Size:
+el:Μέγεθος εικόνας:
+:Keywords:
+el:Λέξεις-κλειδιά:
+:Metering Mode:
+el:Λειτουργία φωτομέτρησης:
+:Orientation:
+el:Προσανατολισμός:
+:White Balance:
+el:Ισορροπία λευκού:
+:Bits Per Sample:
+hi:प्रति नमूना बिट्स:
+:Camera Make:
+hi:कैमरा निर्माता:
+:Camera Model:
+hi:कैमरा मॉडल:
+:Comment:
+hi:टिप्पणी:
+:DPI:
+hi:DPI:
+:Date Original:
+hi:मूल तिथि:
+:Encryption:
+hi:एन्क्रिप्शन:
+:Exposure Bias:
+hi:एक्सपोज़र बायस:
+:Exposure Program:
+hi:एक्सपोज़र प्रोग्राम:
+:Exposure Time:
+hi:एक्सपोज़र समय:
+:F-Number:
+hi:F-नंबर:
+:Files:
+hi:फ़ाइलें:
+:Flash:
+hi:फ्लैश:
+:Focal Length (35mm):
+hi:फोकल लंबाई (35mm):
+:Focal Length:
+hi:फोकल लंबाई:
+:ISO Speed:
+hi:ISO स्पीड:
+:Image Size:
+hi:छवि आकार:
+:Keywords:
+hi:कीवर्ड:
+:Metering Mode:
+hi:मीटरिंग मोड:
+:Orientation:
+hi:अभिविन्यास:
+:White Balance:
+hi:व्हाइट बैलेंस:
+:Bits Per Sample:
+it:Bit per campione:
+:Camera Make:
+it:Marca fotocamera:
+:Camera Model:
+it:Modello fotocamera:
+:Comment:
+it:Commento:
+:DPI:
+it:DPI:
+:Date Original:
+it:Data originale:
+:Encryption:
+it:Crittografia:
+:Exposure Bias:
+it:Compensazione esposizione:
+:Exposure Program:
+it:Programma di esposizione:
+:Exposure Time:
+it:Tempo di esposizione:
+:F-Number:
+it:Numero F:
+:Files:
+it:File:
+:Flash:
+it:Flash:
+:Focal Length (35mm):
+it:Lunghezza focale (35mm):
+:Focal Length:
+it:Lunghezza focale:
+:ISO Speed:
+it:Sensibilità ISO:
+:Image Size:
+it:Dimensione immagine:
+:Keywords:
+it:Parole chiave:
+:Metering Mode:
+it:Modalità misurazione:
+:Orientation:
+it:Orientamento:
+:White Balance:
+it:Bilanciamento del bianco:
+:Bits Per Sample:
+ja:サンプルあたりのビット数:
+:Camera Make:
+ja:カメラメーカー:
+:Camera Model:
+ja:カメラモデル:
+:Comment:
+ja:コメント:
+:DPI:
+ja:DPI:
+:Date Original:
+ja:撮影日時:
+:Encryption:
+ja:暗号化:
+:Exposure Bias:
+ja:露出補正:
+:Exposure Program:
+ja:露出プログラム:
+:Exposure Time:
+ja:露出時間:
+:F-Number:
+ja:F値:
+:Files:
+ja:ファイル:
+:Flash:
+ja:フラッシュ:
+:Focal Length (35mm):
+ja:焦点距離(35mm):
+:Focal Length:
+ja:焦点距離:
+:ISO Speed:
+ja:ISO感度:
+:Image Size:
+ja:画像サイズ:
+:Keywords:
+ja:キーワード:
+:Metering Mode:
+ja:測光モード:
+:Orientation:
+ja:向き:
+:White Balance:
+ja:ホワイトバランス:
+:Bits Per Sample:
+ml:സാമ്പിളിന് ബിറ്റുകൾ:
+:Camera Make:
+ml:ക്യാമറ നിർമ്മാതാവ്:
+:Camera Model:
+ml:ക്യാമറ മോഡൽ:
+:Comment:
+ml:അഭിപ്രായം:
+:DPI:
+ml:DPI:
+:Date Original:
+ml:യഥാർത്ഥ തീയതി:
+:Encryption:
+ml:എൻക്രിപ്ഷൻ:
+:Exposure Bias:
+ml:എക്സ്പോഷർ ബയസ്:
+:Exposure Program:
+ml:എക്സ്പോഷർ പ്രോഗ്രാം:
+:Exposure Time:
+ml:എക്സ്പോഷർ സമയം:
+:F-Number:
+ml:എഫ്-നമ്പർ:
+:Files:
+ml:ഫയലുകൾ:
+:Flash:
+ml:ഫ്ലാഷ്:
+:Focal Length (35mm):
+ml:ഫോക്കൽ ലെങ്ത് (35mm):
+:Focal Length:
+ml:ഫോക്കൽ ലെങ്ത്:
+:ISO Speed:
+ml:ISO സ്പീഡ്:
+:Image Size:
+ml:ചിത്രത്തിന്റെ വലുപ്പം:
+:Keywords:
+ml:കീവേഡുകൾ:
+:Metering Mode:
+ml:മീറ്ററിംഗ് മോഡ്:
+:Orientation:
+ml:ഓറിയന്റേഷൻ:
+:White Balance:
+ml:വൈറ്റ് ബാലൻസ്:
+:Bits Per Sample:
+nl:Bits per sample:
+:Camera Make:
+nl:Cameramerk:
+:Camera Model:
+nl:Cameramodel:
+:Comment:
+nl:Opmerking:
+:DPI:
+nl:DPI:
+:Date Original:
+nl:Oorspronkelijke datum:
+:Encryption:
+nl:Versleuteling:
+:Exposure Bias:
+nl:Belichtingscorrectie:
+:Exposure Program:
+nl:Belichtingsprogramma:
+:Exposure Time:
+nl:Belichtingstijd:
+:F-Number:
+nl:F-getal:
+:Files:
+nl:Bestanden:
+:Flash:
+nl:Flits:
+:Focal Length (35mm):
+nl:Brandpuntsafstand (35mm):
+:Focal Length:
+nl:Brandpuntsafstand:
+:ISO Speed:
+nl:ISO-snelheid:
+:Image Size:
+nl:Afbeeldingsgrootte:
+:Keywords:
+nl:Trefwoorden:
+:Metering Mode:
+nl:Meetmodus:
+:Orientation:
+nl:Oriëntatie:
+:White Balance:
+nl:Witbalans:
+:Bits Per Sample:
+pl:Bitów na próbkę:
+:Camera Make:
+pl:Producent aparatu:
+:Camera Model:
+pl:Model aparatu:
+:Comment:
+pl:Komentarz:
+:DPI:
+pl:DPI:
+:Date Original:
+pl:Data oryginału:
+:Encryption:
+pl:Szyfrowanie:
+:Exposure Bias:
+pl:Kompensacja ekspozycji:
+:Exposure Program:
+pl:Program ekspozycji:
+:Exposure Time:
+pl:Czas naświetlania:
+:F-Number:
+pl:Przysłona:
+:Files:
+pl:Pliki:
+:Flash:
+pl:Lampa błyskowa:
+:Focal Length (35mm):
+pl:Ogniskowa (35mm):
+:Focal Length:
+pl:Ogniskowa:
+:ISO Speed:
+pl:Czułość ISO:
+:Image Size:
+pl:Rozmiar obrazu:
+:Keywords:
+pl:Słowa kluczowe:
+:Metering Mode:
+pl:Tryb pomiaru:
+:Orientation:
+pl:Orientacja:
+:White Balance:
+pl:Balans bieli:
+:Bits Per Sample:
+ru:Бит на образец:
+:Camera Make:
+ru:Производитель камеры:
+:Camera Model:
+ru:Модель камеры:
+:Comment:
+ru:Комментарий:
+:DPI:
+ru:DPI:
+:Date Original:
+ru:Дата съемки:
+:Encryption:
+ru:Шифрование:
+:Exposure Bias:
+ru:Компенсация экспозиции:
+:Exposure Program:
+ru:Программа экспозиции:
+:Exposure Time:
+ru:Время экспозиции:
+:F-Number:
+ru:Диафрагма:
+:Files:
+ru:Файлы:
+:Flash:
+ru:Вспышка:
+:Focal Length (35mm):
+ru:Фокусное расстояние (35мм):
+:Focal Length:
+ru:Фокусное расстояние:
+:ISO Speed:
+ru:Светочувствительность ISO:
+:Image Size:
+ru:Размер изображения:
+:Keywords:
+ru:Ключевые слова:
+:Metering Mode:
+ru:Режим замера:
+:Orientation:
+ru:Ориентация:
+:White Balance:
+ru:Баланс белого:
+:Bits Per Sample:
+sk:Bitov na vzorku:
+:Camera Make:
+sk:Výrobca fotoaparátu:
+:Camera Model:
+sk:Model fotoaparátu:
+:Comment:
+sk:Komentár:
+:DPI:
+sk:DPI:
+:Date Original:
+sk:Dátum originálu:
+:Encryption:
+sk:Šifrovanie:
+:Exposure Bias:
+sk:Korekcia expozície:
+:Exposure Program:
+sk:Program expozície:
+:Exposure Time:
+sk:Čas expozície:
+:F-Number:
+sk:Clonové číslo:
+:Files:
+sk:Súbory:
+:Flash:
+sk:Blesk:
+:Focal Length (35mm):
+sk:Ohnisková vzdialenosť (35mm):
+:Focal Length:
+sk:Ohnisková vzdialenosť:
+:ISO Speed:
+sk:Citlivosť ISO:
+:Image Size:
+sk:Veľkosť obrázka:
+:Keywords:
+sk:Kľúčové slová:
+:Metering Mode:
+sk:Režim merania:
+:Orientation:
+sk:Orientácia:
+:White Balance:
+sk:Vyváženie bielej:
+:Bits Per Sample:
+sr-rs:Bitova po uzorku:
+:Camera Make:
+sr-rs:Proizvođač kamere:
+:Camera Model:
+sr-rs:Model kamere:
+:Comment:
+sr-rs:Komentar:
+:DPI:
+sr-rs:DPI:
+:Date Original:
+sr-rs:Originalni datum:
+:Encryption:
+sr-rs:Šifrovanje:
+:Exposure Bias:
+sr-rs:Kompenzacija ekspozicije:
+:Exposure Program:
+sr-rs:Program ekspozicije:
+:Exposure Time:
+sr-rs:Vreme ekspozicije:
+:F-Number:
+sr-rs:Otvor blende:
+:Files:
+sr-rs:Fajlovi:
+:Flash:
+sr-rs:Blic:
+:Focal Length (35mm):
+sr-rs:Žižna daljina (35mm):
+:Focal Length:
+sr-rs:Žižna daljina:
+:ISO Speed:
+sr-rs:ISO osetljivost:
+:Image Size:
+sr-rs:Veličina slike:
+:Keywords:
+sr-rs:Ključne reči:
+:Metering Mode:
+sr-rs:Režim merenja:
+:Orientation:
+sr-rs:Orijentacija:
+:White Balance:
+sr-rs:Balans bele:
+:Bits Per Sample:
+tw:每樣本位元數：
+:Camera Make:
+tw:相機製造商：
+:Camera Model:
+tw:相機型號：
+:Comment:
+tw:註解：
+:DPI:
+tw:DPI：
+:Date Original:
+tw:原始日期：
+:Encryption:
+tw:加密：
+:Exposure Bias:
+tw:曝光補償：
+:Exposure Program:
+tw:曝光程式：
+:Exposure Time:
+tw:曝光時間：
+:F-Number:
+tw:光圈值：
+:Files:
+tw:檔案：
+:Flash:
+tw:閃光燈：
+:Focal Length (35mm):
+tw:焦距（35mm）：
+:Focal Length:
+tw:焦距：
+:ISO Speed:
+tw:ISO 感光度：
+:Image Size:
+tw:影像大小：
+:Keywords:
+tw:關鍵字：
+:Metering Mode:
+tw:測光模式：
+:Orientation:
+tw:方向：
+:White Balance:
+tw:白平衡：
+:Bits Per Sample:
+az:Nümunə Başına Bitlər:
+:Camera Make:
+az:Kamera İstehsalçısı:
+:Camera Model:
+az:Kamera Modeli:
+:Comment:
+az:Şərh:
+:DPI:
+az:DPI:
+:Date Original:
+az:Orijinal Tarix:
+:Encryption:
+az:Şifrələmə:
+:Exposure Bias:
+az:Ekspozisiya Tənziməsi:
+:Exposure Program:
+az:Ekspozisiya Proqramı:
+:Exposure Time:
+az:Ekspozisiya Müddəti:
+:F-Number:
+az:F-Nömrəsi:
+:Files:
+az:Fayllar:
+:Flash:
+az:Flaş:
+:Focal Length (35mm):
+az:Fokus Məsafəsi (35mm):
+:Focal Length:
+az:Fokus Məsafəsi:
+:ISO Speed:
+az:ISO Sürəti:
+:Image Size:
+az:Şəkil Ölçüsü:
+:Keywords:
+az:Açar Sözlər:
+:Metering Mode:
+az:Ölçmə Rejimi:
+:Orientation:
+az:Oriyentasiya:
+:White Balance:
+az:Ağ Balans:
+:Bits Per Sample:
+by:Бітаў на выбарку:
+:Camera Make:
+by:Вытворца камеры:
+:Camera Model:
+by:Мадэль камеры:
+:Comment:
+by:Каментарый:
+:DPI:
+by:DPI:
+:Date Original:
+by:Зыходная дата:
+:Encryption:
+by:Шыфраванне:
+:Exposure Bias:
+by:Зрух экспазіцыі:
+:Exposure Program:
+by:Праграма экспазіцыі:
+:Exposure Time:
+by:Час экспазіцыі:
+:F-Number:
+by:Дыяфрагма:
+:Files:
+by:Файлы:
+:Flash:
+by:Успышка:
+:Focal Length (35mm):
+by:Фокусная адлегласць (35мм):
+:Focal Length:
+by:Фокусная адлегласць:
+:ISO Speed:
+by:Хуткасць ISO:
+:Image Size:
+by:Памер выявы:
+:Keywords:
+by:Ключавыя словы:
+:Metering Mode:
+by:Рэжым вымярэння:
+:Orientation:
+by:Арыентацыя:
+:White Balance:
+by:Баланс белага:
+:Bits Per Sample:
+ca:Bits per mostra:
+:Camera Make:
+ca:Fabricant de la càmera:
+:Camera Model:
+ca:Model de càmera:
+:Comment:
+ca:Comentari:
+:DPI:
+ca:DPI:
+:Date Original:
+ca:Data original:
+:Encryption:
+ca:Encriptació:
+:Exposure Bias:
+ca:Compensació d'exposició:
+:Exposure Program:
+ca:Programa d'exposició:
+:Exposure Time:
+ca:Temps d'exposició:
+:F-Number:
+ca:Obertura:
+:Files:
+ca:Fitxers:
+:Flash:
+ca:Flaix:
+:Focal Length (35mm):
+ca:Longitud focal (35mm):
+:Focal Length:
+ca:Longitud focal:
+:ISO Speed:
+ca:Sensibilitat ISO:
+:Image Size:
+ca:Mida de la imatge:
+:Keywords:
+ca:Paraules clau:
+:Metering Mode:
+ca:Mode de mesura:
+:Orientation:
+ca:Orientació:
+:White Balance:
+ca:Balanç de blancs:
+:Bits Per Sample:
+cy:Didau Fesul Sampl:
+:Camera Make:
+cy:Gwneuthurwr Camera:
+:Camera Model:
+cy:Model Camera:
+:Comment:
+cy:Sylw:
+:DPI:
+cy:DPI:
+:Date Original:
+cy:Dyddiad Gwreiddiol:
+:Encryption:
+cy:Amgryptiad:
+:Exposure Bias:
+cy:Tuedd Amlygiad:
+:Exposure Program:
+cy:Rhaglen Amlygiad:
+:Exposure Time:
+cy:Amser Amlygiad:
+:F-Number:
+cy:Rhif-F:
+:Files:
+cy:Ffeiliau:
+:Flash:
+cy:Fflach:
+:Focal Length (35mm):
+cy:Hyd Ffocal (35mm):
+:Focal Length:
+cy:Hyd Ffocal:
+:ISO Speed:
+cy:Cyflymder ISO:
+:Image Size:
+cy:Maint Delwedd:
+:Keywords:
+cy:Allweddeiriau:
+:Metering Mode:
+cy:Modd Mesur:
+:Orientation:
+cy:Cyfeiriadedd:
+:White Balance:
+cy:Cydbwysedd Gwyn:
+:Bits Per Sample:
+cz:Bitů na vzorek:
+:Camera Make:
+cz:Výrobce fotoaparátu:
+:Camera Model:
+cz:Model fotoaparátu:
+:Comment:
+cz:Komentář:
+:DPI:
+cz:DPI:
+:Date Original:
+cz:Datum pořízení:
+:Encryption:
+cz:Šifrování:
+:Exposure Bias:
+cz:Korekce expozice:
+:Exposure Program:
+cz:Expoziční program:
+:Exposure Time:
+cz:Expoziční čas:
+:F-Number:
+cz:Clonové číslo:
+:Files:
+cz:Soubory:
+:Flash:
+cz:Blesk:
+:Focal Length (35mm):
+cz:Ohnisková vzdálenost (35mm):
+:Focal Length:
+cz:Ohnisková vzdálenost:
+:ISO Speed:
+cz:Citlivost ISO:
+:Image Size:
+cz:Velikost obrázku:
+:Keywords:
+cz:Klíčová slova:
+:Metering Mode:
+cz:Režim měření:
+:Orientation:
+cz:Orientace:
+:White Balance:
+cz:Vyvážení bílé:
+:Bits Per Sample:
+es:Bits por Muestra:
+:Camera Make:
+es:Marca de Cámara:
+:Camera Model:
+es:Modelo de Cámara:
+:Comment:
+es:Comentario:
+:DPI:
+es:PPP:
+:Date Original:
+es:Fecha Original:
+:Encryption:
+es:Cifrado:
+:Exposure Bias:
+es:Compensación de Exposición:
+:Exposure Program:
+es:Programa de Exposición:
+:Exposure Time:
+es:Tiempo de Exposición:
+:F-Number:
+es:Número F:
+:Files:
+es:Archivos:
+:Flash:
+es:Flash:
+:Focal Length (35mm):
+es:Distancia Focal (35mm):
+:Focal Length:
+es:Distancia Focal:
+:ISO Speed:
+es:Velocidad ISO:
+:Image Size:
+es:Tamaño de Imagen:
+:Keywords:
+es:Palabras Clave:
+:Metering Mode:
+es:Modo de Medición:
+:Orientation:
+es:Orientación:
+:White Balance:
+es:Balance de Blancos:
+:Bits Per Sample:
+fa:بیت در هر نمونه:
+:Camera Make:
+fa:سازنده دوربین:
+:Camera Model:
+fa:مدل دوربین:
+:Comment:
+fa:نظر:
+:DPI:
+fa:DPI:
+:Date Original:
+fa:تاریخ اصلی:
+:Encryption:
+fa:رمزگذاری:
+:Exposure Bias:
+fa:جبران نوردهی:
+:Exposure Program:
+fa:برنامه نوردهی:
+:Exposure Time:
+fa:زمان نوردهی:
+:F-Number:
+fa:عدد دیافراگم:
+:Files:
+fa:فایل‌ها:
+:Flash:
+fa:فلاش:
+:Focal Length (35mm):
+fa:فاصله کانونی (35mm):
+:Focal Length:
+fa:فاصله کانونی:
+:ISO Speed:
+fa:سرعت ISO:
+:Image Size:
+fa:اندازه تصویر:
+:Keywords:
+fa:کلیدواژه‌ها:
+:Metering Mode:
+fa:حالت نورسنجی:
+:Orientation:
+fa:جهت:
+:White Balance:
+fa:تعادل سفیدی:
+:Bits Per Sample:
+fi:Bittiä per näyte:
+:Camera Make:
+fi:Kameran valmistaja:
+:Camera Model:
+fi:Kameramalli:
+:Comment:
+fi:Kommentti:
+:DPI:
+fi:DPI:
+:Date Original:
+fi:Alkuperäinen päivämäärä:
+:Encryption:
+fi:Salaus:
+:Exposure Bias:
+fi:Valotuskorjaus:
+:Exposure Program:
+fi:Valotusohjelma:
+:Exposure Time:
+fi:Valotusaika:
+:F-Number:
+fi:Aukkoluku:
+:Files:
+fi:Tiedostot:
+:Flash:
+fi:Salama:
+:Focal Length (35mm):
+fi:Polttoväli (35mm):
+:Focal Length:
+fi:Polttoväli:
+:ISO Speed:
+fi:ISO-herkkyys:
+:Image Size:
+fi:Kuvan koko:
+:Keywords:
+fi:Avainsanat:
+:Metering Mode:
+fi:Mittaustila:
+:Orientation:
+fi:Suunta:
+:White Balance:
+fi:Valkotasapaino:
+:Bits Per Sample:
+fo:Bits fyri hvørt sýni:
+:Camera Make:
+fo:Myndatøkuveitari:
+:Camera Model:
+fo:Myndatøkumódel:
+:Comment:
+fo:Viðmerking:
+:DPI:
+fo:DPI:
+:Date Original:
+fo:Upprunaligur dagur:
+:Encryption:
+fo:Kryptering:
+:Exposure Bias:
+fo:Ljósstyrksavvik:
+:Exposure Program:
+fo:Ljósstyrksforrit:
+:Exposure Time:
+fo:Ljósstyrkstíð:
+:F-Number:
+fo:F-tal:
+:Files:
+fo:Fílur:
+:Flash:
+fo:Blikslampa:
+:Focal Length (35mm):
+fo:Brennivídd (35mm):
+:Focal Length:
+fo:Brennivídd:
+:ISO Speed:
+fo:ISO ferð:
+:Image Size:
+fo:Myndastødd:
+:Keywords:
+fo:Evnisorð:
+:Metering Mode:
+fo:Mátingarháttur:
+:Orientation:
+fo:Umstilling:
+:White Balance:
+fo:Hvítjavning:
+:Bits Per Sample:
+fr:Bits par échantillon :
+:Camera Make:
+fr:Marque de l'appareil :
+:Camera Model:
+fr:Modèle de l'appareil :
+:Comment:
+fr:Commentaire :
+:DPI:
+fr:PPP :
+:Date Original:
+fr:Date d'origine :
+:Encryption:
+fr:Chiffrement :
+:Exposure Bias:
+fr:Correction d'exposition :
+:Exposure Program:
+fr:Programme d'exposition :
+:Exposure Time:
+fr:Temps d'exposition :
+:F-Number:
+fr:Ouverture :
+:Files:
+fr:Fichiers :
+:Flash:
+fr:Flash :
+:Focal Length (35mm):
+fr:Longueur focale (35mm) :
+:Focal Length:
+fr:Longueur focale :
+:ISO Speed:
+fr:Sensibilité ISO :
+:Image Size:
+fr:Taille de l'image :
+:Keywords:
+fr:Mots-clés :
+:Metering Mode:
+fr:Mode de mesure :
+:Orientation:
+fr:Orientation :
+:White Balance:
+fr:Balance des blancs :
+:Bits Per Sample:
+ga:Giotán In Aghaidh an Sampla:
+:Camera Make:
+ga:Déantóir Ceamara:
+:Camera Model:
+ga:Múnla Ceamara:
+:Comment:
+ga:Nóta Tráchta:
+:DPI:
+ga:DPI:
+:Date Original:
+ga:Dáta Bunaidh:
+:Encryption:
+ga:Criptiú:
+:Exposure Bias:
+ga:Claontacht Nochta:
+:Exposure Program:
+ga:Clár Nochta:
+:Exposure Time:
+ga:Am Nochta:
+:F-Number:
+ga:Uimhir-F:
+:Files:
+ga:Comhaid:
+:Flash:
+ga:Splanc:
+:Focal Length (35mm):
+ga:Fad Fócasach (35mm):
+:Focal Length:
+ga:Fad Fócasach:
+:ISO Speed:
+ga:Luas ISO:
+:Image Size:
+ga:Méid Íomhá:
+:Keywords:
+ga:Eochairfhocail:
+:Metering Mode:
+ga:Mód Méadraithe:
+:Orientation:
+ga:Treoshuíomh:
+:White Balance:
+ga:Cothromaíocht Bhán:
+:Bits Per Sample:
+gl:Bits por mostra:
+:Camera Make:
+gl:Fabricante da cámara:
+:Camera Model:
+gl:Modelo da cámara:
+:Comment:
+gl:Comentario:
+:DPI:
+gl:PPP:
+:Date Original:
+gl:Data orixinal:
+:Encryption:
+gl:Cifrado:
+:Exposure Bias:
+gl:Compensación de exposición:
+:Exposure Program:
+gl:Programa de exposición:
+:Exposure Time:
+gl:Tempo de exposición:
+:F-Number:
+gl:Número F:
+:Files:
+gl:Ficheiros:
+:Flash:
+gl:Flash:
+:Focal Length (35mm):
+gl:Lonxitude focal (35mm):
+:Focal Length:
+gl:Lonxitude focal:
+:ISO Speed:
+gl:Velocidade ISO:
+:Image Size:
+gl:Tamaño da imaxe:
+:Keywords:
+gl:Palabras clave:
+:Metering Mode:
+gl:Modo de medición:
+:Orientation:
+gl:Orientación:
+:White Balance:
+gl:Balance de brancos:
+:Bits Per Sample:
+he:ביטים לדגימה:
+:Camera Make:
+he:יצרן המצלמה:
+:Camera Model:
+he:דגם המצלמה:
+:Comment:
+he:הערה:
+:DPI:
+he:DPI:
+:Date Original:
+he:תאריך מקורי:
+:Encryption:
+he:הצפנה:
+:Exposure Bias:
+he:הטיית חשיפה:
+:Exposure Program:
+he:תוכנית חשיפה:
+:Exposure Time:
+he:זמן חשיפה:
+:F-Number:
+he:מספר F:
+:Files:
+he:קבצים:
+:Flash:
+he:פלאש:
+:Focal Length (35mm):
+he:אורך מוקד (35 מ"מ):
+:Focal Length:
+he:אורך מוקד:
+:ISO Speed:
+he:רגישות ISO:
+:Image Size:
+he:גודל תמונה:
+:Keywords:
+he:מילות מפתח:
+:Metering Mode:
+he:מצב מדידה:
+:Orientation:
+he:כיוון:
+:White Balance:
+he:איזון לבן:
+:Bits Per Sample:
+hu:Bit per minta:
+:Camera Make:
+hu:Kamera gyártója:
+:Camera Model:
+hu:Kamera modellje:
+:Comment:
+hu:Megjegyzés:
+:DPI:
+hu:DPI:
+:Date Original:
+hu:Eredeti dátum:
+:Encryption:
+hu:Titkosítás:
+:Exposure Bias:
+hu:Expozíció korrekció:
+:Exposure Program:
+hu:Expozíciós program:
+:Exposure Time:
+hu:Expozíciós idő:
+:F-Number:
+hu:F-szám:
+:Files:
+hu:Fájlok:
+:Flash:
+hu:Vaku:
+:Focal Length (35mm):
+hu:Gyújtótávolság (35mm):
+:Focal Length:
+hu:Gyújtótávolság:
+:ISO Speed:
+hu:ISO érzékenység:
+:Image Size:
+hu:Képméret:
+:Keywords:
+hu:Kulcsszavak:
+:Metering Mode:
+hu:Mérési mód:
+:Orientation:
+hu:Tájolás:
+:White Balance:
+hu:Fehéregyensúly:
+:Bits Per Sample:
+id:Bit Per Sampel:
+:Camera Make:
+id:Merek Kamera:
+:Camera Model:
+id:Model Kamera:
+:Comment:
+id:Komentar:
+:DPI:
+id:DPI:
+:Date Original:
+id:Tanggal Asli:
+:Encryption:
+id:Enkripsi:
+:Exposure Bias:
+id:Bias Eksposur:
+:Exposure Program:
+id:Program Eksposur:
+:Exposure Time:
+id:Waktu Eksposur:
+:F-Number:
+id:F-Number:
+:Files:
+id:File:
+:Flash:
+id:Lampu Kilat:
+:Focal Length (35mm):
+id:Panjang Fokus (35mm):
+:Focal Length:
+id:Panjang Fokus:
+:ISO Speed:
+id:Kecepatan ISO:
+:Image Size:
+id:Ukuran Gambar:
+:Keywords:
+id:Kata Kunci:
+:Metering Mode:
+id:Mode Metering:
+:Orientation:
+id:Orientasi:
+:White Balance:
+id:White Balance:
+:Bits Per Sample:
+kr:샘플당 비트:
+:Camera Make:
+kr:카메라 제조사:
+:Camera Model:
+kr:카메라 모델:
+:Comment:
+kr:코멘트:
+:DPI:
+kr:DPI:
+:Date Original:
+kr:원본 날짜:
+:Encryption:
+kr:암호화:
+:Exposure Bias:
+kr:노출 보정:
+:Exposure Program:
+kr:노출 프로그램:
+:Exposure Time:
+kr:노출 시간:
+:F-Number:
+kr:조리개 값:
+:Files:
+kr:파일:
+:Flash:
+kr:플래시:
+:Focal Length (35mm):
+kr:초점 거리 (35mm):
+:Focal Length:
+kr:초점 거리:
+:ISO Speed:
+kr:ISO 감도:
+:Image Size:
+kr:이미지 크기:
+:Keywords:
+kr:키워드:
+:Metering Mode:
+kr:측광 모드:
+:Orientation:
+kr:방향:
+:White Balance:
+kr:화이트 밸런스:
+:Bits Per Sample:
+lv:Biti uz paraugu:
+:Camera Make:
+lv:Kameras ražotājs:
+:Camera Model:
+lv:Kameras modelis:
+:Comment:
+lv:Komentārs:
+:DPI:
+lv:DPI:
+:Date Original:
+lv:Oriģinālais datums:
+:Encryption:
+lv:Šifrēšana:
+:Exposure Bias:
+lv:Ekspozīcijas kompensācija:
+:Exposure Program:
+lv:Ekspozīcijas programma:
+:Exposure Time:
+lv:Ekspozīcijas laiks:
+:F-Number:
+lv:F-skaitlis:
+:Files:
+lv:Faili:
+:Flash:
+lv:Zibspuldze:
+:Focal Length (35mm):
+lv:Fokusa attālums (35mm):
+:Focal Length:
+lv:Fokusa attālums:
+:ISO Speed:
+lv:ISO ātrums:
+:Image Size:
+lv:Attēla izmērs:
+:Keywords:
+lv:Atslēgvārdi:
+:Metering Mode:
+lv:Mērīšanas režīms:
+:Orientation:
+lv:Orientācija:
+:White Balance:
+lv:Baltā balanss:
+:Bits Per Sample:
+my:နမူနာတစ်ခုလျှင် ဘစ်များ:
+:Camera Make:
+my:ကင်မရာ ထုတ်လုပ်သူ:
+:Camera Model:
+my:ကင်မရာ မော်ဒယ်:
+:Comment:
+my:မှတ်ချက်:
+:DPI:
+my:DPI:
+:Date Original:
+my:မူရင်းရက်စွဲ:
+:Encryption:
+my:ကုဒ်ဝှက်ခြင်း:
+:Exposure Bias:
+my:အလင်းပေးချိန် လွဲချက်:
+:Exposure Program:
+my:အလင်းပေးချိန် ပရိုဂရမ်:
+:Exposure Time:
+my:အလင်းပေးချိန်:
+:F-Number:
+my:F-နံပါတ်:
+:Files:
+my:ဖိုင်များ:
+:Flash:
+my:ဖလက်ရှ်:
+:Focal Length (35mm):
+my:အာရုံခံအကွာအဝေး (35mm):
+:Focal Length:
+my:အာရုံခံအကွာအဝေး:
+:ISO Speed:
+my:ISO အမြန်နှုန်း:
+:Image Size:
+my:ရုပ်ပုံအရွယ်:
+:Keywords:
+my:သော့ချက်စာလုံးများ:
+:Metering Mode:
+my:တိုင်းတာမှုနည်းလမ်း:
+:Orientation:
+my:တည်နေရာ:
+:White Balance:
+my:အဖြူချိန်ညှိခြင်း:
+:Bits Per Sample:
+pt:Bits Por Amostra:
+:Camera Make:
+pt:Fabricante da Câmara:
+:Camera Model:
+pt:Modelo da Câmara:
+:Comment:
+pt:Comentário:
+:DPI:
+pt:DPI:
+:Date Original:
+pt:Data Original:
+:Encryption:
+pt:Encriptação:
+:Exposure Bias:
+pt:Compensação de Exposição:
+:Exposure Program:
+pt:Programa de Exposição:
+:Exposure Time:
+pt:Tempo de Exposição:
+:F-Number:
+pt:Número F:
+:Files:
+pt:Ficheiros:
+:Flash:
+pt:Flash:
+:Focal Length (35mm):
+pt:Distância Focal (35mm):
+:Focal Length:
+pt:Distância Focal:
+:ISO Speed:
+pt:Velocidade ISO:
+:Image Size:
+pt:Tamanho da Imagem:
+:Keywords:
+pt:Palavras-chave:
+:Metering Mode:
+pt:Modo de Medição:
+:Orientation:
+pt:Orientação:
+:White Balance:
+pt:Balanço de Brancos:
+:Bits Per Sample:
+ro:Biți per eșantion:
+:Camera Make:
+ro:Producător cameră:
+:Camera Model:
+ro:Model cameră:
+:Comment:
+ro:Comentariu:
+:DPI:
+ro:DPI:
+:Date Original:
+ro:Data originală:
+:Encryption:
+ro:Criptare:
+:Exposure Bias:
+ro:Compensare expunere:
+:Exposure Program:
+ro:Program expunere:
+:Exposure Time:
+ro:Timp expunere:
+:F-Number:
+ro:Număr F:
+:Files:
+ro:Fișiere:
+:Flash:
+ro:Bliț:
+:Focal Length (35mm):
+ro:Distanță focală (35mm):
+:Focal Length:
+ro:Distanță focală:
+:ISO Speed:
+ro:Sensibilitate ISO:
+:Image Size:
+ro:Dimensiune imagine:
+:Keywords:
+ro:Cuvinte cheie:
+:Metering Mode:
+ro:Mod măsurare:
+:Orientation:
+ro:Orientare:
+:White Balance:
+ro:Balans de alb:
+:Bits Per Sample:
+sat:ᱱᱚᱢᱩᱱᱟ ᱞᱮᱠᱟᱛᱮ ᱵᱤᱴ:
+:Camera Make:
+sat:ᱠᱮᱢᱮᱨᱟ ᱵᱮᱱᱟᱣᱤᱡ:
+:Camera Model:
+sat:ᱠᱮᱢᱮᱨᱟ ᱢᱳᱰᱮᱞ:
+:Comment:
+sat:ᱢᱚᱱᱛᱚᱵᱽ:
+:DPI:
+sat:DPI:
+:Date Original:
+sat:ᱟᱥᱚᱞ ᱢᱟᱹᱦᱤᱛ:
+:Encryption:
+sat:ᱮᱱᱠᱨᱤᱯᱥᱚᱱ:
+:Exposure Bias:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱵᱟᱭᱟᱥ:
+:Exposure Program:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱯᱨᱳᱜᱨᱟᱢ:
+:Exposure Time:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱚᱠᱛᱚ:
+:F-Number:
+sat:F-ᱮᱞᱮᱞ:
+:Files:
+sat:ᱨᱮᱫᱠᱚ:
+:Flash:
+sat:ᱯᱷᱞᱟᱥ:
+:Focal Length (35mm):
+sat:ᱯᱷᱳᱠᱟᱞ ᱡᱤᱞᱤᱧ (35mm):
+:Focal Length:
+sat:ᱯᱷᱳᱠᱟᱞ ᱡᱤᱞᱤᱧ:
+:ISO Speed:
+sat:ISO ᱞᱚᱜᱚᱱ:
+:Image Size:
+sat:ᱪᱤᱛᱟᱹᱨ ᱢᱟᱯ:
+:Keywords:
+sat:ᱠᱟᱹᱴᱷᱤᱠᱚ:
+:Metering Mode:
+sat:ᱢᱤᱴᱚᱨᱤᱝ ᱢᱳᱰ:
+:Orientation:
+sat:ᱫᱤᱥᱟᱹ:
+:White Balance:
+sat:ᱯᱩᱸᱰ ᱵᱮᱞᱮᱱᱥ:
+:Bits Per Sample:
+sl:Bitov na vzorec:
+:Camera Make:
+sl:Proizvajalec kamere:
+:Camera Model:
+sl:Model kamere:
+:Comment:
+sl:Komentar:
+:DPI:
+sl:DPI:
+:Date Original:
+sl:Izvirni datum:
+:Encryption:
+sl:Šifriranje:
+:Exposure Bias:
+sl:Kompenzacija osvetlitve:
+:Exposure Program:
+sl:Program osvetlitve:
+:Exposure Time:
+sl:Čas osvetlitve:
+:F-Number:
+sl:Zaslonsko število:
+:Files:
+sl:Datoteke:
+:Flash:
+sl:Bliskavica:
+:Focal Length (35mm):
+sl:Goriščna razdalja (35mm):
+:Focal Length:
+sl:Goriščna razdalja:
+:ISO Speed:
+sl:ISO občutljivost:
+:Image Size:
+sl:Velikost slike:
+:Keywords:
+sl:Ključne besede:
+:Metering Mode:
+sl:Način merjenja:
+:Orientation:
+sl:Usmerjenost:
+:White Balance:
+sl:Bela ravnovesje:
+:Bits Per Sample:
+sv:Bitar per sampel:
+:Camera Make:
+sv:Kameratillverkare:
+:Camera Model:
+sv:Kameramodell:
+:Comment:
+sv:Kommentar:
+:DPI:
+sv:DPI:
+:Date Original:
+sv:Ursprungligt datum:
+:Encryption:
+sv:Kryptering:
+:Exposure Bias:
+sv:Exponeringskompensation:
+:Exposure Program:
+sv:Exponeringsprogram:
+:Exposure Time:
+sv:Exponeringstid:
+:F-Number:
+sv:Bländare:
+:Files:
+sv:Filer:
+:Flash:
+sv:Blixt:
+:Focal Length (35mm):
+sv:Brännvidd (35mm):
+:Focal Length:
+sv:Brännvidd:
+:ISO Speed:
+sv:ISO-hastighet:
+:Image Size:
+sv:Bildstorlek:
+:Keywords:
+sv:Nyckelord:
+:Metering Mode:
+sv:Mätläge:
+:Orientation:
+sv:Orientering:
+:White Balance:
+sv:Vitbalans:
+:Bits Per Sample:
+ta:மாதிரிக்கு பிட்கள்:
+:Camera Make:
+ta:கேமரா தயாரிப்பாளர்:
+:Camera Model:
+ta:கேமரா மாடல்:
+:Comment:
+ta:கருத்து:
+:DPI:
+ta:DPI:
+:Date Original:
+ta:அசல் தேதி:
+:Encryption:
+ta:குறியாக்கம்:
+:Exposure Bias:
+ta:வெளிப்பாடு சார்பு:
+:Exposure Program:
+ta:வெளிப்பாடு நிரல்:
+:Exposure Time:
+ta:வெளிப்பாடு நேரம்:
+:F-Number:
+ta:F-எண்:
+:Files:
+ta:கோப்புகள்:
+:Flash:
+ta:ஃபிளாஷ்:
+:Focal Length (35mm):
+ta:குவிய நீளம் (35mm):
+:Focal Length:
+ta:குவிய நீளம்:
+:ISO Speed:
+ta:ISO வேகம்:
+:Image Size:
+ta:படத்தின் அளவு:
+:Keywords:
+ta:முக்கிய சொற்கள்:
+:Metering Mode:
+ta:அளவீடு முறை:
+:Orientation:
+ta:திசையமைப்பு:
+:White Balance:
+ta:வெள்ளை சமநிலை:
+:Bits Per Sample:
+tr:Örnek Başına Bit:
+:Camera Make:
+tr:Kamera Markası:
+:Camera Model:
+tr:Kamera Modeli:
+:Comment:
+tr:Yorum:
+:DPI:
+tr:DPI:
+:Date Original:
+tr:Özgün Tarih:
+:Encryption:
+tr:Şifreleme:
+:Exposure Bias:
+tr:Pozlama Sapması:
+:Exposure Program:
+tr:Pozlama Programı:
+:Exposure Time:
+tr:Pozlama Süresi:
+:F-Number:
+tr:F-Sayısı:
+:Files:
+tr:Dosyalar:
+:Flash:
+tr:Flaş:
+:Focal Length (35mm):
+tr:Odak Uzunluğu (35mm):
+:Focal Length:
+tr:Odak Uzunluğu:
+:ISO Speed:
+tr:ISO Hızı:
+:Image Size:
+tr:Görüntü Boyutu:
+:Keywords:
+tr:Anahtar Kelimeler:
+:Metering Mode:
+tr:Ölçüm Modu:
+:Orientation:
+tr:Yönelim:
+:White Balance:
+tr:Beyaz Dengesi:
+:Bits Per Sample:
+uz:Namuna uchun bitlar:
+:Camera Make:
+uz:Kamera ishlab chiqaruvchisi:
+:Camera Model:
+uz:Kamera modeli:
+:Comment:
+uz:Izoh:
+:DPI:
+uz:DPI:
+:Date Original:
+uz:Asl sana:
+:Encryption:
+uz:Shifrlash:
+:Exposure Bias:
+uz:Ekspozitsiya siljishi:
+:Exposure Program:
+uz:Ekspozitsiya dasturi:
+:Exposure Time:
+uz:Ekspozitsiya vaqti:
+:F-Number:
+uz:F-raqami:
+:Files:
+uz:Fayllar:
+:Flash:
+uz:Flesh:
+:Focal Length (35mm):
+uz:Fokus masofasi (35mm):
+:Focal Length:
+uz:Fokus masofasi:
+:ISO Speed:
+uz:ISO tezligi:
+:Image Size:
+uz:Tasvir hajmi:
+:Keywords:
+uz:Kalit so'zlar:
+:Metering Mode:
+uz:O'lchash rejimi:
+:Orientation:
+uz:Yo'nalish:
+:White Balance:
+uz:Oq balans:
+:Bits Per Sample:
+af:Bisse Per Monster:
+:Camera Make:
+af:Kameramerk:
+:Camera Model:
+af:Kameramodel:
+:Comment:
+af:Kommentaar:
+:DPI:
+af:DPI:
+:Date Original:
+af:Oorspronklike Datum:
+:Encryption:
+af:Enkripsie:
+:Exposure Bias:
+af:Beligtingsyking:
+:Exposure Program:
+af:Beligtingsprogram:
+:Exposure Time:
+af:Beligtingstyd:
+:F-Number:
+af:F-Getal:
+:Files:
+af:Lêers:
+:Flash:
+af:Flits:
+:Focal Length (35mm):
+af:Brandpuntafstand (35mm):
+:Focal Length:
+af:Brandpuntafstand:
+:ISO Speed:
+af:ISO-spoed:
+:Image Size:
+af:Beeldgrootte:
+:Keywords:
+af:Sleutelwoorde:
+:Metering Mode:
+af:Meetmodus:
+:Orientation:
+af:Oriëntasie:
+:White Balance:
+af:Witbalans:
+:Bits Per Sample:
+bg:Битове на извадка:
+:Camera Make:
+bg:Производител на камера:
+:Camera Model:
+bg:Модел на камера:
+:Comment:
+bg:Коментар:
+:DPI:
+bg:DPI:
+:Date Original:
+bg:Оригинална дата:
+:Encryption:
+bg:Шифроване:
+:Exposure Bias:
+bg:Компенсация на експозицията:
+:Exposure Program:
+bg:Програма на експозиция:
+:Exposure Time:
+bg:Време на експозиция:
+:F-Number:
+bg:F-число:
+:Files:
+bg:Файлове:
+:Flash:
+bg:Светкавица:
+:Focal Length (35mm):
+bg:Фокусно разстояние (35mm):
+:Focal Length:
+bg:Фокусно разстояние:
+:ISO Speed:
+bg:ISO светлочувствителност:
+:Image Size:
+bg:Размер на изображение:
+:Keywords:
+bg:Ключови думи:
+:Metering Mode:
+bg:Режим на измерване:
+:Orientation:
+bg:Ориентация:
+:White Balance:
+bg:Баланс на бялото:
+:Bits Per Sample:
+bn:প্রতি নমুনায় বিট:
+:Camera Make:
+bn:ক্যামেরা নির্মাতা:
+:Camera Model:
+bn:ক্যামেরা মডেল:
+:Comment:
+bn:মন্তব্য:
+:DPI:
+bn:ডিপিআই:
+:Date Original:
+bn:মূল তারিখ:
+:Encryption:
+bn:এনক্রিপশন:
+:Exposure Bias:
+bn:এক্সপোজার বায়াস:
+:Exposure Program:
+bn:এক্সপোজার প্রোগ্রাম:
+:Exposure Time:
+bn:এক্সপোজার সময়:
+:F-Number:
+bn:এফ-নম্বর:
+:Files:
+bn:ফাইল:
+:Flash:
+bn:ফ্ল্যাশ:
+:Focal Length (35mm):
+bn:ফোকাল দৈর্ঘ্য (৩৫মিমি):
+:Focal Length:
+bn:ফোকাল দৈর্ঘ্য:
+:ISO Speed:
+bn:আইএসও গতি:
+:Image Size:
+bn:ছবির আকার:
+:Keywords:
+bn:কীওয়ার্ড:
+:Metering Mode:
+bn:মিটারিং মোড:
+:Orientation:
+bn:দিকবিন্যাস:
+:White Balance:
+bn:হোয়াইট ব্যালেন্স:
+:Bits Per Sample:
+bs:Bitova po uzorku:
+:Camera Make:
+bs:Proizvođač kamere:
+:Camera Model:
+bs:Model kamere:
+:Comment:
+bs:Komentar:
+:DPI:
+bs:DPI:
+:Date Original:
+bs:Originalni datum:
+:Encryption:
+bs:Enkripcija:
+:Exposure Bias:
+bs:Kompenzacija ekspozicije:
+:Exposure Program:
+bs:Program ekspozicije:
+:Exposure Time:
+bs:Vrijeme ekspozicije:
+:F-Number:
+bs:F-broj:
+:Files:
+bs:Datoteke:
+:Flash:
+bs:Bljeskalica:
+:Focal Length (35mm):
+bs:Žižna daljina (35mm):
+:Focal Length:
+bs:Žižna daljina:
+:ISO Speed:
+bs:ISO brzina:
+:Image Size:
+bs:Veličina slike:
+:Keywords:
+bs:Ključne riječi:
+:Metering Mode:
+bs:Način mjerenja:
+:Orientation:
+bs:Orijentacija:
+:White Balance:
+bs:Balans bijele:
+:Bits Per Sample:
+ca-xv:Bits per mostra:
+:Camera Make:
+ca-xv:Fabricant de la càmera:
+:Camera Model:
+ca-xv:Model de càmera:
+:Comment:
+ca-xv:Comentari:
+:DPI:
+ca-xv:PPP:
+:Date Original:
+ca-xv:Data original:
+:Encryption:
+ca-xv:Encriptació:
+:Exposure Bias:
+ca-xv:Compensació d'exposició:
+:Exposure Program:
+ca-xv:Programa d'exposició:
+:Exposure Time:
+ca-xv:Temps d'exposició:
+:F-Number:
+ca-xv:Número F:
+:Files:
+ca-xv:Fitxers:
+:Flash:
+ca-xv:Flaix:
+:Focal Length (35mm):
+ca-xv:Longitud focal (35mm):
+:Focal Length:
+ca-xv:Longitud focal:
+:ISO Speed:
+ca-xv:Velocitat ISO:
+:Image Size:
+ca-xv:Mida de la imatge:
+:Keywords:
+ca-xv:Paraules clau:
+:Metering Mode:
+ca-xv:Mode de mesura:
+:Orientation:
+ca-xv:Orientació:
+:White Balance:
+ca-xv:Balanç de blancs:
+:Bits Per Sample:
+dk:Bit pr. prøve:
+:Camera Make:
+dk:Kameramærke:
+:Camera Model:
+dk:Kameramodel:
+:Comment:
+dk:Kommentar:
+:DPI:
+dk:DPI:
+:Date Original:
+dk:Oprindelig dato:
+:Encryption:
+dk:Kryptering:
+:Exposure Bias:
+dk:Eksponeringskompensation:
+:Exposure Program:
+dk:Eksponeringsprogram:
+:Exposure Time:
+dk:Eksponeringstid:
+:F-Number:
+dk:F-nummer:
+:Files:
+dk:Filer:
+:Flash:
+dk:Blitz:
+:Focal Length (35mm):
+dk:Brændvidde (35mm):
+:Focal Length:
+dk:Brændvidde:
+:ISO Speed:
+dk:ISO-følsomhed:
+:Image Size:
+dk:Billedstørrelse:
+:Keywords:
+dk:Nøgleord:
+:Metering Mode:
+dk:Måletilstand:
+:Orientation:
+dk:Orientering:
+:White Balance:
+dk:Hvidbalance:
+:Bits Per Sample:
+et:Bitte proovi kohta:
+:Camera Make:
+et:Kaamera tootja:
+:Camera Model:
+et:Kaamera mudel:
+:Comment:
+et:Kommentaar:
+:DPI:
+et:DPI:
+:Date Original:
+et:Algne kuupäev:
+:Encryption:
+et:Krüpteerimine:
+:Exposure Bias:
+et:Säri nihe:
+:Exposure Program:
+et:Säriprogramm:
+:Exposure Time:
+et:Säriaeg:
+:F-Number:
+et:Ava:
+:Files:
+et:Failid:
+:Flash:
+et:Välk:
+:Focal Length (35mm):
+et:Fookuskaugus (35mm):
+:Focal Length:
+et:Fookuskaugus:
+:ISO Speed:
+et:ISO tundlikkus:
+:Image Size:
+et:Pildi suurus:
+:Keywords:
+et:Võtmesõnad:
+:Metering Mode:
+et:Mõõtmisrežiim:
+:Orientation:
+et:Orientatsioon:
+:White Balance:
+et:Valge tasakaal:
+:Bits Per Sample:
+eu:Bit laginkako:
+:Camera Make:
+eu:Kameraren fabrikatzailea:
+:Camera Model:
+eu:Kameraren eredua:
+:Comment:
+eu:Iruzkina:
+:DPI:
+eu:DPI:
+:Date Original:
+eu:Jatorrizko data:
+:Encryption:
+eu:Enkriptazioa:
+:Exposure Bias:
+eu:Esposizio joera:
+:Exposure Program:
+eu:Esposizio programa:
+:Exposure Time:
+eu:Esposizio denbora:
+:F-Number:
+eu:F-zenbakia:
+:Files:
+eu:Fitxategiak:
+:Flash:
+eu:Flasha:
+:Focal Length (35mm):
+eu:Distantzia fokala (35mm):
+:Focal Length:
+eu:Distantzia fokala:
+:ISO Speed:
+eu:ISO abiadura:
+:Image Size:
+eu:Irudi tamaina:
+:Keywords:
+eu:Gako-hitzak:
+:Metering Mode:
+eu:Neurketa modua:
+:Orientation:
+eu:Orientazioa:
+:White Balance:
+eu:Zuri oreka:
+:Bits Per Sample:
+fy-nl:Bits per sample:
+:Camera Make:
+fy-nl:Kameramerk:
+:Camera Model:
+fy-nl:Kameramodel:
+:Comment:
+fy-nl:Opmerking:
+:DPI:
+fy-nl:DPI:
+:Date Original:
+fy-nl:Orizjinele datum:
+:Encryption:
+fy-nl:Fersifering:
+:Exposure Bias:
+fy-nl:Beljochtingskompinsaasje:
+:Exposure Program:
+fy-nl:Beljochtingsprogramma:
+:Exposure Time:
+fy-nl:Beljochtingstiid:
+:F-Number:
+fy-nl:F-nûmer:
+:Files:
+fy-nl:Bestannen:
+:Flash:
+fy-nl:Flits:
+:Focal Length (35mm):
+fy-nl:Brandpuntsôfstân (35mm):
+:Focal Length:
+fy-nl:Brandpuntsôfstân:
+:ISO Speed:
+fy-nl:ISO-snelheid:
+:Image Size:
+fy-nl:Ofbylding grutte:
+:Keywords:
+fy-nl:Kaaiwurden:
+:Metering Mode:
+fy-nl:Mjitmodus:
+:Orientation:
+fy-nl:Oriïntaasje:
+:White Balance:
+fy-nl:Wytbalâns:
+:Bits Per Sample:
+hr:Bitova po uzorku:
+:Camera Make:
+hr:Proizvođač kamere:
+:Camera Model:
+hr:Model kamere:
+:Comment:
+hr:Komentar:
+:DPI:
+hr:DPI:
+:Date Original:
+hr:Izvorni datum:
+:Encryption:
+hr:Enkripcija:
+:Exposure Bias:
+hr:Kompenzacija ekspozicije:
+:Exposure Program:
+hr:Program ekspozicije:
+:Exposure Time:
+hr:Vrijeme ekspozicije:
+:F-Number:
+hr:Blenda:
+:Files:
+hr:Datoteke:
+:Flash:
+hr:Bljeskalica:
+:Focal Length (35mm):
+hr:Žarišna duljina (35mm):
+:Focal Length:
+hr:Žarišna duljina:
+:ISO Speed:
+hr:ISO osjetljivost:
+:Image Size:
+hr:Veličina slike:
+:Keywords:
+hr:Ključne riječi:
+:Metering Mode:
+hr:Način mjerenja:
+:Orientation:
+hr:Orijentacija:
+:White Balance:
+hr:Balans bijele:
+:Bits Per Sample:
+jv:Bit Saben Sampel:
+:Camera Make:
+jv:Pabrikan Kamera:
+:Camera Model:
+jv:Model Kamera:
+:Comment:
+jv:Komentar:
+:DPI:
+jv:DPI:
+:Date Original:
+jv:Tanggal Asli:
+:Encryption:
+jv:Enkripsi:
+:Exposure Bias:
+jv:Bias Eksposur:
+:Exposure Program:
+jv:Program Eksposur:
+:Exposure Time:
+jv:Wektu Eksposur:
+:F-Number:
+jv:Angka-F:
+:Files:
+jv:Berkas:
+:Flash:
+jv:Lampu Kilat:
+:Focal Length (35mm):
+jv:Dawa Fokus (35mm):
+:Focal Length:
+jv:Dawa Fokus:
+:ISO Speed:
+jv:Kacepetan ISO:
+:Image Size:
+jv:Ukuran Gambar:
+:Keywords:
+jv:Tembung Kunci:
+:Metering Mode:
+jv:Mode Pengukuran:
+:Orientation:
+jv:Orientasi:
+:White Balance:
+jv:Imbangan Putih:
+:Bits Per Sample:
+ka:ბიტი ნიმუშზე:
+:Camera Make:
+ka:კამერის მწარმოებელი:
+:Camera Model:
+ka:კამერის მოდელი:
+:Comment:
+ka:კომენტარი:
+:DPI:
+ka:DPI:
+:Date Original:
+ka:ორიგინალის თარიღი:
+:Encryption:
+ka:დაშიფვრა:
+:Exposure Bias:
+ka:ექსპოზიციის გადახრა:
+:Exposure Program:
+ka:ექსპოზიციის პროგრამა:
+:Exposure Time:
+ka:ექსპოზიციის დრო:
+:F-Number:
+ka:F-რიცხვი:
+:Files:
+ka:ფაილები:
+:Flash:
+ka:ფლეში:
+:Focal Length (35mm):
+ka:ფოკუსური მანძილი (35მმ):
+:Focal Length:
+ka:ფოკუსური მანძილი:
+:ISO Speed:
+ka:ISO სიჩქარე:
+:Image Size:
+ka:გამოსახულების ზომა:
+:Keywords:
+ka:საკვანძო სიტყვები:
+:Metering Mode:
+ka:გაზომვის რეჟიმი:
+:Orientation:
+ka:ორიენტაცია:
+:White Balance:
+ka:თეთრის ბალანსი:
+:Bits Per Sample:
+ku:Bît Ji Bo Nimûneyê:
+:Camera Make:
+ku:Çêkerê Kamerayê:
+:Camera Model:
+ku:Modela Kamerayê:
+:Comment:
+ku:Şîrove:
+:DPI:
+ku:DPI:
+:Date Original:
+ku:Dîroka Orîjînal:
+:Encryption:
+ku:Şîfrekirin:
+:Exposure Bias:
+ku:Laybûna Eşkerekirinê:
+:Exposure Program:
+ku:Bernameya Eşkerekirinê:
+:Exposure Time:
+ku:Dema Eşkerekirinê:
+:F-Number:
+ku:Hejmara-F:
+:Files:
+ku:Dosye:
+:Flash:
+ku:Flaş:
+:Focal Length (35mm):
+ku:Dirêjiya Kanîkê (35mm):
+:Focal Length:
+ku:Dirêjiya Kanîkê:
+:ISO Speed:
+ku:Leza ISO:
+:Image Size:
+ku:Mezinahiya Wêneyê:
+:Keywords:
+ku:Peyvên Kilîtî:
+:Metering Mode:
+ku:Moda Pîvandinê:
+:Orientation:
+ku:Rêveberî:
+:White Balance:
+ku:Hevsengiya Spî:
+:Bits Per Sample:
+kw:Bits Pub Sampl:
+:Camera Make:
+kw:Gwrier Kamera:
+:Camera Model:
+kw:Model Kamera:
+:Comment:
+kw:Kampolla:
+:DPI:
+kw:DPI:
+:Date Original:
+kw:Dedhyans Gwredhek:
+:Encryption:
+kw:Krinieth:
+:Exposure Bias:
+kw:Tuedh Asposedhyans:
+:Exposure Program:
+kw:Program Asposedhyans:
+:Exposure Time:
+kw:Termyn Asposedhyans:
+:F-Number:
+kw:Niver-F:
+:Files:
+kw:Restrennow:
+:Flash:
+kw:Flash:
+:Focal Length (35mm):
+kw:Hirder Fokus (35mm):
+:Focal Length:
+kw:Hirder Fokus:
+:ISO Speed:
+kw:Res ISO:
+:Image Size:
+kw:Myns Imach:
+:Keywords:
+kw:Geryow Alwedh:
+:Metering Mode:
+kw:Modh Mesurans:
+:Orientation:
+kw:Kyfugiaseth:
+:White Balance:
+kw:Balansya Gwynn:
+:Bits Per Sample:
+lt:Bitų vienam pavyzdžiui:
+:Camera Make:
+lt:Kameros gamintojas:
+:Camera Model:
+lt:Kameros modelis:
+:Comment:
+lt:Komentaras:
+:DPI:
+lt:TPC:
+:Date Original:
+lt:Originali data:
+:Encryption:
+lt:Šifravimas:
+:Exposure Bias:
+lt:Ekspozicijos nuokrypis:
+:Exposure Program:
+lt:Ekspozicijos programa:
+:Exposure Time:
+lt:Išlaikymo laikas:
+:F-Number:
+lt:F skaičius:
+:Files:
+lt:Failai:
+:Flash:
+lt:Blykstė:
+:Focal Length (35mm):
+lt:Židinio nuotolis (35mm):
+:Focal Length:
+lt:Židinio nuotolis:
+:ISO Speed:
+lt:ISO jautrumas:
+:Image Size:
+lt:Vaizdo dydis:
+:Keywords:
+lt:Raktažodžiai:
+:Metering Mode:
+lt:Matavimo režimas:
+:Orientation:
+lt:Orientacija:
+:White Balance:
+lt:Baltųjų balansas:
+:Bits Per Sample:
+mk:Битови по примерок:
+:Camera Make:
+mk:Производител на камера:
+:Camera Model:
+mk:Модел на камера:
+:Comment:
+mk:Коментар:
+:DPI:
+mk:DPI:
+:Date Original:
+mk:Оригинален датум:
+:Encryption:
+mk:Енкрипција:
+:Exposure Bias:
+mk:Компензација на експозиција:
+:Exposure Program:
+mk:Програма за експозиција:
+:Exposure Time:
+mk:Време на експозиција:
+:F-Number:
+mk:F-број:
+:Files:
+mk:Датотеки:
+:Flash:
+mk:Блиц:
+:Focal Length (35mm):
+mk:Жижна далечина (35mm):
+:Focal Length:
+mk:Жижна далечина:
+:ISO Speed:
+mk:ISO брзина:
+:Image Size:
+mk:Големина на слика:
+:Keywords:
+mk:Клучни зборови:
+:Metering Mode:
+mk:Режим на мерење:
+:Orientation:
+mk:Ориентација:
+:White Balance:
+mk:Баланс на бела боја:
+:Bits Per Sample:
+mm:နမူနာတစ်ခုလျှင် ဘစ်များ:
+:Camera Make:
+mm:ကင်မရာ ထုတ်လုပ်သူ:
+:Camera Model:
+mm:ကင်မရာ မော်ဒယ်:
+:Comment:
+mm:မှတ်ချက်:
+:DPI:
+mm:DPI:
+:Date Original:
+mm:မူရင်း ရက်စွဲ:
+:Encryption:
+mm:ကုဒ်ဝှက်ခြင်း:
+:Exposure Bias:
+mm:အလင်းထိတွေ့မှု ဘက်လိုက်မှု:
+:Exposure Program:
+mm:အလင်းထိတွေ့မှု ပရိုဂရမ်:
+:Exposure Time:
+mm:အလင်းထိတွေ့မှု အချိန်:
+:F-Number:
+mm:F-နံပါတ်:
+:Files:
+mm:ဖိုင်များ:
+:Flash:
+mm:ဖလက်ရှ်:
+:Focal Length (35mm):
+mm:အာရုံစူးစိုက်မှု အလျား (35mm):
+:Focal Length:
+mm:အာရုံစူးစိုက်မှု အလျား:
+:ISO Speed:
+mm:ISO အမြန်နှုန်း:
+:Image Size:
+mm:ပုံအရွယ်အစား:
+:Keywords:
+mm:သော့ချက်စကားလုံးများ:
+:Metering Mode:
+mm:တိုင်းတာမှု မုဒ်:
+:Orientation:
+mm:ဦးတည်ရာ:
+:White Balance:
+mm:အဖြူရောင် ဟန်ချက်:
+:Bits Per Sample:
+ne:प्रति नमूना बिटहरू:
+:Camera Make:
+ne:क्यामेरा निर्माता:
+:Camera Model:
+ne:क्यामेरा मोडेल:
+:Comment:
+ne:टिप्पणी:
+:DPI:
+ne:DPI:
+:Date Original:
+ne:मूल मिति:
+:Encryption:
+ne:इन्क्रिप्सन:
+:Exposure Bias:
+ne:एक्सपोजर बायस:
+:Exposure Program:
+ne:एक्सपोजर कार्यक्रम:
+:Exposure Time:
+ne:एक्सपोजर समय:
+:F-Number:
+ne:F-नम्बर:
+:Files:
+ne:फाइलहरू:
+:Flash:
+ne:फ्ल्यास:
+:Focal Length (35mm):
+ne:फोकल लम्बाइ (35mm):
+:Focal Length:
+ne:फोकल लम्बाइ:
+:ISO Speed:
+ne:ISO गति:
+:Image Size:
+ne:छवि आकार:
+:Keywords:
+ne:किवर्डहरू:
+:Metering Mode:
+ne:मिटरिङ मोड:
+:Orientation:
+ne:अभिमुखीकरण:
+:White Balance:
+ne:ह्वाइट ब्यालेन्स:
+:Bits Per Sample:
+nn:Bitar per prøve:
+:Camera Make:
+nn:Kameraprodusent:
+:Camera Model:
+nn:Kameramodell:
+:Comment:
+nn:Kommentar:
+:DPI:
+nn:DPI:
+:Date Original:
+nn:Opphavleg dato:
+:Encryption:
+nn:Kryptering:
+:Exposure Bias:
+nn:Eksponeringskorrigering:
+:Exposure Program:
+nn:Eksponeringsprogram:
+:Exposure Time:
+nn:Eksponeringstid:
+:F-Number:
+nn:F-tal:
+:Files:
+nn:Filer:
+:Flash:
+nn:Blits:
+:Focal Length (35mm):
+nn:Brennvidde (35mm):
+:Focal Length:
+nn:Brennvidde:
+:ISO Speed:
+nn:ISO-hastigheit:
+:Image Size:
+nn:Bildestorleik:
+:Keywords:
+nn:Nøkkelord:
+:Metering Mode:
+nn:Målingsmodus:
+:Orientation:
+nn:Orientering:
+:White Balance:
+nn:Kvitbalanse:
+:Bits Per Sample:
+no:Bits per prøve:
+:Camera Make:
+no:Kameraprodusent:
+:Camera Model:
+no:Kameramodell:
+:Comment:
+no:Kommentar:
+:DPI:
+no:DPI:
+:Date Original:
+no:Opprinnelig dato:
+:Encryption:
+no:Kryptering:
+:Exposure Bias:
+no:Eksponeringskompensasjon:
+:Exposure Program:
+no:Eksponeringsprogram:
+:Exposure Time:
+no:Eksponeringstid:
+:F-Number:
+no:Blenderåpning:
+:Files:
+no:Filer:
+:Flash:
+no:Blits:
+:Focal Length (35mm):
+no:Brennvidde (35mm):
+:Focal Length:
+no:Brennvidde:
+:ISO Speed:
+no:ISO-hastighet:
+:Image Size:
+no:Bildestørrelse:
+:Keywords:
+no:Nøkkelord:
+:Metering Mode:
+no:Målemodus:
+:Orientation:
+no:Orientering:
+:White Balance:
+no:Hvitbalanse:
+:Bits Per Sample:
+pa:ਬਿੱਟ ਪ੍ਰਤੀ ਸੈਂਪਲ:
+:Camera Make:
+pa:ਕੈਮਰਾ ਬਣਾਉਣ ਵਾਲਾ:
+:Camera Model:
+pa:ਕੈਮਰਾ ਮਾਡਲ:
+:Comment:
+pa:ਟਿੱਪਣੀ:
+:DPI:
+pa:DPI:
+:Date Original:
+pa:ਅਸਲ ਤਾਰੀਖ:
+:Encryption:
+pa:ਇਨਕ੍ਰਿਪਸ਼ਨ:
+:Exposure Bias:
+pa:ਐਕਸਪੋਜ਼ਰ ਬਾਇਸ:
+:Exposure Program:
+pa:ਐਕਸਪੋਜ਼ਰ ਪ੍ਰੋਗਰਾਮ:
+:Exposure Time:
+pa:ਐਕਸਪੋਜ਼ਰ ਸਮਾਂ:
+:F-Number:
+pa:F-ਨੰਬਰ:
+:Files:
+pa:ਫਾਈਲਾਂ:
+:Flash:
+pa:ਫਲੈਸ਼:
+:Focal Length (35mm):
+pa:ਫੋਕਲ ਲੰਬਾਈ (35mm):
+:Focal Length:
+pa:ਫੋਕਲ ਲੰਬਾਈ:
+:ISO Speed:
+pa:ISO ਸਪੀਡ:
+:Image Size:
+pa:ਚਿੱਤਰ ਆਕਾਰ:
+:Keywords:
+pa:ਕੀਵਰਡ:
+:Metering Mode:
+pa:ਮੀਟਰਿੰਗ ਮੋਡ:
+:Orientation:
+pa:ਸਥਿਤੀ:
+:White Balance:
+pa:ਵਾਈਟ ਬੈਲੇਂਸ:
+:Bits Per Sample:
+si:නියැදියකට බිට්:
+:Camera Make:
+si:කැමරා නිෂ්පාදකයා:
+:Camera Model:
+si:කැමරා ආකෘතිය:
+:Comment:
+si:අදහස:
+:DPI:
+si:DPI:
+:Date Original:
+si:මුල් දිනය:
+:Encryption:
+si:සංකේතනය:
+:Exposure Bias:
+si:නිරාවරණ පක්ෂග්‍රාහිත්වය:
+:Exposure Program:
+si:නිරාවරණ වැඩසටහන:
+:Exposure Time:
+si:නිරාවරණ කාලය:
+:F-Number:
+si:F-අංකය:
+:Files:
+si:ගොනු:
+:Flash:
+si:ෆ්ලෑෂ්:
+:Focal Length (35mm):
+si:නාභීය දිග (35mm):
+:Focal Length:
+si:නාභීය දිග:
+:ISO Speed:
+si:ISO වේගය:
+:Image Size:
+si:රූප ප්‍රමාණය:
+:Keywords:
+si:මූල පද:
+:Metering Mode:
+si:මිනුම් ප්‍රකාරය:
+:Orientation:
+si:දිශානතිය:
+:White Balance:
+si:සුදු සමතුලිතතාවය:
+:Bits Per Sample:
+sn:Mabhiti Pachikamu:
+:Camera Make:
+sn:Mugadziri Wekamera:
+:Camera Model:
+sn:Mhando Yekamera:
+:Comment:
+sn:Chirevo:
+:DPI:
+sn:DPI:
+:Date Original:
+sn:Zuva Rekutanga:
+:Encryption:
+sn:Kuvhara:
+:Exposure Bias:
+sn:Rusaruro Rwekuratidzira:
+:Exposure Program:
+sn:Chirongwa Chekuratidzira:
+:Exposure Time:
+sn:Nguva Yekuratidzira:
+:F-Number:
+sn:Nhamba-F:
+:Files:
+sn:Mafaira:
+:Flash:
+sn:Mheni:
+:Focal Length (35mm):
+sn:Kureba Kwekutarisa (35mm):
+:Focal Length:
+sn:Kureba Kwekutarisa:
+:ISO Speed:
+sn:Kumhanya ISO:
+:Image Size:
+sn:Saizi Yemufananidzo:
+:Keywords:
+sn:Mazwi Ekutsvaga:
+:Metering Mode:
+sn:Maitiro Ekuyera:
+:Orientation:
+sn:Kutarisana:
+:White Balance:
+sn:Kuenzana Kwejena:
+:Bits Per Sample:
+sp-rs:Bitova po uzorku:
+:Camera Make:
+sp-rs:Proizvođač kamere:
+:Camera Model:
+sp-rs:Model kamere:
+:Comment:
+sp-rs:Komentar:
+:DPI:
+sp-rs:DPI:
+:Date Original:
+sp-rs:Originalni datum:
+:Encryption:
+sp-rs:Enkripcija:
+:Exposure Bias:
+sp-rs:Kompenzacija ekspozicije:
+:Exposure Program:
+sp-rs:Program ekspozicije:
+:Exposure Time:
+sp-rs:Vreme ekspozicije:
+:F-Number:
+sp-rs:Blenda:
+:Files:
+sp-rs:Datoteke:
+:Flash:
+sp-rs:Blic:
+:Focal Length (35mm):
+sp-rs:Žižna daljina (35mm):
+:Focal Length:
+sp-rs:Žižna daljina:
+:ISO Speed:
+sp-rs:ISO osetljivost:
+:Image Size:
+sp-rs:Veličina slike:
+:Keywords:
+sp-rs:Ključne reči:
+:Metering Mode:
+sp-rs:Režim merenja:
+:Orientation:
+sp-rs:Orijentacija:
+:White Balance:
+sp-rs:Balans bele:
+:Bits Per Sample:
+sq:Bit për Mostër:
+:Camera Make:
+sq:Prodhuesi i Kamerës:
+:Camera Model:
+sq:Modeli i Kamerës:
+:Comment:
+sq:Koment:
+:DPI:
+sq:DPI:
+:Date Original:
+sq:Data Origjinale:
+:Encryption:
+sq:Enkriptimi:
+:Exposure Bias:
+sq:Devijimi i Ekspozimit:
+:Exposure Program:
+sq:Programi i Ekspozimit:
+:Exposure Time:
+sq:Koha e Ekspozimit:
+:F-Number:
+sq:Numri F:
+:Files:
+sq:Skedarë:
+:Flash:
+sq:Flash:
+:Focal Length (35mm):
+sq:Gjatësia Fokale (35mm):
+:Focal Length:
+sq:Gjatësia Fokale:
+:ISO Speed:
+sq:Shpejtësia ISO:
+:Image Size:
+sq:Madhësia e Imazhit:
+:Keywords:
+sq:Fjalë Kyçe:
+:Metering Mode:
+sq:Modaliteti i Matjes:
+:Orientation:
+sq:Orientimi:
+:White Balance:
+sq:Balanca e Bardhë:
+:Bits Per Sample:
+th:บิตต่อตัวอย่าง:
+:Camera Make:
+th:ยี่ห้อกล้อง:
+:Camera Model:
+th:รุ่นกล้อง:
+:Comment:
+th:ความคิดเห็น:
+:DPI:
+th:DPI:
+:Date Original:
+th:วันที่ต้นฉบับ:
+:Encryption:
+th:การเข้ารหัส:
+:Exposure Bias:
+th:ค่าชดเชยแสง:
+:Exposure Program:
+th:โปรแกรมการรับแสง:
+:Exposure Time:
+th:เวลารับแสง:
+:F-Number:
+th:ค่ารูรับแสง:
+:Files:
+th:ไฟล์:
+:Flash:
+th:แฟลช:
+:Focal Length (35mm):
+th:ความยาวโฟกัส (35mm):
+:Focal Length:
+th:ความยาวโฟกัส:
+:ISO Speed:
+th:ความเร็ว ISO:
+:Image Size:
+th:ขนาดภาพ:
+:Keywords:
+th:คำสำคัญ:
+:Metering Mode:
+th:โหมดการวัดแสง:
+:Orientation:
+th:การวางแนว:
+:White Balance:
+th:สมดุลสีขาว:
+:Bits Per Sample:
+tl:Bits Bawat Sample:
+:Camera Make:
+tl:Tatak ng Camera:
+:Camera Model:
+tl:Modelo ng Camera:
+:Comment:
+tl:Komento:
+:DPI:
+tl:DPI:
+:Date Original:
+tl:Orihinal na Petsa:
+:Encryption:
+tl:Enkripsiyon:
+:Exposure Bias:
+tl:Exposure Bias:
+:Exposure Program:
+tl:Programa ng Exposure:
+:Exposure Time:
+tl:Oras ng Exposure:
+:F-Number:
+tl:F-Number:
+:Files:
+tl:Mga File:
+:Flash:
+tl:Flash:
+:Focal Length (35mm):
+tl:Focal Length (35mm):
+:Focal Length:
+tl:Focal Length:
+:ISO Speed:
+tl:ISO Speed:
+:Image Size:
+tl:Laki ng Larawan:
+:Keywords:
+tl:Mga Keyword:
+:Metering Mode:
+tl:Metering Mode:
+:Orientation:
+tl:Oryentasyon:
+:White Balance:
+tl:White Balance:
+:Bits Per Sample:
+uk:Біт на зразок:
+:Camera Make:
+uk:Виробник камери:
+:Camera Model:
+uk:Модель камери:
+:Comment:
+uk:Коментар:
+:DPI:
+uk:DPI:
+:Date Original:
+uk:Дата оригіналу:
+:Encryption:
+uk:Шифрування:
+:Exposure Bias:
+uk:Компенсація експозиції:
+:Exposure Program:
+uk:Програма експозиції:
+:Exposure Time:
+uk:Час експозиції:
+:F-Number:
+uk:Діафрагма:
+:Files:
+uk:Файли:
+:Flash:
+uk:Спалах:
+:Focal Length (35mm):
+uk:Фокусна відстань (35мм):
+:Focal Length:
+uk:Фокусна відстань:
+:ISO Speed:
+uk:Швидкість ISO:
+:Image Size:
+uk:Розмір зображення:
+:Keywords:
+uk:Ключові слова:
+:Metering Mode:
+uk:Режим вимірювання:
+:Orientation:
+uk:Орієнтація:
+:White Balance:
+uk:Баланс білого:
+:Bits Per Sample:
+vn:Bit Trên Mẫu:
+:Camera Make:
+vn:Hãng Máy Ảnh:
+:Camera Model:
+vn:Mẫu Máy Ảnh:
+:Comment:
+vn:Bình Luận:
+:DPI:
+vn:DPI:
+:Date Original:
+vn:Ngày Gốc:
+:Encryption:
+vn:Mã Hóa:
+:Exposure Bias:
+vn:Độ Lệch Phơi Sáng:
+:Exposure Program:
+vn:Chương Trình Phơi Sáng:
+:Exposure Time:
+vn:Thời Gian Phơi Sáng:
+:F-Number:
+vn:Khẩu Độ:
+:Files:
+vn:Tập Tin:
+:Flash:
+vn:Đèn Flash:
+:Focal Length (35mm):
+vn:Tiêu Cự (35mm):
+:Focal Length:
+vn:Tiêu Cự:
+:ISO Speed:
+vn:Độ Nhạy ISO:
+:Image Size:
+vn:Kích Thước Ảnh:
+:Keywords:
+vn:Từ Khóa:
+:Metering Mode:
+vn:Chế Độ Đo Sáng:
+:Orientation:
+vn:Hướng:
+:White Balance:
+vn:Cân Bằng Trắng:

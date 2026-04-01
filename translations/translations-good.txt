@@ -6862,6 +6862,79 @@ tw:背景顏色:
 uk:Колір фону
 uz:Fon rangi:
 vn:Màu nền
+:Bits Per Sample:
+af:Bisse Per Monster:
+am:ቢትስ በናሙና:
+ar:البتات لكل عينة:
+az:Nümunə Başına Bitlər:
+bg:Битове на извадка:
+bn:প্রতি নমুনায় বিট:
+br:Bitoù dre standilhon:
+bs:Bitova po uzorku:
+by:Бітаў на выбарку:
+ca:Bits per mostra:
+ca-xv:Bits per mostra:
+cn:每样本位数:
+co:Bits per campione:
+cy:Didau Fesul Sampl:
+cz:Bitů na vzorek:
+de:Bits pro Sample:
+dk:Bit pr. prøve:
+el:Bits ανά δείγμα:
+es:Bits por Muestra:
+et:Bitte proovi kohta:
+eu:Bit laginkako:
+fa:بیت در هر نمونه:
+fi:Bittiä per näyte:
+fo:Bits fyri hvørt sýni:
+fr:Bits par échantillon :
+fy-nl:Bits per sample:
+ga:Giotán In Aghaidh an Sampla:
+gl:Bits por mostra:
+he:ביטים לדגימה:
+hi:प्रति नमूना बिट्स:
+hr:Bitova po uzorku:
+hu:Bit per minta:
+id:Bit Per Sampel:
+it:Bit per campione:
+ja:サンプルあたりのビット数:
+jv:Bit Saben Sampel:
+ka:ბიტი ნიმუშზე:
+kr:샘플당 비트:
+ku:Bît Ji Bo Nimûneyê:
+kw:Bits Pub Sampl:
+lt:Bitų vienam pavyzdžiui:
+lv:Biti uz paraugu:
+mk:Битови по примерок:
+ml:സാമ്പിളിന് ബിറ്റുകൾ:
+mm:နမူနာတစ်ခုလျှင် ဘစ်များ:
+my:နမူနာတစ်ခုလျှင် ဘစ်များ:
+ne:प्रति नमूना बिटहरू:
+nl:Bits per sample:
+nn:Bitar per prøve:
+no:Bits per prøve:
+pa:ਬਿੱਟ ਪ੍ਰਤੀ ਸੈਂਪਲ:
+pl:Bitów na próbkę:
+pt:Bits Por Amostra:
+ro:Biți per eșantion:
+ru:Бит на образец:
+sat:ᱱᱚᱢᱩᱱᱟ ᱞᱮᱠᱟᱛᱮ ᱵᱤᱴ:
+si:නියැදියකට බිට්:
+sk:Bitov na vzorku:
+sl:Bitov na vzorec:
+sn:Mabhiti Pachikamu:
+sp-rs:Bitova po uzorku:
+sq:Bit për Mostër:
+sr-rs:Bitova po uzorku:
+sv:Bitar per sampel:
+ta:மாதிரிக்கு பிட்கள்:
+th:บิตต่อตัวอย่าง:
+tl:Bits Bawat Sample:
+tr:Örnek Başına Bit:
+tw:每樣本位元數：
+uk:Біт на зразок:
+uz:Namuna uchun bitlar:
+vn:Bit Trên Mẫu:
 :Book View
 af:Boekaansig
 am:Գրքի տեսքով
@@ -7519,6 +7592,152 @@ tw:CHM 文件
 uk:Документи CHM
 uz:CHM hujjatlari
 vn:Tập tin CHM
+:Camera Make:
+af:Kameramerk:
+am:የካሜራ አምራች:
+ar:صانع الكاميرا:
+az:Kamera İstehsalçısı:
+bg:Производител на камера:
+bn:ক্যামেরা নির্মাতা:
+br:Groaer ar c'hamera:
+bs:Proizvođač kamere:
+by:Вытворца камеры:
+ca:Fabricant de la càmera:
+ca-xv:Fabricant de la càmera:
+cn:相机制造商:
+co:Marca di a camera:
+cy:Gwneuthurwr Camera:
+cz:Výrobce fotoaparátu:
+de:Kamerahersteller:
+dk:Kameramærke:
+el:Κατασκευαστής κάμερας:
+es:Marca de Cámara:
+et:Kaamera tootja:
+eu:Kameraren fabrikatzailea:
+fa:سازنده دوربین:
+fi:Kameran valmistaja:
+fo:Myndatøkuveitari:
+fr:Marque de l'appareil :
+fy-nl:Kameramerk:
+ga:Déantóir Ceamara:
+gl:Fabricante da cámara:
+he:יצרן המצלמה:
+hi:कैमरा निर्माता:
+hr:Proizvođač kamere:
+hu:Kamera gyártója:
+id:Merek Kamera:
+it:Marca fotocamera:
+ja:カメラメーカー:
+jv:Pabrikan Kamera:
+ka:კამერის მწარმოებელი:
+kr:카메라 제조사:
+ku:Çêkerê Kamerayê:
+kw:Gwrier Kamera:
+lt:Kameros gamintojas:
+lv:Kameras ražotājs:
+mk:Производител на камера:
+ml:ക്യാമറ നിർമ്മാതാവ്:
+mm:ကင်မရာ ထုတ်လုပ်သူ:
+my:ကင်မရာ ထုတ်လုပ်သူ:
+ne:क्यामेरा निर्माता:
+nl:Cameramerk:
+nn:Kameraprodusent:
+no:Kameraprodusent:
+pa:ਕੈਮਰਾ ਬਣਾਉਣ ਵਾਲਾ:
+pl:Producent aparatu:
+pt:Fabricante da Câmara:
+ro:Producător cameră:
+ru:Производитель камеры:
+sat:ᱠᱮᱢᱮᱨᱟ ᱵᱮᱱᱟᱣᱤᱡ:
+si:කැමරා නිෂ්පාදකයා:
+sk:Výrobca fotoaparátu:
+sl:Proizvajalec kamere:
+sn:Mugadziri Wekamera:
+sp-rs:Proizvođač kamere:
+sq:Prodhuesi i Kamerës:
+sr-rs:Proizvođač kamere:
+sv:Kameratillverkare:
+ta:கேமரா தயாரிப்பாளர்:
+th:ยี่ห้อกล้อง:
+tl:Tatak ng Camera:
+tr:Kamera Markası:
+tw:相機製造商：
+uk:Виробник камери:
+uz:Kamera ishlab chiqaruvchisi:
+vn:Hãng Máy Ảnh:
+:Camera Model:
+af:Kameramodel:
+am:የካሜራ ሞዴል:
+ar:طراز الكاميرا:
+az:Kamera Modeli:
+bg:Модел на камера:
+bn:ক্যামেরা মডেল:
+br:Patrom ar c'hamera:
+bs:Model kamere:
+by:Мадэль камеры:
+ca:Model de càmera:
+ca-xv:Model de càmera:
+cn:相机型号:
+co:Mudellu di a camera:
+cy:Model Camera:
+cz:Model fotoaparátu:
+de:Kameramodell:
+dk:Kameramodel:
+el:Μοντέλο κάμερας:
+es:Modelo de Cámara:
+et:Kaamera mudel:
+eu:Kameraren eredua:
+fa:مدل دوربین:
+fi:Kameramalli:
+fo:Myndatøkumódel:
+fr:Modèle de l'appareil :
+fy-nl:Kameramodel:
+ga:Múnla Ceamara:
+gl:Modelo da cámara:
+he:דגם המצלמה:
+hi:कैमरा मॉडल:
+hr:Model kamere:
+hu:Kamera modellje:
+id:Model Kamera:
+it:Modello fotocamera:
+ja:カメラモデル:
+jv:Model Kamera:
+ka:კამერის მოდელი:
+kr:카메라 모델:
+ku:Modela Kamerayê:
+kw:Model Kamera:
+lt:Kameros modelis:
+lv:Kameras modelis:
+mk:Модел на камера:
+ml:ക്യാമറ മോഡൽ:
+mm:ကင်မရာ မော်ဒယ်:
+my:ကင်မရာ မော်ဒယ်:
+ne:क्यामेरा मोडेल:
+nl:Cameramodel:
+nn:Kameramodell:
+no:Kameramodell:
+pa:ਕੈਮਰਾ ਮਾਡਲ:
+pl:Model aparatu:
+pt:Modelo da Câmara:
+ro:Model cameră:
+ru:Модель камеры:
+sat:ᱠᱮᱢᱮᱨᱟ ᱢᱳᱰᱮᱞ:
+si:කැමරා ආකෘතිය:
+sk:Model fotoaparátu:
+sl:Model kamere:
+sn:Mhando Yekamera:
+sp-rs:Model kamere:
+sq:Modeli i Kamerës:
+sr-rs:Model kamere:
+sv:Kameramodell:
+ta:கேமரா மாடல்:
+th:รุ่นกล้อง:
+tl:Modelo ng Camera:
+tr:Kamera Modeli:
+tw:相機型號：
+uk:Модель камери:
+uz:Kamera modeli:
+vn:Mẫu Máy Ảnh:
 :Can't connect to the Internet (error %#x).
 af:Kan nie aan die Internet koppel nie (fout %#x).
 am:Հնարավոր չէ կապակցել (սխալ %#x)։
@@ -9344,6 +9563,79 @@ tw:命令面板
 uk:Палітра команд
 uz:Buyruqlar paneli
 vn:Lệnh
+:Comment:
+af:Kommentaar:
+am:አስተያየት:
+ar:تعليق:
+az:Şərh:
+bg:Коментар:
+bn:মন্তব্য:
+br:Evezhiadenn:
+bs:Komentar:
+by:Каментарый:
+ca:Comentari:
+ca-xv:Comentari:
+cn:注释:
+co:Cummentu:
+cy:Sylw:
+cz:Komentář:
+de:Kommentar:
+dk:Kommentar:
+el:Σχόλιο:
+es:Comentario:
+et:Kommentaar:
+eu:Iruzkina:
+fa:نظر:
+fi:Kommentti:
+fo:Viðmerking:
+fr:Commentaire :
+fy-nl:Opmerking:
+ga:Nóta Tráchta:
+gl:Comentario:
+he:הערה:
+hi:टिप्पणी:
+hr:Komentar:
+hu:Megjegyzés:
+id:Komentar:
+it:Commento:
+ja:コメント:
+jv:Komentar:
+ka:კომენტარი:
+kr:코멘트:
+ku:Şîrove:
+kw:Kampolla:
+lt:Komentaras:
+lv:Komentārs:
+mk:Коментар:
+ml:അഭിപ്രായം:
+mm:မှတ်ချက်:
+my:မှတ်ချက်:
+ne:टिप्पणी:
+nl:Opmerking:
+nn:Kommentar:
+no:Kommentar:
+pa:ਟਿੱਪਣੀ:
+pl:Komentarz:
+pt:Comentário:
+ro:Comentariu:
+ru:Комментарий:
+sat:ᱢᱚᱱᱛᱚᱵᱽ:
+si:අදහස:
+sk:Komentár:
+sl:Komentar:
+sn:Chirevo:
+sp-rs:Komentar:
+sq:Koment:
+sr-rs:Komentar:
+sv:Kommentar:
+ta:கருத்து:
+th:ความคิดเห็น:
+tl:Komento:
+tr:Yorum:
+tw:註解：
+uk:Коментар:
+uz:Izoh:
+vn:Bình Luận:
 :Compatibility
 af:Verenigbaarheid
 am:Համատեղելիությունը
@@ -13359,6 +13651,79 @@ tw:自訂縮放(&Z)...
 uk:Нетиповий масштаб...
 uz:Maxsus kattalashtirish...
 vn:Thiết Lập &Phóng...
+:DPI:
+af:DPI:
+am:ዲፒአይ:
+ar:نقطة لكل بوصة:
+az:DPI:
+bg:DPI:
+bn:ডিপিআই:
+br:DPI:
+bs:DPI:
+by:DPI:
+ca:DPI:
+ca-xv:PPP:
+cn:DPI:
+co:DPI:
+cy:DPI:
+cz:DPI:
+de:DPI:
+dk:DPI:
+el:DPI:
+es:PPP:
+et:DPI:
+eu:DPI:
+fa:DPI:
+fi:DPI:
+fo:DPI:
+fr:PPP :
+fy-nl:DPI:
+ga:DPI:
+gl:PPP:
+he:DPI:
+hi:DPI:
+hr:DPI:
+hu:DPI:
+id:DPI:
+it:DPI:
+ja:DPI:
+jv:DPI:
+ka:DPI:
+kr:DPI:
+ku:DPI:
+kw:DPI:
+lt:TPC:
+lv:DPI:
+mk:DPI:
+ml:DPI:
+mm:DPI:
+my:DPI:
+ne:DPI:
+nl:DPI:
+nn:DPI:
+no:DPI:
+pa:DPI:
+pl:DPI:
+pt:DPI:
+ro:DPI:
+ru:DPI:
+sat:DPI:
+si:DPI:
+sk:DPI:
+sl:DPI:
+sn:DPI:
+sp-rs:DPI:
+sq:DPI:
+sr-rs:DPI:
+sv:DPI:
+ta:DPI:
+th:DPI:
+tl:DPI:
+tr:DPI:
+tw:DPI：
+uk:DPI:
+uz:DPI:
+vn:DPI:
 :Dark
 af:Donker
 am:Մուգ
@@ -13505,6 +13870,79 @@ tw:更暗
 uk:Темніша
 uz:To‘qroq
 vn:Tối hơn
+:Date Original:
+af:Oorspronklike Datum:
+am:የመጀመሪያ ቀን:
+ar:التاريخ الأصلي:
+az:Orijinal Tarix:
+bg:Оригинална дата:
+bn:মূল তারিখ:
+br:Deiziad orin:
+bs:Originalni datum:
+by:Зыходная дата:
+ca:Data original:
+ca-xv:Data original:
+cn:拍摄日期:
+co:Data originale:
+cy:Dyddiad Gwreiddiol:
+cz:Datum pořízení:
+de:Originaldatum:
+dk:Oprindelig dato:
+el:Ημερομηνία πρωτοτύπου:
+es:Fecha Original:
+et:Algne kuupäev:
+eu:Jatorrizko data:
+fa:تاریخ اصلی:
+fi:Alkuperäinen päivämäärä:
+fo:Upprunaligur dagur:
+fr:Date d'origine :
+fy-nl:Orizjinele datum:
+ga:Dáta Bunaidh:
+gl:Data orixinal:
+he:תאריך מקורי:
+hi:मूल तिथि:
+hr:Izvorni datum:
+hu:Eredeti dátum:
+id:Tanggal Asli:
+it:Data originale:
+ja:撮影日時:
+jv:Tanggal Asli:
+ka:ორიგინალის თარიღი:
+kr:원본 날짜:
+ku:Dîroka Orîjînal:
+kw:Dedhyans Gwredhek:
+lt:Originali data:
+lv:Oriģinālais datums:
+mk:Оригинален датум:
+ml:യഥാർത്ഥ തീയതി:
+mm:မူရင်း ရက်စွဲ:
+my:မူရင်းရက်စွဲ:
+ne:मूल मिति:
+nl:Oorspronkelijke datum:
+nn:Opphavleg dato:
+no:Opprinnelig dato:
+pa:ਅਸਲ ਤਾਰੀਖ:
+pl:Data oryginału:
+pt:Data Original:
+ro:Data originală:
+ru:Дата съемки:
+sat:ᱟᱥᱚᱞ ᱢᱟᱹᱦᱤᱛ:
+si:මුල් දිනය:
+sk:Dátum originálu:
+sl:Izvirni datum:
+sn:Zuva Rekutanga:
+sp-rs:Originalni datum:
+sq:Data Origjinale:
+sr-rs:Originalni datum:
+sv:Ursprungligt datum:
+ta:அசல் தேதி:
+th:วันที่ต้นฉบับ:
+tl:Orihinal na Petsa:
+tr:Özgün Tarih:
+tw:原始日期：
+uk:Дата оригіналу:
+uz:Asl sana:
+vn:Ngày Gốc:
 :Date:
 af:Datum:
 am:Ամսաթիվ՝
@@ -15476,6 +15914,79 @@ tw:内嵌…
 uk:Вбудувати...
 uz:Joylashtirish...
 vn:Nhúng...
+:Encryption:
+af:Enkripsie:
+am:ምስጠራ:
+ar:التشفير:
+az:Şifrələmə:
+bg:Шифроване:
+bn:এনক্রিপশন:
+br:Enrinegañ:
+bs:Enkripcija:
+by:Шыфраванне:
+ca:Encriptació:
+ca-xv:Encriptació:
+cn:加密:
+co:Criptatura:
+cy:Amgryptiad:
+cz:Šifrování:
+de:Verschlüsselung:
+dk:Kryptering:
+el:Κρυπτογράφηση:
+es:Cifrado:
+et:Krüpteerimine:
+eu:Enkriptazioa:
+fa:رمزگذاری:
+fi:Salaus:
+fo:Kryptering:
+fr:Chiffrement :
+fy-nl:Fersifering:
+ga:Criptiú:
+gl:Cifrado:
+he:הצפנה:
+hi:एन्क्रिप्शन:
+hr:Enkripcija:
+hu:Titkosítás:
+id:Enkripsi:
+it:Crittografia:
+ja:暗号化:
+jv:Enkripsi:
+ka:დაშიფვრა:
+kr:암호화:
+ku:Şîfrekirin:
+kw:Krinieth:
+lt:Šifravimas:
+lv:Šifrēšana:
+mk:Енкрипција:
+ml:എൻക്രിപ്ഷൻ:
+mm:ကုဒ်ဝှက်ခြင်း:
+my:ကုဒ်ဝှက်ခြင်း:
+ne:इन्क्रिप्सन:
+nl:Versleuteling:
+nn:Kryptering:
+no:Kryptering:
+pa:ਇਨਕ੍ਰਿਪਸ਼ਨ:
+pl:Szyfrowanie:
+pt:Encriptação:
+ro:Criptare:
+ru:Шифрование:
+sat:ᱮᱱᱠᱨᱤᱯᱥᱚᱱ:
+si:සංකේතනය:
+sk:Šifrovanie:
+sl:Šifriranje:
+sn:Kuvhara:
+sp-rs:Enkripcija:
+sq:Enkriptimi:
+sr-rs:Šifrovanje:
+sv:Kryptering:
+ta:குறியாக்கம்:
+th:การเข้ารหัส:
+tl:Enkripsiyon:
+tr:Şifreleme:
+tw:加密：
+uk:Шифрування:
+uz:Shifrlash:
+vn:Mã Hóa:
 :Enter password
 af:Tik Wagwoord In
 am:Գրեք գաղտնաբառը
@@ -16206,6 +16717,225 @@ tw:全部展開
 uk:Розгорнути всі
 uz:Barchasini kengaytirish
 vn:Mở Rộng Tất Cả
+:Exposure Bias:
+af:Beligtingsyking:
+am:የተጋላጭነት አድሎአዊነት:
+ar:انحياز التعريض:
+az:Ekspozisiya Tənziməsi:
+bg:Компенсация на експозицията:
+bn:এক্সপোজার বায়াস:
+br:Dilerc'hiadur an disklêriadur:
+bs:Kompenzacija ekspozicije:
+by:Зрух экспазіцыі:
+ca:Compensació d'exposició:
+ca-xv:Compensació d'exposició:
+cn:曝光补偿:
+co:Compensazione di l'esposizione:
+cy:Tuedd Amlygiad:
+cz:Korekce expozice:
+de:Belichtungskorrektur:
+dk:Eksponeringskompensation:
+el:Μετατόπιση έκθεσης:
+es:Compensación de Exposición:
+et:Säri nihe:
+eu:Esposizio joera:
+fa:جبران نوردهی:
+fi:Valotuskorjaus:
+fo:Ljósstyrksavvik:
+fr:Correction d'exposition :
+fy-nl:Beljochtingskompinsaasje:
+ga:Claontacht Nochta:
+gl:Compensación de exposición:
+he:הטיית חשיפה:
+hi:एक्सपोज़र बायस:
+hr:Kompenzacija ekspozicije:
+hu:Expozíció korrekció:
+id:Bias Eksposur:
+it:Compensazione esposizione:
+ja:露出補正:
+jv:Bias Eksposur:
+ka:ექსპოზიციის გადახრა:
+kr:노출 보정:
+ku:Laybûna Eşkerekirinê:
+kw:Tuedh Asposedhyans:
+lt:Ekspozicijos nuokrypis:
+lv:Ekspozīcijas kompensācija:
+mk:Компензација на експозиција:
+ml:എക്സ്പോഷർ ബയസ്:
+mm:အလင်းထိတွေ့မှု ဘက်လိုက်မှု:
+my:အလင်းပေးချိန် လွဲချက်:
+ne:एक्सपोजर बायस:
+nl:Belichtingscorrectie:
+nn:Eksponeringskorrigering:
+no:Eksponeringskompensasjon:
+pa:ਐਕਸਪੋਜ਼ਰ ਬਾਇਸ:
+pl:Kompensacja ekspozycji:
+pt:Compensação de Exposição:
+ro:Compensare expunere:
+ru:Компенсация экспозиции:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱵᱟᱭᱟᱥ:
+si:නිරාවරණ පක්ෂග්‍රාහිත්වය:
+sk:Korekcia expozície:
+sl:Kompenzacija osvetlitve:
+sn:Rusaruro Rwekuratidzira:
+sp-rs:Kompenzacija ekspozicije:
+sq:Devijimi i Ekspozimit:
+sr-rs:Kompenzacija ekspozicije:
+sv:Exponeringskompensation:
+ta:வெளிப்பாடு சார்பு:
+th:ค่าชดเชยแสง:
+tl:Exposure Bias:
+tr:Pozlama Sapması:
+tw:曝光補償：
+uk:Компенсація експозиції:
+uz:Ekspozitsiya siljishi:
+vn:Độ Lệch Phơi Sáng:
+:Exposure Program:
+af:Beligtingsprogram:
+am:የተጋላጭነት ፕሮግራም:
+ar:برنامج التعريض:
+az:Ekspozisiya Proqramı:
+bg:Програма на експозиция:
+bn:এক্সপোজার প্রোগ্রাম:
+br:Programa disklêriadur:
+bs:Program ekspozicije:
+by:Праграма экспазіцыі:
+ca:Programa d'exposició:
+ca-xv:Programa d'exposició:
+cn:曝光程序:
+co:Prugramma d'esposizione:
+cy:Rhaglen Amlygiad:
+cz:Expoziční program:
+de:Belichtungsprogramm:
+dk:Eksponeringsprogram:
+el:Πρόγραμμα έκθεσης:
+es:Programa de Exposición:
+et:Säriprogramm:
+eu:Esposizio programa:
+fa:برنامه نوردهی:
+fi:Valotusohjelma:
+fo:Ljósstyrksforrit:
+fr:Programme d'exposition :
+fy-nl:Beljochtingsprogramma:
+ga:Clár Nochta:
+gl:Programa de exposición:
+he:תוכנית חשיפה:
+hi:एक्सपोज़र प्रोग्राम:
+hr:Program ekspozicije:
+hu:Expozíciós program:
+id:Program Eksposur:
+it:Programma di esposizione:
+ja:露出プログラム:
+jv:Program Eksposur:
+ka:ექსპოზიციის პროგრამა:
+kr:노출 프로그램:
+ku:Bernameya Eşkerekirinê:
+kw:Program Asposedhyans:
+lt:Ekspozicijos programa:
+lv:Ekspozīcijas programma:
+mk:Програма за експозиција:
+ml:എക്സ്പോഷർ പ്രോഗ്രാം:
+mm:အလင်းထိတွေ့မှု ပရိုဂရမ်:
+my:အလင်းပေးချိန် ပရိုဂရမ်:
+ne:एक्सपोजर कार्यक्रम:
+nl:Belichtingsprogramma:
+nn:Eksponeringsprogram:
+no:Eksponeringsprogram:
+pa:ਐਕਸਪੋਜ਼ਰ ਪ੍ਰੋਗਰਾਮ:
+pl:Program ekspozycji:
+pt:Programa de Exposição:
+ro:Program expunere:
+ru:Программа экспозиции:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱯᱨᱳᱜᱨᱟᱢ:
+si:නිරාවරණ වැඩසටහන:
+sk:Program expozície:
+sl:Program osvetlitve:
+sn:Chirongwa Chekuratidzira:
+sp-rs:Program ekspozicije:
+sq:Programi i Ekspozimit:
+sr-rs:Program ekspozicije:
+sv:Exponeringsprogram:
+ta:வெளிப்பாடு நிரல்:
+th:โปรแกรมการรับแสง:
+tl:Programa ng Exposure:
+tr:Pozlama Programı:
+tw:曝光程式：
+uk:Програма експозиції:
+uz:Ekspozitsiya dasturi:
+vn:Chương Trình Phơi Sáng:
+:Exposure Time:
+af:Beligtingstyd:
+am:የተጋላጭነት ጊዜ:
+ar:وقت التعريض:
+az:Ekspozisiya Müddəti:
+bg:Време на експозиция:
+bn:এক্সপোজার সময়:
+br:Amzer disklêriadur:
+bs:Vrijeme ekspozicije:
+by:Час экспазіцыі:
+ca:Temps d'exposició:
+ca-xv:Temps d'exposició:
+cn:曝光时间:
+co:Tempu d'esposizione:
+cy:Amser Amlygiad:
+cz:Expoziční čas:
+de:Belichtungszeit:
+dk:Eksponeringstid:
+el:Χρόνος έκθεσης:
+es:Tiempo de Exposición:
+et:Säriaeg:
+eu:Esposizio denbora:
+fa:زمان نوردهی:
+fi:Valotusaika:
+fo:Ljósstyrkstíð:
+fr:Temps d'exposition :
+fy-nl:Beljochtingstiid:
+ga:Am Nochta:
+gl:Tempo de exposición:
+he:זמן חשיפה:
+hi:एक्सपोज़र समय:
+hr:Vrijeme ekspozicije:
+hu:Expozíciós idő:
+id:Waktu Eksposur:
+it:Tempo di esposizione:
+ja:露出時間:
+jv:Wektu Eksposur:
+ka:ექსპოზიციის დრო:
+kr:노출 시간:
+ku:Dema Eşkerekirinê:
+kw:Termyn Asposedhyans:
+lt:Išlaikymo laikas:
+lv:Ekspozīcijas laiks:
+mk:Време на експозиција:
+ml:എക്സ്പോഷർ സമയം:
+mm:အလင်းထိတွေ့မှု အချိန်:
+my:အလင်းပေးချိန်:
+ne:एक्सपोजर समय:
+nl:Belichtingstijd:
+nn:Eksponeringstid:
+no:Eksponeringstid:
+pa:ਐਕਸਪੋਜ਼ਰ ਸਮਾਂ:
+pl:Czas naświetlania:
+pt:Tempo de Exposição:
+ro:Timp expunere:
+ru:Время экспозиции:
+sat:ᱮᱠᱥᱯᱳᱡᱚᱨ ᱚᱠᱛᱚ:
+si:නිරාවරණ කාලය:
+sk:Čas expozície:
+sl:Čas osvetlitve:
+sn:Nguva Yekuratidzira:
+sp-rs:Vreme ekspozicije:
+sq:Koha e Ekspozimit:
+sr-rs:Vreme ekspozicije:
+sv:Exponeringstid:
+ta:வெளிப்பாடு நேரம்:
+th:เวลารับแสง:
+tl:Oras ng Exposure:
+tr:Pozlama Süresi:
+tw:曝光時間：
+uk:Час експозиції:
+uz:Ekspozitsiya vaqti:
+vn:Thời Gian Phơi Sáng:
 :F&avorites
 af:Gunstelinge
 am:Ը&նտրյալներ
@@ -16425,6 +17155,79 @@ tw:全螢幕模式(&U)
 uk:Повноекранний
 uz:To‘liq ekran
 vn:Toàn Màn Hình
+:F-Number:
+af:F-Getal:
+am:ኤፍ-ቁጥር:
+ar:رقم الفتحة:
+az:F-Nömrəsi:
+bg:F-число:
+bn:এফ-নম্বর:
+br:Niver F:
+bs:F-broj:
+by:Дыяфрагма:
+ca:Obertura:
+ca-xv:Número F:
+cn:光圈值:
+co:Numeru F:
+cy:Rhif-F:
+cz:Clonové číslo:
+de:Blende:
+dk:F-nummer:
+el:Διάφραγμα:
+es:Número F:
+et:Ava:
+eu:F-zenbakia:
+fa:عدد دیافراگم:
+fi:Aukkoluku:
+fo:F-tal:
+fr:Ouverture :
+fy-nl:F-nûmer:
+ga:Uimhir-F:
+gl:Número F:
+he:מספר F:
+hi:F-नंबर:
+hr:Blenda:
+hu:F-szám:
+id:F-Number:
+it:Numero F:
+ja:F値:
+jv:Angka-F:
+ka:F-რიცხვი:
+kr:조리개 값:
+ku:Hejmara-F:
+kw:Niver-F:
+lt:F skaičius:
+lv:F-skaitlis:
+mk:F-број:
+ml:എഫ്-നമ്പർ:
+mm:F-နံပါတ်:
+my:F-နံပါတ်:
+ne:F-नम्बर:
+nl:F-getal:
+nn:F-tal:
+no:Blenderåpning:
+pa:F-ਨੰਬਰ:
+pl:Przysłona:
+pt:Número F:
+ro:Număr F:
+ru:Диафрагма:
+sat:F-ᱮᱞᱮᱞ:
+si:F-අංකය:
+sk:Clonové číslo:
+sl:Zaslonsko število:
+sn:Nhamba-F:
+sp-rs:Blenda:
+sq:Numri F:
+sr-rs:Otvor blende:
+sv:Bländare:
+ta:F-எண்:
+th:ค่ารูรับแสง:
+tl:F-Number:
+tr:F-Sayısı:
+tw:光圈值：
+uk:Діафрагма:
+uz:F-raqami:
+vn:Khẩu Độ:
 :Facing
 af:Teenoor
 am:Երկու էջ
@@ -17381,7 +18184,7 @@ ar:مسار الملف غير متاح
 az:Fayl yolu mövcud deyil
 bg:Пътят до файла не е наличен
 bn:ফাইলের পাথ উপলব্ধ নেই
-br:N'eo ket hegerz hent ar restr
+br:O caminho do arquivo não está disponível
 bs:Putanja datoteke nije dostupna
 by:Шлях да файла недаступны
 ca:Ruta del fitxer no disponible
@@ -17426,7 +18229,7 @@ nl:Bestandspad niet beschikbaar
 nn:Filstig ikkje tilgjengeleg
 no:Filbane ikke tilgjengelig
 pa:ਫਾਈਲ ਮਾਰਗ ਉਪਲਬਧ ਨਹੀਂ
-pl:Ścieżka pliku niedostępna
+pl:Ścieżka do pliku niedostępna
 pt:Caminho do arquivo não disponível
 ro:Calea fișierului nu este disponibilă
 ru:Путь к файлу недоступен
@@ -17520,6 +18323,79 @@ tw:檔案:
 uk:Файл:
 uz:Fayl:
 vn:Tập tin:
+:Files:
+af:Lêers:
+am:ፋይሎች:
+ar:الملفات:
+az:Fayllar:
+bg:Файлове:
+bn:ফাইল:
+br:Restroù:
+bs:Datoteke:
+by:Файлы:
+ca:Fitxers:
+ca-xv:Fitxers:
+cn:文件:
+co:Schedarii:
+cy:Ffeiliau:
+cz:Soubory:
+de:Dateien:
+dk:Filer:
+el:Αρχεία:
+es:Archivos:
+et:Failid:
+eu:Fitxategiak:
+fa:فایل‌ها:
+fi:Tiedostot:
+fo:Fílur:
+fr:Fichiers :
+fy-nl:Bestannen:
+ga:Comhaid:
+gl:Ficheiros:
+he:קבצים:
+hi:फ़ाइलें:
+hr:Datoteke:
+hu:Fájlok:
+id:File:
+it:File:
+ja:ファイル:
+jv:Berkas:
+ka:ფაილები:
+kr:파일:
+ku:Dosye:
+kw:Restrennow:
+lt:Failai:
+lv:Faili:
+mk:Датотеки:
+ml:ഫയലുകൾ:
+mm:ဖိုင်များ:
+my:ဖိုင်များ:
+ne:फाइलहरू:
+nl:Bestanden:
+nn:Filer:
+no:Filer:
+pa:ਫਾਈਲਾਂ:
+pl:Pliki:
+pt:Ficheiros:
+ro:Fișiere:
+ru:Файлы:
+sat:ᱨᱮᱫᱠᱚ:
+si:ගොනු:
+sk:Súbory:
+sl:Datoteke:
+sn:Mafaira:
+sp-rs:Datoteke:
+sq:Skedarë:
+sr-rs:Fajlovi:
+sv:Filer:
+ta:கோப்புகள்:
+th:ไฟล์:
+tl:Mga File:
+tr:Dosyalar:
+tw:檔案：
+uk:Файли:
+uz:Fayllar:
+vn:Tập Tin:
 :Fin&d...
 af:Vind...
 am:Գտն&ել...
@@ -18761,6 +19637,225 @@ tw:符合單頁
 uk:Вмістити на сторінку
 uz:Bitta betga moslash
 vn:Vừa một trang đơn
+:Flash:
+af:Flits:
+am:ፍላሽ:
+ar:الفلاش:
+az:Flaş:
+bg:Светкавица:
+bn:ফ্ল্যাশ:
+br:Gwalarn:
+bs:Bljeskalica:
+by:Успышка:
+ca:Flaix:
+ca-xv:Flaix:
+cn:闪光灯:
+co:Flash:
+cy:Fflach:
+cz:Blesk:
+de:Blitz:
+dk:Blitz:
+el:Φλας:
+es:Flash:
+et:Välk:
+eu:Flasha:
+fa:فلاش:
+fi:Salama:
+fo:Blikslampa:
+fr:Flash :
+fy-nl:Flits:
+ga:Splanc:
+gl:Flash:
+he:פלאש:
+hi:फ्लैश:
+hr:Bljeskalica:
+hu:Vaku:
+id:Lampu Kilat:
+it:Flash:
+ja:フラッシュ:
+jv:Lampu Kilat:
+ka:ფლეში:
+kr:플래시:
+ku:Flaş:
+kw:Flash:
+lt:Blykstė:
+lv:Zibspuldze:
+mk:Блиц:
+ml:ഫ്ലാഷ്:
+mm:ဖလက်ရှ်:
+my:ဖလက်ရှ်:
+ne:फ्ल्यास:
+nl:Flits:
+nn:Blits:
+no:Blits:
+pa:ਫਲੈਸ਼:
+pl:Lampa błyskowa:
+pt:Flash:
+ro:Bliț:
+ru:Вспышка:
+sat:ᱯᱷᱞᱟᱥ:
+si:ෆ්ලෑෂ්:
+sk:Blesk:
+sl:Bliskavica:
+sn:Mheni:
+sp-rs:Blic:
+sq:Flash:
+sr-rs:Blic:
+sv:Blixt:
+ta:ஃபிளாஷ்:
+th:แฟลช:
+tl:Flash:
+tr:Flaş:
+tw:閃光燈：
+uk:Спалах:
+uz:Flesh:
+vn:Đèn Flash:
+:Focal Length (35mm):
+af:Brandpuntafstand (35mm):
+am:የትኩረት ርዝመት (35ሚሜ):
+ar:البعد البؤري (35 ملم):
+az:Fokus Məsafəsi (35mm):
+bg:Фокусно разстояние (35mm):
+bn:ফোকাল দৈর্ঘ্য (৩৫মিমি):
+br:Hed ar fokalenn (35mm):
+bs:Žižna daljina (35mm):
+by:Фокусная адлегласць (35мм):
+ca:Longitud focal (35mm):
+ca-xv:Longitud focal (35mm):
+cn:焦距 (35mm):
+co:Lunghezza focale (35mm):
+cy:Hyd Ffocal (35mm):
+cz:Ohnisková vzdálenost (35mm):
+de:Brennweite (35mm):
+dk:Brændvidde (35mm):
+el:Εστιακή απόσταση (35mm):
+es:Distancia Focal (35mm):
+et:Fookuskaugus (35mm):
+eu:Distantzia fokala (35mm):
+fa:فاصله کانونی (35mm):
+fi:Polttoväli (35mm):
+fo:Brennivídd (35mm):
+fr:Longueur focale (35mm) :
+fy-nl:Brandpuntsôfstân (35mm):
+ga:Fad Fócasach (35mm):
+gl:Lonxitude focal (35mm):
+he:אורך מוקד (35 מ"מ):
+hi:फोकल लंबाई (35mm):
+hr:Žarišna duljina (35mm):
+hu:Gyújtótávolság (35mm):
+id:Panjang Fokus (35mm):
+it:Lunghezza focale (35mm):
+ja:焦点距離(35mm):
+jv:Dawa Fokus (35mm):
+ka:ფოკუსური მანძილი (35მმ):
+kr:초점 거리 (35mm):
+ku:Dirêjiya Kanîkê (35mm):
+kw:Hirder Fokus (35mm):
+lt:Židinio nuotolis (35mm):
+lv:Fokusa attālums (35mm):
+mk:Жижна далечина (35mm):
+ml:ഫോക്കൽ ലെങ്ത് (35mm):
+mm:အာရုံစူးစိုက်မှု အလျား (35mm):
+my:အာရုံခံအကွာအဝေး (35mm):
+ne:फोकल लम्बाइ (35mm):
+nl:Brandpuntsafstand (35mm):
+nn:Brennvidde (35mm):
+no:Brennvidde (35mm):
+pa:ਫੋਕਲ ਲੰਬਾਈ (35mm):
+pl:Ogniskowa (35mm):
+pt:Distância Focal (35mm):
+ro:Distanță focală (35mm):
+ru:Фокусное расстояние (35мм):
+sat:ᱯᱷᱳᱠᱟᱞ ᱡᱤᱞᱤᱧ (35mm):
+si:නාභීය දිග (35mm):
+sk:Ohnisková vzdialenosť (35mm):
+sl:Goriščna razdalja (35mm):
+sn:Kureba Kwekutarisa (35mm):
+sp-rs:Žižna daljina (35mm):
+sq:Gjatësia Fokale (35mm):
+sr-rs:Žižna daljina (35mm):
+sv:Brännvidd (35mm):
+ta:குவிய நீளம் (35mm):
+th:ความยาวโฟกัส (35mm):
+tl:Focal Length (35mm):
+tr:Odak Uzunluğu (35mm):
+tw:焦距（35mm）：
+uk:Фокусна відстань (35мм):
+uz:Fokus masofasi (35mm):
+vn:Tiêu Cự (35mm):
+:Focal Length:
+af:Brandpuntafstand:
+am:የትኩረት ርዝመት:
+ar:البعد البؤري:
+az:Fokus Məsafəsi:
+bg:Фокусно разстояние:
+bn:ফোকাল দৈর্ঘ্য:
+br:Hed ar fokalenn:
+bs:Žižna daljina:
+by:Фокусная адлегласць:
+ca:Longitud focal:
+ca-xv:Longitud focal:
+cn:焦距:
+co:Lunghezza focale:
+cy:Hyd Ffocal:
+cz:Ohnisková vzdálenost:
+de:Brennweite:
+dk:Brændvidde:
+el:Εστιακή απόσταση:
+es:Distancia Focal:
+et:Fookuskaugus:
+eu:Distantzia fokala:
+fa:فاصله کانونی:
+fi:Polttoväli:
+fo:Brennivídd:
+fr:Longueur focale :
+fy-nl:Brandpuntsôfstân:
+ga:Fad Fócasach:
+gl:Lonxitude focal:
+he:אורך מוקד:
+hi:फोकल लंबाई:
+hr:Žarišna duljina:
+hu:Gyújtótávolság:
+id:Panjang Fokus:
+it:Lunghezza focale:
+ja:焦点距離:
+jv:Dawa Fokus:
+ka:ფოკუსური მანძილი:
+kr:초점 거리:
+ku:Dirêjiya Kanîkê:
+kw:Hirder Fokus:
+lt:Židinio nuotolis:
+lv:Fokusa attālums:
+mk:Жижна далечина:
+ml:ഫോക്കൽ ലെങ്ത്:
+mm:အာရုံစူးစိုက်မှု အလျား:
+my:အာရုံခံအကွာအဝေး:
+ne:फोकल लम्बाइ:
+nl:Brandpuntsafstand:
+nn:Brennvidde:
+no:Brennvidde:
+pa:ਫੋਕਲ ਲੰਬਾਈ:
+pl:Ogniskowa:
+pt:Distância Focal:
+ro:Distanță focală:
+ru:Фокусное расстояние:
+sat:ᱯᱷᱳᱠᱟᱞ ᱡᱤᱞᱤᱧ:
+si:නාභීය දිග:
+sk:Ohnisková vzdialenosť:
+sl:Goriščna razdalja:
+sn:Kureba Kwekutarisa:
+sp-rs:Žižna daljina:
+sq:Gjatësia Fokale:
+sr-rs:Žižna daljina:
+sv:Brännvidd:
+ta:குவிய நீளம்:
+th:ความยาวโฟกัส:
+tl:Focal Length:
+tr:Odak Uzunluğu:
+tw:焦距：
+uk:Фокусна відстань:
+uz:Fokus masofasi:
+vn:Tiêu Cự:
 :Fonts:
 af:Fonte:
 am:Տառատեսաներ.
@@ -20075,6 +21170,79 @@ tw:首頁
 uk:Головна
 uz:Bosh sahifa
 vn:Trang chủ
+:ISO Speed:
+af:ISO-spoed:
+am:አይ ኤስ ኦ ፍጥነት:
+ar:سرعة ISO:
+az:ISO Sürəti:
+bg:ISO светлочувствителност:
+bn:আইএসও গতি:
+br:Tizh ISO:
+bs:ISO brzina:
+by:Хуткасць ISO:
+ca:Sensibilitat ISO:
+ca-xv:Velocitat ISO:
+cn:ISO 速度:
+co:Velocità ISO:
+cy:Cyflymder ISO:
+cz:Citlivost ISO:
+de:ISO-Empfindlichkeit:
+dk:ISO-følsomhed:
+el:Ταχύτητα ISO:
+es:Velocidad ISO:
+et:ISO tundlikkus:
+eu:ISO abiadura:
+fa:سرعت ISO:
+fi:ISO-herkkyys:
+fo:ISO ferð:
+fr:Sensibilité ISO :
+fy-nl:ISO-snelheid:
+ga:Luas ISO:
+gl:Velocidade ISO:
+he:רגישות ISO:
+hi:ISO स्पीड:
+hr:ISO osjetljivost:
+hu:ISO érzékenység:
+id:Kecepatan ISO:
+it:Sensibilità ISO:
+ja:ISO感度:
+jv:Kacepetan ISO:
+ka:ISO სიჩქარე:
+kr:ISO 감도:
+ku:Leza ISO:
+kw:Res ISO:
+lt:ISO jautrumas:
+lv:ISO ātrums:
+mk:ISO брзина:
+ml:ISO സ്പീഡ്:
+mm:ISO အမြန်နှုန်း:
+my:ISO အမြန်နှုန်း:
+ne:ISO गति:
+nl:ISO-snelheid:
+nn:ISO-hastigheit:
+no:ISO-hastighet:
+pa:ISO ਸਪੀਡ:
+pl:Czułość ISO:
+pt:Velocidade ISO:
+ro:Sensibilitate ISO:
+ru:Светочувствительность ISO:
+sat:ISO ᱞᱚᱜᱚᱱ:
+si:ISO වේගය:
+sk:Citlivosť ISO:
+sl:ISO občutljivost:
+sn:Kumhanya ISO:
+sp-rs:ISO osetljivost:
+sq:Shpejtësia ISO:
+sr-rs:ISO osetljivost:
+sv:ISO-hastighet:
+ta:ISO வேகம்:
+th:ความเร็ว ISO:
+tl:ISO Speed:
+tr:ISO Hızı:
+tw:ISO 感光度：
+uk:Швидкість ISO:
+uz:ISO tezligi:
+vn:Độ Nhạy ISO:
 :Icon:
 af:Ikoon:
 am:Պատկերակ.
@@ -20148,6 +21316,79 @@ tw:圖示:
 uk:Значок:
 uz:Ikonka:
 vn:Biểu Tượng:
+:Image Size:
+af:Beeldgrootte:
+am:የምስል መጠን:
+ar:حجم الصورة:
+az:Şəkil Ölçüsü:
+bg:Размер на изображение:
+bn:ছবির আকার:
+br:Ment ar skeudenn:
+bs:Veličina slike:
+by:Памер выявы:
+ca:Mida de la imatge:
+ca-xv:Mida de la imatge:
+cn:图像大小:
+co:Dimensione di l'imaghjina:
+cy:Maint Delwedd:
+cz:Velikost obrázku:
+de:Bildgröße:
+dk:Billedstørrelse:
+el:Μέγεθος εικόνας:
+es:Tamaño de Imagen:
+et:Pildi suurus:
+eu:Irudi tamaina:
+fa:اندازه تصویر:
+fi:Kuvan koko:
+fo:Myndastødd:
+fr:Taille de l'image :
+fy-nl:Ofbylding grutte:
+ga:Méid Íomhá:
+gl:Tamaño da imaxe:
+he:גודל תמונה:
+hi:छवि आकार:
+hr:Veličina slike:
+hu:Képméret:
+id:Ukuran Gambar:
+it:Dimensione immagine:
+ja:画像サイズ:
+jv:Ukuran Gambar:
+ka:გამოსახულების ზომა:
+kr:이미지 크기:
+ku:Mezinahiya Wêneyê:
+kw:Myns Imach:
+lt:Vaizdo dydis:
+lv:Attēla izmērs:
+mk:Големина на слика:
+ml:ചിത്രത്തിന്റെ വലുപ്പം:
+mm:ပုံအရွယ်အစား:
+my:ရုပ်ပုံအရွယ်:
+ne:छवि आकार:
+nl:Afbeeldingsgrootte:
+nn:Bildestorleik:
+no:Bildestørrelse:
+pa:ਚਿੱਤਰ ਆਕਾਰ:
+pl:Rozmiar obrazu:
+pt:Tamanho da Imagem:
+ro:Dimensiune imagine:
+ru:Размер изображения:
+sat:ᱪᱤᱛᱟᱹᱨ ᱢᱟᱯ:
+si:රූප ප්‍රමාණය:
+sk:Veľkosť obrázka:
+sl:Velikost slike:
+sn:Saizi Yemufananidzo:
+sp-rs:Veličina slike:
+sq:Madhësia e Imazhit:
+sr-rs:Veličina slike:
+sv:Bildstorlek:
+ta:படத்தின் அளவு:
+th:ขนาดภาพ:
+tl:Laki ng Larawan:
+tr:Görüntü Boyutu:
+tw:影像大小：
+uk:Розмір зображення:
+uz:Tasvir hajmi:
+vn:Kích Thước Ảnh:
 :Image files (*.%s)
 af:Beeldlêers (*.%s)
 am:Պատկերի ֆայլեր (*.%s)
@@ -21170,6 +22411,79 @@ tw:KB
 uk:KB
 uz:KB
 vn:KB
+:Keywords:
+af:Sleutelwoorde:
+am:ቁልፍ ቃላት:
+ar:الكلمات المفتاحية:
+az:Açar Sözlər:
+bg:Ключови думи:
+bn:কীওয়ার্ড:
+br:Gerioù-alc'hwez:
+bs:Ključne riječi:
+by:Ключавыя словы:
+ca:Paraules clau:
+ca-xv:Paraules clau:
+cn:关键词:
+co:Parolle chjave:
+cy:Allweddeiriau:
+cz:Klíčová slova:
+de:Stichwörter:
+dk:Nøgleord:
+el:Λέξεις-κλειδιά:
+es:Palabras Clave:
+et:Võtmesõnad:
+eu:Gako-hitzak:
+fa:کلیدواژه‌ها:
+fi:Avainsanat:
+fo:Evnisorð:
+fr:Mots-clés :
+fy-nl:Kaaiwurden:
+ga:Eochairfhocail:
+gl:Palabras clave:
+he:מילות מפתח:
+hi:कीवर्ड:
+hr:Ključne riječi:
+hu:Kulcsszavak:
+id:Kata Kunci:
+it:Parole chiave:
+ja:キーワード:
+jv:Tembung Kunci:
+ka:საკვანძო სიტყვები:
+kr:키워드:
+ku:Peyvên Kilîtî:
+kw:Geryow Alwedh:
+lt:Raktažodžiai:
+lv:Atslēgvārdi:
+mk:Клучни зборови:
+ml:കീവേഡുകൾ:
+mm:သော့ချက်စကားလုံးများ:
+my:သော့ချက်စာလုံးများ:
+ne:किवर्डहरू:
+nl:Trefwoorden:
+nn:Nøkkelord:
+no:Nøkkelord:
+pa:ਕੀਵਰਡ:
+pl:Słowa kluczowe:
+pt:Palavras-chave:
+ro:Cuvinte cheie:
+ru:Ключевые слова:
+sat:ᱠᱟᱹᱴᱷᱤᱠᱚ:
+si:මූල පද:
+sk:Kľúčové slová:
+sl:Ključne besede:
+sn:Mazwi Ekutsvaga:
+sp-rs:Ključne reči:
+sq:Fjalë Kyçe:
+sr-rs:Ključne reči:
+sv:Nyckelord:
+ta:முக்கிய சொற்கள்:
+th:คำสำคัญ:
+tl:Mga Keyword:
+tr:Anahtar Kelimeler:
+tw:關鍵字：
+uk:Ключові слова:
+uz:Kalit so'zlar:
+vn:Từ Khóa:
 :Last Page
 af:Laaste Bladsy
 am:Վերջին էջ
@@ -22192,6 +23506,79 @@ tw:線上說明
 uk:Посібник на веб-сайті
 uz:Veb-saytda qo‘llanma
 vn:Hướng dẫn sử dụng trên trang web
+:Metering Mode:
+af:Meetmodus:
+am:የመለኪያ ሁኔታ:
+ar:وضع القياس:
+az:Ölçmə Rejimi:
+bg:Режим на измерване:
+bn:মিটারিং মোড:
+br:Doare ar muzuliadur:
+bs:Način mjerenja:
+by:Рэжым вымярэння:
+ca:Mode de mesura:
+ca-xv:Mode de mesura:
+cn:测光模式:
+co:Modu di misurazione:
+cy:Modd Mesur:
+cz:Režim měření:
+de:Messmethode:
+dk:Måletilstand:
+el:Λειτουργία φωτομέτρησης:
+es:Modo de Medición:
+et:Mõõtmisrežiim:
+eu:Neurketa modua:
+fa:حالت نورسنجی:
+fi:Mittaustila:
+fo:Mátingarháttur:
+fr:Mode de mesure :
+fy-nl:Mjitmodus:
+ga:Mód Méadraithe:
+gl:Modo de medición:
+he:מצב מדידה:
+hi:मीटरिंग मोड:
+hr:Način mjerenja:
+hu:Mérési mód:
+id:Mode Metering:
+it:Modalità misurazione:
+ja:測光モード:
+jv:Mode Pengukuran:
+ka:გაზომვის რეჟიმი:
+kr:측광 모드:
+ku:Moda Pîvandinê:
+kw:Modh Mesurans:
+lt:Matavimo režimas:
+lv:Mērīšanas režīms:
+mk:Режим на мерење:
+ml:മീറ്ററിംഗ് മോഡ്:
+mm:တိုင်းတာမှု မုဒ်:
+my:တိုင်းတာမှုနည်းလမ်း:
+ne:मिटरिङ मोड:
+nl:Meetmodus:
+nn:Målingsmodus:
+no:Målemodus:
+pa:ਮੀਟਰਿੰਗ ਮੋਡ:
+pl:Tryb pomiaru:
+pt:Modo de Medição:
+ro:Mod măsurare:
+ru:Режим замера:
+sat:ᱢᱤᱴᱚᱨᱤᱝ ᱢᱳᱰ:
+si:මිනුම් ප්‍රකාරය:
+sk:Režim merania:
+sl:Način merjenja:
+sn:Maitiro Ekuyera:
+sp-rs:Režim merenja:
+sq:Modaliteti i Matjes:
+sr-rs:Režim merenja:
+sv:Mätläge:
+ta:அளவீடு முறை:
+th:โหมดการวัดแสง:
+tl:Metering Mode:
+tr:Ölçüm Modu:
+tw:測光模式：
+uk:Режим вимірювання:
+uz:O'lchash rejimi:
+vn:Chế Độ Đo Sáng:
 :Mobi documents
 af:Mobi dokumente
 am:XPS ֆայլեր
@@ -26134,6 +27521,79 @@ tw:選項…
 uk:Опції...
 uz:Parametrlar...
 vn:Tuỳ chọn
+:Orientation:
+af:Oriëntasie:
+am:አቅጣጫ:
+ar:الاتجاه:
+az:Oriyentasiya:
+bg:Ориентация:
+bn:দিকবিন্যাস:
+br:Reteradur:
+bs:Orijentacija:
+by:Арыентацыя:
+ca:Orientació:
+ca-xv:Orientació:
+cn:方向:
+co:Orientazione:
+cy:Cyfeiriadedd:
+cz:Orientace:
+de:Ausrichtung:
+dk:Orientering:
+el:Προσανατολισμός:
+es:Orientación:
+et:Orientatsioon:
+eu:Orientazioa:
+fa:جهت:
+fi:Suunta:
+fo:Umstilling:
+fr:Orientation :
+fy-nl:Oriïntaasje:
+ga:Treoshuíomh:
+gl:Orientación:
+he:כיוון:
+hi:अभिविन्यास:
+hr:Orijentacija:
+hu:Tájolás:
+id:Orientasi:
+it:Orientamento:
+ja:向き:
+jv:Orientasi:
+ka:ორიენტაცია:
+kr:방향:
+ku:Rêveberî:
+kw:Kyfugiaseth:
+lt:Orientacija:
+lv:Orientācija:
+mk:Ориентација:
+ml:ഓറിയന്റേഷൻ:
+mm:ဦးတည်ရာ:
+my:တည်နေရာ:
+ne:अभिमुखीकरण:
+nl:Oriëntatie:
+nn:Orientering:
+no:Orientering:
+pa:ਸਥਿਤੀ:
+pl:Orientacja:
+pt:Orientação:
+ro:Orientare:
+ru:Ориентация:
+sat:ᱫᱤᱥᱟᱹ:
+si:දිශානතිය:
+sk:Orientácia:
+sl:Usmerjenost:
+sn:Kutarisana:
+sp-rs:Orijentacija:
+sq:Orientimi:
+sr-rs:Orijentacija:
+sv:Orientering:
+ta:திசையமைப்பு:
+th:การวางแนว:
+tl:Oryentasyon:
+tr:Yönelim:
+tw:方向：
+uk:Орієнтація:
+uz:Yo'nalish:
+vn:Hướng:
 :Overwrite
 af:Oorskryf
 am:በላዩ ላይ ጻፍ
@@ -40515,6 +41975,79 @@ tw:警告
 uk:Застереження
 uz:Diqqat
 vn:Cảnh báo
+:White Balance:
+af:Witbalans:
+am:ነጭ ሚዛን:
+ar:توازن الأبيض:
+az:Ağ Balans:
+bg:Баланс на бялото:
+bn:হোয়াইট ব্যালেন্স:
+br:Kempouez ar gwenn:
+bs:Balans bijele:
+by:Баланс белага:
+ca:Balanç de blancs:
+ca-xv:Balanç de blancs:
+cn:白平衡:
+co:Balance di u biancu:
+cy:Cydbwysedd Gwyn:
+cz:Vyvážení bílé:
+de:Weißabgleich:
+dk:Hvidbalance:
+el:Ισορροπία λευκού:
+es:Balance de Blancos:
+et:Valge tasakaal:
+eu:Zuri oreka:
+fa:تعادل سفیدی:
+fi:Valkotasapaino:
+fo:Hvítjavning:
+fr:Balance des blancs :
+fy-nl:Wytbalâns:
+ga:Cothromaíocht Bhán:
+gl:Balance de brancos:
+he:איזון לבן:
+hi:व्हाइट बैलेंस:
+hr:Balans bijele:
+hu:Fehéregyensúly:
+id:White Balance:
+it:Bilanciamento del bianco:
+ja:ホワイトバランス:
+jv:Imbangan Putih:
+ka:თეთრის ბალანსი:
+kr:화이트 밸런스:
+ku:Hevsengiya Spî:
+kw:Balansya Gwynn:
+lt:Baltųjų balansas:
+lv:Baltā balanss:
+mk:Баланс на бела боја:
+ml:വൈറ്റ് ബാലൻസ്:
+mm:အဖြူရောင် ဟန်ချက်:
+my:အဖြူချိန်ညှိခြင်း:
+ne:ह्वाइट ब्यालेन्स:
+nl:Witbalans:
+nn:Kvitbalanse:
+no:Hvitbalanse:
+pa:ਵਾਈਟ ਬੈਲੇਂਸ:
+pl:Balans bieli:
+pt:Balanço de Brancos:
+ro:Balans de alb:
+ru:Баланс белого:
+sat:ᱯᱩᱸᱰ ᱵᱮᱞᱮᱱᱥ:
+si:සුදු සමතුලිතතාවය:
+sk:Vyváženie bielej:
+sl:Bela ravnovesje:
+sn:Kuenzana Kwejena:
+sp-rs:Balans bele:
+sq:Balanca e Bardhë:
+sr-rs:Balans bele:
+sv:Vitbalans:
+ta:வெள்ளை சமநிலை:
+th:สมดุลสีขาว:
+tl:White Balance:
+tr:Beyaz Dengesi:
+tw:白平衡：
+uk:Баланс білого:
+uz:Oq balans:
+vn:Cân Bằng Trắng:
 :XPS documents
 af:XPS dokumente
 am:XPS ֆայլեր
