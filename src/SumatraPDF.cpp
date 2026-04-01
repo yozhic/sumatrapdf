@@ -1439,6 +1439,22 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         if (args->showWin) {
             ShowWindow(win->hwndFrame, showType);
         }
+
+
+#if 0
+        // fix https://github.com/sumatrapdfreader/sumatrapdf/issues/5456
+        // bad initial layout with RememberOpenedFiles = false
+        // it's redundant with LayoutAndFocusOnStartup()
+
+        // Fire deferred SWP_FRAMECHANGED for custom caption so the
+        // non-client area is recalculated and the client rect is correct.
+        // ShowMainWindow normally does this, but this code path bypasses it.
+        if (win->tabsInTitlebar) {
+            uint swpFlags = SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE;
+            SetWindowPos(win->hwndFrame, nullptr, 0, 0, 0, 0, swpFlags);
+        }
+#endif
+
         if (win) {
             UpdateWindow(win->hwndFrame);
         }

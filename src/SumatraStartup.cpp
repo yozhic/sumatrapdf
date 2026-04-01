@@ -936,10 +936,11 @@ void StartDeleteStaleFiles() {
     RunAsync(fn, "DeleteStaleFilesThread");
 }
 
- static void FocusMainWindowOnStartup(MainWindow* win) {
+static void LayoutAndFocusOnStartup(MainWindow* win) {
      if (!win || !IsWindow(win->hwndFrame)) {
          return;
      }
+     RelayoutWindow(win);
      win->Focus();
  }
 
@@ -2755,8 +2756,9 @@ ContinueOpenWindow:
     }
 
     StartDeleteStaleFiles();
-    // TODO: don't know why I need this but I do if RememberOpenedFiles = false
-    uitask::Post(MkFunc0(FocusMainWindowOnStartup, win), "FocusMainWindowOnStartup");
+    // needed if RememberOpenedFiles = false
+    // https://github.com/sumatrapdfreader/sumatrapdf/issues/5456
+    uitask::Post(MkFunc0(LayoutAndFocusOnStartup, win), "LayoutAndFocusOnStartup");
 
     exitCode = RunMessageLoop();
     SafeCloseHandle(&hMutex);
