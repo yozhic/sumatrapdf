@@ -2317,7 +2317,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     // in debug build, default
     if (gIsDebugBuild) {
         if (!flags.logFile) {
-            flags.logFile = str::DupTemp("sumlog.txt");
+            flags.logFile = str::Dup("sumlog.txt");
         }
     }
     if (flags.log && !noLogHere) {
