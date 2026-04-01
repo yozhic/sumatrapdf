@@ -13,6 +13,8 @@
 #include "AppTools.h"
 #include "Screenshot.h"
 #include "ImageSaveCropResize.h"
+#include "Commands.h"
+#include "Accelerators.h"
 
 struct MainWindow;
 extern Vec<MainWindow*> gWindows;
@@ -917,10 +919,50 @@ static bool IsOtherSumatraProcessRunning() {
     return false;
 }
 
+// find custom shortcut key string for CmdScreenshot, or nullptr if none
+static const char* FindScreenshotShortcut() {
+    auto curr = gFirstCustomCommand;
+    while (curr) {
+        if (curr->origId == CmdScreenshot && !str::IsEmptyOrWhiteSpace(curr->key)) {
+            return curr->key;
+        }
+        curr = curr->next;
+    }
+    return nullptr;
+}
+
+static UINT AccelFVirtToHotkeyMod(BYTE fVirt) {
+    UINT mod = 0;
+    if (fVirt & FALT) {
+        mod |= MOD_ALT;
+    }
+    if (fVirt & FCONTROL) {
+        mod |= MOD_CONTROL;
+    }
+    if (fVirt & FSHIFT) {
+        mod |= MOD_SHIFT;
+    }
+    return mod;
+}
+
 void RegisterScreenshotHotkey(HWND hwnd) {
-    BOOL ok = RegisterHotKey(hwnd, kScreenshotHotkeyId, 0, VK_SNAPSHOT);
+    const char* shortcut = FindScreenshotShortcut();
+    UINT mod = 0;
+    UINT vk = VK_SNAPSHOT;
+    if (shortcut) {
+        ACCEL accel{};
+        if (ParseShortcutString(shortcut, accel)) {
+            mod = AccelFVirtToHotkeyMod(accel.fVirt);
+            vk = accel.key;
+        }
+    }
+    BOOL ok = RegisterHotKey(hwnd, kScreenshotHotkeyId, mod, vk);
     if (!ok && !IsOtherSumatraProcessRunning()) {
-        MaybeDelayedWarningNotification("Couldn't register PrtScr global hotkey for taking screenshots");
+        if (shortcut) {
+            MaybeDelayedWarningNotification("Couldn't register '%s' global hotkey for taking screenshots", shortcut);
+        } else {
+            MaybeDelayedWarningNotification("Couldn't register PrtScr global hotkey for taking screenshots");
+        }
     }
 }
 

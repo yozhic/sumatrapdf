@@ -503,6 +503,10 @@ bool IsValidShortcutString(const char* shortcut) {
     return parseShortcut(shortcut, accel);
 }
 
+bool ParseShortcutString(const char* shortcut, ACCEL& accel) {
+    return parseShortcut(shortcut, accel);
+}
+
 static TempStr appendAccelKeyToMenuStringTemp(TempStr menuStr, const ACCEL& a) {
     auto lang = trans::GetCurrentLangCode();
     bool isEng = str::IsEmpty(lang) || str::Eq(lang, "en");
@@ -716,6 +720,11 @@ void CreateSumatraAcceleratorTable() {
     curr = gFirstCustomCommand;
     while (curr) {
         if ((curr->id > 0) && !str::IsEmptyOrWhiteSpace(curr->key)) {
+            // CmdScreenshot shortcuts are registered as global hotkeys, not accelerators
+            if (curr->origId == CmdScreenshot) {
+                curr = curr->next;
+                continue;
+            }
             ACCEL accel{};
             accel.cmd = curr->id;
             if (parseShortcut(curr->key, accel)) {
