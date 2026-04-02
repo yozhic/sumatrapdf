@@ -278,8 +278,8 @@ static MenuDef menuDefView[] = {
         CmdToggleToolbar,
     },
     {
-        _TRN("Show Scr&ollbars"),
-        CmdToggleScrollbars,
+        _TRN("Change Scr&ollbar"),
+        CmdChangeScrollbar,
     },
     {
         nullptr,
@@ -841,8 +841,8 @@ static MenuDef menuDefContext[] = {
         CmdToggleToolbar,
     },
     {
-        _TRN("Show &Scrollbars"),
-        CmdToggleScrollbars,
+        _TRN("Change &Scrollbar"),
+        CmdChangeScrollbar,
     },
     {
         kMenuSeparator,
@@ -1087,7 +1087,7 @@ UINT_PTR removeIfChm[] = {
     CmdRotateLeft,
     CmdRotateRight,
     CmdTogglePresentationMode,
-    CmdToggleScrollbars,
+    CmdChangeScrollbar,
     CmdZoomFitPage,
     CmdZoomActualSize,
     CmdZoomFitWidth,
@@ -1676,7 +1676,7 @@ static void MenuUpdateStateForWindow(MainWindow* win) {
 
     MenuSetChecked(win->menu, CmdFavoriteToggle, gGlobalPrefs->showFavorites);
     MenuSetChecked(win->menu, CmdToggleToolbar, gGlobalPrefs->showToolbar);
-    MenuSetChecked(win->menu, CmdToggleScrollbars, !gGlobalPrefs->fixedPageUI.hideScrollbars);
+    // CmdChangeScrollbar doesn't need a check mark - it opens a dialog
     MenuUpdateDisplayMode(win);
     MenuUpdateZoom(win);
 
@@ -1854,8 +1854,6 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     MenuSetEnabled(popup, CmdToggleBookmarks, win->ctrl->HasToc());
     MenuSetChecked(popup, CmdToggleBookmarks, win->tocVisible);
 
-    MenuSetChecked(popup, CmdToggleScrollbars, !gGlobalPrefs->fixedPageUI.hideScrollbars);
-
     MenuSetEnabled(popup, CmdFavoriteToggle, HasFavorites());
     MenuSetChecked(popup, CmdFavoriteToggle, gGlobalPrefs->showFavorites);
 
@@ -1952,7 +1950,7 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdFavoriteToggle:
         case CmdProperties:
         case CmdToggleToolbar:
-        case CmdToggleScrollbars:
+        case CmdChangeScrollbar:
         case CmdSaveAnnotations:
         case CmdSaveAnnotationsNewFile:
         case CmdFavoriteAdd: {

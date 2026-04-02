@@ -3,6 +3,8 @@
 
 struct AnnotCreateArgs;
 
+#include "OverlayScrollbar.h"
+
 #define CANVAS_CLASS_NAME L"SUMATRA_PDF_CANVAS"
 #define FRAME_CLASS_NAME L"SUMATRA_PDF_FRAME"
 
@@ -127,6 +129,18 @@ void AdvanceFocus(MainWindow* win);
 void SetCurrentLanguageAndRefreshUI(const char* langCode);
 void UpdateDocumentColors();
 void UpdateFixedPageScrollbarsVisibility();
+
+// scrollbar mode values: "windows\0smart\0overlay\0hidden\0"
+constexpr int kScrollbarWindows = 0;
+constexpr int kScrollbarSmart = 1;
+constexpr int kScrollbarOverlay = 2;
+constexpr int kScrollbarHidden = 3;
+extern SeqStrings gScrollbarModeNames;
+int ScrollbarModeFromPrefs();
+
+bool ScrollbarsAreHidden();
+bool ScrollbarsUseOverlay();
+OverlayScrollbar::Mode ScrollbarsOverlayMode();
 void UpdateTabFileDisplayStateForTab(WindowTab* tab);
 void ReloadDocument(MainWindow* win, bool autoRefresh);
 void ToggleFullScreen(MainWindow* win, bool presentation = false);

@@ -713,6 +713,57 @@ bool Dialog_CustomZoom(HWND hwnd, bool forChm, float* currZoomInOut) {
     return true;
 }
 
+static INT_PTR CALLBACK Dialog_ChangeScrollbar_Proc(HWND hDlg, UINT msg, WPARAM wp, LPARAM) {
+    switch (msg) {
+        case WM_INITDIALOG: {
+            if (UseDarkModeLib()) {
+                DarkMode::setDarkWndSafe(hDlg);
+            }
+            const char* s = gGlobalPrefs->fixedPageUI.scrollbars;
+            int checkId = IDC_SCROLLBAR_WINDOWS;
+            if (str::EqI(s, "smart")) {
+                checkId = IDC_SCROLLBAR_SMART;
+            } else if (str::EqI(s, "overlay")) {
+                checkId = IDC_SCROLLBAR_OVERLAY;
+            } else if (str::EqI(s, "hidden")) {
+                checkId = IDC_SCROLLBAR_HIDDEN;
+            }
+            CheckRadioButton(hDlg, IDC_SCROLLBAR_WINDOWS, IDC_SCROLLBAR_HIDDEN, checkId);
+            HwndSetText(hDlg, _TRA("Change Scrollbar"));
+            HwndSetDlgItemText(hDlg, IDOK, _TRA("OK"));
+            HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("Cancel"));
+            CenterDialog(hDlg);
+            return TRUE;
+        }
+        case WM_COMMAND:
+            switch (LOWORD(wp)) {
+                case IDOK: {
+                    const char* val = "windows";
+                    if (IsDlgButtonChecked(hDlg, IDC_SCROLLBAR_SMART) == BST_CHECKED) {
+                        val = "smart";
+                    } else if (IsDlgButtonChecked(hDlg, IDC_SCROLLBAR_OVERLAY) == BST_CHECKED) {
+                        val = "overlay";
+                    } else if (IsDlgButtonChecked(hDlg, IDC_SCROLLBAR_HIDDEN) == BST_CHECKED) {
+                        val = "hidden";
+                    }
+                    str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, val);
+                    EndDialog(hDlg, IDOK);
+                    return TRUE;
+                }
+                case IDCANCEL:
+                    EndDialog(hDlg, IDCANCEL);
+                    return TRUE;
+            }
+            break;
+    }
+    return FALSE;
+}
+
+bool Dialog_ChangeScrollbar(HWND hwnd) {
+    INT_PTR res = CreateDialogBox(IDD_DIALOG_CHANGE_SCROLLBAR, hwnd, Dialog_ChangeScrollbar_Proc, 0);
+    return res == IDOK;
+}
+
 static void RemoveDialogItem(HWND hDlg, int itemId, int prevId = 0) {
     HWND hItem = GetDlgItem(hDlg, itemId);
     Rect itemRc = MapRectToWindow(WindowRect(hItem), HWND_DESKTOP, hDlg);

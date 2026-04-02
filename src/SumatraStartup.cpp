@@ -2486,7 +2486,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         gGlobalPrefs->useTabs = false;
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
+        str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
     }
     SetCurrentLang(flags.lang ? flags.lang : gGlobalPrefs->uiLanguage);
     FileWatcherInit();

@@ -1,6 +1,8 @@
 /* Copyright 2022 the SumatraPDF project authors (see AUTHORS file).
    License: GPLv3 */
 
+#pragma once
+
 // Overlay scrollbar - a semi-transparent top-level window that acts like
 // a standard Windows scrollbar but floats over the owner window.
 
@@ -76,6 +78,9 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb);
 
 // Show/hide
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show);
+
+// Change the scrollbar mode (Smart vs Thick)
+void OverlayScrollbarSetMode(OverlayScrollbar* sb, OverlayScrollbar::Mode mode);
 
 // returns true if scrollbar is visible (thin, thick, or always thick)
 bool IsOverlayScrollbarVisible(OverlayScrollbar* sb);

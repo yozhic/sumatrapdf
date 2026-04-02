@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-c34a6c24c7275730039e340ada16af5741976cf3
+0102fa3be671416e2a4112503343e78c8058bd84
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -848,79 +848,6 @@ tw:放棄變更(&D)
 uk:&Скасувати зміни
 uz:O‘zgarishlarni rad etish
 vn:&Không Lưu thay đổi
-:&Don't ask me again
-af:Moet My Nie Weer Vra Nie
-am:&Այլևս չհարցնել
-ar:لا تسألني مرةً أخرى&
-az:Bir daha &soruşma
-bg:Без повтор&но питане
-bn:&আমাকে আর জিজ্ঞেস করবেন না
-br:&Não me pergunte de novo
-bs:Nemoj me ponovo pitati
-by:Больш не пытаць
-ca-xv:&No m'ho tornis a preguntar
-ca:&No ho tornis a preguntar
-cn:不再询问(&D)
-co:Ùn mi dumandà &più
-cy:&Peidio â gofyn eto
-cz:&Příště se již neptat
-de:Nicht &wieder fragen.
-dk:&Spørg mig ikke igen
-el:&Να μην ερωτηθώ ξανά
-es:&No volver a preguntar
-et:Ä&ra küsi uuesti
-eu:&Ez galdetu berriro
-fa:&دوباره از من نپرس
-fi:Ä&lä kysy uudestaan
-fo:&Spyr meg ikki  aftur
-fr:&Ne plus me demander
-fy-nl:Net mear freegje
-ga:&Ná fiafraigh dom arís
-gl:Non preguntar de novo
-he:אל תציג הודעה זו שוב
-hi:फिर मत पूछिए
-hr:Ubuduće nemoj pitati
-hu:Ne kérdezze meg többé
-id:&Jangan ulangi pertanyaan ini
-it:Non chie&dermelo più
-ja:再び質問しない(&D)
-jv:&Ojo takon meneh
-ka:&აღარ შემეკითხო
-kr:다시는 묻지 않기(&D)
-ku:دووبارە پرسیار مەکەرەوە&
-kw:&Na wovyn orthiv arta
-lt:&Daugiau nebeklausti
-lv:&Vairs nejautāt
-mk:Не ме прашувај повторно
-ml:എന്നോട് വീണ്ടും &ചോദിക്കരുത്
-mm:ထပ်မမေးပါနှင့်။
-my:&Jangan tanya saya lagi
-ne:मलाई पुनः &नसोध्नुहोस्
-nl:Niet opnieuw vragen
-nn:Ikkje spør meg igjen
-no:&Ikke spør meg igjen
-pa:ਮੈਥੌਂ ਮੁੜ ਨਾ ਪੁਛੋ
-pl:&Nie pytaj więcej
-pt:&Não me perguntar de novo
-ro:&Nu mă întreba din nou
-ru:&Больше не спрашивать
-sat:ᱟᱨᱦᱚᱸ ᱟᱞᱚᱢ ᱠᱩᱴᱤ ᱤᱧᱟ
-si:යළි විමසන්න &එපා
-sk:&Nepýtať sa znova
-sl:&Ne sprašuj me več
-sn:Usandivhunze futi
-sp-rs:Ne pitaj me ponovo
-sq:&Mos pyet më
-sr-rs:Не питај ме &поново
-sv:Fråga inte igen
-ta:மறுபடியும் கேட்காதே
-th:&ไม่ต้องถามอีกครั้ง
-tl:Huwag na akong tanunging muli
-tr:Yeniden &sorma
-tw:不要再詢問我(&D)
-uk:Не питати знову
-uz:&Boshqa so'ralmasin
-vn:Không hỏi lại
 :&Even pages only
 am:&Միայն զույգ էջերը
 ar:الصفحات &الزوجية فقط
@@ -1972,77 +1899,6 @@ tw:下一頁(&N)
 uk:Наступна сторінка
 uz:Keyingi sahifa
 vn:&Trang Tiếp
-:&No
-af:&Nee
-am:&Ոչ
-ar:لا&
-az:&Xeyr
-bg:&Не
-bn:&না
-br:&Não
-bs:&Ne
-by:Нет
-ca-xv:&No
-ca:&No
-cn:否(&N)
-co:I&nnò
-cy:&Na
-cz:&Ne
-de:&Nein
-dk:&Nej
-el:Ό&χι
-es:&No
-et:&Ei
-eu:&Ez
-fa:&خیر
-fi:&Ei
-fo:&Nei
-fr:&Non
-fy-nl:&Nee
-ga:&Ná déan
-gl:&Non
-he:לא
-hi:नहीं(&N)
-hr:&Ne
-hu:&Nem
-id:&Tidak
-it:&No
-ja:いいえ(&N)
-jv:&Ora
-ka:&არა
-kr:아니오(&N)
-ku:نەخێر&
-kw:&Na
-lt:&Ne
-lv:&Nē
-mk:&Не
-my:&Tidak
-ne:&नाइँ/हैन
-nl:&Nee
-nn:&Nei
-no:&Nei
-pa:&ਨਹੀਂ
-pl:&Nie
-pt:&Não
-ro:&Nu
-ru:&Нет
-sat:&ᱵᱟᱝ
-si:&එපා
-sk:&Nie
-sl:&Ne
-sn:&kwete
-sp-rs:Ne
-sq:&Jo
-sr-rs:&Не
-sv:&Nej
-ta:இல்லை
-th:&ไม่ใช่
-tl:Hindi
-tr:&Hayır
-tw:否(&N)
-uk:Ні
-uz:&Yo'q
-vn:Không
 :&Odd pages only
 am:&Միայն կենտ էջերը
 ar:&الصفحات الفردية فقط
@@ -3780,75 +3636,6 @@ tw:視窗(&W)
 uk:&Вікно
 uz:&Oyna
 vn:&Cửa sổ
-:&Yes
-af:&Ja
-am:&Այո
-ar:&نعم
-az:&Bəli
-bg:&Да
-bn:&হ্যাঁ
-br:&Sim
-bs:&Da
-by:Так
-ca-xv:&Sí
-ca:&Sí
-cn:确定(&Y)
-co:&Sì
-cy:&Iawn
-cz:&Ano
-de:&Ja
-dk:&Ja
-el:&Ναι
-es:&Sí
-et:&Jah
-eu:&Bai
-fa:&بلی
-fi:&Kyllä
-fo:&Ja
-fr:&Oui
-fy-nl:&Ja
-ga:&Déan sin
-gl:&Si
-he:כן
-hi:हां(&Y)
-hr:&Da
-hu:&Igen
-id:&Ya
-it:&Sì
-ja:はい(&Y)
-jv:&Yo
-ka:&დიახ
-kr:예(&Y)
-ku:بەڵێ&
-kw:&Ya
-lt:&Taip
-lv:&Jā
-mk:&Да
-my:&Ya
-ne:&हुन्छ
-nl:&Ja
-nn:&Ja
-no:&Ja
-pl:&Tak
-pt:&Sim
-ro:&Da
-ru:&Да
-sat:&ᱦᱚᱭ
-si:&ඔව්
-sk:&Áno
-sl:&Da
-sp-rs:Da
-sq:&Po
-sr-rs:&Да
-sv:&Ja
-ta:ஆம்
-th:&ใช่
-tl:&Oo
-tr:&Evet
-tw:是(&Y)
-uk:Так
-uz:&Ha
-vn:Đồng ý
 :&Zoom
 af:&Zoem
 am:&Դիտափոխել
@@ -4055,6 +3842,7 @@ vn:(trang %s)
 :(unsaved annotations)
 br:(Anotações não salvas)
 de:(nicht gespeicherte Anmerkungen)
+nl:(niet opgeslagen notaties)
 pl:(niezapisane adnotacje)
 sk:(neuložené anotácie)
 :: Everything
@@ -4921,79 +4709,6 @@ tw:您確定要解除安裝 SumatraPDF 嗎？
 uk:Ви впевнені, що хочете видалити SumatraPDF?
 uz:SumatraPDF'ni o'chirishga ishonchingiz komilmi?
 vn:Bạn có chắc muốn gỡ bỏ SumatraPDF không?
-:Associate with PDF files?
-af:Assosieer Met PDF lêers?
-am:Համակցե՞լ PDF ֆայլերի հետ։
-ar:ارتبط بملفات مستندات محمولة ؟
-az:PDF fayllarla əlaqə yaradılsın?
-bg:Указване на програмата като такава по подразбиране за отваряне на PDF файлове?
-bn:পিডিএফ সঞ্চিকার সাথে সম্বন্ধ করা হবে?
-br:Associar com os arquivos PDF?
-bs:Asocirati sa PDF datotekama?
-by:Асацыяваць з PDF-файламі?
-ca-xv:Voleu associar-lo amb els fitxers PDF?
-ca:Voleu associar-lo amb els fitxers PDF?
-cn:设置 PDF 文件关联吗?
-co:Assucià à i schedarii PDF ?
-cy:Cysylltu gyda ffeiliau PDF?
-cz:Přidružit k PDF souborům?
-de:Mit PDF-Dateien verknüpfen?
-dk:Tilknyt med PDF-filer?
-el:Να γίνει συσχετισμός με τα αρχεία PDF;
-es:¿Asociar con archivos PDF?
-et:Seosta PDF-failidega?
-eu:Elkartu PDF agiriekin?
-fa:پرونده‌های PDF همیشه با این برنامه خوانده شوند؟
-fi:Tiedostosidos PDF-tiedostoihin?
-fo:Sambinda við PDF fílur?
-fr:Associer aux fichiers PDF ?
-fy-nl:Assosjearje mei PDF-bestannen?
-ga:Comhthiomsaigh le comhaid PDF?
-gl:Asociar con ficheiros PDF?
-he:לשייך לקובצי PDF?
-hi:PDF फाईलों से संबंध बनाइए?
-hr:Asocirati sa PDF datotekama?
-hu:Társítás a PDF fájlokkal?
-id:Asosiasikan dengan berkas PDF?
-it:Associare SumatraPDF ai file PDF?
-ja:PDF ファイルと関連付けますか？
-jv:Asosiasi karo berkas PDF?
-ka:გსურთ PDF ფაილებთან ასოცირება?
-kr:PDF 파일 확장자를 연결할까요?
-ku:؟PDF پەیوەستکردن بە فایلەکانی
-kw:Keskelmi orth restrennow PDF?
-lt:Susieti su PDF failais?
-lv:Vai piesaistīt PDF failiem?
-mk:Да управувам со PDF-датотеки?
-ml:capture
-mm:PDF ဖိုင်များနှင့်ဆက်စပ်ရန်
-my:Kaitkan dengan fail PDF?
-ne:PDF फाइलहरु सँग सम्बन्धन गराउने?
-nl:Associëren met PDF-bestanden?
-nn:Tilknytte PDF-filer?
-no:Tilknytt til PDF-filer?
-pa:PDF ਫਾਈਲਾਂ ਨਾਲ ਸੰਬੰਦ ਬਣਾਓ ?
-pl:Skojarzyć z plikami PDF?
-pt:Associar com ficheiros PDF?
-ro:Asociază cu fișierele PDF?
-ru:Ассоциировать с файлами PDF?
-sat:PDF ᱨᱮᱫᱽᱠᱚ ᱥᱟᱞᱟᱜ ᱡᱚᱲᱟᱣ ᱠᱟᱱᱟ ?
-si:PDF ගොනු සමඟ සම්භන්ධක?
-sk:Asociovať s PDF súbormi?
-sl:Povežem s PDF datotekami?
-sn:Ita zvifambidzane nemagwaro ePDF
-sp-rs:Pridružiti PDF datotekama?
-sq:Do e shoqëroni me skedarët PDF?
-sr-rs:Придружити PDF датотекама?
-sv:Koppla ihop med PDF-filer?
-ta:PDF கோப்புகளுடன் இணை
-th:เชื่อมกับไฟล์ PDF หรือไม่?
-tl:I-associate sa mga PDF file?
-tr:PDF dosyaları ile bağdaştırmak ister misiniz?
-tw:設定 PDF 檔案關聯嗎?
-uk:Асоціювати з PDF-файлами?
-uz:PDF-fayllar bilan bog'lansinmi?
-vn:Liên kết với tập tin PDF?
 :Attachment: %s
 am:Կցորդ. %s
 ar:%s:مرفق
@@ -5402,6 +5117,7 @@ vn:Màu nền
 :Bits Per Sample:
 br:Bits por Amostra:
 de:Bittiefe:
+nl:Bits per monster:
 pl:Bity na próbkę:
 sk:Bitov na jednu vzorku:
 :Book View
@@ -5895,11 +5611,13 @@ vn:Tập tin CHM
 :Camera Make:
 br:Fabricante da Câmera:
 de:Kameramarke:
+nl:Camera Merk:
 pl:Marka aparatu:
 sk:Výrobca fotoaparátu:
 :Camera Model:
 br:Modelo da Câmera:
 de:Kameramodell:
+nl:Camera Model:
 pl:Model aparatu:
 sk:Model fotoaparátu:
 :Can't connect to the Internet (error %#x).
@@ -6181,6 +5899,7 @@ tw:無法進行反向搜尋。請檢查設定的命令列。
 uk:Неможливо запустити команду зворотнього пошуку. Перевірте налашутвання командного рядка.
 uz:Qayta qidirish buyrug'i xatosi. Buyruq satri parametrlarini tekshiring.
 vn:Không thể bắt đầu lệnh tìm kiếm ngược. Xin kiểm tra phần dòng lệnh trong Cài đặt.
+:Change &Scrollbar
 :Change Language
 af:Verander Taal (Change Language)
 am:Փոխել լեզուն (Change Language)
@@ -6270,6 +5989,8 @@ ru:Изменить Язык
 sk:Zmeniť jazyk…
 sr-rs:Промени језик...
 tw:變更語言…
+:Change Scr&ollbar
+:Change Scrollbar
 :Check For Updates
 am:Ստուգել թարմացումները
 br:Procurar Atualizações
@@ -7130,6 +6851,7 @@ vn:Lệnh
 :Comment:
 br:Comentário:
 de:Kommentar:
+nl:Commentaar:
 pl:Komentarz:
 sk:Komentár:
 :Compatibility
@@ -9333,6 +9055,7 @@ vn:Thiết Lập &Phóng...
 :DPI:
 br:DPI:
 de:DPI:
+nl:DPI
 pl:DPI:
 sk:DPI:
 :Dark
@@ -9473,6 +9196,7 @@ vn:Tối hơn
 :Date Original:
 br:Data Original:
 de:Originaldatum:
+nl:Oorspronkelijke Datum:
 pl:Data oryginału:
 sk:Dátum vytvorenia:
 :Date:
@@ -10513,6 +10237,7 @@ tw:内嵌…
 :Encryption:
 br:Criptografia:
 de:Verschlüsselung:
+nl:Versleuteling:
 pl:Szyfrowanie:
 sk:Šifrovanie:
 :Enter password
@@ -10939,16 +10664,19 @@ vn:Mở Rộng Tất Cả
 :Exposure Bias:
 br:Tendência da Exposição:
 de:Belichtungskorrektur:
+nl:Blootstelling Bias
 pl:Błąd ekspozycji:
 sk:Odchýlka expozície:
 :Exposure Program:
 br:Programa de Exposição:
 de:Belichtungsprogramm:
+nl:Blootstelling Programma:
 pl:Program ekspozycji:
 sk:Expozičný program:
 :Exposure Time:
 br:Tempo de Exposição:
 de:Belichtungszeit:
+nl:Blootstelling Tijd:
 pl:Czas ekspozycji:
 sk:Čas expozície:
 :F&avorites
@@ -11123,6 +10851,7 @@ vn:Toàn Màn Hình
 :F-Number:
 br:Número-F:
 de:F-Nummer:
+nl:F Nummer:
 pl:Liczba przysłony:
 sk:Clonové číslo:
 :Facing
@@ -11944,6 +11673,7 @@ vn:Kích thước:
 :File path not available
 br:O caminho do arquivo não está disponível
 de:Dateipfad nicht verfügbar
+nl:Bestand pad niet beschikbaar
 pl:Ścieżka do pliku niedostępna
 sk:Cesta k súboru je nedostupná
 :File:
@@ -12020,6 +11750,7 @@ vn:Tập tin:
 :Files:
 br:Arquivos:
 de:Dateien:
+nl:Bestanden:
 pl:Pliki:
 sk:Súbory:
 :Fin&d...
@@ -12910,16 +12641,19 @@ vn:Vừa một trang đơn
 :Flash:
 br:Flash:
 de:Blitz:
+nl:Flits
 pl:Lampa błyskowa:
 sk:Blesk:
 :Focal Length (35mm):
 br:Tamanho do Foco (35 mm):
 de:Brennweite (35 mm):
+nl:Brandpunt afstand (35mm):
 pl:Ogniskowa (35 mm):
 sk:Ohnisková vzdialenosť (35 mm):
 :Focal Length:
 br:Tamanho do Foco:
 de:Brennweite:
+nl:Brandpunt afstand:
 pl:Ogniskowa:
 sk:Ohnisková vzdialenosť:
 :Fonts:
@@ -13653,6 +13387,7 @@ tw:首頁
 :ISO Speed:
 br:Velocidade da ISO:
 de:ISO-Empfindlichkeit:
+nl:ISO Gevoeligheid:
 pl:Czułość ISO:
 sk:Rýchlosť ISO:
 :Icon:
@@ -13714,6 +13449,7 @@ vn:Biểu Tượng:
 :Image Size:
 br:Tamanho da Imagem:
 de:Bildgröße:
+nl:Afbeelding Omvang:
 pl:Rozmiar obrazu:
 sk:Rozmery obrázka:
 :Image files (*.%s)
@@ -14486,6 +14222,7 @@ vn:KB
 :Keywords:
 br:Palavras-Chave:
 de:Schlüsselwörter:
+nl:Sleutelwoorden:
 pl:Słowa kluczowe:
 sk:Kľúčové slová:
 :Last Page
@@ -15011,76 +14748,6 @@ tw:MB
 uk:MB
 uz:MB
 vn:MB
-:Make SumatraPDF default application for PDF files?
-af:Maak Sumatra Die Automatiese Program Vir PDF Lêers?
-am:Դարձնե՞լ SumatraPDF-ը սկզբնադիր ծրագիր PDF ֆայլերը բացելու համար:
-ar: المحمولة الافتراضي  لملفات المستندات المحمولة؟ Sumatra  جعل تطبيق مستندات
-az:SumatraPDF PDF faylların görüntülənməsi üçün standart proqram edilsin?
-bg:Искате ли да зададете SumatraPDF като основното си приложение за отваряне на PDF файлове?
-bn:সুমাত্রাপিডিএফ কে পিডিএফ সঞ্চিকাগুলির জন্য স্বাভাবিক অনুপ্রয়োগ রূপে নির্ধারণ করা হবে?
-br:Tornar o SumatraPDF o aplicativo padrão pra arquivos PDF?
-bs:Postavi SumatraPDF za glavnu aplikaciju za PDF fajlove?
-by:Зрабіць SumatraPDF стандартнай праграмай прагляду PDF-файлаў?
-ca-xv:Voleu que el SumatraPDF siga el visor predeterminat dels fitxers PDF?
-ca:Voleu que el SumatraPDF sigui el visor predeterminat dels fitxers PDF?
-cn:将 SumatraPDF 设为默认的 PDF 阅读器？
-co:Fà di SumatraPDF l’appiecazione predefinita per i schedarii PDF ?
-cy:Gosod SumatraPDF fel rhaglen rhagosodedig ar gyfer ffeiliau PDF?
-cz:Nastavit SumatraPDF jako výchozí prohlížeč PDF souborů?
-de:SumatraPDF als Standardanwendung für PDF-Dateien registrieren?
-dk:Gør SumatraPDF til standardprogrammet for PDF-filer
-el:Να γίνει το SumatraPDF το προεπιλεγμένο πρόγραμμα αρχείων PDF;
-es:¿Convertir SumatraPDF en la aplicación predeterminada para archivos PDF?
-et:Tee SumatraPDF PDF-failide vaikerakenduseks?
-eu:Egin SumatraPFD berezko aplikazioa PDF agirientzat?
-fa:پرونده‌های PDF همیشه با این برنامه خوانده شوند؟
-fi:Tee SumatraPDF:stä PDF-asiakirjojen oletuslukuohjelma?
-fo:Ger SumatraPDF til standard nýtsluskipan fyri PDF fílur?
-fr:Faire de SumatraPDF l’application par défaut pour les fichiers PDF ?
-fy-nl:SumatraPDF as standertlêzer fan PDF-bestannen ynstelle?
-ga:Bíodh SumatraPDF mar an léitheoir PDF réamhshocruithe?
-gl:Facer o SumatraPDF a aplicación por defecto para arquivos PDF?
-he:האם ברצונך להגדיר את SumatraPDF\n כתוכנת ברירת מחדל לקובצי PDF?
-hi:सभी PDF फाईलें SumatraPDF में खोलें ?
-hr:Postaviti SumatruPDF pretpostavljenim preglednikom PDF datoteka?
-hu:Legyen a SumatraPDF az alapértelmezett PDF-megnyitó program?
-id:Jadikan SumatraPDF sebagai aplikasi standar untuk membuka berkas PDF?
-it:Impostare SumatraPDF come applicazione predefinita per i file PDF?
-ja:SumatraPDFをPDFファイルの既定アプリにしますか？
-ka:გსურთ SumatraPDF-ის დაყენება PDF-ისთვის საწყის აპლიკაციად?
-kr:SumatraPDF를 PDF 파일의 기본 프로그램으로 만들까요?
-ku:؟PDF وەکو بەرنامەی سەرەکی بۆ کردنەوەی فایلەکانی SumatraPDF ڕێکخستنی
-kw:Gul SumatraPDF towlen savonek rag restrennow PDF?
-lt:Ar nustatyti „SumatraPDF“ kaip numatytąją PDF žiūryklę?
-lv:Vai iestatīt SumatraPDF kā noklusējuma lietotni PDF failiem?
-mk:Дали да ја направам SumatraPDF основна апликација за PDF-датотеки?
-mm:SumatraPDF ကို PDF ဖိုင်များဖွင့်ရန် အဖြစ်ပြုလုပ်လိုပါသလား။
-my:Jadikan aplikasi SumatraPDF pembaca utama bagi fail PDF?
-ne:SumatraPDF लाई PDF फाइलको पूर्वनिर्धारित अनुप्रयोग बनाउने?
-nl:SumatraPDF standaard programma voor PDF-bestanden?
-nn:Gjere SumatraPDF til standardprogram for PDF-filer?
-no:Gjøre SumatraPDF til standard åpningsprogram for PDF-filer?
-pa:PDF ਫਾਈਲਾਂ SumatraPDF ਵਿੱਚ ਖੋਲੋ?
-pl:Ustawić program SumatraPDF jako domyślną przeglądarkę plików PDF?
-pt:Tornar SumatraPDF a aplicação padrão para ficheiros PDF?
-ro:Setați SumatraPDF ca program implicit pentru fișierele PDF?
-ru:Сделать SumatraPDF программой просмотра файлов PDF по умолчанию?
-sat:SumatraPDF ᱫᱚ PDF ᱨᱮᱫᱽᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱛᱮ ᱢᱩᱞ ᱮᱯᱞᱤᱠᱮᱥᱚᱱ ᱞᱮᱠᱷᱟ ᱫᱚᱦᱚ ᱥᱟᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ ?
-si:PDF ගොනු සදහා පෙරනිමි මෘදුකාංගය ලෙස SumatraPDF සකසන්නද?
-sk:Nastaviť SumatraPDF ako predvolený prehliadač PDF súborov?
-sl:Naj bo SumatraPDF privezti program za datoteke PDF?
-sp-rs:Postaviti SumatraPDF kao podrazumevanu aplikaciju za PDF datoteke?
-sq:A të jetë SumatraPDF aplikacioni standard për skedarët PDF?
-sr-rs:Поставити SumatraPDF као подразумевану апликацију за PDF датотеке?
-sv:Ställa in SumatraPDF som standardprogram för PDF-filer?
-ta:சுமத்ராPDFயை கோட நிலை PDF படிப்பியாக மாற்றவா?
-th:ตั้ง SumatraPDF เป็นโปรแกรมมาตรฐานสำหรับเปิดไฟล์ PDF หรือไม่
-tl:Gawin ang SumatraPDF bilang default na pambukas ng mga PDF files?
-tr:SumatraPDF, PDF dosyalarının öntanımlı uygulaması yapılsın mı?
-tw:是否把 SumatraPDF 作為預設的 PDF 閱讀器？
-uk:Зробити SumatraPDF типовою програмою для PDF-файлів?
-uz:SumatraPDF PDF-fayllarni ko'rish andoza dasturi sifatida ishlatilsinmi?
-vn:Đặt SumatraPDF làm trình đọc PDF mặc định?
 :Man&ga Mode
 am:Man&ga եղանակ
 ar:نمط Man&ga
@@ -15188,6 +14855,7 @@ uz:Veb-saytda qo‘llanma
 :Metering Mode:
 br:Modo de Medição:
 de:Messmodus:
+nl:Meet Modus:
 pl:Tryb pomiaru:
 sk:Režim merania:
 :Mobi documents
@@ -17306,6 +16974,7 @@ tw:選項…
 :Orientation:
 br:Orientação:
 de:Ausrichtung:
+nl:Oriëntatie:
 pl:Orientacja:
 sk:Orientácia:
 :Overwrite
@@ -21815,63 +21484,6 @@ tw:連續顯示頁面(&P)
 uk:Відображати сторінки безперервно
 uz:&Betlarni uzluksiz ko'rsatish
 vn:Xem trang liên tiếp
-:Show &Scrollbars
-am:Ցուցադրել &ոլորգոտիները
-ar:إظهار شريط التمرير
-az:&Sürüşdürmə zolaqlarını göstər
-bg:Покажи &лентите за превъртане (Scrollbars)
-br:Mostrar as &Barras de Rolagem
-by:Паказваць &палоскі пракруткі
-ca-xv:Mostra les barres de &desplaçament
-ca:Mostra les barres de &desplaçament
-cn:显示滚动条(&S)
-co:&Affissà e barre di sfilarata
-cy:Dangos Barrau &Sgrolio
-cz:Zobrazit &posuvníky
-de:&Bildlaufleisten anzeigen
-dk:Vis &rullepaneler
-el:Εμφάνιση μπαρών κύλισης
-es:Mostrar las &barras de desplazamiento
-et:Näita kerimi&sribasid
-eu:Erakutsi &Irristabarrak
-fa:نمایش &پیمایشگر
-fi:Näytä &Vierityspalkit
-fo:Vís Skrullibjál&kar
-fr:Afficher les &barres de défilement
-ga:Taispeáin na barraí &scrollála
-gl:Amosr barra&s de desprazamento
-he:הצג פסי גלילה
-hi:स्क्रॉलबार दिखाएँ
-hr:Prikaži &klizače
-hu:Görgetősávok mutatása
-id:Tampilkan &Scrollbars
-it:Mostra Barre &scorrimento
-ja:スクロールバーを表示(&S)
-ka:საცოცი &პანელის ჩვენება
-kr:스크롤바 보이기(&S)
-kw:Diskwedhes &Skrolvarrys
-lt:Rodyti &slinkties juostas
-lv:Rādīt &ritjoslas
-my:Tunjukkan &Bar Tatalan
-nl:Toon S&chuifbalken
-no:Vis &rullefelt
-pl:Pokaż &paski przewijania
-pt:Mo&strar barra de deslocação
-ro:Arată bare de &derulare
-ru:Показывать по&лосы прокрутки
-sat:&ᱠᱷᱚᱥᱨᱚᱫᱵᱟᱨᱠᱚ ᱫᱮᱠᱷᱟᱣᱢᱮ
-sk:Zobraziť po&suvníky
-sl:Pokaži dr&sne trakove
-sr-rs:Прикажи &траке за померање
-sv:Visa &rullister
-ta:உருட்பட்டைகளை காண்பி
-th:แสดงผล &​แถบเลื่อน
-tl:Ipakita ang &Scrollbars
-tr:&Kaydırma Çubuklarını Göster
-tw:顯示捲軸(&S)
-uk:&Показати смугу прокрутки
-uz:&Scrollbarlarni ko‘rsatish
-vn:Hiện &Thanh cuộn
 :Show &Toolbar
 af:Vertoon Toolbar
 am:Ցուցադրել &գործիքները
@@ -22129,63 +21741,6 @@ it:Mostra info PDF
 nl:Toon PDF Info
 pl:Pokaż informacje o PDF
 sk:Zobraziť informácie o PDF
-:Show Scr&ollbars
-am:Ցուցադրել ոլո&րագոտիները
-ar:إظهار أشرطة التمرير
-az:Sürüşdürmə &zolaqlarını göstər
-bg:Пока&жи лентите за превъртане
-br:Mostrar as Barras de R&olagem
-by:Паказваць п&алоскі пракруткі
-ca-xv:Mostra les barres de &desplaçament
-ca:Mostra les barres de &desplaçament
-cn:显示滚动条(&O)
-co:&Affissà e barre di sfilarata
-cy:Dangos Barrau Sgr&olio
-cz:Zobrazit Pos&uvníky
-de:&Bildlaufleisten anzeigen
-dk:Vis rul&lepaneler
-el:Εμφάνιση μπαρών κύλισης
-es:Mostrar las barras de &desplazamiento
-et:Näita &kerimisribasid
-eu:Erakutsi Irristaba&rrak
-fa:نمایش &پیمایشگر
-fi:Näytä vie&rityspalkit
-fo:Vís Skrullibjál&kar
-fr:Afficher les barres de &défilement
-ga:Taispeáin na barraí scr&ollála
-gl:Amosar barras de desprazament&o
-he:הצג פסי גלילה
-hi:स्क्रॉलबार दिखाएँ
-hr:Prikaži &klizače
-hu:Gör&getősávok megjelenítése
-id:Tampilkan Scr&ollbars
-it:Mostra Barre sc&orrimento
-ja:スクロールバーを表示(&O)
-ka:საცოცი პან&ელის ჩვენება
-kr:스크롤바 보이기(&o)
-kw:Diskwedhes Skr&olvarrys
-lt:Rodyti &slinkties juostas
-lv:Rādīt rit&joslas
-my:Tunjukkan Bar &Tatalan
-nl:Toon Sch&uifbalken
-no:Vis rul&lefelt
-pl:Pokaż p&aski przewijania
-pt:M&ostrar barra de deslocação
-ro:Arată bare de de&rulare
-ru:Показывать по&лосы прокрутки
-sat:&ᱠᱷᱚᱥᱨᱚᱫᱵᱟᱨᱠᱚ ᱫᱮᱠᱷᱟᱣ ᱢᱮ
-sk:Zobraziť posu&vníky
-sl:Pokaži drsne trak&ove
-sr-rs:Прикажи траке за по&мерање
-sv:Visa rullnings&lister
-ta:உருட்பட்டைகளை காண்பி
-th:&แสดงแถบเลื่อน
-tl:Ipakita ang Scr&ollbars
-tr:Kaydırma Ç&ubuklarını Göster
-tw:顯示捲軸(&O)
-uk:Показати смугу &прокрутки
-uz:Scr&ollbarlarni ko‘rsatish
-vn:Hiển Thị Thanh &Kéo
 :Show frequently read
 am:Ցուցադրել հաճախակի բացվածները
 ar:إظهار الأكثر قراءة
@@ -24174,13 +23729,6 @@ nl:Volledig Scherm IN\UIT Schakelen
 pl:Przełącz tryb pełnoekranowy
 sk:Prepnúť Zobrazenie na celú obrazovku
 tw:切換全螢幕
-:Toggle Hide Scrollbar
-br:Ativar/Desativar a Ocultação da Barra de Rolagem
-de:Bildlaufleiste ein-/ausblenden
-it:Commuta Nascondi barra scorrimento
-nl:Schuifbalk IN\UIT Schakelen
-pl:Przełącz ukrywanie paska przewijania
-sk:Prepnúť Skryť posuvník
 :Toggle Inverse Search
 am:Միացնել/անջատել հակադարձ որոնումը
 br:Ativar/Desativar a Busca Invertida
@@ -24237,14 +23785,6 @@ nl:Menubalk Tonen/Verbergen
 pl:Przełącz pasek menu
 sk:Prepnúť Panel s ponukami
 tw:切換功能表列
-:Toggle Overlay Scrollbar
-br:AtivarDesativar a Barra de Rolagem da Sobreposição
-co:Attivà o disattivà a barra di sfilarata d’accavalcatura
-de:Überlappende Bildlaufleiste ein-/ausblenden
-it:Commuta Barra scorrimento sovrapposizione
-nl:Schuifbalk IN\UIT Schakelen
-pl:Przełącz nakładkowy pasek przewijania
-sk:Prepnúť Skrývanie posuvníka
 :Toggle Page Info
 am:Ցուցադրել/թաքցնել էջի տեղեկությունները
 br:Exibir/Ocultar Informações da Página
@@ -24264,18 +23804,6 @@ it:Commuta Barra scorrimento su pagina singola
 nl:Schuifbalk IN/UIT Schakelen op enkele pagina
 pl:Przełącz pasek przewijania na pojedynczej stronie
 sk:Prepnúť Posuvník v zobrazení jednej strany
-:Toggle Scrollbars
-am:Միացնել/անջատել սահող գոտիները
-br:Exibir/Ocultar Barras de Rolagem
-cn:切换滚动条
-co:Attivà o disattivà e barre di sfilarata
-de:Bildlaufleisten umschalten
-el:Εναλλαγή γραμμών κύλισης
-it:Commuta Barre scorrimento
-nl:Schuifbalken IN/UIT Schakelen
-pl:Przełącz paski przewijania
-sk:Prepnúť Posuvníky
-tw:切換捲軸
 :Toggle Show Annotations
 am:Ցուցադրել/անջատել ծանոթագրությունները
 br:Ativar/Desativar a Mostra de Anotações
@@ -24320,7 +23848,9 @@ pl:Przełącz spis treści
 sk:Prepnúť Obsah
 tw:切換目錄
 :Toggle Tabs MRU Order
+br:Ativar/Desativar a Ordem da MRU das Abas
 de:Reihenfolge der zuletzt verwendeten Tabs umkehren
+nl:IN/UIT Schakelen Tabbladen MRU Volgorde
 pl:Przełącz kolejność ostatnio używanych kart
 :Toggle Toolbar
 am:Գործիքագոտու միացում/անջատում
@@ -25134,6 +24664,7 @@ vn:Cảnh báo
 :White Balance:
 br:Equilíbrio dos Brancos:
 de:Weißabgleich:
+nl:Wit Balance:
 pl:Balans bieli:
 sk:Vyváženie bielej:
 :XPS documents

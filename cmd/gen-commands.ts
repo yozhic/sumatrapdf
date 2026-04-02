@@ -34,8 +34,7 @@ export const commands = [
     "CmdPresentationBlackBackground", "Presentation Black Background",
     "CmdTogglePresentationMode", "View: Presentation Mode",
     "CmdToggleToolbar", "Toggle Toolbar",
-    "CmdToggleScrollbars", "Toggle Scrollbars",
-    "CmdToggleOverlayScrollbar", "Toggle Overlay Scrollbar",
+    "CmdChangeScrollbar", "Change Scrollbar",
     "CmdToggleMenuBar", "Toggle Menu Bar",
     "CmdToggleUseTabs", "Toggle Use Tabs",
     "CmdToggleTabsMru", "Toggle Tabs MRU Order",
@@ -198,7 +197,7 @@ export const commands = [
     "CmdDebugToggleRtl", "Debug: Toggle Rtl",
     "CmdToggleAntiAlias", "Toggle Anti-Alias Rendering",
     "CmdToggleSmoothScroll", "Toggle Smooth Scroll",
-    "CmdToggleHideScrollbar", "Toggle Hide Scrollbar",
+    // removed: CmdToggleHideScrollbar (replaced by CmdChangeScrollbar)
     "CmdToggleScrollbarInSinglePage", "Toggle Scrollbar In Single Page",
     "CmdToggleLazyLoading", "Toggle Lazy Loading",
     "CmdListPrinters", "List Printers",

@@ -21,7 +21,7 @@ Here are some things you can customize:
 - width of tab with `Tab Width`
 - window background color with `FixedPageUI.BackgroundColor`
 - color used to highlight text with `FixedPageUI.SelectionColor`
-- hide scrollbars with `FixedPageUI.HideScrollbars`
+- control scrollbar mode with `FixedPageUI.Scrollbars` (values: `windows`, `smart`, `overlay`, `hidden`)
 
 Advanced settings file also stores the history and state of opened files so that we can e.g. re-open on the page
 
@@ -219,12 +219,10 @@ FixedPageUI [
     ; if true, TextColor and BackgroundColor of the document will be swapped
     InvertColors = false
 
-    ; if true, hides the scrollbars but retains ability to scroll
-    HideScrollbars = false
-
-    ; if true, uses overlay scrollbar instead of standard Windows scrollbar
-    ; (introduced in version 3.7)
-    UseOverlayScrollbar = true
+    ; scrollbar mode: windows (standard Windows scrollbar), smart (overlay
+    ; scrollbar with auto-hide), overlay (always visible overlay scrollbar),
+    ; hidden (no scrollbars) (introduced in version 3.7)
+    Scrollbars = windows
 ]
 
 ; customization options for eBookUI

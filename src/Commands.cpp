@@ -45,8 +45,7 @@ static SeqStrings gCommandNames =
     "CmdPresentationBlackBackground\0"
     "CmdTogglePresentationMode\0"
     "CmdToggleToolbar\0"
-    "CmdToggleScrollbars\0"
-    "CmdToggleOverlayScrollbar\0"
+    "CmdChangeScrollbar\0"
     "CmdToggleMenuBar\0"
     "CmdToggleUseTabs\0"
     "CmdToggleTabsMru\0"
@@ -209,7 +208,6 @@ static SeqStrings gCommandNames =
     "CmdDebugToggleRtl\0"
     "CmdToggleAntiAlias\0"
     "CmdToggleSmoothScroll\0"
-    "CmdToggleHideScrollbar\0"
     "CmdToggleScrollbarInSinglePage\0"
     "CmdToggleLazyLoading\0"
     "CmdListPrinters\0"
@@ -255,8 +253,7 @@ static i32 gCommandIds[] = {
     CmdPresentationBlackBackground,
     CmdTogglePresentationMode,
     CmdToggleToolbar,
-    CmdToggleScrollbars,
-    CmdToggleOverlayScrollbar,
+    CmdChangeScrollbar,
     CmdToggleMenuBar,
     CmdToggleUseTabs,
     CmdToggleTabsMru,
@@ -419,7 +416,6 @@ static i32 gCommandIds[] = {
     CmdDebugToggleRtl,
     CmdToggleAntiAlias,
     CmdToggleSmoothScroll,
-    CmdToggleHideScrollbar,
     CmdToggleScrollbarInSinglePage,
     CmdToggleLazyLoading,
     CmdListPrinters,
@@ -465,8 +461,7 @@ SeqStrings gCommandDescriptions =
     "Presentation Black Background\0"
     "View: Presentation Mode\0"
     "Toggle Toolbar\0"
-    "Toggle Scrollbars\0"
-    "Toggle Overlay Scrollbar\0"
+    "Change Scrollbar\0"
     "Toggle Menu Bar\0"
     "Toggle Use Tabs\0"
     "Toggle Tabs MRU Order\0"
@@ -629,7 +624,6 @@ SeqStrings gCommandDescriptions =
     "Debug: Toggle Rtl\0"
     "Toggle Anti-Alias Rendering\0"
     "Toggle Smooth Scroll\0"
-    "Toggle Hide Scrollbar\0"
     "Toggle Scrollbar In Single Page\0"
     "Toggle Lazy Loading\0"
     "List Printers\0"

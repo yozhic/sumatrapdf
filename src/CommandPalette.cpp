@@ -100,7 +100,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugToggleRtl,
     CmdToggleAntiAlias,
     CmdToggleSmoothScroll,
-    CmdToggleHideScrollbar,
+    CmdChangeScrollbar,
     CmdToggleScrollbarInSinglePage,
     CmdToggleLazyLoading,
     CmdToggleFullscreen,
@@ -417,9 +417,6 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
     if ((cmdId == CmdToggleBookmarks) || (cmdId == CmdToggleTableOfContents)) {
         return ctx.hasToc;
     }
-    if ((cmdId == CmdToggleScrollbars) && !gGlobalPrefs->fixedPageUI.hideScrollbars) {
-        return false;
-    }
     return true;
 }
 
@@ -451,15 +448,6 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         case CmdToggleToolbar: {
             isToggle = true;
             newIsOn = !gGlobalPrefs->showToolbar;
-        } break;
-        case CmdToggleScrollbars: {
-            isToggle = true;
-            // hideScrollbars is inverted: true means hidden, toggling will show them
-            newIsOn = gGlobalPrefs->fixedPageUI.hideScrollbars;
-        } break;
-        case CmdToggleOverlayScrollbar: {
-            isToggle = true;
-            newIsOn = !gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
         } break;
         case CmdToggleMenuBar: {
             isToggle = true;
@@ -514,10 +502,6 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         case CmdToggleSmoothScroll: {
             isToggle = true;
             newIsOn = !gGlobalPrefs->smoothScroll;
-        } break;
-        case CmdToggleHideScrollbar: {
-            isToggle = true;
-            newIsOn = !gGlobalPrefs->fixedPageUI.hideScrollbars;
         } break;
         case CmdToggleScrollbarInSinglePage: {
             isToggle = true;

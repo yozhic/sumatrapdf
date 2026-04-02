@@ -66,11 +66,10 @@ struct FixedPageUI {
     // if true, TextColor and BackgroundColor of the document will be
     // swapped
     bool invertColors;
-    // if true, hides the scrollbars but retains ability to scroll
-    bool hideScrollbars;
-    // if true, uses overlay scrollbar instead of standard Windows
-    // scrollbar
-    bool useOverlayScrollbar;
+    // scrollbar mode: windows (standard Windows scrollbar), smart (overlay
+    // scrollbar with auto-hide), overlay (always visible overlay
+    // scrollbar), hidden (no scrollbars)
+    char* scrollbars;
 };
 
 // customization options for eBookUI
@@ -563,12 +562,11 @@ static const FieldInfo gFixedPageUIFields[] = {
     {offsetof(FixedPageUI, pageSpacing), SettingType::Compact, (intptr_t)&gSizeInfo},
     {offsetof(FixedPageUI, gradientColors), SettingType::ColorArray, 0},
     {offsetof(FixedPageUI, invertColors), SettingType::Bool, false},
-    {offsetof(FixedPageUI, hideScrollbars), SettingType::Bool, false},
-    {offsetof(FixedPageUI, useOverlayScrollbar), SettingType::Bool, true},
+    {offsetof(FixedPageUI, scrollbars), SettingType::String, (intptr_t)"windows"},
 };
-static const StructInfo gFixedPageUIInfo = {sizeof(FixedPageUI), 9, gFixedPageUIFields,
-                                            "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0Gra"
-                                            "dientColors\0InvertColors\0HideScrollbars\0UseOverlayScrollbar"};
+static const StructInfo gFixedPageUIInfo = {
+    sizeof(FixedPageUI), 8, gFixedPageUIFields,
+    "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0GradientColors\0InvertColors\0Scrollbars"};
 
 static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, fontSize), SettingType::Float, (intptr_t)"0"},

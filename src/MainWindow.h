@@ -226,7 +226,7 @@ struct MainWindow {
     Rect canvasRc;      // size of the canvas (excluding any scroll bars)
     int currPageNo = 0; // cached value, needed to determine when to auto-update the ToC selection
 
-    // overlay scrollbars (used when useOverlayScrollbar is true)
+    // overlay scrollbars (used when scrollbars mode is "smart" or "overlay")
     struct OverlayScrollbar* overlayScrollV = nullptr;
     struct OverlayScrollbar* overlayScrollH = nullptr;
 

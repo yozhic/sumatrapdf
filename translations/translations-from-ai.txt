@@ -41638,3 +41638,271 @@ tl:I-toggle ang Pagkakasunud-sunod ng Tabs ayon sa MRU
 uk:Перемкнути порядок вкладок MRU
 :Toggle Tabs MRU Order
 vn:Chuyển đổi thứ tự tab MRU
+:Change &Scrollbar
+am:ማሸብለያ ዘንግ ቀይር
+:Change &Scrollbar
+ar:تغيير شريط التمرير
+:Change &Scrollbar
+br:Cheñch ar varrenn-dibunañ
+:Change &Scrollbar
+cn:更改滚动条
+:Change &Scrollbar
+co:Cambià a barra di scorsa
+:Change &Scrollbar
+de:Scrollleiste ändern
+:Change &Scrollbar
+el:Αλλαγή Γραμμής Κύλισης
+:Change &Scrollbar
+hi:स्क्रॉलबार बदलें
+:Change &Scrollbar
+it:Cambia barra di scorrimento
+:Change &Scrollbar
+ja:スクロールバーを変更
+:Change &Scrollbar
+ml:സ്ക്രോൾബാർ മാറ്റുക
+:Change &Scrollbar
+nl:Schuifbalk wijzigen
+:Change &Scrollbar
+pl:Zmień pasek przewijania
+:Change &Scrollbar
+ru:Изменить полосу прокрутки
+:Change &Scrollbar
+sk:Zmeniť posuvník
+:Change &Scrollbar
+sr-rs:Promeni traku za pomeranje
+:No
+sr-rs:Ne
+:Yes
+sr-rs:Da
+:Change &Scrollbar
+tw:變更捲軸
+:Change &Scrollbar
+az:Sürüşdürmə Çubuğunu Dəyişdir
+:No
+az:Xeyr
+:Yes
+az:Bəli
+:Change &Scrollbar
+by:Змяніць паласу пракруткі
+:Change &Scrollbar
+ca:Canviar barra de desplaçament
+:Change &Scrollbar
+cy:Newid Bar Sgrolio
+:Change &Scrollbar
+cz:Změnit posuvník
+:Change &Scrollbar
+es:Cambiar barra de desplazamiento
+:Change &Scrollbar
+fa:تغییر نوار پیمایش
+:No
+fa:خیر
+:Yes
+fa:بله
+:Change &Scrollbar
+fi:Vaihda vierityspalkkia
+:Change &Scrollbar
+fo:Broyt rullilist
+:Change &Scrollbar
+fr:Modifier la barre de défilement
+:Change &Scrollbar
+ga:Athraigh Scrollbharra
+:Change &Scrollbar
+gl:Cambiar barra de desprazamento
+:Change &Scrollbar
+he:שינוי פס גלילה
+:Change &Scrollbar
+hu:Görgetősáv módosítása
+:Change &Scrollbar
+id:Ubah Bilah Gulir
+:Change &Scrollbar
+kr:스크롤바 변경
+:No
+kr:아니오
+:Yes
+kr:예
+:Change &Scrollbar
+lv:Mainīt ritjoslu
+:Change &Scrollbar
+my:လှိမ့်ဘားကို ပြောင်းလဲရန်
+:Change &Scrollbar
+pt:Alterar Barra de Rolagem
+:Change &Scrollbar
+ro:Schimbă bara de derulare
+:Change &Scrollbar
+sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
+:Change &Scrollbar
+sl:Spremeni drsnik
+:Change &Scrollbar
+sv:Ändra rullningslist
+:Change &Scrollbar
+ta:உருளைப்பட்டையை மாற்று
+:No
+ta:இல்லை
+:Yes
+ta:ஆம்
+:Change &Scrollbar
+tr:Kaydırma Çubuğunu Değiştir
+:Change &Scrollbar
+uz:Aylantirish panelini o'zgartirish
+:Change &Scrollbar
+af:Verander Rolbalk
+:No
+af:Nee
+:Yes
+af:Ja
+:Change &Scrollbar
+bg:Промяна на лентата за превъртане
+:No
+bg:Не
+:Yes
+bg:Да
+:Change &Scrollbar
+bn:স্ক্রলবার পরিবর্তন করুন
+:No
+bn:না
+:Yes
+bn:হ্যাঁ
+:Change &Scrollbar
+bs:Promijeni traku za pomicanje
+:No
+bs:Ne
+:Yes
+bs:Da
+:Change &Scrollbar
+ca-xv:Canvia la barra de desplaçament
+:No
+ca-xv:No
+:Yes
+ca-xv:Sí
+:Change &Scrollbar
+dk:Skift rullebjælke
+:Change &Scrollbar
+et:Muuda kerimisriba
+:No
+et:Ei
+:Yes
+et:Jah
+:Change &Scrollbar
+eu:Aldatu korritze-barra
+:No
+eu:Ez
+:Yes
+eu:Bai
+:Change &Scrollbar
+fy-nl:Scrollbar wizigje
+:No
+fy-nl:Nee
+:Yes
+fy-nl:Ja
+:Change &Scrollbar
+hr:Promijeni kliznu traku
+:No
+hr:Ne
+:Yes
+hr:Da
+:Change &Scrollbar
+jv:Ganti Scrollbar
+:No
+jv:Ora
+:Yes
+jv:Ya
+:Change &Scrollbar
+ka:სქროლბარის შეცვლა
+:No
+ka:არა
+:Yes
+ka:კი
+:Change &Scrollbar
+ku:Scrollbarê Biguherîne
+:No
+ku:Na
+:Yes
+ku:Erê
+:Change &Scrollbar
+kw:Chanjya an Barr Gorra
+:No
+kw:Na
+:Yes
+kw:Ya
+:Change &Scrollbar
+lt:Keisti slinkties juostą
+:No
+lt:Ne
+:Yes
+lt:Taip
+:Change &Scrollbar
+mk:Промени лента за лизгање
+:No
+mk:Не
+:Yes
+mk:Да
+:Change &Scrollbar
+mm:လှိမ့်တန်းကို ပြောင်းရန်
+:Change &Scrollbar
+ne:स्क्रोलबार परिवर्तन गर्नुहोस्
+:No
+ne:होइन
+:Yes
+ne:हो
+:Change &Scrollbar
+nn:Endre rullefeltet
+:No
+nn:Nei
+:Yes
+nn:Ja
+:Change &Scrollbar
+no:Endre rullefelt
+:No
+no:Nei
+:Yes
+no:Ja
+:Change &Scrollbar
+pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
+:No
+pa:ਨਹੀਂ
+:Change &Scrollbar
+si:අනුචලන තීරුව වෙනස් කරන්න
+:No
+si:නැත
+:Yes
+si:ඔව්
+:Change &Scrollbar
+sn:Chinja Scrollbar
+:No
+sn:Kwete
+:Change &Scrollbar
+sp-rs:Промени траку за померање
+:No
+sp-rs:Не
+:Yes
+sp-rs:Да
+:Change &Scrollbar
+sq:Ndrysho Scrollbar
+:No
+sq:Jo
+:Yes
+sq:Po
+:Change &Scrollbar
+th:เปลี่ยนแถบเลื่อน
+:No
+th:ไม่
+:Yes
+th:ใช่
+:Change &Scrollbar
+tl:Baguhin ang Scrollbar
+:No
+tl:Hindi
+:Yes
+tl:Oo
+:Change &Scrollbar
+uk:Змінити смугу прокрутки
+:No
+uk:Ні
+:Yes
+uk:Так
+:Change &Scrollbar
+vn:Thay đổi thanh cuộn
+:No
+vn:Không
+:Yes
+vn:Có

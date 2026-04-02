@@ -280,7 +280,7 @@ const char* scrollMsgStr(USHORT msg) {
 static void OnVScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollV);
+    bool useOverlay = ScrollbarsUseOverlay() && IsOverlayScrollbarVisible(win->overlayScrollV);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -387,7 +387,7 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
     // Set the position and then retrieve it.  Due to adjustments
     // by Windows it may not be the same as the value set.
     si.fMask = SIF_POS;
-    bool showScrollbar = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    bool showScrollbar = !ScrollbarsAreHidden();
     BOOL showWinScrollbar = showScrollbar && !useOverlay;
     BOOL showOverScrollbar = showScrollbar && useOverlay;
     SetScrollInfo(win->hwndCanvas, SB_VERT, &si, showWinScrollbar);
@@ -409,7 +409,7 @@ static void OnVScroll(MainWindow* win, WPARAM wp) {
 static void OnHScroll(MainWindow* win, WPARAM wp) {
     ReportIf(!win->AsFixed());
 
-    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && IsOverlayScrollbarVisible(win->overlayScrollH);
+    bool useOverlay = ScrollbarsUseOverlay() && IsOverlayScrollbarVisible(win->overlayScrollH);
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -2349,7 +2349,7 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
             return OnGesture(win, msg, wp, lp);
 
         case WM_NCPAINT: {
-            if (gGlobalPrefs->fixedPageUI.hideScrollbars || gGlobalPrefs->fixedPageUI.useOverlayScrollbar) {
+            if (ScrollbarsAreHidden() || ScrollbarsUseOverlay()) {
                 ShowScrollBar(win->hwndCanvas, SB_BOTH, false);
                 goto def;
             }

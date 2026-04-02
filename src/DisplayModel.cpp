@@ -738,8 +738,8 @@ RestartLayout:
     int columnMaxWidth[2] = {0, 0};
     int pageInARow = 0;
     int rowMaxPageDy = 0;
-    bool hideScrollbars = gGlobalPrefs->fixedPageUI.hideScrollbars;
-    bool useOverlayScrollbar = gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
+    bool hideScrollbars = ScrollbarsAreHidden();
+    bool useOverlayScrollbar = ScrollbarsUseOverlay();
     for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
         PageInfo* pageInfo = GetPageInfo(pageNo);
         if (!pageInfo->shown) {

@@ -935,12 +935,38 @@ static void makeFullScrollbar(SCROLLINFO& si) {
     si.nPage = 100;
 }
 
+SeqStrings gScrollbarModeNames = "windows\0smart\0overlay\0hidden\0";
+
+int ScrollbarModeFromPrefs() {
+    int idx = seqstrings::StrToIdxIS(gScrollbarModeNames, gGlobalPrefs->fixedPageUI.scrollbars);
+    if (idx < 0) {
+        idx = kScrollbarWindows;
+    }
+    return idx;
+}
+
+bool ScrollbarsAreHidden() {
+    return ScrollbarModeFromPrefs() == kScrollbarHidden;
+}
+
+bool ScrollbarsUseOverlay() {
+    int mode = ScrollbarModeFromPrefs();
+    return mode == kScrollbarSmart || mode == kScrollbarOverlay;
+}
+
+OverlayScrollbar::Mode ScrollbarsOverlayMode() {
+    if (ScrollbarModeFromPrefs() == kScrollbarOverlay) {
+        return OverlayScrollbar::Mode::Thick;
+    }
+    return OverlayScrollbar::Mode::Smart;
+}
+
 void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     ReportIf(!win->AsFixed());
     DisplayModel* dm = win->AsFixed();
 
-    bool hideScrollbar = gGlobalPrefs->fixedPageUI.hideScrollbars;
-    bool useOverlay = gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
+    bool hideScrollbar = ScrollbarsAreHidden();
+    bool useOverlay = ScrollbarsUseOverlay();
     SCROLLINFO si{};
     si.cbSize = sizeof(si);
     si.fMask = SIF_ALL;
@@ -962,7 +988,8 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
         ShowScrollBar(win->hwndCanvas, SB_HORZ, FALSE);
         SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
         if (!win->overlayScrollH) {
-            win->overlayScrollH = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Horz);
+            win->overlayScrollH =
+                OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Horz, ScrollbarsOverlayMode());
         }
         if (showHScroll) {
             OverlayScrollbarShow(win->overlayScrollH, true);
@@ -1001,7 +1028,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
         }
         showVScroll = (viewPort.dy < canvas.dy);
     }
-    bool showScrollbar = !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    bool showScrollbar = !hideScrollbar;
     BOOL showWinScrollbar = showScrollbar && !useOverlay;
     BOOL showOverScrollbar = showScrollbar && useOverlay;
 
@@ -1013,7 +1040,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     if (useOverlay) {
         if (!win->overlayScrollV) {
             win->overlayScrollV =
-                OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, OverlayScrollbar::Mode::Smart);
+                OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, ScrollbarsOverlayMode());
         }
         if (showVScroll && showScrollbar) {
             OverlayScrollbarShow(win->overlayScrollV, true);
@@ -2577,32 +2604,11 @@ void UpdateDocumentColors() {
 }
 
 void UpdateFixedPageScrollbarsVisibility() {
-    // https://github.com/sumatrapdfreader/sumatrapdf/issues/191#issuecomment-3814604637
-    // was trying to avoid re-render when updating scrollbar visibility but this
-    // logic no longer works 100% with ScrollbarInSinglePage = true
-    // too lazy to fix it, so just disabling the optimization
-#if 0
-    bool hideScrollbars = gGlobalPrefs->fixedPageUI.hideScrollbars;
-    bool scrollbarsVisible = false; // assume no scrollbars by default
-
-    // iterate through each fixed page window to check whether scrollbars are shown
-    for (auto* win : gWindows) {
-        if (auto* pdfWin = win->AsFixed()) {
-            scrollbarsVisible = pdfWin->IsVScrollbarVisible() || pdfWin->IsHScrollbarVisible();
-            if (scrollbarsVisible) {
-                break;
-            }
-        }
-    }
-
-    bool rerenderRequired = (hideScrollbars && scrollbarsVisible) || (!hideScrollbars && !scrollbarsVisible);
-    if (!rerenderRequired) {
-        return;
-    }
-#endif
-    bool showOverlayScrollbar =
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar && !gGlobalPrefs->fixedPageUI.hideScrollbars;
+    bool showOverlayScrollbar = ScrollbarsUseOverlay();
+    auto mode = ScrollbarsOverlayMode();
     for (MainWindow* w : gWindows) {
+        OverlayScrollbarSetMode(w->overlayScrollV, mode);
+        OverlayScrollbarSetMode(w->overlayScrollH, mode);
         OverlayScrollbarShow(w->overlayScrollV, showOverlayScrollbar);
         OverlayScrollbarShow(w->overlayScrollH, showOverlayScrollbar);
     }
@@ -4225,9 +4231,10 @@ static void OnMenuViewShowHideToolbar() {
     }
 }
 
-static void OnMenuViewShowHideScrollbars() {
-    gGlobalPrefs->fixedPageUI.hideScrollbars = !gGlobalPrefs->fixedPageUI.hideScrollbars;
-    UpdateFixedPageScrollbarsVisibility();
+static void OnMenuChangeScrollbar(HWND hwnd) {
+    if (Dialog_ChangeScrollbar(hwnd)) {
+        UpdateFixedPageScrollbarsVisibility();
+    }
 }
 
 #if 0 // note: was used in OpenAdvancedOptions()
@@ -6252,13 +6259,8 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             OnMenuViewShowHideToolbar();
             break;
 
-        case CmdToggleScrollbars:
-            OnMenuViewShowHideScrollbars();
-            break;
-
-        case CmdToggleOverlayScrollbar:
-            gGlobalPrefs->fixedPageUI.useOverlayScrollbar = !gGlobalPrefs->fixedPageUI.useOverlayScrollbar;
-            UpdateFixedPageScrollbarsVisibility();
+        case CmdChangeScrollbar:
+            OnMenuChangeScrollbar(win->hwndFrame);
             break;
 
         case CmdToggleUseTabs:
@@ -6832,9 +6834,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
-        case CmdToggleHideScrollbar:
-            OnMenuViewShowHideScrollbars();
-            break;
+            // removed: CmdToggleHideScrollbar (replaced by CmdChangeScrollbar)
 
         case CmdToggleScrollbarInSinglePage:
             gGlobalPrefs->scrollbarInSinglePage = !gGlobalPrefs->scrollbarInSinglePage;
@@ -7824,7 +7824,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
         gGlobalPrefs->useTabs = false;
         gGlobalPrefs->restoreSession = false;
         gGlobalPrefs->rememberOpenedFiles = false;
-        gGlobalPrefs->fixedPageUI.useOverlayScrollbar = false;
+        str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
         SetTabsInTitlebar(win, false);
         DestroyMenuBarRebar(win);
         SetMenu(hwnd, nullptr);

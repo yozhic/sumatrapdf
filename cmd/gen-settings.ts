@@ -275,9 +275,8 @@ const fixedPageUI: Field[] = [
       "suggested values: #2828aa #28aa28 #aa2828",
   ),
   mkField("InvertColors", Bool, false, "if true, TextColor and BackgroundColor of the document will be swapped"),
-  mkField("HideScrollbars", Bool, false, "if true, hides the scrollbars but retains ability to scroll"),
   setVersion(
-    mkField("UseOverlayScrollbar", Bool, true, "if true, uses overlay scrollbar instead of standard Windows scrollbar"),
+    mkField("Scrollbars", Str, "windows", "scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar with auto-hide), overlay (always visible overlay scrollbar), hidden (no scrollbars)"),
     "3.7",
   ),
 ];

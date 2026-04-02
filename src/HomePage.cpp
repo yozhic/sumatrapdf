@@ -1118,10 +1118,11 @@ void DrawHomePage(MainWindow* win, HDC hdc) {
     DrawHomePageLayout(l);
 
     // update overlay scrollbar for home page if thumbnails overflow visible area
-    bool showScrollbarV = gGlobalPrefs->fixedPageUI.useOverlayScrollbar && l.totalContentDy > l.thumbsVisibleDy;
+    bool showScrollbarV = ScrollbarsUseOverlay() && l.totalContentDy > l.thumbsVisibleDy;
     if (showScrollbarV) {
         if (!win->overlayScrollV) {
-            win->overlayScrollV = OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert);
+            win->overlayScrollV =
+                OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Vert, ScrollbarsOverlayMode());
         }
         SCROLLINFO si{};
         si.cbSize = sizeof(si);

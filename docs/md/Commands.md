@@ -77,8 +77,7 @@ CmdToggleFullscreen,"f, Shift + Ctrl + L, F11",Toggle Fullscreen,
 CmdToggleMangaMode,,Toggle Manga Mode,
 CmdToggleMenuBar,F9,Toggle Menu Bar,
 CmdTogglePageInfo,Shift + i,Show / Hide Current Page Number,
-CmdToggleScrollbars,,Toggle Scrollbars,
-CmdToggleOverlayScrollbar,,Toggle Overlay Scrollbar,ver 3.7+
+CmdChangeScrollbar,,Change Scrollbar,"Opens dialog to choose scrollbar mode (windows/smart/overlay/hidden)"
 CmdToggleToolbar,F8,Toggle Toolbar,
 CmdToggleUseTabs,,Toggle Use Tabs,"Toggle UseTabs setting, only affects new windows, ver 3.7+"
 CmdToggleTabsMru,,Toggle Tabs MRU Order,"Toggle TabsMru setting: Ctrl+Tab switches tabs in most recently used order, ver 3.7+"
@@ -278,7 +277,6 @@ Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdToggleInverseSearch,,Toggle Inverse Search,"temporarily disable TeX inverse search on left mouse click, ver 3.6+"
 CmdToggleAntiAlias,,Toggle Anti-Alias Rendering,"Toggle anti-alias rendering in pdf and epub documents, ver 3.6+"
 CmdToggleSmoothScroll,,Toggle Smooth Scroll,"Toggle SmoothScroll advanced setting, ver 3.7+"
-CmdToggleHideScrollbar,,Toggle Hide Scrollbar,"Toggle HideScrollbar advanced setting, ver 3.7+"
 CmdToggleScrollbarInSinglePage,,Toggle Scrollbar In Single Page,"Toggle ScrollbarInSinglePage advanced setting, ver 3.7+"
 CmdToggleLazyLoading,,Toggle Lazy Loading,"Toggle LazyLoading advanced setting, ver 3.7+"
 CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only available when SumatraPDF is installed. Registers or un-registers the PDF preview handler for Windows Explorer preview pane, ver 3.7+"
