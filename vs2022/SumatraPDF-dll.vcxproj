@@ -1669,7 +1669,6 @@ cd ../out/rel64_prefast_asan &amp; ..\..\bin\MakeLZSA.exe InstallerData.dat libm
     <None Include="..\docs\sumatra.css" />
     <None Include="..\docs\wishlist.txt" />
     <None Include="..\ext\versions.txt" />
-    <None Include="..\out.txt" />
     <None Include="..\premake5.files.lua" />
     <None Include="..\premake5.lua" />
     <None Include="..\readme.md" />

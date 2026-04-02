@@ -958,7 +958,13 @@ workspace "MakeLZSA"
   architecture "x86"
   filter {}
 
-  filter "platforms:x64"
+  filter "platforms:x64_asan"
+    sanitize { "Address" }
+    incrementallink("Off")
+    editandcontinue "Off"
+  filter {}
+
+  filter "platforms:x64 or x64_asan"
   architecture "x86_64"
   -- strangely this is not set by default for rc.exe
   resdefines { "_WIN64" }
@@ -988,6 +994,12 @@ workspace "MakeLZSA"
     targetdir "out/rel64"
   filter { "platforms:x64", "configurations:Debug" }
     targetdir "out/dbg64"
+  filter {}
+
+  filter { "platforms:x64_asan", "configurations:Release" }
+    targetdir "out/rel64_asan"
+  filter { "platforms:x64_asan", "configurations:Debug" }
+    targetdir "out/dbg64_asan"
   filter {}
 
   objdir "%{cfg.targetdir}/obj"

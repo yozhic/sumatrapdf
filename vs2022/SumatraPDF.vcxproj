@@ -1652,7 +1652,6 @@
     <None Include="..\docs\sumatra.css" />
     <None Include="..\docs\wishlist.txt" />
     <None Include="..\ext\versions.txt" />
-    <None Include="..\out.txt" />
     <None Include="..\premake5.files.lua" />
     <None Include="..\premake5.lua" />
     <None Include="..\readme.md" />
