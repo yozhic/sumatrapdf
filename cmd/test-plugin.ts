@@ -3,7 +3,9 @@ import { copyFileSync, unlinkSync } from "node:fs";
 import { detectVisualStudio2026, runLogged } from "./util";
 
 function tryDelete(path: string) {
-  try { unlinkSync(path); } catch {}
+  try {
+    unlinkSync(path);
+  } catch {}
 }
 
 async function main() {
@@ -18,7 +20,7 @@ async function main() {
   console.log("debug build");
 
   const { msbuildPath } = detectVisualStudio2026();
-  const sln = String.raw`vs2026\SumatraPDF.slnx`;
+  const sln = String.raw`vs2022\SumatraPDF.sln`;
   const t = `/t:SumatraPDF`;
   const p = `/p:Configuration=Debug;Platform=x64`;
   await runLogged(msbuildPath, [sln, t, p, `/m`]);
@@ -38,7 +40,9 @@ async function main() {
   copyFileSync(sumatraExe, testPluginExe);
   console.log(`copied ${sumatraExe} -> ${testPluginExe}`);
 
-  console.log(`running: ${testPluginExe} -test-plugin ${sumatraExe} "${pdfFile}"`);
+  console.log(
+    `running: ${testPluginExe} -test-plugin ${sumatraExe} "${pdfFile}"`,
+  );
   await runLogged(testPluginExe, ["-test-plugin", sumatraExe, pdfFile]);
 }
 

@@ -1,8 +1,7 @@
-import { existsSync, writeFileSync, statSync } from "node:fs";
+import { writeFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { $ } from "bun";
 import {
-  detectVisualStudio,
   getGitLinearVersion,
   extractSumatraVersion,
   runLogged,
@@ -15,7 +14,7 @@ import {
 //const slnPath = join("vs2022", "SumatraPDF.sln");
 
 const { msbuildPath } = detectVisualStudio2026();
-const slnPath = join("vs2026", "SumatraPDF.slnx");
+const slnPath = join("vs2022", "SumatraPDF.sln");
 
 const platforms = [
   { vsplatform: "ARM64", suffix: "arm64", outDir: join("out", "arm64") },
@@ -64,7 +63,9 @@ function ensureManualIsBuilt(): void {
     // file doesn't exist
   }
   if (size < 2 * 2024) {
-    throw new Error(`size of '${path}' is ${size} which indicates we didn't build it`);
+    throw new Error(
+      `size of '${path}' is ${size} which indicates we didn't build it`,
+    );
   }
 }
 
@@ -97,12 +98,16 @@ async function main() {
   try {
     for (const plat of platforms) {
       const platStart = performance.now();
-      console.log(`buidling pre-release ${plat.vsplatform} version ${preRelVer}`);
+      console.log(
+        `buidling pre-release ${plat.vsplatform} version ${preRelVer}`,
+      );
       const p = `/p:Configuration=Release;Platform=${plat.vsplatform}`;
       const t = `/t:SumatraPDF;SumatraPDF-dll`;
       await runLogged(msbuildPath, [slnPath, t, p, `/m`]);
       const platElapsed = ((performance.now() - platStart) / 1000).toFixed(1);
-      console.log(`buidling pre-release ${plat.vsplatform} version ${preRelVer} took ${platElapsed}s`);
+      console.log(
+        `buidling pre-release ${plat.vsplatform} version ${preRelVer} took ${platElapsed}s`,
+      );
     }
   } finally {
     await revertBuildConfig();

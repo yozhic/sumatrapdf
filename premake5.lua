@@ -246,10 +246,6 @@ workspace "SumatraPDF"
     location "vs2022"
   filter {}
 
-  filter "action:vs2026"
-    location "vs2026"
-  filter {}
-
   clang_conf()
 
   filter { "platforms:x86", "configurations:Release" }
@@ -976,10 +972,6 @@ workspace "MakeLZSA"
 
   filter "action:vs2022"
     location "vs2022"
-  filter {}
-
-  filter "action:vs2026"
-    location "vs2026"
   filter {}
 
   clang_conf()
