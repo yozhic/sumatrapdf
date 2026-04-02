@@ -535,12 +535,12 @@ void RenderCache::RequestRendering(DisplayModel* dm, int pageNo, TilePosition ti
     }
 
     auto cb = MkMethod1<DisplayModel, PageRenderRequest*, &DisplayModel::RenderFinished>(dm);
-    Render(dm, pageNo, rotation, zoom, &tile, nullptr, &cb);
+    Render(dm, pageNo, rotation, zoom, &tile, nullptr, cb);
 }
 
 void RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom, RectF pageRect,
                          const Func1<PageRenderRequest*>& callback) {
-    bool ok = Render(dm, pageNo, rotation, zoom, nullptr, &pageRect, &callback);
+    bool ok = Render(dm, pageNo, rotation, zoom, nullptr, &pageRect, callback);
     if (!ok) {
         // create a dummy request to notify callback of failure
         PageRenderRequest req;
@@ -553,15 +553,16 @@ void RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom,
 }
 
 bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom, TilePosition* tile, RectF* pageRect,
-                         const Func1<PageRenderRequest*>* renderFinishedCb) {
+                         const Func1<PageRenderRequest*>& renderFinishedCb) {
     logvf("RenderCache::Render: pageNo %d\n", pageNo);
     ReportIf(!dm);
     if (!dm || dm->pauseRendering) {
         return false;
     }
+    ReportIf(!renderFinishedCb.IsValid());
 
-    ReportIf(!(tile || pageRect && renderFinishedCb));
-    if (!tile && !(pageRect && renderFinishedCb)) {
+    ReportIf(!(tile || pageRect));
+    if (!tile && !pageRect) {
         return false;
     }
 
@@ -594,8 +595,6 @@ bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom,
         newRequest->tile = *tile;
     } else if (pageRect) {
         newRequest->pageRect = *pageRect;
-        // can't cache bitmaps that aren't for a given tile
-        ReportIf(!renderFinishedCb);
     } else {
         CrashMe();
     }
@@ -604,11 +603,7 @@ bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom,
     newRequest->timestamp = GetTickCount();
     newRequest->bmp = nullptr;
     newRequest->errorCode = 0;
-    if (renderFinishedCb) {
-        newRequest->renderFinishedCb = *renderFinishedCb;
-    } else {
-        newRequest->renderFinishedCb = {};
-    }
+    newRequest->renderFinishedCb = renderFinishedCb;
 
     ReleaseSemaphore(startRendering, 1, nullptr);
 
@@ -794,12 +789,8 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
             req.bmp = nullptr; // ownership transferred to cache
         }
 
-        if (req.renderFinishedCb.IsValid()) {
-            req.renderFinishedCb.Call(&req);
-        } else {
-            // legacy path
-            req.dm->RepaintDisplay();
-        }
+        ReportIf(!req.renderFinishedCb.IsValid());
+        req.renderFinishedCb.Call(&req);
         ResetTempAllocator();
     }
     logf("RenderCacheThread: exiting\n");

@@ -145,8 +145,8 @@ struct RenderCache {
     bool IsRenderQueueFull() const { return requestCount == MAX_PAGE_REQUESTS; }
     int GetRenderDelay(DisplayModel* dm, int pageNo, TilePosition tile);
     void RequestRendering(DisplayModel* dm, int pageNo, TilePosition tile, bool clearQueueForPage = true);
-    bool Render(DisplayModel* dm, int pageNo, int rotation, float zoom, TilePosition* tile = nullptr,
-                RectF* pageRect = nullptr, const Func1<PageRenderRequest*>* renderFinishedCb = nullptr);
+    bool Render(DisplayModel* dm, int pageNo, int rotation, float zoom, TilePosition* tile, RectF* pageRect,
+                const Func1<PageRenderRequest*>& renderFinishedCb);
     void ClearQueueForDisplayModel(DisplayModel* dm, int pageNo = kInvalidPageNo, TilePosition* tile = nullptr);
     void AbortCurrentRequest(int threadIdx);
 
