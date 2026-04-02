@@ -179,6 +179,9 @@ RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
 
     HANDLE hMap = nullptr;
     HBITMAP hbmp = CreateMemoryBitmap(screen.Size(), &hMap);
+    if (!hbmp) {
+        return nullptr;
+    }
     HDC hDC = CreateCompatibleDC(nullptr);
     DeleteObject(SelectObject(hDC, hbmp));
 
@@ -207,8 +210,15 @@ RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
     Rect pageRcI = PageMediabox(pageNo).Round();
     ImageAttributes imgAttrs;
     imgAttrs.SetWrapMode(WrapModeTileFlipXY);
-    Status ok =
-        g.DrawImage(page->bmp, ToGdipRect(pageRcI), pageRcI.x, pageRcI.y, pageRcI.dx, pageRcI.dy, UnitPixel, &imgAttrs);
+    Status ok;
+    {
+        // GDI+ Bitmap is not thread-safe; concurrent DrawImage on the same Bitmap
+        // from multiple render threads causes InsufficientBuffer (status 4) errors.
+        // Serialize access to the shared page bitmap.
+        ScopedCritSec scope(&cacheAccess);
+        ok = g.DrawImage(page->bmp, ToGdipRect(pageRcI), pageRcI.x, pageRcI.y, pageRcI.dx, pageRcI.dy, UnitPixel,
+                         &imgAttrs);
+    }
 
     DropPage(page, false);
     DeleteDC(hDC);
