@@ -4048,7 +4048,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         rc.y += rcRebar.dy;
         rc.dy -= rcRebar.dy;
     }
-    ShowWindow(win->hwndReBar, win->isToolbarVisible ? SW_SHOW : SW_HIDE);
+    if (updateToolbars) {
+        ShowWindow(win->hwndReBar, win->isToolbarVisible ? SW_SHOW : SW_HIDE);
+    }
 
     // ToC and Favorites sidebars at the left
     bool favVisible = gGlobalPrefs->showFavorites && !gPluginMode && CanAccessDisk();
@@ -4127,7 +4129,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     if (tocVisible && favVisible) {
         InvalidateRect(win->favSplitter->hwnd, nullptr, TRUE);
     }
-    if (win->isToolbarVisible) {
+    if (updateToolbars && win->isToolbarVisible) {
         RedrawWindow(win->hwndReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
     if (updateToolbars && win->tabsInTitlebar) {
