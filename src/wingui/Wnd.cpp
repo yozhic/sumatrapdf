@@ -1293,6 +1293,13 @@ void DrawCloseButton(const DrawCloseButtonArgs& args) {
     }
     Gdiplus::Color c;
 
+    // paint rectangular background if specified
+    if (args.colBg != kColorNoChange) {
+        c.SetFromCOLORREF(args.colBg);
+        Gdiplus::SolidBrush bgBr(c);
+        g.FillRectangle(&bgBr, r.x, r.y, r.dx, r.dy);
+    }
+
     // in onhover state, background is a red-ish circle
     if (args.isHover) {
         c.SetFromCOLORREF(args.colHoverBg);

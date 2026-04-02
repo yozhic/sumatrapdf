@@ -247,15 +247,6 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             gfx.FillRectangle(&dbgBr, ToGdipRect(ti->rCloseHit));
         }
 
-        bool closeVisible = ti->canClose && (isSelected || (isUnderMouse && ti->r.dx >= kMinTabWidthForClose));
-        if (closeVisible) {
-            DrawCloseButtonArgs closeArgs;
-            closeArgs.hdc = hdc;
-            closeArgs.r = ti->rClose;
-            closeArgs.isHover = overClose && isUnderMouse;
-            DrawCloseButton(closeArgs);
-        }
-
         // draw text
         gfx.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
         rTxt = ToGdipRectF(ti->r);
@@ -288,6 +279,15 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
             SolidBrush redBr(Color(255, 0xEE, 0x22, 0x22));
             gfx.FillEllipse(&redBr, dotX, dotY, dotRadius * 2, dotRadius * 2);
             gfx.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+        }
+        bool closeVisible = ti->canClose && (isSelected || (isUnderMouse && ti->r.dx >= kMinTabWidthForClose));
+        if (closeVisible) {
+            DrawCloseButtonArgs closeArgs;
+            closeArgs.hdc = hdc;
+            closeArgs.r = ti->rClose;
+            closeArgs.isHover = overClose && isUnderMouse;
+            closeArgs.colBg = tabBgCol;
+            DrawCloseButton(closeArgs);
         }
     }
 }
