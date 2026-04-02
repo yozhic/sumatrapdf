@@ -1313,13 +1313,8 @@ static LRESULT CALLBACK MenuBarReBarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam,
 static LRESULT CALLBACK MenuBarToolbarWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass,
                                               DWORD_PTR dwRefData) {
     if (WM_ERASEBKGND == uMsg) {
-        HDC hdc = (HDC)wParam;
-        RECT rect;
-        GetClientRect(hWnd, &rect);
-        COLORREF bgCol = ThemeControlBackgroundColor();
-        auto bgBrush = CreateSolidBrush(bgCol);
-        FillRect(hdc, &rect, bgBrush);
-        DeleteObject(bgBrush);
+        // don't erase background here; toolbar paints its own background during WM_PAINT
+        // filling here causes visible flicker (erase then paint) during window resize
         return 1;
     }
     if (WM_NCDESTROY == uMsg) {

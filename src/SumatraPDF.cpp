@@ -7366,7 +7366,7 @@ void RelayoutCaption(MainWindow* win) {
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
         if (win->captionBtn[i].visible) {
             RECT r = ToRECT(win->captionBtn[i].rect);
-            InvalidateRect(win->hwndFrame, &r, TRUE);
+            InvalidateRect(win->hwndFrame, &r, FALSE);
         }
     }
 }
