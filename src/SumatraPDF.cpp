@@ -3979,13 +3979,19 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         rc.dy -= kFrameBorderSize + (kFrameBorderSize - 1);
     }
 
-    // hide overlay scrollbars before relayout so they don't appear outside
-    // the window while child windows are being repositioned
-    if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
-        ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
+    // hide Smart mode overlay scrollbars before relayout so they don't appear
+    // outside the window while child windows are being repositioned.
+    // Thick/Overlay mode scrollbars stay visible — hiding and re-showing them
+    // causes flicker and they can fail to reappear at startup.
+    if (win->overlayScrollV && win->overlayScrollV->mode == OverlayScrollbar::Mode::Smart) {
+        if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
+            ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
+        }
     }
-    if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
-        ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
+    if (win->overlayScrollH && win->overlayScrollH->mode == OverlayScrollbar::Mode::Smart) {
+        if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
+            ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
+        }
     }
 
     bool suppressIntermediateRedraws = !win->suppressFrameRedraw;
