@@ -42328,3 +42328,425 @@ vn:Thu nhỏ vừa khít
 vn:Thay đổi thanh cuộn
 :Zoom: Shrink To Fit
 vn:Zoom: Thu nhỏ vừa khít
+:Change Scrollbar
+am:የማሸብለያ አሞሌ ቀይር
+:Show &Menu
+am:ምናሌ አሳይ
+:Shrink To Fit
+am:እንዲመጥን አሳንስ
+:Change Scrollbar
+ar:تغيير شريط التمرير
+:Show &Menu
+ar:إظهار القائمة
+:Shrink To Fit
+ar:تقليص لتناسب
+:Show &Menu
+br:Diskouez al lañser
+:Shrink To Fit
+br:Bihanaat evit klotañ
+:Change Scrollbar
+cn:更改滚动条
+:Show &Menu
+cn:显示菜单
+:Shrink To Fit
+cn:缩小至适合
+:Change Scrollbar
+co:Cambià a barra di scorsa
+:Show &Menu
+co:Mustrà u menu
+:Shrink To Fit
+co:Riduce per adattà
+:Show &Menu
+de:Menü anzeigen
+:Shrink To Fit
+de:An Fenstergröße anpassen
+:Change Scrollbar
+el:Αλλαγή Γραμμής Κύλισης
+:Show &Menu
+el:Εμφάνιση Μενού
+:Shrink To Fit
+el:Συρρίκνωση Για Προσαρμογή
+:Change Scrollbar
+hi:स्क्रॉलबार बदलें
+:Show &Menu
+hi:मेनू दिखाएं
+:Shrink To Fit
+hi:फ़िट करने के लिए सिकोड़ें
+:Show &Menu
+it:Mostra menu
+:Shrink To Fit
+it:Riduci per adattare
+:Change Scrollbar
+ja:スクロールバーを変更
+:Show &Menu
+ja:メニューを表示
+:Shrink To Fit
+ja:縮小して全体を表示
+:Change Scrollbar
+ml:സ്ക്രോൾബാർ മാറ്റുക
+:Show &Menu
+ml:മെനു കാണിക്കുക
+:Shrink To Fit
+ml:യോജിക്കാൻ ചുരുക്കുക
+:Change Scrollbar
+nl:Schuifbalk wijzigen
+:Show &Menu
+nl:Menu weergeven
+:Shrink To Fit
+nl:Verkleinen tot passend
+:Show &Menu
+pl:Pokaż menu
+:Shrink To Fit
+pl:Zmniejsz do dopasowania
+:Change Scrollbar
+ru:Изменить полосу прокрутки
+:Show &Menu
+ru:Показать меню
+:Shrink To Fit
+ru:Сжать по размеру
+:Show &Menu
+sk:Zobraziť ponuku
+:Shrink To Fit
+sk:Zmenšiť na veľkosť
+:Change Scrollbar
+sr-rs:Промени траку за скроловање
+:Show &Menu
+sr-rs:Прикажи мени
+:Shrink To Fit
+sr-rs:Скупи да одговара
+:Change Scrollbar
+tw:變更捲軸
+:Show &Menu
+tw:顯示選單
+:Shrink To Fit
+tw:縮小至適當大小
+:Change Scrollbar
+az:Sürüşdürmə Çubuğunu Dəyişdir
+:Show &Menu
+az:Menyunu Göstər
+:Shrink To Fit
+az:Sığdırmaq üçün Kiçilt
+:Change Scrollbar
+by:Змяніць паласу пракруткі
+:Show &Menu
+by:Паказаць меню
+:Shrink To Fit
+by:Сціснуць да памеру
+:Change Scrollbar
+ca:Canvia la barra de desplaçament
+:Show &Menu
+ca:Mostra el menú
+:Shrink To Fit
+ca:Redueix per ajustar
+:Change Scrollbar
+cy:Newid y Bar Sgrolio
+:Show &Menu
+cy:Dangos Dewislen
+:Shrink To Fit
+cy:Crebachu i Ffitio
+:Change Scrollbar
+cz:Změnit posuvník
+:Show &Menu
+cz:Zobrazit nabídku
+:Shrink To Fit
+cz:Zmenšit na šířku
+:Change Scrollbar
+es:Cambiar barra de desplazamiento
+:Show &Menu
+es:Mostrar menú
+:Shrink To Fit
+es:Reducir para ajustar
+:Change Scrollbar
+fa:تغییر نوار پیمایش
+:Show &Menu
+fa:نمایش منو
+:Shrink To Fit
+fa:کوچک کردن برای جا شدن
+:Change Scrollbar
+fi:Vaihda vierityspalkkia
+:Show &Menu
+fi:Näytä valikko
+:Shrink To Fit
+fi:Sovita kokoon
+:Change Scrollbar
+fo:Broyt rullistiku
+:Show &Menu
+fo:Vís valmynd
+:Shrink To Fit
+fo:Minka til at passa
+:Change Scrollbar
+fr:Modifier la barre de défilement
+:Show &Menu
+fr:Afficher le menu
+:Shrink To Fit
+fr:Réduire pour ajuster
+:Change Scrollbar
+ga:Athraigh Scrollbharra
+:Show &Menu
+ga:Taispeáin Roghchlár
+:Shrink To Fit
+ga:Crap Le Cur Isteach
+:Change Scrollbar
+gl:Cambiar barra de desprazamento
+:Show &Menu
+gl:Mostrar menú
+:Shrink To Fit
+gl:Encoller para axustar
+:Change Scrollbar
+he:שנה פס גלילה
+:Show &Menu
+he:הצג תפריט
+:Shrink To Fit
+he:כווץ להתאמה
+:Change Scrollbar
+hu:Görgetősáv módosítása
+:Show &Menu
+hu:Menü megjelenítése
+:Shrink To Fit
+hu:Zsugorítás a mérethez
+:Change Scrollbar
+id:Ubah Scrollbar
+:Show &Menu
+id:Tampilkan Menu
+:Shrink To Fit
+id:Kecilkan Agar Pas
+:Change Scrollbar
+kr:스크롤바 변경
+:Show &Menu
+kr:메뉴 표시
+:Shrink To Fit
+kr:크기에 맞게 축소
+:Change Scrollbar
+lv:Mainīt ritjoslu
+:Show &Menu
+lv:Rādīt izvēlni
+:Shrink To Fit
+lv:Samazināt līdz ietilpināšanai
+:Change Scrollbar
+my:လှိမ့်ဘားကို ပြောင်းရန်
+:Show &Menu
+my:မီနူးပြရန်
+:Shrink To Fit
+my:အံကိုက်အောင် ချုံ့ရန်
+:Change Scrollbar
+pt:Alterar Barra de Rolagem
+:Show &Menu
+pt:Mostrar Menu
+:Shrink To Fit
+pt:Reduzir para Caber
+:Change Scrollbar
+ro:Schimbă bara de derulare
+:Show &Menu
+ro:Afișează meniul
+:Shrink To Fit
+ro:Micșorează pentru a se potrivi
+:Change Scrollbar
+sat:स्क्रोलबार बदलाव
+:Show &Menu
+sat:मेनू देखाव
+:Shrink To Fit
+sat:फिट होनाय लेका छोटो
+:Change Scrollbar
+sl:Spremeni drsnik
+:Show &Menu
+sl:Pokaži meni
+:Shrink To Fit
+sl:Skrči na velikost
+:Change Scrollbar
+sv:Ändra rullningslist
+:Show &Menu
+sv:Visa meny
+:Shrink To Fit
+sv:Krymp för att passa
+:Change Scrollbar
+ta:உருள்பட்டியை மாற்று
+:Show &Menu
+ta:பட்டியைக் காட்டு
+:Shrink To Fit
+ta:பொருந்தும்படி சுருக்கு
+:Change Scrollbar
+tr:Kaydırma Çubuğunu Değiştir
+:Show &Menu
+tr:Menüyü Göster
+:Shrink To Fit
+tr:Sığdırmak İçin Küçült
+:Change Scrollbar
+uz:Aylantirish panelini o'zgartirish
+:Show &Menu
+uz:Menyuni ko'rsatish
+:Shrink To Fit
+uz:Sig'dirish uchun kichraytirish
+:Change Scrollbar
+af:Verander Rolbalk
+:Show &Menu
+af:Wys Kieslys
+:Shrink To Fit
+af:Krimp Om Te Pas
+:Change Scrollbar
+bg:Промяна на плъзгача
+:Show &Menu
+bg:Показване на меню
+:Shrink To Fit
+bg:Свиване до побиране
+:Change Scrollbar
+bn:স্ক্রলবার পরিবর্তন করুন
+:Show &Menu
+bn:মেনু দেখান
+:Shrink To Fit
+bn:মানানসই করতে সংকুচিত করুন
+:Change Scrollbar
+bs:Promijeni traku za pomicanje
+:Show &Menu
+bs:Prikaži meni
+:Shrink To Fit
+bs:Smanji da stane
+:Change Scrollbar
+ca-xv:Canvia la barra de desplaçament
+:Show &Menu
+ca-xv:Mostra el menú
+:Shrink To Fit
+ca-xv:Encongeix per ajustar
+:Change Scrollbar
+dk:Skift rullepanel
+:Show &Menu
+dk:Vis menu
+:Shrink To Fit
+dk:Formindsk til passende størrelse
+:Change Scrollbar
+et:Muuda kerimisriba
+:Show &Menu
+et:Kuva menüü
+:Shrink To Fit
+et:Kahanda mahutamiseks
+:Change Scrollbar
+eu:Aldatu korritze-barra
+:Show &Menu
+eu:Erakutsi menua
+:Shrink To Fit
+eu:Txikiту egokitzeko
+:Change Scrollbar
+fy-nl:Scrollbalke wizigje
+:Show &Menu
+fy-nl:Menu toane
+:Shrink To Fit
+fy-nl:Ferlytse om te passen
+:Change Scrollbar
+hr:Promijeni traku za pomicanje
+:Show &Menu
+hr:Prikaži izbornik
+:Shrink To Fit
+hr:Smanji da stane
+:Change Scrollbar
+jv:Ganti Scrollbar
+:Show &Menu
+jv:Tuduhake Menu
+:Shrink To Fit
+jv:Cilikake Supaya Pas
+:Change Scrollbar
+ka:გადახვევის ზოლის შეცვლა
+:Show &Menu
+ka:მენიუს ჩვენება
+:Shrink To Fit
+ka:ზომის შემცირება ჩატევამდე
+:Change Scrollbar
+ku:Navbara Lêgerînê Biguherîne
+:Show &Menu
+ku:Menuê Nîşan Bide
+:Shrink To Fit
+ku:Ji Bo Li Hev Bikin Biçûk Bike
+:Change Scrollbar
+kw:Chanjya an Barr Gorra
+:Show &Menu
+kw:Diskwedhes Rol
+:Shrink To Fit
+kw:Krena Dhe Gwedha
+:Change Scrollbar
+lt:Keisti slinkties juostą
+:Show &Menu
+lt:Rodyti meniu
+:Shrink To Fit
+lt:Sumažinti iki tinkamo dydžio
+:Change Scrollbar
+mk:Промени лизгач
+:Show &Menu
+mk:Прикажи мени
+:Shrink To Fit
+mk:Намали за да се вклопи
+:Change Scrollbar
+mm:လှိမ့်ဘားကို ပြောင်းလဲရန်
+:Show &Menu
+mm:မီနူး ပြရန်
+:Shrink To Fit
+mm:အံဝင်ခွင်ကျ ချုံ့ရန်
+:Change Scrollbar
+ne:स्क्रोलबार परिवर्तन गर्नुहोस्
+:Show &Menu
+ne:मेनु देखाउनुहोस्
+:Shrink To Fit
+ne:फिट हुनको लागि संकुचन गर्नुहोस्
+:Change Scrollbar
+nn:Endre rullefelt
+:Show &Menu
+nn:Vis meny
+:Shrink To Fit
+nn:Krymp til passform
+:Change Scrollbar
+no:Endre rullefelt
+:Show &Menu
+no:Vis meny
+:Shrink To Fit
+no:Krymp til passform
+:Change Scrollbar
+pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
+:Show &Menu
+pa:ਮੀਨੂ ਦਿਖਾਓ
+:Shrink To Fit
+pa:ਫਿੱਟ ਕਰਨ ਲਈ ਸੁੰਗੜੋ
+:Change Scrollbar
+si:අනුචලන තීරුව වෙනස් කරන්න
+:Show &Menu
+si:මෙනුව පෙන්වන්න
+:Shrink To Fit
+si:ගැලපෙන පරිදි හැකිළෙන්න
+:Change Scrollbar
+sn:Shandura Bhawa Rekukwerera
+:Show &Menu
+sn:Ratidza Menyu
+:Shrink To Fit
+sn:Deredza Kuti Zvikwane
+:Change Scrollbar
+sp-rs:Promeni traku za pomeranje
+:Show &Menu
+sp-rs:Prikaži meni
+:Shrink To Fit
+sp-rs:Skupi da stane
+:Change Scrollbar
+sq:Ndrysho Shiritin e Lëvizjes
+:Show &Menu
+sq:Shfaq Menynë
+:Shrink To Fit
+sq:Zvogëlo për t'u Përshtatur
+:Change Scrollbar
+th:เปลี่ยนแถบเลื่อน
+:Show &Menu
+th:แสดงเมนู
+:Shrink To Fit
+th:ย่อให้พอดี
+:Change Scrollbar
+tl:Baguhin ang Scrollbar
+:Show &Menu
+tl:Ipakita ang Menu
+:Shrink To Fit
+tl:Paliitin Upang Magkasya
+:Change Scrollbar
+uk:Змінити смугу прокрутки
+:Show &Menu
+uk:Показати меню
+:Shrink To Fit
+uk:Зменшити до розміру
+:Change Scrollbar
+vn:Thay đổi thanh cuộn
+:Show &Menu
+vn:Hiển thị menu
+:Shrink To Fit
+vn:Thu nhỏ để vừa

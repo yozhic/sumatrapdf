@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-963ac33832f505b7abe1d9a57f65af18d06591f5
+3de2d8cc02661a445c02183c29322a7e43deb18b
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -4628,6 +4628,7 @@ uz:Dastur:
 vn:Ứng dụng:
 :Apply Crop
 br:Aplicar Corte
+co:Appiecà a runzicatura
 de:Zuschneiden anwenden
 it:Applica ritaglio
 nl:Bijsnijden Toepassen
@@ -4635,6 +4636,7 @@ pl:Zastosuj przycięcie
 sk:Použiť orezanie
 :Apply Resize
 br:Aplicar Redimensionamento
+co:Appiecà a ridimensione
 de:Größe anpassen
 it:Applica ridimensionamento
 nl:Wijzig Formaat Toepassen
@@ -5529,6 +5531,7 @@ uz:Bayt
 vn:Bytes
 :C&opy To Clipboard
 br:C&opiar para a Área de Transferência
+co:C&upià in u preme’papei
 de:In Zwischenablage k&opieren
 it:C&opia negli Appunti
 nl:Kopieer naar Klembord
@@ -5536,6 +5539,7 @@ pl:Kopiuj do sc&howka
 sk:K&opírovať do schránky
 :C&rop
 br:C&ortar
+co:Run&zicà
 de:&Zuschneiden
 it:&Ritaglia
 nl:B&ijsnijden
@@ -11778,6 +11782,7 @@ uz:Fayl:
 vn:Tập tin:
 :Files:
 br:Arquivos:
+co:Schedarii
 de:Dateien:
 it:File:
 nl:Bestanden:
@@ -13482,6 +13487,7 @@ uz:Ikonka:
 vn:Biểu Tượng:
 :Image Size:
 br:Tamanho da Imagem:
+co:Dimensione di a fiura
 de:Bildgröße:
 it:Dimensioni immagine:
 nl:Afbeelding Omvang:
@@ -17017,6 +17023,7 @@ pl:Orientacja:
 sk:Orientácia:
 :Overwrite
 br:Sobrescrever
+co:Rimpiazzà
 de:Überschreiben
 it:Sovrascrivi
 nl:Overschrijven
@@ -17884,6 +17891,7 @@ uz:PalmDoc ho'jjatlari
 vn:Tài liệu PalmDoc
 :Paste Image From Clipboard
 br:Colar Imagem da Área de Transferência
+co:Incullà a fiura da u preme’papei
 de:Bild aus Zwischenablage einfügen
 it:Incolla immagine dagli Appunti
 nl:Afbeelding van Klembord Plakken
@@ -19539,6 +19547,7 @@ sk:Znovu otvoriť naposledy zatvorené
 tw:重新開啟上次關閉的內容
 :Resize
 br:Redimensionar
+co:Ridimensione
 de:Größe ändern
 it:Ridimensiona
 nl:Wijzig Formaat
@@ -19848,6 +19857,7 @@ uz:SVG hujjatlari
 vn:Các Tài Liệu SVG
 :Save
 br:Salvar
+co:Arregistrà
 de:Speichern
 it:Salva
 nl:Opslaan
@@ -21456,6 +21466,7 @@ tw:顯示我的最愛(&F)
 uk:Показати О&бране
 uz:Sevimlilarni ko‘rsatish
 vn:Hiện mục Ưa thích
+:Show &Menu
 :Show &Pages Continuously
 am:Էջերը &ցուցադրել շարունակական
 ar:اظهار الصفحات باستمرار

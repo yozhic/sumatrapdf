@@ -274,6 +274,10 @@ static MenuDef menuDefView[] = {
         CmdToggleBookmarks,
     },
     {
+        _TRN("Show &Menu"),
+        CmdToggleMenuBar,
+    },
+    {
         _TRN("Show &Toolbar"),
         CmdToggleToolbar,
     },
@@ -1686,6 +1690,7 @@ static void MenuUpdateStateForWindow(MainWindow* win) {
 
     MenuSetChecked(win->menu, CmdFavoriteToggle, gGlobalPrefs->showFavorites);
     MenuSetChecked(win->menu, CmdToggleToolbar, gGlobalPrefs->showToolbar);
+    MenuSetChecked(win->menu, CmdToggleMenuBar, gGlobalPrefs->showMenubar);
     // CmdChangeScrollbar doesn't need a check mark - it opens a dialog
     MenuUpdateDisplayMode(win);
     MenuUpdateZoom(win);
@@ -1960,6 +1965,7 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdFavoriteToggle:
         case CmdProperties:
         case CmdToggleToolbar:
+        case CmdToggleMenuBar:
         case CmdChangeScrollbar:
         case CmdSaveAnnotations:
         case CmdSaveAnnotationsNewFile:
