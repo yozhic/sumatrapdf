@@ -474,6 +474,14 @@ NO_INLINE bool GetCurrentThreadCallstack(str::Str& s) {
 
 str::Str* gCallstackLogs = nullptr;
 
+TempStr GetCurrentThreadCallstackTemp() {
+    str::Str s(2048);
+    if (!GetCurrentThreadCallstack(s)) {
+        return (TempStr) "";
+    }
+    return str::DupTemp(s.Get());
+}
+
 // start remembering callstack logs done with LogCallstack()
 void RememberCallstackLogs() {
     ReportIf(gCallstackLogs);

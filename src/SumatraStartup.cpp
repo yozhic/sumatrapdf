@@ -2204,6 +2204,11 @@ Exit:
     return res;
 }
 
+static void LogCommandLine() {
+    TempStr s = ToUtf8Temp(GetCommandLineW());
+    logf("'%s'\n  ver %s\n", s, UPDATE_CHECK_VERA);
+}
+
 int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
     int exitCode = 1; // by default it's error
     int nWithDde = 0;
@@ -2232,10 +2237,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
 
     srand((unsigned int)time(nullptr));
 
-    {
-        TempStr s = ToUtf8Temp(GetCommandLineW());
-        logf("'%s'\n  ver %s\n", s, UPDATE_CHECK_VERA);
-    }
+    LogCommandLine();
 
     if (!gIsAsanBuild) {
         TempStr symDir = GetCrashInfoDirTemp();
@@ -2318,18 +2320,20 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     if (gIsDebugBuild) {
         if (!flags.logFile) {
             flags.logFile = str::Dup("sumlog.txt");
+            flags.log = true;
         }
     }
     if (flags.log && !noLogHere) {
         if (flags.logFile) {
-            dir::CreateForFile(flags.logFile);
             logFilePath = flags.logFile;
             logFilePath = path::NormalizeTemp(logFilePath);
+            dir::CreateForFile(logFilePath);
         } else {
             logFilePath = GetLogFilePathTemp();
         }
         if (logFilePath) {
             StartLogToFile(logFilePath, true);
+            LogCommandLine();
         }
         // gRedrawLog = true;
     }

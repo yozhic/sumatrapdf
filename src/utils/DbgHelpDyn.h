@@ -11,6 +11,7 @@ void GetThreadCallstack(str::Str& s, DWORD threadId);
 bool GetCurrentThreadCallstack(str::Str& s);
 void LogCallstack();
 void RememberCallstackLogs();
+TempStr GetCurrentThreadCallstackTemp();
 void FreeCallstackLogs();
 ByteSlice GetCallstacks();
 void GetAllThreadsCallstacks(str::Str& s);

@@ -20,11 +20,12 @@ static LRESULT CALLBACK WndProcTaskDispatch(HWND hwnd, UINT msg, WPARAM wp, LPAR
     if (gExecuteTaskMessage == msg) {
         Kind kind = (Kind)wp;
         auto func = (Func0*)lp;
-        if (kind != nullptr) {
+        bool shouldLog = (kind != nullptr) && !str::Eq(kind, "RenderFinished");
+        if (shouldLog) {
             logf("uitask::WndProcTaskDispatch: will execute '%s', func 0x%p\n", kind, (void*)func);
         }
         func->Call();
-        if (kind != nullptr) {
+        if (shouldLog) {
             logf("uitask::WndProcTaskDispatch: did execute, will delete func 0x%p\n", (void*)func);
         }
         delete func;
