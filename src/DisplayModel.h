@@ -7,6 +7,7 @@
 constexpr int kInvalidPageNo = -1;
 
 struct Annotation;
+struct PageRenderRequest;
 enum class AnnotationType;
 
 /* Describes many attributes of one page in one, convenient place */
@@ -261,6 +262,12 @@ struct DisplayModel : DocController {
 
     /* allow resizing a window without triggering a new rendering (needed for window destruction) */
     bool pauseRendering = false;
+
+    // pages that failed to render (e.g. corrupt image data)
+    Vec<int> failedPages;
+    bool IsPageFailedToRender(int pageNo) const;
+    void MarkPageFailedToRender(int pageNo);
+    void RenderFinished(PageRenderRequest* req);
 };
 
 extern bool gPredictiveRender;

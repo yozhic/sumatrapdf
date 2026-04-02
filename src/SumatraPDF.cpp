@@ -803,6 +803,20 @@ struct ControllerCallbackHandler : DocControllerCallback {
     void SaveDownload(const char* url, const ByteSlice&) override;
 };
 
+struct ThumbnailRenderData {
+    const OnBitmapRendered* saveThumbnail = nullptr;
+};
+
+static void ThumbnailRenderFinished(ThumbnailRenderData* d, PageRenderRequest* req) {
+    // extract bitmap from request and pass to original callback
+    // the callback takes ownership of the bitmap
+    RenderedBitmap* bmp = req->bmp;
+    req->bmp = nullptr; // prevent double-free
+    d->saveThumbnail->Call(bmp);
+    delete d->saveThumbnail;
+    delete d;
+}
+
 void ControllerCallbackHandler::RenderThumbnail(DisplayModel* dm, Size size, const OnBitmapRendered* saveThumbnail) {
     auto engine = dm->GetEngine();
     RectF pageRect = engine->PageMediabox(1);
@@ -822,7 +836,11 @@ void ControllerCallbackHandler::RenderThumbnail(DisplayModel* dm, Size size, con
     // always render thumbnails with anti-aliasing for quality
     bool savedAntiAlias = engine->disableAntiAlias;
     engine->disableAntiAlias = false;
-    gRenderCache->Render(dm, 1, 0, zoom, pageRect, *saveThumbnail);
+
+    auto* td = new ThumbnailRenderData();
+    td->saveThumbnail = saveThumbnail;
+    auto cb = MkFunc1(ThumbnailRenderFinished, td);
+    gRenderCache->Render(dm, 1, 0, zoom, pageRect, cb);
     engine->disableAntiAlias = savedAntiAlias;
 }
 
@@ -1439,7 +1457,6 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         if (args->showWin) {
             ShowWindow(win->hwndFrame, showType);
         }
-
 
 #if 0
         // fix https://github.com/sumatrapdfreader/sumatrapdf/issues/5456

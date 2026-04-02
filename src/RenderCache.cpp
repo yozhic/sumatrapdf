@@ -534,27 +534,34 @@ void RenderCache::RequestRendering(DisplayModel* dm, int pageNo, TilePosition ti
         return;
     }
 
-    Render(dm, pageNo, rotation, zoom, &tile);
+    auto cb = MkMethod1<DisplayModel, PageRenderRequest*, &DisplayModel::RenderFinished>(dm);
+    Render(dm, pageNo, rotation, zoom, &tile, nullptr, &cb);
 }
 
 void RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom, RectF pageRect,
-                         const OnBitmapRendered& callback) {
+                         const Func1<PageRenderRequest*>& callback) {
     bool ok = Render(dm, pageNo, rotation, zoom, nullptr, &pageRect, &callback);
     if (!ok) {
-        callback.Call(nullptr);
+        // create a dummy request to notify callback of failure
+        PageRenderRequest req;
+        req.dm = dm;
+        req.pageNo = pageNo;
+        req.bmp = nullptr;
+        req.errorCode = 1;
+        callback.Call(&req);
     }
 }
 
 bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom, TilePosition* tile, RectF* pageRect,
-                         const OnBitmapRendered* renderCb) {
+                         const Func1<PageRenderRequest*>* renderFinishedCb) {
     logvf("RenderCache::Render: pageNo %d\n", pageNo);
     ReportIf(!dm);
     if (!dm || dm->pauseRendering) {
         return false;
     }
 
-    ReportIf(!(tile || pageRect && renderCb));
-    if (!tile && !(pageRect && renderCb)) {
+    ReportIf(!(tile || pageRect && renderFinishedCb));
+    if (!tile && !(pageRect && renderFinishedCb)) {
         return false;
     }
 
@@ -564,8 +571,11 @@ bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom,
     /* add request to the queue */
     if (requestCount == MAX_PAGE_REQUESTS) {
         /* queue is full -> remove the oldest items on the queue */
-        if (requests[0].renderCb) {
-            requests[0].renderCb->Call(nullptr);
+        if (requests[0].renderFinishedCb.IsValid()) {
+            requests[0].abort = true;
+            requests[0].bmp = nullptr;
+            requests[0].errorCode = 0;
+            requests[0].renderFinishedCb.Call(&requests[0]);
         }
         memmove(&(requests[0]), &(requests[1]), sizeof(PageRenderRequest) * (MAX_PAGE_REQUESTS - 1));
         newRequest = &(requests[MAX_PAGE_REQUESTS - 1]);
@@ -585,14 +595,20 @@ bool RenderCache::Render(DisplayModel* dm, int pageNo, int rotation, float zoom,
     } else if (pageRect) {
         newRequest->pageRect = *pageRect;
         // can't cache bitmaps that aren't for a given tile
-        ReportIf(!renderCb);
+        ReportIf(!renderFinishedCb);
     } else {
         CrashMe();
     }
     newRequest->abort = false;
     newRequest->abortCookie = nullptr;
     newRequest->timestamp = GetTickCount();
-    newRequest->renderCb = renderCb;
+    newRequest->bmp = nullptr;
+    newRequest->errorCode = 0;
+    if (renderFinishedCb) {
+        newRequest->renderFinishedCb = *renderFinishedCb;
+    } else {
+        newRequest->renderFinishedCb = {};
+    }
 
     ReleaseSemaphore(startRendering, 1, nullptr);
 
@@ -687,9 +703,7 @@ void RenderCache::ClearQueueForDisplayModel(DisplayModel* dm, int pageNo, TilePo
             requests[curPos] = requests[i];
         }
         if (shouldRemove) {
-            if (req->renderCb) {
-                req->renderCb->Call(nullptr);
-            }
+            // don't call renderFinishedCb for cleared requests - treat as aborted
             requestCount--;
         } else {
             curPos++;
@@ -737,14 +751,12 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
             continue;
         }
 
-        if (!req.dm->PageVisibleNearby(req.pageNo) && !req.renderCb) {
+        if (!req.dm->PageVisibleNearby(req.pageNo) && !req.renderFinishedCb.IsValid()) {
             continue;
         }
 
         if (req.dm->pauseRendering) {
-            if (req.renderCb) {
-                req.renderCb->Call(nullptr);
-            }
+            // aborted due to pause - do nothing
             continue;
         }
 
@@ -761,10 +773,8 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
         auto timeStart = TimeGet();
         bmp = engine->RenderPage(args);
         if (req.abort) {
+            // aborted - do nothing, discard result
             delete bmp;
-            if (req.renderCb) {
-                req.renderCb->Call(nullptr);
-            }
             continue;
         }
         auto durMs = TimeSinceInMs(timeStart);
@@ -773,21 +783,19 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
             logfa("Slow rendering: %.2f ms, page: %d in '%s'\n", (float)durMs, req.pageNo, path);
         }
 
-        if (req.renderCb) {
-            // the callback must free the RenderedBitmap
-            req.renderCb->Call(bmp);
-            // req.renderCb = (RenderingCallback*)1; // will crash if accessed again, which should not happen
+        req.bmp = bmp;
+        req.errorCode = bmp ? 0 : 1;
+
+        if (req.renderFinishedCb.IsValid()) {
+            req.renderFinishedCb.Call(&req);
         } else {
-            if (!bmp) {
-                req.dm->RepaintDisplay();
-                ResetTempAllocator();
-                continue;
+            // legacy path: cache directly and repaint
+            if (bmp) {
+                if (!engine->IsImageCollection()) {
+                    UpdateBitmapColors(bmp->GetBitmap(), cache->textColor, cache->backgroundColor);
+                }
+                cache->Add(req, bmp);
             }
-            // don't replace colors for individual images
-            if (bmp && !engine->IsImageCollection()) {
-                UpdateBitmapColors(bmp->GetBitmap(), cache->textColor, cache->backgroundColor);
-            }
-            cache->Add(req, bmp);
             req.dm->RepaintDisplay();
         }
         ResetTempAllocator();

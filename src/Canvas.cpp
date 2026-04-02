@@ -1561,9 +1561,21 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
             PaintPageFrameAndShadow(hdc, bounds, r, presMode);
         }
 
+        // check if this page is known to have failed rendering
+        if (dm->IsPageFailedToRender(pageNo)) {
+            shouldPaint = true;
+            HFONT fontRightTxt = CreateSimpleFont(hdc, "MS Shell Dlg", 14);
+            HGDIOBJ hPrevFont = SelectObject(hdc, fontRightTxt);
+            auto prevCol = SetTextColor(hdc, colDocTxt);
+            DrawCenteredText(hdc, bounds, _TRA("Couldn't render the page"), isRtl);
+            SetTextColor(hdc, prevCol);
+            SelectObject(hdc, hPrevFont);
+            continue;
+        }
+
         bool renderOutOfDateCue = false;
         int renderDelay = gRenderCache->Paint(hdc, bounds, dm, pageNo, pageInfo, &renderOutOfDateCue);
-        if (renderDelay == 0 || renderDelay == RENDER_DELAY_FAILED) {
+        if (renderDelay == 0) {
             shouldPaint = true;
         }
         if (renderDelay != 0) {
@@ -1578,13 +1590,7 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
                 }
                 rendering = true;
             } else {
-#if 0
-                AutoDeletePen pen(CreatePen(PS_SOLID, 2, RGB(0xff, 0, 0)));
-                ScopedSelectPen restorePen(hdc, pen);
-                auto x = bounds.x;
-                auto y = bounds.y;
-                Rectangle(hdc, x, y, x + bounds.dx, y + bounds.dy);
-#endif
+                shouldPaint = true;
                 auto prevCol = SetTextColor(hdc, colDocTxt);
                 DrawCenteredText(hdc, bounds, _TRA("Couldn't render the page"), isRtl);
                 SetTextColor(hdc, prevCol);

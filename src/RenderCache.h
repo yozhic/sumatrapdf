@@ -77,9 +77,14 @@ struct PageRenderRequest {
     bool abort = false;
     AbortCookie* abortCookie = nullptr;
     DWORD timestamp = 0;
-    // owned by the PageRenderRequest (use it before reusing the request)
-    // on rendering success, the callback gets handed the RenderedBitmap
-    const OnBitmapRendered* renderCb = nullptr;
+
+    // set by render thread before calling renderFinishedCb
+    RenderedBitmap* bmp = nullptr;
+    int errorCode = 0; // 0 = success
+
+    // called when rendering finishes (success or failure)
+    // if null, render cache handles caching directly (legacy path)
+    Func1<PageRenderRequest*> renderFinishedCb;
 };
 
 constexpr int kMaxRenderThreads = 32;
@@ -118,7 +123,7 @@ struct RenderCache {
 
     void RequestRendering(DisplayModel* dm, int pageNo);
     void Render(DisplayModel* dm, int pageNo, int rotation, float zoom, RectF pageRect,
-                const OnBitmapRendered& callback);
+                const Func1<PageRenderRequest*>& callback);
     void CancelRendering(DisplayModel* dm);
     bool Exists(DisplayModel* dm, int pageNo, int rotation, float zoom = kInvalidZoom, TilePosition* tile = nullptr);
     void FreeForDisplayModel(DisplayModel* dm);
@@ -141,7 +146,7 @@ struct RenderCache {
     int GetRenderDelay(DisplayModel* dm, int pageNo, TilePosition tile);
     void RequestRendering(DisplayModel* dm, int pageNo, TilePosition tile, bool clearQueueForPage = true);
     bool Render(DisplayModel* dm, int pageNo, int rotation, float zoom, TilePosition* tile = nullptr,
-                RectF* pageRect = nullptr, const OnBitmapRendered* renderCb = nullptr);
+                RectF* pageRect = nullptr, const Func1<PageRenderRequest*>* renderFinishedCb = nullptr);
     void ClearQueueForDisplayModel(DisplayModel* dm, int pageNo = kInvalidPageNo, TilePosition* tile = nullptr);
     void AbortCurrentRequest(int threadIdx);
 
