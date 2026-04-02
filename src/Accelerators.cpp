@@ -99,6 +99,7 @@
     V(VK_PRINT, "Print")             \
     V(VK_EXECUTE, "Execute")         \
     V(VK_SNAPSHOT, "PrtSc")          \
+    V(VK_SNAPSHOT, "Print")          \
     V(VK_SLEEP, "Sleep")             \
     V(VK_SEPARATOR, "Separator")     \
     V(VK_DECIMAL, "Decimal")         \

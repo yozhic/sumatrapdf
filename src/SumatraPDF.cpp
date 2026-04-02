@@ -845,25 +845,53 @@ void ControllerCallbackHandler::RenderThumbnail(DisplayModel* dm, Size size, con
     engine->disableAntiAlias = savedAntiAlias;
 }
 
-struct CreateThumbnailData {
+struct CreateThumbnailFromFileData {
     char* filePath = nullptr;
     RenderedBitmap* bmp = nullptr;
-
-    ~CreateThumbnailData() { str::Free(filePath); }
+    ~CreateThumbnailFromFileData() { str::Free(filePath); }
 };
 
-static void CreateThumbnailFinish(CreateThumbnailData* d) {
-    char* path = d->filePath;
+static void CreateThumbnailFromFileFinish(CreateThumbnailFromFileData* d) {
     if (d->bmp) {
-        SetThumbnail(gFileHistory.FindByPath(path), d->bmp);
+        FileState* fs = gFileHistory.FindByPath(d->filePath);
+        SetThumbnail(fs, d->bmp);
     }
     delete d;
 }
 
-static void CreateThumbnailOnBitmapRendered(CreateThumbnailData* d, RenderedBitmap* bmp) {
-    d->bmp = bmp;
-    auto fn = MkFunc0<CreateThumbnailData>(CreateThumbnailFinish, d);
-    uitask::PostOptimized(fn, "TaskSetThumbnail");
+static void CreateThumbnailFromFileThread(CreateThumbnailFromFileData* d) {
+    HwndPasswordUI pwdUI(nullptr);
+    EngineBase* engine = CreateEngineFromFile(d->filePath, &pwdUI, true);
+    if (!engine) {
+        delete d;
+        return;
+    }
+    RectF pageRect = engine->PageMediabox(1);
+    if (pageRect.IsEmpty()) {
+        engine->Release();
+        delete d;
+        return;
+    }
+    pageRect = engine->Transform(pageRect, 1, 1.0f, 0);
+    float zoom = (float)kThumbnailDx / (float)pageRect.dx;
+    if (pageRect.dy > (float)kThumbnailDy / zoom) {
+        pageRect.dy = (float)kThumbnailDy / zoom;
+    }
+    pageRect = engine->Transform(pageRect, 1, 1.0f, 0, true);
+    RenderPageArgs args(1, zoom, 0, &pageRect);
+    d->bmp = engine->RenderPage(args);
+    engine->Release();
+    auto fn = MkFunc0<CreateThumbnailFromFileData>(CreateThumbnailFromFileFinish, d);
+    uitask::Post(fn, "SetThumbnailFromFile");
+}
+
+// create a thumbnail by loading the file with a temporary engine
+// used for lazy-loaded files that don't have a loaded controller
+static void CreateThumbnailFromFileAsync(FileState* ds) {
+    auto* d = new CreateThumbnailFromFileData();
+    d->filePath = str::Dup(ds->filePath);
+    auto fn = MkFunc0<CreateThumbnailFromFileData>(CreateThumbnailFromFileThread, d);
+    RunAsync(fn, "CreateThumbnailFromFile");
 }
 
 static void CreateThumbnailForFile(MainWindow* win, FileState* ds) {
@@ -871,29 +899,25 @@ static void CreateThumbnailForFile(MainWindow* win, FileState* ds) {
         return;
     }
 
-    ReportIf(!win->IsDocLoaded());
-    if (!win->IsDocLoaded()) {
-        return;
-    }
-
     // don't create thumbnails for password protected documents
     // (unless we're also remembering the decryption key anyway)
-    auto* model = win->AsFixed();
-    if (model) {
-        auto* engine = model->GetEngine();
-        bool withPwd = engine->IsPasswordProtected();
-        AutoFreeStr decrKey = engine->GetDecryptionKey();
-        if (withPwd && !decrKey) {
-            RemoveThumbnail(ds);
-            return;
+    if (win->IsDocLoaded()) {
+        auto* model = win->AsFixed();
+        if (model) {
+            auto* engine = model->GetEngine();
+            bool withPwd = engine->IsPasswordProtected();
+            AutoFreeStr decrKey = engine->GetDecryptionKey();
+            if (withPwd && !decrKey) {
+                RemoveThumbnail(ds);
+                return;
+            }
         }
     }
 
-    auto size = Size(kThumbnailDx, kThumbnailDy);
-    auto d = new CreateThumbnailData{};
-    d->filePath = str::Dup(win->ctrl->GetFilePath());
-    auto fn = NewFunc1(CreateThumbnailOnBitmapRendered, d);
-    win->ctrl->CreateThumbnail(size, fn);
+    // always use file-based async thumbnail creation; it's independent
+    // of the tab lifecycle so it works even if the tab is closed before
+    // the render completes
+    CreateThumbnailFromFileAsync(ds);
 }
 
 /* Send the request to render a given page to a rendering thread */
@@ -2178,7 +2202,7 @@ MainWindow* LoadDocumentFinish(LoadArgs* args) {
     if (gGlobalPrefs->rememberOpenedFiles) {
         ReportIf(!str::Eq(fullPath, path));
         FileState* ds = gFileHistory.MarkFileLoaded(fullPath);
-        if (!lazyLoad && gGlobalPrefs->showStartPage) {
+        if (gGlobalPrefs->showStartPage) {
             CreateThumbnailForFile(win, ds);
         }
         // TODO: this seems to save the state of file that we just opened
