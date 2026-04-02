@@ -150,7 +150,7 @@ static void CloseWindowIfNoDocuments(MainWindow* win) {
         }
     }
     // no tabs or only about tab
-    CloseWindow(win, true, true);
+    CloseWindow(win, true, false);
 }
 
 static void MaybeMigrateTab(WindowTab* tab, MainWindow* newWin) {
