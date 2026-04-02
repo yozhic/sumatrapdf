@@ -10,9 +10,6 @@
 
 bool ToBool(BOOL b);
 
-void RememberMainUIThreadId();
-bool IsMainUIThread();
-
 UINT_PTR NextSubclassId();
 
 RECT ClientRECT(HWND);

@@ -14,6 +14,8 @@ static HWND gTaskDispatchHwnd = nullptr;
 
 UINT gExecuteTaskMessage = 0;
 
+static DWORD gMainUIThreadId = 0;
+
 static LRESULT CALLBACK WndProcTaskDispatch(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     if (gExecuteTaskMessage == msg) {
         Kind kind = (Kind)wp;
@@ -34,6 +36,8 @@ static LRESULT CALLBACK WndProcTaskDispatch(HWND hwnd, UINT msg, WPARAM wp, LPAR
 constexpr const WCHAR* UITASK_CLASS_NAME = L"UITask_Wnd_Class";
 
 void Initialize() {
+    gMainUIThreadId = GetCurrentThreadId();
+
     ReportIf(gExecuteTaskMessage != 0);
     gExecuteTaskMessage = RegisterWindowMessageA("UITask_Msg_StdFunction");
     WNDCLASSEX wcex;
@@ -67,6 +71,10 @@ void Post(const Func0& f, Kind kind) {
     auto func = new Func0(f);
     PostMessageW(gTaskDispatchHwnd, gExecuteTaskMessage, (WPARAM)kind, (LPARAM)func);
 } // NOLINT
+
+bool IsMainUIThread() {
+    return GetCurrentThreadId() == gMainUIThreadId;
+}
 
 void PostOptimized(const Func0& f, Kind kind) {
     if (IsMainUIThread()) {

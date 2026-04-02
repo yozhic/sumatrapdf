@@ -7,6 +7,8 @@ namespace uitask {
 void Initialize();
 void Destroy();
 
+bool IsMainUIThread();
+
 // call only from the same thread as Initialize() and Destroy()
 void DrainQueue();
 

@@ -937,12 +937,12 @@ void StartDeleteStaleFiles() {
 }
 
 static void LayoutAndFocusOnStartup(MainWindow* win) {
-     if (!win || !IsWindow(win->hwndFrame)) {
-         return;
-     }
-     RelayoutWindow(win);
-     win->Focus();
- }
+    if (!win || !IsWindow(win->hwndFrame)) {
+        return;
+    }
+    RelayoutWindow(win);
+    win->Focus();
+}
 
 // non-admin process cannot send DDE messages to admin process
 // so when that happens we need to alert the user
@@ -2205,7 +2205,6 @@ Exit:
 }
 
 int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
-    RememberMainUIThreadId();
     int exitCode = 1; // by default it's error
     int nWithDde = 0;
     MainWindow* win = nullptr;
@@ -2752,7 +2751,7 @@ ContinueOpenWindow:
 
     if (IsDebuggerPresent()) {
         // helps when running from 10x under debugger
-        //BringWindowToTop(win->hwndFrame);
+        // BringWindowToTop(win->hwndFrame);
     }
 
     StartDeleteStaleFiles();
