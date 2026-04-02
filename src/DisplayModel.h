@@ -36,6 +36,9 @@ struct PageInfo {
     /* data that needs to be set before DisplayModel::Relayout().
        Determines whether a given page should be shown on the screen. */
     bool shown = false;
+
+    // set to true if rendering this page failed (e.g. corrupt image data)
+    bool failedToRender = false;
 };
 
 /* The current scroll state (needed for saving/restoring the scroll position) */
@@ -263,10 +266,6 @@ struct DisplayModel : DocController {
     /* allow resizing a window without triggering a new rendering (needed for window destruction) */
     bool pauseRendering = false;
 
-    // pages that failed to render (e.g. corrupt image data)
-    Vec<int> failedPages;
-    bool IsPageFailedToRender(int pageNo) const;
-    void MarkPageFailedToRender(int pageNo);
     void RenderFinished(PageRenderRequest* req);
 };
 

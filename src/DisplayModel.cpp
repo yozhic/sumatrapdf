@@ -216,37 +216,18 @@ void DisplayModel::RepaintDisplay() {
     cb->Repaint();
 }
 
-bool DisplayModel::IsPageFailedToRender(int pageNo) const {
-    return failedPages.Contains(pageNo);
-}
-
-void DisplayModel::MarkPageFailedToRender(int pageNo) {
-    if (!failedPages.Contains(pageNo)) {
-        failedPages.Append(pageNo);
-    }
-}
-
 void DisplayModel::RenderFinished(PageRenderRequest* req) {
     if (req->abort) {
         return;
     }
     if (req->errorCode != 0) {
-        MarkPageFailedToRender(req->pageNo);
+        PageInfo* pageInfo = GetPageInfo(req->pageNo);
+        if (pageInfo) {
+            pageInfo->failedToRender = true;
+        }
         RepaintDisplay();
         return;
     }
-    RenderedBitmap* bmp = req->bmp;
-    if (!bmp) {
-        MarkPageFailedToRender(req->pageNo);
-        RepaintDisplay();
-        return;
-    }
-    // don't replace colors for individual images
-    if (!engine->IsImageCollection()) {
-        UpdateBitmapColors(bmp->GetBitmap(), gRenderCache->textColor, gRenderCache->backgroundColor);
-    }
-    gRenderCache->Add(*req, bmp);
-    req->bmp = nullptr; // ownership transferred to cache
     if (PageVisibleNearby(req->pageNo)) {
         RepaintDisplay();
     }

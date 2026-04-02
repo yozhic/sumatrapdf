@@ -1562,7 +1562,7 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
         }
 
         // check if this page is known to have failed rendering
-        if (dm->IsPageFailedToRender(pageNo)) {
+        if (pageInfo->failedToRender) {
             shouldPaint = true;
             HFONT fontRightTxt = CreateSimpleFont(hdc, "MS Shell Dlg", 14);
             HGDIOBJ hPrevFont = SelectObject(hdc, fontRightTxt);

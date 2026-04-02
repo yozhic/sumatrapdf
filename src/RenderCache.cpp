@@ -786,16 +786,18 @@ static DWORD WINAPI RenderCacheThread(LPVOID data) {
         req.bmp = bmp;
         req.errorCode = bmp ? 0 : 1;
 
+        if (bmp) {
+            if (!engine->IsImageCollection()) {
+                UpdateBitmapColors(bmp->GetBitmap(), cache->textColor, cache->backgroundColor);
+            }
+            cache->Add(req, bmp);
+            req.bmp = nullptr; // ownership transferred to cache
+        }
+
         if (req.renderFinishedCb.IsValid()) {
             req.renderFinishedCb.Call(&req);
         } else {
-            // legacy path: cache directly and repaint
-            if (bmp) {
-                if (!engine->IsImageCollection()) {
-                    UpdateBitmapColors(bmp->GetBitmap(), cache->textColor, cache->backgroundColor);
-                }
-                cache->Add(req, bmp);
-            }
+            // legacy path
             req.dm->RepaintDisplay();
         }
         ResetTempAllocator();
