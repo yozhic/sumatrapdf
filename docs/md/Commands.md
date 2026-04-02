@@ -182,6 +182,7 @@ CmdToggleZoom,z,Toggle Zoom,
 CmdZoomActualSize,Ctrl + 1,Zoom: Actual Size,
 CmdZoomCustom,Ctrl + Y,Zoom: Custom...,
 CmdZoomFitContent,Ctrl + 3,Zoom: Fit Content,
+CmdZoomShrinkToFit,,Zoom: Shrink To Fit,"Shows at 100% if page is smaller than view area, otherwise fits page"
 CmdZoomFitPage,Ctrl + 0,Zoom: Fit Page,
 CmdZoomFitPageAndSinglePage,,Zoom: Fit Page and Single Page,
 CmdZoomFitWidth,Ctrl + 2,Zoom: Fit Width,

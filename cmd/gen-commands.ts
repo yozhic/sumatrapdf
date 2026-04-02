@@ -95,6 +95,7 @@ export const commands = [
     "CmdZoom12_5", "Zoom: 12.5%",
     "CmdZoom8_33", "Zoom: 8.33%",
     "CmdZoomFitContent", "Zoom: Fit Content",
+    "CmdZoomShrinkToFit", "Zoom: Shrink To Fit",
     "CmdZoomCustom", "Zoom: Custom...",
     "CmdZoomIn", "Zoom In",
     "CmdZoomOut", "Zoom Out",

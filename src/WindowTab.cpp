@@ -126,6 +126,8 @@ void WindowTab::ToggleZoom() const {
         newZoom = kZoomFitWidth;
     } else if (kZoomFitWidth == currZoom) {
         newZoom = kZoomFitContent;
+    } else if (kZoomFitContent == currZoom) {
+        newZoom = kZoomShrinkToFit;
     }
     ctrl->SetZoomVirtual(newZoom, nullptr);
 }

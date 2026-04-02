@@ -106,6 +106,7 @@ static SeqStrings gCommandNames =
     "CmdZoom12_5\0"
     "CmdZoom8_33\0"
     "CmdZoomFitContent\0"
+    "CmdZoomShrinkToFit\0"
     "CmdZoomCustom\0"
     "CmdZoomIn\0"
     "CmdZoomOut\0"
@@ -314,6 +315,7 @@ static i32 gCommandIds[] = {
     CmdZoom12_5,
     CmdZoom8_33,
     CmdZoomFitContent,
+    CmdZoomShrinkToFit,
     CmdZoomCustom,
     CmdZoomIn,
     CmdZoomOut,
@@ -522,6 +524,7 @@ SeqStrings gCommandDescriptions =
     "Zoom: 12.5%\0"
     "Zoom: 8.33%\0"
     "Zoom: Fit Content\0"
+    "Zoom: Shrink To Fit\0"
     "Zoom: Custom...\0"
     "Zoom In\0"
     "Zoom Out\0"

@@ -528,6 +528,10 @@ bool DisplayModel::LastBookPageVisible() const {
 /* Given a zoom level that can include a "virtual" zoom levels like kZoomFitWidth,
    kZoomFitPage or kZoomFitContent, calculate an absolute zoom level */
 float DisplayModel::ZoomRealFromVirtualForPage(float zoomVirtual, int pageNo) const {
+    bool isShrinkToFit = (kZoomShrinkToFit == zoomVirtual);
+    if (isShrinkToFit) {
+        zoomVirtual = kZoomFitPage;
+    }
     if (zoomVirtual != kZoomFitWidth && zoomVirtual != kZoomFitPage && zoomVirtual != kZoomFitContent) {
         return zoomVirtual * 0.01f * dpiFactor;
     }
@@ -578,10 +582,19 @@ float DisplayModel::ZoomRealFromVirtualForPage(float zoomVirtual, int pageNo) co
 
     float zoomX = areaForPagesDx / (float)row.dx;
     float zoomY = areaForPagesDy / (float)row.dy;
+    float zoom;
     if (zoomX < zoomY || kZoomFitWidth == zoomVirtual) {
-        return zoomX;
+        zoom = zoomX;
+    } else {
+        zoom = zoomY;
     }
-    return zoomY;
+    if (isShrinkToFit) {
+        float maxZoom = 1.0f * dpiFactor;
+        if (zoom > maxZoom) {
+            zoom = maxZoom;
+        }
+    }
+    return zoom;
 }
 
 int DisplayModel::FirstVisiblePageNo() const {
@@ -641,7 +654,7 @@ void DisplayModel::CalcZoomReal(float newZoomVirtual) {
     ReportIf(!IsValidZoom(newZoomVirtual));
     zoomVirtual = newZoomVirtual;
     int nPages = PageCount();
-    if ((kZoomFitWidth == newZoomVirtual) || (kZoomFitPage == newZoomVirtual)) {
+    if ((kZoomFitWidth == newZoomVirtual) || (kZoomFitPage == newZoomVirtual) || (kZoomShrinkToFit == newZoomVirtual)) {
         /* we want the same zoom for all pages, so use the smallest zoom
            across the pages so that the largest page fits. In most documents
            all pages are the same size anyway */
@@ -1610,7 +1623,7 @@ void DisplayModel::SetZoomVirtual(float zoomLevel, Point* fixPt) {
         return;
     }
 
-    bool scrollToFitPage = kZoomFitPage == zoomLevel || kZoomFitContent == zoomLevel;
+    bool scrollToFitPage = kZoomFitPage == zoomLevel || kZoomFitContent == zoomLevel || kZoomShrinkToFit == zoomLevel;
     if (zoomVirtual == zoomLevel && (fixPt || !scrollToFitPage)) {
         return;
     }

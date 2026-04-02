@@ -26,6 +26,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdToggleSmoothScroll` (`Toggle Smooth Scroll`) command to toggle `SmoothScroll` advanced setting
 - replace `HideScrollbars` and `UseOverlayScrollbar` settings with `Scrollbars` setting (values: `windows`, `smart`, `overlay`, `hidden`)
 - add `CmdChangeScrollbar` (`Change Scrollbar`) command to open scrollbar mode dialog
+- add `CmdZoomShrinkToFit` (`Shrink To Fit`) zoom mode: shows at 100% if page is smaller than view area, otherwise fits page
 - add `CmdToggleScrollbarInSinglePage` (`Toggle Scrollbar In Single Page`) command to toggle `ScrollbarInSinglePage` advanced setting
 - add `TabsMru` advanced setting and `CmdToggleTabsMru` (`Toggle Tabs MRU`) command to toggle it. It changes order of navigating tabs when usint `Ctrl + Tab` (`CmdNextTabSmart`)
 - improve document properties for comic book files (CBZ, CBR, CB7, CBT). We now show list of image files.

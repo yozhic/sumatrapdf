@@ -83,7 +83,7 @@ static bool ShowDebugMenu() {
 // note: IDM_VIEW_SINGLE_PAGE - IDM_VIEW_CONTINUOUS and also
 //       CmdZoomFIT_PAGE - CmdZoomCUSTOM must be in a continuous range!
 static_assert(CmdViewLayoutLast - CmdViewLayoutFirst == 4, "view layout ids are not in a continuous range");
-static_assert(CmdZoomLast - CmdZoomFirst == 17, "zoom ids are not in a continuous range");
+static_assert(CmdZoomLast - CmdZoomFirst == 18, "zoom ids are not in a continuous range");
 
 // clang-format off
 //[ ACCESSKEY_GROUP File Menu
@@ -355,6 +355,10 @@ static MenuDef menuDefZoomShort[] = {
         CmdZoomFitContent,
     },
     {
+        _TRN("&Shrink To Fit"),
+        CmdZoomShrinkToFit,
+    },
+    {
         _TRN("Custom &Zoom..."),
         CmdZoomCustom,
     },
@@ -385,6 +389,10 @@ static MenuDef menuDefZoom[] = {
     {
         _TRN("Fit &Content"),
         CmdZoomFitContent,
+    },
+    {
+        _TRN("&Shrink To Fit"),
+        CmdZoomShrinkToFit,
     },
     {
         _TRN("Custom &Zoom..."),
@@ -1092,6 +1100,7 @@ UINT_PTR removeIfChm[] = {
     CmdZoomActualSize,
     CmdZoomFitWidth,
     CmdZoomFitContent,
+    CmdZoomShrinkToFit,
     CmdZoom6400,
     CmdZoom3200,
     CmdZoom1600,
@@ -1491,6 +1500,7 @@ static struct {
     { CmdZoomFitPage,    kZoomFitPage    },
     { CmdZoomFitWidth,   kZoomFitWidth   },
     { CmdZoomFitContent, kZoomFitContent },
+    { CmdZoomShrinkToFit, kZoomShrinkToFit },
     { CmdZoomActualSize, kZoomActualSize },
 };
 // clang-format on

@@ -141,7 +141,11 @@ static void ParseZoomValue(float* zoom, const char* txtOrig) {
         // 0-2 : fit page
         // 3-5 : fit width
         // 6-8 : fit content
-        *zoom = kZoomFitContent;
+        // 9-11: shrink to fit
+        *zoom = kZoomShrinkToFit;
+        if (zoomVal <= 8) {
+            *zoom = kZoomFitContent;
+        }
         if (zoomVal <= 5) {
             *zoom = kZoomFitWidth;
         }

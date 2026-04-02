@@ -3723,6 +3723,79 @@ tw:設定(&S)...
 uk:Налаштування
 uz:&Moslamalar
 vn:Cài đặt
+:&Shrink To Fit
+af:Krimp Om Te Pas
+am:በመጠን እንዲያጣጥም ቀንስ
+ar:تقليص لتناسب
+az:Sığdırmaq üçün kiçilt
+bg:Свиване до побиране
+bn:মানানসই করতে সংকুচিত করুন
+br:Bihanaat evit klotañ
+bs:Smanji da stane
+by:Сціснуць да памеру
+ca:Encongir per ajustar
+ca-xv:Ajustar a la finestra
+cn:缩小以适应
+co:Riduce per adattà
+cy:Crebachu i Ffitio
+cz:Přizpůsobit velikost
+de:Auf Fenstergröße verkleinern
+dk:Tilpas til vindue
+el:Συρρίκνωση για Προσαρμογή
+es:Ajustar al tamaño
+et:Kahanda mahutamiseks
+eu:Txikitu tamainara egokitzeko
+fa:کوچک کردن برای تناسب
+fi:Sovita kokoon
+fo:Minka til at passa
+fr:Réduire pour ajuster
+fy-nl:Krimp Om Yn Te Passen
+ga:Crapaigh le Feistiú
+gl:Reducir ata axustar
+he:כווץ להתאמה
+hi:फ़िट करने के लिए सिकोड़ें
+hr:Smanji da stane
+hu:Zsugorítás igazításhoz
+id:Kecilkan Agar Pas
+it:Riduci per adattare
+ja:ウィンドウに合わせる
+jv:Nyusutake Supaya Pas
+ka:ეკრანზე მოთავსება
+kr:화면에 맞추기
+ku:Biçûkbike bo Lihevhatinê
+kw:Krychya Dhe Fytya
+lt:Sumažinti iki tinkamo dydžio
+lv:Samazināt līdz ietilpst
+mk:Намали за да одговара
+ml:ഫിറ്റാകാൻ ചുരുക്കുക
+mm:အံကိုက်အောင် ချုံ့ပါ
+my:အံကိုက်အောင် ချုံ့ရန်
+ne:फिट हुनको लागि संकुचित गर्नुहोस्
+nl:Aanpassen aan venster
+nn:Krymp til passform
+no:Krymp til tilpasning
+pa:ਫਿੱਟ ਕਰਨ ਲਈ ਸਿਕੁੜੋ
+pl:Zmniejsz do dopasowania
+pt:Encolher para Caber
+ro:Micșorează pentru a se potrivi
+ru:Сжать по размеру
+sat:ᱯᱷᱤᱴ ᱞᱟᱹᱜᱤᱫ ᱦᱟᱨᱟ
+si:ගැළපෙන පරිදි හැකිළවන්න
+sk:Zmenšiť na veľkosť
+sl:Skrči na velikost
+sn:Deredza Kuti Zvikwane
+sp-rs:Skupi da stane
+sq:Zvogëlo për t'u Përshtatur
+sr-rs:Skupi da stane
+sv:Krymp till passform
+ta:பொருந்தும்படி சுருக்கு
+th:ย่อให้พอดี
+tl:Paliitin Upang Magkasya
+tr:Sığdırmak İçin Küçült
+tw:縮小至適合大小
+uk:Зменшити до розміру
+uz:O'lchamga sig'dirish
+vn:Thu nhỏ vừa khít
 :&Shrink pages to printable area (if necessary)
 af:Krimp bladsye na drukbare area (indien nodig)
 am:&Հարմարեցնել էջը տպելու համար (եթե պահանջվում է)
@@ -4779,7 +4852,7 @@ hi:(असहेजे गए एनोटेशन)
 hr:(nespremljene bilješke)
 hu:(nem mentett megjegyzések)
 id:(anotasi belum disimpan)
-it:(annotazioni non salvate)
+it:(Annotazioni non salvate)
 ja:(未保存の注釈)
 jv:(anotasi durung disimpen)
 ka:(შეუნახავი ანოტაციები)
@@ -6604,7 +6677,7 @@ hi:प्रति नमूना बिट्स:
 hr:Bitova po uzorku:
 hu:Bit per minta:
 id:Bit Per Sampel:
-it:Bit per campione:
+it:Bit per campione
 ja:サンプルあたりのビット数:
 jv:Bit Saben Sampel:
 ka:ბიტი ნიმუშზე:
@@ -7745,7 +7818,7 @@ ar:تغيير شريط التمرير
 az:Sürüşdürmə Çubuğunu Dəyişdir
 bg:Промяна на лентата за превъртане
 bn:স্ক্রলবার পরিবর্তন করুন
-br:Cheñch ar varrenn-dibunañ
+br:Mudar a &Barra de Rolagem
 bs:Promijeni traku za pomicanje
 by:Змяніць паласу пракруткі
 ca:Canviar barra de desplaçament
@@ -7754,7 +7827,7 @@ cn:更改滚动条
 co:Cambià a barra di scorsa
 cy:Newid Bar Sgrolio
 cz:Změnit posuvník
-de:Scrollleiste ändern
+de:&Bildlaufleiste ändern
 dk:Skift rullebjælke
 el:Αλλαγή Γραμμής Κύλισης
 es:Cambiar barra de desplazamiento
@@ -7772,7 +7845,7 @@ hi:स्क्रॉलबार बदलें
 hr:Promijeni kliznu traku
 hu:Görgetősáv módosítása
 id:Ubah Bilah Gulir
-it:Cambia barra di scorrimento
+it:Modifica barra &scorrimento
 ja:スクロールバーを変更
 jv:Ganti Scrollbar
 ka:სქროლბარის შეცვლა
@@ -7790,13 +7863,13 @@ nl:Schuifbalk wijzigen
 nn:Endre rullefeltet
 no:Endre rullefelt
 pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
-pl:Zmień pasek przewijania
+pl:Zmień pasek &przewijania
 pt:Alterar Barra de Rolagem
 ro:Schimbă bara de derulare
 ru:Изменить полосу прокрутки
 sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
 si:අනුචලන තීරුව වෙනස් කරන්න
-sk:Zmeniť posuvník
+sk:Zmeniť po&suvník
 sl:Spremeni drsnik
 sn:Chinja Scrollbar
 sp-rs:Промени траку за померање
@@ -7958,7 +8031,84 @@ uk:Змінити мову...
 uz:Tilni o'zgartirish...
 vn:Thay đổi ngôn ngữ...
 :Change Scr&ollbar
+af:Verander Rolbalk
+am:የመዘዋወሪያ አሞሌ ቀይር
+ar:تغيير شريط التمرير
+az:Sürüşdürmə çubuğunu dəyişdir
+bg:Промяна на лентата за превъртане
+bn:স্ক্রলবার পরিবর্তন করুন
+br:Mudar a Bar&ra de Rolagem
+bs:Promijeni klizač
+by:Змяніць паласу пракруткі
+ca:Canviar barra de desplaçament
+ca-xv:Canviar barra de desplaçament
+cn:更改滚动条
+co:Cambià a barra di scorrimentu
+cy:Newid Bar Sgrolio
+cz:Změnit posuvník
+de:Bildlaufleiste &ändern
+dk:Skift rullepanel
+el:Αλλαγή Γραμμής Κύλισης
+es:Cambiar barra de desplazamiento
+et:Muuda kerimisriba
+eu:Aldatu korritze-barra
+fa:تغییر نوار پیمایش
+fi:Vaihda vierityspalkkia
+fo:Broyt rullilest
+fr:Modifier la barre de défilement
+fy-nl:Skowbalke Feroarje
+ga:Athraigh Scrollbharra
+gl:Cambiar barra de desprazamento
+he:שנה פס גלילה
+hi:स्क्रॉलबार बदलें
+hr:Promijeni kliznu traku
+hu:Görgetősáv módosítása
+id:Ubah Scrollbar
+it:Modifica barra sc&orrimento
+ja:スクロールバーを変更
+jv:Ganti Scrollbar
+ka:გადახვევის ზოლის შეცვლა
+kr:스크롤바 변경
+ku:Darika Rêzikê Biguherîne
+kw:Chanjya Barr Skrolya
+lt:Keisti slinkties juostą
+lv:Mainīt ritjoslu
+mk:Промени лента за лизгање
+ml:സ്ക്രോൾബാർ മാറ്റുക
+mm:လှိမ့်ဘား ပြောင်းပါ
+my:လှိမ့်တန်း ပြောင်းရန်
+ne:स्क्रोलबार परिवर्तन गर्नुहोस्
+nl:Schuifbalk wijzigen
+nn:Endre rullefeltet
+no:Endre rullefelt
+pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
+pl:Zmień pasek prze&wijania
+pt:Alterar Barra de Rolagem
+ro:Schimbă bara de defilare
+ru:Изменить полосу прокрутки
+sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
+si:අනුචලන තීරුව වෙනස් කරන්න
+sk:Zmeniť p&osuvník
+sl:Spremeni drsnik
+sn:Shandura Bha Rekukwevera
+sp-rs:Promeni traku za pomeranje
+sq:Ndrysho Shiritin e Rrëshqitjes
+sr-rs:Promeni traku za pomeranje
+sv:Ändra rullningslist
+ta:உருட்டுபட்டையை மாற்று
+th:เปลี่ยนแถบเลื่อน
+tl:Baguhin ang Scrollbar
+tr:Kaydırma Çubuğunu Değiştir
+tw:變更捲軸
+uk:Змінити смугу прокручування
+uz:Aylantirish panelini o'zgartirish
+vn:Thay đổi thanh cuộn
 :Change Scrollbar
+br:Mudar a Barra de Rolagem
+de:Bildlaufleiste ändern
+it:Modifica barra scorrimento
+pl:Zmień pasek przewijania
+sk:Zmeniť posuvník
 :Check For Updates
 af:Kyk vir Bywerkings
 am:Ստուգել թարմացումները
@@ -10229,7 +10379,7 @@ ar:نسخ هدف الرابط
 az:Keçid Hədəfini Kopyala
 bg:Копиране на целта на връзката
 bn:লিঙ্ক টার্গেট কপি করুন
-br:Copiar Endereço do Link
+br:Copiar o Alvo do Link
 bs:Kopiraj odredište linka
 by:Капіяваць спасылку
 ca:Copia l'enllaç de destinació
@@ -13687,7 +13837,7 @@ hi:मूल तिथि:
 hr:Izvorni datum:
 hu:Eredeti dátum:
 id:Tanggal Asli:
-it:Data originale:
+it:Data/Ora originali:
 ja:撮影日時:
 jv:Tanggal Asli:
 ka:ორიგინალის თარიღი:
@@ -16534,7 +16684,7 @@ hi:एक्सपोज़र बायस:
 hr:Kompenzacija ekspozicije:
 hu:Expozíció korrekció:
 id:Bias Eksposur:
-it:Compensazione esposizione:
+it:Distorsione esposizione:
 ja:露出補正:
 jv:Bias Eksposur:
 ka:ექსპოზიციის გადახრა:
@@ -16607,7 +16757,7 @@ hi:एक्सपोज़र प्रोग्राम:
 hr:Program ekspozicije:
 hu:Expozíciós program:
 id:Program Eksposur:
-it:Programma di esposizione:
+it:Programma esposizione:
 ja:露出プログラム:
 jv:Program Eksposur:
 ka:ექსპოზიციის პროგრამა:
@@ -16680,7 +16830,7 @@ hi:एक्सपोज़र समय:
 hr:Vrijeme ekspozicije:
 hu:Expozíciós idő:
 id:Waktu Eksposur:
-it:Tempo di esposizione:
+it:Tempo esposizione:
 ja:露出時間:
 jv:Wektu Eksposur:
 ka:ექსპოზიციის დრო:
@@ -16972,7 +17122,7 @@ hi:F-नंबर:
 hr:Blenda:
 hu:F-szám:
 id:F-Number:
-it:Numero F:
+it:Valore F:
 ja:F値:
 jv:Angka-F:
 ka:F-რიცხვი:
@@ -19527,7 +19677,7 @@ hi:फोकल लंबाई (35mm):
 hr:Žarišna duljina (35mm):
 hu:Gyújtótávolság (35mm):
 id:Panjang Fokus (35mm):
-it:Lunghezza focale (35mm):
+it:Lunghezza focale (35 mm):
 ja:焦点距離(35mm):
 jv:Dawa Fokus (35mm):
 ka:ფოკუსური მანძილი (35მმ):
@@ -20011,7 +20161,7 @@ ar:جارٍ الحصول على معلومات الخطوط...
 az:Şrift məlumatları əldə edilir...
 bg:Получаване на информация за шрифтовете...
 bn:ফন্টের তথ্য পাওয়া যাচ্ছে...
-br:Obtendo informações de fontes...
+br:Obtendo informações das fontes...
 bs:Preuzimanje informacija o fontovima...
 by:Атрыманне інфармацыі пра шрыфты...
 ca:Obtenint informació de les fonts...
@@ -20987,7 +21137,7 @@ hi:ISO स्पीड:
 hr:ISO osjetljivost:
 hu:ISO érzékenység:
 id:Kecepatan ISO:
-it:Sensibilità ISO:
+it:Velocità ISO:
 ja:ISO感度:
 jv:Kacepetan ISO:
 ka:ISO სიჩქარე:
@@ -21133,7 +21283,7 @@ hi:छवि आकार:
 hr:Veličina slike:
 hu:Képméret:
 id:Ukuran Gambar:
-it:Dimensione immagine:
+it:Dimensioni immagine:
 ja:画像サイズ:
 jv:Ukuran Gambar:
 ka:გამოსახულების ზომა:
@@ -33005,7 +33155,7 @@ ar:التمرير لأسفل
 az:Aşağı Sürüşdür
 bg:Превъртане надолу
 bn:নিচে স্ক্রল করুন
-br:Rolar para Baixo
+br:Rolar pra Baixo
 bs:Klizaj dolje
 by:Пракруціць уніз
 ca:Desplaça avall
@@ -33370,7 +33520,7 @@ ar:التمرير لليمين
 az:Sağa Sürüşdür
 bg:Превъртане надясно
 bn:ডানে স্ক্রল করুন
-br:Rolar para a Direita
+br:Rolar pra Direita
 bs:Klizaj desno
 by:Пракруціць управа
 ca:Desplaça a la dreta
@@ -33516,7 +33666,7 @@ ar:التمرير لأعلى
 az:Yuxarı Sürüşdür
 bg:Превъртане нагоре
 bn:উপরে স্ক্রল করুন
-br:Rolar para Cima
+br:Rolar pra Cima
 bs:Klizaj gore
 by:Пракруціць уверх
 ca:Desplaça amunt
@@ -36356,6 +36506,7 @@ tw:可用時顯示書籤邊欄(&B)
 uk:Якщо доступно, показати бокову панель закладок
 uz:Mavjud bo'lganda &xatcho'plar panelini ko'rsatish
 vn:Hiện chỉ dấu sách nếu có
+:Shrink To Fit
 :Single Page
 af:Enkele Bladsy
 am:Մեկ էջ
@@ -39894,7 +40045,7 @@ hi:टैब MRU क्रम टॉगल करें
 hr:Uključi/isključi MRU redoslijed kartica
 hu:Lapok MRU sorrendjének váltása
 id:Alihkan Urutan MRU Tab
-it:Attiva/disattiva ordine MRU schede
+it:Commuta ordine schede usate di recente
 ja:タブのMRU順序を切り替え
 jv:Ngalih Urutan Tab MRU
 ka:ჩანართების MRU მიმდევრობის გადართვა
@@ -39918,7 +40069,7 @@ ro:Comutare ordine file MRU
 ru:Переключить порядок вкладок MRU
 sat:ᱴᱮᱵᱽ MRU ᱚᱨᱰᱚᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
 si:ටැබ MRU අනුපිළිවෙල ටොගල් කරන්න
-sk:Prepnúť poradie kariet MRU
+sk:Prepnúť poradie kariet od najnovších
 sl:Preklopi vrstni red zavihkov MRU
 sn:Chinja Kurongeka Kwemadhimikisi MRU
 sp-rs:Промени редослед картица по последњем коришћењу
@@ -41427,7 +41578,7 @@ hi:व्हाइट बैलेंस:
 hr:Balans bijele:
 hu:Fehéregyensúly:
 id:White Balance:
-it:Bilanciamento del bianco:
+it:Bilanciamento bianco:
 ja:ホワイトバランス:
 jv:Imbangan Putih:
 ka:თეთრის ბალანსი:
@@ -43583,6 +43734,79 @@ tw:縮放：符合頁寬，連續顯示
 uk:Масштаб: За шириною та безперервно
 uz:Masshtab: Kenglikka moslashtirish va uzluksiz
 vn:Thu phóng: Vừa chiều rộng và liên tục
+:Zoom: Shrink To Fit
+af:Zoom: Krimp Om Te Pas
+am:አጉላ: በመጠን እንዲያጣጥም ቀንስ
+ar:تكبير/تصغير: تقليص لتناسب
+az:Miqyas: Sığdırmaq üçün kiçilt
+bg:Мащабиране: Свиване до побиране
+bn:জুম: মানানসই করতে সংকুচিত করুন
+br:Zoom: Bihanaat evit klotañ
+bs:Zum: Smanji da stane
+by:Маштаб: Сціснуць да памеру
+ca:Zoom: Encongir per ajustar
+ca-xv:Zoom: Ajustar a la finestra
+cn:缩放：缩小以适应
+co:Zoom: Riduce per adattà
+cy:Chwyddo: Crebachu i Ffitio
+cz:Přiblížení: Přizpůsobit velikost
+de:Zoom: Auf Fenstergröße verkleinern
+dk:Zoom: Tilpas til vindue
+el:Ζουμ: Συρρίκνωση για Προσαρμογή
+es:Zoom: Ajustar al tamaño
+et:Suum: Kahanda mahutamiseks
+eu:Zoom: Txikitu tamainara egokitzeko
+fa:بزرگنمایی: کوچک کردن برای تناسب
+fi:Zoomaus: Sovita kokoon
+fo:Zoom: Minka til at passa
+fr:Zoom : Réduire pour ajuster
+fy-nl:Zoom: Krimp Om Yn Te Passen
+ga:Súmáil: Crapaigh le Feistiú
+gl:Zoom: Reducir ata axustar
+he:זום: כווץ להתאמה
+hi:ज़ूम: फ़िट करने के लिए सिकोड़ें
+hr:Zumiranje: Smanji da stane
+hu:Nagyítás: Zsugorítás igazításhoz
+id:Zoom: Kecilkan Agar Pas
+it:Zoom: Riduci per adattare
+ja:ズーム: ウィンドウに合わせる
+jv:Zoom: Nyusutake Supaya Pas
+ka:მასშტაბი: ეკრანზე მოთავსება
+kr:확대/축소: 화면에 맞추기
+ku:Nêzîkkirin: Biçûkbike bo Lihevhatinê
+kw:Zoom: Krychya Dhe Fytya
+lt:Mastelis: Sumažinti iki tinkamo dydžio
+lv:Tālummaiņa: Samazināt līdz ietilpst
+mk:Зумирање: Намали за да одговара
+ml:സൂം: ഫിറ്റാകാൻ ചുരുക്കുക
+mm:ချဲ့ကြည့်ခြင်း - အံကိုက်အောင် ချုံ့ပါ
+my:ချဲ့ကြည့်ရန်: အံကိုက်အောင် ချုံ့ရန်
+ne:जुम: फिट हुनको लागि संकुचित गर्नुहोस्
+nl:Zoom: Aanpassen aan venster
+nn:Zoom: Krymp til passform
+no:Zoom: Krymp til tilpasning
+pa:ਜ਼ੂਮ: ਫਿੱਟ ਕਰਨ ਲਈ ਸਿਕੁੜੋ
+pl:Powiększenie: Zmniejsz do dopasowania
+pt:Zoom: Encolher para Caber
+ro:Zoom: Micșorează pentru a se potrivi
+ru:Масштаб: Сжать по размеру
+sat:ᱡᱩᱢ: ᱯᱷᱤᱴ ᱞᱟᱹᱜᱤᱫ ᱦᱟᱨᱟ
+si:විශාලනය: ගැළපෙන පරිදි හැකිළවන්න
+sk:Lupa: Zmenšiť na veľkosť
+sl:Povečava: Skrči na velikost
+sn:Zoom: Deredza Kuti Zvikwane
+sp-rs:Zum: Skupi da stane
+sq:Zmadhim: Zvogëlo për t'u Përshtatur
+sr-rs:Zum: Skupi da stane
+sv:Zoom: Krymp till passform
+ta:பெரிதாக்கு: பொருந்தும்படி சுருக்கு
+th:ซูม: ย่อให้พอดี
+tl:Zoom: Paliitin Upang Magkasya
+tr:Yakınlaştırma: Sığdırmak İçin Küçült
+tw:縮放：縮小至適合大小
+uk:Масштаб: Зменшити до розміру
+uz:Masshtab: O'lchamga sig'dirish
+vn:Zoom: Thu nhỏ vừa khít
 :[Changes detected; refreshing] %s
 af:[Veranderings opgespoor; herlaai] %s
 am:[Հայտնաբերվել են փոփոխություններ, ընթանում է թարմացում] %s

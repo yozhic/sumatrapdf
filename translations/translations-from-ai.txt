@@ -41906,3 +41906,425 @@ vn:Thay đổi thanh cuộn
 vn:Không
 :Yes
 vn:Có
+:&Shrink To Fit
+am:በመጠን እንዲያጣጥም ቀንስ
+:Change Scr&ollbar
+am:የመዘዋወሪያ አሞሌ ቀይር
+:Zoom: Shrink To Fit
+am:አጉላ: በመጠን እንዲያጣጥም ቀንስ
+:&Shrink To Fit
+ar:تقليص لتناسب
+:Change Scr&ollbar
+ar:تغيير شريط التمرير
+:Zoom: Shrink To Fit
+ar:تكبير/تصغير: تقليص لتناسب
+:&Shrink To Fit
+br:Bihanaat evit klotañ
+:Zoom: Shrink To Fit
+br:Zoom: Bihanaat evit klotañ
+:&Shrink To Fit
+cn:缩小以适应
+:Change Scr&ollbar
+cn:更改滚动条
+:Zoom: Shrink To Fit
+cn:缩放：缩小以适应
+:&Shrink To Fit
+co:Riduce per adattà
+:Change Scr&ollbar
+co:Cambià a barra di scorrimentu
+:Zoom: Shrink To Fit
+co:Zoom: Riduce per adattà
+:&Shrink To Fit
+de:Auf Fenstergröße verkleinern
+:Zoom: Shrink To Fit
+de:Zoom: Auf Fenstergröße verkleinern
+:&Shrink To Fit
+el:Συρρίκνωση για Προσαρμογή
+:Change Scr&ollbar
+el:Αλλαγή Γραμμής Κύλισης
+:Zoom: Shrink To Fit
+el:Ζουμ: Συρρίκνωση για Προσαρμογή
+:&Shrink To Fit
+hi:फ़िट करने के लिए सिकोड़ें
+:Change Scr&ollbar
+hi:स्क्रॉलबार बदलें
+:Zoom: Shrink To Fit
+hi:ज़ूम: फ़िट करने के लिए सिकोड़ें
+:&Shrink To Fit
+it:Riduci per adattare
+:Zoom: Shrink To Fit
+it:Zoom: Riduci per adattare
+:&Shrink To Fit
+ja:ウィンドウに合わせる
+:Change Scr&ollbar
+ja:スクロールバーを変更
+:Zoom: Shrink To Fit
+ja:ズーム: ウィンドウに合わせる
+:&Shrink To Fit
+ml:ഫിറ്റാകാൻ ചുരുക്കുക
+:Change Scr&ollbar
+ml:സ്ക്രോൾബാർ മാറ്റുക
+:Zoom: Shrink To Fit
+ml:സൂം: ഫിറ്റാകാൻ ചുരുക്കുക
+:&Shrink To Fit
+nl:Aanpassen aan venster
+:Change Scr&ollbar
+nl:Schuifbalk wijzigen
+:Zoom: Shrink To Fit
+nl:Zoom: Aanpassen aan venster
+:&Shrink To Fit
+pl:Zmniejsz do dopasowania
+:Zoom: Shrink To Fit
+pl:Powiększenie: Zmniejsz do dopasowania
+:&Shrink To Fit
+ru:Сжать по размеру
+:Change Scr&ollbar
+ru:Изменить полосу прокрутки
+:Zoom: Shrink To Fit
+ru:Масштаб: Сжать по размеру
+:&Shrink To Fit
+sk:Zmenšiť na veľkosť
+:Zoom: Shrink To Fit
+sk:Lupa: Zmenšiť na veľkosť
+:&Shrink To Fit
+sr-rs:Skupi da stane
+:Change Scr&ollbar
+sr-rs:Promeni traku za pomeranje
+:Zoom: Shrink To Fit
+sr-rs:Zum: Skupi da stane
+:&Shrink To Fit
+tw:縮小至適合大小
+:Change Scr&ollbar
+tw:變更捲軸
+:Zoom: Shrink To Fit
+tw:縮放：縮小至適合大小
+:&Shrink To Fit
+az:Sığdırmaq üçün kiçilt
+:Change Scr&ollbar
+az:Sürüşdürmə çubuğunu dəyişdir
+:Zoom: Shrink To Fit
+az:Miqyas: Sığdırmaq üçün kiçilt
+:&Shrink To Fit
+by:Сціснуць да памеру
+:Change Scr&ollbar
+by:Змяніць паласу пракруткі
+:Zoom: Shrink To Fit
+by:Маштаб: Сціснуць да памеру
+:&Shrink To Fit
+ca:Encongir per ajustar
+:Change Scr&ollbar
+ca:Canviar barra de desplaçament
+:Zoom: Shrink To Fit
+ca:Zoom: Encongir per ajustar
+:&Shrink To Fit
+cy:Crebachu i Ffitio
+:Change Scr&ollbar
+cy:Newid Bar Sgrolio
+:Zoom: Shrink To Fit
+cy:Chwyddo: Crebachu i Ffitio
+:&Shrink To Fit
+cz:Přizpůsobit velikost
+:Change Scr&ollbar
+cz:Změnit posuvník
+:Zoom: Shrink To Fit
+cz:Přiblížení: Přizpůsobit velikost
+:&Shrink To Fit
+es:Ajustar al tamaño
+:Change Scr&ollbar
+es:Cambiar barra de desplazamiento
+:Zoom: Shrink To Fit
+es:Zoom: Ajustar al tamaño
+:&Shrink To Fit
+fa:کوچک کردن برای تناسب
+:Change Scr&ollbar
+fa:تغییر نوار پیمایش
+:Zoom: Shrink To Fit
+fa:بزرگنمایی: کوچک کردن برای تناسب
+:&Shrink To Fit
+fi:Sovita kokoon
+:Change Scr&ollbar
+fi:Vaihda vierityspalkkia
+:Zoom: Shrink To Fit
+fi:Zoomaus: Sovita kokoon
+:&Shrink To Fit
+fo:Minka til at passa
+:Change Scr&ollbar
+fo:Broyt rullilest
+:Zoom: Shrink To Fit
+fo:Zoom: Minka til at passa
+:&Shrink To Fit
+fr:Réduire pour ajuster
+:Change Scr&ollbar
+fr:Modifier la barre de défilement
+:Zoom: Shrink To Fit
+fr:Zoom : Réduire pour ajuster
+:&Shrink To Fit
+ga:Crapaigh le Feistiú
+:Change Scr&ollbar
+ga:Athraigh Scrollbharra
+:Zoom: Shrink To Fit
+ga:Súmáil: Crapaigh le Feistiú
+:&Shrink To Fit
+gl:Reducir ata axustar
+:Change Scr&ollbar
+gl:Cambiar barra de desprazamento
+:Zoom: Shrink To Fit
+gl:Zoom: Reducir ata axustar
+:&Shrink To Fit
+he:כווץ להתאמה
+:Change Scr&ollbar
+he:שנה פס גלילה
+:Zoom: Shrink To Fit
+he:זום: כווץ להתאמה
+:&Shrink To Fit
+hu:Zsugorítás igazításhoz
+:Change Scr&ollbar
+hu:Görgetősáv módosítása
+:Zoom: Shrink To Fit
+hu:Nagyítás: Zsugorítás igazításhoz
+:&Shrink To Fit
+id:Kecilkan Agar Pas
+:Change Scr&ollbar
+id:Ubah Scrollbar
+:Zoom: Shrink To Fit
+id:Zoom: Kecilkan Agar Pas
+:&Shrink To Fit
+kr:화면에 맞추기
+:Change Scr&ollbar
+kr:스크롤바 변경
+:Zoom: Shrink To Fit
+kr:확대/축소: 화면에 맞추기
+:&Shrink To Fit
+lv:Samazināt līdz ietilpst
+:Change Scr&ollbar
+lv:Mainīt ritjoslu
+:Zoom: Shrink To Fit
+lv:Tālummaiņa: Samazināt līdz ietilpst
+:&Shrink To Fit
+my:အံကိုက်အောင် ချုံ့ရန်
+:Change Scr&ollbar
+my:လှိမ့်တန်း ပြောင်းရန်
+:Zoom: Shrink To Fit
+my:ချဲ့ကြည့်ရန်: အံကိုက်အောင် ချုံ့ရန်
+:&Shrink To Fit
+pt:Encolher para Caber
+:Change Scr&ollbar
+pt:Alterar Barra de Rolagem
+:Zoom: Shrink To Fit
+pt:Zoom: Encolher para Caber
+:&Shrink To Fit
+ro:Micșorează pentru a se potrivi
+:Change Scr&ollbar
+ro:Schimbă bara de defilare
+:Zoom: Shrink To Fit
+ro:Zoom: Micșorează pentru a se potrivi
+:&Shrink To Fit
+sat:ᱯᱷᱤᱴ ᱞᱟᱹᱜᱤᱫ ᱦᱟᱨᱟ
+:Change Scr&ollbar
+sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
+:Zoom: Shrink To Fit
+sat:ᱡᱩᱢ: ᱯᱷᱤᱴ ᱞᱟᱹᱜᱤᱫ ᱦᱟᱨᱟ
+:&Shrink To Fit
+sl:Skrči na velikost
+:Change Scr&ollbar
+sl:Spremeni drsnik
+:Zoom: Shrink To Fit
+sl:Povečava: Skrči na velikost
+:&Shrink To Fit
+sv:Krymp till passform
+:Change Scr&ollbar
+sv:Ändra rullningslist
+:Zoom: Shrink To Fit
+sv:Zoom: Krymp till passform
+:&Shrink To Fit
+ta:பொருந்தும்படி சுருக்கு
+:Change Scr&ollbar
+ta:உருட்டுபட்டையை மாற்று
+:Zoom: Shrink To Fit
+ta:பெரிதாக்கு: பொருந்தும்படி சுருக்கு
+:&Shrink To Fit
+tr:Sığdırmak İçin Küçült
+:Change Scr&ollbar
+tr:Kaydırma Çubuğunu Değiştir
+:Zoom: Shrink To Fit
+tr:Yakınlaştırma: Sığdırmak İçin Küçült
+:&Shrink To Fit
+uz:O'lchamga sig'dirish
+:Change Scr&ollbar
+uz:Aylantirish panelini o'zgartirish
+:Zoom: Shrink To Fit
+uz:Masshtab: O'lchamga sig'dirish
+:&Shrink To Fit
+af:Krimp Om Te Pas
+:Change Scr&ollbar
+af:Verander Rolbalk
+:Zoom: Shrink To Fit
+af:Zoom: Krimp Om Te Pas
+:&Shrink To Fit
+bg:Свиване до побиране
+:Change Scr&ollbar
+bg:Промяна на лентата за превъртане
+:Zoom: Shrink To Fit
+bg:Мащабиране: Свиване до побиране
+:&Shrink To Fit
+bn:মানানসই করতে সংকুচিত করুন
+:Change Scr&ollbar
+bn:স্ক্রলবার পরিবর্তন করুন
+:Zoom: Shrink To Fit
+bn:জুম: মানানসই করতে সংকুচিত করুন
+:&Shrink To Fit
+bs:Smanji da stane
+:Change Scr&ollbar
+bs:Promijeni klizač
+:Zoom: Shrink To Fit
+bs:Zum: Smanji da stane
+:&Shrink To Fit
+ca-xv:Ajustar a la finestra
+:Change Scr&ollbar
+ca-xv:Canviar barra de desplaçament
+:Zoom: Shrink To Fit
+ca-xv:Zoom: Ajustar a la finestra
+:&Shrink To Fit
+dk:Tilpas til vindue
+:Change Scr&ollbar
+dk:Skift rullepanel
+:Zoom: Shrink To Fit
+dk:Zoom: Tilpas til vindue
+:&Shrink To Fit
+et:Kahanda mahutamiseks
+:Change Scr&ollbar
+et:Muuda kerimisriba
+:Zoom: Shrink To Fit
+et:Suum: Kahanda mahutamiseks
+:&Shrink To Fit
+eu:Txikitu tamainara egokitzeko
+:Change Scr&ollbar
+eu:Aldatu korritze-barra
+:Zoom: Shrink To Fit
+eu:Zoom: Txikitu tamainara egokitzeko
+:&Shrink To Fit
+fy-nl:Krimp Om Yn Te Passen
+:Change Scr&ollbar
+fy-nl:Skowbalke Feroarje
+:Zoom: Shrink To Fit
+fy-nl:Zoom: Krimp Om Yn Te Passen
+:&Shrink To Fit
+hr:Smanji da stane
+:Change Scr&ollbar
+hr:Promijeni kliznu traku
+:Zoom: Shrink To Fit
+hr:Zumiranje: Smanji da stane
+:&Shrink To Fit
+jv:Nyusutake Supaya Pas
+:Change Scr&ollbar
+jv:Ganti Scrollbar
+:Zoom: Shrink To Fit
+jv:Zoom: Nyusutake Supaya Pas
+:&Shrink To Fit
+ka:ეკრანზე მოთავსება
+:Change Scr&ollbar
+ka:გადახვევის ზოლის შეცვლა
+:Zoom: Shrink To Fit
+ka:მასშტაბი: ეკრანზე მოთავსება
+:&Shrink To Fit
+ku:Biçûkbike bo Lihevhatinê
+:Change Scr&ollbar
+ku:Darika Rêzikê Biguherîne
+:Zoom: Shrink To Fit
+ku:Nêzîkkirin: Biçûkbike bo Lihevhatinê
+:&Shrink To Fit
+kw:Krychya Dhe Fytya
+:Change Scr&ollbar
+kw:Chanjya Barr Skrolya
+:Zoom: Shrink To Fit
+kw:Zoom: Krychya Dhe Fytya
+:&Shrink To Fit
+lt:Sumažinti iki tinkamo dydžio
+:Change Scr&ollbar
+lt:Keisti slinkties juostą
+:Zoom: Shrink To Fit
+lt:Mastelis: Sumažinti iki tinkamo dydžio
+:&Shrink To Fit
+mk:Намали за да одговара
+:Change Scr&ollbar
+mk:Промени лента за лизгање
+:Zoom: Shrink To Fit
+mk:Зумирање: Намали за да одговара
+:&Shrink To Fit
+mm:အံကိုက်အောင် ချုံ့ပါ
+:Change Scr&ollbar
+mm:လှိမ့်ဘား ပြောင်းပါ
+:Zoom: Shrink To Fit
+mm:ချဲ့ကြည့်ခြင်း - အံကိုက်အောင် ချုံ့ပါ
+:&Shrink To Fit
+ne:फिट हुनको लागि संकुचित गर्नुहोस्
+:Change Scr&ollbar
+ne:स्क्रोलबार परिवर्तन गर्नुहोस्
+:Zoom: Shrink To Fit
+ne:जुम: फिट हुनको लागि संकुचित गर्नुहोस्
+:&Shrink To Fit
+nn:Krymp til passform
+:Change Scr&ollbar
+nn:Endre rullefeltet
+:Zoom: Shrink To Fit
+nn:Zoom: Krymp til passform
+:&Shrink To Fit
+no:Krymp til tilpasning
+:Change Scr&ollbar
+no:Endre rullefelt
+:Zoom: Shrink To Fit
+no:Zoom: Krymp til tilpasning
+:&Shrink To Fit
+pa:ਫਿੱਟ ਕਰਨ ਲਈ ਸਿਕੁੜੋ
+:Change Scr&ollbar
+pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
+:Zoom: Shrink To Fit
+pa:ਜ਼ੂਮ: ਫਿੱਟ ਕਰਨ ਲਈ ਸਿਕੁੜੋ
+:&Shrink To Fit
+si:ගැළපෙන පරිදි හැකිළවන්න
+:Change Scr&ollbar
+si:අනුචලන තීරුව වෙනස් කරන්න
+:Zoom: Shrink To Fit
+si:විශාලනය: ගැළපෙන පරිදි හැකිළවන්න
+:&Shrink To Fit
+sn:Deredza Kuti Zvikwane
+:Change Scr&ollbar
+sn:Shandura Bha Rekukwevera
+:Zoom: Shrink To Fit
+sn:Zoom: Deredza Kuti Zvikwane
+:&Shrink To Fit
+sp-rs:Skupi da stane
+:Change Scr&ollbar
+sp-rs:Promeni traku za pomeranje
+:Zoom: Shrink To Fit
+sp-rs:Zum: Skupi da stane
+:&Shrink To Fit
+sq:Zvogëlo për t'u Përshtatur
+:Change Scr&ollbar
+sq:Ndrysho Shiritin e Rrëshqitjes
+:Zoom: Shrink To Fit
+sq:Zmadhim: Zvogëlo për t'u Përshtatur
+:&Shrink To Fit
+th:ย่อให้พอดี
+:Change Scr&ollbar
+th:เปลี่ยนแถบเลื่อน
+:Zoom: Shrink To Fit
+th:ซูม: ย่อให้พอดี
+:&Shrink To Fit
+tl:Paliitin Upang Magkasya
+:Change Scr&ollbar
+tl:Baguhin ang Scrollbar
+:Zoom: Shrink To Fit
+tl:Zoom: Paliitin Upang Magkasya
+:&Shrink To Fit
+uk:Зменшити до розміру
+:Change Scr&ollbar
+uk:Змінити смугу прокручування
+:Zoom: Shrink To Fit
+uk:Масштаб: Зменшити до розміру
+:&Shrink To Fit
+vn:Thu nhỏ vừa khít
+:Change Scr&ollbar
+vn:Thay đổi thanh cuộn
+:Zoom: Shrink To Fit
+vn:Zoom: Thu nhỏ vừa khít

@@ -6222,6 +6222,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
         case CmdZoomFitPage:
         case CmdZoomFitWidth:
         case CmdZoomFitContent:
+        case CmdZoomShrinkToFit:
         case CmdZoomActualSize:
             OnMenuZoom(win, cmdId);
             break;
