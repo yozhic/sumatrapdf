@@ -219,6 +219,8 @@ static SeqStrings gCommandNames =
     "CmdResizeImage\0"
     "CmdSaveImage\0"
     "CmdPasteClipboardImage\0"
+    "CmdTabGroupSave\0"
+    "CmdTabGroupOpen\0"
     "CmdNone\0"
     "\0";
 
@@ -428,6 +430,8 @@ static i32 gCommandIds[] = {
     CmdResizeImage,
     CmdSaveImage,
     CmdPasteClipboardImage,
+    CmdTabGroupSave,
+    CmdTabGroupOpen,
     CmdNone,
 };
 
@@ -637,6 +641,8 @@ SeqStrings gCommandDescriptions =
     "Resize Image\0"
     "Save Image\0"
     "Paste Image From Clipboard\0"
+    "Save Tab Group\0"
+    "Open Tab Group\0"
     "Do nothing\0"
     "\0";
 // clang-format on

@@ -100,6 +100,8 @@ CmdMoveTabRight,Ctrl + Shift + PageUp,Move Tab Right,ver 3.6+
 CmdMoveTabLeft,Ctrl + Shift + PageDown,Move Tab Left,ver 3.6+
 CmdNextTabSmart,Ctrl + Tab,Smart tab Switch,ver 3.6+
 CmdPrevTabSmart,Ctrl + Shift + Tab,Smart tab Switch,ver 3.6+
+CmdTabGroupSave,,Save Tab Group,ver 3.7+
+CmdTabGroupOpen,,Open Tab Group,ver 3.7+
 ```
 
 ## Navigation

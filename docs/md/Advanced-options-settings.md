@@ -413,6 +413,22 @@ Themes [
   ]
 ]
 
+; saved groups of tabs (introduced in version 3.7)
+TabGroups [
+  [
+    ; name of the tab group
+    Name = 
+
+    ; files in the tab group
+    TabFiles [
+      [
+        ; file path
+        Path = 
+      ]
+    ]
+  ]
+]
+
 ; a whitespace separated list of passwords to try when opening a password
 ; protected document (passwords containing spaces must be quoted) (introduced in
 ; version 2.4)

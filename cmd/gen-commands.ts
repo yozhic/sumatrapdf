@@ -209,6 +209,8 @@ export const commands = [
     "CmdResizeImage", "Resize Image",
     "CmdSaveImage", "Save Image",
     "CmdPasteClipboardImage", "Paste Image From Clipboard",
+    "CmdTabGroupSave", "Save Tab Group",
+    "CmdTabGroupOpen", "Open Tab Group",
     "CmdNone", "Do nothing",
 ];
 

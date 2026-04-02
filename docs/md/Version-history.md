@@ -25,6 +25,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `Show Errors` in right-click context menu for PDF documents that have mupdf warnings/errors
 - add `CmdToggleSmoothScroll` (`Toggle Smooth Scroll`) command to toggle `SmoothScroll` advanced setting
 - replace `HideScrollbars` and `UseOverlayScrollbar` settings with `Scrollbars` setting (values: `windows`, `smart`, `overlay`, `hidden`)
+- add `CmdTabGroupSave` (`Save Tab Group`) and `CmdTabGroupOpen` (`Open Tab Group`) commands to save and restore groups of tabs. Saved groups are persisted in `TabGroups` advanced setting
 - add `CmdChangeScrollbar` (`Change Scrollbar`) command to open scrollbar mode dialog
 - add `CmdZoomShrinkToFit` (`Shrink To Fit`) zoom mode: shows at 100% if page is smaller than view area, otherwise fits page
 - add `CmdToggleScrollbarInSinglePage` (`Toggle Scrollbar In Single Page`) command to toggle `ScrollbarInSinglePage` advanced setting

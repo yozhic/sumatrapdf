@@ -236,6 +236,20 @@ struct Theme {
     bool colorizeControls;
 };
 
+// files in the tab group
+struct TabFile {
+    // file path
+    char* path;
+};
+
+// saved groups of tabs
+struct TabGroup {
+    // name of the tab group
+    char* name;
+    // files in the tab group
+    Vec<TabFile*>* tabFiles;
+};
+
 // Values which are persisted for bookmarks/favorites
 struct Favorite {
     // name of this favorite as shown in the menu
@@ -499,6 +513,8 @@ struct GlobalPrefs {
     Vec<Shortcut*>* shortcuts;
     // color themes
     Vec<Theme*>* themes;
+    // saved groups of tabs
+    Vec<TabGroup*>* tabGroups;
     // passwords to try when opening a password protected document
     Vec<char*>* defaultPasswords;
     // ISO code of the current UI language
@@ -677,6 +693,17 @@ static const StructInfo gThemeInfo = {
     sizeof(Theme), 6, gThemeFields,
     "Name\0TextColor\0BackgroundColor\0ControlBackgroundColor\0LinkColor\0ColorizeControls"};
 
+static const FieldInfo gTabFileFields[] = {
+    {offsetof(TabFile, path), SettingType::String, (intptr_t)""},
+};
+static const StructInfo gTabFileInfo = {sizeof(TabFile), 1, gTabFileFields, "Path"};
+
+static const FieldInfo gTabGroupFields[] = {
+    {offsetof(TabGroup, name), SettingType::String, (intptr_t)""},
+    {offsetof(TabGroup, tabFiles), SettingType::Array, (intptr_t)&gTabFileInfo},
+};
+static const StructInfo gTabGroupInfo = {sizeof(TabGroup), 2, gTabGroupFields, "Name\0TabFiles"};
+
 static const FieldInfo gRectFields[] = {
     {offsetof(Rect, x), SettingType::Int, 0},
     {offsetof(Rect, y), SettingType::Int, 0},
@@ -851,6 +878,8 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, themes), SettingType::Array, (intptr_t)&gThemeInfo},
     {(size_t)-1, SettingType::Comment, 0},
+    {offsetof(GlobalPrefs, tabGroups), SettingType::Array, (intptr_t)&gTabGroupInfo},
+    {(size_t)-1, SettingType::Comment, 0},
     {(size_t)-1, SettingType::Comment, (intptr_t)"You're not expected to change those manually"},
     {offsetof(GlobalPrefs, defaultPasswords), SettingType::StringArray, 0},
     {offsetof(GlobalPrefs, uiLanguage), SettingType::String, 0},
@@ -867,7 +896,7 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 82, gGlobalPrefsFields,
+    sizeof(GlobalPrefs), 84, gGlobalPrefsFields,
     "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
     "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
     "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
@@ -875,8 +904,9 @@ static const StructInfo gGlobalPrefsInfo = {
     "arInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0Theme\0TocDy\0ToolbarSi"
     "ze\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMru\0ZoomLevels\0ZoomIncr"
     "ement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ChmUI\0\0Annotations\0\0ExternalViewers\0\0ForwardSearch\0\0Prin"
-    "terDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowSt"
-    "ate\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
+    "terDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0DefaultPasswords\0UiLanguage\0VersionToS"
+    "kip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos"
+    "\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

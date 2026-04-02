@@ -81,6 +81,7 @@
 #include "OverlayScrollbar.h"
 #include "SumatraDialogs.h"
 #include "SumatraProperties.h"
+#include "TabGroupsManage.h"
 #include "TableOfContents.h"
 #include "Tabs.h"
 #include "Toolbar.h"
@@ -6081,6 +6082,14 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdNewWindow:
             CreateAndShowMainWindow(nullptr);
+            break;
+
+        case CmdTabGroupSave:
+            ShowSaveTabGroupDialog(win);
+            break;
+
+        case CmdTabGroupOpen:
+            ShowOpenTabGroupDialog(win);
             break;
 
         case CmdDuplicateInNewWindow:

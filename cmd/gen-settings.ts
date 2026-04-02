@@ -168,6 +168,15 @@ const theme: Field[] = [
   mkField("ColorizeControls", Bool, false, "should we colorize Windows controls and window areas"),
 ];
 
+const tabFile: Field[] = [
+  mkField("Path", Str, "", "file path"),
+];
+
+const tabGroup: Field[] = [
+  mkField("Name", Str, "", "name of the tab group"),
+  mkArray("TabFiles", tabFile, "files in the tab group"),
+];
+
 const windowPos: Field[] = [
   mkField("X", Int, 0, "x coordinate"),
   mkField("Y", Int, 0, "y coordinate"),
@@ -810,6 +819,8 @@ const globalPrefs: Field[] = [
   mkArray("Shortcuts", keyboardShortcut, "custom keyboard shortcuts"),
   mkEmptyLine(),
   setVersion(mkArray("Themes", theme, "color themes"), "3.6"),
+  mkEmptyLine(),
+  setVersion(mkArray("TabGroups", tabGroup, "saved groups of tabs"), "3.7"),
   mkEmptyLine(),
 
   mkComment("You're not expected to change those manually"),

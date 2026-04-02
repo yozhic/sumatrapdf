@@ -42750,3 +42750,151 @@ vn:Thay đổi thanh cuộn
 vn:Hiển thị menu
 :Shrink To Fit
 vn:Thu nhỏ để vừa
+:Open Tab Group
+am:የትር ቡድን ክፈት
+:Save Tab Group
+am:የትር ቡድን አስቀምጥ
+:Open Tab Group
+ar:فتح مجموعة علامات التبويب
+:Save Tab Group
+ar:حفظ مجموعة علامات التبويب
+:Open Tab Group
+br:Digeriñ ar strollad ivinelloù
+:Save Tab Group
+br:Enrollañ ar strollad ivinelloù
+:Open Tab Group
+cn:打开标签组
+:Save Tab Group
+cn:保存标签组
+:Open Tab Group
+co:Apre u gruppu di schede
+:Save Tab Group
+co:Salvà u gruppu di schede
+:Open Tab Group
+de:Tab-Gruppe öffnen
+:Save Tab Group
+de:Tab-Gruppe speichern
+:Open Tab Group
+el:Άνοιγμα ομάδας καρτελών
+:Save Tab Group
+el:Αποθήκευση ομάδας καρτελών
+:Open Tab Group
+hi:टैब समूह खोलें
+:Save Tab Group
+hi:टैब समूह सहेजें
+:Open Tab Group
+it:Apri gruppo di schede
+:Save Tab Group
+it:Salva gruppo di schede
+:Open Tab Group
+ja:タブグループを開く
+:Save Tab Group
+ja:タブグループを保存
+:Open Tab Group
+ml:ടാബ് ഗ്രൂപ്പ് തുറക്കുക
+:Save Tab Group
+ml:ടാബ് ഗ്രൂപ്പ് സംരക്ഷിക്കുക
+:Open Tab Group
+nl:Tabbladgroep openen
+:Save Tab Group
+nl:Tabbladgroep opslaan
+:Open Tab Group
+pl:Otwórz grupę kart
+:Save Tab Group
+pl:Zapisz grupę kart
+:Open Tab Group
+ru:Открыть группу вкладок
+:Save Tab Group
+ru:Сохранить группу вкладок
+:Open Tab Group
+sk:Otvoriť skupinu kariet
+:Save Tab Group
+sk:Uložiť skupinu kariet
+:Open Tab Group
+sr-rs:Отвори групу картица
+:Save Tab Group
+sr-rs:Сачувај групу картица
+:Open Tab Group
+tw:開啟分頁群組
+:Save Tab Group
+tw:儲存分頁群組
+:Open Tab Group
+az:Vərəq Qrupunu Aç
+:Save Tab Group
+az:Vərəq Qrupunu Yadda Saxla
+:Open Tab Group
+by:Адкрыць групу ўкладак
+:Save Tab Group
+by:Захаваць групу ўкладак
+:Open Tab Group
+ca:Obre el grup de pestanyes
+:Save Tab Group
+ca:Desa el grup de pestanyes
+:Open Tab Group
+cy:Agor Grŵp Tabiau
+:Save Tab Group
+cy:Cadw Grŵp Tabiau
+:Open Tab Group
+cz:Otevřít skupinu karet
+:Save Tab Group
+cz:Uložit skupinu karet
+:Open Tab Group
+es:Abrir grupo de pestañas
+:Save Tab Group
+es:Guardar grupo de pestañas
+:Open Tab Group
+fa:باز کردن گروه زبانه
+:Save Tab Group
+fa:ذخیره گروه زبانه
+:Open Tab Group
+fi:Avaa välilehtiryhmä
+:Save Tab Group
+fi:Tallenna välilehtiryhmä
+:Open Tab Group
+fo:Opna flikkasamling
+:Save Tab Group
+fo:Goym flikkasamling
+:Open Tab Group
+fr:Ouvrir le groupe d'onglets
+:Save Tab Group
+fr:Enregistrer le groupe d'onglets
+:Open Tab Group
+ga:Oscail Grúpa Cluaisíní
+:Save Tab Group
+ga:Sábháil Grúpa Cluaisíní
+:Open Tab Group
+gl:Abrir grupo de pestanas
+:Save Tab Group
+gl:Gardar grupo de pestanas
+:Open Tab Group
+he:פתח קבוצת כרטיסיות
+:Save Tab Group
+he:שמור קבוצת כרטיסיות
+:Open Tab Group
+hu:Laplap-csoport megnyitása
+:Save Tab Group
+hu:Laplap-csoport mentése
+:Open Tab Group
+id:Buka Grup Tab
+:Save Tab Group
+id:Simpan Grup Tab
+:Open Tab Group
+kr:탭 그룹 열기
+:Save Tab Group
+kr:탭 그룹 저장
+:Open Tab Group
+lv:Atvērt ciļņu grupu
+:Save Tab Group
+lv:Saglabāt ciļņu grupu
+:Open Tab Group
+my:တက်ဘ်အုပ်စုကို ဖွင့်ရန်
+:Save Tab Group
+my:တက်ဘ်အုပ်စုကို သိမ်းဆည်းရန်
+:Open Tab Group
+pt:Abrir Grupo de Abas
+:Save Tab Group
+pt:Salvar Grupo de Abas
+:Open Tab Group
+ro:Deschide grup de file
+:Save Tab Group
+ro:Salvează grup de file

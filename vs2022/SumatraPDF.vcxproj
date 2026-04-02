@@ -1248,6 +1248,7 @@
     <ClCompile Include="..\src\SumatraDialogs.cpp" />
     <ClCompile Include="..\src\SumatraPDF.cpp" />
     <ClCompile Include="..\src\SumatraProperties.cpp" />
+    <ClCompile Include="..\src\TabGroupsManage.cpp" />
     <ClCompile Include="..\src\SumatraStartup.cpp" />
     <ClCompile Include="..\src\SvgIcons.cpp" />
     <ClCompile Include="..\src\TableOfContents.cpp" />
