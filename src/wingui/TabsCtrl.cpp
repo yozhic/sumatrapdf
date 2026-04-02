@@ -562,7 +562,7 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 // logf("tab: WM_MOUSEMOVE: tabHighlighted = tabUnderMouse: %d\n", tabHighlighted);
                 // note: hl == -1 possible repro: we start drag, a file gets loaded via DDE etc.
                 // which re-layouts tabs and mouse is no longer over a tab
-                if (isDragging && hl != -1) {
+                if (isDragging && hl != -1 && tabUnderMouse != -1) {
                     // send notification if the highlighted tab is dragged over another
                     if (!CanDragTab(GetTab(tabUnderMouse))) {
                         TriggerTabDragged(this, hl, tabUnderMouse);
