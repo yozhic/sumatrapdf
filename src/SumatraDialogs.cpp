@@ -415,6 +415,35 @@ struct Dialog_ChangeLanguage_Data {
     const char* langCode;
 };
 
+// maps listbox index to lang index when filtered
+static Vec<int>* gLangListMap = nullptr;
+
+static void FilterLangList(HWND hDlg, const char* filter, const char* currLangCode) {
+    HWND langList = GetDlgItem(hDlg, IDC_CHANGE_LANG_LANG_LIST);
+    ListBox_ResetContent(langList);
+
+    delete gLangListMap;
+    gLangListMap = new Vec<int>();
+
+    int itemToSelect = 0;
+    for (int i = 0; i < trans::GetLangsCount(); i++) {
+        const char* name = trans::GetLangNameByIdx(i);
+        if (filter && *filter && !str::ContainsI(name, filter)) {
+            continue;
+        }
+        auto langName = ToWStrTemp(name);
+        ListBox_AppendString_NoSort(langList, langName);
+        const char* langCode = trans::GetLangCodeByIdx(i);
+        if (str::Eq(langCode, currLangCode)) {
+            itemToSelect = gLangListMap->Size();
+        }
+        gLangListMap->Append(i);
+    }
+    if (gLangListMap->Size() > 0) {
+        ListBox_SetCurSel(langList, itemToSelect);
+    }
+}
+
 static INT_PTR CALLBACK Dialog_ChangeLanguage_Proc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp) {
     Dialog_ChangeLanguage_Data* data;
     HWND langList;
@@ -423,6 +452,7 @@ static INT_PTR CALLBACK Dialog_ChangeLanguage_Proc(HWND hDlg, UINT msg, WPARAM w
         DIALOG_SIZER_START(sz)
         DIALOG_SIZER_ENTRY(IDOK, DS_MoveX | DS_MoveY)
         DIALOG_SIZER_ENTRY(IDCANCEL, DS_MoveX | DS_MoveY)
+        DIALOG_SIZER_ENTRY(IDC_CHANGE_LANG_SEARCH, DS_SizeX)
         DIALOG_SIZER_ENTRY(IDC_CHANGE_LANG_LANG_LIST, DS_SizeY | DS_SizeX)
         DIALOG_SIZER_END()
         DialogSizer_Set(hDlg, sz, TRUE);
@@ -435,45 +465,48 @@ static INT_PTR CALLBACK Dialog_ChangeLanguage_Proc(HWND hDlg, UINT msg, WPARAM w
         // for non-latin languages this depends on the correct fonts being installed,
         // otherwise all the user will see are squares
         HwndSetText(hDlg, _TRA("Change Language"));
+
+        FilterLangList(hDlg, nullptr, data->langCode);
+
         langList = GetDlgItem(hDlg, IDC_CHANGE_LANG_LANG_LIST);
-        int itemToSelect = 0;
-        for (int i = 0; i < trans::GetLangsCount(); i++) {
-            const char* name = trans::GetLangNameByIdx(i);
-            const char* langCode = trans::GetLangCodeByIdx(i);
-            auto langName = ToWStrTemp(name);
-            ListBox_AppendString_NoSort(langList, langName);
-            if (str::Eq(langCode, data->langCode)) {
-                itemToSelect = i;
-            }
-        }
-        ListBox_SetCurSel(langList, itemToSelect);
         // the language list is meant to be laid out left-to-right
         SetWindowExStyle(langList, WS_EX_LAYOUTRTL, false);
         HwndSetDlgItemText(hDlg, IDOK, _TRA("OK"));
         HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("Cancel"));
 
         CenterDialog(hDlg);
-        HwndSetFocus(langList);
+        HwndSetFocus(GetDlgItem(hDlg, IDC_CHANGE_LANG_SEARCH));
         return FALSE;
     }
 
     switch (msg) {
         case WM_COMMAND:
             data = (Dialog_ChangeLanguage_Data*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
+            if (LOWORD(wp) == IDC_CHANGE_LANG_SEARCH && HIWORD(wp) == EN_CHANGE) {
+                char* filter = HwndGetTextTemp(GetDlgItem(hDlg, IDC_CHANGE_LANG_SEARCH));
+                FilterLangList(hDlg, filter, data->langCode);
+                return TRUE;
+            }
             if (HIWORD(wp) == LBN_DBLCLK) {
                 ReportIf(IDC_CHANGE_LANG_LANG_LIST != LOWORD(wp));
                 langList = GetDlgItem(hDlg, IDC_CHANGE_LANG_LANG_LIST);
                 ReportIf(langList != (HWND)lp);
-                int langIdx = (int)ListBox_GetCurSel(langList);
-                data->langCode = trans::GetLangCodeByIdx(langIdx);
-                EndDialog(hDlg, IDOK);
+                int idx = (int)ListBox_GetCurSel(langList);
+                if (gLangListMap && idx >= 0 && idx < gLangListMap->Size()) {
+                    int langIdx = gLangListMap->At(idx);
+                    data->langCode = trans::GetLangCodeByIdx(langIdx);
+                    EndDialog(hDlg, IDOK);
+                }
                 return FALSE;
             }
             switch (LOWORD(wp)) {
                 case IDOK: {
                     langList = GetDlgItem(hDlg, IDC_CHANGE_LANG_LANG_LIST);
-                    int langIdx = ListBox_GetCurSel(langList);
-                    data->langCode = trans::GetLangCodeByIdx(langIdx);
+                    int idx = ListBox_GetCurSel(langList);
+                    if (gLangListMap && idx >= 0 && idx < gLangListMap->Size()) {
+                        int langIdx = gLangListMap->At(idx);
+                        data->langCode = trans::GetLangCodeByIdx(langIdx);
+                    }
                     EndDialog(hDlg, IDOK);
                 }
                     return TRUE;
@@ -494,6 +527,8 @@ const char* Dialog_ChangeLanguge(HWND hwnd, const char* currLangCode) {
     data.langCode = currLangCode;
 
     INT_PTR res = CreateDialogBox(IDD_DIALOG_CHANGE_LANGUAGE, hwnd, Dialog_ChangeLanguage_Proc, (LPARAM)&data);
+    delete gLangListMap;
+    gLangListMap = nullptr;
     if (IDCANCEL == res) {
         return nullptr;
     }
