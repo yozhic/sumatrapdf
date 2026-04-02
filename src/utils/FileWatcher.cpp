@@ -159,7 +159,23 @@ static bool FileStateChanged(const char* filePath, FileWatcherState* fs) {
 // queue, restart the thread with a timeout, restart the process if we
 // get notified again before timeout expires, call OnFileChanges() when
 // timeout expires
+static bool IsLogFile(WatchedDir* d, const char* fileName) {
+    if (!gLogFilePath) {
+        return false;
+    }
+    TempStr logBaseName = path::GetBaseNameTemp(gLogFilePath);
+    if (!str::EqI(fileName, logBaseName)) {
+        return false;
+    }
+    TempStr logDirPath = path::GetDirTemp(gLogFilePath);
+    return str::EqI(d->dirPath, logDirPath);
+}
+
 static void NotifyAboutFile(WatchedDir* d, const char* fileName) {
+    if (IsLogFile(d, fileName)) {
+        return;
+    }
+
     int i = 0;
 
     for (WatchedFile* wf = gWatchedFiles; wf; wf = wf->next) {
