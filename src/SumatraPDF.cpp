@@ -4564,8 +4564,8 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     }
     win->nonFullScreenFrameRect = WindowRect(win->hwndFrame);
 
-    // Hide sidebar and toolbar before suppressing redraws so the hides
-    // take visual effect immediately, preventing a flash of sidebar at
+    // Hide sidebar before suppressing redraws so the hide takes
+    // visual effect immediately, preventing a flash of sidebar at
     // fullscreen size during the transition.
     // TODO: make showFavorites a per-window pref
     bool showFavoritesTmp = gGlobalPrefs->showFavorites;
@@ -4573,13 +4573,14 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
         SetSidebarVisibility(win, false, false, false);
     }
 
+    // Set state flags; RelayoutFrame (triggered by SetWindowPos/WM_SIZE)
+    // will handle the actual showing/hiding of toolbar and tabs.
     win->isToolbarVisible = false;
+    win->tabsCtrl->SetIsVisible(false);
     SetMenu(win->hwndFrame, nullptr);
-    ShowWindow(win->hwndReBar, SW_HIDE);
     if (win->hwndMenuReBar) {
         ShowWindow(win->hwndMenuReBar, SW_HIDE);
     }
-    win->tabsCtrl->SetIsVisible(false);
 
     BeginFrameRedrawSuppression(win);
 
