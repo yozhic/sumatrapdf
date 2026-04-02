@@ -136,6 +136,7 @@ bool gCrashOnOpen = false;
 bool gRedrawLog = false;
 
 static void RelayoutFrame(MainWindow* win, bool updateToolbars = true, int sidebarDx = -1);
+static void UpdateOverlayScrollbarPositions(MainWindow* win);
 
 static const char* HwndName(HWND hwnd) {
     WCHAR cls[64]{};
@@ -984,9 +985,7 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
 
     bool showHScroll = (viewPort.dx < canvas.dx) && !hideScrollbar;
     if (useOverlay) {
-        // Hide native scrollbar, use overlay instead
-        ShowScrollBar(win->hwndCanvas, SB_HORZ, FALSE);
-        SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
+        SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, FALSE);
         if (!win->overlayScrollH) {
             win->overlayScrollH =
                 OverlayScrollbarCreate(win->hwndCanvas, OverlayScrollbar::Type::Horz, ScrollbarsOverlayMode());
@@ -1032,10 +1031,12 @@ void ControllerCallbackHandler::UpdateScrollbars(Size canvas) {
     BOOL showWinScrollbar = showScrollbar && !useOverlay;
     BOOL showOverScrollbar = showScrollbar && useOverlay;
 
-    // even when not shown, we use windows logic to adjust scroll position
-    // so we always set the scrollbar info
-    ShowScrollBar(win->hwndCanvas, SB_VERT, showWinScrollbar);
-    SetScrollInfo(win->hwndCanvas, SB_VERT, &si, showWinScrollbar);
+    if (useOverlay || hideScrollbar) {
+        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, FALSE);
+    } else {
+        ShowScrollBar(win->hwndCanvas, SB_VERT, showWinScrollbar);
+        SetScrollInfo(win->hwndCanvas, SB_VERT, &si, showWinScrollbar);
+    }
 
     if (useOverlay) {
         if (!win->overlayScrollV) {
@@ -1269,7 +1270,9 @@ static void SetFrameTitleForTab(WindowTab* tab, bool needRefresh) {
 static void UpdateUiForCurrentTab(MainWindow* win) {
     // hide the scrollbars before any other relayouting (for assertion in MainWindow::GetViewPortSize)
     if (!win->AsFixed()) {
-        ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+        if (!ScrollbarsAreHidden() && !ScrollbarsUseOverlay()) {
+            ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+        }
         OverlayScrollbarShow(win->overlayScrollV, false);
         OverlayScrollbarShow(win->overlayScrollH, false);
     }
@@ -1733,7 +1736,10 @@ static MainWindow* CreateMainWindow() {
     // screen's edge when maximized (cf. Fitts' law) and there are
     // no additional adjustments needed when (un)maximizing
     clsName = CANVAS_CLASS_NAME;
-    style = WS_CHILD | WS_HSCROLL | WS_VSCROLL | WS_CLIPCHILDREN;
+    style = WS_CHILD | WS_CLIPCHILDREN;
+    if (!ScrollbarsAreHidden() && !ScrollbarsUseOverlay()) {
+        style |= WS_HSCROLL | WS_VSCROLL;
+    }
     /* position and size determined in OnSize */
     Rect rcFrame = ClientRect(hwndFrame);
     win->hwndCanvas =
@@ -1749,7 +1755,9 @@ static MainWindow* CreateMainWindow() {
     }
 
     // hide scrollbars to avoid showing/hiding on empty window
-    ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+    if (!ScrollbarsAreHidden() && !ScrollbarsUseOverlay()) {
+        ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+    }
 
     ReportIf(win->menu);
     win->menu = BuildMenu(win);
@@ -2709,7 +2717,9 @@ static void CloseDocumentInCurrentTab(MainWindow* win, bool keepUIEnabled, bool 
             RebuildMenuBarForWindow(win);
             ShowOrHideToolbar(win);
         }
-        ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+        if (!ScrollbarsAreHidden() && !ScrollbarsUseOverlay()) {
+            ShowScrollBar(win->hwndCanvas, SB_BOTH, FALSE);
+        }
         win->RedrawAll();
         HwndSetText(win->hwndFrame, kSumatraWindowTitle);
         ReportIf(win->TabCount() != 0 || win->CurrentTab());
@@ -3979,19 +3989,13 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         rc.dy -= kFrameBorderSize + (kFrameBorderSize - 1);
     }
 
-    // hide Smart mode overlay scrollbars before relayout so they don't appear
-    // outside the window while child windows are being repositioned.
-    // Thick/Overlay mode scrollbars stay visible — hiding and re-showing them
-    // causes flicker and they can fail to reappear at startup.
-    if (win->overlayScrollV && win->overlayScrollV->mode == OverlayScrollbar::Mode::Smart) {
-        if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
-            ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
-        }
+    // hide overlay scrollbars before relayout so they don't appear at
+    // stale positions while child windows are being repositioned
+    if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
+        ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
     }
-    if (win->overlayScrollH && win->overlayScrollH->mode == OverlayScrollbar::Mode::Smart) {
-        if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
-            ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
-        }
+    if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
+        ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
     }
 
     bool suppressIntermediateRedraws = !win->suppressFrameRedraw;
@@ -4163,6 +4167,13 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
         // (and SetSidebarVisibility relies on this for initialization)
         UpdateTocSelection(win, win->ctrl->CurrentPageNo());
     }
+
+    // reposition overlay scrollbars after relayout (they were hidden at the
+    // start to prevent stale positioning); skip during fullscreen transitions
+    // where EndFrameRedrawSuppression handles this
+    if (!win->suppressFrameRedraw) {
+        UpdateOverlayScrollbarPositions(win);
+    }
 }
 
 static void BeginFrameRedrawSuppression(MainWindow* win) {
@@ -4194,7 +4205,6 @@ static void UpdateOverlayScrollbarPositions(MainWindow* win) {
 
 static void FrameOnSize(MainWindow* win, int, int) {
     RelayoutFrame(win);
-    UpdateOverlayScrollbarPositions(win);
 
     if (win->presentation || win->isFullScreen) {
         Rect fullscreen = GetFullscreenRect(win->hwndFrame);
@@ -4590,12 +4600,15 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     // will handle the actual showing/hiding of toolbar and tabs.
     win->isToolbarVisible = false;
     win->tabsCtrl->SetIsVisible(false);
+
+    // suppress redraws before any operations that trigger WM_SIZE
+    // (SetMenu, SetWindowLong, SetWindowPos all change non-client area)
+    BeginFrameRedrawSuppression(win);
+
     SetMenu(win->hwndFrame, nullptr);
     if (win->hwndMenuReBar) {
         ShowWindow(win->hwndMenuReBar, SW_HIDE);
     }
-
-    BeginFrameRedrawSuppression(win);
 
     // remove window styles that add to non-client area
     ws &= ~(WS_CAPTION | WS_THICKFRAME);

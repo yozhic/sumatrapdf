@@ -448,7 +448,7 @@ static void OnHScroll(MainWindow* win, WPARAM wp) {
     // Set the position and then retrieve it.  Due to adjustments
     // by Windows it may not be the same as the value set.
     si.fMask = SIF_POS;
-    SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, TRUE);
+    SetScrollInfo(win->hwndCanvas, SB_HORZ, &si, !useOverlay);
     GetScrollInfo(win->hwndCanvas, SB_HORZ, &si);
     if (useOverlay) {
         OverlayScrollbarSetInfo(win->overlayScrollH, &si, TRUE);
@@ -2350,7 +2350,8 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
 
         case WM_NCPAINT: {
             if (ScrollbarsAreHidden() || ScrollbarsUseOverlay()) {
-                ShowScrollBar(win->hwndCanvas, SB_BOTH, false);
+                // native scrollbars are already disabled; don't call ShowScrollBar
+                // here as it changes the client area, triggering WM_SIZE oscillation
                 goto def;
             }
 
@@ -2928,6 +2929,21 @@ void RevokeCanvasDropTarget(HWND hwndCanvas) {
 
 LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     // messages that don't require win
+
+    if (msg == WM_NCCALCSIZE && wp == TRUE) {
+        // When overlay/hidden scrollbars are active, SetScrollInfo still adds
+        // WS_VSCROLL/WS_HSCROLL styles. Handle WM_NCCALCSIZE to prevent Windows
+        // from reserving non-client space for native scrollbars.
+        if (ScrollbarsAreHidden() || ScrollbarsUseOverlay()) {
+            // strip scroll styles that SetScrollInfo may have added
+            DWORD style = GetWindowLong(hwnd, GWL_STYLE);
+            if (style & (WS_VSCROLL | WS_HSCROLL)) {
+                SetWindowLong(hwnd, GWL_STYLE, style & ~(WS_VSCROLL | WS_HSCROLL));
+            }
+            // let DefWindowProc calculate NC size without scroll styles
+            return DefWindowProc(hwnd, msg, wp, lp);
+        }
+    }
 
     MainWindow* win = FindMainWindowByHwnd(hwnd);
     switch (msg) {

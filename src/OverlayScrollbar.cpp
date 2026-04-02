@@ -915,7 +915,14 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     }
     SetWindowLongPtrW(sb->hwnd, GWL_EXSTYLE, exStyle);
 
-    SetWindowPos(sb->hwnd, HWND_TOP, x, y, w, h, SWP_NOACTIVATE);
+    UINT swpFlags = SWP_NOACTIVATE;
+    // re-show the window if the state says it should be visible
+    // (RelayoutFrame hides overlay scrollbar windows with SW_HIDE
+    // to prevent them from appearing at stale positions)
+    if (IsVisible(sb) && !IsWindowVisible(sb->hwnd)) {
+        swpFlags |= SWP_SHOWWINDOW;
+    }
+    SetWindowPos(sb->hwnd, HWND_TOP, x, y, w, h, swpFlags);
 }
 
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
