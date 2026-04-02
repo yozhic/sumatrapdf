@@ -534,7 +534,7 @@ void RenderCache::RequestRendering(DisplayModel* dm, int pageNo, TilePosition ti
         return;
     }
 
-    auto cb = MkMethod1<DisplayModel, PageRenderRequest*, &DisplayModel::RenderFinished>(dm);
+    auto cb = MkMethod1<DisplayModel, PageRenderRequest*, &DisplayModel::RenderFinishedAsync>(dm);
     Render(dm, pageNo, rotation, zoom, &tile, nullptr, cb);
 }
 

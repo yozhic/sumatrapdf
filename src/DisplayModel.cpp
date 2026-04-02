@@ -63,6 +63,9 @@
 #include "TextSelection.h"
 #include "TextSearch.h"
 #include "RenderCache.h"
+#include "utils/UITask.h"
+#include "WindowTab.h"
+#include "MainWindow.h"
 
 #include "utils/Log.h"
 
@@ -216,10 +219,36 @@ void DisplayModel::RepaintDisplay() {
     cb->Repaint();
 }
 
-void DisplayModel::RenderFinished(PageRenderRequest* req) {
+static bool IsDisplayModelValid(DisplayModel* dm) {
+    for (MainWindow* win : gWindows) {
+        for (WindowTab* tab : win->Tabs()) {
+            if (tab->AsFixed() == dm) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static void RenderFinishedOnUIThread(PageRenderRequest* req) {
+    if (!IsDisplayModelValid(req->dm)) {
+        delete req;
+        return;
+    }
+    req->dm->RenderFinished(req);
+    delete req;
+}
+
+void DisplayModel::RenderFinishedAsync(PageRenderRequest* req) {
     if (req->abort) {
         return;
     }
+    auto* copy = new PageRenderRequest(*req);
+    auto fn = MkFunc0(RenderFinishedOnUIThread, copy);
+    uitask::Post(fn, "RenderFinished");
+}
+
+void DisplayModel::RenderFinished(PageRenderRequest* req) {
     if (req->errorCode != 0) {
         PageInfo* pageInfo = GetPageInfo(req->pageNo);
         if (pageInfo) {

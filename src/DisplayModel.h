@@ -267,6 +267,7 @@ struct DisplayModel : DocController {
     bool pauseRendering = false;
 
     void RenderFinished(PageRenderRequest* req);
+    void RenderFinishedAsync(PageRenderRequest* req);
 };
 
 extern bool gPredictiveRender;
