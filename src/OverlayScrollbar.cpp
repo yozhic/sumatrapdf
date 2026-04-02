@@ -783,10 +783,13 @@ OverlayScrollbar* OverlayScrollbarCreate(HWND hwndOwner, OverlayScrollbar::Type 
     if (sysWidth > 0) {
         sb->thickWidth = sysWidth;
     }
-    DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE;
+    DWORD exStyle = WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_TRANSPARENT | WS_EX_NOACTIVATE;
     DWORD style = WS_POPUP;
 
-    sb->hwnd = CreateWindowExW(exStyle, OVERLAY_SCROLLBAR_CLASS, nullptr, style, 0, 0, 1, 1, nullptr, nullptr,
+    // use the top-level ancestor as owner so the scrollbar stays above its
+    // own window but doesn't cover other application windows
+    HWND hwndTopLevel = GetAncestor(hwndOwner, GA_ROOT);
+    sb->hwnd = CreateWindowExW(exStyle, OVERLAY_SCROLLBAR_CLASS, nullptr, style, 0, 0, 1, 1, hwndTopLevel, nullptr,
                                GetModuleHandleW(nullptr), nullptr);
     SetWindowLongPtrW(sb->hwnd, GWLP_USERDATA, (LONG_PTR)sb);
 
@@ -912,7 +915,7 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     }
     SetWindowLongPtrW(sb->hwnd, GWL_EXSTYLE, exStyle);
 
-    SetWindowPos(sb->hwnd, HWND_TOPMOST, x, y, w, h, SWP_NOACTIVATE);
+    SetWindowPos(sb->hwnd, HWND_TOP, x, y, w, h, SWP_NOACTIVATE);
 }
 
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
