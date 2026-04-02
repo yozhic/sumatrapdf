@@ -16,7 +16,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `DefaultImageZoom` advanced setting to control default zoom level for images
 - improve `Toggle Use Tabs` (`CmdToggleUseTabs`). You can now transition between using tabs / not using tabs witout restarting the app
 - allow showing menu bar when using tabs (previously menu bar was only shown when not using tabs)
-- add `CmdScreenshot` (`Take Screenshot` in `Ctrl + k` [command palette](Command-Palette.md)) to capture screenshots of the desktop and all visible windows, saved as PNG files in `Screenshots` sub-directory of SumatraPDF data directory
+- add `CmdScreenshot` (`Take Screenshot` in `Ctrl + k` [command palette](Command-Palette.md)) to capture screenshots of the desktop and all visible windows, saved as PNG files in `Screenshots` sub-directory of SumatraPDF data directory. Global hotkey (e.g. PrtSc) requires a Shortcuts entry.
 - you can drag&drop images from a browser onto SumatraPDF window. We'll download it to Downloads folder and open
 - add `CmdCropImage` (`Crop Image`) command for cropping images when viewing image files
 - add `CmdResizeImage` (`Resize Image`) command for resizing images when viewing image files

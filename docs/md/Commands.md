@@ -252,7 +252,7 @@ CmdContributeTranslation,,Contribute Translation,
 CmdForgetSelectedDocument,,Remove Selected Document From History,
 CmdListPrinters,,List Printers,ver 3.7+
 CmdOptions,,Options...,
-CmdScreenshot,,Take Screenshot,ver 3.7+
+CmdScreenshot,,Take Screenshot,"ver 3.7+, requires Shortcuts entry (e.g. Key = PrtSc) to register global hotkey"
 CmdCropImage,,Crop Image,ver 3.7+
 CmdResizeImage,,Resize Image,ver 3.7+
 CmdSaveImage,,Save Image,"Save image from context menu, ver 3.7+"

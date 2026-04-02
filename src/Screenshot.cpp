@@ -947,22 +947,21 @@ static UINT AccelFVirtToHotkeyMod(BYTE fVirt) {
 
 void RegisterScreenshotHotkey(HWND hwnd) {
     const char* shortcut = FindScreenshotShortcut();
+    if (!shortcut) {
+        // don't register global hotkey by default; require explicit
+        // Shortcuts entry (e.g. Key = PrtSc, CmdScreenshot)
+        return;
+    }
     UINT mod = 0;
     UINT vk = VK_SNAPSHOT;
-    if (shortcut) {
-        ACCEL accel{};
-        if (ParseShortcutString(shortcut, accel)) {
-            mod = AccelFVirtToHotkeyMod(accel.fVirt);
-            vk = accel.key;
-        }
+    ACCEL accel{};
+    if (ParseShortcutString(shortcut, accel)) {
+        mod = AccelFVirtToHotkeyMod(accel.fVirt);
+        vk = accel.key;
     }
     BOOL ok = RegisterHotKey(hwnd, kScreenshotHotkeyId, mod, vk);
     if (!ok && !IsOtherSumatraProcessRunning()) {
-        if (shortcut) {
-            MaybeDelayedWarningNotification("Couldn't register '%s' global hotkey for taking screenshots", shortcut);
-        } else {
-            MaybeDelayedWarningNotification("Couldn't register PrtScr global hotkey for taking screenshots");
-        }
+        MaybeDelayedWarningNotification("Couldn't register '%s' global hotkey for taking screenshots", shortcut);
     }
 }
 
