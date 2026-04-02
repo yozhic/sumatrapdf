@@ -6,7 +6,6 @@ struct GlobalPrefs;
 char* Dialog_GoToPage(HWND hwnd, const char* currentPageLabel, int pageCount, bool onlyNumeric = true);
 char* Dialog_Find(HWND hwnd, const char* previousSearch, bool* matchCase);
 char* Dialog_GetPassword(HWND hwnd, const char* fileName, bool* rememberPassword);
-INT_PTR Dialog_PdfAssociate(HWND hwnd, bool* dontAskAgainOut);
 const char* Dialog_ChangeLanguge(HWND hwnd, const char* currLangCode);
 bool Dialog_CustomZoom(HWND hwnd, bool forChm, float* currZoomInOut);
 INT_PTR Dialog_Settings(HWND hwnd, GlobalPrefs* prefs);

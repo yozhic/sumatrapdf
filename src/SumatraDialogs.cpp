@@ -410,66 +410,6 @@ char* Dialog_Find(HWND hwnd, const char* previousSearch, bool* matchCase) {
     return data.searchTerm;
 }
 
-/* For passing data to/from AssociateWithPdf dialog */
-struct Dialog_PdfAssociate_Data {
-    bool dontAskAgain = false;
-};
-
-static INT_PTR CALLBACK Dialog_PdfAssociate_Proc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp) {
-    Dialog_PdfAssociate_Data* data;
-
-    //[ ACCESSKEY_GROUP Associate Dialog
-    if (WM_INITDIALOG == msg) {
-        data = (Dialog_PdfAssociate_Data*)lp;
-        SetWindowLongPtr(hDlg, GWLP_USERDATA, (LONG_PTR)data);
-        if (UseDarkModeLib()) {
-            DarkMode::setDarkWndSafe(hDlg);
-        }
-        HwndSetText(hDlg, _TRA("Associate with PDF files?"));
-        HwndSetDlgItemText(hDlg, IDC_STATIC, _TRA("Make SumatraPDF default application for PDF files?"));
-        HwndSetDlgItemText(hDlg, IDC_DONT_ASK_ME_AGAIN, _TRA("&Don't ask me again"));
-        CheckDlgButton(hDlg, IDC_DONT_ASK_ME_AGAIN, BST_UNCHECKED);
-        HwndSetDlgItemText(hDlg, IDOK, _TRA("&Yes"));
-        HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("&No"));
-
-        CenterDialog(hDlg);
-        HwndSetFocus(GetDlgItem(hDlg, IDOK));
-        return FALSE;
-    }
-    //] ACCESSKEY_GROUP Associate Dialog
-
-    switch (msg) {
-        case WM_COMMAND:
-            data = (Dialog_PdfAssociate_Data*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
-            data->dontAskAgain = (BST_CHECKED == IsDlgButtonChecked(hDlg, IDC_DONT_ASK_ME_AGAIN));
-            switch (LOWORD(wp)) {
-                case IDOK:
-                    EndDialog(hDlg, IDYES);
-                    return TRUE;
-
-                case IDCANCEL:
-                    EndDialog(hDlg, IDNO);
-                    return TRUE;
-
-                case IDC_DONT_ASK_ME_AGAIN:
-                    return TRUE;
-            }
-            break;
-    }
-    return FALSE;
-}
-
-/* Show "associate this application with PDF files" dialog.
-   Returns IDYES if "Yes" button was pressed or
-   IDNO if "No" button was pressed.
-   Returns the state of "don't ask me again" checkbox" in <dontAskAgain> */
-INT_PTR Dialog_PdfAssociate(HWND hwnd, bool* dontAskAgainOut) {
-    Dialog_PdfAssociate_Data data;
-    INT_PTR res = CreateDialogBox(IDD_DIALOG_PDF_ASSOCIATE, hwnd, Dialog_PdfAssociate_Proc, (LPARAM)&data);
-    *dontAskAgainOut = data.dontAskAgain;
-    return res;
-}
-
 /* For passing data to/from ChangeLanguage dialog */
 struct Dialog_ChangeLanguage_Data {
     const char* langCode;
