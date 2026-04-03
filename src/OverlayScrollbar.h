@@ -78,6 +78,7 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb);
 
 // Show/hide
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show);
+void OverlayScrollbarHide(OverlayScrollbar* sb);
 
 // Change the scrollbar mode (Smart vs Thick)
 void OverlayScrollbarSetMode(OverlayScrollbar* sb, OverlayScrollbar::Mode mode);

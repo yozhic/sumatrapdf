@@ -4016,12 +4016,8 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
 
     // hide overlay scrollbars before relayout so they don't appear at
     // stale positions while child windows are being repositioned
-    if (IsOverlayScrollbarVisible(win->overlayScrollV)) {
-        ShowWindow(win->overlayScrollV->hwnd, SW_HIDE);
-    }
-    if (IsOverlayScrollbarVisible(win->overlayScrollH)) {
-        ShowWindow(win->overlayScrollH->hwnd, SW_HIDE);
-    }
+    OverlayScrollbarHide(win->overlayScrollV);
+    OverlayScrollbarHide(win->overlayScrollH);
 
     bool suppressIntermediateRedraws = !win->suppressFrameRedraw;
     if (suppressIntermediateRedraws) {

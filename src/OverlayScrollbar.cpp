@@ -391,6 +391,16 @@ static void PaintScrollbar(OverlayScrollbar* sb) {
     ReleaseDC(nullptr, hdcScreen);
 }
 
+// Make the layered window fully transparent without hiding it.
+// ShowWindow(SW_HIDE) can steal activation from other windows (e.g. command palette).
+static void MakeLayeredWindowTransparent(HWND hwnd) {
+    BLENDFUNCTION blend{};
+    blend.BlendOp = AC_SRC_OVER;
+    blend.SourceConstantAlpha = 0;
+    blend.AlphaFormat = AC_SRC_ALPHA;
+    UpdateLayeredWindow(hwnd, nullptr, nullptr, nullptr, nullptr, nullptr, 0, &blend, ULW_ALPHA);
+}
+
 static void SetState(OverlayScrollbar* sb, State newState) {
     if (sb->state == newState) {
         return;
@@ -401,11 +411,15 @@ static void SetState(OverlayScrollbar* sb, State newState) {
 
     OverlayScrollbarUpdatePos(sb);
     if (nowVisible) {
-        ShowWindow(sb->hwnd, SW_SHOWNOACTIVATE);
+        if (!wasVisible) {
+            ShowWindow(sb->hwnd, SW_SHOWNOACTIVATE);
+        }
         PaintScrollbar(sb);
     } else {
+        // Make fully transparent instead of ShowWindow(SW_HIDE) because
+        // SW_HIDE can trigger Z-order changes that hide other popups
         sb->mouseOverThumb = false;
-        ShowWindow(sb->hwnd, SW_HIDE);
+        MakeLayeredWindowTransparent(sb->hwnd);
     }
 
     KillTimer(sb->hwnd, OverlayScrollbar::kTimerAutoHide);
@@ -922,7 +936,23 @@ void OverlayScrollbarUpdatePos(OverlayScrollbar* sb) {
     if (IsVisible(sb) && !IsWindowVisible(sb->hwnd)) {
         swpFlags |= SWP_SHOWWINDOW;
     }
-    SetWindowPos(sb->hwnd, HWND_TOP, x, y, w, h, swpFlags);
+    // When not visible, don't change Z-order — HWND_TOP on an owned popup
+    // brings the owner (frame) to the top too, which can hide other popups
+    // like the command palette
+    if (!IsVisible(sb)) {
+        swpFlags |= SWP_NOZORDER;
+    }
+    SetWindowPos(sb->hwnd, IsVisible(sb) ? HWND_TOP : nullptr, x, y, w, h, swpFlags);
+}
+
+// Hide the scrollbar window without stealing activation from other windows.
+// Uses SWP_HIDEWINDOW | SWP_NOACTIVATE instead of ShowWindow(SW_HIDE).
+void OverlayScrollbarHide(OverlayScrollbar* sb) {
+    if (!sb || !sb->hwnd) {
+        return;
+    }
+    SetWindowPos(sb->hwnd, nullptr, 0, 0, 0, 0,
+                 SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {

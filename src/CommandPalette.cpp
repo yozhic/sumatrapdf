@@ -1508,7 +1508,6 @@ void RunCommandPalette(MainWindow* win, const char* prefix, int smartTabAdvance)
     ReportIf(!ok);
     gCommandPaletteWnd = wnd;
     gCommandPaletteHwnd = wnd->hwnd;
-    logf("gCommandPaletteHwnd: 0x%p\n", gCommandPaletteHwnd);
     gHwndToActivateOnClose = win->hwndFrame;
 }
 
