@@ -418,8 +418,8 @@ TreeItemState TreeView::GetItemState(TreeItem ti) {
     TreeItemState res;
 
     TVITEMW* it = GetTVITEM(this, ti);
-    ReportIf(!it);
     if (!it) {
+        // could be missing if filtered
         return res;
     }
     SetTreeItemState(it->state, res);
@@ -498,10 +498,10 @@ LRESULT TreeView::OnNotifyReflect(WPARAM wp, LPARAM lp) {
         HTREEITEM hItem = (HTREEITEM)ev.nm->nmcd.dwItemSpec;
         // it can be 0 in CDDS_PREPAINT state
         ev.treeItem = GetTreeItemByHandle(hItem);
-        // TODO: seeing this in crash reports because GetTVITEM() returns nullptr
-        // should log more info
-        // SubmitBugReportIf(!a.treeItem);
-        if (!ev.treeItem) {
+        // allow CDDS_PREPAINT through even with null treeItem
+        // so the handler can return CDRF_NOTIFYITEMDRAW
+        DWORD drawStage = ev.nm->nmcd.dwDrawStage;
+        if (!ev.treeItem && drawStage != CDDS_PREPAINT) {
             return CDRF_DODEFAULT;
         }
         onCustomDraw.Call(&ev);

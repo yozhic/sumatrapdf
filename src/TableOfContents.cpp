@@ -846,12 +846,26 @@ static void DrawTocItemHighlight(TreeView::CustomDrawEvent* ev, MainWindow* win)
         highlightRects[i].right = labelRect.left + szEnd.cx;
     }
 
-    // draw highlight background
+    // erase the label area with the correct background color
+    // so we can redraw text cleanly without double-draw artifacts
+    NMCUSTOMDRAW* cd = &tvcd->nmcd;
+    bool isSelected = (cd->uItemState & CDIS_SELECTED) != 0;
+    bool hasFocus = (GetFocus() == tv->hwnd);
+    COLORREF bgCol;
+    if (isSelected) {
+        bgCol = GetSysColor(hasFocus ? COLOR_HIGHLIGHT : COLOR_BTNFACE);
+    } else {
+        bgCol = IsSpecialColor(tv->bgColor) ? GetSysColor(COLOR_WINDOW) : tv->bgColor;
+    }
+    HBRUSH hbrBg = CreateSolidBrush(bgCol);
+    FillRect(hdc, &labelRect, hbrBg);
+    DeleteObject(hbrBg);
+
+    // draw highlight background rectangles
     COLORREF highlightCol;
     if (IsCurrentThemeDefault()) {
         highlightCol = RGB(255, 255, 0);
     } else {
-        COLORREF bgCol = ThemeControlBackgroundColor();
         highlightCol = AccentColor(bgCol, 40);
     }
     HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
@@ -860,8 +874,16 @@ static void DrawTocItemHighlight(TreeView::CustomDrawEvent* ev, MainWindow* win)
     }
     DeleteObject(hbrHighlight);
 
-    // redraw the text on top of the highlights
-    COLORREF oldTxtCol = SetTextColor(hdc, tvcd->clrText);
+    // draw the text on top
+    COLORREF txtCol;
+    if (isSelected && hasFocus) {
+        txtCol = GetSysColor(COLOR_HIGHLIGHTTEXT);
+    } else if (tocItem->color != kColorUnset) {
+        txtCol = tocItem->color;
+    } else {
+        txtCol = IsSpecialColor(tv->textColor) ? GetSysColor(COLOR_WINDOWTEXT) : tv->textColor;
+    }
+    COLORREF oldTxtCol = SetTextColor(hdc, txtCol);
     int oldBkMode = SetBkMode(hdc, TRANSPARENT);
     DrawTextW(hdc, titleW, -1, &labelRect, DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
     SetBkMode(hdc, oldBkMode);
@@ -1263,7 +1285,7 @@ void CreateToc(MainWindow* win) {
     {
         Edit::CreateArgs eargs;
         eargs.parent = win->hwndTocBox;
-        eargs.withBorder = true;
+        eargs.withBorder = false;
         eargs.cueText = "Filter bookmarks";
         eargs.font = GetDefaultGuiFont(false, false);
         filterEdit->Create(eargs);
