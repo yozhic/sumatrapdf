@@ -706,8 +706,10 @@ void LoadTocTree(MainWindow* win) {
     win->tocLoaded = true;
 
     // clear filter when loading new toc
+    // null out currToc first so that SetText("") callback doesn't use stale pointer
     delete win->tocFilteredTree;
     win->tocFilteredTree = nullptr;
+    tab->currToc = nullptr;
     if (win->tocFilterEdit) {
         win->tocFilterEdit->SetText("");
     }
@@ -1199,6 +1201,9 @@ static TocItem* FilterTocItemRec(TocItem* item, const char* filter) {
 }
 
 static void ApplyTocFilter(MainWindow* win, const char* filter) {
+    if (!win->tocLoaded) {
+        return;
+    }
     WindowTab* tab = win->CurrentTab();
     if (!tab || !tab->currToc) {
         return;
