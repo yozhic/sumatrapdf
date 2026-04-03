@@ -100,6 +100,7 @@ You can [customize keyboard shortcuts](Customizing-keyboard-shortcuts.md). Also 
 
 ### Actions
 
+- `Ctrl + K` Command palette
 - `Ctrl + O` Open a new document
 - `Ctrl + W` Close current document
 - `Ctrl + F4` Also close current document
