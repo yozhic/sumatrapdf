@@ -117,7 +117,6 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugCrashMe,
     CmdDebugCorruptMemory,
     CmdScreenshot,
-    CmdTabGroupSave,
     CmdTabGroupOpen,
     0,
 };
@@ -267,6 +266,7 @@ struct CommandPaletteBuildCtx {
     bool canCloseTabsToRight = false;
     bool canCloseTabsToLeft = false;
     bool isPdf = false;
+    bool hasDocTabs = false;
 
     ~CommandPaletteBuildCtx() = default;
 };
@@ -308,6 +308,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
 
     if (CmdReopenLastClosedFile == cmdId) {
         return RecentlyCloseDocumentsCount() > 0;
+    }
+
+    if (CmdTabGroupSave == cmdId) {
+        return ctx.hasDocTabs;
     }
 
     // must check before ctx.isDocLoaded
@@ -652,6 +656,7 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
             nFirstDocTab = 1;
             continue;
         }
+        ctx.hasDocTabs = true;
         if (t == currTab) {
             if (i > nFirstDocTab) {
                 ctx.canCloseTabsToLeft = true;
