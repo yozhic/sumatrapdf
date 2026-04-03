@@ -652,14 +652,15 @@ Promote::~Promote() {
     str::Free(info);
 }
 
+static Promote* gPromoteList = nullptr;
+static Promote* gPromoteSelected = nullptr;
+
 struct HomePageLayout {
     // args in
     HWND hwnd = nullptr;
     HDC hdc = nullptr;
     Rect rc;
     MainWindow* win = nullptr;
-
-    Promote* promote = nullptr;
 
     Rect rcAppWithVer; // SumatraPDF colorful text + version
     Rect rcLine;       // line under bApp
@@ -674,12 +675,11 @@ struct HomePageLayout {
     int thumbsVisibleDy = 0;         // visible height for thumbnails area
     Rect rcThumbsArea;               // clip rect for thumbnails
 
-    // promotion
-    Promote* promoteSelected = nullptr; // not owned, points into promote list
-    Rect rcPromote;                     // background rect
-    Rect rcPromoteTitle;                // "Try my other software"
-    Rect rcPromoteName;                 // name link
-    Rect rcPromoteInfo;                 // info text
+    // promotion layout rects (gPromoteSelected holds the selected item)
+    Rect rcPromote;      // background rect
+    Rect rcPromoteTitle; // "Try my other software"
+    Rect rcPromoteName;  // name link
+    Rect rcPromoteInfo;  // info text
 
     ~HomePageLayout();
 };
@@ -687,7 +687,6 @@ struct HomePageLayout {
 HomePageLayout::~HomePageLayout() {
     delete freqRead;
     delete openDoc;
-    ListDelete(promote);
 }
 
 static Promote* ParsePromoteFromTree(SquareTreeNode* root) {
@@ -729,11 +728,44 @@ static Promote* ParsePromoteFromString(const char* s) {
 constexpr int kOpenDocumentYShift = 7;
 constexpr int kThumbsMiddleMargin = 32;
 
-void LayoutHomePage(HomePageLayout& l) {
-    if (!l.promote) {
+static void EnsurePromoteListParsed() {
+    if (!gPromoteList) {
         auto s = promoFromServer ? promoFromServer : promoBuiltIn;
-        l.promote = ParsePromoteFromString(s);
+        gPromoteList = ParsePromoteFromString(s);
+        if (gPromoteList) {
+            int n = ListLen(gPromoteList);
+            int idx = rand() % n;
+            Promote* p = gPromoteList;
+            for (int i = 0; i < idx; i++) {
+                p = p->next;
+            }
+            gPromoteSelected = p;
+        }
     }
+}
+
+void PickAnotherRandomPromotion() {
+    if (!gPromoteList) {
+        return;
+    }
+    int n = ListLen(gPromoteList);
+    if (n <= 1) {
+        return;
+    }
+    // pick a different one than currently selected
+    Promote* prev = gPromoteSelected;
+    while (gPromoteSelected == prev) {
+        int idx = rand() % n;
+        Promote* p = gPromoteList;
+        for (int i = 0; i < idx; i++) {
+            p = p->next;
+        }
+        gPromoteSelected = p;
+    }
+}
+
+void LayoutHomePage(HomePageLayout& l) {
+    EnsurePromoteListParsed();
 
     Vec<FileState*> fileStates;
     if (gGlobalPrefs->homePageSortByFrequentlyRead) {
@@ -828,18 +860,11 @@ void LayoutHomePage(HomePageLayout& l) {
 
     // --- Step 2: calculate promotion area at the bottom (before thumbnails) ---
     int promoHeight = 0;
-    if (l.promote) {
+    if (gPromoteSelected) {
         HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
         Size titleSize = HdcMeasureText(hdc, "Try my other software", DT_LEFT, fontPromoTitle);
         HFONT fontPromoName = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        int n = ListLen(l.promote);
-        int idx = rand() % n;
-        Promote* p = l.promote;
-        for (int i = 0; i < idx; i++) {
-            p = p->next;
-        }
-        l.promoteSelected = p;
-        Size nameSize = HdcMeasureText(hdc, p->name, DT_LEFT, fontPromoName);
+        Size nameSize = HdcMeasureText(hdc, gPromoteSelected->name, DT_LEFT, fontPromoName);
         int padding = DpiScale(hdc, 8);
         promoHeight = titleSize.dy / 2 + padding + std::max(nameSize.dy, titleSize.dy) + 2 * padding;
     }
@@ -906,9 +931,9 @@ void LayoutHomePage(HomePageLayout& l) {
         }
     }
 
-    // layout promotion at the bottom (promoteSelected already picked in step 2)
-    if (l.promoteSelected) {
-        Promote* p = l.promoteSelected;
+    // layout promotion at the bottom (gPromoteSelected already picked)
+    if (gPromoteSelected) {
+        Promote* p = gPromoteSelected;
 
         HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
         HFONT fontPromoName = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
@@ -1054,8 +1079,8 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
     }
 
     // draw promotion
-    if (gShowPromotion && l.promoteSelected) {
-        Promote* p = l.promoteSelected;
+    if (gShowPromotion && gPromoteSelected) {
+        Promote* p = gPromoteSelected;
 #if 0
         {
             Rect rcWin = ClientRect(win->hwndCanvas);
