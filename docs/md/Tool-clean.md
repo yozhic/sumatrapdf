@@ -32,6 +32,20 @@ Now to open `foo-encrypted.pdf` the user will have to provide password `pwd`.
 
 `SumatraPDF clean -D -p pwd foo-encrypted.pdf foo-decrypted.pdf`
 
+## Extract pages from PDF as PDF
+
+`SumatraPDF clean input.pdf output.pdf 1,3-5`
+
+This creates PDF output.pdf with pages 1,3,4,5 of PDF input.pdf
+
+## Delete a page from PDF
+
+Let's say you have `input.pdf` with 8 pages. To delete a page 4:
+
+`SumatraPDF clean input.pdf output.pdf 1-3,5-N`
+
+`N` represents last page.
+
 ## All options
 
 ```
