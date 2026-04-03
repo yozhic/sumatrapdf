@@ -3987,11 +3987,42 @@ constexpr int kTocMinDy = 100;
 
 constexpr int kFrameBorderSize = 1;
 
+using LayoutState = MainWindow::LayoutState;
+
+static bool IsLayoutStateEq(LayoutState* s1, LayoutState* s2) {
+    return s1->rc == s2->rc && s1->presentation == s2->presentation && s1->tabsInTitlebar == s2->tabsInTitlebar &&
+           s1->isFullScreen == s2->isFullScreen && s1->tabsVisible == s2->tabsVisible &&
+           s1->isToolbarVisible == s2->isToolbarVisible && s1->tocVisible == s2->tocVisible &&
+           s1->showFavorites == s2->showFavorites;
+}
+
 static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     Rect rc = ClientRect(win->hwndFrame);
     // don't relayout while the window is minimized
     if (rc.IsEmpty()) {
         return;
+    }
+    // build a snapshot of all state that affects layout
+    MainWindow::LayoutState curState;
+    curState.rc = rc;
+    curState.presentation = (int)win->presentation;
+    curState.tabsInTitlebar = win->tabsInTitlebar;
+    curState.isFullScreen = win->isFullScreen;
+    curState.tabsVisible = win->tabsVisible;
+    curState.isToolbarVisible = win->isToolbarVisible;
+    curState.tocVisible = win->tocVisible;
+    curState.showFavorites = gGlobalPrefs->showFavorites;
+
+    // skip redundant relayouts when all layout-affecting state is unchanged
+    if (IsLayoutStateEq(&curState, &win->lastLayoutState) && updateToolbars && sidebarDx == -1) {
+        return;
+    }
+    // only cache for default calls; non-default calls (sidebar dragging etc.)
+    // must not prevent a subsequent default call from running
+    if (updateToolbars && sidebarDx == -1) {
+        win->lastLayoutState = curState;
+    } else {
+        win->lastLayoutState = {};
     }
     if (gRedrawLog) {
         RECT r = ToRECT(rc);

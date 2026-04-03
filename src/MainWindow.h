@@ -223,7 +223,21 @@ struct MainWindow {
     long nonFullScreenWindowStyle = 0;
     Rect nonFullScreenFrameRect;
 
-    Rect canvasRc;      // size of the canvas (excluding any scroll bars)
+    Rect canvasRc; // size of the canvas (excluding any scroll bars)
+
+    // state snapshot used to skip redundant RelayoutFrame calls
+    struct LayoutState {
+        Rect rc;
+        int presentation = 0;
+        bool tabsInTitlebar = false;
+        bool isFullScreen = false;
+        bool tabsVisible = false;
+        bool isToolbarVisible = false;
+        bool tocVisible = false;
+        bool showFavorites = false;
+    };
+    LayoutState lastLayoutState;
+
     int currPageNo = 0; // cached value, needed to determine when to auto-update the ToC selection
 
     // overlay scrollbars (used when scrollbars mode is "smart" or "overlay")

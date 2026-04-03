@@ -959,6 +959,13 @@ void OverlayScrollbarShow(OverlayScrollbar* sb, bool show) {
     if (!sb) {
         return;
     }
+    // skip if already in the desired visibility state
+    if (show && IsActive(sb) && IsWindowVisible(sb->hwnd)) {
+        return;
+    }
+    if (!show && !IsActive(sb)) {
+        return;
+    }
     if (show) {
         if (!IsActive(sb)) {
             ShowScrollbarWindow(sb, false);
