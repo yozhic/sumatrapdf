@@ -775,12 +775,14 @@ CommandPaletteWnd* gCommandPaletteWnd = nullptr;
 HWND gCommandPaletteHwnd = nullptr;
 static HWND gHwndToActivateOnClose = nullptr;
 static WindowTab* gTabToSelectOnClose = nullptr;
+static i32 gCmdIdToExecOnClose = 0;
 
 void SafeDeleteCommandPaletteWnd() {
     if (!gCommandPaletteWnd) {
         return;
     }
 
+    MainWindow* win = gCommandPaletteWnd->win;
     auto tmp = gCommandPaletteWnd;
     gCommandPaletteWnd = nullptr;
     gCommandPaletteHwnd = nullptr;
@@ -796,12 +798,20 @@ void SafeDeleteCommandPaletteWnd() {
             SelectTabInWindow(tab);
         }
     }
+    if (gCmdIdToExecOnClose != 0) {
+        i32 cmdId = gCmdIdToExecOnClose;
+        gCmdIdToExecOnClose = 0;
+        if (win && IsMainWindowValid(win)) {
+            HwndPostCommand(win->hwndFrame, cmdId);
+        }
+    }
 }
 
-static void ScheduleDelete() {
+static void ScheduleDeleteAndExecCommand(i32 cmdId = 0) {
     if (!gCommandPaletteWnd) {
         return;
     }
+    gCmdIdToExecOnClose = cmdId;
     if (IsMainWindowValid(gCommandPaletteWnd->win)) {
         HighlightTab(gCommandPaletteWnd->win, nullptr);
     }
@@ -813,7 +823,7 @@ LRESULT CommandPaletteWnd::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     switch (msg) {
         case WM_ACTIVATE:
             if (wp == WA_INACTIVE) {
-                ScheduleDelete();
+                ScheduleDeleteAndExecCommand();
                 return 0;
             }
             break;
@@ -876,7 +886,7 @@ bool CommandPaletteWnd::PreTranslateMessage(MSG& msg) {
     if (msg.message == WM_KEYDOWN) {
         int dir = 0;
         if (msg.wParam == VK_ESCAPE) {
-            ScheduleDelete();
+            ScheduleDeleteAndExecCommand();
             return true;
         }
 
@@ -1073,8 +1083,7 @@ void CommandPaletteWnd::ExecuteCurrentSelection() {
         if (noActivate) {
             gHwndToActivateOnClose = nullptr;
         }
-        HwndSendCommand(win->hwndFrame, cmdId);
-        ScheduleDelete();
+        ScheduleDeleteAndExecCommand(cmdId);
         return;
     }
 
@@ -1083,7 +1092,7 @@ void CommandPaletteWnd::ExecuteCurrentSelection() {
         MainWindow* mainWin = tab->win;
         gTabToSelectOnClose = tab;
         gHwndToActivateOnClose = mainWin->hwndFrame;
-        ScheduleDelete();
+        ScheduleDeleteAndExecCommand();
         return;
     }
     auto filePath = data->filePath;
@@ -1091,12 +1100,12 @@ void CommandPaletteWnd::ExecuteCurrentSelection() {
         LoadArgs args(filePath, win);
         args.forceReuse = false; // open in a new tab
         StartLoadDocument(&args);
-        ScheduleDelete();
+        ScheduleDeleteAndExecCommand();
         return;
     }
     logf("CommandPaletteWnd::ExecuteCurrentSelection: no match for selection '%s'\n", m->strings.At(idx));
     ReportIf(true);
-    ScheduleDelete();
+    ScheduleDeleteAndExecCommand();
 }
 
 void CommandPaletteWnd::OnListDoubleClick() {
@@ -1104,7 +1113,7 @@ void CommandPaletteWnd::OnListDoubleClick() {
 }
 
 void OnDestroy(Wnd::DestroyEvent*) {
-    ScheduleDelete();
+    ScheduleDeleteAndExecCommand();
 }
 
 // almost like HwndPositionInCenterOf but y is near top of hwndRelative

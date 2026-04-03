@@ -2958,6 +2958,10 @@ void HwndSendCommand(HWND hwnd, int cmdId, LPARAM lp) {
     SendMessageW(hwnd, WM_COMMAND, (WPARAM)cmdId, lp);
 }
 
+void HwndPostCommand(HWND hwnd, int cmdId, LPARAM lp) {
+    PostMessageW(hwnd, WM_COMMAND, (WPARAM)cmdId, lp);
+}
+
 void HwndDestroyWindowSafe(HWND* hwndPtr) {
     auto hwnd = *hwndPtr;
     *hwndPtr = nullptr;
