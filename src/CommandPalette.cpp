@@ -376,6 +376,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
+    if (!ctx.isPdf && (cmdId == CmdPdfBake)) {
+        return false;
+    }
+
     if (!ctx.annotationUnderCursor) {
         if (cmdId == CmdDeleteAnnotation) {
             return false;

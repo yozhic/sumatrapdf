@@ -22,6 +22,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdResizeImage` (`Resize Image`) command for resizing images when viewing image files
 - `Ctrl + V` pastes image from clipboard, saves as PNG in Downloads folder and opens it
 - Can save images in different formats: PNG, JPEG, BMP, GIF, TIFF.
+- add `CmdPdfBake` (`Bake PDF File` in `Ctrl + k` [command palette](Command-Palette.md)) to bake interactive form and annotation content into static graphics in a new PDF file
 - add `Show Errors` in right-click context menu for PDF documents that have mupdf warnings/errors
 - add `CmdToggleSmoothScroll` (`Toggle Smooth Scroll`) command to toggle `SmoothScroll` advanced setting
 - replace `HideScrollbars` and `UseOverlayScrollbar` settings with `Scrollbars` setting (values: `windows`, `smart`, `overlay`, `hidden`)
