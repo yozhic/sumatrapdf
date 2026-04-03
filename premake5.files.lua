@@ -751,6 +751,7 @@ function sumatrapdf_files()
     "SvgIcons.*",
     "TableOfContents.*",
     "Tabs.*",
+    "TabGroupsManage.*",
     "Tester.*",
     "Tests.cpp",
     "TextSearch.*",

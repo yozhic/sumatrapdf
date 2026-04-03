@@ -843,6 +843,8 @@ workspace "SumatraPDF"
     engines_files()
     sumatrapdf_files()
 
+    debugdir(".")
+
     defines { "_CRT_SECURE_NO_WARNINGS" }
     defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
 
@@ -904,6 +906,8 @@ workspace "SumatraPDF"
     sumatrapdf_files()
 
     webview_conf()
+
+    debugdir(".")
 
     defines { "_CRT_SECURE_NO_WARNINGS" }
     defines { "DISABLE_DOCUMENT_RESTRICTIONS" }
