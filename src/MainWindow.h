@@ -2,6 +2,7 @@
    License: GPLv3 */
 
 struct DoubleBuffer;
+struct Edit;
 struct LinkHandler;
 struct StressTest;
 class SumatraUIAutomationProvider;
@@ -11,6 +12,7 @@ struct Splitter;
 struct Tooltip;
 struct TreeView;
 struct TabsCtrl;
+struct TocTree;
 
 // factor by how large the non-maximized caption should be in relation to the tabbar
 #define kCaptionTabBarDyFactor 1.25f
@@ -134,7 +136,9 @@ struct MainWindow {
     UINT_PTR tocBoxSubclassId = 0;
 
     LabelWithCloseWnd* tocLabelWithClose = nullptr;
+    Edit* tocFilterEdit = nullptr;
     TreeView* tocTreeView = nullptr;
+    TocTree* tocFilteredTree = nullptr;
 
     // whether the current tab's ToC has been loaded into the tree
     bool tocLoaded = false;

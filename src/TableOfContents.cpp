@@ -48,6 +48,8 @@
 #define WM_APP_REPAINT_TOC (WM_APP + 1)
 #endif
 
+static void LayoutTocContainer(MainWindow* win);
+
 // set tooltip for this item but only if the text isn't fully shown
 // TODO: I might have lost something in translation
 static void TocCustomizeTooltip(TreeView::GetTooltipEvent* ev) {
@@ -235,6 +237,13 @@ void ClearTocBox(MainWindow* win) {
     }
 
     win->tocTreeView->Clear();
+
+    // clear filter state
+    delete win->tocFilteredTree;
+    win->tocFilteredTree = nullptr;
+    if (win->tocFilterEdit) {
+        win->tocFilterEdit->SetText("");
+    }
 
     win->currPageNo = 0;
     win->tocLoaded = false;
@@ -710,6 +719,13 @@ void LoadTocTree(MainWindow* win) {
 
     win->tocLoaded = true;
 
+    // clear filter when loading new toc
+    delete win->tocFilteredTree;
+    win->tocFilteredTree = nullptr;
+    if (win->tocFilterEdit) {
+        win->tocFilterEdit->SetText("");
+    }
+
     auto* tocTree = tab->ctrl->GetToc();
     if (!tocTree || !tocTree->root) {
         return;
@@ -736,7 +752,7 @@ void LoadTocTree(MainWindow* win) {
     if (ShouldCustomDraw(win)) {
         treeView->onCustomDraw = MkFunc1Void(OnTocCustomDraw);
     }
-    LayoutTreeContainer(win->tocLabelWithClose, win->tocTreeView->hwnd);
+    LayoutTocContainer(win);
     // uint fl = RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN;
     // RedrawWindow(hwnd, nullptr, nullptr, fl);
 }
@@ -898,6 +914,28 @@ void LayoutTreeContainer(LabelWithCloseWnd* l, HWND hwndTree) {
     MoveWindow(hwndTree, 0, y, rc.dx, dy, TRUE);
 }
 
+// Position label, filter edit, and tree window within toc container.
+static void LayoutTocContainer(MainWindow* win) {
+    LabelWithCloseWnd* l = win->tocLabelWithClose;
+    Edit* edit = win->tocFilterEdit;
+    TreeView* treeView = win->tocTreeView;
+    HWND hwndContainer = win->hwndTocBox;
+    Size labelSize = l->GetIdealSize();
+    Rect rc = WindowRect(hwndContainer);
+    int dy = rc.dy;
+    int y = 0;
+    MoveWindow(l->hwnd, 0, y, rc.dx, labelSize.dy, TRUE);
+    dy -= labelSize.dy;
+    y += labelSize.dy;
+    if (edit && edit->hwnd) {
+        Size editSize = edit->GetIdealSize();
+        MoveWindow(edit->hwnd, 0, y, rc.dx, editSize.dy, TRUE);
+        dy -= editSize.dy;
+        y += editSize.dy;
+    }
+    MoveWindow(treeView->hwnd, 0, y, rc.dx, dy, TRUE);
+}
+
 static LRESULT CALLBACK WndProcTocBox(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR subclassId, DWORD_PTR data) {
     MainWindow* win = FindMainWindowByHwnd(hwnd);
     if (!win) {
@@ -914,7 +952,7 @@ static LRESULT CALLBACK WndProcTocBox(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
 
     switch (msg) {
         case WM_SIZE:
-            LayoutTreeContainer(win->tocLabelWithClose, treeView->hwnd);
+            LayoutTocContainer(win);
             break;
 
         case WM_COMMAND:
@@ -982,6 +1020,111 @@ void TocTreeCharHandler(CharEvent* ev) {
 }
 #endif
 
+// Recursively build a filtered copy of the TocItem tree.
+// Includes items whose title matches the filter, plus ancestors needed to reach them.
+// Returns nullptr if nothing matches.
+static TocItem* FilterTocItemRec(TocItem* item, const char* filter) {
+    if (!item) {
+        return nullptr;
+    }
+    TocItem* resultFirst = nullptr;
+    TocItem* resultLast = nullptr;
+    for (TocItem* si = item; si; si = si->next) {
+        // recursively filter children
+        TocItem* filteredChildren = FilterTocItemRec(si->child, filter);
+        bool titleMatches = si->title && str::ContainsI(si->title, filter);
+        if (!titleMatches && !filteredChildren) {
+            continue;
+        }
+        // create a copy of this item
+        auto* copy = new TocItem();
+        copy->title = str::Dup(si->title);
+        copy->pageNo = si->pageNo;
+        copy->id = si->id;
+        copy->fontFlags = si->fontFlags;
+        copy->color = si->color;
+        copy->dest = si->dest;
+        copy->destNotOwned = true;
+        copy->isOpenDefault = true;
+        copy->isOpenToggled = false;
+        copy->child = filteredChildren;
+        // set parent pointers on children
+        for (TocItem* c = copy->child; c; c = c->next) {
+            c->parent = copy;
+        }
+        if (!resultFirst) {
+            resultFirst = copy;
+            resultLast = copy;
+        } else {
+            resultLast->next = copy;
+            resultLast = copy;
+        }
+    }
+    return resultFirst;
+}
+
+static void ApplyTocFilter(MainWindow* win, const char* filter) {
+    WindowTab* tab = win->CurrentTab();
+    if (!tab || !tab->currToc) {
+        return;
+    }
+    // free previous filtered tree
+    delete win->tocFilteredTree;
+    win->tocFilteredTree = nullptr;
+
+    TreeView* treeView = win->tocTreeView;
+    TocTree* origTree = tab->currToc;
+
+    if (!filter || str::Len(filter) == 0) {
+        // restore original tree
+        SetInitialExpandState(origTree->root, tab->tocState);
+        treeView->SetTreeModel(origTree);
+        return;
+    }
+
+    TocItem* filteredRoot = FilterTocItemRec(origTree->root, filter);
+    if (!filteredRoot) {
+        treeView->Clear();
+        return;
+    }
+    auto* filteredTree = new TocTree(filteredRoot);
+    win->tocFilteredTree = filteredTree;
+    treeView->SetTreeModel(filteredTree);
+}
+
+void TocFilterChanged(MainWindow* win) {
+    Edit* edit = win->tocFilterEdit;
+    if (!edit) {
+        return;
+    }
+    TempStr filter = edit->GetTextTemp();
+    ApplyTocFilter(win, filter);
+}
+
+static void OnTocFilterTextChanged(MainWindow* win) {
+    TocFilterChanged(win);
+}
+
+static LRESULT CALLBACK WndProcTocFilterEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR subclassId,
+                                             DWORD_PTR data) {
+    if (msg == WM_KEYDOWN && wp == VK_ESCAPE) {
+        MainWindow* win = (MainWindow*)data;
+        Edit* edit = win->tocFilterEdit;
+        if (edit) {
+            TempStr txt = edit->GetTextTemp();
+            if (txt && str::Len(txt) > 0) {
+                edit->SetText("");
+                // onTextChanged will fire and restore the tree
+                return 0;
+            }
+            // if already empty, move focus to tree
+            SetFocus(win->tocTreeView->hwnd);
+            return 0;
+        }
+    }
+    return DefSubclassProc(hwnd, msg, wp, lp);
+}
+
 void CreateToc(MainWindow* win) {
     HMODULE hmod = GetModuleHandle(nullptr);
     int dx = gGlobalPrefs->sidebarDx;
@@ -1002,6 +1145,19 @@ void CreateToc(MainWindow* win) {
     win->tocLabelWithClose = l;
     l->SetPaddingXY(2, 2);
     // label is set in UpdateToolbarSidebarText()
+
+    auto filterEdit = new Edit();
+    {
+        Edit::CreateArgs eargs;
+        eargs.parent = win->hwndTocBox;
+        eargs.withBorder = true;
+        eargs.cueText = "Filter bookmarks";
+        eargs.font = GetDefaultGuiFont(false, false);
+        filterEdit->Create(eargs);
+    }
+    win->tocFilterEdit = filterEdit;
+    filterEdit->onTextChanged = MkFunc0(OnTocFilterTextChanged, win);
+    SetWindowSubclass(filterEdit->hwnd, WndProcTocFilterEdit, NextSubclassId(), (DWORD_PTR)win);
 
     auto treeView = new TreeView();
     TreeView::CreateArgs args;

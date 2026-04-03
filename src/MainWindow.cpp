@@ -158,6 +158,8 @@ MainWindow::~MainWindow() {
     delete frameRateWnd;
     delete infotip;
     delete tocTreeView;
+    delete tocFilterEdit;
+    delete tocFilteredTree;
     if (favTreeView) {
         delete favTreeView->treeModel;
         delete favTreeView;
@@ -692,6 +694,9 @@ void UpdateControlsColors(MainWindow* win) {
         tocTreeView->SetColors(txtCol, bgCol);
 
         win->tocLabelWithClose->SetColors(txtCol, bgCol);
+        if (win->tocFilterEdit) {
+            win->tocFilterEdit->SetColors(txtCol, bgCol);
+        }
         win->sidebarSplitter->SetColors(kColorNoChange, splitterCol);
     }
 
