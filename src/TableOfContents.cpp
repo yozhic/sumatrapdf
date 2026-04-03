@@ -38,6 +38,7 @@
 #include "Tabs.h"
 #include "Menu.h"
 #include "Accelerators.h"
+#include "Theme.h"
 
 #include "utils/Log.h"
 
@@ -672,21 +673,6 @@ static void TocContextMenu(ContextMenuEvent* ev) {
     }
 }
 
-static bool ShouldCustomDraw(MainWindow* win) {
-    // we only want custom drawing for pdf and pdf multi engines
-    // as they are the only ones supporting custom colors and fonts
-    DisplayModel* dm = win->AsFixed();
-    if (!dm) {
-        return false;
-    }
-    EngineBase* engine = dm->GetEngine();
-    if (!engine) {
-        return false;
-    }
-    Kind kind = dm->GetEngineType();
-    return kind == kindEngineMupdf;
-}
-
 void OnTocCustomDraw(TreeView::CustomDrawEvent*);
 
 // auto-expand root level ToC nodes if there are at most two
@@ -749,9 +735,7 @@ void LoadTocTree(MainWindow* win) {
 
     treeView->SetTreeModel(tocTree);
 
-    if (ShouldCustomDraw(win)) {
-        treeView->onCustomDraw = MkFunc1Void(OnTocCustomDraw);
-    }
+    treeView->onCustomDraw = MkFunc1Void(OnTocCustomDraw);
     LayoutTocContainer(win);
     // uint fl = RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN;
     // RedrawWindow(hwnd, nullptr, nullptr, fl);
@@ -766,6 +750,122 @@ static void UpdateFont(HDC hdc, int fontFlags) {
     bool bold = bit::IsSet(fontFlags, fontBitBold);
     HFONT hfont = GetDefaultGuiFont(bold, italic);
     SelectObject(hdc, hfont);
+}
+
+static bool HasTocFilter(MainWindow* win) {
+    if (!win || !win->tocFilterEdit) {
+        return false;
+    }
+    TempStr filter = win->tocFilterEdit->GetTextTemp();
+    return filter && str::Len(filter) > 0;
+}
+
+static void DrawTocItemHighlight(TreeView::CustomDrawEvent* ev, MainWindow* win) {
+    TocItem* tocItem = (TocItem*)ev->treeItem;
+    if (!tocItem || !tocItem->title) {
+        return;
+    }
+    Edit* edit = win->tocFilterEdit;
+    if (!edit) {
+        return;
+    }
+    TempStr filter = edit->GetTextTemp();
+    if (!filter || str::Len(filter) == 0) {
+        return;
+    }
+    const char* title = tocItem->title;
+    int titleLen = str::Leni(title);
+    if (titleLen == 0) {
+        return;
+    }
+
+    // mark which bytes are part of a match
+    u8* highlighted = AllocArrayTemp<u8>(titleLen);
+    int filterLen = str::Leni(filter);
+    const char* p = title;
+    while ((p = str::FindI(p, filter)) != nullptr) {
+        int off = (int)(p - title);
+        for (int k = 0; k < filterLen && off + k < titleLen; k++) {
+            highlighted[off + k] = 1;
+        }
+        p += filterLen;
+    }
+
+    // collect contiguous highlighted ranges (up to 16)
+    struct ByteRange {
+        int start;
+        int end;
+    };
+    ByteRange byteRanges[16];
+    int nRanges = 0;
+    {
+        int pos = 0;
+        while (pos < titleLen && nRanges < 16) {
+            if (highlighted[pos]) {
+                int start = pos;
+                while (pos < titleLen && highlighted[pos]) {
+                    pos++;
+                }
+                byteRanges[nRanges++] = {start, pos};
+            } else {
+                pos++;
+            }
+        }
+    }
+    if (nRanges == 0) {
+        return;
+    }
+
+    // get the label rect for this tree item
+    RECT labelRect;
+    TreeView* tv = ev->treeView;
+    if (!tv->GetItemRect(ev->treeItem, true, labelRect)) {
+        return;
+    }
+
+    NMTVCUSTOMDRAW* tvcd = ev->nm;
+    HDC hdc = tvcd->nmcd.hdc;
+
+    WCHAR* titleW = ToWStrTemp(title);
+
+    // compute pixel rectangles for each highlighted range
+    RECT highlightRects[16];
+    for (int i = 0; i < nRanges; i++) {
+        WCHAR* prefixToStart = ToWStrTemp(title, (size_t)byteRanges[i].start);
+        int wStart = str::Leni(prefixToStart);
+        WCHAR* prefixToEnd = ToWStrTemp(title, (size_t)byteRanges[i].end);
+        int wEnd = str::Leni(prefixToEnd);
+
+        SIZE szStart, szEnd;
+        GetTextExtentPoint32W(hdc, titleW, wStart, &szStart);
+        GetTextExtentPoint32W(hdc, titleW, wEnd, &szEnd);
+
+        highlightRects[i].top = labelRect.top;
+        highlightRects[i].bottom = labelRect.bottom;
+        highlightRects[i].left = labelRect.left + szStart.cx;
+        highlightRects[i].right = labelRect.left + szEnd.cx;
+    }
+
+    // draw highlight background
+    COLORREF highlightCol;
+    if (IsCurrentThemeDefault()) {
+        highlightCol = RGB(255, 255, 0);
+    } else {
+        COLORREF bgCol = ThemeControlBackgroundColor();
+        highlightCol = AccentColor(bgCol, 40);
+    }
+    HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
+    for (int i = 0; i < nRanges; i++) {
+        FillRect(hdc, &highlightRects[i], hbrHighlight);
+    }
+    DeleteObject(hbrHighlight);
+
+    // redraw the text on top of the highlights
+    COLORREF oldTxtCol = SetTextColor(hdc, tvcd->clrText);
+    int oldBkMode = SetBkMode(hdc, TRANSPARENT);
+    DrawTextW(hdc, titleW, -1, &labelRect, DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
+    SetBkMode(hdc, oldBkMode);
+    SetTextColor(hdc, oldTxtCol);
 }
 
 // https://docs.microsoft.com/en-us/windows/win32/controls/about-custom-draw
@@ -790,29 +890,42 @@ void OnTocCustomDraw(TreeView::CustomDrawEvent* ev) {
     ev->result = CDRF_DODEFAULT;
     NMTVCUSTOMDRAW* tvcd = ev->nm;
     NMCUSTOMDRAW* cd = &(tvcd->nmcd);
+
     if (cd->dwDrawStage == CDDS_PREPAINT) {
-        // ask to be notified about each item
         ev->result = CDRF_NOTIFYITEMDRAW;
         return;
     }
 
+    MainWindow* win = FindMainWindowByHwnd(ev->treeView->hwnd);
+    bool filterActive = HasTocFilter(win);
+
     if (cd->dwDrawStage == CDDS_ITEMPREPAINT) {
-        // called before drawing each item
         TocItem* tocItem = (TocItem*)ev->treeItem;
         if (!tocItem) {
             return;
         }
+        LRESULT res = 0;
         if (tocItem->color != kColorUnset) {
             tvcd->clrText = tocItem->color;
         }
         if (tocItem->fontFlags != 0) {
             UpdateFont(cd->hdc, tocItem->fontFlags);
-            ev->result = CDRF_NEWFONT;
-            return;
+            res = CDRF_NEWFONT;
         }
+        if (filterActive) {
+            res |= CDRF_NOTIFYPOSTPAINT;
+        }
+        ev->result = res;
         return;
     }
-    return;
+
+    if (cd->dwDrawStage == CDDS_ITEMPOSTPAINT) {
+        if (filterActive && win) {
+            DrawTocItemHighlight(ev, win);
+        }
+        ev->result = CDRF_DODEFAULT;
+        return;
+    }
 }
 
 // disabled becaues of https://github.com/sumatrapdfreader/sumatrapdf/issues/2202
