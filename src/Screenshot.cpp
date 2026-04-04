@@ -74,17 +74,20 @@ static bool ShouldCaptureWindow(HWND hwnd, HWND overlayHwnd) {
         return false;
     }
     WCHAR className[256];
+    bool isMenu = false;
     if (GetClassNameW(hwnd, className, 256) > 0) {
         if (str::Eq(className, L"Progman") || str::Eq(className, L"WorkerW")) {
             return false;
         }
+        // #32768 is the Win32 menu window class (context menus, popups etc.)
+        isMenu = str::Eq(className, L"#32768");
     }
     LONG_PTR exStyle = GetWindowLongPtrW(hwnd, GWL_EXSTYLE);
-    if (exStyle & WS_EX_TOOLWINDOW) {
+    if (!isMenu && (exStyle & WS_EX_TOOLWINDOW)) {
         return false;
     }
     HWND hwndOwner = GetWindow(hwnd, GW_OWNER);
-    if (hwndOwner != nullptr && !(exStyle & WS_EX_APPWINDOW)) {
+    if (!isMenu && hwndOwner != nullptr && !(exStyle & WS_EX_APPWINDOW)) {
         // owned window without WS_EX_APPWINDOW: accept if it has a caption
         // (modal dialogs like config windows), reject otherwise
         LONG_PTR style = GetWindowLongPtrW(hwnd, GWL_STYLE);
