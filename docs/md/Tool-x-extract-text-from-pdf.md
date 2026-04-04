@@ -10,6 +10,8 @@ Let's assume you have `foo.pdf`
 
 `SumatraPDF draw -o foo.txt foo.pdf`
 
+`SumatraPDF convert -o foo.txt foo.pdf`
+
 ## Extract text from selected pages of a PDF
 
 `SumatraPDF draw -o foo.txt foo.pdf 1-3,4,8-9`

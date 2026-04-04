@@ -2,6 +2,26 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+To search text in `file.pdf`:
+
+`SumatraPDF grep -i foo file.pdf`
+
+`-i` ignores case i.e. does case-insensitive search, which is probably a good default.
+
+Other options:
+
+- `-a` ignore accents (diacritics)
+
+## Search with a regular expression
+
+`SumatraPDF grep -i -G x.* file.pdf`
+
+- `-G` search pattern is a regex
+- `-i` you can combine it with case-insensitive flag
+- `x.*` is a regular expression that says: every string that starts with `x`
+
+## All options
+
 ```
 usage: SumatraPDF grep [options] pattern input.pdf [ input2.pdf ... ]
   -p -    password for encrypted PDF files

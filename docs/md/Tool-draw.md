@@ -2,8 +2,6 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-## SumatraPDF draw
-
 Usage: `SumatraPDF draw [options] file [pages]`
 
 See [all-options](#all-options) below.
@@ -17,18 +15,6 @@ You can use `draw` to:
 ## Example usage
 
 Let's assume you have `foo.pdf` with 8 pages.
-
-### Extract 2nd page
-
-`SumatraPDF draw -o foo-page-2.pdf foo.pdf 2`
-
-### Extract pages 1,2,7,8 into a separate file each
-
-`SumatraPDF draw -o "foo-page-%d.pdf" foo.pdf 1-2,7,8`
-
-### Delete 3rd page
-
-`SumatraPDF draw -o foo-3rd-page-deleted.pdf foo.pdf 1-2,4-8`
 
 ### Extract 2nd page as png image
 

@@ -2,8 +2,6 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-## SumatraPDF clean
-
 Usage: `SumatraPDF clean [options] input.pdf [output.pdf] [pages]`
 
 See [all-options](#all-options) below.
@@ -45,6 +43,18 @@ Let's say you have `input.pdf` with 8 pages. To delete a page 4:
 `SumatraPDF clean input.pdf output.pdf 1-3,5-N`
 
 `N` represents last page.
+
+### Extract 2nd page
+
+`SumatraPDF draw -o foo-page-2.pdf foo.pdf 2`
+
+### Extract pages 1,2,7,8 into a separate file each
+
+`SumatraPDF draw -o "foo-page-%d.pdf" foo.pdf 1-2,7,8`
+
+### Delete 3rd page
+
+`SumatraPDF draw -o foo-3rd-page-deleted.pdf foo.pdf 1-2,4-8`
 
 ## All options
 

@@ -2,6 +2,10 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+Usage: `SumatraPDF poster [options] input.pdf [output.pdf]`
+
+## All options
+
 ```
 Usage: SumatraPDF poster [options] input.pdf [output.pdf]
   -p -    password

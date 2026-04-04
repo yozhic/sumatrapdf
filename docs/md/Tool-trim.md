@@ -2,6 +2,10 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+Usage: `SumatraPDF trim [options] <input filename>`
+
+## All options
+
 ```
 Usage: SumatraPDF trim [options] <input filename>
   -b -    Which box to trim to (MediaBox(default), CropBox, BleedBox, TrimBox, ArtBox)

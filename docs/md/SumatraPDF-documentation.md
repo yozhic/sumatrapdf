@@ -88,6 +88,22 @@ Staring in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease) you ca
 
 [Extract text from PDF](Tool-x-extract-text-from-pdf.md)
 
+[Compress a PDF](Tool-x-compress-PDF.md)
+
+[Decompress a PDF](Tool-x-decompress-PDF.md)
+
+[Encrypt a PDF](Tool-x-encrypt-PDF-with-password.md)
+
+[Decrypt a PDF](Tool-x-decrypt-PDF.md)
+
+[Delete pages from PDF](Tool-x-delete-pages-from-PDF.md)
+
+[Extract images from PDF](Tool-x-extract-images-from-PDF.md)
+
+[Extract text from PDF](Tool-x-extract-text-from-pdf.md)
+
+[Search text in a PDF](Tool-x-search-pdf.md)
+
 :columns
 
 ## Downloads

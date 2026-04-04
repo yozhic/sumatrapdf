@@ -2,6 +2,10 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+Usage: `SumatraPDF trace [options] file [pages]`
+
+## All options
+
 ```
 Usage: SumatraPDF trace [options] file [pages]
   -p -    password

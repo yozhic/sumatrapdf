@@ -2,6 +2,12 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+Usage: `SumatraPDF show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *`
+
+`show` is advanced tool for inspecting internal structure of a PDF file.
+
+## All options
+
 ```
 Usage: SumatraPDF show [options] file.pdf ( trailer | xref | pages | grep | outline | js | form | <path> ) *
   -p -    password
