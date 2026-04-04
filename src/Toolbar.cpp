@@ -1371,11 +1371,45 @@ static bool ShouldSwitchCustomMenuBarPopup(UINT vk) {
     return true;
 }
 
+// check if mouse is over a different toolbar button and switch to it
+static bool ShouldSwitchMenuBarOnMouseMove() {
+    if (!gMenuBarPopupNav.win || !gMenuBarPopupNav.win->hwndMenuToolbar) {
+        return false;
+    }
+    HWND hwndTb = gMenuBarPopupNav.win->hwndMenuToolbar;
+
+    POINT pt;
+    GetCursorPos(&pt);
+    ScreenToClient(hwndTb, &pt);
+
+    // hit-test the toolbar
+    int btnCount = (int)SendMessageW(hwndTb, TB_BUTTONCOUNT, 0, 0);
+    for (int i = 0; i < btnCount; i++) {
+        RECT rc;
+        SendMessageW(hwndTb, TB_GETITEMRECT, i, (LPARAM)&rc);
+        if (PtInRect(&rc, pt)) {
+            TBBUTTON tb{};
+            SendMessageW(hwndTb, TB_GETBUTTON, i, (LPARAM)&tb);
+            int menuIdx = tb.idCommand - kMenuBarCmdFirst;
+            if (menuIdx != gMenuBarPopupNav.nextMenuIdx) {
+                gMenuBarPopupNav.nextMenuIdx = menuIdx;
+                return true;
+            }
+            return false;
+        }
+    }
+    return false;
+}
+
 static LRESULT CALLBACK MenuBarMsgFilterHook(int code, WPARAM wParam, LPARAM lParam) {
     if (code == MSGF_MENU && gMenuBarPopupNav.win) {
         MSG* msg = (MSG*)lParam;
         if ((msg->message == WM_KEYDOWN || msg->message == WM_SYSKEYDOWN) &&
             ShouldSwitchCustomMenuBarPopup((UINT)msg->wParam)) {
+            EndMenu();
+            return 1;
+        }
+        if (msg->message == WM_MOUSEMOVE && ShouldSwitchMenuBarOnMouseMove()) {
             EndMenu();
             return 1;
         }
