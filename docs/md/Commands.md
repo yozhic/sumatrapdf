@@ -53,13 +53,13 @@ CmdDeleteFile,,Delete Currently Opened File, ver 3.6+
 ## Search
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdFindFirst,Ctrl + F,Find
-CmdFindToggleMatchCase,,Find: Toggle Match Case
-CmdFindNext,F3,Find Next
-CmdFindNextSel,Ctrl + F3,Find Next Selection
-CmdFindPrev,Shift + F3,Find Previous
-CmdFindPrevSel,Shift + Ctrl + F3,Find Previous Selection
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdFindFirst,Ctrl + F,Find,
+CmdFindToggleMatchCase,,Find: Toggle Match Case,
+CmdFindNext,F3,Find Next,
+CmdFindNextSel,Ctrl + F3,Find Next Selection,
+CmdFindPrev,Shift + F3,Find Previous,
+CmdFindPrevSel,Shift + Ctrl + F3,Find Previous Selection,
 ```
 
 ## Viewing
@@ -107,42 +107,42 @@ CmdTabGroupOpen,,Open Tab Group,ver 3.7+
 ## Navigation
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdScrollUp,"k, Up",Scroll Up
-CmdScrollDown,"j, Down",Scroll Down
-CmdScrollLeft,"h, Left",Scroll Left
-CmdScrollRight,"l, Right",Scroll Right
-CmdScrollUpHalfPage,Shift + Up,Scroll Up By Half Page
-CmdScrollDownHalfPage,Shift + Down,Scroll Down By Half Page
-CmdScrollUpPage,"Ctrl + Up, PageUp, Shift + Return, Shift + Space",Scroll Up By Page
-CmdScrollDownPage,"Ctrl + Down, PageDown, Return, Space",Scroll Down By Page
-CmdScrollLeftPage,Shift + Left,Scroll Left By Page
-CmdScrollRightPage,Shift + Right,Scroll Right By Page
-CmdGoToFirstPage,"Ctrl + Home, Home",First Page
-CmdGoToLastPage,"Ctrl + End, End",Last Page
-CmdGoToPrevPage,"p",Previous Page
-CmdGoToNextPage,"n",Next Page
-CmdGoToPage,"g, Ctrl + G",Go to Page...
-CmdNavigateBack,"Alt + Left, Backspace",Navigate Back
-CmdNavigateForward,"Alt + Right, Shift + Backspace",Navigate Forward
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdScrollUp,"k, Up",Scroll Up,
+CmdScrollDown,"j, Down",Scroll Down,
+CmdScrollLeft,"h, Left",Scroll Left,
+CmdScrollRight,"l, Right",Scroll Right,
+CmdScrollUpHalfPage,Shift + Up,Scroll Up By Half Page,
+CmdScrollDownHalfPage,Shift + Down,Scroll Down By Half Page,
+CmdScrollUpPage,"Ctrl + Up, PageUp, Shift + Return, Shift + Space",Scroll Up By Page,
+CmdScrollDownPage,"Ctrl + Down, PageDown, Return, Space",Scroll Down By Page,
+CmdScrollLeftPage,Shift + Left,Scroll Left By Page,
+CmdScrollRightPage,Shift + Right,Scroll Right By Page,
+CmdGoToFirstPage,"Ctrl + Home, Home",First Page,
+CmdGoToLastPage,"Ctrl + End, End",Last Page,
+CmdGoToPrevPage,"p",Previous Page,
+CmdGoToNextPage,"n",Next Page,
+CmdGoToPage,"g, Ctrl + G",Go to Page...,
+CmdNavigateBack,"Alt + Left, Backspace",Navigate Back,
+CmdNavigateForward,"Alt + Right, Shift + Backspace",Navigate Forward,
 ```
 
 ## Favorites
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdFavoriteAdd,Ctrl + B,Add Favorite
-CmdFavoriteDel,,Delete Favorite
-CmdFavoriteToggle,,Toggle Favorites
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdFavoriteAdd,Ctrl + B,Add Favorite,
+CmdFavoriteDel,,Delete Favorite,
+CmdFavoriteToggle,,Toggle Favorites,
 ```
 
 ## Presentation
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdTogglePresentationMode,"Ctrl + L, Shift + F11, F5",View: Presentation Mode
-CmdPresentationBlackBackground,.,Presentation Black Background
-CmdPresentationWhiteBackground,w,Presentation White Background
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdTogglePresentationMode,"Ctrl + L, Shift + F11, F5",View: Presentation Mode,
+CmdPresentationBlackBackground,.,Presentation Black Background,
+CmdPresentationWhiteBackground,w,Presentation White Background,
 ```
 
 ## Annotations
@@ -208,12 +208,11 @@ CmdZoom800,,Zoom: 800%,
 
 ## File information / conversion
 
-## External app
-
 ```commands
 Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdShowPdfInfo,,Show PDF Info,shows information about currently opened PDF file
 CmdPdfBake,,Bake PDF File,bakes interactive form and annotation content into static graphics; saves to a new PDF file and opens it
+```
 
 ## External app
 
@@ -266,15 +265,16 @@ CmdShowLog,,Show Logs,
 ## Help
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdHelpOpenManual,F1,Help: Manual
-CmdHelpOpenKeyboardShortcuts,,Help: Keyboard Shortcuts
-CmdHelpAbout,,Help: About SumatraPDF
-CmdHelpOpenManualOnWebsite,,Help: Manual On Website
-CmdHelpVisitWebsite,,Help: SumatraPDF Website
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdHelpOpenManual,F1,Help: Manual,
+CmdHelpOpenKeyboardShortcuts,,Help: Keyboard Shortcuts,
+CmdHelpAbout,,Help: About SumatraPDF,
+CmdHelpOpenManualOnWebsite,,Help: Manual On Website,
+CmdHelpVisitWebsite,,Help: SumatraPDF Website,
 ```
 
 ## Misc
+
 ```commands
 Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdToggleInverseSearch,,Toggle Inverse Search,"temporarily disable TeX inverse search on left mouse click, ver 3.6+"
@@ -289,31 +289,31 @@ CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only
 ## Debug
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdDebugCrashMe,,Debug: Crash Me
-CmdDebugDownloadSymbols,,Debug: Download Symbols
-CmdDebugShowNotif,,Debug: Show Notification
-CmdDebugStartStressTest,,Debug: Start Stress Test
-CmdDebugTestApp,,Debug: Test App
-CmdDebugTogglePredictiveRender,,Debug: Toggle Predictive Rendering
-CmdDebugToggleRtl,,Debug: Toggle Rtl
-CmdNone,,Do nothing
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdDebugCrashMe,,Debug: Crash Me,
+CmdDebugDownloadSymbols,,Debug: Download Symbols,
+CmdDebugShowNotif,,Debug: Show Notification,
+CmdDebugStartStressTest,,Debug: Start Stress Test,
+CmdDebugTestApp,,Debug: Test App,
+CmdDebugTogglePredictiveRender,,Debug: Toggle Predictive Rendering,
+CmdDebugToggleRtl,,Debug: Toggle Rtl,
+CmdNone,,Do nothing,
 ```
 
 ## Deprecated or internal
 
 ```commands
-Command IDs,Keyboard shortcuts,Command Palette
-CmdDebugCorruptMemory,,don't use
-CmdOpenWithKnownExternalViewerFirst,,don't use
-CmdOpenWithKnownExternalViewerLast,,don't use
-CmdSelectionHandler,,use SelectionHandlers advanced setting instead
-CmdSetTheme,,don't use
-CmdViewWithExternalViewer,,don't use
-CmdSaveAttachment,,don't use
-CmdOpenAttachment,,don't use
-CmdExec,,don't use
-CmdFindMatch,,since 3.6 it's called CmdFindToggleMatchCase
+Command IDs,Keyboard shortcuts,Command Palette,Notes
+CmdDebugCorruptMemory,,don't use,
+CmdOpenWithKnownExternalViewerFirst,,don't use,
+CmdOpenWithKnownExternalViewerLast,,don't use,
+CmdSelectionHandler,,use SelectionHandlers advanced setting instead,
+CmdSetTheme,,don't use,
+CmdViewWithExternalViewer,,don't use,
+CmdSaveAttachment,,don't use,
+CmdOpenAttachment,,don't use,
+CmdExec,,don't use,
+CmdFindMatch,,since 3.6 it's called CmdFindToggleMatchCase,
 ```
 
 # Commands with arguments
@@ -388,10 +388,11 @@ Arguments:
 
 - `color` : default, color
 - `openedit` : boolean, `false` if not given
-- `copytoclipboard` : boolean, `false` if not given. For highlight/underline/squiggly/strikeout  annotations, copies the selection (text of annotation) to clipboard. This used to be default behavior for built-in `a` etc. keyboard shortcuts but now it has to be explicitly chosen.
+- `copytoclipboard` : boolean, `false` if not given. For highlight/underline/squiggly/strikeout annotations, copies the selection (text of annotation) to clipboard. This used to be default behavior for built-in `a` etc. keyboard shortcuts but now it has to be explicitly chosen.
 - `setcontent` : boolean, false if not given. For highlight/underline/squiggly/strikeout sets content of annotation to the selection (text of annotation)
 
 Use cases:
+
 - change default color for annotations
 - create multiple shortcuts for different colors
 
@@ -406,7 +407,7 @@ Shortcuts [
 ]
 ```
 
-## Other CmdCreateAnnot* arguments
+## Other CmdCreateAnnot\* arguments
 
 **Ver 3.6+**
 
@@ -426,12 +427,14 @@ Arguments for `CmdCreateAnnotHighlight` plus:
 **Ver 3.6+**
 
 Arguments:
+
 - `level` : default, string or integer, zoom level
 
 `level` can be:
+
 - a number describing zoom level in percent e.g.:
-    - `50` or `50%` means 50% zoom
-    - `125` means 125% zoom
+  - `50` or `50%` means 50% zoom
+  - `125` means 125% zoom
 - a virtual zoom level:
   - `actual size` (100% zoom level)
   - `fit page`
@@ -449,12 +452,12 @@ Shortcuts [
 ]
 ```
 
-
 ## `CmdCommandPalette`
 
 **Ver 3.6+**
 
 Argument:
+
 - `mode` : default, optional string, Values:
   - `@` for opened files (tabs)
   - `#` for history of files
