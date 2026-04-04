@@ -2,19 +2,15 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-You can use SumatraPDF cmd-line to extract text from PDF.
-
-Let's assume you have `foo.pdf`
+You can use SumatraPDF cmd-line to extract text from a PDF file.
 
 ## Extract all text from PDF
 
-`SumatraPDF draw -o foo.txt foo.pdf`
-
-`SumatraPDF convert -o foo.txt foo.pdf`
+`SumatraPDF convert -o output.txt input.pdf`
 
 ## Extract text from selected pages of a PDF
 
-`SumatraPDF draw -o foo.txt foo.pdf 1-3,4,8-9`
+`SumatraPDF convert -o output.txt input.pdf 1-3,4,8-9`
 
 This will extract text from pages 1,2,3,4,8,9.
 
