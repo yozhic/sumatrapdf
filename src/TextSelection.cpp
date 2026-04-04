@@ -272,6 +272,46 @@ void TextSelection::SelectUpTo(int pageNo, int glyphIx) {
     }
 }
 
+// extend backward across comma-separated digit groups (e.g. "1,234,567")
+// returns the new start position if valid grouping found, otherwise returns curStart
+static int ExtendBackAcrossCommaGroups(const WCHAR* text, int curStart) {
+    int pos = curStart;
+    while (pos >= 2 && text[pos - 1] == ',') {
+        // count digits before the comma
+        int j = pos - 2;
+        int nDigits = 0;
+        while (j >= 0 && isDigit(text[j])) {
+            nDigits++;
+            j--;
+        }
+        if (nDigits == 0) {
+            break;
+        }
+        pos = j + 1;
+    }
+    return pos;
+}
+
+// extend forward across comma-separated digit groups (e.g. ",234,567")
+// returns the new end position
+static int ExtendForwardAcrossCommaGroups(const WCHAR* text, int textLen, int curEnd) {
+    int pos = curEnd;
+    while (pos < textLen && text[pos] == ',') {
+        // count digits after the comma
+        int j = pos + 1;
+        int nDigits = 0;
+        while (j < textLen && isDigit(text[j])) {
+            nDigits++;
+            j++;
+        }
+        if (nDigits == 0) {
+            break;
+        }
+        pos = j;
+    }
+    return pos;
+}
+
 void TextSelection::SelectWordAt(int pageNo, double x, double y) {
     int i = FindClosestGlyph(this, pageNo, x, y);
     int textLen;
@@ -291,19 +331,21 @@ void TextSelection::SelectWordAt(int pageNo, double x, double y) {
     int wordStart = i;
     int maybeNumberStart = i;
     int nDigits = 0;
-    if (isAllDigits && c == '.') {
-        for (int j = i - 2; j >= 0; j--) {
-            c = text[j];
-            if (isDigit(c)) {
-                nDigits++;
-                continue;
-            }
-            if (nDigits > 0) {
-                maybeNumberStart = j + 1;
-            } else {
-                isAllDigits = false;
-            }
-            break;
+    if (isAllDigits && (c == '.' || c == ',')) {
+        // walk backward across a pattern like "1,234." or "1,234,567,"
+        int j = i - 2;
+        // first skip one group of digits (before the separator we stopped at)
+        nDigits = 0;
+        while (j >= 0 && isDigit(text[j])) {
+            nDigits++;
+            j--;
+        }
+        if (nDigits > 0) {
+            maybeNumberStart = j + 1;
+            // continue backward across comma-separated groups
+            maybeNumberStart = ExtendBackAcrossCommaGroups(text, maybeNumberStart);
+        } else {
+            isAllDigits = false;
         }
     }
 
@@ -317,25 +359,29 @@ void TextSelection::SelectWordAt(int pageNo, double x, double y) {
         }
     }
 
-    // try to select fractional numbers i.e. if c is '.', chars before are all digits and chars after are all digits,
-    // extend to digits
+    // try to select numbers with commas and decimal points
+    // e.g. "1,234.56" or "1,234,567" or "123.45"
     int wordEnd = i;
-    nDigits = 0;
-    if (isAllDigits && c == '.') {
-        for (int j = wordEnd + 1; j < textLen; j++) {
-            c = text[j];
-            if (isDigit(c)) {
-                nDigits++;
-                continue;
-            }
-            break;
-        }
-        if (nDigits > 0) {
-            wordEnd += nDigits + 1; // +1 for '.'
-        }
-    }
     if (isAllDigits) {
-        wordStart = maybeNumberStart;
+        // extend forward across comma groups
+        wordEnd = ExtendForwardAcrossCommaGroups(text, textLen, wordEnd);
+        // extend forward across decimal point + digits
+        if (wordEnd < textLen && text[wordEnd] == '.') {
+            int j = wordEnd + 1;
+            nDigits = 0;
+            while (j < textLen && isDigit(text[j])) {
+                nDigits++;
+                j++;
+            }
+            if (nDigits > 0) {
+                wordEnd = j;
+            }
+        }
+        // extend backward across comma groups
+        wordStart = ExtendBackAcrossCommaGroups(text, wordStart);
+        if (maybeNumberStart < wordStart) {
+            wordStart = maybeNumberStart;
+        }
     }
     StartAt(pageNo, wordStart);
     SelectUpTo(pageNo, wordEnd);
