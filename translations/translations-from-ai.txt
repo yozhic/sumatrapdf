@@ -42898,3 +42898,505 @@ pt:Salvar Grupo de Abas
 ro:Deschide grup de file
 :Save Tab Group
 ro:Salvează grup de file
+:Bake PDF File
+am:PDF ፋይል ጋግር
+:Restore Tab Group
+am:የትር ቡድንን ወደነበረበት መልስ
+:Show PDF Outline
+am:የPDF ረቂቅ አሳይ
+:Bake PDF File
+ar:تحويل ملف PDF
+:Restore Tab Group
+ar:استعادة مجموعة علامات التبويب
+:Show PDF Outline
+ar:عرض مخطط PDF
+:Bake PDF File
+br:Poazhañ ar restr PDF
+:Restore Tab Group
+br:Assevel ar strollad ivinelloù
+:Show PDF Outline
+br:Diskouez steuñv ar PDF
+:Bake PDF File
+cn:烘焙 PDF 文件
+:Restore Tab Group
+cn:恢复标签页组
+:Show PDF Outline
+cn:显示 PDF 大纲
+:Bake PDF File
+co:Cuoce u schedariu PDF
+:Restore Tab Group
+co:Ristabilisce u gruppu di schede
+:Show PDF Outline
+co:Mustrà a struttura PDF
+:Bake PDF File
+de:PDF-Datei einbrennen
+:Restore Tab Group
+de:Tab-Gruppe wiederherstellen
+:Show PDF Outline
+de:PDF-Gliederung anzeigen
+:Bake PDF File
+el:Δημιουργία αρχείου PDF
+:Restore Tab Group
+el:Επαναφορά ομάδας καρτελών
+:Show PDF Outline
+el:Εμφάνιση περιγράμματος PDF
+:Bake PDF File
+hi:PDF फ़ाइल बेक करें
+:Restore Tab Group
+hi:टैब समूह पुनर्स्थापित करें
+:Show PDF Outline
+hi:PDF रूपरेखा दिखाएं
+:Bake PDF File
+it:Salva file PDF
+:Restore Tab Group
+it:Ripristina gruppo schede
+:Show PDF Outline
+it:Mostra struttura PDF
+:Bake PDF File
+ja:PDFファイルを焼き込む
+:Restore Tab Group
+ja:タブグループを復元
+:Show PDF Outline
+ja:PDFアウトラインを表示
+:Bake PDF File
+ml:PDF ഫയൽ ബേക്ക് ചെയ്യുക
+:Restore Tab Group
+ml:ടാബ് ഗ്രൂപ്പ് പുനഃസ്ഥാപിക്കുക
+:Show PDF Outline
+ml:PDF ഔട്ട്‌ലൈൻ കാണിക്കുക
+:Bake PDF File
+nl:PDF-bestand bakken
+:Restore Tab Group
+nl:Tabbladgroep herstellen
+:Show PDF Outline
+nl:PDF-overzicht weergeven
+:Bake PDF File
+pl:Wypiecz plik PDF
+:Restore Tab Group
+pl:Przywróć grupę kart
+:Show PDF Outline
+pl:Pokaż konspekt PDF
+:Bake PDF File
+ru:Сохранить PDF-файл
+:Restore Tab Group
+ru:Восстановить группу вкладок
+:Show PDF Outline
+ru:Показать структуру PDF
+:Bake PDF File
+sk:Zapečť PDF súbor
+:Restore Tab Group
+sk:Obnoviť skupinu kariet
+:Show PDF Outline
+sk:Zobraziť osnovu PDF
+:Bake PDF File
+sr-rs:Ispeci PDF datoteku
+:Restore Tab Group
+sr-rs:Vrati grupu kartica
+:Show PDF Outline
+sr-rs:Prikaži strukturu PDF-a
+:Bake PDF File
+tw:烘焙 PDF 檔案
+:Restore Tab Group
+tw:還原分頁群組
+:Show PDF Outline
+tw:顯示 PDF 大綱
+:Bake PDF File
+az:PDF Faylını Bişir
+:Restore Tab Group
+az:Vərəq Qrupunu Bərpa Et
+:Show PDF Outline
+az:PDF Konturunu Göstər
+:Bake PDF File
+by:Спячы PDF файл
+:Restore Tab Group
+by:Аднавіць групу ўкладак
+:Show PDF Outline
+by:Паказаць структуру PDF
+:Bake PDF File
+ca:Crea fitxer PDF
+:Restore Tab Group
+ca:Restaura el grup de pestanyes
+:Show PDF Outline
+ca:Mostra l'esquema del PDF
+:Bake PDF File
+cy:Pobi Ffeil PDF
+:Restore Tab Group
+cy:Adfer Grŵp Tabiau
+:Show PDF Outline
+cy:Dangos Amlinelliad PDF
+:Bake PDF File
+cz:Vytvořit PDF soubor
+:Restore Tab Group
+cz:Obnovit skupinu karet
+:Show PDF Outline
+cz:Zobrazit osnovu PDF
+:Bake PDF File
+es:Procesar archivo PDF
+:Restore Tab Group
+es:Restaurar grupo de pestañas
+:Show PDF Outline
+es:Mostrar esquema del PDF
+:Bake PDF File
+fa:پخت فایل PDF
+:Restore Tab Group
+fa:بازیابی گروه زبانه
+:Show PDF Outline
+fa:نمایش طرح کلی PDF
+:Bake PDF File
+fi:Polta PDF-tiedosto
+:Restore Tab Group
+fi:Palauta välilehtiryhmä
+:Show PDF Outline
+fi:Näytä PDF-jäsennys
+:Bake PDF File
+fo:Baka PDF fílu
+:Restore Tab Group
+fo:Endurskapa flikabólk
+:Show PDF Outline
+fo:Vís PDF yvirlit
+:Bake PDF File
+fr:Figer le fichier PDF
+:Restore Tab Group
+fr:Restaurer le groupe d'onglets
+:Show PDF Outline
+fr:Afficher le plan du PDF
+:Bake PDF File
+ga:Bácáil Comhad PDF
+:Restore Tab Group
+ga:Athchóirigh Grúpa Cluaisíní
+:Show PDF Outline
+ga:Taispeáin Imlíne PDF
+:Bake PDF File
+gl:Crear ficheiro PDF
+:Restore Tab Group
+gl:Restaurar grupo de pestanas
+:Show PDF Outline
+gl:Mostrar esquema do PDF
+:Bake PDF File
+he:אפה קובץ PDF
+:Restore Tab Group
+he:שחזר קבוצת כרטיסיות
+:Show PDF Outline
+he:הצג מתאר PDF
+:Bake PDF File
+hu:PDF fájl beégetése
+:Restore Tab Group
+hu:Lap csoport visszaállítása
+:Show PDF Outline
+hu:PDF vázlat megjelenítése
+:Bake PDF File
+id:Panggang Berkas PDF
+:Restore Tab Group
+id:Pulihkan Grup Tab
+:Show PDF Outline
+id:Tampilkan Kerangka PDF
+:Bake PDF File
+kr:PDF 파일 굽기
+:Restore Tab Group
+kr:탭 그룹 복원
+:Show PDF Outline
+kr:PDF 개요 표시
+:Bake PDF File
+lv:Saglabāt PDF failu
+:Restore Tab Group
+lv:Atjaunot cilņu grupu
+:Show PDF Outline
+lv:Rādīt PDF struktūru
+:Bake PDF File
+my:PDF ဖိုင်ကို ဖုတ်ပါ
+:Restore Tab Group
+my:တက်ဘ်အုပ်စုကို ပြန်လည်ရယူပါ
+:Show PDF Outline
+my:PDF အကြမ်းဖျင်းကို ပြပါ
+:Bake PDF File
+pt:Preparar arquivo PDF
+:Restore Tab Group
+pt:Restaurar grupo de abas
+:Show PDF Outline
+pt:Mostrar estrutura do PDF
+:Bake PDF File
+ro:Pregătește fișier PDF
+:Restore Tab Group
+ro:Restaurează grup de file
+:Show PDF Outline
+ro:Afișează contur PDF
+:Bake PDF File
+sat:PDF ᱨᱮᱫ ᱵᱮᱠ ᱢᱮ
+:Restore Tab Group
+sat:ᱴᱮᱵᱽ ᱜᱟᱶᱛᱟ ᱫᱚᱦᱲᱟ ᱫᱚᱦᱚ ᱢᱮ
+:Save Tab Group
+sat:ᱴᱮᱵᱽ ᱜᱟᱶᱛᱟ ᱥᱟᱺᱪᱟᱣ ᱢᱮ
+:Show PDF Outline
+sat:PDF ᱨᱮᱫ ᱵᱟᱦᱨᱮ ᱫᱷᱟᱨᱮ ᱩᱫᱩᱜ ᱢᱮ
+:Bake PDF File
+sl:Speči datoteko PDF
+:Restore Tab Group
+sl:Obnovi skupino zavihkov
+:Save Tab Group
+sl:Shrani skupino zavihkov
+:Show PDF Outline
+sl:Prikaži oris PDF
+:Bake PDF File
+sv:Baka PDF-fil
+:Restore Tab Group
+sv:Återställ flikgrupp
+:Save Tab Group
+sv:Spara flikgrupp
+:Show PDF Outline
+sv:Visa PDF-disposition
+:Bake PDF File
+ta:PDF கோப்பை சுடவும்
+:Restore Tab Group
+ta:தாவல் குழுவை மீட்டமை
+:Save Tab Group
+ta:தாவல் குழுவை சேமி
+:Show PDF Outline
+ta:PDF அவுட்லைனைக் காட்டு
+:Bake PDF File
+tr:PDF Dosyasını Pişir
+:Restore Tab Group
+tr:Sekme Grubunu Geri Yükle
+:Save Tab Group
+tr:Sekme Grubunu Kaydet
+:Show PDF Outline
+tr:PDF Anahattını Göster
+:Bake PDF File
+uz:PDF faylni pishirish
+:Restore Tab Group
+uz:Varaq guruhini tiklash
+:Save Tab Group
+uz:Varaq guruhini saqlash
+:Show PDF Outline
+uz:PDF konturini ko'rsatish
+:Bake PDF File
+af:Bak PDF-lêer
+:Restore Tab Group
+af:Herstel oortjiegroep
+:Save Tab Group
+af:Stoor oortjiegroep
+:Show PDF Outline
+af:Wys PDF-uiteensetting
+:Bake PDF File
+bg:Изпичане на PDF файл
+:Restore Tab Group
+bg:Възстановяване на група раздели
+:Save Tab Group
+bg:Запазване на група раздели
+:Show PDF Outline
+bg:Показване на структурата на PDF
+:Bake PDF File
+bn:PDF ফাইল বেক করুন
+:Restore Tab Group
+bn:ট্যাব গ্রুপ পুনরুদ্ধার করুন
+:Save Tab Group
+bn:ট্যাব গ্রুপ সংরক্ষণ করুন
+:Show PDF Outline
+bn:PDF রূপরেখা দেখান
+:Bake PDF File
+bs:Pripremi PDF datoteku
+:Restore Tab Group
+bs:Vrati grupu kartica
+:Save Tab Group
+bs:Sačuvaj grupu kartica
+:Show PDF Outline
+bs:Prikaži strukturu PDF-a
+:Bake PDF File
+ca-xv:Processa el fitxer PDF
+:Restore Tab Group
+ca-xv:Restaura el grup de pestanyes
+:Save Tab Group
+ca-xv:Desa el grup de pestanyes
+:Show PDF Outline
+ca-xv:Mostra l'índex del PDF
+:Bake PDF File
+dk:Indbyg PDF-fil
+:Restore Tab Group
+dk:Gendan fanegruppe
+:Save Tab Group
+dk:Gem fanegruppe
+:Show PDF Outline
+dk:Vis PDF-indholdsfortegnelse
+:Bake PDF File
+et:Küpseta PDF-fail
+:Restore Tab Group
+et:Taasta kaartide grupp
+:Save Tab Group
+et:Salvesta kaartide grupp
+:Show PDF Outline
+et:Kuva PDF-i struktuur
+:Bake PDF File
+eu:Egosi PDF fitxategia
+:Restore Tab Group
+eu:Leheneratu fitxa taldea
+:Save Tab Group
+eu:Gorde fitxa taldea
+:Show PDF Outline
+eu:Erakutsi PDF eskema
+:Bake PDF File
+fy-nl:PDF-bestân bakke
+:Restore Tab Group
+fy-nl:Ljepblêdgroep werstelle
+:Save Tab Group
+fy-nl:Ljepblêdgroep bewarje
+:Show PDF Outline
+fy-nl:PDF-oersjoch toane
+:Bake PDF File
+hr:Ispeći PDF datoteku
+:Restore Tab Group
+hr:Vrati grupu kartica
+:Save Tab Group
+hr:Spremi grupu kartica
+:Show PDF Outline
+hr:Prikaži obris PDF-a
+:Bake PDF File
+jv:Gawé File PDF
+:Restore Tab Group
+jv:Mulihake Grup Tab
+:Save Tab Group
+jv:Simpen Grup Tab
+:Show PDF Outline
+jv:Tuduhake Garis Gedhe PDF
+:Bake PDF File
+ka:PDF ფაილის შენახვა
+:Restore Tab Group
+ka:ჩანართების ჯგუფის აღდგენა
+:Save Tab Group
+ka:ჩანართების ჯგუფის შენახვა
+:Show PDF Outline
+ka:PDF მოხაზულობის ჩვენება
+:Bake PDF File
+ku:Pelên PDF Bipeze
+:Restore Tab Group
+ku:Koma Hilpekînan Vegerîne
+:Save Tab Group
+ku:Koma Hilpekînan Tomar Bike
+:Show PDF Outline
+ku:Xêzika PDF Nîşan Bide
+:Bake PDF File
+kw:Poba Restren PDF
+:Restore Tab Group
+kw:Daskor Bagas Tablow
+:Save Tab Group
+kw:Gwitha Bagas Tablow
+:Show PDF Outline
+kw:Diskwedhes Amlinell PDF
+:Bake PDF File
+lt:Įdiegti PDF failą
+:Restore Tab Group
+lt:Atkurti kortelių grupę
+:Save Tab Group
+lt:Išsaugoti kortelių grupę
+:Show PDF Outline
+lt:Rodyti PDF struktūrą
+:Bake PDF File
+mk:Изгответи PDF датотека
+:Restore Tab Group
+mk:Врати група на јазичиња
+:Save Tab Group
+mk:Зачувај група на јазичиња
+:Show PDF Outline
+mk:Прикажи PDF контура
+:Bake PDF File
+mm:PDF ဖိုင်ကို ဖုတ်ရန်
+:Restore Tab Group
+mm:တက်ဗ်အုပ်စုကို ပြန်လည်ရယူရန်
+:Save Tab Group
+mm:တက်ဗ်အုပ်စုကို သိမ်းဆည်းရန်
+:Show PDF Outline
+mm:PDF အကြမ်းဖျင်းကို ပြရန်
+:Bake PDF File
+ne:PDF फाइल बेक गर्नुहोस्
+:Restore Tab Group
+ne:ट्याब समूह पुनर्स्थापना गर्नुहोस्
+:Save Tab Group
+ne:ट्याब समूह सुरक्षित गर्नुहोस्
+:Show PDF Outline
+ne:PDF रूपरेखा देखाउनुहोस्
+:Bake PDF File
+nn:Bak PDF-fil
+:Restore Tab Group
+nn:Gjenopprett fanegruppe
+:Save Tab Group
+nn:Lagre fanegruppe
+:Show PDF Outline
+nn:Vis PDF-disposisjon
+:Bake PDF File
+no:Bak PDF-fil
+:Restore Tab Group
+no:Gjenopprett fanegruppe
+:Save Tab Group
+no:Lagre fanegruppe
+:Show PDF Outline
+no:Vis PDF-disposisjon
+:Bake PDF File
+pa:PDF ਫਾਈਲ ਬੇਕ ਕਰੋ
+:Restore Tab Group
+pa:ਟੈਬ ਗਰੁੱਪ ਮੁੜ-ਬਹਾਲ ਕਰੋ
+:Save Tab Group
+pa:ਟੈਬ ਗਰੁੱਪ ਸੁਰੱਖਿਅਤ ਕਰੋ
+:Show PDF Outline
+pa:PDF ਰੂਪਰੇਖਾ ਦਿਖਾਓ
+:Bake PDF File
+si:PDF ගොනුව පිළියෙළ කරන්න
+:Restore Tab Group
+si:ටැබ් සමූහය ප්‍රතිස්ථාපනය කරන්න
+:Save Tab Group
+si:ටැබ් සමූහය සුරකින්න
+:Show PDF Outline
+si:PDF දළ විශ්ලේෂණය පෙන්වන්න
+:Bake PDF File
+sn:Bika Faira rePDF
+:Restore Tab Group
+sn:Dzorera Boka reMapato
+:Save Tab Group
+sn:Chengetedza Boka reMapato
+:Show PDF Outline
+sn:Ratidza Muumbire wePDF
+:Bake PDF File
+sp-rs:Ispeci PDF fajl
+:Restore Tab Group
+sp-rs:Vrati grupu kartica
+:Save Tab Group
+sp-rs:Sačuvaj grupu kartica
+:Show PDF Outline
+sp-rs:Prikaži strukturu PDF-a
+:Bake PDF File
+sq:Përgatit skedarin PDF
+:Restore Tab Group
+sq:Rikthe grupin e skedave
+:Save Tab Group
+sq:Ruaj grupin e skedave
+:Show PDF Outline
+sq:Shfaq skicën e PDF-së
+:Bake PDF File
+th:อบไฟล์ PDF
+:Restore Tab Group
+th:กลับคืนกลุ่มแท็บ
+:Save Tab Group
+th:บันทึกกลุ่มแท็บ
+:Show PDF Outline
+th:แสดงโครงร่าง PDF
+:Bake PDF File
+tl:I-bake ang PDF File
+:Restore Tab Group
+tl:Ibalik ang Tab Group
+:Save Tab Group
+tl:I-save ang Tab Group
+:Show PDF Outline
+tl:Ipakita ang PDF Outline
+:Bake PDF File
+uk:Зберегти PDF-файл
+:Restore Tab Group
+uk:Відновити групу вкладок
+:Save Tab Group
+uk:Зберегти групу вкладок
+:Show PDF Outline
+uk:Показати структуру PDF
+:Bake PDF File
+vn:Nướng tệp PDF
+:Restore Tab Group
+vn:Khôi phục nhóm thẻ
+:Save Tab Group
+vn:Lưu nhóm thẻ
+:Show PDF Outline
+vn:Hiển thị mục lục PDF

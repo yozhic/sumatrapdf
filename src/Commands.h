@@ -217,7 +217,7 @@ enum {
     CmdSaveImage = 406,
     CmdPasteClipboardImage = 407,
     CmdTabGroupSave = 408,
-    CmdTabGroupOpen = 409,
+    CmdTabGroupRestore = 409,
     CmdNone = 410,
 
     /* range for file history */

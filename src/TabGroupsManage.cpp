@@ -257,7 +257,7 @@ static void ShowTabGroupsDialog(MainWindow* win, TabGroupDialogMode mode) {
 
     bool isRtl = IsUIRtl();
 
-    const char* titleStr = (mode == TabGroupDialogMode::Save) ? _TRA("Save Tab Group") : _TRA("Open Tab Group");
+    const char* titleStr = (mode == TabGroupDialogMode::Save) ? _TRA("Save Tab Group") : _TRA("Restore Tab Group");
     auto title = ToWStrTemp(titleStr);
 
     DWORD dwStyle = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;

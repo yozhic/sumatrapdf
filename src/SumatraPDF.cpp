@@ -6118,7 +6118,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             ShowSaveTabGroupDialog(win);
             break;
 
-        case CmdTabGroupOpen:
+        case CmdTabGroupRestore:
             ShowOpenTabGroupDialog(win);
             break;
 

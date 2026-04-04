@@ -117,7 +117,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugCrashMe,
     CmdDebugCorruptMemory,
     CmdScreenshot,
-    CmdTabGroupOpen,
+    CmdTabGroupRestore,
     0,
 };
 
@@ -142,7 +142,7 @@ static i32 gCommandsNoActivate[] = {
     CmdCropImage,
     CmdResizeImage,
     CmdTabGroupSave,
-    CmdTabGroupOpen,
+    CmdTabGroupRestore,
     // TOOD: probably more
     0,
 };

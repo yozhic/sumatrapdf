@@ -212,7 +212,7 @@ export const commands = [
     "CmdSaveImage", "Save Image",
     "CmdPasteClipboardImage", "Paste Image From Clipboard",
     "CmdTabGroupSave", "Save Tab Group",
-    "CmdTabGroupOpen", "Open Tab Group",
+    "CmdTabGroupRestore", "Restore Tab Group",
     "CmdNone", "Do nothing",
 ];
 
