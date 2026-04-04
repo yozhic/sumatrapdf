@@ -725,6 +725,7 @@ function sumatrapdf_files()
     "Menu.*",
     "Notifications.*",
     "PdfSync.*",
+    "PdfTools.*",
     "PreviewPipe.*",
     "Print.*",
     "ProgressUpdateUI.*",
@@ -913,7 +914,6 @@ function engines_files()
     "MobiDoc.*",
     "PalmDbReader.*",
     "PdfCreator.*",
-    "PdfTools.*",
   })
 end
 
@@ -1310,7 +1310,6 @@ function pdf_preview_files()
     "MUPDF_Exports.cpp",
     "PalmDbReader.*",
     "PdfCreator.*",
-    "PdfTools.*",
     "RegistryPreview.*",
     "SumatraConfig.*",
     "utils/Log.*",

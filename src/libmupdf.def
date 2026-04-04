@@ -2,6 +2,10 @@
 
 LIBRARY libmupdf
 EXPORTS
+	fz_open_document
+	fz_write_byte
+	fz_drop_output
+	fz_write_printf
 	fz_optind
 	fz_redirect_io_to_existing_console
 	muconvert_main
