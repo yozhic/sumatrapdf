@@ -4080,6 +4080,60 @@ Annotation* MakeAnnotationWrapper(EngineMupdf* engine, pdf_annot* annot, int pag
 
 extern "C" fz_buffer* pdfinfo_to_buffer(fz_context* ctx, const char* filename);
 
+static void outline_to_buffer_rec(fz_context* ctx, fz_output* out, fz_outline* outline, int level) {
+    while (outline) {
+        if (outline->down) {
+            fz_write_byte(ctx, out, outline->is_open ? '-' : '+');
+        } else {
+            fz_write_byte(ctx, out, '|');
+        }
+        for (int i = 0; i < level; i++) {
+            fz_write_byte(ctx, out, '\t');
+        }
+        fz_write_printf(ctx, out, "%s\t%s\n", outline->title ? outline->title : "", outline->uri ? outline->uri : "");
+        if (outline->down) {
+            outline_to_buffer_rec(ctx, out, outline->down, level + 1);
+        }
+        outline = outline->next;
+    }
+}
+
+TempStr EngineMupdfGetPdfOutline(const char* path) {
+    fz_context* ctx = fz_new_context(nullptr, nullptr, FZ_STORE_UNLIMITED);
+    if (!ctx) {
+        return nullptr;
+    }
+    TempStr res = nullptr;
+    fz_document* doc = nullptr;
+    fz_outline* outline = nullptr;
+    fz_buffer* buf = nullptr;
+    fz_output* out = nullptr;
+    fz_try(ctx) {
+        doc = fz_open_document(ctx, path);
+        outline = fz_load_outline(ctx, doc);
+        if (!outline) {
+            res = str::DupTemp("(no outline)");
+        } else {
+            buf = fz_new_buffer(ctx, 1024);
+            out = fz_new_output_with_buffer(ctx, buf);
+            outline_to_buffer_rec(ctx, out, outline, 1);
+            fz_close_output(ctx, out);
+            unsigned char* data;
+            size_t len = fz_buffer_storage(ctx, buf, &data);
+            res = str::DupTemp((const char*)data, len);
+        }
+    }
+    fz_catch(ctx) {
+        fz_report_error(ctx);
+    }
+    fz_drop_output(ctx, out);
+    fz_drop_buffer(ctx, buf);
+    fz_drop_outline(ctx, outline);
+    fz_drop_document(ctx, doc);
+    fz_drop_context(ctx);
+    return res;
+}
+
 TempStr EngineMupdfGetPdfInfo(const char* path) {
     fz_context* ctx = fz_new_context(nullptr, nullptr, FZ_STORE_UNLIMITED);
     if (!ctx) {

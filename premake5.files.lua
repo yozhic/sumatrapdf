@@ -913,6 +913,7 @@ function engines_files()
     "MobiDoc.*",
     "PalmDbReader.*",
     "PdfCreator.*",
+    "PdfTools.*",
   })
 end
 
@@ -1309,6 +1310,7 @@ function pdf_preview_files()
     "MUPDF_Exports.cpp",
     "PalmDbReader.*",
     "PdfCreator.*",
+    "PdfTools.*",
     "RegistryPreview.*",
     "SumatraConfig.*",
     "utils/Log.*",

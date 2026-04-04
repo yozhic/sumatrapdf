@@ -137,6 +137,7 @@ static i32 gCommandsNoActivate[] = {
     CmdNewWindow,
     CmdDuplicateInNewWindow,
     CmdShowPdfInfo,
+    CmdShowPdfOutline,
     CmdListPrinters,
     CmdCropImage,
     CmdResizeImage,
@@ -372,7 +373,7 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && (cmdId == CmdShowPdfInfo)) {
+    if (!ctx.isPdf && (cmdId == CmdShowPdfInfo || cmdId == CmdShowPdfOutline)) {
         return false;
     }
 

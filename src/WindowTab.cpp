@@ -45,6 +45,10 @@ WindowTab::~WindowTab() {
         DestroyWindow(hwndPDFInfo);
         hwndPDFInfo = nullptr;
     }
+    if (hwndPDFOutline) {
+        DestroyWindow(hwndPDFOutline);
+        hwndPDFOutline = nullptr;
+    }
     CloseAndDeleteEditAnnotationsWindow(this);
     FileWatcherUnsubscribe(watcher);
     if (AsChm()) {

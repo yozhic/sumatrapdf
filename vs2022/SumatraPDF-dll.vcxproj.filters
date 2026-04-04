@@ -225,6 +225,9 @@
     <ClInclude Include="..\src\PdfSync.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\PdfTools.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\PreviewPipe.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -540,6 +543,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PdfSync.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PdfTools.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PreviewPipe.cpp">
@@ -1010,7 +1016,7 @@
     <None Include="..\docs\md\Scrolling-and-zooming.md">
       <Filter>docs\md</Filter>
     </None>
-    <None Include="..\docs\md\Set-as-default-PDF-viewer.md">
+    <None Include="..\docs\md\Set-as-default-pdf-viewer.md">
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Source-code-downloads.md">
@@ -1041,9 +1047,6 @@
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tool-draw.md">
-      <Filter>docs\md</Filter>
-    </None>
-    <None Include="..\docs\md\Tool-extract-text-from-pdf.md">
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tool-extract.md">
@@ -1077,6 +1080,39 @@
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tool-trim.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-compress-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-convert-png-to-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-convert-text-to-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-decompress-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-decrypt-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-delete-pages-from-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-encrypt-pdf-with-password.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-extract-images-from-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-extract-pages-from-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-extract-text-from-pdf.md">
+      <Filter>docs\md</Filter>
+    </None>
+    <None Include="..\docs\md\Tool-x-search-pdf.md">
       <Filter>docs\md</Filter>
     </None>
     <None Include="..\docs\md\Tools.md">
@@ -1121,6 +1157,7 @@
     <None Include="..\premake5.files.lua" />
     <None Include="..\premake5.lua" />
     <None Include="..\readme.md" />
+    <None Include="..\sumlog.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\SumatraPDF.rc">
