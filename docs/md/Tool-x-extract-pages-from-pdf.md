@@ -12,4 +12,4 @@ This extracts pages 1, 2, 3, 4, 5 and 8 to last from `input.pdf` and saves as `o
 
 ## Delete page or pages from PDF
 
-To delete a page you need to extract all pages except the one you want to delete. See [delete pages from PDF](Tool-x-delete-pages-from-PDF.md).
+To delete a page you need to extract all pages except the one you want to delete. See [delete pages from PDF](Tool-x-delete-pages-from-pdf.md).

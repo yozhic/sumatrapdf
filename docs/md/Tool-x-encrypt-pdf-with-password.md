@@ -13,4 +13,4 @@ Flags:
 
 You can see [all flags](Tool-clean.md).
 
-You can also [decrypt](Tool-x-decrypt-PDF.md)
+You can also [decrypt](Tool-x-decrypt-pdf.md)

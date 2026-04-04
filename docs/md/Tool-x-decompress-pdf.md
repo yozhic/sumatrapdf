@@ -14,4 +14,4 @@ If a PDF file is compressed, the decompressed version should be bigger.
 
 If a PDF is already decompressed, this will have little effect.
 
-You can also [compress](Tool-x-compress-PDF.md) PDF.
+You can also [compress](Tool-x-compress-pdf.md) PDF.
