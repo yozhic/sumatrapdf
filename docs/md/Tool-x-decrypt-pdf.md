@@ -13,4 +13,4 @@ Flags:
 
 You can see [all flags](Tool-clean.md).
 
-You can also [encrypt](Tool-x-encrypt-PDF-with-password.md)
+You can also [encrypt](Tool-x-encrypt-pdf-with-password.md)
