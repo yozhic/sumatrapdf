@@ -4,3 +4,4 @@
 struct MainWindow;
 
 void ShowPdfBakeDialog(MainWindow* win);
+void ShowPdfExtractTextDialog(MainWindow* win);

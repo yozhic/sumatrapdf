@@ -378,7 +378,7 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && (cmdId == CmdPdfBake)) {
+    if (!ctx.isPdf && (cmdId == CmdPdfBake || cmdId == CmdPdfExtractText)) {
         return false;
     }
 

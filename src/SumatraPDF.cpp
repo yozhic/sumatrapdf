@@ -6731,6 +6731,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             ShowPdfBakeDialog(win);
             break;
 
+        case CmdPdfExtractText:
+            ShowPdfExtractTextDialog(win);
+            break;
+
         case CmdMoveFrameFocus:
             if (!HwndIsFocused(win->hwndFrame)) {
                 HwndSetFocus(win->hwndFrame);
