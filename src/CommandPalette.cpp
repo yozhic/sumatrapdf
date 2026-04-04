@@ -793,7 +793,13 @@ void SafeDeleteCommandPaletteWnd() {
     gCommandPaletteHwnd = nullptr;
     delete tmp;
     if (gHwndToActivateOnClose) {
-        SetActiveWindow(gHwndToActivateOnClose);
+        HWND fg = GetForegroundWindow();
+        // Only restore main window if no other window already took foreground.
+        // This avoids stealing focus from e.g. the screenshot overlay which
+        // may have been shown while the command palette was closing.
+        if (!fg || fg == gHwndToActivateOnClose) {
+            SetActiveWindow(gHwndToActivateOnClose);
+        }
         gHwndToActivateOnClose = nullptr;
     }
     if (gTabToSelectOnClose) {
