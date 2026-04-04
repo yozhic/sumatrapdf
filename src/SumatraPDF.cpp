@@ -3994,7 +3994,7 @@ static bool IsLayoutStateEq(LayoutState* s1, LayoutState* s2) {
     return s1->rc == s2->rc && s1->presentation == s2->presentation && s1->tabsInTitlebar == s2->tabsInTitlebar &&
            s1->isFullScreen == s2->isFullScreen && s1->tabsVisible == s2->tabsVisible &&
            s1->isToolbarVisible == s2->isToolbarVisible && s1->tocVisible == s2->tocVisible &&
-           s1->showFavorites == s2->showFavorites;
+           s1->showFavorites == s2->showFavorites && s1->showMenuBarRebar == s2->showMenuBarRebar;
 }
 
 static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
@@ -4013,6 +4013,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     curState.isToolbarVisible = win->isToolbarVisible;
     curState.tocVisible = win->tocVisible;
     curState.showFavorites = gGlobalPrefs->showFavorites;
+    curState.showMenuBarRebar = IsShowingMenuBarRebar(win);
 
     // skip redundant relayouts when all layout-affecting state is unchanged
     if (IsLayoutStateEq(&curState, &win->lastLayoutState) && updateToolbars && sidebarDx == -1) {

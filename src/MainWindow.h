@@ -239,6 +239,7 @@ struct MainWindow {
         bool isToolbarVisible = false;
         bool tocVisible = false;
         bool showFavorites = false;
+        bool showMenuBarRebar = false;
     };
     LayoutState lastLayoutState;
 

@@ -88,6 +88,8 @@ Starting in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease) you c
 
 [Extract text from PDF](Tool-x-extract-text-from-pdf.md)
 
+[Convert text file to a PDF](Tool-x-convert-text-to-pdf.md)
+
 [Compress a PDF](Tool-x-compress-pdf.md)
 
 [Decompress a PDF](Tool-x-decompress-pdf.md)
