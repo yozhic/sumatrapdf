@@ -1690,6 +1690,7 @@ void MenuUpdateDisplayMode(MainWindow* win) {
     if (win->CurrentTab() && win->CurrentTab()->GetEngineType() == kindEngineComicBooks) {
         bool mangaMode = win->AsFixed()->GetDisplayR2L();
         MenuSetChecked(win->menu, CmdToggleMangaMode, mangaMode);
+        MenuSetEnabled(win->menu, CmdToggleMangaMode, !IsSingle(displayMode));
     }
 }
 

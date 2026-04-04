@@ -268,6 +268,7 @@ struct CommandPaletteBuildCtx {
     bool canCloseTabsToRight = false;
     bool canCloseTabsToLeft = false;
     bool isPdf = false;
+    bool isSinglePage = false;
     bool hasDocTabs = false;
 
     ~CommandPaletteBuildCtx() = default;
@@ -379,6 +380,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
     }
 
     if (!ctx.isPdf && (cmdId == CmdPdfBake || cmdId == CmdPdfExtractText)) {
+        return false;
+    }
+
+    if (ctx.isSinglePage && cmdId == CmdToggleMangaMode) {
         return false;
     }
 
@@ -644,6 +649,9 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     ctx.hasSelection = ctx.isDocLoaded && currTab && mainWin->showSelection && currTab->selectionOnPage;
     ctx.canSendEmail = CanSendAsEmailAttachment(currTab);
     ctx.isPdf = ctx.isDocLoaded && CouldBePDFDoc(currTab);
+    if (ctx.isDocLoaded && mainWin->ctrl) {
+        ctx.isSinglePage = IsSingle(mainWin->ctrl->GetDisplayMode());
+    }
     ctx.allowToggleMenuBar = true;
 
     int nTabs = mainWin->TabCount();
