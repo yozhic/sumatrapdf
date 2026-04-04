@@ -31,7 +31,7 @@
 
 [DDE Commands](DDE-Commands.md)
 
-[Set as default PDF viewer](Set-as-default-PDF-viewer.md)
+[Set as default PDF viewer](Set-as-default-pdf-viewer.md)
 
 [Configure for restricted use](Configure-for-restricted-use.md)
 
@@ -88,17 +88,17 @@ Starting in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease) you c
 
 [Extract text from PDF](Tool-x-extract-text-from-pdf.md)
 
-[Compress a PDF](Tool-x-compress-PDF.md)
+[Compress a PDF](Tool-x-compress-pdf.md)
 
-[Decompress a PDF](Tool-x-decompress-PDF.md)
+[Decompress a PDF](Tool-x-decompress-pdf.md)
 
-[Encrypt a PDF](Tool-x-encrypt-PDF-with-password.md)
+[Encrypt a PDF](Tool-x-encrypt-pdf-with-password.md)
 
-[Decrypt a PDF](Tool-x-decrypt-PDF.md)
+[Decrypt a PDF](Tool-x-decrypt-pdf.md)
 
-[Delete pages from PDF](Tool-x-delete-pages-from-PDF.md)
+[Delete pages from PDF](Tool-x-delete-pages-from-pdf.md)
 
-[Extract images from PDF](Tool-x-extract-images-from-PDF.md)
+[Extract images from PDF](Tool-x-extract-images-from-pdf.md)
 
 [Extract text from PDF](Tool-x-extract-text-from-pdf.md)
 

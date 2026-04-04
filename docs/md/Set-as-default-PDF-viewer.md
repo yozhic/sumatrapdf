@@ -36,5 +36,4 @@ In Default apps type `.pdf` for file extension:
 
 Click on current default PDF application (`Microsoft Edge` in this example) and select `SumatraPDF`:
 
-
 You can do that for other file formats.

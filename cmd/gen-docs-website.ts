@@ -55,9 +55,9 @@ async function updateSumatraWebsite(): Promise<string> {
   if (!existsSync(dir)) {
     throw new Error(`directory for sumatra website '${dir}' doesn't exist`);
   }
-  if (!(await isGitClean(dir))) {
-    throw new Error(`github repository '${dir}' must be clean`);
-  }
+  // if (!(await isGitClean(dir))) {
+  //   throw new Error(`github repository '${dir}' must be clean`);
+  // }
   if (getCurrentBranch(dir) !== "master") {
     throw new Error(`github repository '${dir}' must be on master branch`);
   }
