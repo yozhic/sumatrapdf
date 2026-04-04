@@ -22,7 +22,7 @@ This will extract text from pages 1,2,3,4,8,9.
 
 PDF files don't really contain text. It's made of glyphs (characters) in a given font positioned at (x,y) position in a page.
 
-Extracting text is based on heursitics i.e. the program tries to guess words and lines based on position of characters.
+Extracting text is based on heuristics i.e. the program tries to guess words and lines based on position of characters.
 
 Structured text is detailed information about every character on the page:
 

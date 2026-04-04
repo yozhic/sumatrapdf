@@ -1,4 +1,4 @@
-# Decrpt a PDF
+# Encrypt a PDF with password
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 

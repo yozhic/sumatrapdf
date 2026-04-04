@@ -1,4 +1,4 @@
-# Decrpt a PDF
+# Decrypt a PDF
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 

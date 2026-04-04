@@ -36,7 +36,7 @@ Use `-R 90|180|270` option to rotate pages.
 
 Each page in a PDF has a given width / height.
 
-When convertint to an image (like PNG), you can change the size of output image:
+When converting to an image (like PNG), you can change the size of the output image:
 
 `SumatraPDF draw -o "foo-%d.png" -w 400 -h 800 foo.pdf`
 
@@ -60,7 +60,7 @@ When convertint to an image (like PNG), you can change the size of output image:
 
 In PDF text really consists of characters positioned in a page.
 
-If you want to see detailed information about text in PDF, especially for further programmating processing, you can extract structured text which is: font, glyph (character), position.
+If you want to see detailed information about text in PDF, especially for further programmatic processing, you can extract structured text which is: font, glyph (character), position.
 
 ### Extract structured text from PDF in XML format
 

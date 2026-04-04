@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-To deompress a PDF using SumatraPDF from command-line:
+To decompress a PDF using SumatraPDF from command-line:
 
 `SumatraPDF clean -d foo.pdf foo-decompressed.pdf`
 
@@ -14,4 +14,4 @@ If a PDF file is compressed, the decompressed version should be bigger.
 
 If a PDF is already decompressed, this will have little effect.
 
-You can also [decompress](Tool-x-decompress-PDF.md) PDF.
+You can also [compress](Tool-x-compress-PDF.md) PDF.

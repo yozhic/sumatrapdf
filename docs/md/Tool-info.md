@@ -4,7 +4,7 @@
 
 Usage: `SumatraPDF info [options] file.pdf [pages]`
 
-PDf file can contain embedded fonts, images, patterns etc. Each object has an object number.
+PDF file can contain embedded fonts, images, patterns etc. Each object has an object number.
 
 `SumatraPDF info foo.pdf` shows list of objects in the PDF file.
 

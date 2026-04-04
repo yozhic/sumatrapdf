@@ -51,7 +51,7 @@
 
 ## Using SumatraPDF to convert and modify PDF and other files
 
-Staring in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease) you can use `SumatraPDF <tool> <option> <files>` commands to convert, extract, search PDF and other files.
+Starting in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease) you can use `SumatraPDF <tool> <option> <files>` commands to convert, extract, search PDF and other files.
 
 :columns
 [All cmd-line tools](Tools.md)
