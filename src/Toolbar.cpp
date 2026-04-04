@@ -197,7 +197,7 @@ static bool IsCmdEnabled(MainWindow* win, int cmdId) {
         case CmdPrevTab:
         case CmdNextTabSmart:
         case CmdPrevTabSmart:
-            return gGlobalPrefs->useTabs;
+            return SettingsUseTabs();
         case PageInfoId:
             return true;
     }
@@ -387,7 +387,7 @@ bool ShouldShowToolbar(MainWindow* win) {
         return false;
     }
     // hide toolbar on about/home page when not using tabs
-    if (!gGlobalPrefs->useTabs && win->IsCurrentTabAbout()) {
+    if (!SettingsUseTabs() && win->IsCurrentTabAbout()) {
         return false;
     }
     return true;

@@ -76,7 +76,7 @@ static void ShowTabBar(MainWindow* win, bool show) {
 
 void UpdateTabWidth(MainWindow* win) {
     int nTabs = (int)win->TabCount();
-    bool showSingleTab = gGlobalPrefs->useTabs || win->tabsInTitlebar;
+    bool showSingleTab = SettingsUseTabs() || win->tabsInTitlebar;
     bool showTabs = (nTabs > 1) || (showSingleTab && (nTabs > 0));
     int tabWidth = gGlobalPrefs->tabWidth;
     if (win->tabsCtrl) {
@@ -529,7 +529,7 @@ WindowTab* AddTabToWindow(MainWindow* win, WindowTab* tab) {
 
     auto tabs = win->tabsCtrl;
     int idx = win->TabCount();
-    bool useTabs = gGlobalPrefs->useTabs;
+    bool useTabs = SettingsUseTabs();
     bool noHomeTab = gGlobalPrefs->noHomeTab;
     bool createHomeTab = useTabs && !noHomeTab && (idx == 0);
     if (createHomeTab) {

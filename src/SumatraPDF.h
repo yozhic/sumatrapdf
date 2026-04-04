@@ -109,6 +109,9 @@ extern DocController* gMostRecentlyOpenedDoc;
 #define gPluginMode (gPluginURL != nullptr)
 
 bool NeedsWindowEmbeddingHacks();
+bool SettingsUseTabs();
+bool SettingsRestoreSession();
+bool SettingsRememberOpenedFiles();
 
 void InitializePolicies(bool restrict);
 void RestrictPolicies(Perm revokePermission);

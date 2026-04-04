@@ -1730,7 +1730,7 @@ static void MenuUpdateStateForWindow(MainWindow* win) {
 }
 
 void OnAboutContextMenu(MainWindow* win, int x, int y) {
-    if (!HasPermission(Perm::SavePreferences | Perm::DiskAccess) || !gGlobalPrefs->rememberOpenedFiles ||
+    if (!HasPermission(Perm::SavePreferences | Perm::DiskAccess) || !SettingsRememberOpenedFiles() ||
         !gGlobalPrefs->showStartPage) {
         return;
     }

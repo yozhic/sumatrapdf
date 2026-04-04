@@ -124,6 +124,18 @@ bool NeedsWindowEmbeddingHacks() {
     return gMyWindowWasEmbedded || gPluginMode;
 }
 
+bool SettingsUseTabs() {
+    return gGlobalPrefs->useTabs && !gMyWindowWasEmbedded;
+}
+
+bool SettingsRestoreSession() {
+    return gGlobalPrefs->restoreSession && !gMyWindowWasEmbedded;
+}
+
+bool SettingsRememberOpenedFiles() {
+    return gGlobalPrefs->rememberOpenedFiles && !gMyWindowWasEmbedded;
+}
+
 static Kind kNotifPersistentWarning = "persistentWarning";
 static Kind kNotifZoom = "zoom";
 
@@ -545,7 +557,7 @@ char* HwndPasswordUI::GetPassword(const char* path, u8* fileDigest, u8 decryptio
     // make sure that the password dialog is visible
     HwndToForeground(hwnd);
 
-    bool* rememberPwd = gGlobalPrefs->rememberOpenedFiles ? saveKey : nullptr;
+    bool* rememberPwd = SettingsRememberOpenedFiles() ? saveKey : nullptr;
     return Dialog_GetPassword(hwnd, path, rememberPwd);
 }
 
@@ -699,7 +711,7 @@ static void UpdateWindowRtlLayout(MainWindow* win) {
 }
 
 static bool IsMenubarVisible() {
-    if (gGlobalPrefs->useTabs) {
+    if (SettingsUseTabs()) {
         return gGlobalPrefs->showMenubarWithTabs;
     }
     return gGlobalPrefs->showMenubar;
@@ -1831,7 +1843,7 @@ static MainWindow* CreateMainWindow() {
     // is deferred to ShowMainWindow so the shell sees a normal frame during
     // the first ShowWindow and creates the taskbar button.
     {
-        bool inTitleBar = gGlobalPrefs->useTabs;
+        bool inTitleBar = SettingsUseTabs();
         win->tabsInTitlebar = inTitleBar;
         win->tabsCtrl->inTitleBar = inTitleBar;
         if (inTitleBar) {
@@ -2120,7 +2132,7 @@ MainWindow* LoadDocumentFinish(LoadArgs* args) {
     MainWindow* win = args->win;
     const char* fullPath = args->FilePath();
 
-    bool openNewTab = gGlobalPrefs->useTabs && !args->forceReuse;
+    bool openNewTab = SettingsUseTabs() && !args->forceReuse;
     ReportIf(openNewTab && args->forceReuse);
 
     if (win->IsCurrentTabAbout()) {
@@ -2155,7 +2167,7 @@ MainWindow* LoadDocumentFinish(LoadArgs* args) {
     }
 
     // TODO: stop remembering/restoring window positions when using tabs?
-    args->placeWindow = !gGlobalPrefs->useTabs;
+    args->placeWindow = !SettingsUseTabs();
     bool lazyLoad = args->lazyLoad;
     if (!lazyLoad) {
         ReplaceDocumentInCurrentTab(args, args->ctrl, nullptr);
@@ -2201,7 +2213,7 @@ MainWindow* LoadDocumentFinish(LoadArgs* args) {
         currTab->watcher = FileWatcherSubscribe(path, fn, enableManualCheck);
     }
 
-    if (gGlobalPrefs->rememberOpenedFiles) {
+    if (SettingsRememberOpenedFiles()) {
         ReportIf(!str::Eq(fullPath, path));
         FileState* ds = gFileHistory.MarkFileLoaded(fullPath);
         if (gGlobalPrefs->showStartPage) {
@@ -2233,7 +2245,7 @@ static NotificationWnd* ShowLoadingNotif(MainWindow* win, const char* path) {
 
 static MainWindow* MaybeCreateWindowForFileLoad(LoadArgs* args) {
     MainWindow* win = args->win;
-    bool openNewTab = gGlobalPrefs->useTabs && !args->forceReuse;
+    bool openNewTab = SettingsUseTabs() && !args->forceReuse;
     if (openNewTab && !args->win) {
         // modify the args so that we always reuse the same window
         // TODO: enable the tab bar if tabs haven't been initialized
@@ -4342,7 +4354,7 @@ static void ShowOptionsDialog(HWND hwnd) {
         return;
     }
 
-    if (!gGlobalPrefs->rememberOpenedFiles) {
+    if (!SettingsRememberOpenedFiles()) {
         gFileHistory.Clear(true);
         DeleteThumbnailCacheDirectory();
     }
@@ -7922,9 +7934,6 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
     if (win && !gMyWindowWasEmbedded && isChildWindow) {
         logf("Detected window embedded in another window\n");
         gMyWindowWasEmbedded = true;
-        gGlobalPrefs->useTabs = false;
-        gGlobalPrefs->restoreSession = false;
-        gGlobalPrefs->rememberOpenedFiles = false;
         str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
         SetTabsInTitlebar(win, false);
         DestroyMenuBarRebar(win);

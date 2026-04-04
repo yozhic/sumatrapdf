@@ -610,7 +610,7 @@ void DrawAboutPage(MainWindow* win, HDC hdc) {
     Rect rc = ClientRect(win->hwndCanvas);
     UpdateAboutLayoutInfo(win->hwndCanvas, hdc, &rc);
     DrawAbout(win->hwndCanvas, hdc, rc, win->staticLinks);
-    if (HasPermission(Perm::SavePreferences | Perm::DiskAccess) && gGlobalPrefs->rememberOpenedFiles) {
+    if (HasPermission(Perm::SavePreferences | Perm::DiskAccess) && SettingsRememberOpenedFiles()) {
         Rect rect = DrawHideFrequentlyReadLink(win->hwndCanvas, hdc, _TRA("Show frequently read"));
         auto sl = new StaticLink(rect, kLinkShowList);
         win->staticLinks.Append(sl);

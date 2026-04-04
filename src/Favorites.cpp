@@ -249,7 +249,7 @@ static void RemoveFav(const char* filePath, int pageNo) {
     fav->favorites->Remove(fn);
     DeleteFavorite(fn);
 
-    if (!gGlobalPrefs->rememberOpenedFiles && 0 == fav->favorites->size()) {
+    if (!SettingsRememberOpenedFiles() && 0 == fav->favorites->size()) {
         gFileHistory.Remove(fav);
         DeleteFileState(fav);
     }
@@ -266,7 +266,7 @@ static void RemoveAllFavForFile(const char* filePath) {
     }
     fav->favorites->Reset();
 
-    if (!gGlobalPrefs->rememberOpenedFiles) {
+    if (!SettingsRememberOpenedFiles()) {
         gFileHistory.Remove(fav);
         DeleteFileState(fav);
     }

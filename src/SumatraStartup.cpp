@@ -2487,9 +2487,6 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     LoadSettings();
     UpdateGlobalPrefs(flags);
     if (gMyWindowWasEmbedded) {
-        gGlobalPrefs->useTabs = false;
-        gGlobalPrefs->restoreSession = false;
-        gGlobalPrefs->rememberOpenedFiles = false;
         str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
     }
     SetCurrentLang(flags.lang ? flags.lang : gGlobalPrefs->uiLanguage);
@@ -2570,7 +2567,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         // TODO: pass print request through to previous instance?
     } else if (flags.reuseDdeInstance || flags.dde) {
         existingHwnd = FindWindowW(FRAME_CLASS_NAME, nullptr);
-    } else if (gGlobalPrefs->reuseInstance || gGlobalPrefs->useTabs) {
+    } else if (gGlobalPrefs->reuseInstance || SettingsUseTabs()) {
         existingHwnd = existingInstanceHwnd;
     }
 
@@ -2614,16 +2611,16 @@ ContinueOpenWindow:
     gInitialSessionData = gGlobalPrefs->sessionData;
     gGlobalPrefs->sessionData = new Vec<SessionData*>();
 
-    restoreSession = gGlobalPrefs->restoreSession && (gInitialSessionData->Size() > 0) && !NeedsWindowEmbeddingHacks();
-    if (!gGlobalPrefs->useTabs && (existingInstanceHwnd != nullptr)) {
+    restoreSession = SettingsRestoreSession() && (gInitialSessionData->Size() > 0) && !NeedsWindowEmbeddingHacks();
+    if (!SettingsUseTabs() && (existingInstanceHwnd != nullptr)) {
         // do not restore a session if tabs are disabled and SumatraPDF is already running
         // TODO: maybe disable restoring if tabs are disabled?
         restoreSession = false;
         logf("not restoring a session because the same exe is already running and tabs are disabled\n");
     }
 
-    showStartPage = !restoreSession && flags.fileNames.Size() == 0 && gGlobalPrefs->rememberOpenedFiles &&
-                    gGlobalPrefs->showStartPage;
+    showStartPage =
+        !restoreSession && flags.fileNames.Size() == 0 && SettingsRememberOpenedFiles() && gGlobalPrefs->showStartPage;
 
     // ShGetFileInfoW triggers ASAN deep in Windows code so probably not my fault
     if (showStartPage) {
