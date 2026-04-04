@@ -31682,6 +31682,79 @@ tw:調整圖片大小
 uk:Змінити розмір зображення
 uz:Rasmni o'lchamini o'zgartirish
 vn:Thay đổi kích thước hình ảnh
+:Restore
+af:Herstel
+am:ወደነበረበት መልስ
+ar:استعادة
+az:Bərpa et
+bg:Възстановяване
+bn:পুনরুদ্ধার করুন
+br:Assav
+bs:Vrati
+by:Аднавіць
+ca:Restaura
+ca-xv:Restaura
+cn:恢复
+co:Ristabilisce
+cy:Adfer
+cz:Obnovit
+de:Wiederherstellen
+dk:Gendan
+el:Επαναφορά
+es:Restaurar
+et:Taasta
+eu:Berreskuratu
+fa:بازیابی
+fi:Palauta
+fo:Endurskapa
+fr:Restaurer
+fy-nl:Werómset
+ga:Athchóirigh
+gl:Restaurar
+he:שחזר
+hi:पुनर्स्थापित करें
+hr:Vrati
+hu:Visszaállítás
+id:Pulihkan
+it:Ripristina
+ja:復元
+jv:Mulihake
+ka:აღდგენა
+kr:복원
+ku:Vegerîne
+kw:Dasserghyans
+lt:Atkurti
+lv:Atjaunot
+mk:Врати
+ml:പുനഃസ്ഥാപിക്കുക
+mm:ပြန်လည်ရယူရန်
+my:ပြန်လည်ရယူရန်
+ne:पुनर्स्थापना गर्नुहोस्
+nl:Herstellen
+nn:Gjenopprett
+no:Gjenopprett
+pa:ਬਹਾਲ ਕਰੋ
+pl:Przywróć
+pt:Restaurar
+ro:Restaurează
+ru:Восстановить
+sat:ᱫᱩᱦᱲᱟᱹ ᱫᱚᱦᱚᱭ ᱢᱮ
+si:ප්‍රතිස්ථාපනය කරන්න
+sk:Obnoviť
+sl:Obnovi
+sn:Dzorera
+sp-rs:Врати
+sq:Rikthe
+sr-rs:Врати
+sv:Återställ
+ta:மீட்டமை
+th:คืนค่า
+tl:Ibalik
+tr:Geri Yükle
+tw:回復
+uk:Відновити
+uz:Tiklash
+vn:Khôi phục
 :Restore Tab Group
 af:Herstel oortjiegroep
 am:የትር ቡድንን ወደነበረበት መልስ
@@ -34164,6 +34237,79 @@ tw:向上捲動一頁
 uk:Прокрутити вгору на сторінку
 uz:Sahifa bo'yicha yuqoriga aylantirish
 vn:Cuộn lên một trang
+:Search Bookmarks
+af:Deursoek Boekmerke
+am:ዕልባቶችን ፈልግ
+ar:البحث في الإشارات المرجعية
+az:Əlfəcinləri axtar
+bg:Търсене в отметки
+bn:বুকমার্ক অনুসন্ধান করুন
+br:Klask er sinedoù
+bs:Pretraži zabilješke
+by:Шукаць закладкі
+ca:Cerca adreces d'interès
+ca-xv:Cerca als marcadors
+cn:搜索书签
+co:Circà in i segnalibri
+cy:Chwilio Nodau Tudalen
+cz:Hledat záložky
+de:Lesezeichen durchsuchen
+dk:Søg i bogmærker
+el:Αναζήτηση σελιδοδεικτών
+es:Buscar marcadores
+et:Otsi järjehoidjaid
+eu:Bilatu laster-markak
+fa:جستجوی نشانک‌ها
+fi:Hae kirjanmerkeistä
+fo:Leita í bókamerkjum
+fr:Rechercher dans les favoris
+fy-nl:Blêdwizers sykje
+ga:Cuardaigh Leabharmharcanna
+gl:Buscar marcadores
+he:חפש סימניות
+hi:बुकमार्क खोजें
+hr:Pretraži zabilješke
+hu:Könyvjelzők keresése
+id:Cari Bookmark
+it:Cerca segnalibri
+ja:ブックマークを検索
+jv:Goleki Tandha
+ka:სანიშნების ძებნა
+kr:북마크 검색
+ku:Li Şûnpeyvan Bigere
+kw:Hwilas Folennosow
+lt:Ieškoti žymelių
+lv:Meklēt grāmatzīmes
+mk:Пребарај обележувачи
+ml:ബുക്ക്മാർക്കുകൾ തിരയുക
+mm:စာညှပ်များကို ရှာဖွေရန်
+my:စာညှပ်များကို ရှာဖွေရန်
+ne:बुकमार्कहरू खोज्नुहोस्
+nl:Bladwijzers doorzoeken
+nn:Søk i bokmerke
+no:Søk i bokmerker
+pa:ਬੁੱਕਮਾਰਕ ਖੋਜੋ
+pl:Szukaj zakładek
+pt:Pesquisar Favoritos
+ro:Caută în marcaje
+ru:Поиск закладок
+sat:ᱵᱩᱠᱢᱟᱨᱠ ᱠᱚ ᱥᱮᱸᱫᱽᱨᱟᱭ ᱢᱮ
+si:පිටු සළකුණු සොයන්න
+sk:Hľadať v záložkách
+sl:Iskanje po zaznamkih
+sn:Tsvaga Zvibhukimaki
+sp-rs:Претражи обележиваче
+sq:Kërko në Faqeruajtës
+sr-rs:Претражи обележиваче
+sv:Sök bokmärken
+ta:புத்தகக்குறிகளைத் தேடு
+th:ค้นหาบุ๊กมาร์ก
+tl:Maghanap ng mga Bookmark
+tr:Yer İşaretlerinde Ara
+tw:搜尋書籤
+uk:Шукати закладки
+uz:Xatcho'plarni qidirish
+vn:Tìm kiếm dấu trang
 :Search Selection with Bing
 af:Soek Seleksie met Bing
 am:Որոնել ընտրումը Bing-ի միջոցով
@@ -38252,6 +38398,79 @@ tw:無法開啟同步檔案
 uk:Неможливо відкрити файл синхронізації
 uz:Sinxronlanish faylini ochib bo'lmadi
 vn:Không mở được tập tin đồng bộ
+:Tab Groups
+af:Oortjiegroepe
+am:የትር ቡድኖች
+ar:مجموعات علامات التبويب
+az:Vərəq Qrupları
+bg:Групи раздели
+bn:ট্যাব গ্রুপ
+br:Strolladoù ivinelloù
+bs:Grupe kartica
+by:Групы ўкладак
+ca:Grups de pestanyes
+ca-xv:Grups de pestanyes
+cn:标签页组
+co:Gruppi di schedine
+cy:Grwpiau Tabiau
+cz:Skupiny karet
+de:Tab-Gruppen
+dk:Fanegrupper
+el:Ομάδες καρτελών
+es:Grupos de pestañas
+et:Kaardirühmad
+eu:Fitxa taldeak
+fa:گروه‌های زبانه
+fi:Välilehtiryhmät
+fo:Flikabólkar
+fr:Groupes d'onglets
+fy-nl:Ljepblêdgroepen
+ga:Grúpaí Cluaisíní
+gl:Grupos de pestanas
+he:קבוצות כרטיסיות
+hi:टैब समूह
+hr:Grupe kartica
+hu:Lapcsoportok
+id:Grup Tab
+it:Gruppi di schede
+ja:タブグループ
+jv:Klompok Tab
+ka:ჩანართების ჯგუფები
+kr:탭 그룹
+ku:Komên Hilpekan
+kw:Bagas Tabmow
+lt:Kortelių grupės
+lv:Ciļņu grupas
+mk:Групи на јазичиња
+ml:ടാബ് ഗ്രൂപ്പുകൾ
+mm:တက်ဘ်အုပ်စုများ
+my:တက်ဘ်အုပ်စုများ
+ne:ट्याब समूहहरू
+nl:Tabbladgroepen
+nn:Fanegrupper
+no:Fanegrupper
+pa:ਟੈਬ ਗਰੁੱਪ
+pl:Grupy kart
+pt:Grupos de Abas
+ro:Grupuri de file
+ru:Группы вкладок
+sat:ᱴᱮᱵᱽ ᱜᱟᱫᱮᱞ ᱠᱚ
+si:ටැබ් සමූහ
+sk:Skupiny kariet
+sl:Skupine zavihkov
+sn:Mapoka eTab
+sp-rs:Групе картица
+sq:Grupe Skedash
+sr-rs:Групе картица
+sv:Flikgrupper
+ta:தாவல் குழுக்கள்
+th:กลุ่มแท็บ
+tl:Mga Grupo ng Tab
+tr:Sekme Grupları
+tw:分頁群組
+uk:Групи вкладок
+uz:Varaq guruhlari
+vn:Nhóm thẻ
 :Tagged PDF
 af:Gemerkte PDF
 am:Կցված PDF

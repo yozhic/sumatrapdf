@@ -681,6 +681,15 @@ void LinkHandler::GotoNamedDest(const char* name) {
     }
 }
 
+bool HasOpenedDocuments(MainWindow* win) {
+    for (WindowTab* t : win->Tabs()) {
+        if (!t->IsAboutTab()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void UpdateControlsColors(MainWindow* win) {
     COLORREF bgCol = ThemeControlBackgroundColor();
     COLORREF txtCol = ThemeWindowTextColor();

@@ -313,6 +313,7 @@ struct MainWindow {
     bool CreateUIAProvider();
 };
 
+bool HasOpenedDocuments(MainWindow*);
 void UpdateControlsColors(MainWindow*);
 void ScheduleRepaint(MainWindow*, int delay);
 void ClearFindBox(MainWindow*);

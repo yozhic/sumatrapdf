@@ -43400,3 +43400,435 @@ vn:Khôi phục nhóm thẻ
 vn:Lưu nhóm thẻ
 :Show PDF Outline
 vn:Hiển thị mục lục PDF
+:Restore
+am:ወደነበረበት መልስ
+:Search Bookmarks
+am:ዕልባቶችን ፈልግ
+:Tab Groups
+am:የትር ቡድኖች
+:Restore
+ar:استعادة
+:Search Bookmarks
+ar:البحث في الإشارات المرجعية
+:Tab Groups
+ar:مجموعات علامات التبويب
+:Restore
+br:Assav
+:Search Bookmarks
+br:Klask er sinedoù
+:Tab Groups
+br:Strolladoù ivinelloù
+:Restore
+cn:恢复
+:Search Bookmarks
+cn:搜索书签
+:Tab Groups
+cn:标签页组
+:Restore
+co:Ristabilisce
+:Search Bookmarks
+co:Circà in i segnalibri
+:Tab Groups
+co:Gruppi di schedine
+:Restore
+de:Wiederherstellen
+:Search Bookmarks
+de:Lesezeichen durchsuchen
+:Tab Groups
+de:Tab-Gruppen
+:Restore
+el:Επαναφορά
+:Search Bookmarks
+el:Αναζήτηση σελιδοδεικτών
+:Tab Groups
+el:Ομάδες καρτελών
+:Restore
+hi:पुनर्स्थापित करें
+:Search Bookmarks
+hi:बुकमार्क खोजें
+:Tab Groups
+hi:टैब समूह
+:Restore
+it:Ripristina
+:Search Bookmarks
+it:Cerca segnalibri
+:Tab Groups
+it:Gruppi di schede
+:Restore
+ja:復元
+:Search Bookmarks
+ja:ブックマークを検索
+:Tab Groups
+ja:タブグループ
+:Restore
+ml:പുനഃസ്ഥാപിക്കുക
+:Search Bookmarks
+ml:ബുക്ക്മാർക്കുകൾ തിരയുക
+:Tab Groups
+ml:ടാബ് ഗ്രൂപ്പുകൾ
+:Restore
+nl:Herstellen
+:Search Bookmarks
+nl:Bladwijzers doorzoeken
+:Tab Groups
+nl:Tabbladgroepen
+:Restore
+pl:Przywróć
+:Search Bookmarks
+pl:Szukaj zakładek
+:Tab Groups
+pl:Grupy kart
+:Restore
+ru:Восстановить
+:Search Bookmarks
+ru:Поиск закладок
+:Tab Groups
+ru:Группы вкладок
+:Restore
+sk:Obnoviť
+:Search Bookmarks
+sk:Hľadať v záložkách
+:Tab Groups
+sk:Skupiny kariet
+:Restore
+sr-rs:Врати
+:Search Bookmarks
+sr-rs:Претражи обележиваче
+:Tab Groups
+sr-rs:Групе картица
+:Restore
+tw:回復
+:Search Bookmarks
+tw:搜尋書籤
+:Tab Groups
+tw:分頁群組
+:Restore
+az:Bərpa et
+:Search Bookmarks
+az:Əlfəcinləri axtar
+:Tab Groups
+az:Vərəq Qrupları
+:Restore
+by:Аднавіць
+:Search Bookmarks
+by:Шукаць закладкі
+:Tab Groups
+by:Групы ўкладак
+:Restore
+ca:Restaura
+:Search Bookmarks
+ca:Cerca adreces d'interès
+:Tab Groups
+ca:Grups de pestanyes
+:Restore
+cy:Adfer
+:Search Bookmarks
+cy:Chwilio Nodau Tudalen
+:Tab Groups
+cy:Grwpiau Tabiau
+:Restore
+cz:Obnovit
+:Search Bookmarks
+cz:Hledat záložky
+:Tab Groups
+cz:Skupiny karet
+:Restore
+es:Restaurar
+:Search Bookmarks
+es:Buscar marcadores
+:Tab Groups
+es:Grupos de pestañas
+:Restore
+fa:بازیابی
+:Search Bookmarks
+fa:جستجوی نشانک‌ها
+:Tab Groups
+fa:گروه‌های زبانه
+:Restore
+fi:Palauta
+:Search Bookmarks
+fi:Hae kirjanmerkeistä
+:Tab Groups
+fi:Välilehtiryhmät
+:Restore
+fo:Endurskapa
+:Search Bookmarks
+fo:Leita í bókamerkjum
+:Tab Groups
+fo:Flikabólkar
+:Restore
+fr:Restaurer
+:Search Bookmarks
+fr:Rechercher dans les favoris
+:Tab Groups
+fr:Groupes d'onglets
+:Restore
+ga:Athchóirigh
+:Search Bookmarks
+ga:Cuardaigh Leabharmharcanna
+:Tab Groups
+ga:Grúpaí Cluaisíní
+:Restore
+gl:Restaurar
+:Search Bookmarks
+gl:Buscar marcadores
+:Tab Groups
+gl:Grupos de pestanas
+:Restore
+he:שחזר
+:Search Bookmarks
+he:חפש סימניות
+:Tab Groups
+he:קבוצות כרטיסיות
+:Restore
+hu:Visszaállítás
+:Search Bookmarks
+hu:Könyvjelzők keresése
+:Tab Groups
+hu:Lapcsoportok
+:Restore
+id:Pulihkan
+:Search Bookmarks
+id:Cari Bookmark
+:Tab Groups
+id:Grup Tab
+:Restore
+kr:복원
+:Search Bookmarks
+kr:북마크 검색
+:Tab Groups
+kr:탭 그룹
+:Restore
+lv:Atjaunot
+:Search Bookmarks
+lv:Meklēt grāmatzīmes
+:Tab Groups
+lv:Ciļņu grupas
+:Restore
+my:ပြန်လည်ရယူရန်
+:Search Bookmarks
+my:စာညှပ်များကို ရှာဖွေရန်
+:Tab Groups
+my:တက်ဘ်အုပ်စုများ
+:Restore
+pt:Restaurar
+:Search Bookmarks
+pt:Pesquisar Favoritos
+:Tab Groups
+pt:Grupos de Abas
+:Restore
+ro:Restaurează
+:Search Bookmarks
+ro:Caută în marcaje
+:Tab Groups
+ro:Grupuri de file
+:Restore
+sat:ᱫᱩᱦᱲᱟᱹ ᱫᱚᱦᱚᱭ ᱢᱮ
+:Search Bookmarks
+sat:ᱵᱩᱠᱢᱟᱨᱠ ᱠᱚ ᱥᱮᱸᱫᱽᱨᱟᱭ ᱢᱮ
+:Tab Groups
+sat:ᱴᱮᱵᱽ ᱜᱟᱫᱮᱞ ᱠᱚ
+:Restore
+sl:Obnovi
+:Search Bookmarks
+sl:Iskanje po zaznamkih
+:Tab Groups
+sl:Skupine zavihkov
+:Restore
+sv:Återställ
+:Search Bookmarks
+sv:Sök bokmärken
+:Tab Groups
+sv:Flikgrupper
+:Restore
+ta:மீட்டமை
+:Search Bookmarks
+ta:புத்தகக்குறிகளைத் தேடு
+:Tab Groups
+ta:தாவல் குழுக்கள்
+:Restore
+tr:Geri Yükle
+:Search Bookmarks
+tr:Yer İşaretlerinde Ara
+:Tab Groups
+tr:Sekme Grupları
+:Restore
+uz:Tiklash
+:Search Bookmarks
+uz:Xatcho'plarni qidirish
+:Tab Groups
+uz:Varaq guruhlari
+:Restore
+af:Herstel
+:Search Bookmarks
+af:Deursoek Boekmerke
+:Tab Groups
+af:Oortjiegroepe
+:Restore
+bg:Възстановяване
+:Search Bookmarks
+bg:Търсене в отметки
+:Tab Groups
+bg:Групи раздели
+:Restore
+bn:পুনরুদ্ধার করুন
+:Search Bookmarks
+bn:বুকমার্ক অনুসন্ধান করুন
+:Tab Groups
+bn:ট্যাব গ্রুপ
+:Restore
+bs:Vrati
+:Search Bookmarks
+bs:Pretraži zabilješke
+:Tab Groups
+bs:Grupe kartica
+:Restore
+ca-xv:Restaura
+:Search Bookmarks
+ca-xv:Cerca als marcadors
+:Tab Groups
+ca-xv:Grups de pestanyes
+:Restore
+dk:Gendan
+:Search Bookmarks
+dk:Søg i bogmærker
+:Tab Groups
+dk:Fanegrupper
+:Restore
+et:Taasta
+:Search Bookmarks
+et:Otsi järjehoidjaid
+:Tab Groups
+et:Kaardirühmad
+:Restore
+eu:Berreskuratu
+:Search Bookmarks
+eu:Bilatu laster-markak
+:Tab Groups
+eu:Fitxa taldeak
+:Restore
+fy-nl:Werómset
+:Search Bookmarks
+fy-nl:Blêdwizers sykje
+:Tab Groups
+fy-nl:Ljepblêdgroepen
+:Restore
+hr:Vrati
+:Search Bookmarks
+hr:Pretraži zabilješke
+:Tab Groups
+hr:Grupe kartica
+:Restore
+jv:Mulihake
+:Search Bookmarks
+jv:Goleki Tandha
+:Tab Groups
+jv:Klompok Tab
+:Restore
+ka:აღდგენა
+:Search Bookmarks
+ka:სანიშნების ძებნა
+:Tab Groups
+ka:ჩანართების ჯგუფები
+:Restore
+ku:Vegerîne
+:Search Bookmarks
+ku:Li Şûnpeyvan Bigere
+:Tab Groups
+ku:Komên Hilpekan
+:Restore
+kw:Dasserghyans
+:Search Bookmarks
+kw:Hwilas Folennosow
+:Tab Groups
+kw:Bagas Tabmow
+:Restore
+lt:Atkurti
+:Search Bookmarks
+lt:Ieškoti žymelių
+:Tab Groups
+lt:Kortelių grupės
+:Restore
+mk:Врати
+:Search Bookmarks
+mk:Пребарај обележувачи
+:Tab Groups
+mk:Групи на јазичиња
+:Restore
+mm:ပြန်လည်ရယူရန်
+:Search Bookmarks
+mm:စာညှပ်များကို ရှာဖွေရန်
+:Tab Groups
+mm:တက်ဘ်အုပ်စုများ
+:Restore
+ne:पुनर्स्थापना गर्नुहोस्
+:Search Bookmarks
+ne:बुकमार्कहरू खोज्नुहोस्
+:Tab Groups
+ne:ट्याब समूहहरू
+:Restore
+nn:Gjenopprett
+:Search Bookmarks
+nn:Søk i bokmerke
+:Tab Groups
+nn:Fanegrupper
+:Restore
+no:Gjenopprett
+:Search Bookmarks
+no:Søk i bokmerker
+:Tab Groups
+no:Fanegrupper
+:Restore
+pa:ਬਹਾਲ ਕਰੋ
+:Search Bookmarks
+pa:ਬੁੱਕਮਾਰਕ ਖੋਜੋ
+:Tab Groups
+pa:ਟੈਬ ਗਰੁੱਪ
+:Restore
+si:ප්‍රතිස්ථාපනය කරන්න
+:Search Bookmarks
+si:පිටු සළකුණු සොයන්න
+:Tab Groups
+si:ටැබ් සමූහ
+:Restore
+sn:Dzorera
+:Search Bookmarks
+sn:Tsvaga Zvibhukimaki
+:Tab Groups
+sn:Mapoka eTab
+:Restore
+sp-rs:Врати
+:Search Bookmarks
+sp-rs:Претражи обележиваче
+:Tab Groups
+sp-rs:Групе картица
+:Restore
+sq:Rikthe
+:Search Bookmarks
+sq:Kërko në Faqeruajtës
+:Tab Groups
+sq:Grupe Skedash
+:Restore
+th:คืนค่า
+:Search Bookmarks
+th:ค้นหาบุ๊กมาร์ก
+:Tab Groups
+th:กลุ่มแท็บ
+:Restore
+tl:Ibalik
+:Search Bookmarks
+tl:Maghanap ng mga Bookmark
+:Tab Groups
+tl:Mga Grupo ng Tab
+:Restore
+uk:Відновити
+:Search Bookmarks
+uk:Шукати закладки
+:Tab Groups
+uk:Групи вкладок
+:Restore
+vn:Khôi phục
+:Search Bookmarks
+vn:Tìm kiếm dấu trang
+:Tab Groups
+vn:Nhóm thẻ

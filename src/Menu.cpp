@@ -503,6 +503,21 @@ static MenuDef menuDefSettings[] = {
 //] ACCESSKEY_GROUP Settings Menu
 
 //[ ACCESSKEY_GROUP Favorites Menu
+static MenuDef menuDefTabGroups[] = {
+    {
+        _TRN("Save Tab Group"),
+        CmdTabGroupSave,
+    },
+    {
+        _TRN("Restore Tab Group"),
+        CmdTabGroupRestore,
+    },
+    {
+        nullptr,
+        0,
+    },
+};
+
 MenuDef menuDefFavorites[] = {
     {
         _TRN("Add to favorites"),
@@ -515,6 +530,14 @@ MenuDef menuDefFavorites[] = {
     {
         _TRN("Show Favorites"),
         CmdFavoriteToggle,
+    },
+    {
+        kMenuSeparator,
+        0,
+    },
+    {
+        _TRN("Tab Groups"),
+        (UINT_PTR)menuDefTabGroups,
     },
     {
         nullptr,
@@ -1390,6 +1413,11 @@ std::pair<bool, bool> GetCommandIdState(BuildMenuCtx* ctx, int cmdId) {
     disable |= (!ctx->hasSelection && cmdIdInList(disableIfNoSelection));
     disable |= (!ctx->annotationUnderCursor && (cmdId == CmdDeleteAnnotation));
     disable |= !ctx->hasUnsavedAnnotations && (cmdId == CmdSaveAnnotations);
+
+    if (cmdId == CmdTabGroupSave) {
+        disable |= !ctx->tab || !ctx->tab->win || !HasOpenedDocuments(ctx->tab->win);
+    }
+
     return {remove, disable};
 }
 
@@ -1727,6 +1755,7 @@ static void MenuUpdateStateForWindow(MainWindow* win) {
     CheckMenuRadioItem(win->menu, gFirstSetThemeCmdId, gLastSetThemeCmdId, gCurrSetThemeCmdId, MF_BYCOMMAND);
 
     MenuSetChecked(win->menu, CmdToggleLinks, gGlobalPrefs->showLinks);
+    MenuSetEnabled(win->menu, CmdTabGroupSave, HasOpenedDocuments(win));
 }
 
 void OnAboutContextMenu(MainWindow* win, int x, int y) {
@@ -1950,30 +1979,6 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     }
 
     switch (cmdId) {
-        case CmdCopySelection:
-        case CmdTranslateSelectionWithGoogle:
-        case CmdTranslateSelectionWithDeepL:
-        case CmdSearchSelectionWithGoogle:
-        case CmdSearchSelectionWithBing:
-        case CmdSearchSelectionWithWikipedia:
-        case CmdSearchSelectionWithGoogleScholar:
-        case CmdSelectAll:
-        case CmdSaveAs:
-        case CmdPrint:
-        case CmdToggleBookmarks:
-        case CmdToggleTableOfContents:
-        case CmdFavoriteToggle:
-        case CmdProperties:
-        case CmdToggleToolbar:
-        case CmdToggleMenuBar:
-        case CmdChangeScrollbar:
-        case CmdSaveAnnotations:
-        case CmdSaveAnnotationsNewFile:
-        case CmdFavoriteAdd: {
-            HwndSendCommand(win->hwndFrame, cmdId);
-            break;
-        }
-
         case CmdSaveImage:
         case CmdCropImage:
         case CmdResizeImage: {
@@ -1996,19 +2001,18 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
             } else {
                 HwndSendCommand(win->hwndFrame, cmdId);
             }
-        } break;
-        case CmdToggleFullscreen: {
-            // handle in FrameOnCommand() in SumatraPDF.cpp
-            HwndSendCommand(win->hwndFrame, cmdId);
-        } break;
+            return;
+        };
 
         case CmdCopyLinkTarget: {
             TempStr tmp = CleanupURLForClipbardCopyTemp(value);
             CopyTextToClipboard(tmp);
-        } break;
-        case CmdCopyComment:
+            return;
+        };
+        case CmdCopyComment: {
             CopyTextToClipboard(value);
-            break;
+            return;
+        }
 
         case CmdCopyImage: {
             if (pageEl) {
@@ -2018,11 +2022,11 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
                 }
                 delete bmp;
             }
-            break;
+            return;
         }
         case CmdFavoriteDel: {
             DelFavorite(filePath, pageNoUnderCursor);
-            break;
+            return;
         }
         case CmdShowErrors: {
             if (engine && engine->errors.Size() > 0) {
@@ -2030,9 +2034,11 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
                 ShowTextInWindow("Errors", text);
                 str::Free(text);
             }
-            break;
+            return;
         }
     }
+    // everything else we forward to FrameOnCommand() in SumatraPDF.cpp
+    HwndSendCommand(win->hwndFrame, cmdId);
 }
 
 // so that we can do free everything at exit

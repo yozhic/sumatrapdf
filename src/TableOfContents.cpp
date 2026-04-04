@@ -1291,7 +1291,7 @@ void CreateToc(MainWindow* win) {
         Edit::CreateArgs eargs;
         eargs.parent = win->hwndTocBox;
         eargs.withBorder = false;
-        eargs.cueText = "Filter bookmarks";
+        eargs.cueText = _TRN("Search Bookmarks");
         eargs.font = GetDefaultGuiFont(false, false);
         filterEdit->Create(eargs);
     }

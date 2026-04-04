@@ -628,10 +628,6 @@ LRESULT TryReflectMessages(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
         case WM_CTLCOLORLISTBOX:
         case WM_CTLCOLORSCROLLBAR:
         case WM_CTLCOLORSTATIC:
-        case WM_DRAWITEM:
-        case WM_MEASUREITEM:
-        case WM_DELETEITEM:
-        case WM_COMPAREITEM:
         case WM_CHARTOITEM:
         case WM_VKEYTOITEM:
         case WM_HSCROLL:
@@ -643,9 +639,44 @@ LRESULT TryReflectMessages(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
                 result = pWnd->MessageReflect(msg, wparam, lparam);
             }
             if (result != 0) {
-                return result; // Message processed so return.
+                return result;
             }
-        } break; // Do default processing when message not already processed.
+        } break;
+        // owner-draw messages: lparam is a struct pointer, not an HWND
+        case WM_DRAWITEM: {
+            DRAWITEMSTRUCT* dis = (DRAWITEMSTRUCT*)lparam;
+            Wnd* pWnd = WndListFindByHwnd(dis->hwndItem);
+            if (pWnd != nullptr) {
+                LRESULT result = pWnd->OnMessageReflect(msg, wparam, lparam);
+                if (result != 0) {
+                    return result;
+                }
+            }
+        } break;
+        case WM_MEASUREITEM: {
+            HWND wnd = GetDlgItem(hwnd, static_cast<int>(wparam));
+            if (!wnd && wparam == 0) {
+                wnd = FindWindowExW(hwnd, nullptr, L"LISTBOX", nullptr);
+            }
+            Wnd* pWnd = wnd ? WndListFindByHwnd(wnd) : nullptr;
+            if (pWnd != nullptr) {
+                LRESULT result = pWnd->OnMessageReflect(msg, wparam, lparam);
+                if (result != 0) {
+                    return result;
+                }
+            }
+        } break;
+        case WM_DELETEITEM:
+        case WM_COMPAREITEM: {
+            HWND wnd = GetDlgItem(hwnd, static_cast<int>(wparam));
+            Wnd* pWnd = wnd ? WndListFindByHwnd(wnd) : nullptr;
+            if (pWnd != nullptr) {
+                LRESULT result = pWnd->MessageReflect(msg, wparam, lparam);
+                if (result != 0) {
+                    return result;
+                }
+            }
+        } break;
     }
     return 0;
 }

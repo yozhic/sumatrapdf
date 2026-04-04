@@ -4,6 +4,7 @@
 #include "utils/BaseUtil.h"
 #include "utils/ScopedWin.h"
 #include "utils/FileUtil.h"
+#include "utils/Dpi.h"
 #include "utils/WinUtil.h"
 
 #include "wingui/UIModels.h"
@@ -23,6 +24,7 @@
 #include "Commands.h"
 #include "Translations.h"
 #include "SumatraConfig.h"
+#include "Theme.h"
 #include "TabGroupsManage.h"
 
 constexpr const WCHAR* kTabGroupsWinClassName = L"SUMATRA_PDF_TAB_GROUPS";
@@ -37,12 +39,37 @@ enum class TabGroupDialogMode {
     Open,
 };
 
+struct TabGroupsListBoxModel : ListBoxModel {
+    Vec<TabGroup*> groups;
+
+    void Reload() {
+        groups.Reset();
+        auto* g = gGlobalPrefs->tabGroups;
+        if (g) {
+            for (auto* tg : *g) {
+                groups.Append(tg);
+            }
+        }
+    }
+
+    int ItemsCount() override { return groups.Size(); }
+
+    const char* Item(int i) override { return groups.At(i)->name; }
+
+    int TabCount(int i) {
+        auto* tf = groups.At(i)->tabFiles;
+        return tf ? tf->Size() : 0;
+    }
+};
+
 struct TabGroupsDialog {
     HWND hwnd = nullptr;
     HWND hwndParent = nullptr;
     HWND hwndEdit = nullptr;
-    HWND hwndListBox = nullptr;
+    ListBox* listBox = nullptr;
+    TabGroupsListBoxModel* model = nullptr;
     Button* btnOk = nullptr;
+    Button* btnDelete = nullptr;
     Button* btnCancel = nullptr;
     TabGroupDialogMode mode = TabGroupDialogMode::Save;
     MainWindow* win = nullptr;
@@ -59,16 +86,9 @@ static TabGroupsDialog* FindDialog(HWND hwnd) {
     return nullptr;
 }
 
-static void PopulateListBox(HWND hwndLb) {
-    SendMessageW(hwndLb, LB_RESETCONTENT, 0, 0);
-    auto* groups = gGlobalPrefs->tabGroups;
-    if (!groups) {
-        return;
-    }
-    for (auto* g : *groups) {
-        auto ws = ToWStrTemp(g->name);
-        SendMessageW(hwndLb, LB_ADDSTRING, 0, (LPARAM)ws);
-    }
+static void PopulateListBox(TabGroupsDialog* d) {
+    d->model->Reload();
+    d->listBox->SetModel(d->model);
 }
 
 static void LayoutControls(TabGroupsDialog* d) {
@@ -86,15 +106,22 @@ static void LayoutControls(TabGroupsDialog* d) {
     if (lbDy < 20) {
         lbDy = 20;
     }
-    MoveWindow(d->hwndListBox, x, y, dx, lbDy, TRUE);
+    if (d->listBox) {
+        MoveWindow(d->listBox->hwnd, x, y, dx, lbDy, TRUE);
+    }
     y += lbDy;
 
-    // buttons at the bottom right
+    // buttons at the bottom right: [Save/Open] [Delete] [Cancel]
     Size okSize = d->btnOk->GetIdealSize();
     Size cancelSize = d->btnCancel->GetIdealSize();
     int btnY = rc.dy - kButtonPadding - okSize.dy;
     int btnX = rc.dx - kButtonPadding - cancelSize.dx;
     MoveWindow(d->btnCancel->hwnd, btnX, btnY, cancelSize.dx, cancelSize.dy, TRUE);
+    if (d->btnDelete) {
+        Size deleteSize = d->btnDelete->GetIdealSize();
+        btnX -= kButtonPadding + deleteSize.dx;
+        MoveWindow(d->btnDelete->hwnd, btnX, btnY, deleteSize.dx, deleteSize.dy, TRUE);
+    }
     btnX -= kButtonPadding + okSize.dx;
     MoveWindow(d->btnOk->hwnd, btnX, btnY, okSize.dx, okSize.dy, TRUE);
 }
@@ -132,12 +159,12 @@ static void SaveTabGroup(TabGroupsDialog* d) {
     }
     gGlobalPrefs->tabGroups->Append(group);
     SaveSettings();
-    DestroyWindow(d->hwnd);
+    PostMessageW(d->hwnd, WM_CLOSE, 0, 0);
 }
 
 static void OpenTabGroup(TabGroupsDialog* d) {
-    int sel = (int)SendMessageW(d->hwndListBox, LB_GETCURSEL, 0, 0);
-    if (sel == LB_ERR) {
+    int sel = d->listBox ? d->listBox->GetCurrentSelection() : -1;
+    if (sel < 0) {
         return;
     }
     auto* groups = gGlobalPrefs->tabGroups;
@@ -149,8 +176,17 @@ static void OpenTabGroup(TabGroupsDialog* d) {
         return;
     }
 
-    MainWindow* newWin = CreateAndShowMainWindow(nullptr);
-    if (!newWin) {
+    // reuse current window if it has no files open (only about tab or empty)
+    MainWindow* win = d->win;
+    bool hasFiles = false;
+    for (WindowTab* tab : win->Tabs()) {
+        if (!tab->IsAboutTab()) {
+            hasFiles = true;
+            break;
+        }
+    }
+    MainWindow* targetWin = hasFiles ? CreateAndShowMainWindow(nullptr) : win;
+    if (!targetWin) {
         return;
     }
     bool first = true;
@@ -158,15 +194,129 @@ static void OpenTabGroup(TabGroupsDialog* d) {
         if (!tf->path || !*tf->path) {
             continue;
         }
-        LoadArgs args(tf->path, newWin);
-        // first file replaces the about tab, rest open as new tabs
+        LoadArgs args(tf->path, targetWin);
         if (!first) {
             args.forceReuse = false;
         }
         LoadDocument(&args);
         first = false;
     }
-    DestroyWindow(d->hwnd);
+    // post WM_CLOSE instead of DestroyWindow so we return from the
+    // listbox double-click callback before the dialog is torn down
+    PostMessageW(d->hwnd, WM_CLOSE, 0, 0);
+}
+
+static void FreeTabGroup(TabGroup* group) {
+    if (!group) {
+        return;
+    }
+    str::Free(group->name);
+    if (group->tabFiles) {
+        for (auto* tf : *group->tabFiles) {
+            str::Free(tf->path);
+            free(tf);
+        }
+        delete group->tabFiles;
+    }
+    free(group);
+}
+
+static void UpdateDeleteButton(TabGroupsDialog* d) {
+    if (!d->btnDelete) {
+        return;
+    }
+    int sel = d->listBox ? d->listBox->GetCurrentSelection() : -1;
+    EnableWindow(d->btnDelete->hwnd, sel >= 0);
+}
+
+static void DeleteTabGroup(TabGroupsDialog* d) {
+    int sel = d->listBox ? d->listBox->GetCurrentSelection() : -1;
+    if (sel < 0) {
+        return;
+    }
+    auto* groups = gGlobalPrefs->tabGroups;
+    if (!groups || sel >= groups->Size()) {
+        return;
+    }
+    TabGroup* group = groups->At(sel);
+    groups->Remove(group);
+    FreeTabGroup(group);
+    SaveSettings();
+    PopulateListBox(d);
+    UpdateDeleteButton(d);
+}
+
+static void DrawTabGroupItem(TabGroupsDialog* d, ListBox::DrawItemEvent* ev) {
+    if (ev->itemIndex < 0 || ev->itemIndex >= d->model->ItemsCount()) {
+        return;
+    }
+
+    HDC hdc = ev->hdc;
+    RECT rc = ev->itemRect;
+    ListBox* lb = ev->listBox;
+
+    COLORREF colBg = IsSpecialColor(lb->bgColor) ? GetSysColor(COLOR_WINDOW) : lb->bgColor;
+    COLORREF colText = IsSpecialColor(lb->textColor) ? GetSysColor(COLOR_WINDOWTEXT) : lb->textColor;
+    if (ev->selected) {
+        colBg = AccentColor(colBg, 30);
+    }
+
+    SetBkColor(hdc, colBg);
+    ExtTextOutW(hdc, 0, 0, ETO_OPAQUE, &rc, nullptr, 0, nullptr);
+
+    SetTextColor(hdc, colText);
+    SetBkMode(hdc, TRANSPARENT);
+
+    HFONT oldFont = nullptr;
+    if (lb->font) {
+        oldFont = SelectFont(hdc, lb->font);
+    }
+
+    int padX = DpiScale(lb->hwnd, 4);
+    rc.left += padX;
+    rc.right -= padX;
+
+    // draw group name on the left
+    const char* name = d->model->Item(ev->itemIndex);
+    WCHAR* nameW = ToWStrTemp(name);
+    uint fmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX | DT_LEFT;
+    DrawTextW(hdc, nameW, -1, &rc, fmt);
+
+    // draw tab count on the right
+    int nTabs = d->model->TabCount(ev->itemIndex);
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%d tabs", nTabs);
+    WCHAR* countW = ToWStrTemp(buf);
+    COLORREF rightCol = AccentColor(colText, 80);
+    SetTextColor(hdc, rightCol);
+    RECT rcRight = rc;
+    fmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX | DT_RIGHT;
+    DrawTextW(hdc, countW, -1, &rcRight, fmt);
+
+    if (oldFont) {
+        SelectFont(hdc, oldFont);
+    }
+}
+
+static void OnListSelectionChanged(TabGroupsDialog* d) {
+    UpdateDeleteButton(d);
+}
+
+static void OnListDoubleClick(TabGroupsDialog* d) {
+    if (d->mode == TabGroupDialogMode::Open) {
+        OpenTabGroup(d);
+    } else {
+        int sel = d->listBox ? d->listBox->GetCurrentSelection() : -1;
+        if (sel >= 0 && d->hwndEdit) {
+            auto* groups = gGlobalPrefs->tabGroups;
+            if (groups && sel < groups->Size()) {
+                auto ws = ToWStrTemp(groups->At(sel)->name);
+                SetWindowTextW(d->hwndEdit, ws);
+                SendMessageW(d->hwndEdit, EM_SETSEL, 0, -1);
+                SetFocus(d->hwndEdit);
+            }
+        }
+    }
 }
 
 static LRESULT CALLBACK WndProcTabGroups(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
@@ -185,25 +335,6 @@ static LRESULT CALLBACK WndProcTabGroups(HWND hwnd, UINT msg, WPARAM wp, LPARAM 
             return 0;
 
         case WM_COMMAND:
-            if (d && HIWORD(wp) == LBN_DBLCLK && (HWND)lp == d->hwndListBox) {
-                if (d->mode == TabGroupDialogMode::Open) {
-                    OpenTabGroup(d);
-                } else {
-                    // in save mode, double-click populates edit with the group name
-                    // for overwrite (but we just select the name in the edit)
-                    int sel = (int)SendMessageW(d->hwndListBox, LB_GETCURSEL, 0, 0);
-                    if (sel != LB_ERR && d->hwndEdit) {
-                        auto* groups = gGlobalPrefs->tabGroups;
-                        if (groups && sel < groups->Size()) {
-                            auto ws = ToWStrTemp(groups->At(sel)->name);
-                            SetWindowTextW(d->hwndEdit, ws);
-                            SendMessageW(d->hwndEdit, EM_SETSEL, 0, -1);
-                            SetFocus(d->hwndEdit);
-                        }
-                    }
-                }
-                return 0;
-            }
             break;
 
         case WM_CHAR:
@@ -214,9 +345,16 @@ static LRESULT CALLBACK WndProcTabGroups(HWND hwnd, UINT msg, WPARAM wp, LPARAM 
             break;
 
         case WM_DESTROY:
+            return 0;
+
+        case WM_NCDESTROY:
             if (d) {
                 gTabGroupsDialogs.Remove(d);
+                // prevent double-free: ListBox::~ListBox deletes the model
+                d->model = nullptr;
+                delete d->listBox;
                 delete d->btnOk;
+                delete d->btnDelete;
                 delete d->btnCancel;
                 delete d;
             }
@@ -227,7 +365,7 @@ static LRESULT CALLBACK WndProcTabGroups(HWND hwnd, UINT msg, WPARAM wp, LPARAM 
 }
 
 static void OnCancel(TabGroupsDialog* d) {
-    DestroyWindow(d->hwnd);
+    PostMessageW(d->hwnd, WM_CLOSE, 0, 0);
 }
 
 static void OnOk(TabGroupsDialog* d) {
@@ -236,6 +374,23 @@ static void OnOk(TabGroupsDialog* d) {
     } else {
         OpenTabGroup(d);
     }
+}
+
+static LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR, DWORD_PTR dwRefData) {
+    if (msg == WM_KEYDOWN && wp == VK_RETURN) {
+        auto* d = (TabGroupsDialog*)dwRefData;
+        if (d->mode == TabGroupDialogMode::Save) {
+            int n = GetWindowTextLengthW(d->hwndEdit);
+            if (n > 0) {
+                SaveTabGroup(d);
+                return 0;
+            }
+        }
+    }
+    if (msg == WM_NCDESTROY) {
+        RemoveWindowSubclass(hwnd, EditSubclassProc, 0);
+    }
+    return DefSubclassProc(hwnd, msg, wp, lp);
 }
 
 static void ShowTabGroupsDialog(MainWindow* win, TabGroupDialogMode mode) {
@@ -295,17 +450,28 @@ static void ShowTabGroupsDialog(MainWindow* win, TabGroupDialogMode mode) {
         auto ws = ToWStrTemp(buf);
         SetWindowTextW(d->hwndEdit, ws);
         SendMessageW(d->hwndEdit, EM_SETSEL, 0, -1);
+        SetWindowSubclass(d->hwndEdit, EditSubclassProc, 0, (DWORD_PTR)d);
     }
 
     // listbox
-    DWORD lbStyle = WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_BORDER | LBS_NOTIFY;
-    d->hwndListBox = CreateWindowExW(0, L"LISTBOX", L"", lbStyle, 0, 0, 0, 0, hwnd, nullptr, h, nullptr);
-    SendMessageW(d->hwndListBox, WM_SETFONT, (WPARAM)hFont, TRUE);
-    PopulateListBox(d->hwndListBox);
+    {
+        ListBox::CreateArgs lbArgs;
+        lbArgs.parent = hwnd;
+        lbArgs.font = hFont;
+        lbArgs.isRtl = isRtl;
+        auto* lb = new ListBox();
+        lb->onDrawItem = MkFunc1(DrawTabGroupItem, d);
+        lb->onSelectionChanged = MkFunc0(OnListSelectionChanged, d);
+        lb->onDoubleClick = MkFunc0(OnListDoubleClick, d);
+        lb->Create(lbArgs);
+        d->listBox = lb;
+        d->model = new TabGroupsListBoxModel();
+        PopulateListBox(d);
+    }
 
     // buttons
     {
-        const char* okText = (mode == TabGroupDialogMode::Save) ? _TRA("Save") : _TRA("Open");
+        const char* okText = (mode == TabGroupDialogMode::Save) ? _TRA("Save") : _TRA("Restore");
         Button::CreateArgs args;
         args.parent = hwnd;
         args.text = okText;
@@ -314,6 +480,17 @@ static void ShowTabGroupsDialog(MainWindow* win, TabGroupDialogMode mode) {
         b->Create(args);
         d->btnOk = b;
         b->onClick = MkFunc0(OnOk, d);
+    }
+    {
+        Button::CreateArgs args;
+        args.parent = hwnd;
+        args.text = _TRA("Delete");
+        args.isRtl = isRtl;
+        auto b = new Button();
+        b->Create(args);
+        d->btnDelete = b;
+        b->onClick = MkFunc0(DeleteTabGroup, d);
+        EnableWindow(b->hwnd, FALSE);
     }
     {
         Button::CreateArgs args;

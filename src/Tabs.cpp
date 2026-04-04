@@ -282,6 +282,18 @@ static MenuDef menuDefContextTab[] = {
         CmdCloseAllTabs,
     },
     {
+        kMenuSeparator,
+        0,
+    },
+    {
+        _TRN("Save Tab Group"),
+        CmdTabGroupSave,
+    },
+    {
+        _TRN("Restore Tab Group"),
+        CmdTabGroupRestore,
+    },
+    {
         nullptr,
         0,
     },
@@ -358,55 +370,61 @@ static void TabsContextMenu(ContextMenuEvent* ev) {
     if (toCloseLeft.IsEmpty()) {
         MenuSetEnabled(popup, CmdCloseTabsToTheLeft, false);
     }
+    if (!HasOpenedDocuments(win)) {
+        MenuSetEnabled(popup, CmdTabGroupSave, false);
+    }
     MarkMenuOwnerDraw(popup);
     uint flags = TPM_RETURNCMD | TPM_RIGHTBUTTON;
-    int cmd = TrackPopupMenu(popup, flags, pt.x, pt.y, 0, win->hwndFrame, nullptr);
+    int cmdId = TrackPopupMenu(popup, flags, pt.x, pt.y, 0, win->hwndFrame, nullptr);
     FreeMenuOwnerDrawInfoData(popup);
     DestroyMenu(popup);
-    switch (cmd) {
-        case CmdClose:
+    switch (cmdId) {
+        case CmdClose: {
             CloseTab(tabUnderMouse, false);
-            break;
+            return;
+        }
 
         case CmdCloseAllTabs: {
             CloseAllTabs(win);
-            break;
+            return;
         }
         case CmdCloseOtherTabs: {
             for (WindowTab* t : toCloseOther) {
                 CloseTab(t, false);
             }
-            break;
+            return;
         }
         case CmdCloseTabsToTheRight: {
             for (WindowTab* t : toCloseRight) {
                 CloseTab(t, false);
             }
-            break;
+            return;
         }
         case CmdCloseTabsToTheLeft: {
             for (WindowTab* t : toCloseLeft) {
                 CloseTab(t, false);
             }
-            break;
+            return;
         }
         case CmdShowInFolder: {
             SumatraOpenPathInDefaultFileManager(tabUnderMouse->filePath);
-            break;
+            return;
         }
         case CmdCopyFilePath: {
             CopyFilePath(tabUnderMouse);
-            break;
+            return;
         }
         case CmdDuplicateInNewWindow: {
             DuplicateTabInNewWindow(tabUnderMouse);
-            break;
+            return;
         }
         case CmdProperties: {
             ShowProperties(win->hwndFrame, tabUnderMouse->ctrl);
-            break;
+            return;
         }
     }
+    // everything we forward to main window
+    HwndSendCommand(win->hwndFrame, cmdId);
 }
 
 static void MainWindowTabClosed(MainWindow* win, TabsCtrl::ClosedEvent* ev) {

@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-dbcab4f43b0a174bf9d1af4831ea8929e4a01794
+75da96192760cefaca393c4c11191335905c9832
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -19569,6 +19569,7 @@ it:Ridimensiona immagine
 nl:Wijzig Afbeelding Formaat
 pl:Zmień rozmiar obrazu
 sk:Zmeniť veľkosť obrázka
+:Restore
 :Restore Tab Group
 :Rotate &Left
 am:Պտտել &ձախ
@@ -20587,6 +20588,7 @@ nl:Scroll Omhoog Per Pagina
 pl:Przewiń w górę o stronę
 sk:Posúvať hore na strane
 tw:向上捲動一頁
+:Search Bookmarks
 :Search Selection with Bing
 am:Որոնել ընտրումը Bing-ի միջոցով
 br:Procurar Seleção com Bing
@@ -23012,6 +23014,7 @@ tw:無法開啟同步檔案
 uk:Неможливо відкрити файл синхронізації
 uz:Sinxronlanish faylini ochib bo'lmadi
 vn:Không mở được tập tin đồng bộ
+:Tab Groups
 :Tagged PDF
 am:Կցված PDF
 ar:المستندات المحمولة موسومة
