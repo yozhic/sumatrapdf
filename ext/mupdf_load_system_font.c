@@ -112,6 +112,13 @@ static struct {
     {"Times-Italic", "TimesNewRomanPS-ItalicMT"},
     {"Times-BoldItalic", "TimesNewRomanPS-BoldItalicMT"},
     {"Symbol", "SymbolMT"},
+    // CSS generic font families used in EPUB files
+    {"serif", "TimesNewRomanPSMT"},
+    {"sans-serif", "ArialMT"},
+    {"sans", "ArialMT"},
+    {"monospace", "CourierNewPSMT"},
+    {"cursive", "ComicSansMS"},
+    {"fantasy", "Impact"},
 };
 
 static win_fonts g_win_fonts;
@@ -601,7 +608,7 @@ static fz_buffer* load_and_cache_font(fz_context* ctx, win_font_info* fi, const 
     ff = &g_font_files.files[file_idx];
     if (ff->data) {
         buffer = fz_new_buffer_from_shared_data(ctx, ff->data, ff->size);
-        fz_warn(ctx, "found cached font '%s' from '%s'", font_name, ff->file_path);
+        //fz_warn(ctx, "found cached font '%s' from '%s'", font_name, ff->file_path);
     }
     LeaveCriticalSection(&cs_fonts);
     if (buffer) {
@@ -620,7 +627,7 @@ static fz_buffer* load_and_cache_font(fz_context* ctx, win_font_info* fi, const 
     fz_drop_buffer(ctx, buffer);
     buffer = fz_new_buffer_from_shared_data(ctx, ff->data, ff->size);
     LeaveCriticalSection(&cs_fonts);
-    fz_warn(ctx, "loaded font '%s' from '%s'", font_name, ff->file_path);
+    //fz_warn(ctx, "loaded font '%s' from '%s'", font_name, ff->file_path);
     return buffer;
 }
 
