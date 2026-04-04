@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF draw [options] file [pages]`
+**Usage:** `SumatraPDF draw [options] file [pages]`
 
 See [all-options](#all-options) below.
 

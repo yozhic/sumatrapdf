@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF info [options] file.pdf [pages]`
+**Usage:** `SumatraPDF info [options] file.pdf [pages]`
 
 PDF file can contain embedded fonts, images, patterns etc. Each object has an object number.
 

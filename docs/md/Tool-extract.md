@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF extract [options] file.pdf [object numbers]`
+**Usage:** `SumatraPDF extract [options] file.pdf [object numbers]`
 
 You can use [`SumatraPDF info`](Tool-info.md) to get a list of image, font etc. objects present in a PDF file.
 

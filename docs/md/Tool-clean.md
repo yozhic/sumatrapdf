@@ -2,15 +2,16 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF clean [options] input.pdf [output.pdf] [pages]`
+**Usage:** `SumatraPDF clean [options] input.pdf [output.pdf] [pages]`
 
 See [all-options](#all-options) below.
 
-You can use `clean` to:
+`clean` rewrites s PDF file. You can:
 
 - compress a PDF
 - decompress a PDF
 - encrypt / decrypt PDF
+- extract / remove pages
 
 ## Compress a PDF
 

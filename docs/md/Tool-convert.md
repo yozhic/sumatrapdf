@@ -2,7 +2,7 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF convert [options] file [pages]`
+**Usage:** `SumatraPDF convert [options] file [pages]`
 
 ## All options
 

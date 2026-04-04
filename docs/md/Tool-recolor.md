@@ -2,7 +2,11 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
-Usage: `SumatraPDF recolor [options] <input filename>`
+**Usage:** `SumatraPDF recolor [options] <input filename>`
+
+A PDF can use several color spaces. You can use `recolor` to change the colorspace.
+
+To convert a PDF to gray: `SumatraPDF recolor -o output.pdf -c gray input.pdf`
 
 ## All options
 
