@@ -2161,7 +2161,7 @@ static struct {
 
 constexpr int kNoMutool = -1234321; // arbitrary negative value that won't collide with any mutool exit code
 
-static int MaybeMutool() {
+static int MaybeRunMutool() {
     WCHAR* exePath;
     int argc = 0;
     char** argv = nullptr;
@@ -2357,23 +2357,6 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         return 0;
     }
 
-    if (flags.justExtractFiles) {
-        RedirectIOToExistingConsole();
-        if (!ExeHasInstallerResources()) {
-            log("this is not a SumatraPDF installer, -x option not available\n");
-            HandleRedirectedConsoleOnShutdown();
-            return 1;
-        }
-        exitCode = 0;
-        if (!ExtractInstallerFiles(gCli->installDir)) {
-            log("failed to extract files");
-            LogLastError();
-            exitCode = 1;
-        }
-        HandleRedirectedConsoleOnShutdown();
-        return exitCode;
-    }
-
     if (flags.updateSelfTo) {
         logf(" flags.updateSelfTo: '%s'\n", flags.updateSelfTo);
         RedirectIOToExistingConsole();
@@ -2470,8 +2453,26 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     }
 #endif
 
-    if (MaybeMutool() != kNoMutool) {
+    if (MaybeRunMutool() != kNoMutool) {
         goto Exit;
+    }
+
+    // -x is one of options for poster tool, so we must run MaybeRunMutool() before this
+    if (flags.justExtractFiles) {
+        RedirectIOToExistingConsole();
+        if (!ExeHasInstallerResources()) {
+            log("this is not a SumatraPDF installer, -x option not available\n");
+            HandleRedirectedConsoleOnShutdown();
+            return 1;
+        }
+        exitCode = 0;
+        if (!ExtractInstallerFiles(gCli->installDir)) {
+            log("failed to extract files");
+            LogLastError();
+            exitCode = 1;
+        }
+        HandleRedirectedConsoleOnShutdown();
+        return exitCode;
     }
 
     DetectExternalViewers();
