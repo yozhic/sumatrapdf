@@ -874,6 +874,56 @@ static fz_font* load_windows_fallback_font(fz_context* ctx, int script, int lang
                 font_name = "SegoeUI-Bold";
             }
         } break;
+        case UCDN_SCRIPT_ARABIC:
+        case UCDN_SCRIPT_SYRIAC:
+        case UCDN_SCRIPT_THAANA: {
+            font_name = "SegoeUI";
+            if (bold) {
+                font_name = "SegoeUI-Bold";
+            }
+        } break;
+        case UCDN_SCRIPT_THAI:
+        case UCDN_SCRIPT_LAO:
+        case UCDN_SCRIPT_KHMER:
+        case UCDN_SCRIPT_MYANMAR:
+        case UCDN_SCRIPT_TIBETAN: {
+            font_name = "MicrosoftSansSerif";
+        } break;
+        case UCDN_SCRIPT_HAN:
+        case UCDN_SCRIPT_BOPOMOFO: {
+            font_name = "MicrosoftYaHei";
+            if (bold) {
+                font_name = "MicrosoftYaHei-Bold";
+            }
+        } break;
+        case UCDN_SCRIPT_HIRAGANA:
+        case UCDN_SCRIPT_KATAKANA: {
+            font_name = "YuGothic-Regular";
+            if (bold) {
+                font_name = "YuGothic-Bold";
+            }
+        } break;
+        case UCDN_SCRIPT_HANGUL: {
+            font_name = "MalgunGothic";
+            if (bold) {
+                font_name = "MalgunGothicBold";
+            }
+        } break;
+        case UCDN_SCRIPT_ETHIOPIC: {
+            font_name = "NyalaSemiBold";
+        } break;
+        case UCDN_SCRIPT_CANADIAN_ABORIGINAL: {
+            font_name = "Gadugi";
+            if (bold) {
+                font_name = "Gadugi-Bold";
+            }
+        } break;
+        case UCDN_SCRIPT_MONGOLIAN: {
+            font_name = "MongolianBaiti";
+        } break;
+        case UCDN_SCRIPT_YI: {
+            font_name = "MicrosoftYiBaiti";
+        } break;
         case UCDN_SCRIPT_CYRILLIC:
         case UCDN_SCRIPT_GREEK:
         case UCDN_SCRIPT_ARMENIAN:
