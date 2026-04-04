@@ -126,7 +126,6 @@ struct ImageEditWindow {
     HWND hwndDestEdit = nullptr;
     HWND hwndBrowseBtn = nullptr;
     HWND hwndInfoLabel = nullptr;
-    Button* btnCancel = nullptr;
     Button* btnSave = nullptr;
     Button* btnCrop = nullptr;   // "Crop" or "Apply Crop"
     Button* btnResize = nullptr; // "Resize" or "Apply Resize"
@@ -176,7 +175,6 @@ struct ImageEditWindow {
     ~ImageEditWindow() {
         delete srcBitmap;
         free(filePath);
-        delete btnCancel;
         delete btnSave;
         delete btnCrop;
         delete btnResize;
@@ -768,14 +766,11 @@ static void LayoutControls(ImageEditWindow* ew) {
     // row 3: info label, cancel, save
     // layout buttons first to know where info label must stop
     int bx = cRc.dx - kButtonPadding;
-    if (ew->btnSave && ew->btnCancel) {
-        // right-to-left: Cancel, Resize, Crop, [Format], Save
-        Size szCancel = ew->btnCancel->GetIdealSize();
-        bx -= szCancel.dx;
-        ew->btnCancel->SetBounds({bx, y, szCancel.dx, szCancel.dy});
+    if (ew->btnSave) {
+        // right-to-left: Resize, Crop, [Format], Save
         if (ew->btnResize) {
             Size szResize = ew->btnResize->GetIdealSize();
-            bx -= szResize.dx + 4;
+            bx -= szResize.dx;
             ew->btnResize->SetBounds({bx, y, szResize.dx, szResize.dy});
         }
         if (ew->btnCrop) {
@@ -786,8 +781,8 @@ static void LayoutControls(ImageEditWindow* ew) {
         if (ew->dropFormat) {
             Size szDrop = ew->dropFormat->GetIdealSize();
             bx -= szDrop.dx + 4;
-            // vertically center dropdown with buttons
-            int dropY = y + (szCancel.dy - szDrop.dy) / 2;
+            Size szRef = ew->btnResize ? ew->btnResize->GetIdealSize() : ew->btnSave->GetIdealSize();
+            int dropY = y + (szRef.dy - szDrop.dy) / 2;
             ew->dropFormat->SetBounds({bx, dropY, szDrop.dx, szDrop.dy});
         }
         Size szSave = ew->btnSave->GetIdealSize();
@@ -1028,10 +1023,6 @@ static void OnSave(ImageEditWindow* ew) {
         StartLoadDocument(&args);
     }
     free(savedPath);
-}
-
-static void OnCancel(ImageEditWindow* ew) {
-    DestroyWindow(ew->hwnd);
 }
 
 static void UpdateInfoLabel(ImageEditWindow* ew);
@@ -1817,15 +1808,6 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
     SendMessageW(ew->hwndInfoLabel, WM_SETFONT, (WPARAM)ew->hFont, TRUE);
 
     // buttons
-    {
-        auto* btn = new Button();
-        Button::CreateArgs args;
-        args.parent = hwnd;
-        args.text = _TRN("Cancel");
-        btn->Create(args);
-        btn->onClick = MkFunc0<ImageEditWindow>(OnCancel, ew);
-        ew->btnCancel = btn;
-    }
     {
         auto* btn = new Button();
         Button::CreateArgs args;
