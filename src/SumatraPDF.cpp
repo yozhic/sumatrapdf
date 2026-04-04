@@ -6970,6 +6970,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
 
+        case CmdToggleEscToExit:
+            gGlobalPrefs->escToExit = !gGlobalPrefs->escToExit;
+            SaveSettings();
+            break;
+
         case CmdNavigateBack:
             if (ctrl) {
                 ctrl->Navigate(-1);

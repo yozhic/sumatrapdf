@@ -525,6 +525,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
             isToggle = true;
             newIsOn = !gGlobalPrefs->lazyLoading;
         } break;
+        case CmdToggleEscToExit: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->escToExit;
+        } break;
         case CmdToggleUseTabs: {
             isToggle = true;
             newIsOn = !gGlobalPrefs->useTabs;

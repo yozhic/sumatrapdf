@@ -213,6 +213,7 @@ static SeqStrings gCommandNames =
     "CmdToggleSmoothScroll\0"
     "CmdToggleScrollbarInSinglePage\0"
     "CmdToggleLazyLoading\0"
+    "CmdToggleEscToExit\0"
     "CmdListPrinters\0"
     "CmdToggleWindowsPreviewer\0"
     "CmdToggleWindowsSearchFilter\0"
@@ -426,6 +427,7 @@ static i32 gCommandIds[] = {
     CmdToggleSmoothScroll,
     CmdToggleScrollbarInSinglePage,
     CmdToggleLazyLoading,
+    CmdToggleEscToExit,
     CmdListPrinters,
     CmdToggleWindowsPreviewer,
     CmdToggleWindowsSearchFilter,
@@ -639,6 +641,7 @@ SeqStrings gCommandDescriptions =
     "Toggle Smooth Scroll\0"
     "Toggle Scrollbar In Single Page\0"
     "Toggle Lazy Loading\0"
+    "Toggle Esc to Exit\0"
     "List Printers\0"
     "Toggle Windows Previewer\0"
     "Toggle Windows Search Filter\0"

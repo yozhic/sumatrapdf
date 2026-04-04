@@ -203,6 +203,7 @@ export const commands = [
     // removed: CmdToggleHideScrollbar (replaced by CmdChangeScrollbar)
     "CmdToggleScrollbarInSinglePage", "Toggle Scrollbar In Single Page",
     "CmdToggleLazyLoading", "Toggle Lazy Loading",
+    "CmdToggleEscToExit", "Toggle Esc to Exit",
     "CmdListPrinters", "List Printers",
     "CmdToggleWindowsPreviewer", "Toggle Windows Previewer",
     "CmdToggleWindowsSearchFilter", "Toggle Windows Search Filter",
