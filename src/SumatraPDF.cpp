@@ -539,6 +539,11 @@ char* HwndPasswordUI::GetPassword(const char* path, u8* fileDigest, u8 decryptio
         return nullptr;
     }
 
+    // can't show a dialog (e.g. thumbnail generation thread)
+    if (!hwnd) {
+        return nullptr;
+    }
+
     // extract the filename from the URL in plugin mode instead
     // of using the more confusing temporary filename
     if (gPluginMode) {
@@ -924,6 +929,11 @@ static void CreateThumbnailForFile(MainWindow* win, FileState* ds) {
             if (withPwd && !decrKey) {
                 RemoveThumbnail(ds);
                 return;
+            }
+            // save decryption key to file history so the thumbnail thread can use it
+            if (decrKey && !str::Eq(ds->decryptionKey, decrKey.Get())) {
+                free(ds->decryptionKey);
+                ds->decryptionKey = decrKey.Release();
             }
         }
     }
