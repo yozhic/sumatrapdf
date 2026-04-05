@@ -3590,6 +3590,27 @@ void EngineMupdf::GetProperties(StrVec& keyValOut) {
     if (val) {
         AddProp(keyValOut, kPropEncryption, val);
     }
+
+    // for epub files, list all files in the archive
+    const char* path = FilePath();
+    if (path && str::EndsWithI(path, ".epub")) {
+        MultiFormatArchive* zip = OpenZipArchive(path, false);
+        if (zip) {
+            str::Str filesStr;
+            auto& fileInfos = zip->GetFileInfos();
+            size_t n = fileInfos.size();
+            for (size_t i = 0; i < n; i++) {
+                auto* fi = fileInfos[i];
+                if (str::IsEmpty(fi->name)) {
+                    continue;
+                }
+                filesStr.AppendChar('\n');
+                filesStr.Append(fi->name);
+            }
+            AddProp(keyValOut, kPropFiles, filesStr.CStr());
+            delete zip;
+        }
+    }
 }
 
 ByteSlice EngineMupdf::GetFileData() {
