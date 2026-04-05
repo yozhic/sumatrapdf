@@ -878,6 +878,7 @@ end
 function utils_files()
   files_in_dir("src/utils", {
     "ApiHook.*",
+    "Archive.*",
     "AvifReader.*",
     "BaseUtil.*",
     "BitReader.*",

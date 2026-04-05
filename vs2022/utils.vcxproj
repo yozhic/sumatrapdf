@@ -838,6 +838,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\utils\Archive.h" />
     <ClInclude Include="..\src\utils\AvifReader.h" />
     <ClInclude Include="..\src\utils\BaseUtil.h" />
     <ClInclude Include="..\src\utils\BitReader.h" />
@@ -888,6 +889,7 @@
     <ClInclude Include="..\src\utils\windrawlib.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\utils\Archive.cpp" />
     <ClCompile Include="..\src\utils\AvifReader.cpp" />
     <ClCompile Include="..\src\utils\BaseUtil.cpp" />
     <ClCompile Include="..\src\utils\BitReader.cpp" />

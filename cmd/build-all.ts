@@ -19,7 +19,7 @@ async function main() {
   const sln = String.raw`vs2022\SumatraPDF.sln`;
   const t = `/t:SumatraPDF-dll;SumatraPDF`;
   // const t = `/t:SumatraPDF;test_util`;
-  const p = `/p:Configuration=Debug;Platform=x64`;
+  const p = `/p:Configuration=Release;Platform=x64`;
   await runLogged(msbuildPath, [sln, t, p, `/m`]);
 
   // const outDir = join("out", "dbg64");

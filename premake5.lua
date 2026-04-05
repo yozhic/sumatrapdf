@@ -782,9 +782,9 @@ workspace "SumatraPDF"
     cppdialect "C++latest"
     mixed_dbg_rel_conf()
     disablewarnings { "4100", "4838" }
+    defines { "HAVE_LIBARCHIVE", "LIBARCHIVE_STATIC" }
     filter { "configurations:Debug" }
     defines { "BUILD_TEX_IFILTER", "BUILD_EPUB_IFILTER" }
-    defines { "HAVE_LIBARCHIVE", "LIBARCHIVE_STATIC" }
     filter {}
     includedirs { "src", "src/wingui", "mupdf/include", "ext/libarchive" }
     search_filter_files()
