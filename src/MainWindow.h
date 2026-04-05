@@ -15,10 +15,10 @@ struct TabsCtrl;
 struct TocTree;
 
 // factor by how large the non-maximized caption should be in relation to the tabbar
-#define kCaptionTabBarDyFactor 1.25f
+#define kCaptionTabBarDyFactor 1.0f
 
 // gap in pixels between top of caption and tabs; this area allows dragging the window
-#define kCaptionTopPadding 14
+#define kCaptionTopPadding 8
 
 enum CaptionButtons {
     CB_BTN_FIRST = 0,

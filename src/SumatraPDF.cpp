@@ -4093,7 +4093,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
                 rc.dy -= kCaptionTopPadding;
             }
             int tabHeight = GetTabbarHeight(win->hwndFrame);
-            int captionHeight = tabHeight;
+            int captionHeight = tabHeight + 2;
             if (showingMenuBar) {
                 int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0) + 1;
                 // check if there are actual file tabs to show
@@ -7435,23 +7435,25 @@ void RelayoutCaption(MainWindow* win) {
         win->captionBtn[CB_MINIMIZE].visible = true;
         rc.dx -= btnDx;
 
-        rc.y += rc.dy - tabHeight;
+        // tabs fill the full caption height (rc.dy)
+        int tabDy = rc.dy;
+        rc.y += rc.dy - tabDy;
 
-        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+        win->captionBtn[CB_SYSTEM_MENU].rect = {rc.x, rc.y, tabDy, tabDy};
         win->captionBtn[CB_SYSTEM_MENU].visible = true;
-        rc.x += tabHeight;
-        rc.dx -= tabHeight;
+        rc.x += tabDy;
+        rc.dx -= tabDy;
 
-        win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabHeight, tabHeight};
+        win->captionBtn[CB_MENU].rect = {rc.x, rc.y, tabDy, tabDy};
         win->captionBtn[CB_MENU].visible = true;
-        rc.x += tabHeight;
-        rc.dx -= tabHeight;
+        rc.x += tabDy;
+        rc.dx -= tabDy;
 
         // leave a gap between the tab bar and the minimize button
         rc.dx -= kTabsButtonGapX;
 
         DeferWinPosHelper dh;
-        dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
+        dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabDy, SWP_NOZORDER);
         dh.End();
     }
 
