@@ -155,27 +155,8 @@ static bool FileStateChanged(const char* filePath, FileWatcherState* fs) {
 // and we don't handle that. On the other hand, I've only seen references
 // to it wrt. to rename/delete operation, which we don't get notified about
 //
-// TODO: to collapse multiple notifications for the same file, could put it on a
-// queue, restart the thread with a timeout, restart the process if we
-// get notified again before timeout expires, call OnFileChanges() when
-// timeout expires
-static bool IsLogFile(WatchedDir* d, const char* fileName) {
-    if (!gLogFilePath) {
-        return false;
-    }
-    TempStr logBaseName = path::GetBaseNameTemp(gLogFilePath);
-    if (!str::EqI(fileName, logBaseName)) {
-        return false;
-    }
-    TempStr logDirPath = path::GetDirTemp(gLogFilePath);
-    return str::EqI(d->dirPath, logDirPath);
-}
 
 static void NotifyAboutFile(WatchedDir* d, const char* fileName) {
-    if (IsLogFile(d, fileName)) {
-        return;
-    }
-
     int i = 0;
 
     for (WatchedFile* wf = gWatchedFiles; wf; wf = wf->next) {
@@ -491,7 +472,12 @@ WatchedFile* FileWatcherSubscribe(const char* path, const Func0& onFileChangedCb
     // logf("FileWatcherSubscribe() path: %s\n", path);
 
     if (!file::Exists(path)) {
-        logf("FileWatcherSubscribe: path='%s' doesn't exist\n", path);
+        logf("FileWatcherSubscribe: '%s' doesn't exist\n", path);
+        return nullptr;
+    }
+
+    if (path::IsSame(gLogFilePath, path)) {
+        logf("FileWatcherSubscribe: '%s' is our own log file\n", path);
         return nullptr;
     }
 #if 0
