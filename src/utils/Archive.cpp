@@ -80,13 +80,18 @@ bool MultiFormatArchive::ParseEntries(struct archive* a) {
 }
 
 bool MultiFormatArchive::Open(const char* path) {
+    bool ok = OpenArchive(path);
+    if (ok) {
+        return true;
+    }
+    // for .rar files, fall back to unrar.dll if libarchive fails
     if ((format == Format::Rar) && path) {
-        bool ok = OpenUnrarFallback(path);
+        ok = OpenUnrarFallback(path);
         if (ok) {
             return true;
         }
     }
-    return OpenArchive(path);
+    return false;
 }
 
 bool MultiFormatArchive::Open(IStream* stream) {
