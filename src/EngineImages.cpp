@@ -145,12 +145,11 @@ RectF EngineImages::PageMediabox(int pageNo) {
     ReportIf((pageNo < 1) || (pageNo > pageCount));
     int n = pageNo - 1;
     ImagePageInfo* pi = pages[n];
-    RectF& mbox = pi->mediabox;
     if (!pi->hasMediaBox) {
-        mbox = LoadMediabox(pageNo);
+        pi->mediabox = LoadMediabox(pageNo);
         pi->hasMediaBox = true;
     }
-    return mbox;
+    return pi->mediabox;
 }
 
 RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
@@ -1586,7 +1585,6 @@ RectF EngineCbx::LoadMediabox(int pageNo) {
         Size size = BitmapSizeFromData(img);
         img.Free();
         if (size.IsEmpty()) {
-            ;
             logf("EngineCbx::LoadMediabox: empty media box for page: %d\n", pageNo);
         }
         return RectF(0, 0, (float)size.dx, (float)size.dy);

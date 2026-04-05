@@ -299,7 +299,8 @@ SizeF DisplayModel::PageSizeAfterRotation(int pageNo, bool fitToContent) const {
         }
     }
 
-    RectF box = fitToContent ? pageInfo->contentBox : pageInfo->page;
+    RectF pageBox = PageMediaBox(pageNo);
+    RectF box = fitToContent ? pageInfo->contentBox : pageBox;
     return engine->Transform(box, pageNo, 1.0, rotation).Size();
 }
 
@@ -373,12 +374,37 @@ DisplayModel::~DisplayModel() {
     free(pagesInfo);
 }
 
+RectF DisplayModel::PageMediaBox(int pageNo) const {
+    PageInfo* pi = GetPageInfo(pageNo);
+    if (!pi) return RectF();
+    if (pi->state == PageInfo::State::Known) {
+        return pi->_mediaBox;
+    }
+    if (pi->state == PageInfo::State::Error) {
+        return RectF();
+    }
+    pi->_mediaBox = engine->PageMediabox(pageNo);
+    if (pi->_mediaBox.IsEmpty()) {
+        float fileDPI = engine->GetFileDPI();
+        if (0 == GetMeasurementSystem()) {
+            pi->_mediaBox = RectF(0, 0, 21.0 / 2.54 * fileDPI, 29.7 / 2.54 * fileDPI);
+        } else {
+            pi->_mediaBox = RectF(0, 0, 8.5 * fileDPI, 11 * fileDPI);
+        }
+        pi->state = PageInfo::State::Error;
+    } else {
+        pi->state = PageInfo::State::Known;
+    }
+    return pi->_mediaBox;
+}
+
 PageInfo* DisplayModel::GetPageInfo(int pageNo) const {
     if (!ValidPageNo(pageNo)) {
         return nullptr;
     }
     ReportIf(!pagesInfo);
-    return &(pagesInfo[pageNo - 1]);
+    PageInfo* pi = &(pagesInfo[pageNo - 1]);
+    return pi;
 }
 
 // Call this before the first Relayout
@@ -422,7 +448,7 @@ void DisplayModel::BuildPagesInfo() {
     ReportIf(pagesInfo);
     int pageCount = PageCount();
     pagesInfo = AllocArray<PageInfo>(pageCount);
-
+    // +1 so we can index by pageNo (1-based)
     log("DisplayModel::BuildPagesInfo started\n");
     auto timeStart = TimeGet();
     defer {
@@ -430,45 +456,40 @@ void DisplayModel::BuildPagesInfo() {
         logf("DisplayModel::BuildPagesInfo took %.2f ms\n", dur);
     };
 
-    RectF defaultRect;
-    float fileDPI = engine->GetFileDPI();
-    if (0 == GetMeasurementSystem()) {
-        defaultRect = RectF(0, 0, 21.0 / 2.54 * fileDPI, 29.7 / 2.54 * fileDPI);
-    } else {
-        defaultRect = RectF(0, 0, 8.5 * fileDPI, 11 * fileDPI);
-    }
-
     int columns = ColumnsFromDisplayMode(displayMode);
     int newStartPage = startPage;
     if (IsBookView(displayMode) && newStartPage == 1 && columns > 1) {
         newStartPage--;
     }
 
+    bool isCont = IsContinuous(displayMode);
     for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        pageInfo->page = engine->PageMediabox(pageNo);
-        // layout pages with an empty mediabox as A4 size (resp. letter size)
-        if (pageInfo->page.IsEmpty()) {
-            pageInfo->page = defaultRect;
-        }
+        PageInfo* pageInfo = &pagesInfo[pageNo - 1];
         pageInfo->visibleRatio = 0.0;
-        pageInfo->shown = false;
-        if (IsContinuous(displayMode)) {
-            pageInfo->shown = true;
+        pagesInfo[pageNo - 1].isShown = false;
+        if (isCont) {
+            pagesInfo[pageNo - 1].isShown = true;
         } else if (newStartPage <= pageNo && pageNo < newStartPage + columns) {
-            pageInfo->shown = true;
+            pagesInfo[pageNo - 1].isShown = true;
         }
     }
+
+    if (isCont) {
+        // in continuous mode, we need page sizes for all pages upfront for layout
+        for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
+            GetPageInfo(pageNo); // triggers lazy load of page mediabox
+        }
+    }
+    // in non-continuous mode, GetPageInfo() will lazily load page sizes on demand
 }
 
 // TODO: a better name e.g. ShouldShow() to better distinguish between
 // before-layout info and after-layout visibility checks
 bool DisplayModel::PageShown(int pageNo) const {
-    PageInfo* pageInfo = GetPageInfo(pageNo);
-    if (!pageInfo) {
+    if (!ValidPageNo(pageNo) || !pagesInfo) {
         return false;
     }
-    return pageInfo->shown;
+    return pagesInfo[pageNo - 1].isShown;
 }
 
 bool DisplayModel::PageVisible(int pageNo) const {
@@ -552,7 +573,8 @@ float DisplayModel::ZoomRealFromVirtualForPage(float zoomVirtual, int pageNo) co
                 pageInfo->contentBox = engine->PageContentBox(i);
             }
 
-            RectF pageBox = engine->Transform(pageInfo->page, i, 1.0, rotation);
+            RectF mbox = PageMediaBox(i);
+            RectF pageBox = engine->Transform(mbox, i, 1.0, rotation);
             RectF contentBox = engine->Transform(pageInfo->contentBox, i, 1.0, rotation);
             if (contentBox.IsEmpty()) {
                 contentBox = pageBox;
@@ -660,11 +682,11 @@ void DisplayModel::CalcZoomReal(float newZoomVirtual) {
            all pages are the same size anyway */
         float minZoom = (float)HUGE_VAL;
         for (int pageNo = 1; pageNo <= nPages; pageNo++) {
-            if (PageShown(pageNo)) {
+            PageInfo* pi = GetPageInfo(pageNo);
+            if (pi->isShown) {
                 float zoom = ZoomRealFromVirtualForPage(newZoomVirtual, pageNo);
-                PageInfo* pageInfo = GetPageInfo(pageNo);
                 ReportDebugIf(zoom < 0.01f);
-                pageInfo->zoomReal = zoom;
+                pi->zoomReal = zoom;
                 if (minZoom > zoom) {
                     minZoom = zoom;
                 }
@@ -753,10 +775,11 @@ RestartLayout:
     int rowMaxPageDy = 0;
     bool hideScrollbars = ScrollbarsAreHidden();
     bool useOverlayScrollbar = ScrollbarsUseOverlay();
-    for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        if (!pageInfo->shown) {
-            ReportIf(0.0 != pageInfo->visibleRatio);
+    int nPages = PageCount();
+    for (int pageNo = 1; pageNo <= nPages; ++pageNo) {
+        PageInfo* pi = GetPageInfo(pageNo);
+        if (!pi->isShown) {
+            // ReportIf(0.0 != pageInfo->visibleRatio);
             continue;
         }
         SizeF pageSize = PageSizeAfterRotation(pageNo);
@@ -799,7 +822,7 @@ RestartLayout:
             goto RestartLayout;
         }
 
-        pageInfo->pos = pos;
+        pi->pos = pos;
 
         pageInARow++;
         ReportIf(pageInARow > columns);
@@ -854,12 +877,12 @@ RestartLayout:
     ReportIf(offX < 0);
     pageInARow = 0;
     int pageOffX = offX + windowMargin.left;
-    for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        if (!pageInfo->shown) {
-            ReportIf(0.0 != pageInfo->visibleRatio);
+    int nPages2 = PageCount();
+    for (int pageNo = 1; pageNo <= nPages2; ++pageNo) {
+        if (!pagesInfo[pageNo - 1].isShown) {
             continue;
         }
+        PageInfo* pageInfo = GetPageInfo(pageNo);
         // leave first spot empty in cover page mode
         if (IsBookView(GetDisplayMode()) && pageNo == 1) {
             ReportIf(pageInARow >= dimofi(columnMaxWidth));
@@ -907,11 +930,10 @@ RestartLayout:
         int offY = windowMargin.top + (viewPort.dy - canvasDy) / 2;
         ReportIf(offY < 0.0);
         for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-            PageInfo* pageInfo = GetPageInfo(pageNo);
-            if (!pageInfo->shown) {
-                ReportIf(0.0 != pageInfo->visibleRatio);
+            if (!pagesInfo[pageNo - 1].isShown) {
                 continue;
             }
+            PageInfo* pageInfo = GetPageInfo(pageNo);
             pageInfo->pos.y += offY;
         }
     }
@@ -937,15 +959,14 @@ void DisplayModel::ChangeStartPage(int newStartPage) {
         newStartPage--;
     }
     for (int pageNo = 1; pageNo <= PageCount(); pageNo++) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
         if (IsContinuous(GetDisplayMode())) {
-            pageInfo->shown = true;
+            pagesInfo[pageNo - 1].isShown = true;
         } else if (pageNo >= newStartPage && pageNo < newStartPage + columns) {
-            // lf("DisplayModel::changeStartPage() set page %d as shown", pageNo);
-            pageInfo->shown = true;
+            pagesInfo[pageNo - 1].isShown = true;
         } else {
-            pageInfo->shown = false;
+            pagesInfo[pageNo - 1].isShown = false;
         }
+        PageInfo* pageInfo = GetPageInfo(pageNo);
         pageInfo->visibleRatio = 0.0;
     }
     Relayout(zoomVirtual, rotation);
@@ -962,11 +983,10 @@ void DisplayModel::RecalcVisibleParts() const {
     }
 
     for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        if (!pageInfo->shown) {
-            ReportIf(0.0 != pageInfo->visibleRatio);
+        if (!pagesInfo[pageNo - 1].isShown) {
             continue;
         }
+        PageInfo* pageInfo = GetPageInfo(pageNo);
 
         Rect pageRect = pageInfo->pos;
         Rect visiblePart = pageRect.Intersect(viewPort);
@@ -989,11 +1009,10 @@ int DisplayModel::GetPageNoByPoint(Point pt) const {
     }
 
     for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        ReportIf(!(0.0 == pageInfo->visibleRatio || pageInfo->shown));
-        if (!pageInfo->shown) {
+        if (!pagesInfo[pageNo - 1].isShown) {
             continue;
         }
+        PageInfo* pageInfo = GetPageInfo(pageNo);
 
         if (pageInfo->pageOnScreen.Contains(pt)) {
             return pageNo;
@@ -1012,11 +1031,10 @@ int DisplayModel::GetPageNextToPoint(Point pt) const {
     int closest = startPage;
 
     for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
-        PageInfo* pageInfo = GetPageInfo(pageNo);
-        ReportIf(0.0 != pageInfo->visibleRatio && !pageInfo->shown);
-        if (!pageInfo->shown) {
+        if (!pagesInfo[pageNo - 1].isShown) {
             continue;
         }
+        PageInfo* pageInfo = GetPageInfo(pageNo);
 
         if (pageInfo->pageOnScreen.Contains(pt)) {
             return pageNo;
@@ -1174,7 +1192,7 @@ void DisplayModel::RenderVisibleParts() {
     for (int pageNo = 1; pageNo <= PageCount(); ++pageNo) {
         PageInfo* pageInfo = GetPageInfo(pageNo);
         if (pageInfo->visibleRatio > 0.0) {
-            ReportIf(!pageInfo->shown);
+            ReportIf(!pagesInfo[pageNo - 1].isShown);
             if (0 == firstVisiblePage) {
                 firstVisiblePage = pageNo;
             }
@@ -1392,8 +1410,8 @@ void DisplayModel::SetDisplayMode(DisplayMode newDisplayMode, bool keepContinuou
            for non-continuous mode is in DisplayModel::changeStartPage() called
            from DisplayModel::GoToPage() */
         for (int pageNo = 1; pageNo <= PageCount(); pageNo++) {
+            pagesInfo[pageNo - 1].isShown = true;
             PageInfo* pageInfo = &(pagesInfo[pageNo - 1]);
-            pageInfo->shown = true;
             pageInfo->visibleRatio = 0.0;
         }
         Relayout(zoomVirtual, rotation);
@@ -1731,7 +1749,8 @@ float DisplayModel::GetNextZoomStep(float towardsLevel) const {
     float* zoomLevels = GetDefaultZoomLevels(&nZoomLevels);
 
     float pageZoom = (float)HUGE_VAL, widthZoom = (float)HUGE_VAL;
-    for (int pageNo = 1; pageNo <= PageCount(); pageNo++) {
+    int nPages = PageCount();
+    for (int pageNo = 1; pageNo <= nPages; pageNo++) {
         if (PageShown(pageNo)) {
             float pagePageZoom = ZoomRealFromVirtualForPage(kZoomFitPage, pageNo);
             pageZoom = std::min(pageZoom, pagePageZoom);

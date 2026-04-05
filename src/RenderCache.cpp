@@ -883,9 +883,8 @@ static int cmpTilePosition(const void* a, const void* b) {
     return ta->res != tb->res ? ta->res - tb->res : ta->row != tb->row ? ta->row - tb->row : ta->col - tb->col;
 }
 
-int RenderCache::Paint(HDC hdc, Rect bounds, DisplayModel* dm, int pageNo, PageInfo* pageInfo,
-                       bool* renderOutOfDateCue) {
-    ReportIf(!pageInfo->shown || 0.0 == pageInfo->visibleRatio);
+int RenderCache::Paint(HDC hdc, Rect bounds, DisplayModel* dm, int pageNo, PageInfo* pi, bool* renderOutOfDateCue) {
+    ReportIf(!pi->isShown || 0.0 == pi->visibleRatio);
 
 #if 0
     auto timeStart = TimeGet();
@@ -899,10 +898,10 @@ int RenderCache::Paint(HDC hdc, Rect bounds, DisplayModel* dm, int pageNo, PageI
     if (!dm->ShouldCacheRendering(pageNo)) {
         int rotation = dm->GetRotation();
         float zoom = dm->GetZoomReal(pageNo);
-        bounds = pageInfo->pageOnScreen.Intersect(bounds);
+        bounds = pi->pageOnScreen.Intersect(bounds);
 
         RectF area = ToRectF(bounds);
-        area.Offset(-pageInfo->pageOnScreen.x, -pageInfo->pageOnScreen.y);
+        area.Offset(-pi->pageOnScreen.x, -pi->pageOnScreen.y);
         area = dm->GetEngine()->Transform(area, pageNo, zoom, rotation, true);
 
         RenderPageArgs args(pageNo, zoom, rotation, &area);
@@ -928,13 +927,13 @@ int RenderCache::Paint(HDC hdc, Rect bounds, DisplayModel* dm, int pageNo, PageI
 
     while (queue.size() > 0) {
         TilePosition tile = queue.PopAt(0);
-        Rect tileOnScreen = GetTileOnScreen(dm->GetEngine(), pageNo, rotation, zoom, tile, pageInfo->pageOnScreen);
+        Rect tileOnScreen = GetTileOnScreen(dm->GetEngine(), pageNo, rotation, zoom, tile, pi->pageOnScreen);
         if (tileOnScreen.IsEmpty()) {
             // display an error message when only empty tiles should be drawn (i.e. on page loading errors)
             renderDelayMin = std::min(RENDER_DELAY_FAILED, renderDelayMin);
             continue;
         }
-        tileOnScreen = pageInfo->pageOnScreen.Intersect(tileOnScreen);
+        tileOnScreen = pi->pageOnScreen.Intersect(tileOnScreen);
         Rect isect = bounds.Intersect(tileOnScreen);
         if (isect.IsEmpty()) {
             continue;

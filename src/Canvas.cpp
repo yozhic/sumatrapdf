@@ -1329,8 +1329,8 @@ static void DebugShowLinks(DisplayModel* dm, HDC hdc) {
     ScopedSelectObject autoPen(hdc, CreatePen(PS_SOLID, 1, RGB(0x00, 0x00, 0xff)), true);
 
     for (int pageNo = dm->PageCount(); pageNo >= 1; --pageNo) {
-        PageInfo* pageInfo = dm->GetPageInfo(pageNo);
-        if (!pageInfo || !pageInfo->shown || 0.0 == pageInfo->visibleRatio) {
+        PageInfo* pi = dm->GetPageInfo(pageNo);
+        if (!pi || !pi->isShown || 0.0 == pi->visibleRatio) {
             continue;
         }
 
@@ -1352,8 +1352,8 @@ static void DebugShowLinks(DisplayModel* dm, HDC hdc) {
     if (false && dm->GetZoomVirtual() == kZoomFitContent) {
         // also display the content box when fitting content
         for (int pageNo = dm->PageCount(); pageNo >= 1; --pageNo) {
-            PageInfo* pageInfo = dm->GetPageInfo(pageNo);
-            if (!pageInfo->shown || 0.0 == pageInfo->visibleRatio) {
+            PageInfo* pi = dm->GetPageInfo(pageNo);
+            if (!pi->isShown || 0.0 == pi->visibleRatio) {
                 continue;
             }
 
@@ -1543,25 +1543,25 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
 
     bool isRtl = IsUIRtl();
     for (int pageNo = 1; pageNo <= dm->PageCount(); ++pageNo) {
-        PageInfo* pageInfo = dm->GetPageInfo(pageNo);
-        if (!pageInfo || 0.0F == pageInfo->visibleRatio) {
+        PageInfo* pi = dm->GetPageInfo(pageNo);
+        if (!pi || 0.0F == pi->visibleRatio) {
             continue;
         }
-        ReportIf(!pageInfo->shown);
-        if (!pageInfo->shown) {
+        ReportIf(!pi->isShown);
+        if (!pi->isShown) {
             continue;
         }
 
-        Rect bounds = pageInfo->pageOnScreen.Intersect(screen);
+        Rect bounds = pi->pageOnScreen.Intersect(screen);
         // don't paint the frame background for images
         if (!dm->GetEngine()->IsImageCollection()) {
-            Rect r = pageInfo->pageOnScreen;
+            Rect r = pi->pageOnScreen;
             auto presMode = win->presentation;
             PaintPageFrameAndShadow(hdc, bounds, r, presMode);
         }
 
         // check if this page is known to have failed rendering
-        if (pageInfo->failedToRender) {
+        if (pi->failedToRender) {
             shouldPaint = true;
             HFONT fontRightTxt = CreateSimpleFont(hdc, "MS Shell Dlg", 14);
             HGDIOBJ hPrevFont = SelectObject(hdc, fontRightTxt);
@@ -1573,7 +1573,7 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
         }
 
         bool renderOutOfDateCue = false;
-        int renderDelay = gRenderCache->Paint(hdc, bounds, dm, pageNo, pageInfo, &renderOutOfDateCue);
+        int renderDelay = gRenderCache->Paint(hdc, bounds, dm, pageNo, pi, &renderOutOfDateCue);
         if (renderDelay == 0) {
             shouldPaint = true;
         }

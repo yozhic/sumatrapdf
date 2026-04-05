@@ -12,8 +12,15 @@ enum class AnnotationType;
 
 /* Describes many attributes of one page in one, convenient place */
 struct PageInfo {
+    enum class State {
+        Unknown,
+        Known,
+        Error,
+    };
+
     /* data that is constant for a given page. page size in document units */
-    RectF page{};
+    RectF _mediaBox{};
+    State state = State::Unknown;
 
     /* data that is calculated when needed. actual content size within a page (View target) */
     RectF contentBox{};
@@ -33,9 +40,7 @@ struct PageInfo {
     // or kZoomFitContent, this is per-page zoom level
     float zoomReal;
 
-    /* data that needs to be set before DisplayModel::Relayout().
-       Determines whether a given page should be shown on the screen. */
-    bool shown = false;
+    bool isShown = false;
 
     // set to true if rendering this page failed (e.g. corrupt image data)
     bool failedToRender = false;
@@ -137,6 +142,7 @@ struct DisplayModel : DocController {
     TextSearch* textSearch = nullptr;
 
     PageInfo* GetPageInfo(int pageNo) const;
+    RectF PageMediaBox(int pageNo) const;
 
     /* current rotation selected by user */
     int GetRotation() const;

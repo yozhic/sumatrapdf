@@ -54,13 +54,13 @@ Vec<SelectionOnPage>* SelectionOnPage::FromRectangle(DisplayModel* dm, Rect rect
     Vec<SelectionOnPage>* sel = new Vec<SelectionOnPage>();
 
     for (int pageNo = dm->GetEngine()->PageCount(); pageNo >= 1; --pageNo) {
-        PageInfo* pageInfo = dm->GetPageInfo(pageNo);
-        ReportIf(!(!pageInfo || 0.0 == pageInfo->visibleRatio || pageInfo->shown));
-        if (!pageInfo || !pageInfo->shown) {
+        PageInfo* pi = dm->GetPageInfo(pageNo);
+        ReportIf(!(!pi || 0.0 == pi->visibleRatio || pi->isShown));
+        if (!pi || !pi->isShown) {
             continue;
         }
 
-        Rect intersect = rect.Intersect(pageInfo->pageOnScreen);
+        Rect intersect = rect.Intersect(pi->pageOnScreen);
         if (intersect.IsEmpty()) {
             continue;
         }
@@ -315,11 +315,11 @@ void OnSelectAll(MainWindow* win, bool textOnly) {
     DisplayModel* dm = win->AsFixed();
     if (textOnly) {
         int pageNo;
-        for (pageNo = 1; !dm->GetPageInfo(pageNo)->shown; pageNo++) {
+        for (pageNo = 1; !dm->PageShown(pageNo); pageNo++) {
             ;
         }
         dm->textSelection->StartAt(pageNo, 0);
-        for (pageNo = win->ctrl->PageCount(); !dm->GetPageInfo(pageNo)->shown; pageNo--) {
+        for (pageNo = win->ctrl->PageCount(); !dm->PageShown(pageNo); pageNo--) {
             ;
         }
         dm->textSelection->SelectUpTo(pageNo, -1);
