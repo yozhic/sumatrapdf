@@ -2031,7 +2031,7 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         }
         case CmdShowErrors: {
             if (engine && engine->errors.Size() > 0) {
-                char* text = Join(&engine->errors, "\n");
+                char* text = Join(&engine->errors, "");
                 ShowTextInWindow("Errors", text);
                 str::Free(text);
             }
