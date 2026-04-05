@@ -9,9 +9,8 @@
 
 #include "utils/Archive.h"
 
-extern "C" {
-#include <unarr.h>
-}
+#include "libarchive/archive.h"
+#include "libarchive/archive_entry.h"
 
 // TODO: set include path to ext/ dir
 #include "../../ext/unrar/dll.hpp"
@@ -27,70 +26,121 @@ FILETIME MultiFormatArchive::FileInfo::GetWinFileTime() const {
     return ft;
 }
 
-MultiFormatArchive::MultiFormatArchive(archive_opener_t opener, MultiFormatArchive::Format format)
-    : format(format), opener_(opener) {
-    ReportIf(!opener);
-    if (format == Format::Tar) loadOnOpen = true;
+MultiFormatArchive::MultiFormatArchive(MultiFormatArchive::Format format) : format(format) {
+    if (format == Format::Tar) {
+        loadOnOpen = true;
+    }
 }
 
-bool MultiFormatArchive::Open(ar_stream* data, const char* archivePath) {
-    data_ = data;
-    if (!data) {
-        return false;
+MultiFormatArchive::~MultiFormatArchive() {
+    for (auto& fi : fileInfos_) {
+        free((void*)fi->data);
     }
-    if ((format == Format::Rar) && archivePath) {
-        bool ok = OpenUnrarFallback(archivePath);
-        if (ok) {
-            return true;
-        }
-    }
-    ar_ = opener_(data);
-    if (!ar_ || ar_at_eof(ar_)) {
-        if (format == Format::Rar && archivePath) {
-            return OpenUnrarFallback(archivePath);
-        }
-        return false;
-    }
+    free(archivePath_);
+}
 
+bool MultiFormatArchive::ParseEntries(struct archive* a) {
+    struct archive_entry* entry;
     size_t fileId = 0;
-    while (ar_parse_entry(ar_)) {
-        const char* name = ar_entry_get_name(ar_);
+    while (archive_read_next_header(a, &entry) == ARCHIVE_OK) {
+        const char* name = archive_entry_pathname_utf8(entry);
+        if (!name) {
+            name = archive_entry_pathname(entry);
+        }
         if (!name) {
             name = "";
         }
         FileInfo* i = allocator_.AllocStruct<FileInfo>();
         i->fileId = fileId;
-        i->fileSizeUncompressed = ar_entry_get_size(ar_);
-        i->filePos = ar_entry_get_offset(ar_);
-        i->fileTime = ar_entry_get_filetime(ar_);
+        i->fileSizeUncompressed = (size_t)archive_entry_size(entry);
+        i->filePos = (i64)fileId; // use fileId as position identifier
+        i->fileTime = (i64)archive_entry_mtime(entry);
         i->name = str::Dup(&allocator_, name);
         i->data = nullptr;
         fileInfos_.Append(i);
-        // doesn't benchmark faster for .zip files but not much slower either
-        // is probably faster for .tar.gz files
+
         if (loadOnOpen) {
             size_t size = i->fileSizeUncompressed;
-            i->data = AllocArray<char>(size + ZERO_PADDING_COUNT);
-            if (i->data) {
-                bool ok = ar_entry_uncompress(ar_, (void*)i->data, size);
-                if (!ok) {
-                    free(i->data);
-                    i->data = nullptr;
+            if (size > 0) {
+                i->data = AllocArray<char>(size + ZERO_PADDING_COUNT);
+                if (i->data) {
+                    la_ssize_t n = archive_read_data(a, (void*)i->data, size);
+                    if (n < 0 || (size_t)n != size) {
+                        free(i->data);
+                        i->data = nullptr;
+                    }
                 }
             }
+        } else {
+            archive_read_data_skip(a);
         }
-
         fileId++;
     }
-    return true;
+    return fileId > 0;
 }
 
-MultiFormatArchive::~MultiFormatArchive() {
-    ar_close_archive(ar_);
-    ar_close(data_);
-    for (auto& fi : fileInfos_) {
-        free((void*)fi->data);
+bool MultiFormatArchive::Open(const char* path) {
+    if ((format == Format::Rar) && path) {
+        bool ok = OpenUnrarFallback(path);
+        if (ok) {
+            return true;
+        }
     }
+    return OpenArchive(path);
+}
+
+bool MultiFormatArchive::Open(IStream* stream) {
+    // for IStream, read all data into memory and open from there
+    STATSTG stat;
+    if (FAILED(stream->Stat(&stat, STATFLAG_NONAME))) {
+        return false;
+    }
+    size_t size = (size_t)stat.cbSize.QuadPart;
+    u8* data = AllocArray<u8>(size);
+    if (!data) {
+        return false;
+    }
+    LARGE_INTEGER zero = {};
+    stream->Seek(zero, STREAM_SEEK_SET, nullptr);
+    ULONG read = 0;
+    HRESULT hr = stream->Read(data, (ULONG)size, &read);
+    if (FAILED(hr) || read != size) {
+        free(data);
+        return false;
+    }
+
+    struct archive* a = archive_read_new();
+    archive_read_support_format_all(a);
+    archive_read_support_filter_all(a);
+    int r = archive_read_open_memory(a, data, size);
+    if (r != ARCHIVE_OK) {
+        archive_read_free(a);
+        free(data);
+        return false;
+    }
+    bool ok = ParseEntries(a);
+    archive_read_free(a);
+    free(data);
+    return ok;
+}
+
+bool MultiFormatArchive::OpenArchive(const char* path) {
+    struct archive* a = archive_read_new();
+    archive_read_support_format_all(a);
+    archive_read_support_filter_all(a);
+    int r = archive_read_open_filename(a, path, 10240);
+    if (r != ARCHIVE_OK) {
+        archive_read_free(a);
+        return false;
+    }
+    archivePath_ = str::Dup(path);
+    bool ok = ParseEntries(a);
+    archive_read_free(a);
+    return ok;
+}
+
+Vec<MultiFormatArchive::FileInfo*> const& MultiFormatArchive::GetFileInfos() {
+    return fileInfos_;
 }
 
 size_t getFileIdByName(Vec<MultiFormatArchive::FileInfo*>& fileInfos, const char* name) {
@@ -100,10 +150,6 @@ size_t getFileIdByName(Vec<MultiFormatArchive::FileInfo*>& fileInfos, const char
         }
     }
     return (size_t)-1;
-}
-
-Vec<MultiFormatArchive::FileInfo*> const& MultiFormatArchive::GetFileInfos() {
-    return fileInfos_;
 }
 
 size_t MultiFormatArchive::GetFileId(const char* fileName) {
@@ -136,62 +182,63 @@ ByteSlice MultiFormatArchive::GetFileDataById(size_t fileId) {
         return GetFileDataByIdUnarrDll(fileId);
     }
 
-    if (!ar_) {
+    return GetFileDataByIdLibarchive(fileId);
+}
+
+ByteSlice MultiFormatArchive::GetFileDataByIdLibarchive(size_t fileId) {
+    if (!archivePath_) {
+        return {};
+    }
+    auto* fileInfo = fileInfos_[fileId];
+
+    // re-open the archive and skip to the right entry
+    struct archive* a = archive_read_new();
+    archive_read_support_format_all(a);
+    archive_read_support_filter_all(a);
+    int r = archive_read_open_filename(a, archivePath_, 10240);
+    if (r != ARCHIVE_OK) {
+        archive_read_free(a);
         return {};
     }
 
-    auto filePos = fileInfo->filePos;
-    if (!ar_parse_entry_at(ar_, filePos)) {
-        return {};
+    struct archive_entry* entry;
+    size_t idx = 0;
+    while (archive_read_next_header(a, &entry) == ARCHIVE_OK) {
+        if (idx == fileId) {
+            size_t size = fileInfo->fileSizeUncompressed;
+            if (addOverflows<size_t>(size, ZERO_PADDING_COUNT)) {
+                archive_read_free(a);
+                return {};
+            }
+            u8* data = AllocArray<u8>(size + ZERO_PADDING_COUNT);
+            if (!data) {
+                archive_read_free(a);
+                return {};
+            }
+            la_ssize_t n = archive_read_data(a, data, size);
+            archive_read_free(a);
+            if (n < 0 || (size_t)n != size) {
+                free(data);
+                return {};
+            }
+            return {data, size};
+        }
+        archive_read_data_skip(a);
+        idx++;
     }
-    size_t size = fileInfo->fileSizeUncompressed;
-    if (addOverflows<size_t>(size, ZERO_PADDING_COUNT)) {
-        return {};
-    }
-    u8* data = AllocArray<u8>(size + ZERO_PADDING_COUNT);
-    if (!data) {
-        return {};
-    }
-    if (!ar_entry_uncompress(ar_, data, size)) {
-        return {};
-    }
-
-    return {data, size};
+    archive_read_free(a);
+    return {};
 }
 
 const char* MultiFormatArchive::GetComment() {
-    if (!ar_) {
-        return nullptr;
-    }
-
-    size_t n = ar_get_global_comment(ar_, nullptr, 0);
-    if (0 == n || (size_t)-1 == n) {
-        return nullptr;
-    }
-    char* comment = Allocator::AllocArray<char>(&allocator_, n + 1);
-    if (!comment) {
-        return nullptr;
-    }
-    size_t nRead = ar_get_global_comment(ar_, comment, n);
-    if (nRead != n) {
-        return nullptr;
-    }
-    return comment;
+    // libarchive doesn't support zip global comments
+    return nullptr;
 }
 
 ///// format specific handling /////
 
-static ar_archive* ar_open_zip_archive_any(ar_stream* stream) {
-    return ar_open_zip_archive(stream, false);
-}
-static ar_archive* ar_open_zip_archive_deflated(ar_stream* stream) {
-    return ar_open_zip_archive(stream, true);
-}
-
 static MultiFormatArchive* open(MultiFormatArchive* archive, const char* path) {
-    WCHAR* pathW = ToWStrTemp(path);
-    ar_stream* stm = ar_open_file_w(pathW);
-    bool ok = archive->Open(stm, path);
+    bool ok = archive->Open(path);
     if (!ok) {
         delete archive;
         return nullptr;
@@ -200,7 +247,7 @@ static MultiFormatArchive* open(MultiFormatArchive* archive, const char* path) {
 }
 
 static MultiFormatArchive* open(MultiFormatArchive* archive, IStream* stream) {
-    bool ok = archive->Open(ar_open_istream(stream), nullptr);
+    bool ok = archive->Open(stream);
     if (!ok) {
         delete archive;
         return nullptr;
@@ -208,51 +255,43 @@ static MultiFormatArchive* open(MultiFormatArchive* archive, IStream* stream) {
     return archive;
 }
 
-MultiFormatArchive* OpenZipArchive(const char* path, bool deflatedOnly) {
-    auto opener = ar_open_zip_archive_any;
-    if (deflatedOnly) {
-        opener = ar_open_zip_archive_deflated;
-    }
-    auto* archive = new MultiFormatArchive(opener, MultiFormatArchive::Format::Zip);
+MultiFormatArchive* OpenZipArchive(const char* path, bool /*deflatedOnly*/) {
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
     return open(archive, path);
 }
 
 MultiFormatArchive* Open7zArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(ar_open_7z_archive, MultiFormatArchive::Format::SevenZip);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
     return open(archive, path);
 }
 
 MultiFormatArchive* OpenTarArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(ar_open_tar_archive, MultiFormatArchive::Format::Tar);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
     return open(archive, path);
 }
 
 MultiFormatArchive* OpenRarArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(ar_open_rar_archive, MultiFormatArchive::Format::Rar);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
     return open(archive, path);
 }
 
-MultiFormatArchive* OpenZipArchive(IStream* stream, bool deflatedOnly) {
-    auto opener = ar_open_zip_archive_any;
-    if (deflatedOnly) {
-        opener = ar_open_zip_archive_deflated;
-    }
-    auto* archive = new MultiFormatArchive(opener, MultiFormatArchive::Format::Zip);
+MultiFormatArchive* OpenZipArchive(IStream* stream, bool /*deflatedOnly*/) {
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
     return open(archive, stream);
 }
 
 MultiFormatArchive* Open7zArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(ar_open_7z_archive, MultiFormatArchive::Format::SevenZip);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
     return open(archive, stream);
 }
 
 MultiFormatArchive* OpenTarArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(ar_open_tar_archive, MultiFormatArchive::Format::Tar);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
     return open(archive, stream);
 }
 
 MultiFormatArchive* OpenRarArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(ar_open_rar_archive, MultiFormatArchive::Format::Rar);
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
     return open(archive, stream);
 }
 

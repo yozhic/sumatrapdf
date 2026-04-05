@@ -11,7 +11,6 @@
 #include "utils/FileUtil.h"
 
 extern "C" {
-#include <unarr.h>
 #include <zlib.h>
 }
 

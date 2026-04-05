@@ -179,44 +179,6 @@ function unarr_lzma_files()
   })
 end
 
-function unarr_files()
-  files {
-    "ext/bzip2/bzip_all.c",
-    "ext/unarr/_7z/*",
-    "ext/unarr/common/*",
-    "ext/unarr/rar/*",
-    "ext/unarr/tar/*",
-    "ext/unarr/zip/*",
-  }
-  unarrr_lzmasdk_files()
-  unarr_lzma_files()
-end
-
-function unarr_no_lzma_files()
-  files {
-    "ext/bzip2/bzip_all.c",
-    "ext/unarr/_7z/*",
-    "ext/unarr/common/*",
-    "ext/unarr/lzmasdk/LzmaDec.*",
-    "ext/unarr/rar/*",
-    "ext/unarr/tar/*",
-    "ext/unarr/zip/*",
-  }
-  unarrr_lzmasdk_files()
-end
-
-function unarr_no_bzip_files()
-  files {
-    "ext/unarr/_7z/*",
-    "ext/unarr/common/*",
-    "ext/unarr/rar/*",
-    "ext/unarr/tar/*",
-    "ext/unarr/zip/*",
-  }
-  unarrr_lzmasdk_files()
-  unarr_lzma_files()
-end
-
 function libarchive_files()
   files { "ext/libarchive/libarchive/*.h" }
   files_in_dir("ext/libarchive/libarchive", {
@@ -880,6 +842,7 @@ function sumatrapdf_files()
   })
   files_in_dir("src/utils", {
     "UtAssert.*",
+    "Archive.*",
   })
   filter {}
 end
@@ -915,7 +878,6 @@ end
 function utils_files()
   files_in_dir("src/utils", {
     "ApiHook.*",
-    "Archive.*",
     "AvifReader.*",
     "BaseUtil.*",
     "BitReader.*",
@@ -1382,7 +1344,9 @@ function pdf_preview_files()
     "PdfPreviewBase.h",
     "PdfPreviewDll.cpp",
   })
-
+  files_in_dir("src/utils", {
+    "Archive.*",
+  })
   files_in_dir("src", {
     "ChmFile.*",
     "CrashHandlerNoOp.cpp",
@@ -1416,6 +1380,9 @@ function search_filter_files()
     "FilterBase.h",
     "PdfFilter.*",
     "SearchFilterDll.cpp",
+  })
+  files_in_dir("src/utils", {
+    "Archive.*",
   })
   files_in_dir("src", {
     "CrashHandlerNoOp.cpp",

@@ -805,34 +805,6 @@ EXPORTS
 	xps_clip
 	xps_lookup_alternate_content
 
-; unarr exports (required for ArchUtil, ZipUtil)
-
-	ar_open
-	ar_open_file
-	ar_open_file_w
-	ar_open_memory
-	ar_open_istream
-	ar_close
-	ar_read
-	ar_seek
-	ar_skip
-	ar_tell
-	ar_close_archive
-	ar_parse_entry
-	ar_parse_entry_at
-	ar_parse_entry_for
-	ar_at_eof
-	ar_entry_get_name
-	ar_entry_get_offset
-	ar_entry_get_size
-	ar_entry_get_filetime
-	ar_entry_uncompress
-	ar_get_global_comment
-	ar_open_rar_archive
-	ar_open_tar_archive
-	ar_open_zip_archive
-	ar_open_7z_archive
-
 ; djvu exports (required for DjVuEngine)
 
 	ddjvu_anno_get_hyperlinks
@@ -892,6 +864,8 @@ EXPORTS
 	inflateEnd
 	inflateInit_
 	inflateInit2_
+	inflateReset
+	inflateSetDictionary
 
 ; lzma exports (needed for LzmaSimpleArchive)
 

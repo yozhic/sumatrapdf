@@ -29,6 +29,9 @@
     <ClInclude Include="..\src\ifilter\TeXFilter.h">
       <Filter>ifilter</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\utils\Archive.h">
+      <Filter>utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\utils\Log.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -54,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\src\ifilter\TeXFilter.cpp">
       <Filter>ifilter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\Archive.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\src\utils\Log.cpp">
       <Filter>utils</Filter>

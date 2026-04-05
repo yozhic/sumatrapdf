@@ -1,12 +1,8 @@
 /* Copyright 2022 the SumatraPDF project authors (see AUTHORS file).
    License: Simplified BSD (see COPYING.BSD) */
 
-extern "C" {
-typedef struct ar_stream_s ar_stream;
-typedef struct ar_archive_s ar_archive;
-}
-
-typedef ar_archive* (*archive_opener_t)(ar_stream*);
+struct archive;
+struct archive_entry;
 
 class MultiFormatArchive {
   public:
@@ -30,12 +26,13 @@ class MultiFormatArchive {
         FILETIME GetWinFileTime() const;
     };
 
-    MultiFormatArchive(archive_opener_t opener, Format format);
+    MultiFormatArchive(Format format);
     ~MultiFormatArchive();
 
     Format format;
 
-    bool Open(ar_stream* data, const char* archivePath);
+    bool Open(const char* path);
+    bool Open(IStream* stream);
 
     Vec<FileInfo*> const& GetFileInfos();
 
@@ -54,15 +51,18 @@ class MultiFormatArchive {
     PoolAllocator allocator_;
     Vec<FileInfo*> fileInfos_;
 
-    archive_opener_t opener_ = nullptr;
-    ar_stream* data_ = nullptr;
-    ar_archive* ar_ = nullptr;
+    char* archivePath_ = nullptr;
 
     // only set when we loaded file infos using unrar.dll fallback
     const char* rarFilePath_ = nullptr;
 
+    bool OpenArchive(const char* path);
+    bool OpenArchive(IStream* stream);
+    bool ParseEntries(struct archive* a);
+
     bool OpenUnrarFallback(const char* rarPathUtf);
     ByteSlice GetFileDataByIdUnarrDll(size_t fileId);
+    ByteSlice GetFileDataByIdLibarchive(size_t fileId);
     bool LoadedUsingUnrarDll() const { return rarFilePath_ != nullptr; }
 };
 

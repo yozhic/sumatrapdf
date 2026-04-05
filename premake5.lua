@@ -346,19 +346,6 @@ workspace "SumatraPDF"
     disablewarnings { "4018", "4244", "4267", "4996" }
     files { "ext/CHMLib/*.c", "ext/CHMLib/*.h" }
 
-  project "unarrlib"
-    kind "StaticLib"
-    language "C"
-    optimized_conf()
-    -- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
-    -- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
-    defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
-    -- TODO: most of these warnings are due to bzip2 and lzma
-    disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
-    uses_zlib()
-    includedirs { "ext/bzip2", "ext/lzma/C" }
-    unarr_files()
-
   project "libarchive"
     kind "StaticLib"
     language "C"
@@ -372,6 +359,9 @@ workspace "SumatraPDF"
     uses_zlib()
     includedirs { "ext/libarchive/libarchive" }
     libarchive_files()
+    -- LZMA files needed by LzmaSimpleArchive in utils (previously provided by unarrlib)
+    includedirs { "ext/lzma/C" }
+    files { "ext/lzma/C/LzmaDec.c", "ext/lzma/C/Bra86.c", "ext/lzma/C/Bra.c" }
 
   project "libwebp"
     kind "StaticLib"
@@ -729,7 +719,7 @@ workspace "SumatraPDF"
     -- linkoptions { "/DEF:..\\src\\libmupdf.def", "-IGNORE:4702" }
     linkoptions { "-IGNORE:4702" }
     links_zlib()
-    links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif", "unarrlib", "libarchive" }
+    links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif" }
     links {
       "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
       "shell32", "windowscodecs", "comctl32", "msimg32",
@@ -753,9 +743,9 @@ workspace "SumatraPDF"
     -- QITABENT in shlwapi.h has incorrect definition and causes 4838
     disablewarnings { "4100", "4267", "4457", "4838" }
     uses_zlib()
-    defines { "LIBHEIF_STATIC_BUILD" }
+    defines { "LIBHEIF_STATIC_BUILD", "LIBARCHIVE_STATIC" }
     includedirs { "src", "ext/lzma/C" }
-    includedirs { "ext/libheif/libheif/api", "ext/libwebp/src", "ext/dav1d/include", "ext/unarr", "mupdf/include" }
+    includedirs { "ext/libheif/libheif/api", "ext/libwebp/src", "ext/dav1d/include", "ext/libarchive", "mupdf/include" }
     utils_files()
 
 ---- executables
@@ -788,10 +778,11 @@ workspace "SumatraPDF"
     disablewarnings { "4100", "4838" }
     filter { "configurations:Debug" }
     defines { "BUILD_TEX_IFILTER", "BUILD_EPUB_IFILTER" }
+    defines { "HAVE_LIBARCHIVE", "LIBARCHIVE_STATIC" }
     filter {}
-    includedirs { "src", "src/wingui", "mupdf/include" }
+    includedirs { "src", "src/wingui", "mupdf/include", "ext/libarchive" }
     search_filter_files()
-    links { "utils", "unrar", "libmupdf" }
+    links { "utils", "unrar", "libmupdf", "libarchive" }
     links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
   project "PdfFilter2"
@@ -824,14 +815,16 @@ workspace "SumatraPDF"
     cppdialect "C++latest"
     mixed_dbg_rel_conf()
     disablewarnings { "4100", "4838" }
+    defines { "HAVE_LIBARCHIVE", "LIBARCHIVE_STATIC" }
     includedirs {
       "src", "src/wingui", "mupdf/include",
-      "ext/libdjvu", "ext/CHMLib"
+      "ext/libdjvu", "ext/CHMLib",
+      "ext/libarchive",
     }
     pdf_preview_files()
     -- TODO: "chm" should only be for Debug config but doing links { "chm" }
     -- in the filter breaks linking by setting LinkLibraryDependencies to false
-    links { "utils", "unrar", "libmupdf", "chm" }
+    links { "utils", "unrar", "libmupdf", "libarchive", "chm" }
     links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
   -- a single static executable
@@ -843,8 +836,9 @@ workspace "SumatraPDF"
     warnings_as_errors()
     entrypoint "WinMainCRTStartup"
     manifest("Off")
+    defines { "LIBARCHIVE_STATIC" }
     includedirs { "src", "mupdf/include" }
-    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
+    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib", "ext/libarchive" }
 
     includedirs { "ext/darkmodelib/include" }
     defines { "_DARKMODELIB_NO_INI_CONFIG" }
@@ -881,7 +875,7 @@ workspace "SumatraPDF"
 
     links_zlib()
     links {
-      "libdjvu", "libwebp", "dav1d", "libheif", "mupdf", "unarrlib", "utils", "unrar", "chm"
+      "libdjvu", "libwebp", "dav1d", "libheif", "mupdf", "libarchive", "utils", "unrar", "chm"
     }
     links {
       "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
@@ -906,8 +900,9 @@ workspace "SumatraPDF"
     warnings_as_errors()
     entrypoint "WinMainCRTStartup"
     manifest("Off")
+    defines { "LIBARCHIVE_STATIC" }
     includedirs { "src", "mupdf/include" }
-    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib" }
+    includedirs { "ext/synctex", "ext/libdjvu", "ext/CHMLib", "ext/libarchive" }
     includedirs { "ext/darkmodelib/include" }
 
     includedirs { "ext/darkmodelib/include" }
@@ -950,7 +945,7 @@ workspace "SumatraPDF"
     files { "src/MuPDF_Exports.cpp" }
 
     links {
-      "libmupdf", "unrar", "unarrlib", "utils", "chm"
+      "libmupdf", "unrar", "libarchive", "utils", "chm"
     }
     links {
       "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
@@ -1036,19 +1031,11 @@ workspace "MakeLZSA"
 
     makelzsa_files()
     disablewarnings { "4131", "4244", "4245", "4267", "4996" }
-    includedirs { "src", "ext/lzma/C", "ext/unarr" }
+    includedirs { "src", "ext/lzma/C" }
 
     -- for zlib
     disablewarnings { "4131", "4244", "4245", "4267", "4996" }
     zlib_files()
     uses_zlib()
 
-    -- unarrlib
-    -- TODO: for bzip2, need BZ_NO_STDIO and BZ_DEBUG=0
-    -- TODO: for lzma, need _7ZIP_PPMD_SUPPPORT
-    defines { "HAVE_ZLIB", "HAVE_BZIP2", "HAVE_7Z", "BZ_NO_STDIO", "_7ZIP_PPMD_SUPPPORT" }
-    -- TODO: most of these warnings are due to bzip2 and lzma
-    disablewarnings { "4100", "4244", "4267", "4456", "4457", "4996" }
-    includedirs { "ext/bzip2", "ext/lzma/C" }
-    unarr_files()
     links { "shlwapi", "version", "comctl32", "wininet" }

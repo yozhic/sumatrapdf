@@ -339,6 +339,9 @@
     <ClInclude Include="..\src\uia\TextRange.h">
       <Filter>src\uia</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\utils\Archive.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\utils\UtAssert.h">
       <Filter>src\utils</Filter>
     </ClInclude>
@@ -680,6 +683,9 @@
     <ClCompile Include="..\src\uia\TextRange.cpp">
       <Filter>src\uia</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\utils\Archive.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\utils\UtAssert.cpp">
       <Filter>src\utils</Filter>
     </ClCompile>
@@ -815,6 +821,9 @@
     <None Include="..\.gitignore" />
     <None Include="..\Claude.md" />
     <None Include="..\SECURITY.md" />
+    <None Include="..\cmd\build-all.ts">
+      <Filter>cmd</Filter>
+    </None>
     <None Include="..\cmd\build-ci-daily.ts">
       <Filter>cmd</Filter>
     </None>
