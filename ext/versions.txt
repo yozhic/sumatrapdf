@@ -3,6 +3,9 @@ Project         Version    Date
 ../mupdf        1.27.2
   https://github.com/ArtifexSoftware/mupdf/releases/tag/1.27.2
 
+libarchive     3.8.6
+  https://github.com/libarchive/libarchive
+
 mujs           git         Oct 29, 2025
   https://mujs.com/
   https://github.com/ArtifexSoftware/mujs/commit/33c83d8553048fd7710a518821cdefa5818e1559

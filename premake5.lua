@@ -359,6 +359,20 @@ workspace "SumatraPDF"
     includedirs { "ext/bzip2", "ext/lzma/C" }
     unarr_files()
 
+  project "libarchive"
+    kind "StaticLib"
+    language "C"
+    optimized_conf()
+    defines {
+      "_CRT_SECURE_NO_WARNINGS",
+      "LIBARCHIVE_STATIC",
+      'PLATFORM_CONFIG_H="config_windows.h"',
+    }
+    disablewarnings { "4018", "4054", "4055", "4090", "4098", "4100", "4127", "4146", "4244", "4245", "4267", "4305", "4389", "4456", "4457", "4706", "4996" }
+    uses_zlib()
+    includedirs { "ext/libarchive/libarchive" }
+    libarchive_files()
+
   project "libwebp"
     kind "StaticLib"
     language "C"
@@ -655,6 +669,7 @@ workspace "SumatraPDF"
     -- we exclude the very big cjk fonts
     defines { "TOFU_NOTO", "TOFU_CJK_LANG", "TOFU_NOTO_SUMATRA" }
     defines { "FZ_ENABLE_PDF=1", "FZ_ENABLE_SVG=1", "FZ_ENABLE_BROTLI=1", "FZ_ENABLE_BARCODE=0", "FZ_ENABLE_JS=1", "FZ_ENABLE_HYPHEN=0" }
+    defines { "HAVE_LIBARCHIVE", "LIBARCHIVE_STATIC" }
 
     filter { "platforms:arm64" }
     defines { "ARCH_HAS_NEON=1" }
@@ -682,11 +697,12 @@ workspace "SumatraPDF"
       "ext/lcms2/include",
       "ext/gumbo-parser/src",
       "ext/extract/include",
+      "ext/libarchive",
     }
     fonts()
 
     mupdf_files()
-    links { "mupdf-libs" }
+    links { "mupdf-libs", "libarchive" }
     -- links { "mupdf-libs", "zlib", "freetype", "openjpeg", "libjpeg-turbo", "jbig2dec", "lcms2", "harfbuzz", "mujs", "gumbo" }
 
     -- mupdf
@@ -713,7 +729,7 @@ workspace "SumatraPDF"
     -- linkoptions { "/DEF:..\\src\\libmupdf.def", "-IGNORE:4702" }
     linkoptions { "-IGNORE:4702" }
     links_zlib()
-    links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif", "unarrlib" }
+    links { "mupdf", "libdjvu", "libwebp", "dav1d", "libheif", "unarrlib", "libarchive" }
     links {
       "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
       "shell32", "windowscodecs", "comctl32", "msimg32",
