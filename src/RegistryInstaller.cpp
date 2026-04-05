@@ -174,11 +174,15 @@ static bool RegisterForOpenWith(HKEY hkey, const char* installedExePath) {
         // ",-${n}" => n is icon with resource id
         char* iconPath;
         if (str::Eq(ext, ".epub")) {
-            iconPath = str::JoinTemp(exePathQuoted, ",2");
+            iconPath = str::JoinTemp(exePathQuoted, ",-3");
         } else if (str::Eq(ext, ".cbr") || str::Eq(ext, ".cbz") || str::Eq(ext, ".cbt") || str::Eq(ext, ".cb7")) {
-            iconPath = str::JoinTemp(exePathQuoted, ",3");
+            iconPath = str::JoinTemp(exePathQuoted, ",-4");
+        } else if (str::Eq(ext, ".chm")) {
+            iconPath = str::JoinTemp(exePathQuoted, ",-5");
+        } else if (str::Eq(ext, ".djvu")) {
+            iconPath = str::JoinTemp(exePathQuoted, ",-6");
         } else {
-            iconPath = str::JoinTemp(exePathQuoted, ",1");
+            iconPath = str::JoinTemp(exePathQuoted, ",-2");
         }
 
         key = str::JoinTemp(progIDKey, "\\Application");
