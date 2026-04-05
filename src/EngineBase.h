@@ -4,6 +4,12 @@
 struct fz_outline;
 struct fz_link;
 
+enum class PageInfoState {
+    Unknown,
+    Known,
+    Error,
+};
+
 extern Kind kindEngineMupdf;
 extern Kind kindEngineDjVu;
 extern Kind kindEngineImage;

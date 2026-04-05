@@ -12,15 +12,9 @@ enum class AnnotationType;
 
 /* Describes many attributes of one page in one, convenient place */
 struct PageInfo {
-    enum class State {
-        Unknown,
-        Known,
-        Error,
-    };
-
     /* data that is constant for a given page. page size in document units */
     RectF _mediaBox{};
-    State state = State::Unknown;
+    PageInfoState state = PageInfoState::Unknown;
 
     /* data that is calculated when needed. actual content size within a page (View target) */
     RectF contentBox{};

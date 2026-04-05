@@ -69,7 +69,7 @@ struct ImagePage {
 struct ImagePageInfo {
     Vec<IPageElement*> allElements;
     RectF mediabox{};
-    bool hasMediaBox = false;
+    PageInfoState state = PageInfoState::Unknown;
     ImagePageInfo() = default;
 };
 
@@ -106,7 +106,7 @@ class EngineImages : public EngineBase {
 
     CRITICAL_SECTION cacheAccess;
     Vec<ImagePage*> pageCache;
-    Vec<ImagePageInfo*> pages;
+    Vec<ImagePageInfo*> pageInfos;
 
     void GetTransform(Matrix& m, int pageNo, float zoom, int rotation);
 
@@ -136,7 +136,7 @@ EngineImages::~EngineImages() {
         ReportIf(lastPage->refs != 1);
         DropPage(lastPage, true);
     }
-    DeleteVecMembers(pages);
+    DeleteVecMembers(pageInfos);
     LeaveCriticalSection(&cacheAccess);
     DeleteCriticalSection(&cacheAccess);
 }
@@ -144,10 +144,10 @@ EngineImages::~EngineImages() {
 RectF EngineImages::PageMediabox(int pageNo) {
     ReportIf((pageNo < 1) || (pageNo > pageCount));
     int n = pageNo - 1;
-    ImagePageInfo* pi = pages[n];
-    if (!pi->hasMediaBox) {
+    ImagePageInfo* pi = pageInfos[n];
+    if (pi->state == PageInfoState::Unknown) {
         pi->mediabox = LoadMediabox(pageNo);
-        pi->hasMediaBox = true;
+        pi->state = PageInfoState::Known;
     }
     return pi->mediabox;
 }
@@ -264,7 +264,7 @@ static IPageElement* NewImageElement(int pageNo, float dx, float dy) {
 // don't delete the result
 Vec<IPageElement*> EngineImages::GetElements(int pageNo) {
     ReportIf(pageNo < 1 || pageNo > pageCount);
-    auto* pi = pages[pageNo - 1];
+    auto* pi = pageInfos[pageNo - 1];
     if (pi->allElements.size() > 0) {
         return pi->allElements;
     }
@@ -629,9 +629,9 @@ bool EngineImage::FinishLoading() {
 
     auto pi = new ImagePageInfo();
     pi->mediabox = RectF(0, 0, (float)image->GetWidth(), (float)image->GetHeight());
-    pages.Append(pi);
-    pi->hasMediaBox = true;
-    ReportIf(pages.size() != 1);
+    pageInfos.Append(pi);
+    pi->state = PageInfoState::Known;
+    ReportIf(pageInfos.size() != 1);
 
     // extract all frames from multi-page TIFFs and animated GIFs
     // TODO: do the same for .avif and .heic formats
@@ -640,10 +640,10 @@ bool EngineImage::FinishLoading() {
         int nFrames = image->GetFrameCount(dim) - 1;
         for (int i = 0; i < nFrames; i++) {
             pi = new ImagePageInfo();
-            pages.Append(pi);
+            pageInfos.Append(pi);
         }
     }
-    pageCount = pages.Size();
+    pageCount = pageInfos.Size();
 
     return pageCount > 0;
 }
@@ -1079,7 +1079,7 @@ static bool LoadImageDir(EngineImageDir* e, const char* dir) {
 
     for (int i = 0; i < nFiles; i++) {
         ImagePageInfo* pi = new ImagePageInfo();
-        e->pages.Append(pi);
+        e->pageInfos.Append(pi);
     }
 
     e->pageCount = nFiles;
@@ -1476,7 +1476,7 @@ bool EngineCbx::FinishLoading() {
 
     for (int i = 0; i < nFiles; i++) {
         auto pi = new ImagePageInfo();
-        pages.Append(pi);
+        pageInfos.Append(pi);
     }
     files = std::move(pageFiles);
     pageCount = nFiles;

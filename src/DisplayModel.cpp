@@ -377,10 +377,10 @@ DisplayModel::~DisplayModel() {
 RectF DisplayModel::PageMediaBox(int pageNo) const {
     PageInfo* pi = GetPageInfo(pageNo);
     if (!pi) return RectF();
-    if (pi->state == PageInfo::State::Known) {
+    if (pi->state == PageInfoState::Known) {
         return pi->_mediaBox;
     }
-    if (pi->state == PageInfo::State::Error) {
+    if (pi->state == PageInfoState::Error) {
         return RectF();
     }
     pi->_mediaBox = engine->PageMediabox(pageNo);
@@ -391,9 +391,9 @@ RectF DisplayModel::PageMediaBox(int pageNo) const {
         } else {
             pi->_mediaBox = RectF(0, 0, 8.5 * fileDPI, 11 * fileDPI);
         }
-        pi->state = PageInfo::State::Error;
+        pi->state = PageInfoState::Error;
     } else {
-        pi->state = PageInfo::State::Known;
+        pi->state = PageInfoState::Known;
     }
     return pi->_mediaBox;
 }
