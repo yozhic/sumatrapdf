@@ -7328,6 +7328,8 @@ static void HandleCaptionClick(MainWindow* win, int btnIdx) {
     }
 }
 
+constexpr int kTabsButtonGapX = 32;
+
 void RelayoutCaption(MainWindow* win) {
     for (int i = CB_BTN_FIRST; i < CB_BTN_COUNT; i++) {
         win->captionBtn[i].id = i;
@@ -7444,6 +7446,9 @@ void RelayoutCaption(MainWindow* win) {
         win->captionBtn[CB_MENU].visible = true;
         rc.x += tabHeight;
         rc.dx -= tabHeight;
+
+        // leave a gap between the tab bar and the minimize button
+        rc.dx -= kTabsButtonGapX;
 
         DeferWinPosHelper dh;
         dh.SetWindowPos(win->tabsCtrl->hwnd, nullptr, rc.x, rc.y, rc.dx, tabHeight, SWP_NOZORDER);
