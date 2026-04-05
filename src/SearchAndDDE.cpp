@@ -470,6 +470,18 @@ void FindTextOnThread(MainWindow* win, TextSearch::Direction direction, bool sho
     // if document is rtl, need to reverse the text
     // s = ReverseTextTemp(s);
     bool wasModified = Edit_GetModify(win->hwndFindEdit);
+    if (!wasModified) {
+        // check if the find text differs from the current tab's cached search text
+        // this happens when switching tabs: the find edit box shows the current text
+        // but the per-tab textSearch still has the old search text cached
+        DisplayModel* dm = win->AsFixed();
+        if (dm && dm->textSearch) {
+            TempWStr ws = ToWStrTemp(s);
+            if (!str::Eq(ws, dm->textSearch->findText)) {
+                wasModified = true;
+            }
+        }
+    }
     Edit_SetModify(win->hwndFindEdit, FALSE);
     FindTextOnThread(win, direction, s, wasModified, showProgress);
 }
