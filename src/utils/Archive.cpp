@@ -269,8 +269,7 @@ ByteSlice MultiFormatArchive::GetFileDataPartById(size_t fileId, size_t sizeHint
     }
 
     if (LoadedUsingUnrarDll()) {
-        // unrar doesn't support partial reads easily, get full data
-        return GetFileDataByIdUnarrDll(fileId);
+        return GetFileDataPartByIdUnarrDll(fileId, sizeHint);
     }
 
     if (!archivePath_) {
@@ -479,6 +478,75 @@ Exit:
         return {};
     }
     return {(u8*)data, size};
+}
+
+ByteSlice MultiFormatArchive::GetFileDataPartByIdUnarrDll(size_t fileId, size_t sizeHint) {
+    ReportIf(!rarFilePath_);
+
+    auto* fileInfo = fileInfos_[fileId];
+    ReportIf(fileInfo->fileId != fileId);
+    if (fileInfo->data != nullptr) {
+        size_t n = std::min(fileInfo->fileSizeUncompressed, sizeHint);
+        u8* data = AllocArray<u8>(n + ZERO_PADDING_COUNT);
+        if (!data) {
+            return {};
+        }
+        memcpy(data, fileInfo->data, n);
+        return {data, n};
+    }
+
+    auto rarPath = ToWStrTemp(rarFilePath_);
+
+    Data uncompressedBuf;
+
+    RAROpenArchiveDataEx arcData = {nullptr};
+    arcData.ArcNameW = rarPath;
+    arcData.OpenMode = RAR_OM_EXTRACT;
+    arcData.Callback = unrarCallback;
+    arcData.UserData = (LPARAM)&uncompressedBuf;
+
+    HANDLE hArc = RAROpenArchiveEx(&arcData);
+    if (!hArc || arcData.OpenResult != 0) {
+        return {};
+    }
+
+    char* data = nullptr;
+    size_t size = 0;
+    auto fileName = ToWStrTemp(fileInfo->name);
+    RARHeaderDataEx rarHeader{};
+    bool ok = FindFile(hArc, &rarHeader, fileName);
+    if (!ok) {
+        goto Exit;
+    }
+    // allocate only sizeHint bytes; the callback will stop when the buffer is full
+    size = std::min(fileInfo->fileSizeUncompressed, sizeHint);
+    if (addOverflows<size_t>(size, ZERO_PADDING_COUNT)) {
+        ok = false;
+        goto Exit;
+    }
+
+    data = AllocArray<char>(size + ZERO_PADDING_COUNT);
+    if (!data) {
+        ok = false;
+        goto Exit;
+    }
+
+    uncompressedBuf.d = (u8*)data;
+    uncompressedBuf.curr = (u8*)data;
+    uncompressedBuf.sz = size;
+    RARProcessFile(hArc, RAR_TEST, nullptr, nullptr);
+    // if we requested less than full size, the callback returns -1 when full,
+    // causing RARProcessFile to return an error; that's expected
+    ok = (uncompressedBuf.curr > uncompressedBuf.d);
+
+Exit:
+    RARCloseArchive(hArc);
+    if (!ok) {
+        free(data);
+        return {};
+    }
+    size_t got = (size_t)(uncompressedBuf.curr - uncompressedBuf.d);
+    return {(u8*)data, got};
 }
 
 // asan build crashes in UnRAR code
