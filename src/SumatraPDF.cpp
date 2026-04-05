@@ -4759,17 +4759,15 @@ void ExitFullScreen(MainWindow* win) {
         }
     }
 
+    // restore DWM rounded corners and border
+    dwm::SetWindowRoundedCorners(win->hwndFrame, true);
+    UpdateWindowFrameBorderColor(win);
+
     Rect cr = ClientRect(win->hwndFrame);
     SetWindowLong(win->hwndFrame, GWL_STYLE, win->nonFullScreenWindowStyle);
     uint flags = SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOSIZE | SWP_NOMOVE;
     SetWindowPos(win->hwndFrame, nullptr, 0, 0, 0, 0, flags);
     MoveWindow(win->hwndFrame, win->nonFullScreenFrameRect);
-
-    // restore DWM rounded corners and border after the window is back at its
-    // normal position; doing this before MoveWindow caused a visible DWM border
-    // artifact on multi-monitor setups (github issue #5479)
-    dwm::SetWindowRoundedCorners(win->hwndFrame, true);
-    UpdateWindowFrameBorderColor(win);
     // TODO: this ReportIf() fires in pre-release e.g. 64011
     // ReportIf(WindowRect(win.hwndFrame) != win.nonFullScreenFrameRect);
     // We have to relayout here, because it isn't done in the SetWindowPos nor MoveWindow,

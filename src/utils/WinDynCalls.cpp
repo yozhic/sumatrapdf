@@ -200,11 +200,8 @@ void SetWindowBorderColor(HWND hwnd, COLORREF color) {
 void SetWindowRoundedCorners(HWND hwnd, bool rounded) {
     auto cornerPref = rounded ? DWMWCP_ROUND : DWMWCP_DONOTROUND;
     SetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
-    if (!rounded) {
-        // hide border for fullscreen; when re-enabling, the caller sets the
-        // correct border color via SetWindowBorderColor / UpdateWindowFrameBorderColor
-        SetWindowBorderColor(hwnd, DWMWA_COLOR_NONE);
-    }
+    COLORREF borderColor = rounded ? DWMWA_COLOR_DEFAULT : DWMWA_COLOR_NONE;
+    SetWindowBorderColor(hwnd, borderColor);
 }
 
 }; // namespace dwm
