@@ -8206,6 +8206,8 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
             return OnDDEInitiate(hwnd, wp, lp);
         case WM_DDE_EXECUTE:
             return OnDDExecute(hwnd, wp, lp);
+        case WM_DDE_REQUEST:
+            return OnDDERequest(hwnd, wp, lp);
         case WM_DDE_TERMINATE:
             return OnDDETerminate(hwnd, wp, lp);
 
