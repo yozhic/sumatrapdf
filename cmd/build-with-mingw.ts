@@ -1353,7 +1353,6 @@ const sumatraFiles: FileGroup[] = [
     patterns: [
       "Accelerators.*",
       "Actions.*",
-      "AppColors.*",
       "AppSettings.*",
       "AppTools.*",
       "Caption.*",

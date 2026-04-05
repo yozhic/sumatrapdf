@@ -58,10 +58,3 @@ bool gIsStoreBuild = false;
 int GetAppIconID() {
     return IDI_SUMATRAPDF;
 }
-
-const char* GetCommitID() {
-    if (gitCommidId) {
-        return gitCommidId;
-    }
-    return "unknown";
-}

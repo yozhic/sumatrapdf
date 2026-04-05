@@ -18,7 +18,6 @@
 #include "EngineBase.h"
 #include "SumatraConfig.h"
 #include "FileHistory.h"
-#include "AppColors.h"
 #include "GlobalPrefs.h"
 #include "Annotation.h"
 #include "SumatraPDF.h"

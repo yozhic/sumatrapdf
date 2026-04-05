@@ -8,7 +8,5 @@ struct fz_context;
 fz_context* fz_new_context_windows(size_t maxStore = kFzStoreUnlimited);
 void fz_drop_context_windows(fz_context* ctx);
 
-Gdiplus::Bitmap* FzImageFromData(const ByteSlice&);
-
 Gdiplus::Bitmap* BitmapFromData(const ByteSlice&);
 RenderedBitmap* LoadRenderedBitmap(const char* path);

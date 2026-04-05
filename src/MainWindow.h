@@ -316,14 +316,12 @@ struct MainWindow {
 bool HasOpenedDocuments(MainWindow*);
 void UpdateControlsColors(MainWindow*);
 void ScheduleRepaint(MainWindow*, int delay);
-void ClearFindBox(MainWindow*);
 void CreateMovePatternLazy(MainWindow*);
 void ClearMouseState(MainWindow*);
 bool IsRightDragging(MainWindow*);
 MainWindow* FindMainWindowByTab(WindowTab*);
 MainWindow* FindMainWindowByHwnd(HWND);
 bool IsMainWindowValid(MainWindow*);
-MainWindow* FindMainWindowByController(DocController*);
 extern Vec<MainWindow*> gWindows;
 void HighlightTab(MainWindow*, WindowTab*);
 HWND GetHwndForNotification();

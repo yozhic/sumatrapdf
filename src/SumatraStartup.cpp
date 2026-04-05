@@ -67,7 +67,6 @@
 #include "AppTools.h"
 #include "Installer.h"
 #include "ExternalViewers.h"
-#include "AppColors.h"
 #include "PreviewPipe.h"
 #include "Theme.h"
 #include "DarkModeSubclass.h"

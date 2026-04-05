@@ -55,7 +55,6 @@
 #include "ProgressUpdateUI.h"
 #include "TextSelection.h"
 #include "TextSearch.h"
-#include "AppColors.h"
 #include "SumatraPDF.h"
 #include "Notifications.h"
 #include "MainWindow.h"
@@ -2779,7 +2778,7 @@ static void CloseDocumentInCurrentTab(MainWindow* win, bool keepUIEnabled, bool 
     // HwndSetFocus(win->hwndFrame);
 }
 
-void ShowSavedAnnotationsNotification(HWND hwndParent, const char* path) {
+static void ShowSavedAnnotationsNotification(HWND hwndParent, const char* path) {
     str::Str msg;
     msg.AppendFmt(_TRA("Saved annotations to '%s'"), path);
     NotificationCreateArgs nargs;
@@ -2790,7 +2789,7 @@ void ShowSavedAnnotationsNotification(HWND hwndParent, const char* path) {
     ShowNotification(nargs);
 }
 
-void ShowSavedAnnotationsFailedNotification(HWND hwndParent, const char* path, const char* mupdfErr) {
+static void ShowSavedAnnotationsFailedNotification(HWND hwndParent, const char* path, const char* mupdfErr) {
     str::Str msg;
     msg.AppendFmt(_TRA("Saving of '%s' failed with: '%s'"), path, mupdfErr);
     ShowWarningNotification(hwndParent, msg.Get(), 0);
@@ -5035,7 +5034,7 @@ static void AddUniquePageNo(Vec<int>& v, int pageNo) {
 
 // create one or more annotations from current selection
 // returns last created annotations
-Annotation* MakeAnnotationsFromSelection(WindowTab* tab, AnnotCreateArgs* args) {
+static Annotation* MakeAnnotationsFromSelection(WindowTab* tab, AnnotCreateArgs* args) {
     // converts current selection to annotation (or back to regular text
     // if it's already an annotation)
     DisplayModel* dm = tab->AsFixed();

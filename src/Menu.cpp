@@ -26,7 +26,6 @@
 #include "DarkModeSubclass.h"
 #include "GlobalPrefs.h"
 #include "Annotation.h"
-#include "AppColors.h"
 #include "SumatraConfig.h"
 #include "SumatraPDF.h"
 #include "SumatraDialogs.h"

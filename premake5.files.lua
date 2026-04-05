@@ -751,7 +751,6 @@ function sumatrapdf_files()
   files_in_dir("src", {
     "Accelerators.*",
     "Actions.*",
-    "AppColors.*",
     "AppSettings.*",
     "AppTools.*",
     "Canvas.*",

@@ -126,9 +126,6 @@ void SetIconName(Annotation*, const char*);
 void SetLineEndStyles(Annotation*, int end);
 void SetLineStartStyles(Annotation*, int start);
 
-bool IsAnnotationEq(Annotation* a1, Annotation* a2);
-void PdfColorToFloat(PdfColor c, float rgb[3]);
-
 void DeleteAnnotation(Annotation*);
 bool AnnotationCanBeMoved(AnnotationType);
 bool AnnotationCanBeResized(AnnotationType);

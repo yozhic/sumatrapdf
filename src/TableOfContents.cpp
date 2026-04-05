@@ -24,7 +24,6 @@
 #include "SumatraConfig.h"
 #include "GlobalPrefs.h"
 #include "Annotation.h"
-#include "AppColors.h"
 #include "SumatraPDF.h"
 #include "MainWindow.h"
 #include "DisplayModel.h"

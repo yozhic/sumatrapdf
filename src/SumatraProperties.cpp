@@ -22,7 +22,6 @@
 #include "EngineAll.h"
 #include "DisplayModel.h"
 #include "AppTools.h"
-#include "AppColors.h"
 #include "SumatraPDF.h"
 #include "MainWindow.h"
 #include "resource.h"

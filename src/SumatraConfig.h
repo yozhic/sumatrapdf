@@ -18,4 +18,3 @@ extern const char* preReleaseVersion;
 constexpr const char* kExeName = "SumatraPDF.exe";
 
 int GetAppIconID();
-const char* GetCommitID();

@@ -25,7 +25,6 @@
 #include "Settings.h"
 #include "AppSettings.h"
 #include "DisplayMode.h"
-#include "AppColors.h"
 #include "Annotation.h"
 #include "DocController.h"
 #include "EngineBase.h"

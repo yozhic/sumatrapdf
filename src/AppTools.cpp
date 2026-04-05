@@ -26,7 +26,7 @@ bool NeedsWindowEmbeddingHacks();
 
 /* Returns true, if a Registry entry indicates that this executable has been
    created by an installer (and should be updated through an installer) */
-bool HasBeenInstalled() {
+static bool HasBeenInstalled() {
     // see GetDefaultInstallationDir() in Installer.cpp
     TempStr regPathUninst = str::JoinTemp("Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\", kAppName);
     TempStr installedPath = LoggedReadRegStr2Temp(regPathUninst, "InstallLocation");
@@ -755,20 +755,4 @@ bool IsUntrustedFile(const char* filePath, const char* fileURL) {
     }
 
     return false;
-}
-
-// -1 : didn't check
-// 0  : checked and not signed
-// 1  : checked and signed
-static int gIsSigned = -1;
-
-bool IsSumatraSigned() {
-    if (gIsSigned < 0) {
-        gIsSigned = 0;
-        TempStr filePath = GetSelfExePathTemp();
-        if (IsPEFileSigned(filePath)) {
-            gIsSigned = 1;
-        }
-    }
-    return gIsSigned ? true : false;
 }

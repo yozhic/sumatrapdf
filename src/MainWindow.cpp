@@ -23,7 +23,6 @@
 #include "EngineBase.h"
 #include "EngineAll.h"
 #include "GlobalPrefs.h"
-#include "AppColors.h"
 #include "ChmModel.h"
 #include "DisplayModel.h"
 #include "ProgressUpdateUI.h"
@@ -715,19 +714,6 @@ void UpdateControlsColors(MainWindow* win) {
         win->favLabelWithClose->SetColors(txtCol, bgCol);
         win->favSplitter->SetColors(kColorNoChange, splitterCol);
     }
-    // TODO: more work needed to to ensure consistent look of the ebook window:
-    // - change the tree item text color
-    // - change the tree item background color when selected (for both focused and non-focused cases)
-    // - ultimately implement owner-drawn scrollbars in a simpler style (like Chrome or VS 2013)
-    //   and match their colors as well
-}
-
-void ClearFindBox(MainWindow* win) {
-    HWND hwndFocused = GetFocus();
-    if (hwndFocused == win->hwndFindEdit) {
-        HwndSetFocus(win->hwndFrame);
-    }
-    HwndSetText(win->hwndFindEdit, "");
 }
 
 bool IsRightDragging(MainWindow* win) {
@@ -762,17 +748,6 @@ MainWindow* FindMainWindowByTab(WindowTab* tabToFind) {
     for (MainWindow* win : gWindows) {
         for (WindowTab* tab : win->Tabs()) {
             if (tab == tabToFind) {
-                return win;
-            }
-        }
-    }
-    return nullptr;
-}
-
-MainWindow* FindMainWindowByController(DocController* ctrl) {
-    for (auto& win : gWindows) {
-        for (auto& tab : win->Tabs()) {
-            if (tab->ctrl == ctrl) {
                 return win;
             }
         }

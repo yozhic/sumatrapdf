@@ -22,7 +22,6 @@ extern "C" {
 #include "EngineAll.h"
 #include "DisplayModel.h"
 #include "FzImgReader.h"
-#include "AppColors.h"
 #include "GlobalPrefs.h"
 #include "ProgressUpdateUI.h"
 #include "TextSelection.h"

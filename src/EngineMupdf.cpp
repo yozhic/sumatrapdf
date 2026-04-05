@@ -22,7 +22,6 @@ extern "C" {
 
 #include "wingui/UIModels.h"
 
-#include "AppColors.h"
 #include "Annotation.h"
 #include "DocProperties.h"
 #include "DocController.h"
@@ -945,7 +944,7 @@ static fz_pixmap* FzConvertPixmap2(fz_context* ctx, fz_pixmap* pix, fz_colorspac
     return cvt;
 }
 
-RenderedBitmap* NewRenderedFzPixmap(fz_context* ctx, fz_pixmap* pixmap) {
+static RenderedBitmap* NewRenderedFzPixmap(fz_context* ctx, fz_pixmap* pixmap) {
     if (pixmap->n == 4 && fz_colorspace_is_rgb(ctx, pixmap->colorspace)) {
         RenderedBitmap* res = TryRenderAsPaletteImage(pixmap);
         if (res) {

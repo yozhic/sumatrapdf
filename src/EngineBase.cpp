@@ -259,7 +259,7 @@ HTREEITEM TocTree::GetHandle(TreeItem ti) {
 }
 
 // TODO: speed up by removing recursion
-bool VisitTocTree(TocItem* ti, const VisitTocTreeCb& f) {
+static bool VisitTocTree(TocItem* ti, const VisitTocTreeCb& f) {
     bool cont;
     VisitTocTreeData d;
     while (ti) {
@@ -294,19 +294,6 @@ static bool VisitTocTreeWithParentRecursive(TocItem* ti, TocItem* parent, const 
         ti = ti->next;
     }
     return true;
-}
-
-bool VisitTocTreeWithParent(TocItem* ti, const VisitTocTreeCb& f) {
-    return VisitTocTreeWithParentRecursive(ti, nullptr, f);
-}
-
-static void SetTocItemParent(VisitTocTreeData* d) {
-    d->ti->parent = d->parent;
-}
-
-void SetTocTreeParents(TocItem* treeRoot) {
-    auto fn = MkFunc1Void(SetTocItemParent);
-    VisitTocTreeWithParent(treeRoot, fn);
 }
 
 RenderPageArgs::RenderPageArgs(int pageNo, float zoom, int rotation, RectF* pageRect, RenderTarget target,

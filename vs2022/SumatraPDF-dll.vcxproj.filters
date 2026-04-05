@@ -111,9 +111,6 @@
     <ClInclude Include="..\src\Annotation.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\AppColors.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\AppSettings.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -411,9 +408,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Annotation.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\AppColors.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AppSettings.cpp">

@@ -333,9 +333,6 @@ struct VisitTocTreeData {
 };
 
 using VisitTocTreeCb = Func1<VisitTocTreeData*>;
-bool VisitTocTree(TocItem* ti, const VisitTocTreeCb& f);
-bool VisitTocTreeWithParent(TocItem* ti, const VisitTocTreeCb& f);
-void SetTocTreeParents(TocItem* treeRoot);
 
 // a helper that allows for rendering interruptions in an engine-agnostic way
 class AbortCookie {

@@ -30,10 +30,8 @@ struct NotificationCreateArgs {
 void NotificationUpdateMessage(NotificationWnd* wnd, const char* msg, int timeoutInMS = 0, bool highlight = false);
 void RemoveNotification(NotificationWnd*);
 bool RemoveNotificationsForGroup(HWND, Kind);
-bool RemoveNotificationsForHwnd(HWND);
 NotificationWnd* GetNotificationForGroup(HWND, Kind);
 bool UpdateNotificationProgress(NotificationWnd*, const char* msg, int perc);
-bool NotificationExists(NotificationWnd*);
 void RelayoutNotifications(HWND hwnd);
 
 NotificationWnd* ShowNotification(const NotificationCreateArgs& args);

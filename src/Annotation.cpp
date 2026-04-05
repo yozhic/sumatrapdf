@@ -135,13 +135,6 @@ TempStr AnnotationReadableNameTemp(AnnotationType tp) {
     return s;
 }
 
-bool IsAnnotationEq(Annotation* a1, Annotation* a2) {
-    if (a1 == a2) {
-        return true;
-    }
-    return a1->pdfannot == a2->pdfannot;
-}
-
 AnnotationType Type(Annotation* annot) {
     ReportIf((int)annot->type < 0);
     return annot->type;
@@ -537,7 +530,7 @@ void SetLineStartStyles(Annotation* annot, int start) {
     MarkNotificationAsModified(e, annot);
 }
 
-void PdfColorToFloat(PdfColor c, float rgb[3]) {
+static void PdfColorToFloat(PdfColor c, float rgb[3]) {
     u8 r, g, b, a;
     UnpackPdfColor(c, r, g, b, a);
     rgb[0] = (float)r / 255.0f;

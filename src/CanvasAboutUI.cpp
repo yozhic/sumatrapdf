@@ -11,7 +11,6 @@
 #include "wingui/Layout.h"
 #include "wingui/FrameRateWnd.h"
 
-#include "AppColors.h"
 #include "Settings.h"
 #include "DocController.h"
 #include "GlobalPrefs.h"
