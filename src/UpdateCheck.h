@@ -7,4 +7,5 @@ enum class UpdateCheck {
 };
 
 void StartAsyncUpdateCheck(MainWindow* win, UpdateCheck updateCheckType);
+void StartInstallerAutoUpgrade(const char* installerPath);
 void UpdateSelfTo(const char* path);

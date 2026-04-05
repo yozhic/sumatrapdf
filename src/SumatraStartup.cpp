@@ -2366,6 +2366,13 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         }
     }
 
+    if (flags.upgradeFrom) {
+        logf(" flags.upgradeFrom: '%s'\n", flags.upgradeFrom);
+        StartInstallerAutoUpgrade(flags.upgradeFrom);
+        fastExit = true;
+        goto Exit;
+    }
+
     if (flags.deleteFile) {
         logf(" flags.deleteFile: '%s'\n", flags.deleteFile);
         RedirectIOToExistingConsole();

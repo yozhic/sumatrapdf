@@ -29,6 +29,7 @@
 #include "MainWindow.h"
 #include "SumatraDialogs.h"
 #include "HomePage.h"
+#include "Installer.h"
 #include "UpdateCheck.h"
 
 #include "utils/Log.h"
@@ -227,6 +228,24 @@ static bool ShouldCheckForUpdate(UpdateCheck updateCheckType) {
     return checkUpdate;
 }
 
+void StartInstallerAutoUpgrade(const char* installerPath) {
+    str::Str cmd;
+    if (IsOurExeInstalled()) {
+        // no need for sleep because it shows the installer dialog anyway
+        if (gIsPreReleaseBuild) {
+            cmd.Append(" -fast-install");
+        } else {
+            cmd.Append(" -install");
+        }
+    } else {
+        // we're asking to over-write over ourselves, so also wait 2 secs to allow
+        // our process to exit
+        cmd.AppendFmt(R"( -sleep-ms 500 -exit-when-done -update-self-to "%s")", GetSelfExePathTemp());
+    }
+    logf("StartInstallerAutoUpgrade: installer cmd: '%s'\n", cmd.Get());
+    CreateProcessHelper(installerPath, cmd.Get());
+}
+
 static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
     auto mainInstr = _TRA("New version available");
     auto ver = updateInfo->latestVer;
@@ -286,23 +305,7 @@ static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
         return;
     }
 
-    // TODO: we don't really handle a case when it's a dll build but not installed
-    // maybe in that case go to website
-    str::Str cmd;
-    if (IsDllBuild()) {
-        // no need for sleep because it shows the installer dialog anyway
-        if (gIsPreReleaseBuild) {
-            cmd.Append(" -fast-install");
-        } else {
-            cmd.Append(" -install");
-        }
-    } else {
-        // we're asking to over-write over ourselves, so also wait 2 secs to allow
-        // our process to exit
-        cmd.AppendFmt(R"( -sleep-ms 500 -exit-when-done -update-self-to "%s")", GetSelfExePathTemp());
-    }
-    logf("NotifyUserOfUpdate: installer cmd: '%s'\n", cmd.Get());
-    CreateProcessHelper(installerPath, cmd.Get());
+    StartInstallerAutoUpgrade(installerPath);
     PostQuitMessage(0);
 }
 
@@ -446,9 +449,11 @@ static void NotifySuspiciousUpdate(HWND hwndParent, const char* dlURL) {
 
 static DWORD MaybeStartUpdateDownload(HWND hwndParent, HttpRsp* rsp, UpdateCheck updateCheckType) {
     // for store builds we do update check but ignore the result
+#if 0
     if (gIsStoreBuild) {
         return 0;
     }
+#endif
 
     const char* url = rsp->url.Get();
 
