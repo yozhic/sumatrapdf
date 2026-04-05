@@ -1180,7 +1180,7 @@ RectF EngineImageDir::LoadMediabox(int pageNo) {
     char* path = pageFileNames.At(pageNo - 1);
     ByteSlice bmpData = file::ReadFile(path);
     if (bmpData) {
-        Size size = BitmapSizeFromData(bmpData);
+        Size size = ImageSizeFromData(bmpData);
         bmpData.Free();
         return RectF(0, 0, (float)size.dx, (float)size.dy);
     }
@@ -1580,9 +1580,22 @@ Bitmap* EngineCbx::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
 }
 
 RectF EngineCbx::LoadMediabox(int pageNo) {
+    size_t fileId = files[pageNo - 1]->fileId;
+
+    // try to get image size from just the file header (first 1024 bytes)
+    ByteSlice header = cbxFile->GetFileDataPartById(fileId, 1024);
+    if (!header.empty()) {
+        Size size = ImageSizeFromHeader(header);
+        header.Free();
+        if (!size.IsEmpty()) {
+            return RectF(0, 0, (float)size.dx, (float)size.dy);
+        }
+    }
+
+    // fall back to getting the full image data
     ByteSlice img = GetImageData(pageNo);
     if (!img.empty()) {
-        Size size = BitmapSizeFromData(img);
+        Size size = ImageSizeFromData(img);
         img.Free();
         if (size.IsEmpty()) {
             logf("EngineCbx::LoadMediabox: empty media box for page: %d\n", pageNo);

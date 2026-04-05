@@ -1398,7 +1398,7 @@ static bool SaveHBitmapAsPng(HBITMAP hBitmap, const char* filePath) {
         return false;
     }
     Gdiplus::Bitmap gbmp(hBitmap, nullptr);
-    CLSID pngEncId = GetEncoderClsid(L"image/png");
+    CLSID pngEncId = GetGdiPlusEncoderClsid(L"image/png");
     WCHAR* filePathW = ToWStrTemp(filePath);
     Gdiplus::Status status = gbmp.Save(filePathW, &pngEncId, nullptr);
     return status == Gdiplus::Ok;

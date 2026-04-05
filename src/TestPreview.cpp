@@ -120,7 +120,7 @@ void TestPreview(const WCHAR* cmdLine) {
     }
 
     Gdiplus::Bitmap gdipBmp(bmp, nullptr);
-    CLSID pngClsid = GetEncoderClsid(L"image/png");
+    CLSID pngClsid = GetGdiPlusEncoderClsid(L"image/png");
     Gdiplus::Status st = gdipBmp.Save(L"preview.png", &pngClsid);
     if (st != Gdiplus::Ok) {
         printf("Failed to save preview.png: %d\n", (int)st);

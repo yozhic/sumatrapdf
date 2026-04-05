@@ -134,7 +134,7 @@ void SaveThumbnail(FileState* fs) {
         return;
     }
     Gdiplus::Bitmap bmp(thumbnail->GetBitmap(), nullptr);
-    CLSID tmpClsid = GetEncoderClsid(L"image/png");
+    CLSID tmpClsid = GetGdiPlusEncoderClsid(L"image/png");
     TempWStr pathW = ToWStrTemp(thumbnailPath);
     bmp.Save(pathW, &tmpClsid, nullptr);
 }

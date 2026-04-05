@@ -79,13 +79,28 @@ bool MultiFormatArchive::ParseEntries(struct archive* a) {
     return fileId > 0;
 }
 
+// unfortunately libarchive's rar support is weak
+static bool gUnrarFirst = true;
+
 bool MultiFormatArchive::Open(const char* path) {
+    if (!path) {
+        return false;
+    }
+
+    if (gUnrarFirst && format == Format::Rar) {
+        bool ok = OpenUnrarFallback(path);
+        if (ok) {
+            return true;
+        }
+    }
+
     bool ok = OpenArchive(path);
     if (ok) {
         return true;
     }
+
     // for .rar files, fall back to unrar.dll if libarchive fails
-    if ((format == Format::Rar) && path) {
+    if (!gUnrarFirst && format == Format::Rar) {
         ok = OpenUnrarFallback(path);
         if (ok) {
             return true;
@@ -227,6 +242,68 @@ ByteSlice MultiFormatArchive::GetFileDataByIdLibarchive(size_t fileId) {
                 return {};
             }
             return {data, size};
+        }
+        archive_read_data_skip(a);
+        idx++;
+    }
+    archive_read_free(a);
+    return {};
+}
+
+ByteSlice MultiFormatArchive::GetFileDataPartById(size_t fileId, size_t sizeHint) {
+    if (fileId == (size_t)-1) {
+        return {};
+    }
+    ReportIf(fileId >= fileInfos_.size());
+
+    auto* fileInfo = fileInfos_[fileId];
+    // if full data is cached, return a copy of the prefix
+    if (fileInfo->data != nullptr) {
+        size_t n = std::min(fileInfo->fileSizeUncompressed, sizeHint);
+        u8* data = AllocArray<u8>(n + ZERO_PADDING_COUNT);
+        if (!data) {
+            return {};
+        }
+        memcpy(data, fileInfo->data, n);
+        return {data, n};
+    }
+
+    if (LoadedUsingUnrarDll()) {
+        // unrar doesn't support partial reads easily, get full data
+        return GetFileDataByIdUnarrDll(fileId);
+    }
+
+    if (!archivePath_) {
+        return {};
+    }
+
+    struct archive* a = archive_read_new();
+    archive_read_support_format_all(a);
+    archive_read_support_filter_all(a);
+    int r = archive_read_open_filename(a, archivePath_, 10240);
+    if (r != ARCHIVE_OK) {
+        archive_read_free(a);
+        return {};
+    }
+
+    struct archive_entry* entry;
+    size_t idx = 0;
+    while (archive_read_next_header(a, &entry) == ARCHIVE_OK) {
+        if (idx == fileId) {
+            size_t fullSize = fileInfo->fileSizeUncompressed;
+            size_t toRead = std::min(fullSize, sizeHint);
+            u8* data = AllocArray<u8>(toRead + ZERO_PADDING_COUNT);
+            if (!data) {
+                archive_read_free(a);
+                return {};
+            }
+            la_ssize_t n = archive_read_data(a, data, toRead);
+            archive_read_free(a);
+            if (n < 0) {
+                free(data);
+                return {};
+            }
+            return {data, (size_t)n};
         }
         archive_read_data_skip(a);
         idx++;

@@ -40,6 +40,7 @@ class MultiFormatArchive {
 
     ByteSlice GetFileDataByName(const char* filename);
     ByteSlice GetFileDataById(size_t fileId);
+    ByteSlice GetFileDataPartById(size_t fileId, size_t sizeHint);
 
     const char* GetComment();
 

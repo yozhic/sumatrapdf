@@ -6013,7 +6013,7 @@ static void PasteImageFromClipboard(MainWindow* win) {
     TempStr destPath = MakeUniqueFilePathTemp(basePath);
 
     // save as PNG
-    CLSID pngClsid = GetEncoderClsid(L"image/png");
+    CLSID pngClsid = GetGdiPlusEncoderClsid(L"image/png");
     TempWStr destW = ToWStrTemp(destPath);
     Gdiplus::Status status = gdipBmp.Save(destW, &pngClsid, nullptr);
     if (status != Gdiplus::Ok) {

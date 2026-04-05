@@ -466,6 +466,69 @@ static bool GifSizeFromData(ByteReader r, Size& result) {
     return false;
 }
 
+// try to get image dimensions from EXIF sub-IFD (tags 0xA002/0xA003)
+// tiffBase is the offset into r where the TIFF header starts
+static bool JpegSizeFromExif(ByteReader r, size_t tiffBase, Size& result) {
+    size_t n = r.len;
+    if (tiffBase + 8 > n) {
+        return false;
+    }
+    bool isBE = r.Byte(tiffBase) == 'M';
+    // read IFD0 offset
+    size_t ifdOff = r.DWord(tiffBase + 4, isBE);
+    size_t ifdAbs = tiffBase + ifdOff;
+    if (ifdAbs + 2 > n) {
+        return false;
+    }
+    WORD count = r.Word(ifdAbs, isBE);
+    size_t exifIfdOff = 0;
+    // scan IFD0 for ExifIFD pointer (tag 0x8769)
+    for (WORD i = 0; i < count; i++) {
+        size_t entryOff = ifdAbs + 2 + (size_t)i * 12;
+        if (entryOff + 12 > n) {
+            break;
+        }
+        WORD tag = r.Word(entryOff, isBE);
+        if (tag == 0x8769) {
+            exifIfdOff = r.DWord(entryOff + 8, isBE);
+            break;
+        }
+    }
+    if (exifIfdOff == 0) {
+        return false;
+    }
+    // read EXIF sub-IFD
+    size_t exifAbs = tiffBase + exifIfdOff;
+    if (exifAbs + 2 > n) {
+        return false;
+    }
+    count = r.Word(exifAbs, isBE);
+    for (WORD i = 0; i < count; i++) {
+        size_t entryOff = exifAbs + 2 + (size_t)i * 12;
+        if (entryOff + 12 > n) {
+            break;
+        }
+        WORD tag = r.Word(entryOff, isBE);
+        WORD type = r.Word(entryOff + 2, isBE);
+        if (tag == 0xA002) {
+            // PixelXDimension
+            if (type == 4) {
+                result.dx = (int)r.DWord(entryOff + 8, isBE);
+            } else if (type == 3) {
+                result.dx = r.Word(entryOff + 8, isBE);
+            }
+        } else if (tag == 0xA003) {
+            // PixelYDimension
+            if (type == 4) {
+                result.dy = (int)r.DWord(entryOff + 8, isBE);
+            } else if (type == 3) {
+                result.dy = r.Word(entryOff + 8, isBE);
+            }
+        }
+    }
+    return !result.IsEmpty();
+}
+
 static bool JpegSizeFromData(ByteReader r, Size& result) {
     // find the last start of frame marker for non-differential Huffman/arithmetic coding
     size_t n = r.len;
@@ -484,7 +547,23 @@ static bool JpegSizeFromData(ByteReader r, Size& result) {
             result.dy = r.WordBE(idx + 5);
             return true;
         }
-        idx += (size_t)r.WordBE(idx + 2) + 2;
+        size_t segLen = (size_t)r.WordBE(idx + 2);
+        size_t nextIdx = idx + segLen + 2;
+        if (nextIdx + 9 >= n) {
+            // can't read past this segment; if it's APP1/EXIF, try parsing dimensions from EXIF
+            if (b == 0xE1 && idx + 10 < n) {
+                // check for "Exif\0\0" signature
+                if (r.Byte(idx + 4) == 'E' && r.Byte(idx + 5) == 'x' && r.Byte(idx + 6) == 'i' &&
+                    r.Byte(idx + 7) == 'f' && r.Byte(idx + 8) == 0 && r.Byte(idx + 9) == 0) {
+                    size_t tiffBase = idx + 10; // TIFF header starts after "Exif\0\0"
+                    if (JpegSizeFromExif(r, tiffBase, result)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        idx = nextIdx;
     }
     return false;
 }
@@ -592,7 +671,7 @@ static bool AvifSizeFromData(ByteReader r, Size& result) {
 }
 
 // adapted from http://cpansearch.perl.org/src/RJRAY/Image-Size-3.230/lib/Image/Size.pm
-Size BitmapSizeFromData(const ByteSlice& d) {
+Size ImageSizeFromData(const ByteSlice& d) {
     Size result;
     bool ok = false;
     Kind kind = GuessFileTypeFromContent(d);
@@ -631,7 +710,39 @@ Size BitmapSizeFromData(const ByteSlice& d) {
     return result;
 }
 
-CLSID GetEncoderClsid(const WCHAR* format) {
+// like ImageSizeFromData but only parses headers, no full decode fallback
+Size ImageSizeFromHeader(const ByteSlice& d) {
+    Size result;
+    bool ok = false;
+    Kind kind = GuessFileTypeFromContent(d);
+
+    ByteReader r(d);
+    if (kind == kindFileBmp) {
+        ok = BmpSizeFromData(r, result);
+    } else if (kind == kindFileGif) {
+        ok = GifSizeFromData(r, result);
+    } else if (kind == kindFileJpeg) {
+        ok = JpegSizeFromData(r, result);
+    } else if (kind == kindFileJxr || kind == kindFileTiff) {
+        ok = TiffSizeFromData(r, result);
+    } else if (kind == kindFilePng) {
+        ok = PngSizeFromData(r, result);
+    } else if (kind == kindFileTga) {
+        ok = TgaSizeFromData(r, result);
+    } else if (kind == kindFileWebp) {
+        ok = WebpSizeFromData(r, result);
+    } else if (kind == kindFileJp2) {
+        ok = Jp2SizeFromData(r, result);
+    } else if (kind == kindFileAvif || kind == kindFileHeic) {
+        ok = AvifSizeFromData(r, result);
+    }
+    if (ok && !result.IsEmpty()) {
+        return result;
+    }
+    return {};
+}
+
+CLSID GetGdiPlusEncoderClsid(const WCHAR* format) {
     CLSID null{};
     uint numEncoders, size;
     Status ok = Gdiplus::GetImageEncodersSize(&numEncoders, &size);
