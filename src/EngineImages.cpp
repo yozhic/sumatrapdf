@@ -1338,7 +1338,7 @@ class EngineCbx : public EngineImages {
     ByteSlice GetImageData(int pageNo);
 
     // access to cbxFile must be protected after initialization (with cacheAccess)
-    MultiFormatArchive* cbxFile = nullptr;
+    MultiFormatArchive* cbxArchive = nullptr;
     Vec<MultiFormatArchive::FileInfo*> files;
     TocTree* tocTree = nullptr;
 
@@ -1347,13 +1347,13 @@ class EngineCbx : public EngineImages {
 
 // TODO: refactor so that doesn't have to keep <arch>
 EngineCbx::EngineCbx(MultiFormatArchive* arch) {
-    cbxFile = arch;
+    cbxArchive = arch;
     kind = kindEngineComicBooks;
 }
 
 EngineCbx::~EngineCbx() {
     delete tocTree;
-    delete cbxFile;
+    delete cbxArchive;
 }
 
 EngineBase* EngineCbx::Clone() {
@@ -1412,8 +1412,8 @@ static const char* GetExtFromArchiveType(MultiFormatArchive* cbxFile) {
 }
 
 bool EngineCbx::FinishLoading() {
-    ReportIf(!cbxFile);
-    if (!cbxFile) {
+    ReportIf(!cbxArchive);
+    if (!cbxArchive) {
         return false;
     }
 
@@ -1429,12 +1429,12 @@ bool EngineCbx::FinishLoading() {
     // TODO: return DpiGetForHwnd(HWND_DESKTOP) instead?
     fileDPI = 96.f;
 
-    const char* ext = GetExtFromArchiveType(cbxFile);
+    const char* ext = GetExtFromArchiveType(cbxArchive);
     str::ReplaceWithCopy(&defaultExt, ext);
 
     Vec<MultiFormatArchive::FileInfo*> pageFiles;
 
-    auto& fileInfos = cbxFile->GetFileInfos();
+    auto& fileInfos = cbxArchive->GetFileInfos();
     size_t n = fileInfos.size();
     for (size_t i = 0; i < n; i++) {
         auto* fileInfo = fileInfos[i];
@@ -1442,7 +1442,7 @@ bool EngineCbx::FinishLoading() {
         if (str::Len(fileName) == 0) {
             continue;
         }
-        if (MultiFormatArchive::Format::Zip == cbxFile->format && str::StartsWithI(fileName, "_rels/.rels")) {
+        if (MultiFormatArchive::Format::Zip == cbxArchive->format && str::StartsWithI(fileName, "_rels/.rels")) {
             // bail, if we accidentally try to load an XPS file
             return false;
         }
@@ -1455,20 +1455,20 @@ bool EngineCbx::FinishLoading() {
         }
     }
 
-    ByteSlice metadata = cbxFile->GetFileDataByName("ComicInfo.xml");
+    ByteSlice metadata = cbxArchive->GetFileDataByName("ComicInfo.xml");
     if (metadata) {
         cip.Parse(metadata);
         metadata.Free();
     }
-    const char* comment = cbxFile->GetComment();
+    const char* comment = cbxArchive->GetComment();
     if (comment) {
         json::Parse(comment, &cip);
     }
 
     int nFiles = pageFiles.Size();
     if (nFiles == 0) {
-        delete cbxFile;
-        cbxFile = nullptr;
+        delete cbxArchive;
+        cbxArchive = nullptr;
         return false;
     }
 
@@ -1512,7 +1512,7 @@ TocTree* EngineCbx::GetToc() {
 ByteSlice EngineCbx::GetImageData(int pageNo) {
     ReportIf((pageNo < 1) || (pageNo > PageCount()));
     size_t fileId = files[pageNo - 1]->fileId;
-    ByteSlice d = cbxFile->GetFileDataById(fileId);
+    ByteSlice d = cbxArchive->GetFileDataById(fileId);
     return d;
 }
 
@@ -1549,7 +1549,7 @@ void EngineCbx::GetProperties(StrVec& keyValOut) {
     EngineBase::GetProperties(keyValOut);
 
     str::Str filesStr;
-    auto& fileInfos = cbxFile->GetFileInfos();
+    auto& fileInfos = cbxArchive->GetFileInfos();
     size_t n = fileInfos.size();
     for (size_t i = 0; i < n; i++) {
         auto* fi = fileInfos[i];
@@ -1583,7 +1583,7 @@ RectF EngineCbx::LoadMediabox(int pageNo) {
     size_t fileId = files[pageNo - 1]->fileId;
 
     // try to get image size from just the file header (first 1024 bytes)
-    ByteSlice header = cbxFile->GetFileDataPartById(fileId, 1024);
+    ByteSlice header = cbxArchive->GetFileDataPartById(fileId, 1024);
     if (!header.empty()) {
         Size size = ImageSizeFromHeader(header);
         header.Free();
