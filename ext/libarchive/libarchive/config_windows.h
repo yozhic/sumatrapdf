@@ -109,7 +109,12 @@ typedef unsigned short mode_t;
 #define HAVE_LIBZ 1
 #define HAVE_ZLIB_H 1
 
-/* Use BCrypt API (Vista+) instead of legacy CryptoAPI */
-#define HAVE_BCRYPT_H 1
+/*
+ * Use legacy CryptoAPI for Win7 compatibility.
+ * archive_windows.h defines NOCRYPT before including <windows.h>,
+ * so we must include <wincrypt.h> explicitly here.
+ */
+#include <windows.h>
+#include <wincrypt.h>
 
 /* No bzip2, lzma, lz4, zstd, or openssl for now */
