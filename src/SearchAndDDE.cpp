@@ -806,7 +806,6 @@ valid formats:
     [Open("c:\file.pdf",1,1,0)]
     [Open("c:\file.pdf",1,1,0,1)]
 */
-// TODO: handle inCurrentTab flag
 static const char* HandleOpenCmd(const char* cmd, bool* ack) {
     AutoFreeStr filePath;
     int newWindow = 0;
@@ -906,7 +905,11 @@ static const char* HandleOpenCmd(const char* cmd, bool* ack) {
         if (newWindow) {
             args.activateExisting = false;
         }
-        logf("HandleOpenCmd: calling LoadDocument(), activateExisting: %d\n", (int)args.activateExisting);
+        if (inCurrentTab) {
+            args.forceReuse = true;
+        }
+        logf("HandleOpenCmd: calling LoadDocument(), activateExisting: %d, forceReuse: %d\n",
+             (int)args.activateExisting, (int)args.forceReuse);
         win = LoadDocument(&args);
         if (!win) {
             logf("HandleOpenCmd: LoadDocument() for '%s' failed\n", filePath.Get());
