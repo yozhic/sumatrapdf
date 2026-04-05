@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="bzip2">
+      <UniqueIdentifier>{0C15310F-7829-59C0-41AB-FC1FAD7E55F1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="libarchive">
       <UniqueIdentifier>{1E5D585E-0A15-9AAB-731C-73075FF3349C}</UniqueIdentifier>
     </Filter>
@@ -140,6 +143,30 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ext\bzip2\blocksort.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\bz_internal_error.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\bzlib.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\compress.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\crctable.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\decompress.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\huffman.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\bzip2\randtable.c">
+      <Filter>bzip2</Filter>
+    </ClCompile>
     <ClCompile Include="..\ext\libarchive\libarchive\archive_acl.c">
       <Filter>libarchive\libarchive</Filter>
     </ClCompile>

@@ -359,6 +359,12 @@ workspace "SumatraPDF"
     uses_zlib()
     includedirs { "ext/libarchive/libarchive" }
     libarchive_files()
+    -- bzip2 support for libarchive
+    defines { "BZ_NO_STDIO" }
+    includedirs { "ext/bzip2" }
+    files { "ext/bzip2/blocksort.c", "ext/bzip2/bzlib.c", "ext/bzip2/bz_internal_error.c",
+            "ext/bzip2/compress.c", "ext/bzip2/crctable.c", "ext/bzip2/decompress.c",
+            "ext/bzip2/huffman.c", "ext/bzip2/randtable.c" }
     -- LZMA files needed by LzmaSimpleArchive in utils (previously provided by unarrlib)
     includedirs { "ext/lzma/C" }
     files { "ext/lzma/C/LzmaDec.c", "ext/lzma/C/Bra86.c", "ext/lzma/C/Bra.c" }

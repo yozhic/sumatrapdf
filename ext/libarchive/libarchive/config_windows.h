@@ -117,4 +117,7 @@ typedef unsigned short mode_t;
 #include <windows.h>
 #include <wincrypt.h>
 
-/* No bzip2, lzma, lz4, zstd, or openssl for now */
+/* bzip2 support */
+#define HAVE_BZLIB_H 1
+
+/* No lzma, lz4, zstd, or openssl for now */
