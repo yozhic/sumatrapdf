@@ -1346,8 +1346,8 @@ class EngineCbx : public EngineImages {
 };
 
 // TODO: refactor so that doesn't have to keep <arch>
-EngineCbx::EngineCbx(MultiFormatArchive* arch) {
-    cbxArchive = arch;
+EngineCbx::EngineCbx(MultiFormatArchive* archive) {
+    cbxArchive = archive;
     kind = kindEngineComicBooks;
 }
 
