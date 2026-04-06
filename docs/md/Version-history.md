@@ -37,6 +37,9 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - improve document properties for comic book files (CBZ, CBR, CB7, CBT). We now show list of image files.
 - improve document properties for image files: size, dimensions, DPI, exif metadata
 
+## 3.6.1 (2026-04-06)
+
+- bugfixes
 
 ## 3.6 (2026-03-17)
 
@@ -208,7 +211,6 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 
 - added support for adding / removing / editing annotations in PDF files. Read [the tutorial](Editing-annotations.md)
 - new toolbar
-
   - changed toolbar to scale with DPI by using new, vector icons
   - added rotate left / right to the toolbar
   - new toolbar:
