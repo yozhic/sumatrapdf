@@ -3253,6 +3253,12 @@ void CloseWindow(MainWindow* win, bool quitIfLast, bool forceClose) {
     // hide the window before saving prefs (closing seems slightly faster that way)
     if (!lastWindow || quitIfLast) {
         ShowWindow(win->hwndFrame, SW_HIDE);
+        // ShowWindow can pump messages. If the window is embedded (e.g. in Total Commander),
+        // the host may react by sending WM_DESTROY, which triggers a reentrant CloseWindow()
+        // that frees win. Check if win is still valid before continuing.
+        if (!IsMainWindowValid(win)) {
+            return;
+        }
     }
 
     // if this is a last window, save state before closing window
