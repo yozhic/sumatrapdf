@@ -68,7 +68,7 @@ CmdFindPrevSel,Shift + Ctrl + F3,Find Previous Selection,
 Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdBookView,Ctrl + 8,Book View,
 CmdFacingView,Ctrl + 7,Facing View,
-CmdInvertColors,i,Invert Colors,
+CmdInvertColors,Shift + I,Invert Colors,was `i` before 3.6
 CmdRotateLeft,"[, Shift + Ctrl + Subtract",Rotate Left,
 CmdRotateRight,"], Shift + Ctrl + Add",Rotate Right,
 CmdSinglePageView,Ctrl + 6,Single Page View,
@@ -76,7 +76,7 @@ CmdToggleContinuousView,c,Toggle Continuous View,
 CmdToggleFullscreen,"f, Shift + Ctrl + L, F11",Toggle Fullscreen,
 CmdToggleMangaMode,,Toggle Manga Mode,
 CmdToggleMenuBar,F9,Toggle Menu Bar,
-CmdTogglePageInfo,Shift + i,Show / Hide Current Page Number,
+CmdTogglePageInfo,i,Show / Hide Current Page Number,was Shift + i before 3.6
 CmdChangeScrollbar,,Change Scrollbar,"Opens dialog to choose scrollbar mode (windows/smart/overlay/hidden)"
 CmdToggleToolbar,F8,Toggle Toolbar,
 CmdToggleUseTabs,,Toggle Use Tabs,"Toggle UseTabs setting, only affects new windows, ver 3.7+"
