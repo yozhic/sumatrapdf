@@ -1218,7 +1218,7 @@ int RunInstaller() {
             logf("Parent process: unknown\n");
         }
     }
-    if (!IsProcessAndOsArchSame()) {
+    if (!gCli->silent && !IsProcessAndOsArchSame()) {
         logfa("quitting because !IsProcessAndOsArchSame()\n");
         bool ok = ShouldInstallMismatchedArch(nullptr);
         if (!ok) return 1;
