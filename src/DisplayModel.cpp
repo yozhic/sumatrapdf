@@ -591,7 +591,6 @@ float DisplayModel::ZoomRealFromVirtualForPage(float zoomVirtual, int pageNo) co
         row.dx += (double)pageSpacing.dx * (double)(columns - 1);
     }
 
-    ReportIf(RectF(PointF(), row).IsEmpty());
     if (RectF(PointF(), row).IsEmpty()) {
         return 0;
     }
