@@ -24,9 +24,12 @@
 
 #include "DarkModeSubclass.h"
 
+extern "C" {
+#include <mupdf/fitz/export.h>
+#include <mupdf/fitz/getopt.h>
+}
 extern "C" int pdfbake_main(int argc, char** argv);
 extern "C" int muconvert_main(int argc, char** argv);
-extern "C" int fz_optind;
 
 struct PdfBakeDialog {
     HWND hwnd = nullptr;
