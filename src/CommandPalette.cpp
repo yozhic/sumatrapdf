@@ -556,6 +556,10 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
             isToggle = true;
             newIsOn = !wnd;
         } break;
+        case CmdTogglePromo: {
+            isToggle = true;
+            newIsOn = !gGlobalPrefs->showPromo;
+        } break;
     }
     if (isToggle) {
         s = (const char*)str::JoinTemp(s, newIsOn ? ": on" : ": off");

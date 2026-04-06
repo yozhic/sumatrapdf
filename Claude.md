@@ -25,7 +25,7 @@ To add a new advanced setting:
 ## Adding a new command
 
 To add a new command:
-- add to cmd/gen-commands.ts
+- add to cmd/gen-commands.ts, always at the end of the list (before the "CmdNone" command)
 - run "bun cmd/gen-commands.ts" to regenerate src/Commands.h and src/Commands.cpp
 - document in docs/md/Commands.md
 - document in docs/md/Version-history.md in **next** section

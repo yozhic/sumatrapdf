@@ -931,7 +931,7 @@ void LayoutHomePage(HomePageLayout& l) {
     }
 
     // layout promotion at the bottom (gPromoteSelected already picked)
-    if (gPromoteSelected) {
+    if (gShowPromotion && gGlobalPrefs->showPromo && gPromoteSelected) {
         Promote* p = gPromoteSelected;
 
         HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
@@ -1078,7 +1078,7 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
     }
 
     // draw promotion
-    if (gShowPromotion && gPromoteSelected) {
+    if (gShowPromotion && gGlobalPrefs->showPromo && gPromoteSelected) {
         Promote* p = gPromoteSelected;
 #if 0
         {

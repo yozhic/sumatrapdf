@@ -679,6 +679,7 @@ const globalPrefs: Field[] = [
     ),
     "3.7",
   ),
+  mkField("ShowPromo", Bool, true, "if true, we show promotions on the home page"),
   mkField("ShowToolbar", Bool, true, "if true, we show the toolbar at the top of the window"),
   mkField("ShowFavorites", Bool, false, "if true, we show the Favorites sidebar"),
   mkField(

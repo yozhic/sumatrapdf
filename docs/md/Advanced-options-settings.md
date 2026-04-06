@@ -105,6 +105,9 @@ ShowMenubar = true
 ; version 3.7)
 ShowMenubarWithTabs = false
 
+; if true, we show promotions on the home page
+ShowPromo = true
+
 ; if true, we show the toolbar at the top of the window
 ShowToolbar = true
 
