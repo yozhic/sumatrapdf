@@ -100,6 +100,15 @@ struct PageDestinationMupdf : IPageDestination {
         link = l;
         outline = o;
     }
+
+    RectF GetRect2() override {
+        if (outline) {
+            // needed for -named-dest called from LinkHandler::ScrollTo
+            RectF r{outline->x, outline->y, 0, 0};
+            return r;
+        }
+        return rect;
+    }
     ~PageDestinationMupdf() override {
         str::Free(value);
         str::Free(name);

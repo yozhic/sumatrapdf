@@ -178,7 +178,6 @@ struct GoToTocLinkData {
     DocController* ctrl;
 };
 
-// TocItem* tocItem, WindowTab* tab, DocController* ctrl
 static void GoToTocLink(GoToTocLinkData* d) {
     AutoDelete delData(d);
 
