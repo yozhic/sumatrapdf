@@ -12,6 +12,7 @@
 #include "utils/FileWatcher.h"
 #include "utils/HtmlParserLookup.h"
 #include "utils/GdiPlusUtil.h"
+#include "utils/GuessFileType.h"
 #include "mui/Mui.h"
 #include "utils/SquareTreeParser.h"
 #include "utils/ThreadUtil.h"
@@ -994,10 +995,57 @@ static void testLogf() {
 extern "C" void destroy_system_font_list();
 extern void DeleteManualBrowserWindow();
 
+// must match order of PreviewFileType enum (starting at 1)
+static SeqStrings gPreviewFileTypeNames = "PDF\0DjVu\0EPUB\0FB2\0MOBI\0CBX\0TGA\0XPS\0";
+
+static const char* PreviewFileTypeName(u32 fileType) {
+    const char* name = seqstrings::IdxToStr(gPreviewFileTypeNames, (int)fileType - 1);
+    return name ? name : "unknown";
+}
+
+static PreviewFileType PreviewFileTypeFromContentKind(Kind kind) {
+    if (kind == kindFilePDF) {
+        return PreviewFileType::PDF;
+    }
+    if (kind == kindFileXps) {
+        return PreviewFileType::XPS;
+    }
+    if (kind == kindFileDjVu) {
+        return PreviewFileType::DjVu;
+    }
+    if (kind == kindFileEpub) {
+        return PreviewFileType::EPUB;
+    }
+    if (kind == kindFileFb2 || kind == kindFileFb2z) {
+        return PreviewFileType::FB2;
+    }
+    if (kind == kindFileMobi) {
+        return PreviewFileType::MOBI;
+    }
+    if (kind == kindFileCbz || kind == kindFileCbr || kind == kindFileCb7 || kind == kindFileCbt) {
+        return PreviewFileType::CBX;
+    }
+    if (kind == kindFileTga) {
+        return PreviewFileType::TGA;
+    }
+    return (PreviewFileType)0;
+}
+
 static EngineBase* CreateEngineFromDataForPreview(const ByteSlice& data, PreviewFileType fileType) {
     IStream* stream = CreateStreamFromData(data);
     if (!stream) {
         return nullptr;
+    }
+
+    Kind kind = GuessFileTypeFromContent(data);
+    PreviewFileType sniffedType = PreviewFileTypeFromContentKind(kind);
+    if (sniffedType != (PreviewFileType)0) {
+        if (sniffedType != fileType) {
+            logf("CreateEngineFromDataForPreview: sniffed type %d (%s) differs from passed type %d (%s)\n",
+                 (int)sniffedType, PreviewFileTypeName((u32)sniffedType), (int)fileType,
+                 PreviewFileTypeName((u32)fileType));
+        }
+        fileType = sniffedType;
     }
     EngineBase* engine = nullptr;
     switch (fileType) {
@@ -1820,29 +1868,6 @@ static void RunTestPreviewPipe(const char* filePath) {
     TempStr resultPath = path::JoinTemp(resultsDir, "result.txt");
     file::WriteFile(resultPath, resultText.AsByteSlice());
     logf("RunTestPreviewPipe: results written to %s\n", resultPath);
-}
-
-static const char* PreviewFileTypeName(u32 fileType) {
-    switch ((PreviewFileType)fileType) {
-        case PreviewFileType::PDF:
-            return "PDF";
-        case PreviewFileType::DjVu:
-            return "DjVu";
-        case PreviewFileType::EPUB:
-            return "EPUB";
-        case PreviewFileType::FB2:
-            return "FB2";
-        case PreviewFileType::MOBI:
-            return "MOBI";
-        case PreviewFileType::CBX:
-            return "CBX";
-        case PreviewFileType::TGA:
-            return "TGA";
-        case PreviewFileType::XPS:
-            return "XPS";
-        default:
-            return "unknown";
-    }
 }
 
 static void RunPreviewPipeServer(const char* pipeName) {
