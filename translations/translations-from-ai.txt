@@ -43832,3 +43832,411 @@ vn:Khôi phục
 vn:Tìm kiếm dấu trang
 :Tab Groups
 vn:Nhóm thẻ
+:Extract PDF Text
+am:የPDF ጽሁፍ ቅጂ አውጣ
+:Toggle Esc to Exit
+am:ለመውጣት Esc ቀይር
+:Toggle Promotions
+am:ማስተዋወቂያዎችን ቀይር
+:Extract PDF Text
+ar:استخراج نص PDF
+:Toggle Esc to Exit
+ar:اضغط Esc للخروج
+:Toggle Promotions
+ar:تبديل العروض الترويجية
+:Extract PDF Text
+br:Tennañ testenn PDF
+:Extract PDF Text
+cn:提取PDF文本
+:Extract PDF Text
+co:Estrae u testu PDF
+:Toggle Promotions
+co:Attivà/Disattivà e Promozioni
+:Extract PDF Text
+de:PDF-Text extrahieren
+:Extract PDF Text
+el:Εξαγωγή κειμένου PDF
+:Toggle Esc to Exit
+el:Εναλλαγή Esc για έξοδο
+:Toggle Promotions
+el:Εναλλαγή προωθητικών ενεργειών
+:Extract PDF Text
+hi:PDF टेक्स्ट निकालें
+:Toggle Esc to Exit
+hi:बाहर निकलने के लिए Esc टॉगल करें
+:Toggle Promotions
+hi:प्रमोशन टॉगल करें
+:Extract PDF Text
+it:Estrai testo PDF
+:Extract PDF Text
+ja:PDFテキストを抽出
+:Toggle Esc to Exit
+ja:Escキーで終了を切り替え
+:Toggle Promotions
+ja:プロモーションを切り替え
+:Extract PDF Text
+ml:PDF ടെക്സ്റ്റ് എക്സ്ട്രാക്റ്റ് ചെയ്യുക
+:Toggle Esc to Exit
+ml:പുറത്തുകടക്കാൻ Esc ടോഗിൾ ചെയ്യുക
+:Toggle Promotions
+ml:പ്രമോഷനുകൾ ടോഗിൾ ചെയ്യുക
+:Extract PDF Text
+nl:PDF-tekst extraheren
+:Toggle Esc to Exit
+nl:Schakel Esc om af te sluiten
+:Toggle Promotions
+nl:Schakel promoties
+:Extract PDF Text
+pl:Wyodrębnij tekst z PDF
+:Extract PDF Text
+ru:Извлечь текст из PDF
+:Toggle Esc to Exit
+ru:Переключить Esc для выхода
+:Toggle Promotions
+ru:Переключить промоакции
+:Extract PDF Text
+sk:Extrahovať text z PDF
+:Toggle Promotions
+sk:Prepnúť propagácie
+:Extract PDF Text
+sr-rs:Извуци текст из PDF-а
+:Toggle Esc to Exit
+sr-rs:Притисни Esc за излаз
+:Toggle Promotions
+sr-rs:Прикажи/сакриј промоције
+:Extract PDF Text
+tw:擷取 PDF 文字
+:Toggle Esc to Exit
+tw:切換 Esc 以退出
+:Toggle Promotions
+tw:切換促銷
+:Extract PDF Text
+az:PDF Mətni Çıxart
+:Toggle Esc to Exit
+az:Çıxmaq üçün Esc düyməsini işlət
+:Toggle Promotions
+az:Reklamları Aç/Bağla
+:Extract PDF Text
+by:Здабыць тэкст з PDF
+:Toggle Esc to Exit
+by:Пераключыць Esc для выхаду
+:Toggle Promotions
+by:Пераключыць акцыі
+:Extract PDF Text
+ca:Extreure text del PDF
+:Toggle Esc to Exit
+ca:Commuta Esc per sortir
+:Toggle Promotions
+ca:Commuta promocions
+:Extract PDF Text
+cy:Echdynnu Testun PDF
+:Toggle Esc to Exit
+cy:Toglo Esc i Adael
+:Toggle Promotions
+cy:Toglo Hyrwyddiadau
+:Extract PDF Text
+cz:Extrahovat text z PDF
+:Toggle Esc to Exit
+cz:Přepnout Esc pro ukončení
+:Toggle Promotions
+cz:Přepnout propagace
+:Extract PDF Text
+es:Extraer texto de PDF
+:Toggle Esc to Exit
+es:Alternar Esc para salir
+:Toggle Promotions
+es:Alternar promociones
+:Extract PDF Text
+fa:استخراج متن PDF
+:Toggle Esc to Exit
+fa:فشردن Esc برای خروج
+:Toggle Promotions
+fa:تغییر وضعیت تبلیغات
+:Extract PDF Text
+fi:Pura PDF-teksti
+:Toggle Esc to Exit
+fi:Paina Esc poistuaksesi
+:Toggle Promotions
+fi:Näytä/piilota tarjoukset
+:Extract PDF Text
+fo:Útdráttur PDF tekstur
+:Toggle Esc to Exit
+fo:Skifta Esc fyri at fara út
+:Toggle Promotions
+fo:Skifta kynningar
+:Extract PDF Text
+fr:Extraire le texte du PDF
+:Toggle Esc to Exit
+fr:Appuyez sur Échap pour quitter
+:Toggle Promotions
+fr:Activer/Désactiver les promotions
+:Extract PDF Text
+ga:Bain Téacs PDF
+:Toggle Esc to Exit
+ga:Scoránaigh Esc chun Scor
+:Toggle Promotions
+ga:Scoránaigh Promóisin
+:Extract PDF Text
+gl:Extraer texto do PDF
+:Toggle Esc to Exit
+gl:Premer Esc para saír
+:Toggle Promotions
+gl:Activar/desactivar promocións
+:Extract PDF Text
+he:חילוץ טקסט מ-PDF
+:Toggle Esc to Exit
+he:החלף Esc ליציאה
+:Toggle Promotions
+he:החלף מבצעים
+:Extract PDF Text
+hu:PDF szöveg kinyerése
+:Toggle Esc to Exit
+hu:Kilépés Esc billentyűvel
+:Toggle Promotions
+hu:Promóciók kapcsolása
+:Extract PDF Text
+id:Ekstrak Teks PDF
+:Toggle Esc to Exit
+id:Tekan Esc untuk Keluar
+:Toggle Promotions
+id:Tampilkan Promosi
+:Extract PDF Text
+kr:PDF 텍스트 추출
+:Toggle Esc to Exit
+kr:Esc 키로 종료 전환
+:Toggle Promotions
+kr:프로모션 전환
+:Extract PDF Text
+lv:Izvilkt PDF tekstu
+:Toggle Esc to Exit
+lv:Pārslēgt Esc, lai izietu
+:Toggle Promotions
+lv:Pārslēgt akcijas
+:Extract PDF Text
+my:PDF စာသားကို ထုတ်ယူရန်
+:Toggle Esc to Exit
+my:ထွက်ရန် Esc ကို နှိပ်ပါ
+:Toggle Promotions
+my:ပရိုမိုးရှင်းများကို ဖွင့်/ပိတ်ရန်
+:Extract PDF Text
+pt:Extrair Texto do PDF
+:Toggle Esc to Exit
+pt:Alternar Esc para Sair
+:Toggle Promotions
+pt:Alternar Promoções
+:Extract PDF Text
+ro:Extrage text din PDF
+:Toggle Esc to Exit
+ro:Comută Esc pentru Ieșire
+:Toggle Promotions
+ro:Comută Promoții
+:Extract PDF Text
+sat:PDF ᱚᱞ ᱚᱰᱚᱠ ᱢᱮ
+:Toggle Esc to Exit
+sat:ᱵᱟᱦᱨᱮ ᱪᱟᱞᱟᱜ ᱞᱟᱹᱜᱤᱫ Esc ᱴᱚᱜᱚᱞ ᱢᱮ
+:Toggle Promotions
+sat:ᱯᱨᱚᱢᱚᱥᱚᱱ ᱴᱚᱜᱚᱞ ᱢᱮ
+:Extract PDF Text
+sl:Izvleci besedilo PDF
+:Toggle Esc to Exit
+sl:Preklopi Esc za izhod
+:Toggle Promotions
+sl:Preklopi promocije
+:Extract PDF Text
+sv:Extrahera PDF-text
+:Toggle Esc to Exit
+sv:Växla Esc för att avsluta
+:Toggle Promotions
+sv:Växla kampanjer
+:Extract PDF Text
+ta:PDF உரையைப் பிரித்தெடு
+:Toggle Esc to Exit
+ta:வெளியேற Esc ஐ நிலைமாற்று
+:Toggle Promotions
+ta:விளம்பரங்களை நிலைமாற்று
+:Extract PDF Text
+tr:PDF Metnini Çıkar
+:Toggle Esc to Exit
+tr:Çıkmak için Esc'ye Basın
+:Toggle Promotions
+tr:Promosyonları Aç/Kapat
+:Extract PDF Text
+uz:PDF matnini chiqarish
+:Toggle Esc to Exit
+uz:Chiqish uchun Esc tugmasini bosing
+:Toggle Promotions
+uz:Aksiyalarni yoqish/o'chirish
+:Extract PDF Text
+af:Onttrek PDF-teks
+:Toggle Esc to Exit
+af:Skakel Esc om uit te gaan
+:Toggle Promotions
+af:Skakel promosies
+:Extract PDF Text
+bg:Извличане на текст от PDF
+:Toggle Esc to Exit
+bg:Превключване Esc за изход
+:Toggle Promotions
+bg:Превключване на промоции
+:Extract PDF Text
+bn:PDF টেক্সট এক্সট্র্যাক্ট করুন
+:Toggle Esc to Exit
+bn:প্রস্থান করতে Esc টগল করুন
+:Toggle Promotions
+bn:প্রচার টগল করুন
+:Extract PDF Text
+bs:Ekstraktuj PDF tekst
+:Toggle Esc to Exit
+bs:Preklopite Esc za izlaz
+:Toggle Promotions
+bs:Preklopite promocije
+:Extract PDF Text
+ca-xv:Extraure text del PDF
+:Toggle Esc to Exit
+ca-xv:Commuta Esc per sortir
+:Toggle Promotions
+ca-xv:Commuta promocions
+:Extract PDF Text
+dk:Udtræk PDF-tekst
+:Toggle Esc to Exit
+dk:Tryk Esc for at afslutte
+:Toggle Promotions
+dk:Skift kampagner
+:Extract PDF Text
+et:Ekstrakti PDF-i tekst
+:Toggle Esc to Exit
+et:Lülita Esc väljumiseks
+:Toggle Promotions
+et:Lülita reklaamid
+:Extract PDF Text
+eu:Erauzi PDF testua
+:Toggle Esc to Exit
+eu:Txandakatu Esc irteteko
+:Toggle Promotions
+eu:Txandakatu promozioak
+:Extract PDF Text
+fy-nl:PDF-tekst ekstrahearje
+:Toggle Esc to Exit
+fy-nl:Skeakelje Esc om ôf te sluten
+:Toggle Promotions
+fy-nl:Skeakelje promoasjes
+:Extract PDF Text
+hr:Izdvoji tekst iz PDF-a
+:Toggle Esc to Exit
+hr:Pritisni Esc za izlaz
+:Toggle Promotions
+hr:Uključi/isključi promocije
+:Extract PDF Text
+jv:Ekstrak Teks PDF
+:Toggle Esc to Exit
+jv:Alih Esc kanggo Metu
+:Toggle Promotions
+jv:Alih Promosi
+:Extract PDF Text
+ka:PDF ტექსტის ამოღება
+:Toggle Esc to Exit
+ka:გასასვლელად Esc-ის გადართვა
+:Toggle Promotions
+ka:აქციების გადართვა
+:Extract PDF Text
+ku:Nivîsa PDF Derxîne
+:Toggle Esc to Exit
+ku:Esc Ji Bo Derkevê Veguherîne
+:Toggle Promotions
+ku:Pêşvebiran Veguherîne
+:Extract PDF Text
+kw:Dyrghynna Tekst PDF
+:Toggle Esc to Exit
+kw:Togglelhe Esc dhe Vonesik
+:Toggle Promotions
+kw:Togglelhe Promovyansow
+:Extract PDF Text
+lt:Išgauti PDF tekstą
+:Toggle Esc to Exit
+lt:Perjungti Esc išėjimui
+:Toggle Promotions
+lt:Perjungti akcijas
+:Extract PDF Text
+mk:Извлечи текст од PDF
+:Toggle Esc to Exit
+mk:Притисни Esc за излез
+:Toggle Promotions
+mk:Вклучи/исклучи промоции
+:Extract PDF Text
+mm:PDF စာသားထုတ်ယူရန်
+:Toggle Esc to Exit
+mm:ထွက်ရန် Esc ကိုနှိပ်ပါ
+:Toggle Promotions
+mm:ပရိုမိုးရှင်းများဖွင့်/ပိတ်ရန်
+:Extract PDF Text
+ne:PDF पाठ निकाल्नुहोस्
+:Toggle Esc to Exit
+ne:बाहिर निस्कन Esc टगल गर्नुहोस्
+:Toggle Promotions
+ne:प्रवर्द्धनहरू टगल गर्नुहोस्
+:Extract PDF Text
+nn:Ekstraher PDF-tekst
+:Toggle Esc to Exit
+nn:Veksle Esc for å avslutte
+:Toggle Promotions
+nn:Veksle kampanjar
+:Extract PDF Text
+no:Trekk ut PDF-tekst
+:Toggle Esc to Exit
+no:Veksle Esc for å avslutte
+:Toggle Promotions
+no:Veksle kampanjer
+:Extract PDF Text
+pa:PDF ਟੈਕਸਟ ਕੱਢੋ
+:Toggle Esc to Exit
+pa:ਬਾਹਰ ਜਾਣ ਲਈ Esc ਟੌਗਲ ਕਰੋ
+:Toggle Promotions
+pa:ਪ੍ਰਮੋਸ਼ਨ ਟੌਗਲ ਕਰੋ
+:Extract PDF Text
+si:PDF පෙළ නිස්සාරණය කරන්න
+:Toggle Esc to Exit
+si:පිටවීමට Esc ටොගල් කරන්න
+:Toggle Promotions
+si:ප්‍රවර්ධන ටොගල් කරන්න
+:Extract PDF Text
+sn:Budisa Rugwaro rwePDF
+:Toggle Esc to Exit
+sn:Shandura Esc Kuti Ubude
+:Toggle Promotions
+sn:Shandura Zvinokwidziridza
+:Extract PDF Text
+sp-rs:Ekstraktuj tekst iz PDF-a
+:Toggle Esc to Exit
+sp-rs:Pritisnite Esc za izlaz
+:Toggle Promotions
+sp-rs:Prikaži/sakrij promocije
+:Extract PDF Text
+sq:Nxirr Tekstin e PDF-së
+:Toggle Esc to Exit
+sq:Aktivizo/Çaktivizo Esc për të Dalë
+:Toggle Promotions
+sq:Aktivizo/Çaktivizo Promovime
+:Extract PDF Text
+th:แยกข้อความ PDF
+:Toggle Esc to Exit
+th:กด Esc เพื่อออก
+:Toggle Promotions
+th:สลับโปรโมชั่น
+:Extract PDF Text
+tl:Kunin ang Teksto ng PDF
+:Toggle Esc to Exit
+tl:I-toggle ang Esc upang Lumabas
+:Toggle Promotions
+tl:I-toggle ang mga Promosyon
+:Extract PDF Text
+uk:Витягти текст з PDF
+:Toggle Esc to Exit
+uk:Перемкнути Esc для виходу
+:Toggle Promotions
+uk:Перемкнути акції
+:Extract PDF Text
+vn:Trích xuất văn bản PDF
+:Toggle Esc to Exit
+vn:Nhấn Esc để Thoát
+:Toggle Promotions
+vn:Bật/Tắt Khuyến mãi
