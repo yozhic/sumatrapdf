@@ -1686,8 +1686,9 @@ void MenuUpdateDisplayMode(MainWindow* win) {
     CheckMenuRadioItem(win->menu, CmdViewLayoutFirst, CmdViewLayoutLast, id, MF_BYCOMMAND);
     MenuSetChecked(win->menu, CmdToggleContinuousView, IsContinuous(displayMode));
 
-    if (win->CurrentTab() && win->CurrentTab()->GetEngineType() == kindEngineComicBooks) {
-        bool mangaMode = win->AsFixed()->GetDisplayR2L();
+    DisplayModel* dm = win->AsFixed();
+    if (dm && win->CurrentTab()) {
+        bool mangaMode = dm->GetDisplayR2L();
         MenuSetChecked(win->menu, CmdToggleMangaMode, mangaMode);
         MenuSetEnabled(win->menu, CmdToggleMangaMode, !IsSingle(displayMode));
     }
