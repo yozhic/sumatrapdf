@@ -7106,7 +7106,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             if (!EngineSupportsAnnotations(engine)) {
                 return 0;
             }
-            Point pt = HwndGetCursorPos(hwnd);
+            Point pt = HwndGetCursorPos(win->hwndCanvas);
             if (lp != 0) {
                 // when sending from Menu.cpp mouse position is encoded as LPARAM
                 pt.x = GET_X_LPARAM(lp);
@@ -7121,7 +7121,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
                 // it's a heuristic so might not be what user expects
                 // TODO: ideally creating those annotations should be more visual
                 // i.e. we start interactive process of creating an annotation via mouse
-                auto r = WindowRect(hwnd);
+                auto r = WindowRect(win->hwndCanvas);
                 pt.x = r.dx / 2;
                 pt.y = 20;
                 pageNoUnderCursor = dm->GetPageNoByPoint(pt);
