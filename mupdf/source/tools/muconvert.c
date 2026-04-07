@@ -137,6 +137,8 @@ int muconvert_main(int argc, char **argv)
 	int i, c;
 	int retval = EXIT_SUCCESS;
 
+	fz_optind = 1;
+
 	while ((c = fz_getopt(argc, argv, "p:A:W:H:S:U:Xo:F:O:b:")) != -1)
 	{
 		switch (c)

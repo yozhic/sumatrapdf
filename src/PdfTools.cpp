@@ -24,10 +24,6 @@
 
 #include "DarkModeSubclass.h"
 
-extern "C" {
-#include <mupdf/fitz/export.h>
-#include <mupdf/fitz/getopt.h>
-}
 extern "C" int pdfbake_main(int argc, char** argv);
 extern "C" int muconvert_main(int argc, char** argv);
 
@@ -77,9 +73,6 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
     // build argv for pdfbake_main: "bake" input output
     char* argv[] = {(char*)"bake", dlg->srcPath, destPath};
     int argc = 3;
-
-    // pdfbake_main uses fz_getopt which has global state, reset it
-    fz_optind = 1;
 
     int res = pdfbake_main(argc, argv);
     if (res == 0) {
@@ -279,7 +272,6 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
     char* argv[] = {(char*)"convert", (char*)"-o", destPath, dlg->srcPath, pages};
     int argc = 5;
 
-    fz_optind = 1;
     int res = muconvert_main(argc, argv);
     if (res == 0) {
         DestroyWindow(dlg->hwnd);

@@ -54,6 +54,8 @@ int pdfbake_main(int argc, char **argv)
 	char *input;
 	int c;
 
+	fz_optind = 1;
+
 	while ((c = fz_getopt(argc, argv, "AFO:")) != -1)
 	{
 		switch (c)
