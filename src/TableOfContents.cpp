@@ -235,6 +235,11 @@ void ClearTocBox(MainWindow* win) {
         return;
     }
 
+    // set tocLoaded to false before SetText("") because SetText triggers
+    // EN_CHANGE synchronously which calls ApplyTocFilter() re-entrantly
+    // and we need it to bail out early
+    win->tocLoaded = false;
+
     win->tocTreeView->Clear();
 
     // clear filter state
@@ -245,7 +250,6 @@ void ClearTocBox(MainWindow* win) {
     }
 
     win->currPageNo = 0;
-    win->tocLoaded = false;
 }
 
 void ToggleTocBox(MainWindow* win) {
