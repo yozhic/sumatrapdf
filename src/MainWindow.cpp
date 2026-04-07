@@ -601,9 +601,8 @@ void LinkHandler::LaunchFile(const char* pathOrig, IPageDestination* remoteLink)
 }
 
 // normalizes case and whitespace in the string
-// caller needs to free() the result
-static char* NormalizeFuzzy(const char* str) {
-    char* dup = str::Dup(str);
+static TempStr NormalizeFuzzyTemp(const char* str) {
+    TempStr dup = str::DupTemp(str);
     str::ToLowerInPlace(dup);
     str::NormalizeWSInPlace(dup);
     // cf. AddTocItemToView
@@ -629,7 +628,7 @@ static bool MatchFuzzy(const char* s1, const char* s2, bool partially) {
 IPageDestination* LinkHandler::FindTocItem(TocItem* item, const char* name, bool partially) {
     for (; item; item = item->next) {
         if (item->title) {
-            AutoFreeStr fuzTitle = NormalizeFuzzy(item->title);
+            TempStr fuzTitle = NormalizeFuzzyTemp(item->title);
             if (MatchFuzzy(fuzTitle, name, partially)) {
                 return item->GetPageDestination();
             }
@@ -662,11 +661,13 @@ void LinkHandler::GotoNamedDest(const char* name) {
     } else if (ctrl->HasToc()) {
         auto* docTree = ctrl->GetToc();
         TocItem* root = docTree->root;
-        AutoFreeStr fuzName = NormalizeFuzzy(name);
+        TempStr fuzName = NormalizeFuzzyTemp(name);
         dest = FindTocItem(root, fuzName, false);
         if (!dest) {
             dest = FindTocItem(root, fuzName, true);
         }
+        // TODO: would be nice if we also selected the exact toc item
+        // currently we auto-detect based on heuristic
         if (dest) {
             ScrollTo(dest);
             hasDest = true;
