@@ -514,7 +514,7 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
         if (arg == Arg::NamedDest || arg == Arg::NamedDest2) {
             // -nameddest is for backwards compat (was used pre-1.3)
             // -named-dest is for consistency
-            i.destName = str::Dup(param);
+            i.namedDest = str::Dup(param);
             continue;
         }
         if (arg == Arg::Page) {
@@ -647,7 +647,7 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
             FileArgs fargs;
             ParseAdobeFlags(fargs, param);
             i.search = fargs.search ? str::Dup(fargs.search) : i.search;
-            i.destName = fargs.destName ? str::Dup(fargs.destName) : i.destName;
+            i.namedDest = fargs.destName ? str::Dup(fargs.destName) : i.namedDest;
             i.pageNumber = fargs.pageNumber > 0 ? fargs.pageNumber : i.pageNumber;
             // TODO: annotAttObjNum and attachmentNo?
             continue;
@@ -704,7 +704,7 @@ Flags::~Flags() {
     str::Free(printerName);
     str::Free(printSettings);
     str::Free(forwardSearchOrigin);
-    str::Free(destName);
+    str::Free(namedDest);
     str::Free(pluginURL);
     str::Free(appdataDir);
     str::Free(inverseSearchCmdLine);

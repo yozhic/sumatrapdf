@@ -44,7 +44,7 @@ struct Flags {
     char* forwardSearchOrigin = nullptr;
     int forwardSearchLine = 0;
     bool reuseDdeInstance = false;
-    char* destName = nullptr;
+    char* namedDest = nullptr;
     int pageNumber = -1;
     bool restrictedUse = false;
     bool enterPresentation = false;

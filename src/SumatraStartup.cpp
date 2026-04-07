@@ -168,8 +168,8 @@ static void OpenUsingDDE(HWND targetHwnd, const char* path, Flags& i, bool isFir
         newWindow = 2;
     }
     cmd.AppendFmt("[Open(\"%s\", %d, 1, 0)]", fullPath, newWindow);
-    if (i.destName && isFirstWin) {
-        cmd.AppendFmt("[GotoNamedDest(\"%s\", \"%s\")]", fullPath, i.destName);
+    if (i.namedDest && isFirstWin) {
+        cmd.AppendFmt("[GotoNamedDest(\"%s\", \"%s\")]", fullPath, i.namedDest);
     } else if (i.pageNumber > 0 && isFirstWin) {
         cmd.AppendFmt("[GotoPage(\"%s\", %d)]", fullPath, i.pageNumber);
     }
@@ -243,7 +243,7 @@ static MainWindow* LoadOnStartup(const char* filePath, const Flags& flags, bool 
     }
 
     if (isFirstWin) {
-        MaybeGoTo(win, flags.destName, flags.pageNumber);
+        MaybeGoTo(win, flags.namedDest, flags.pageNumber);
     }
 
     bool ok = MaybeMakePluginWindow(win, flags.hwndPluginParent);
@@ -396,9 +396,9 @@ static bool SetupPluginMode(Flags& i) {
             if (str::StartsWithI(part, "page=") && str::Parse(part + 4, "=%d%$", &pageNo)) {
                 i.pageNumber = pageNo;
             } else if (str::StartsWithI(part, "nameddest=") && part[10]) {
-                i.destName = str::Dup(part + 10);
+                i.namedDest = str::Dup(part + 10);
             } else if (!str::FindChar(part, '=') && part[0]) {
-                i.destName = str::Dup(part);
+                i.namedDest = str::Dup(part);
             }
         }
     }
@@ -2689,7 +2689,7 @@ ContinueOpenWindow:
     if (tabToSelect) {
         SelectTabInWindow(tabToSelect);
         MaybeStartSearch(tabToSelect->win, flags.search);
-        MaybeGoTo(win, flags.destName, flags.pageNumber);
+        MaybeGoTo(win, flags.namedDest, flags.pageNumber);
     }
 
     nWithDde = gDdeOpenOnStartup.Size();
