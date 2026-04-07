@@ -1335,6 +1335,11 @@ struct MenuBarPopupNav {
 
 static MenuBarPopupNav gMenuBarPopupNav;
 
+// track when a menu popup was last dismissed so a second click on the same
+// menu bar button closes the popup instead of immediately reopening it
+static int gMenuBarLastDismissedIdx = -1;
+static DWORD gMenuBarLastDismissedTick = 0;
+
 static bool ShouldSwitchCustomMenuBarPopup(UINT vk) {
     if (!gMenuBarPopupNav.win || !gMenuBarPopupNav.rootMenu) {
         return false;
@@ -1584,6 +1589,14 @@ bool HandleMenuBarCommand(MainWindow* win, int cmdId) {
 
     int menuCount = GetMenuItemCount(win->menu);
     int menuIdx = cmdId - kMenuBarCmdFirst;
+
+    // if same button was clicked shortly after dismissing its popup, treat as toggle-close
+    DWORD now = GetTickCount();
+    if (menuIdx == gMenuBarLastDismissedIdx && (now - gMenuBarLastDismissedTick) < 500) {
+        gMenuBarLastDismissedIdx = -1;
+        return true;
+    }
+
     UINT flags = TPM_LEFTALIGN | TPM_TOPALIGN;
     if (IsUIRtl()) {
         flags = TPM_RIGHTALIGN | TPM_TOPALIGN;
@@ -1617,6 +1630,8 @@ bool HandleMenuBarCommand(MainWindow* win, int cmdId) {
         int nextMenuIdx = gMenuBarPopupNav.nextMenuIdx;
         gMenuBarPopupNav = {};
         if (nextMenuIdx == menuIdx || menuCount <= 1) {
+            gMenuBarLastDismissedIdx = menuIdx;
+            gMenuBarLastDismissedTick = GetTickCount();
             break;
         }
         menuIdx = nextMenuIdx;
