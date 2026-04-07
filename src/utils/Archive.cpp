@@ -138,6 +138,8 @@ bool MultiFormatArchive::Open(IStream* stream) {
         free(data);
         return false;
     }
+    // no file path to re-open from, so load all file data now
+    loadOnOpen = true;
     bool ok = ParseEntries(a);
     archive_read_free(a);
     free(data);
