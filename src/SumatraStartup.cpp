@@ -1822,6 +1822,29 @@ static void RunTestPreviewPipe(const char* filePath) {
     logf("RunTestPreviewPipe: results written to %s\n", resultPath);
 }
 
+static const char* PreviewFileTypeName(u32 fileType) {
+    switch ((PreviewFileType)fileType) {
+        case PreviewFileType::PDF:
+            return "PDF";
+        case PreviewFileType::DjVu:
+            return "DjVu";
+        case PreviewFileType::EPUB:
+            return "EPUB";
+        case PreviewFileType::FB2:
+            return "FB2";
+        case PreviewFileType::MOBI:
+            return "MOBI";
+        case PreviewFileType::CBX:
+            return "CBX";
+        case PreviewFileType::TGA:
+            return "TGA";
+        case PreviewFileType::XPS:
+            return "XPS";
+        default:
+            return "unknown";
+    }
+}
+
 static void RunPreviewPipeServer(const char* pipeName) {
     logf("RunPreviewPipeServer: connecting to pipe '%s'\n", pipeName);
 
@@ -1859,7 +1882,8 @@ static void RunPreviewPipeServer(const char* pipeName) {
             CloseHandle(hPipe);
             return;
         }
-        logf("RunPreviewPipeServer: V1 - fileType=%d, thumbSize=%d, dataSize=%d\n", fileType, thumbSize, dataSize);
+        logf("RunPreviewPipeServer: V1 - fileType=%d (%s), thumbSize=%d, dataSize=%d\n", fileType,
+             PreviewFileTypeName(fileType), thumbSize, dataSize);
         RunPreviewPipeV1(hPipe, fileType, thumbSize, dataSize);
     } else if (version == kPreviewProtocolVersion2) {
         // Version 2: Session-based, commands follow
