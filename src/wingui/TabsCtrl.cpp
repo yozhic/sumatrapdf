@@ -193,7 +193,19 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
     gfx.SetPageUnit(UnitPixel);
 
     SolidBrush br(GdipCol(ThemeControlBackgroundColor()));
-
+    if (IsCurrentThemeDefault()) {
+        // https://github.com/sumatrapdfreader/sumatrapdf/issues/4114
+        if (!IsWindowsVistaOrGreater()) {
+            // win7, win8
+            COLORREF activeGrad = GetSysColor(COLOR_GRADIENTACTIVECAPTION);
+            COLORREF inactiveGrad = GetSysColor(COLOR_GRADIENTINACTIVECAPTION);
+            if (GetForegroundWindow() == HwndGetParent(hwnd)) {
+                br.SetColor(GdipCol(activeGrad));
+            } else {
+                br.SetColor(GdipCol(activeGrad));
+            }
+        }
+    }
     Font f(hdc, GetFont());
 
     Gdiplus::Rect gr = ToGdipRect(rc);
