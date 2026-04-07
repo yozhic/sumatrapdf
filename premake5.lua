@@ -894,7 +894,7 @@ workspace "SumatraPDF"
     filter "platforms:x64_asan"
     linkoptions { "/INFERASANLIBS" }
     filter {}
-    dependson { "PdfFilter2", "PdfPreview2", "test_util" }
+    dependson { "test_util" }
     prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
 
   -- a dll version where most functionality is in libmupdf.dll
