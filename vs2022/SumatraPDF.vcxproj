@@ -1575,6 +1575,7 @@
     <None Include="..\cmd\check-access-keys.ts" />
     <None Include="..\cmd\clang-tidy.ts" />
     <None Include="..\cmd\clean.ts" />
+    <None Include="..\cmd\clear-thumbnail-cache.ts" />
     <None Include="..\cmd\compress-docs-images.ts" />
     <None Include="..\cmd\cppcheck.ts" />
     <None Include="..\cmd\diff.ts" />
@@ -1591,6 +1592,7 @@
     <None Include="..\cmd\pdb-sizes.ts" />
     <None Include="..\cmd\premake.ts" />
     <None Include="..\cmd\run-tests.ts" />
+    <None Include="..\cmd\show-preview-reg.ts" />
     <None Include="..\cmd\test-plugin.ts" />
     <None Include="..\cmd\trans-dl.ts" />
     <None Include="..\cmd\trans-gen.ts" />

@@ -854,6 +854,9 @@
     <None Include="..\cmd\clean.ts">
       <Filter>cmd</Filter>
     </None>
+    <None Include="..\cmd\clear-thumbnail-cache.ts">
+      <Filter>cmd</Filter>
+    </None>
     <None Include="..\cmd\compress-docs-images.ts">
       <Filter>cmd</Filter>
     </None>
@@ -900,6 +903,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\run-tests.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\show-preview-reg.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\test-plugin.ts">

@@ -791,29 +791,29 @@ workspace "SumatraPDF"
     links { "utils", "unrar", "libmupdf", "libarchive" }
     links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-  project "PdfFilter2"
-    kind "SharedLib"
-    language "C++"
-    cppdialect "C++latest"
-    mixed_dbg_rel_conf()
-    disablewarnings { "4100", "4838" }
-    includedirs { "src", "src/wingui" }
-    search_filter2_files()
-    links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  -- project "PdfFilter2"
+  --   kind "SharedLib"
+  --   language "C++"
+  --   cppdialect "C++latest"
+  --   mixed_dbg_rel_conf()
+  --   disablewarnings { "4100", "4838" }
+  --   includedirs { "src", "src/wingui" }
+  --   search_filter2_files()
+  --   links { "comctl32", "gdiplus", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
-  project "PdfPreview2"
-    kind "SharedLib"
-    language "C++"
-    cppdialect "C++latest"
-    mixed_dbg_rel_conf()
-    disablewarnings { "4100", "4838" }
-    includedirs {
-      "src", "src/wingui"
-    }
-    pdf_preview2_files()
-    -- TODO: "chm" should only be for Debug config but doing links { "chm" }
-    -- in the filter breaks linking by setting LinkLibraryDependencies to false
-    links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
+  -- project "PdfPreview2"
+  --   kind "SharedLib"
+  --   language "C++"
+  --   cppdialect "C++latest"
+  --   mixed_dbg_rel_conf()
+  --   disablewarnings { "4100", "4838" }
+  --   includedirs {
+  --     "src", "src/wingui"
+  --   }
+  --   pdf_preview2_files()
+  --   -- TODO: "chm" should only be for Debug config but doing links { "chm" }
+  --   -- in the filter breaks linking by setting LinkLibraryDependencies to false
+  --   links { "comctl32", "gdiplus", "msimg32", "shlwapi", "version", "wininet", "wintrust", "crypt32" }
 
   project "PdfPreview"
     kind "SharedLib"
