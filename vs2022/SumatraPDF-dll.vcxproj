@@ -1134,7 +1134,6 @@ cd ../out/rel64_prefast_asan &amp; ..\..\bin\MakeLZSA.exe InstallerData.dat libm
     <ClInclude Include="..\src\PdfCreator.h" />
     <ClInclude Include="..\src\PdfSync.h" />
     <ClInclude Include="..\src\PdfTools.h" />
-    <ClInclude Include="..\src\PreviewPipe.h" />
     <ClInclude Include="..\src\Print.h" />
     <ClInclude Include="..\src\ProgressUpdateUI.h" />
     <ClInclude Include="..\src\RegistryPreview.h" />
@@ -1242,7 +1241,6 @@ cd ../out/rel64_prefast_asan &amp; ..\..\bin\MakeLZSA.exe InstallerData.dat libm
     <ClCompile Include="..\src\PdfCreator.cpp" />
     <ClCompile Include="..\src\PdfSync.cpp" />
     <ClCompile Include="..\src\PdfTools.cpp" />
-    <ClCompile Include="..\src\PreviewPipe.cpp" />
     <ClCompile Include="..\src\Print.cpp" />
     <ClCompile Include="..\src\RegistryInstaller.cpp" />
     <ClCompile Include="..\src\RegistryPreview.cpp" />

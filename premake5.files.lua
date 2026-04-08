@@ -781,7 +781,6 @@ function sumatrapdf_files()
     "Notifications.*",
     "PdfSync.*",
     "PdfTools.*",
-    "PreviewPipe.*",
     "Print.*",
     "ProgressUpdateUI.*",
     "RegistryInstaller.*",
@@ -1422,7 +1421,6 @@ function pdf_preview2_files()
   files_in_dir("src", {
     "CrashHandlerNoOp.cpp",
     "mui/Mui.*",
-    "PreviewPipe.*",
     "RegistryPreview.*",
     "SumatraConfig.*",
     "utils/BaseUtil.*",
