@@ -80,9 +80,7 @@ const args = [
     "DDE", "dde",
     "EngineDump", "engine-dump",
     "SetColorRange", "set-color-range",
-    "PreviewPipe", "preview-pipe",
     "IFilterPipe", "ifilter-pipe",
-    "TestPreviewPipe", "test-preview-pipe",
     "UpgradeFrom", "upgrade-from",
 ];
 

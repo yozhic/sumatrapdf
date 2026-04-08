@@ -120,14 +120,8 @@ struct Flags {
     // before proceeding
     int sleepMs = 0;
 
-    // for preview pipe mode (used by previewer DLL)
-    char* previewPipeName = nullptr;
-
     // for ifilter pipe mode (used by ifilter DLL)
     char* ifilterPipeName = nullptr;
-
-    // for testing preview pipe functionality
-    char* testPreviewPipePath = nullptr;
 
     Flags() = default;
     ~Flags();
