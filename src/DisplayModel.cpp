@@ -2058,17 +2058,19 @@ void DisplayModel::ScrollToLink(IPageDestination* dest) {
 
 void DisplayModel::ScrollTo(int pageNo, RectF rect, float zoom) {
     Point scroll(-1, 0);
+    // use per-page zoom which may differ from global zoomReal
+    // when pages have varying sizes in fit-width/fit-page mode
+    float pageZoom = GetZoomReal(pageNo);
+
     if (rect.IsEmpty() || (rect.dx == DEST_USE_DEFAULT && rect.dy == DEST_USE_DEFAULT)) {
         // PDF: /XYZ top left zoom
         // scroll to rect.TL()
-        // logf("DisplayModel::ScrollToLink /XYZ START [dest] pageNo=%d rect.x=%f rect.y=%f zoom=%f\n", pageNo, rect.x,
-        // rect.y, zoom); logf("DisplayModel::ScrollToLink /XYZ START [zoom] real=%f virtual=%f\n", zoomReal,
-        // zoomVirtual);
         if (zoom) {
             SetZoomVirtual(100 * zoom, nullptr);
             CalcZoomReal(zoomVirtual);
+            pageZoom = GetZoomReal(pageNo);
         }
-        PointF scrollD = engine->Transform(rect.TL(), pageNo, zoomReal, rotation);
+        PointF scrollD = engine->Transform(rect.TL(), pageNo, pageZoom, rotation);
         scroll = ToPoint(scrollD);
 
         // default values for the coordinates mean: keep the current position
@@ -2079,20 +2081,14 @@ void DisplayModel::ScrollTo(int pageNo, RectF rect, float zoom) {
             PageInfo* pageInfo = GetPageInfo(CurrentPageNo());
             scroll.y = -(pageInfo->pageOnScreen.y - windowMargin.top);
         }
-        // logf("DisplayModel::ScrollToLink /XYZ END [zoom] real=%f virtual=%f\n", zoomReal, zoomVirtual);
-        // logf("DisplayModel::ScrollToLink /XYZ END [scroll] x=%d y=%d\n", scroll.x, scroll.y);
     } else if (rect.dx != DEST_USE_DEFAULT && rect.dy != DEST_USE_DEFAULT) {
         // PDF: /FitR left bottom right top
-        RectF rectD = engine->Transform(rect, pageNo, zoomReal, rotation);
+        RectF rectD = engine->Transform(rect, pageNo, pageZoom, rotation);
         scroll = ToPoint(rectD.TL());
-
-        // Rect<float> rectF = _engine->Transform(rect, pageNo, 1.0, rotation).Convert<float>();
-        // zoom = 100.0f * std::min(viewPort.dx / rectF.dx, viewPort.dy / rectF.dy);
     } else if (rect.y != DEST_USE_DEFAULT) {
         // PDF: /FitH top  or  /FitBH top
-        PointF scrollD = engine->Transform(rect.TL(), pageNo, zoomReal, rotation);
+        PointF scrollD = engine->Transform(rect.TL(), pageNo, pageZoom, rotation);
         scroll.y = (int)scrollD.y;
-        // zoom = FitBH ? kZoomFitContent : kZoomFitWidth
     }
     // else if (Fit || FitV) zoom = kZoomFitPage
     // else if (FitB || FitBV) zoom = kZoomFitContent
