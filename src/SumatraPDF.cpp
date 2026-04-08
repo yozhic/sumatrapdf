@@ -585,11 +585,20 @@ void RememberDefaultWindowPosition(MainWindow* win) {
 
     gGlobalPrefs->sidebarDx = WindowRect(win->hwndTocBox).dx;
 
-    /* don't update the window's dimensions if it is maximized, mimimized or fullscreened */
-    if (WIN_STATE_NORMAL == gGlobalPrefs->windowState && !IsIconic(win->hwndFrame) && !win->presentation) {
-        // TODO: Use Get/SetWindowPlacement (otherwise we'd have to separately track
-        //       the non-maximized dimensions for proper restoration)
+    if (IsIconic(win->hwndFrame) || win->presentation) {
+        return;
+    }
+
+    if (WIN_STATE_NORMAL == gGlobalPrefs->windowState) {
         gGlobalPrefs->windowPos = WindowRect(win->hwndFrame);
+    } else if (WIN_STATE_MAXIMIZED == gGlobalPrefs->windowState) {
+        // use GetWindowPlacement to get the non-maximized position
+        // so we know which monitor the window is on (for #5277)
+        WINDOWPLACEMENT wp{};
+        wp.length = sizeof(wp);
+        if (GetWindowPlacement(win->hwndFrame, &wp)) {
+            gGlobalPrefs->windowPos = ToRect(wp.rcNormalPosition);
+        }
     }
 }
 
