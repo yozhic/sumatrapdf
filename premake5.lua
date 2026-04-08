@@ -368,6 +368,42 @@ workspace "SumatraPDF"
     -- LZMA files needed by LzmaSimpleArchive in utils (previously provided by unarrlib)
     includedirs { "ext/lzma/C" }
     files { "ext/lzma/C/LzmaDec.c", "ext/lzma/C/Bra86.c", "ext/lzma/C/Bra.c" }
+    -- liblzma for LZMA/LZMA2/XZ decompression (needed for 7zip support in libarchive)
+    defines { "HAVE_CONFIG_H", "LZMA_API_STATIC" }
+    includedirs { "ext/liblzma/api", "ext/liblzma/common", "ext/liblzma/check",
+                  "ext/liblzma/delta", "ext/liblzma/lz", "ext/liblzma/lzma",
+                  "ext/liblzma/rangecoder", "ext/liblzma/simple", "ext/liblzma" }
+    files {
+      "ext/liblzma/common/alone_decoder.c",
+      "ext/liblzma/common/auto_decoder.c",
+      "ext/liblzma/common/block_decoder.c",
+      "ext/liblzma/common/block_header_decoder.c",
+      "ext/liblzma/common/block_util.c",
+      "ext/liblzma/common/common.c",
+      "ext/liblzma/common/filter_common.c",
+      "ext/liblzma/common/filter_decoder.c",
+      "ext/liblzma/common/filter_flags_decoder.c",
+      "ext/liblzma/common/index.c",
+      "ext/liblzma/common/index_decoder.c",
+      "ext/liblzma/common/index_hash.c",
+      "ext/liblzma/common/stream_decoder.c",
+      "ext/liblzma/common/stream_flags_common.c",
+      "ext/liblzma/common/stream_flags_decoder.c",
+      "ext/liblzma/common/vli_decoder.c",
+      "ext/liblzma/common/vli_size.c",
+      "ext/liblzma/check/check.c",
+      "ext/liblzma/check/crc32_fast.c",
+      "ext/liblzma/check/crc64_fast.c",
+      "ext/liblzma/lz/lz_decoder.c",
+      "ext/liblzma/lzma/lzma_decoder.c",
+      "ext/liblzma/lzma/lzma2_decoder.c",
+      "ext/liblzma/rangecoder/price_table.c",
+      "ext/liblzma/delta/delta_common.c",
+      "ext/liblzma/delta/delta_decoder.c",
+      "ext/liblzma/simple/simple_coder.c",
+      "ext/liblzma/simple/simple_decoder.c",
+      "ext/liblzma/simple/x86.c",
+    }
 
   project "libwebp"
     kind "StaticLib"

@@ -123,4 +123,8 @@ typedef unsigned short mode_t;
 /* BCrypt support for archive encryption/decryption (Windows Vista+) */
 #define HAVE_BCRYPT_H 1
 
-/* No lzma, lz4, zstd, or openssl for now */
+/* liblzma support for LZMA/LZMA2/XZ decompression (needed for 7zip) */
+#define HAVE_LZMA_H 1
+#define HAVE_LIBLZMA 1
+
+/* No lz4, zstd, or openssl for now */
