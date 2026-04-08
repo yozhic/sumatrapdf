@@ -91,6 +91,14 @@ static void OnMouseLeftButtonUpAbout(MainWindow* win, int x, int y, WPARAM) {
     } else if (str::Eq(url, kLinkShowList)) {
         gGlobalPrefs->showStartPage = true;
         win->RedrawAll(true);
+    } else if (str::Eq(url, kLinkNextTip)) {
+        PickAnotherRandomPromotion();
+        win->RedrawAll(true);
+    } else if (str::StartsWith(url, "Cmd")) {
+        int cmdId = GetCommandIdByName(url);
+        if (cmdId > 0) {
+            HwndSendCommand(win->hwndFrame, cmdId);
+        }
     } else if (IsLink(url)) {
         SumatraLaunchBrowser(url);
     } else {

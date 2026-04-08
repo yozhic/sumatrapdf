@@ -24,6 +24,7 @@
 #include "MainWindow.h"
 #include "resource.h"
 #include "Commands.h"
+#include "Accelerators.h"
 #include "FileThumbnails.h"
 #include "HomePage.h"
 #include "Translations.h"
@@ -41,7 +42,17 @@
 #endif
 #define ABOUT_LINE_SEP_SIZE 1
 
-static bool gShowPromotion = true;
+constexpr const char* sumatraTips = R"(You can [customize scrollbar](CmdChangeScrollbar).
+You can [customize keyboard shortcuts](Help/Customizing-keyboard-shortcuts).
+You can [customize toolbar](Help/Customize-toolbar).
+Press (Key/CmdCommandPalette) to open [command palette](CmdCommandPalette).
+To open file from history open [command palette](CmdCommandPalette) with (Key/CmdCommandPalette) and type `#`.
+You can [extract text from PDF file](Help/Tool-x-extract-text-from-pdf).
+You can [toggle menu bar](CmdToggleMenuBar) with (Key/CmdToggleMenuBar).
+You can [toggle toolbar](CmdToggleToolbar) with (Key/CmdToggleToolbar).
+Try [Edna](https://edna.arslexis.io): a note taking web app for power users.
+Try [MarkLexis](https://marklexis.arslexis.io): a bookmarking web application.
+)";
 
 constexpr const char* promoBuiltIn = R"(
 [
@@ -58,6 +69,231 @@ constexpr const char* promoBuiltIn = R"(
 
 // TODO: leaks if set
 const char* promoFromServer = nullptr;
+
+// a word in a parsed tip; can be part of a link
+struct TipWord {
+    char* text = nullptr; // owned
+    int dx = 0;
+    int dy = 0;
+    int x = 0;
+    int y = 0;
+    bool isLink = false;
+    int linkIdx = -1; // index into ParsedTip::links
+};
+
+struct TipLink {
+    char* cmd = nullptr; // owned, the link_command
+    int firstWord = 0;
+    int lastWord = 0; // inclusive
+};
+
+struct ParsedTip {
+    Vec<TipWord> words;
+    Vec<TipLink> links;
+    int totalDy = 0; // computed by layout
+
+    ~ParsedTip() {
+        for (auto& w : words) {
+            str::Free(w.text);
+        }
+        for (auto& l : links) {
+            str::Free(l.cmd);
+        }
+    }
+};
+
+// resolve (Key/CmdXxx) to keyboard shortcut string
+static TempStr ResolveKeyShortcutTemp(const char* cmdName) {
+    int cmdId = GetCommandIdByName(cmdName);
+    if (cmdId <= 0) {
+        return str::DupTemp(cmdName);
+    }
+    TempStr accel = AppendAccelKeyToMenuStringTemp((TempStr) "", cmdId);
+    if (!accel || !*accel) {
+        return str::DupTemp(cmdName);
+    }
+    // AppendAccelKeyToMenuStringTemp prepends \t, skip it
+    if (accel[0] == '\t') {
+        accel++;
+    }
+    return accel;
+}
+
+// resolve link command to a URL for StaticLink target
+static TempStr ResolveLinkCmdTemp(const char* cmd) {
+    if (str::StartsWith(cmd, "https://") || str::StartsWith(cmd, "http://")) {
+        return str::DupTemp(cmd);
+    }
+    if (str::StartsWith(cmd, "Help/")) {
+        return str::FormatTemp("https://www.sumatrapdfreader.org/docs/%s", cmd + 5);
+    }
+    // Cmd* - use as-is, will be resolved to command ID on click
+    return str::DupTemp(cmd);
+}
+
+static void ParseTip(ParsedTip& tip, const char* s) {
+    str::Str expanded;
+    // first pass: expand (Key/CmdXxx) to shortcut strings
+    while (*s) {
+        if (*s == '(' && str::StartsWith(s + 1, "Key/")) {
+            const char* end = str::FindChar(s, ')');
+            if (end) {
+                // extract command name between "Key/" and ")"
+                const char* cmdStart = s + 5; // skip "(Key/"
+                TempStr cmdName = str::DupTemp(cmdStart, (int)(end - cmdStart));
+                TempStr shortcut = ResolveKeyShortcutTemp(cmdName);
+                expanded.Append(shortcut);
+                s = end + 1;
+                continue;
+            }
+        }
+        expanded.AppendChar(*s);
+        s++;
+    }
+
+    // second pass: split into words, detecting [text](link) markdown links
+    const char* p = expanded.Get();
+    while (*p) {
+        // skip spaces
+        while (*p == ' ') {
+            p++;
+        }
+        if (!*p) {
+            break;
+        }
+
+        if (*p == '[') {
+            // parse markdown link: [text](cmd)
+            const char* textStart = p + 1;
+            const char* textEnd = str::FindChar(textStart, ']');
+            if (textEnd && textEnd[1] == '(') {
+                const char* cmdStart = textEnd + 2;
+                const char* cmdEnd = str::FindChar(cmdStart, ')');
+                if (cmdEnd) {
+                    TempStr linkCmd = str::DupTemp(cmdStart, (int)(cmdEnd - cmdStart));
+                    TempStr linkText = str::DupTemp(textStart, (int)(textEnd - textStart));
+
+                    TipLink link;
+                    link.cmd = str::Dup(ResolveLinkCmdTemp(linkCmd));
+                    link.firstWord = tip.words.Size();
+
+                    // split link text into words
+                    const char* lt = linkText;
+                    while (*lt) {
+                        while (*lt == ' ') {
+                            lt++;
+                        }
+                        if (!*lt) {
+                            break;
+                        }
+                        const char* wordStart = lt;
+                        while (*lt && *lt != ' ') {
+                            lt++;
+                        }
+                        TipWord w;
+                        w.text = str::Dup(wordStart, (int)(lt - wordStart));
+                        w.isLink = true;
+                        w.linkIdx = tip.links.Size();
+                        tip.words.Append(w);
+                    }
+
+                    link.lastWord = tip.words.Size() - 1;
+                    tip.links.Append(link);
+                    p = cmdEnd + 1;
+                    continue;
+                }
+            }
+        }
+
+        // regular word
+        const char* wordStart = p;
+        while (*p && *p != ' ' && *p != '[') {
+            p++;
+        }
+        if (p > wordStart) {
+            TipWord w;
+            w.text = str::Dup(wordStart, (int)(p - wordStart));
+            tip.words.Append(w);
+        }
+    }
+}
+
+static void MeasureTipWords(ParsedTip& tip, HDC hdc, HFONT font) {
+    uint fmt = DT_LEFT | DT_NOCLIP;
+    for (auto& w : tip.words) {
+        Size sz = HdcMeasureText(hdc, w.text, fmt, font);
+        w.dx = sz.dx;
+        w.dy = sz.dy;
+    }
+}
+
+static void LayoutTip(ParsedTip& tip, int areaWidth, int startX, int startY) {
+    int x = startX;
+    int y = startY;
+    int lineHeight = 0;
+    int spaceWidth = 4; // approximate space between words
+    for (auto& w : tip.words) {
+        if (x > startX && x + w.dx > startX + areaWidth) {
+            // wrap to next line
+            x = startX;
+            y += lineHeight + 2;
+            lineHeight = 0;
+        }
+        w.x = x;
+        w.y = y;
+        x += w.dx + spaceWidth;
+        if (w.dy > lineHeight) {
+            lineHeight = w.dy;
+        }
+    }
+    tip.totalDy = (y - startY) + lineHeight;
+}
+
+static ParsedTip* gParsedTips = nullptr;
+static int gParsedTipCount = 0;
+static int gSelectedTipIdx = -1;
+
+static void EnsureTipsParsed() {
+    if (gParsedTips) {
+        return;
+    }
+    StrVec lines;
+    Split(&lines, sumatraTips, "\n");
+    // count non-empty lines
+    int n = 0;
+    for (int i = 0; i < lines.Size(); i++) {
+        const char* line = lines.At(i);
+        if (!str::IsEmptyOrWhiteSpace(line)) {
+            n++;
+        }
+    }
+    if (n == 0) {
+        return;
+    }
+    gParsedTips = new ParsedTip[n];
+    gParsedTipCount = 0;
+    for (int i = 0; i < lines.Size(); i++) {
+        const char* line = lines.At(i);
+        if (str::IsEmptyOrWhiteSpace(line)) {
+            continue;
+        }
+        ParseTip(gParsedTips[gParsedTipCount], line);
+        gParsedTipCount++;
+    }
+    if (gParsedTipCount > 0) {
+        gSelectedTipIdx = rand() % gParsedTipCount;
+    }
+}
+
+static void PickAnotherRandomTip() {
+    if (gParsedTipCount <= 1) {
+        return;
+    }
+    int prev = gSelectedTipIdx;
+    while (gSelectedTipIdx == prev) {
+        gSelectedTipIdx = rand() % gParsedTipCount;
+    }
+}
 
 constexpr COLORREF kAboutBorderCol = RGB(0, 0, 0);
 
@@ -636,24 +872,6 @@ struct ThumbnailLayout {
     StaticLink* sl = nullptr;
 };
 
-struct Promote {
-    struct Promote* next = nullptr;
-    const char* name = nullptr;
-    const char* url = nullptr;
-    const char* info = nullptr;
-    Promote() = default;
-    ~Promote();
-};
-
-Promote::~Promote() {
-    str::Free(name);
-    str::Free(url);
-    str::Free(info);
-}
-
-static Promote* gPromoteList = nullptr;
-static Promote* gPromoteSelected = nullptr;
-
 struct HomePageLayout {
     // args in
     HWND hwnd = nullptr;
@@ -674,11 +892,9 @@ struct HomePageLayout {
     int thumbsVisibleDy = 0;         // visible height for thumbnails area
     Rect rcThumbsArea;               // clip rect for thumbnails
 
-    // promotion layout rects (gPromoteSelected holds the selected item)
-    Rect rcPromote;      // background rect
-    Rect rcPromoteTitle; // "Try my other software"
-    Rect rcPromoteName;  // name link
-    Rect rcPromoteInfo;  // info text
+    // tip layout
+    Rect rcTip;               // background rect for tip area
+    ParsedTip* tip = nullptr; // points to gParsedTips[gSelectedTipIdx], not owned
 
     ~HomePageLayout();
 };
@@ -688,83 +904,15 @@ HomePageLayout::~HomePageLayout() {
     delete openDoc;
 }
 
-static Promote* ParsePromoteFromTree(SquareTreeNode* root) {
-    if (!root) {
-        return nullptr;
-    }
-    SquareTreeNode* node;
-    Promote* first = nullptr;
-    for (auto& i : root->data) {
-        node = i.child;
-        if (!node || node->data.Size() != 3) {
-            continue;
-        }
-        Promote* p = new Promote();
-        p->name = str::Dup(node->GetValue("Name"));
-        p->url = str::Dup(node->GetValue("URL"));
-        p->info = str::Dup(node->GetValue("Info"));
-        bool ok = !str::IsEmptyOrWhiteSpace(p->name) && !str::IsEmptyOrWhiteSpace(p->url) &&
-                  !str::IsEmptyOrWhiteSpace(p->info);
-        if (!ok) {
-            delete p;
-            continue;
-        }
-        ListInsertEnd(&first, p);
-    }
-    return first;
-}
-
-static Promote* ParsePromoteFromString(const char* s) {
-    if (str::IsEmptyOrWhiteSpace(s)) {
-        return nullptr;
-    }
-    SquareTreeNode* root = ParseSquareTree(s);
-    auto res = ParsePromoteFromTree(root);
-    delete root;
-    return res;
-}
-
 constexpr int kOpenDocumentYShift = 7;
 constexpr int kThumbsMiddleMargin = 32;
 
-static void EnsurePromoteListParsed() {
-    if (!gPromoteList) {
-        auto s = promoFromServer ? promoFromServer : promoBuiltIn;
-        gPromoteList = ParsePromoteFromString(s);
-        if (gPromoteList) {
-            int n = ListLen(gPromoteList);
-            int idx = rand() % n;
-            Promote* p = gPromoteList;
-            for (int i = 0; i < idx; i++) {
-                p = p->next;
-            }
-            gPromoteSelected = p;
-        }
-    }
-}
-
 void PickAnotherRandomPromotion() {
-    if (!gPromoteList) {
-        return;
-    }
-    int n = ListLen(gPromoteList);
-    if (n <= 1) {
-        return;
-    }
-    // pick a different one than currently selected
-    Promote* prev = gPromoteSelected;
-    while (gPromoteSelected == prev) {
-        int idx = rand() % n;
-        Promote* p = gPromoteList;
-        for (int i = 0; i < idx; i++) {
-            p = p->next;
-        }
-        gPromoteSelected = p;
-    }
+    PickAnotherRandomTip();
 }
 
 void LayoutHomePage(HomePageLayout& l) {
-    EnsurePromoteListParsed();
+    EnsureTipsParsed();
 
     Vec<FileState*> fileStates;
     if (gGlobalPrefs->homePageSortByFrequentlyRead) {
@@ -857,20 +1005,23 @@ void LayoutHomePage(HomePageLayout& l) {
 
     int headerBottomY = rcHdr.y + rcHdr.dy;
 
-    // --- Step 2: calculate promotion area at the bottom (before thumbnails) ---
-    int promoHeight = 0;
-    if (gPromoteSelected) {
-        HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        Size titleSize = HdcMeasureText(hdc, "Try my other software", DT_LEFT, fontPromoTitle);
-        HFONT fontPromoName = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        Size nameSize = HdcMeasureText(hdc, gPromoteSelected->name, DT_LEFT, fontPromoName);
-        int padding = DpiScale(hdc, 8);
-        promoHeight = titleSize.dy / 2 + padding + std::max(nameSize.dy, titleSize.dy) + 2 * padding;
+    // --- Step 2: calculate tip area at the bottom (before thumbnails) ---
+    int tipHeight = 0;
+    HFONT fontTip = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
+    ParsedTip* tip = nullptr;
+    if (gGlobalPrefs->showPromo && gSelectedTipIdx >= 0 && gSelectedTipIdx < gParsedTipCount) {
+        tip = &gParsedTips[gSelectedTipIdx];
+        MeasureTipWords(*tip, hdc, fontTip);
+        int tipPadding = DpiScale(hdc, 8);
+        // do a preliminary layout to get the height (use thumbnails content width)
+        int tipTextWidth = thumbsColsForLayout * kThumbnailDx + (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX;
+        LayoutTip(*tip, tipTextWidth, 0, 0);
+        tipHeight = tip->totalDy + 2 * tipPadding;
     }
 
     // --- Step 3: middle area for thumbnails ---
     int thumbsTopY = headerBottomY + kThumbsMiddleMargin;
-    int thumbsBottomY = rc.dy - promoHeight - kThumbsMiddleMargin;
+    int thumbsBottomY = rc.dy - tipHeight - kThumbsMiddleMargin;
     int thumbsVisibleDy = std::max(0, thumbsBottomY - thumbsTopY);
 
     l.rcThumbsArea = {0, thumbsTopY, rc.dx, thumbsVisibleDy};
@@ -925,50 +1076,49 @@ void LayoutHomePage(HomePageLayout& l) {
             }
             thumb.rcText = rcText;
             char* path = fs->filePath;
-            thumb.sl = new StaticLink(rcText.Union(rcPage), path, path);
-            win->staticLinks.Append(thumb.sl);
+            Rect slRect = rcText.Union(rcPage).Intersect(l.rcThumbsArea);
+            if (!slRect.IsEmpty()) {
+                thumb.sl = new StaticLink(slRect, path, path);
+                win->staticLinks.Append(thumb.sl);
+            }
         }
     }
 
-    // layout promotion at the bottom (gPromoteSelected already picked)
-    if (gShowPromotion && gGlobalPrefs->showPromo && gPromoteSelected) {
-        Promote* p = gPromoteSelected;
-
-        HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        HFONT fontPromoName = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        HFONT fontPromoInfo = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-
+    // layout tip at the bottom
+    if (tip) {
         Rect rcClient = ClientRect(win->hwndCanvas);
-        int padding = DpiScale(hdc, 8);
+        int tipPadding = DpiScale(hdc, 8);
 
-        const char* titleTxt = "Try my other software";
-        Size titleSize = HdcMeasureText(hdc, titleTxt, DT_LEFT, fontPromoTitle);
+        int tipY = rcClient.dy - tipHeight;
+        // background spans full window width
+        l.rcTip = {0, tipY, rcClient.dx, tipHeight};
+        l.tip = tip;
 
-        Size nameSize = HdcMeasureText(hdc, p->name, DT_LEFT, fontPromoName);
-        TempStr infoTxt = str::JoinTemp(" \xE2\x80\x94 ", p->info);
-        Size infoSize = HdcMeasureText(hdc, infoTxt, DT_LEFT, fontPromoInfo);
+        // text area aligned with thumbnails
+        int tipTextWidth = thumbsColsForLayout * kThumbnailDx + (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX;
+        int tipStartX = thumbsStartX;
+        int tipStartY = tipY + tipPadding;
+        LayoutTip(*tip, tipTextWidth, tipStartX, tipStartY);
 
-        int contentDx = nameSize.dx + infoSize.dx;
-        int titlePadX = DpiScale(hdc, 8);
-        int titlePadY = DpiScale(hdc, 4);
-        int promoteDy = titleSize.dy / 2 + padding + std::max(nameSize.dy, infoSize.dy) + 2 * padding;
-
-        int promoteY = rcClient.dy - promoteDy;
-
-        l.rcPromote = {0, promoteY, rcClient.dx, promoteDy};
-
-        int titleX = (rcClient.dx - titleSize.dx) / 2;
-        int titleY = promoteY - titleSize.dy / 2;
-        l.rcPromoteTitle = {titleX - titlePadX, titleY - titlePadY, titleSize.dx + 2 * titlePadX,
-                            titleSize.dy + titlePadY};
-
-        int contentY = titleY + titleSize.dy + padding;
-        int contentStartX = (rcClient.dx - contentDx) / 2;
-        l.rcPromoteName = {contentStartX, contentY, nameSize.dx, nameSize.dy};
-        l.rcPromoteInfo = {contentStartX + nameSize.dx, contentY, infoSize.dx, infoSize.dy};
-
-        auto slPromo = new StaticLink(l.rcPromoteName, p->url, p->url);
-        win->staticLinks.Append(slPromo);
+        // register tip links; per-link rects first so they take priority in hit testing
+        for (auto& link : tip->links) {
+            // compute bounding rect of all words in this link
+            Rect linkRect;
+            for (int i = link.firstWord; i <= link.lastWord; i++) {
+                auto& w = tip->words[i];
+                Rect wr = {w.x, w.y, w.dx, w.dy};
+                if (i == link.firstWord) {
+                    linkRect = wr;
+                } else {
+                    linkRect = linkRect.Union(wr);
+                }
+            }
+            auto slTip = new StaticLink(linkRect, link.cmd, link.cmd);
+            win->staticLinks.Append(slTip);
+        }
+        // tip background: clicking outside of links picks another tip
+        auto slBg = new StaticLink(l.rcTip, kLinkNextTip);
+        win->staticLinks.Append(slBg);
     }
 }
 
@@ -1077,54 +1227,36 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
         win->staticLinks.Append(sl);
     }
 
-    // draw promotion
-    if (gShowPromotion && gGlobalPrefs->showPromo && gPromoteSelected) {
-        Promote* p = gPromoteSelected;
-#if 0
-        {
-            Rect rcWin = ClientRect(win->hwndCanvas);
-            logf("DrawHomePageLayout: window size: %d x %d\n", rcWin.dx, rcWin.dy);
-            logf("  promote: name='%s' url='%s' info='%s'\n", p->name, p->url, p->info);
-            logf("  rcPromote:      x=%d y=%d dx=%d dy=%d\n", l.rcPromote.x, l.rcPromote.y, l.rcPromote.dx,
-                 l.rcPromote.dy);
-            logf("  rcPromoteTitle: x=%d y=%d dx=%d dy=%d\n", l.rcPromoteTitle.x, l.rcPromoteTitle.y,
-                 l.rcPromoteTitle.dx, l.rcPromoteTitle.dy);
-            logf("  rcPromoteName:  x=%d y=%d dx=%d dy=%d\n", l.rcPromoteName.x, l.rcPromoteName.y, l.rcPromoteName.dx,
-                 l.rcPromoteName.dy);
-            logf("  rcPromoteInfo:  x=%d y=%d dx=%d dy=%d\n", l.rcPromoteInfo.x, l.rcPromoteInfo.y, l.rcPromoteInfo.dx,
-                 l.rcPromoteInfo.dy);
-        }
-#endif
-        COLORREF promoBgCol = ThemeControlBackgroundColor();
-        FillRect(hdc, l.rcPromote, promoBgCol);
+    // draw tip at the bottom
+    if (l.tip) {
+        COLORREF tipBgCol = ThemeControlBackgroundColor();
+        FillRect(hdc, l.rcTip, tipBgCol);
 
-        HFONT fontPromoTitle = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        HFONT fontPromoName = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-        HFONT fontPromoInfo = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
-
+        HFONT fontTip = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
         uint fmt = DT_LEFT | DT_NOCLIP;
+        COLORREF textCol = ThemeWindowTextColor();
+        COLORREF linkCol = ThemeWindowLinkColor();
 
-        // draw title background and text
-        FillRect(hdc, l.rcPromoteTitle, promoBgCol);
-        int titlePadX = DpiScale(hdc, 8);
-        int titlePadY = DpiScale(hdc, 4);
-        Rect rcTitleTxt = {l.rcPromoteTitle.x + titlePadX, l.rcPromoteTitle.y + titlePadY,
-                           l.rcPromoteTitle.dx - 2 * titlePadX, l.rcPromoteTitle.dy - titlePadY};
-        SetTextColor(hdc, ThemeWindowTextColor());
-        HdcDrawText(hdc, "Try my other software", rcTitleTxt, fmt, fontPromoTitle);
-
-        // draw name as link
-        color = ThemeWindowLinkColor();
-        SetTextColor(hdc, color);
+        for (auto& w : l.tip->words) {
+            Point pt = {w.x, w.y};
+            if (w.isLink) {
+                SetTextColor(hdc, linkCol);
+                HdcDrawText(hdc, w.text, pt, fmt, fontTip);
+            } else {
+                SetTextColor(hdc, textCol);
+                HdcDrawText(hdc, w.text, pt, fmt, fontTip);
+            }
+        }
+        // draw underlines spanning each link
         SelectObject(hdc, penLinkLine);
-        HdcDrawText(hdc, p->name, l.rcPromoteName, fmt, fontPromoName);
-        int underlineY = l.rcPromoteName.y + l.rcPromoteName.dy - 3;
-        DrawLine(hdc, Rect(l.rcPromoteName.x, underlineY, l.rcPromoteName.dx, 0));
-
-        // draw info
-        SetTextColor(hdc, ThemeWindowTextColor());
-        TempStr infoTxt = str::JoinTemp(" \xE2\x80\x94 ", p->info);
-        HdcDrawText(hdc, infoTxt, l.rcPromoteInfo, fmt, fontPromoInfo);
+        for (auto& link : l.tip->links) {
+            auto& first = l.tip->words[link.firstWord];
+            auto& last = l.tip->words[link.lastWord];
+            int underlineY = first.y + first.dy - 3;
+            int x1 = first.x;
+            int x2 = last.x + last.dx;
+            DrawLine(hdc, Rect(x1, underlineY, x2 - x1, 0));
+        }
     }
 }
 
