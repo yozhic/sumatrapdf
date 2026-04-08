@@ -58,6 +58,7 @@ struct ImagePage {
     int pageNo = 0;
     Bitmap* bmp = nullptr;
     bool ownBmp = true;
+    bool failedToLoad = false;
     int refs = 1;
 
     ImagePage(int pageNo, Bitmap* bmp) {
@@ -179,6 +180,7 @@ RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
     HANDLE hMap = nullptr;
     HBITMAP hbmp = CreateMemoryBitmap(screen.Size(), &hMap);
     if (!hbmp) {
+        DropPage(page, false);
         return nullptr;
     }
     HDC hDC = CreateCompatibleDC(nullptr);
@@ -200,6 +202,23 @@ RenderedBitmap* EngineImages::RenderPage(RenderPageArgs& args) {
     Gdiplus::Rect screenR = ToGdipRect(screen);
     screenR.Inflate(1, 1);
     g.FillRectangle(&tmpBrush, screenR);
+
+    if (page->failedToLoad) {
+        // draw error message for pages that failed to load
+        Gdiplus::Font font(L"Arial", 14.0f * zoom);
+        Color red(0xFF, 0xCC, 0x00, 0x00);
+        SolidBrush textBrush(red);
+        Gdiplus::StringFormat sf;
+        sf.SetAlignment(Gdiplus::StringAlignmentCenter);
+        sf.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+        Gdiplus::RectF layoutRect(0, 0, (float)screen.dx, (float)screen.dy);
+        TempStr msg = str::FormatTemp("Failed to load page %d", pageNo);
+        TempWStr msgW = ToWStrTemp(msg);
+        g.DrawString(msgW, -1, &font, layoutRect, &sf, &textBrush);
+        DropPage(page, false);
+        DeleteDC(hDC);
+        return new RenderedBitmap(hbmp, screen.Size(), hMap);
+    }
 
     Matrix m;
     GetTransform(m, pageNo, zoom, rotation);
@@ -295,7 +314,10 @@ RenderedBitmap* EngineImages::GetImageForPageElement(IPageElement* pel) {
     auto ipel = (PageElementImage*)pel;
     int pageNo = ipel->pageNo;
     auto page = GetPage(pageNo);
-    if (!page) {
+    if (!page || page->failedToLoad) {
+        if (page) {
+            DropPage(page, false);
+        }
         return nullptr;
     }
 
@@ -354,15 +376,14 @@ ImagePage* EngineImages::GetPage(int pageNo, bool tryOnly) {
         }
         result = new ImagePage(pageNo, nullptr);
         result->bmp = LoadBitmapForPage(pageNo, result->ownBmp);
+        if (!result->bmp) {
+            result->failedToLoad = true;
+        }
         pageCache.InsertAt(0, result);
     } else if (result != pageCache.at(0)) {
         // keep the list Most Recently Used first
         pageCache.Remove(result);
         pageCache.InsertAt(0, result);
-    }
-    // return nullptr if a page failed to load
-    if (result && !result->bmp) {
-        return nullptr;
     }
     if (!result) {
         return nullptr;
@@ -954,9 +975,12 @@ RectF EngineImage::LoadMediabox(int pageNo) {
     // fill the cache to prevent the first few frames from being unpacked twice
     ImagePage* page = GetPage(pageNo, MAX_IMAGE_PAGE_CACHE == pageCache.size());
     if (page) {
-        RectF mbox(0, 0, (float)page->bmp->GetWidth(), (float)page->bmp->GetHeight());
+        if (page->bmp) {
+            RectF mbox(0, 0, (float)page->bmp->GetWidth(), (float)page->bmp->GetHeight());
+            DropPage(page, false);
+            return mbox;
+        }
         DropPage(page, false);
-        return mbox;
     }
     ReportIfNotMultiImage(this);
     RectF mbox = RectF(0, 0, (float)image->GetWidth(), (float)image->GetHeight());
@@ -1091,7 +1115,9 @@ static bool LoadImageDir(EngineImageDir* e, const char* dir) {
     // TODO: better handle the case where images have different resolutions
     ImagePage* page = e->GetPage(1);
     if (page) {
-        e->fileDPI = page->bmp->GetHorizontalResolution();
+        if (page->bmp) {
+            e->fileDPI = page->bmp->GetHorizontalResolution();
+        }
         e->DropPage(page, false);
     }
     return true;
@@ -1626,12 +1652,16 @@ RectF EngineCbx::LoadMediabox(int pageNo) {
 
     ImagePage* page = GetPage(pageNo, MAX_IMAGE_PAGE_CACHE == pageCache.size());
     if (page) {
-        RectF mbox(0, 0, (float)page->bmp->GetWidth(), (float)page->bmp->GetHeight());
+        if (page->bmp) {
+            RectF mbox(0, 0, (float)page->bmp->GetWidth(), (float)page->bmp->GetHeight());
+            DropPage(page, false);
+            return mbox;
+        }
         DropPage(page, false);
-        return mbox;
     }
 
-    return RectF();
+    // use A4-like dimensions (at 96 DPI) as fallback for failed pages
+    return RectF(0, 0, 595, 842);
 }
 
 EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password) {
