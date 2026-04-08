@@ -24,7 +24,7 @@ class PdfFilter : public FilterBase {
     VOID CleanUp();
 
     // IPersist
-    IFACEMETHODIMP GetClassID(CLSID* pClassID) { return CLSIDFromString(kPdfFilterHandler, pClassID); }
+    IFACEMETHODIMP GetClassID(CLSID* pClassID) { return CLSIDFromString(kPdfFilterClsid, pClassID); }
 
   private:
     PdfFilterState m_state{PdfFilterState::End};

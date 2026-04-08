@@ -31,7 +31,7 @@ class TeXFilter : public FilterBase {
     WCHAR* ExtractBracedBlock();
 
     // IPersist
-    IFACEMETHODIMP GetClassID(CLSID* pClassID) { return CLSIDFromString(kTexFilterHandler, pClassID); }
+    IFACEMETHODIMP GetClassID(CLSID* pClassID) { return CLSIDFromString(kTexFilterClsid, pClassID); }
 
   private:
     TEX_FILTER_STATE m_state;
