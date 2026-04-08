@@ -1692,7 +1692,7 @@ float DisplayModel::GetZoomVirtual(bool absolute) const {
 
 bool MaybeGetNextZoomByIncrement(float* currZoomInOut, float towardsLevel) {
     auto zoomIncrPerc = gGlobalPrefs->zoomIncrement;
-    if (zoomIncrPerc <= 1) {
+    if (zoomIncrPerc <= 0) {
         return false;
     }
     float factor = (zoomIncrPerc / 100) + 1;
