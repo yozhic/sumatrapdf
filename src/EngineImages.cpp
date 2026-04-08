@@ -1787,10 +1787,25 @@ bool IsEngineCbxSupportedFileType(Kind kind) {
     return KindIndexOf(cbxKinds, n, kind) >= 0;
 }
 
+// check if a file is an encrypted 7z archive
+// libarchive doesn't support decrypting 7z, so we can't open these
+static bool IsEncrypted7z(const char* path) {
+    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
+    archive->Open(path);
+    bool encrypted = archive->isEncrypted;
+    delete archive;
+    return encrypted;
+}
+
 EngineBase* CreateEngineCbxFromFile(const char* path, PasswordUI* pwdUI) {
     EngineBase* engine = EngineCbx::CreateFromFile(path);
     if (engine || !pwdUI) {
         return engine;
+    }
+    // libarchive can't decrypt 7z archives, so don't prompt for password
+    if (IsEncrypted7z(path)) {
+        logf("CreateEngineCbxFromFile: encrypted 7z not supported\n");
+        return nullptr;
     }
     // if opening failed, try with password
     // archive might be password-protected
