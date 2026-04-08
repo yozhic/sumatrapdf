@@ -30,6 +30,8 @@
 #include "HtmlFormatter.h"
 #include "EbookFormatter.h"
 
+#include "utils/Log.h"
+
 Kind kindEngineEpub = "engineEpub";
 Kind kindEngineFb2 = "engineFb2";
 Kind kindEngineMobi = "engineMobi";
@@ -738,12 +740,21 @@ EngineEpub::~EngineEpub() {
 
 EngineBase* EngineEpub::Clone() {
     if (stream) {
-        return CreateFromStream(stream);
+        auto res = CreateFromStream(stream);
+        if (!res) {
+            logf("EngineEpub::Clone() failed: CreateFromStream() failed\n");
+        }
+        return res;
     }
     const char* path = FilePath();
     if (path) {
-        return CreateFromFile(path);
+        auto res = CreateFromFile(path);
+        if (!res) {
+            logf("EngineEpub::Clone() failed: CreateFromFile('%s') failed\n", path);
+        }
+        return res;
     }
+    logf("EngineEpub::Clone() failed: no stream or file path\n");
     return nullptr;
 }
 

@@ -344,12 +344,21 @@ EngineDjVu::~EngineDjVu() {
 
 EngineBase* EngineDjVu::Clone() {
     if (stream != nullptr) {
-        return CreateEngineDjVuFromStream(stream);
+        auto res = CreateEngineDjVuFromStream(stream);
+        if (!res) {
+            logf("EngineDjVu::Clone() failed: CreateEngineDjVuFromStream() failed\n");
+        }
+        return res;
     }
     const char* path = FilePath();
     if (path) {
-        return CreateEngineDjVuFromFile(path);
+        auto res = CreateEngineDjVuFromFile(path);
+        if (!res) {
+            logf("EngineDjVu::Clone() failed: CreateEngineDjVuFromFile('%s') failed\n", path);
+        }
+        return res;
     }
+    logf("EngineDjVu::Clone() failed: no stream or file path\n");
     return nullptr;
 }
 

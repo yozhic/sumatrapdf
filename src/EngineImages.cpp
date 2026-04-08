@@ -532,6 +532,7 @@ EngineImage::~EngineImage() {
 EngineBase* EngineImage::Clone() {
     Bitmap* bmp = image->Clone(0, 0, image->GetWidth(), image->GetHeight(), PixelFormat32bppARGB);
     if (!bmp) {
+        logf("EngineImage::Clone() failed: Bitmap::Clone() failed for '%s'\n", FilePath() ? FilePath() : "(null)");
         return nullptr;
     }
 
@@ -1364,13 +1365,22 @@ EngineBase* EngineCbx::Clone() {
         ScopedComPtr<IStream> stm;
         HRESULT res = fileStream->Clone(&stm);
         if (SUCCEEDED(res)) {
-            return CreateFromStream(stm);
+            auto clone = CreateFromStream(stm);
+            if (!clone) {
+                logf("EngineCbx::Clone() failed: CreateFromStream() failed\n");
+            }
+            return clone;
         }
     }
     const char* path = FilePath();
     if (path) {
-        return CreateFromFile(path);
+        auto clone = CreateFromFile(path);
+        if (!clone) {
+            logf("EngineCbx::Clone() failed: CreateFromFile('%s') failed\n", path);
+        }
+        return clone;
     }
+    logf("EngineCbx::Clone() failed: no stream or file path\n");
     return nullptr;
 }
 

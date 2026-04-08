@@ -79,10 +79,16 @@ struct PrintData {
         this->rotation = rotation;
         this->engine = engine->Clone();
         if (!this->engine) {
-            logf("PrintData: engine->Clone() failed for '%s'\n", engine->FilePath());
+            // re-create engine from file to avoid sharing with render cache
+            const char* path = engine->FilePath();
+            logf("PrintData: engine->Clone() failed for '%s', re-creating\n", path ? path : "(null)");
+            if (path) {
+                this->engine = CreateEngineFromFile(path, nullptr, false);
+            }
+        }
+        if (!this->engine) {
+            logf("PrintData: failed to create engine for printing\n");
             this->failedEngineClone = true;
-            engine->AddRef();
-            this->engine = engine;
         }
 
         if (!sel) {
@@ -1264,7 +1270,12 @@ void PrintCurrentFile(MainWindow* win, bool waitForCompletion) {
     pd = new PrintData(pinnedEngine, printer, ranges, advanced, rotation, sel);
     SafeEngineRelease(&pinnedEngine);
 
-    if (!waitForCompletion && !pd->failedEngineClone) {
+    if (pd->failedEngineClone) {
+        logf("PrintCurrentFile: failed to create engine for printing\n");
+        delete pd;
+        goto Exit;
+    }
+    if (!waitForCompletion) {
         PrintToDeviceOnThread(win, pd);
     } else {
         PrintToDevice(*pd);

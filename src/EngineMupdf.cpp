@@ -1781,6 +1781,7 @@ EngineBase* EngineMupdf::Clone() {
     ScopedCritSec scope(ctxAccess);
     if (!FilePath()) {
         // before port we could clone streams but it's no longer possible
+        logf("EngineMupdf::Clone() failed: no file path\n");
         return nullptr;
     }
     auto ctx = Ctx();
@@ -1795,6 +1796,7 @@ EngineBase* EngineMupdf::Clone() {
     EngineMupdf* clone = new EngineMupdf();
     bool ok = clone->Load(FilePath(), pwdUI);
     if (!ok) {
+        logf("EngineMupdf::Clone() failed: Load('%s') failed\n", FilePath());
         delete clone;
         delete pwdUI;
         return nullptr;
