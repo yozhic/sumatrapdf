@@ -4137,6 +4137,7 @@ TempStr EngineMupdfGetPdfOutline(const char* path) {
     if (!ctx) {
         return nullptr;
     }
+    fz_register_document_handlers(ctx);
     TempStr res = nullptr;
     fz_document* doc = nullptr;
     fz_outline* outline = nullptr;
@@ -4173,6 +4174,7 @@ TempStr EngineMupdfGetPdfInfo(const char* path) {
     if (!ctx) {
         return nullptr;
     }
+    fz_register_document_handlers(ctx);
     TempStr res = nullptr;
     fz_buffer* buf = nullptr;
     fz_try(ctx) {
