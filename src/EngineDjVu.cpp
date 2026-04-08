@@ -518,8 +518,14 @@ bool EngineDjVu::FinishLoading() {
                 DjVuPageInfo* pi = pages[i];
                 float dx = (float)info.width * GetFileDPI() / (float)info.dpi;
                 float dy = (float)info.height * GetFileDPI() / (float)info.dpi;
-                pi->mediabox.dx = dx;
-                pi->mediabox.dy = dy;
+                if (info.rotation & 1) {
+                    // 90 or 270 degree rotation: swap width and height
+                    pi->mediabox.dx = dy;
+                    pi->mediabox.dy = dx;
+                } else {
+                    pi->mediabox.dx = dx;
+                    pi->mediabox.dy = dy;
+                }
             }
         }
     }
@@ -614,27 +620,30 @@ RenderedBitmap* EngineDjVu::RenderPage(RenderPageArgs& args) {
         return nullptr;
     }
 
-    ddjvu_page_rotation_t rot = DDJVU_ROTATE_0;
+    ddjvu_page_rotation_t userRot = DDJVU_ROTATE_0;
     switch (rotation) {
         case 0:
-            rot = DDJVU_ROTATE_0;
+            userRot = DDJVU_ROTATE_0;
             break;
-        // for whatever reason, 90 and 270 are reverased compared to what I expect
+        // for whatever reason, 90 and 270 are reversed compared to what I expect
         // maybe I'm doing other parts of the code wrong
         case 90:
-            rot = DDJVU_ROTATE_270;
+            userRot = DDJVU_ROTATE_270;
             break;
         case 180:
-            rot = DDJVU_ROTATE_180;
+            userRot = DDJVU_ROTATE_180;
             break;
         case 270:
-            rot = DDJVU_ROTATE_90;
+            userRot = DDJVU_ROTATE_90;
             break;
         default:
             ReportIf("invalid rotation");
             break;
     }
-    ddjvu_page_set_rotation(page, rot);
+    // combine user rotation with the page's inherent rotation
+    ddjvu_page_rotation_t initialRot = ddjvu_page_get_initial_rotation(page);
+    int combinedRot = ((int)initialRot + (int)userRot) % 4;
+    ddjvu_page_set_rotation(page, (ddjvu_page_rotation_t)combinedRot);
 
     bool isBitonal = DDJVU_PAGETYPE_BITONAL == ddjvu_page_get_type(page);
     ddjvu_format_style_t style = isBitonal ? DDJVU_FORMAT_GREY8 : DDJVU_FORMAT_BGR24;
@@ -696,7 +705,7 @@ RectF EngineDjVu::PageContentBox(int pageNo, RenderTarget) {
         ddjvu_page_release(page);
         return pageRc;
     }
-    ddjvu_page_set_rotation(page, DDJVU_ROTATE_0);
+    ddjvu_page_set_rotation(page, ddjvu_page_get_initial_rotation(page));
 
     // render the page in 8-bit grayscale up to 250x250 px in size
     ddjvu_format_t* fmt = ddjvu_format_create(DDJVU_FORMAT_GREY8, 0, nullptr);
