@@ -91,7 +91,7 @@ static EngineBase* CreateEngineForKind(Kind kind, const char* path, PasswordUI* 
     }
 
     if (IsEngineCbxSupportedFileType(kind)) {
-        engine = CreateEngineCbxFromFile(path);
+        engine = CreateEngineCbxFromFile(path, pwdUI);
         return engine;
     }
     if (IsEnginePsSupportedFileType(kind)) {

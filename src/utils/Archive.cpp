@@ -37,6 +37,7 @@ MultiFormatArchive::~MultiFormatArchive() {
         free((void*)fi->data);
     }
     free(archivePath_);
+    str::Free(password);
 }
 
 bool MultiFormatArchive::ParseEntries(struct archive* a) {
@@ -109,6 +110,12 @@ bool MultiFormatArchive::Open(const char* path) {
     return false;
 }
 
+static void SetArchivePassword(struct archive* a, const char* password) {
+    if (password && *password) {
+        archive_read_add_passphrase(a, password);
+    }
+}
+
 bool MultiFormatArchive::Open(IStream* stream) {
     // for IStream, read all data into memory and open from there
     STATSTG stat;
@@ -132,6 +139,7 @@ bool MultiFormatArchive::Open(IStream* stream) {
     struct archive* a = archive_read_new();
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
+    SetArchivePassword(a, password);
     int r = archive_read_open_memory(a, data, size);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
@@ -141,6 +149,9 @@ bool MultiFormatArchive::Open(IStream* stream) {
     // no file path to re-open from, so load all file data now
     loadOnOpen = true;
     bool ok = ParseEntries(a);
+    if (archive_read_has_encrypted_entries(a) > 0) {
+        isEncrypted = true;
+    }
     archive_read_free(a);
     free(data);
     return ok;
@@ -150,6 +161,7 @@ bool MultiFormatArchive::OpenArchive(const char* path) {
     struct archive* a = archive_read_new();
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
+    SetArchivePassword(a, password);
     int r = archive_read_open_filename(a, path, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
@@ -157,6 +169,9 @@ bool MultiFormatArchive::OpenArchive(const char* path) {
     }
     archivePath_ = str::Dup(path);
     bool ok = ParseEntries(a);
+    if (archive_read_has_encrypted_entries(a) > 0) {
+        isEncrypted = true;
+    }
     archive_read_free(a);
     return ok;
 }
@@ -217,6 +232,7 @@ ByteSlice MultiFormatArchive::GetFileDataByIdLibarchive(size_t fileId) {
     struct archive* a = archive_read_new();
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
+    SetArchivePassword(a, password);
     int r = archive_read_open_filename(a, archivePath_, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
@@ -281,6 +297,7 @@ ByteSlice MultiFormatArchive::GetFileDataPartById(size_t fileId, size_t sizeHint
     struct archive* a = archive_read_new();
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
+    SetArchivePassword(a, password);
     int r = archive_read_open_filename(a, archivePath_, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
@@ -378,31 +395,50 @@ MultiFormatArchive* OpenRarArchive(IStream* stream) {
     return open(archive, stream);
 }
 
-struct Data {
+struct UnrarData {
     u8* d = nullptr;
     size_t sz = 0;
     u8* curr = nullptr;
+    const char* password = nullptr;
 };
 
-static size_t DataLeft(const Data& d) {
+static size_t DataLeft(const UnrarData& d) {
     size_t consumed = (d.curr - d.d);
     ReportIf(consumed > d.sz);
     return d.sz - consumed;
 }
 
-// return 1 on success. Other values for msg that we don't handle: UCM_CHANGEVOLUME, UCM_NEEDPASSWORD
+// return 1 on success
 static int CALLBACK unrarCallback(UINT msg, LPARAM userData, LPARAM rarBuffer, LPARAM bytesProcessed) {
-    if (UCM_PROCESSDATA != msg || !userData) {
+    if (!userData) {
         return -1;
     }
-    Data* buf = (Data*)userData;
-    size_t bytesGot = (size_t)bytesProcessed;
-    if (bytesGot > DataLeft(*buf)) {
-        return -1;
+    UnrarData* buf = (UnrarData*)userData;
+    if (msg == UCM_PROCESSDATA) {
+        size_t bytesGot = (size_t)bytesProcessed;
+        if (bytesGot > DataLeft(*buf)) {
+            return -1;
+        }
+        memcpy(buf->curr, (char*)rarBuffer, bytesGot);
+        buf->curr += bytesGot;
+        return 1;
     }
-    memcpy(buf->curr, (char*)rarBuffer, bytesGot);
-    buf->curr += bytesGot;
-    return 1;
+    if (msg == UCM_NEEDPASSWORDW) {
+        if (!buf->password || !*buf->password) {
+            return -1;
+        }
+        WCHAR* pwdBuf = (WCHAR*)rarBuffer;
+        int maxLen = (int)bytesProcessed;
+        auto pwdW = ToWStrTemp(buf->password);
+        int n = str::Leni(pwdW);
+        if (n >= maxLen) {
+            n = maxLen - 1;
+        }
+        memcpy(pwdBuf, pwdW, n * sizeof(WCHAR));
+        pwdBuf[n] = 0;
+        return 1;
+    }
+    return -1;
 }
 
 static bool FindFile(HANDLE hArc, RARHeaderDataEx* rarHeader, const WCHAR* fileName) {
@@ -432,7 +468,8 @@ ByteSlice MultiFormatArchive::GetFileDataByIdUnarrDll(size_t fileId) {
 
     auto rarPath = ToWStrTemp(rarFilePath_);
 
-    Data uncompressedBuf;
+    UnrarData uncompressedBuf;
+    uncompressedBuf.password = password;
 
     RAROpenArchiveDataEx arcData = {nullptr};
     arcData.ArcNameW = rarPath;
@@ -499,7 +536,8 @@ ByteSlice MultiFormatArchive::GetFileDataPartByIdUnarrDll(size_t fileId, size_t 
 
     auto rarPath = ToWStrTemp(rarFilePath_);
 
-    Data uncompressedBuf;
+    UnrarData uncompressedBuf;
+    uncompressedBuf.password = password;
 
     RAROpenArchiveDataEx arcData = {nullptr};
     arcData.ArcNameW = rarPath;
@@ -560,15 +598,16 @@ bool MultiFormatArchive::OpenUnrarFallback(const char* rarPath) {
     ReportIf(rarFilePath_);
     auto rarPathW = ToWStrTemp(rarPath);
 
-    ByteSlice uncompressedBuf;
+    UnrarData uncompressedBuf;
+    uncompressedBuf.password = password;
 
     RAROpenArchiveDataEx arcData = {nullptr};
     arcData.ArcNameW = (WCHAR*)rarPathW;
     arcData.OpenMode = RAR_OM_LIST;
+    arcData.Callback = unrarCallback;
+    arcData.UserData = (LPARAM)&uncompressedBuf;
     if (loadOnOpen) {
         arcData.OpenMode = RAR_OM_EXTRACT;
-        arcData.Callback = unrarCallback;
-        arcData.UserData = (LPARAM)&uncompressedBuf;
     }
 
     HANDLE hArc = RAROpenArchiveEx(&arcData);
@@ -584,6 +623,10 @@ bool MultiFormatArchive::OpenUnrarFallback(const char* rarPath) {
             break;
         }
 
+        if (rarHeader.Flags & RHDF_ENCRYPTED) {
+            isEncrypted = true;
+        }
+
         str::TransCharsInPlace(rarHeader.FileNameW, L"\\", L"/");
         auto name = ToUtf8Temp(rarHeader.FileNameW);
 
@@ -597,7 +640,9 @@ bool MultiFormatArchive::OpenUnrarFallback(const char* rarPath) {
         if (loadOnOpen) {
             // +2 so that it's zero-terminated even when interprted as WCHAR*
             i->data = AllocArray<char>(i->fileSizeUncompressed + 2);
-            uncompressedBuf.Set(i->data, i->fileSizeUncompressed);
+            uncompressedBuf.d = (u8*)i->data;
+            uncompressedBuf.curr = (u8*)i->data;
+            uncompressedBuf.sz = i->fileSizeUncompressed;
         }
         fileInfos_.Append(i);
 

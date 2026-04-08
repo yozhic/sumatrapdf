@@ -47,6 +47,12 @@ class MultiFormatArchive {
     // if true, will load and uncompress all files on open
     bool loadOnOpen = false;
 
+    // password for encrypted archives (owned by this object)
+    char* password = nullptr;
+
+    // set after Open() if the archive contains encrypted entries
+    bool isEncrypted = false;
+
   protected:
     // used for allocating strings that are referenced by ArchFileInfo::name
     PoolAllocator allocator_;

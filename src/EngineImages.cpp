@@ -931,11 +931,14 @@ Bitmap* EngineImage::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
     ReportIf((unsigned int)pageNo > frameCount);
     Bitmap* frame = image->Clone(0, 0, image->GetWidth(), image->GetHeight(), PixelFormat32bppARGB);
     if (!frame) {
+        logf("EngineImage::LoadBitmapForPage: failed to clone bitmap for page %d, path: '%s'\n", pageNo, FilePath());
         return nullptr;
     }
     Status ok = frame->SelectActiveFrame(dim, pageNo - 1);
     if (ok != Ok) {
         delete frame;
+        logf("EngineImage::LoadBitmapForPage: failed to select frame %d, status %d, path: '%s'\n", pageNo, ok,
+             FilePath());
         return nullptr;
     }
     deleteAfterUse = true;
@@ -1324,7 +1327,7 @@ class EngineCbx : public EngineImages {
 
     TocTree* GetToc() override;
 
-    static EngineBase* CreateFromFile(const char* path);
+    static EngineBase* CreateFromFile(const char* path, const char* password = nullptr);
     static EngineBase* CreateFromStream(IStream* stream);
 
   protected:
@@ -1472,6 +1475,13 @@ bool EngineCbx::FinishLoading() {
         return false;
     }
 
+    // encrypted archives list entries but can't extract data without password
+    if (cbxArchive->isEncrypted && !cbxArchive->password) {
+        delete cbxArchive;
+        cbxArchive = nullptr;
+        return false;
+    }
+
     std::sort(pageFiles.begin(), pageFiles.end(), cmpArchFileInfoByName);
 
     for (int i = 0; i < nFiles; i++) {
@@ -1564,18 +1574,18 @@ void EngineCbx::GetProperties(StrVec& keyValOut) {
 
 Bitmap* EngineCbx::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
     auto timeStart = TimeGet();
-    defer {
-        auto dur = TimeSinceInMs(timeStart);
-        logf("EngineCbx::LoadBitmapForPage(page: %d) took %.2f ms\n", pageNo, dur);
-    };
+    defer{};
     ByteSlice img = GetImageData(pageNo);
     if (img.empty()) {
         img.Free();
+        logf("EngineCbx::LoadBitmapForPage(page: %d) failed\n", pageNo);
         return nullptr;
     }
     deleteAfterUse = true;
     auto res = BitmapFromData(img);
     img.Free();
+    auto dur = TimeSinceInMs(timeStart);
+    logf("EngineCbx::LoadBitmapForPage(page: %d) took %.2f ms\n", pageNo, dur);
     return res;
 }
 
@@ -1614,7 +1624,7 @@ RectF EngineCbx::LoadMediabox(int pageNo) {
     return RectF();
 }
 
-EngineBase* EngineCbx::CreateFromFile(const char* path) {
+EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password) {
     auto timeStart = TimeGet();
     // we sniff the type from content first because the
     // files can be mis-named e.g. .cbr archive with .cbz ext
@@ -1630,20 +1640,33 @@ EngineBase* EngineCbx::CreateFromFile(const char* path) {
         kind = GuessFileTypeFromContent(d);
     }
     MultiFormatArchive* archive = nullptr;
-    if (kind == kindFileZip) {
-        archive = OpenZipArchive(path, false);
-    } else if (kind == kindFileRar) {
-        archive = OpenRarArchive(path);
-    } else if (kind == kindFile7Z) {
-        archive = Open7zArchive(path);
-    }
-
-    if (!archive) {
-        kind = GuessFileTypeFromName(path);
-        if (kind == kindFileCbt || kind == kindFileTar) {
-            archive = OpenTarArchive(path);
+    auto openArchive = [&]() -> MultiFormatArchive* {
+        MultiFormatArchive* a = nullptr;
+        if (kind == kindFileZip) {
+            a = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
+        } else if (kind == kindFileRar) {
+            a = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
+        } else if (kind == kindFile7Z) {
+            a = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
         }
-    }
+        if (!a) {
+            Kind nameKind = GuessFileTypeFromName(path);
+            if (nameKind == kindFileCbt || nameKind == kindFileTar) {
+                a = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
+            }
+        }
+        if (!a) {
+            return nullptr;
+        }
+        a->password = str::Dup(password);
+        if (!a->Open(path)) {
+            delete a;
+            return nullptr;
+        }
+        return a;
+    };
+
+    archive = openArchive();
     if (!archive) {
         return nullptr;
     }
@@ -1706,8 +1729,25 @@ bool IsEngineCbxSupportedFileType(Kind kind) {
     return KindIndexOf(cbxKinds, n, kind) >= 0;
 }
 
-EngineBase* CreateEngineCbxFromFile(const char* path) {
-    return EngineCbx::CreateFromFile(path);
+EngineBase* CreateEngineCbxFromFile(const char* path, PasswordUI* pwdUI) {
+    EngineBase* engine = EngineCbx::CreateFromFile(path);
+    if (engine || !pwdUI) {
+        return engine;
+    }
+    // if opening failed, try with password
+    // archive might be password-protected
+    bool saveKey = false;
+    for (;;) {
+        char* pwd = pwdUI->GetPassword(path, nullptr, nullptr, &saveKey);
+        if (!pwd) {
+            return nullptr; // user cancelled
+        }
+        engine = EngineCbx::CreateFromFile(path, pwd);
+        str::Free(pwd);
+        if (engine) {
+            return engine;
+        }
+    }
 }
 
 EngineBase* CreateEngineCbxFromStream(IStream* stream) {
