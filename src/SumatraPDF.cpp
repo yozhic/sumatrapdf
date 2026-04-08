@@ -4998,12 +4998,12 @@ static void OnFrameKeyEsc(MainWindow* win) {
         ToolbarUpdateStateForWindow(win, false);
         return;
     }
-    if (win->presentation || win->isFullScreen) {
-        ToggleFullScreen(win, win->presentation != PM_DISABLED);
+   if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
+        CloseWindow(win, true, false);
         return;
     }
-    if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
-        CloseWindow(win, true, false);
+    if (win->presentation || win->isFullScreen) {
+        ToggleFullScreen(win, win->presentation != PM_DISABLED);
         return;
     }
 }
