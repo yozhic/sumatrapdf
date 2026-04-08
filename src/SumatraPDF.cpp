@@ -2250,6 +2250,12 @@ MainWindow* LoadDocumentFinish(LoadArgs* args) {
         AddPathToRecentDocs(fullPath);
     }
 
+    // Remove Zone.Identifier (Mark of the Web) so that Windows Explorer
+    // will show previews/thumbnails for this file without security warnings
+    if (CanAccessDisk() && !gPluginMode) {
+        file::DeleteZoneIdentifier(fullPath);
+    }
+
     return win;
 }
 
