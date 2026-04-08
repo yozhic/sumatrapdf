@@ -225,7 +225,7 @@ static SeqStrings gCommandNames =
     "CmdPasteClipboardImage\0"
     "CmdTabGroupSave\0"
     "CmdTabGroupRestore\0"
-    "CmdTogglePromo\0"
+    "CmdToggleTips\0"
     "CmdNone\0"
     "\0";
 
@@ -441,7 +441,7 @@ static i32 gCommandIds[] = {
     CmdPasteClipboardImage,
     CmdTabGroupSave,
     CmdTabGroupRestore,
-    CmdTogglePromo,
+    CmdToggleTips,
     CmdNone,
 };
 
@@ -657,7 +657,7 @@ SeqStrings gCommandDescriptions =
     "Paste Image From Clipboard\0"
     "Save Tab Group\0"
     "Restore Tab Group\0"
-    "Toggle Promotions\0"
+    "Toggle Tips\0"
     "Do nothing\0"
     "\0";
 // clang-format on

@@ -560,7 +560,7 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
             isToggle = true;
             newIsOn = !wnd;
         } break;
-        case CmdTogglePromo: {
+        case CmdToggleTips: {
             isToggle = true;
             newIsOn = !gGlobalPrefs->showPromo;
         } break;

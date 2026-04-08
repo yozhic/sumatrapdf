@@ -215,7 +215,7 @@ export const commands = [
     "CmdPasteClipboardImage", "Paste Image From Clipboard",
     "CmdTabGroupSave", "Save Tab Group",
     "CmdTabGroupRestore", "Restore Tab Group",
-    "CmdTogglePromo", "Toggle Promotions",
+    "CmdToggleTips", "Toggle Tips",
     "CmdNone", "Do nothing",
 ];
 

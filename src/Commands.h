@@ -220,7 +220,7 @@ enum {
     CmdPasteClipboardImage = 409,
     CmdTabGroupSave = 410,
     CmdTabGroupRestore = 411,
-    CmdTogglePromo = 412,
+    CmdToggleTips = 412,
     CmdNone = 413,
 
     /* range for file history */

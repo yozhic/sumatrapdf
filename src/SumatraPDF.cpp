@@ -7021,7 +7021,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
 
-        case CmdTogglePromo:
+        case CmdToggleTips:
             gGlobalPrefs->showPromo = !gGlobalPrefs->showPromo;
             SaveSettings();
             break;
