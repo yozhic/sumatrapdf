@@ -270,6 +270,7 @@ struct CommandPaletteBuildCtx {
     bool isPdf = false;
     bool isSinglePage = false;
     bool hasDocTabs = false;
+    Kind engineKind = nullptr;
 
     ~CommandPaletteBuildCtx() = default;
 };
@@ -383,8 +384,15 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && (cmdId == CmdPdfBake || cmdId == CmdPdfExtractText)) {
+    if (!ctx.isPdf && cmdId == CmdPdfBake) {
         return false;
+    }
+
+    if (cmdId == CmdDocumentExtractText) {
+        bool canExtract = ctx.engineKind == kindEngineMupdf || ctx.engineKind == kindEngineDjVu;
+        if (!canExtract) {
+            return false;
+        }
     }
 
     if (ctx.isSinglePage && cmdId == CmdToggleMangaMode) {
@@ -657,6 +665,9 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     ctx.hasSelection = ctx.isDocLoaded && currTab && mainWin->showSelection && currTab->selectionOnPage;
     ctx.canSendEmail = CanSendAsEmailAttachment(currTab);
     ctx.isPdf = ctx.isDocLoaded && CouldBePDFDoc(currTab);
+    if (ctx.isDocLoaded && currTab) {
+        ctx.engineKind = currTab->GetEngineType();
+    }
     if (ctx.isDocLoaded && mainWin->ctrl) {
         ctx.isSinglePage = IsSingle(mainWin->ctrl->GetDisplayMode());
     }

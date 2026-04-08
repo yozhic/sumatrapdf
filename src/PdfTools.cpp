@@ -20,6 +20,8 @@
 #include "MainWindow.h"
 #include "WindowTab.h"
 #include "ExternalViewers.h"
+#include "Flags.h"
+#include "DisplayModel.h"
 #include "Theme.h"
 
 #include "DarkModeSubclass.h"
@@ -229,6 +231,7 @@ struct PdfExtractTextDialog {
     HWND hwndCancelBtn = nullptr;
     HFONT hFont = nullptr;
     char* srcPath = nullptr;
+    MainWindow* win = nullptr;
 };
 
 constexpr int kExtractDlgW = 500;
@@ -255,6 +258,41 @@ static void PdfExtractTextOnBrowse(PdfExtractTextDialog* dlg) {
     }
 }
 
+static bool ExtractTextViaEngine(PdfExtractTextDialog* dlg, const char* destPath, const char* pages) {
+    MainWindow* win = dlg->win;
+    if (!win || !win->ctrl) {
+        return false;
+    }
+    DisplayModel* dm = win->ctrl->AsFixed();
+    if (!dm) {
+        return false;
+    }
+    EngineBase* engine = dm->GetEngine();
+    if (!engine) {
+        return false;
+    }
+    int pageCount = engine->PageCount();
+    Vec<PageRange> ranges;
+    if (!ParsePageRanges(pages, ranges)) {
+        return false;
+    }
+    str::Str text;
+    for (auto& range : ranges) {
+        int start = std::max(range.start, 1);
+        int end = std::min(range.end, pageCount);
+        for (int pageNo = start; pageNo <= end; pageNo++) {
+            PageText pt = engine->ExtractPageText(pageNo);
+            if (pt.text) {
+                TempStr utf8 = ToUtf8Temp(pt.text);
+                text.Append(utf8);
+                text.AppendChar('\n');
+            }
+            FreePageText(&pt);
+        }
+    }
+    return file::WriteFile(destPath, text.AsByteSlice());
+}
+
 static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
     char destPath[MAX_PATH + 1]{};
     GetWindowTextA(dlg->hwndDestEdit, destPath, MAX_PATH);
@@ -268,16 +306,24 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
         return;
     }
 
-    // build argv: "convert" "-o" output input pages
-    char* argv[] = {(char*)"convert", (char*)"-o", destPath, dlg->srcPath, pages};
-    int argc = 5;
+    bool ok = false;
+    WindowTab* tab = dlg->win ? dlg->win->CurrentTab() : nullptr;
+    bool isPdf = tab && CouldBePDFDoc(tab);
+    if (isPdf) {
+        // use muconvert for PDF
+        char* argv[] = {(char*)"convert", (char*)"-o", destPath, dlg->srcPath, pages};
+        int argc = 5;
+        ok = muconvert_main(argc, argv) == 0;
+    } else {
+        // use engine text extraction for other formats (DjVu, etc.)
+        ok = ExtractTextViaEngine(dlg, destPath, pages);
+    }
 
-    int res = muconvert_main(argc, argv);
-    if (res == 0) {
+    if (ok) {
         DestroyWindow(dlg->hwnd);
         OpenPathInDefaultFileManager(destPath);
     } else {
-        MessageBoxWarning(dlg->hwnd, "Failed to extract text from PDF.", "Extract PDF Text");
+        MessageBoxWarning(dlg->hwnd, "Failed to extract text.", "Extract Text");
     }
 }
 
@@ -333,10 +379,6 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     if (!tab || !tab->filePath) {
         return;
     }
-    if (!CouldBePDFDoc(tab)) {
-        return;
-    }
-
     if (!gPdfExtractTextWinClassRegistered) {
         WNDCLASSEXW wc{};
         wc.cbSize = sizeof(wc);
@@ -352,9 +394,10 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
 
     PdfExtractTextDialog* dlg = new PdfExtractTextDialog();
     dlg->srcPath = str::Dup(tab->filePath);
+    dlg->win = win;
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, L"Extract PDF Text",
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, L"Extract Text",
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 kExtractDlgW, kExtractDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {

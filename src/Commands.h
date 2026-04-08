@@ -83,7 +83,7 @@ enum {
     CmdSaveAnnotations = 272,
     CmdSaveAnnotationsNewFile = 273,
     CmdPdfBake = 274,
-    CmdPdfExtractText = 275,
+    CmdDocumentExtractText = 275,
     CmdEditAnnotations = 276,
     CmdDeleteAnnotation = 277,
     CmdZoomFitPage = 278,

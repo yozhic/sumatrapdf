@@ -50,6 +50,7 @@ To open file from history open [command palette](CmdCommandPalette) with (Key/Cm
 You can [extract text from PDF file](Help/Tool-x-extract-text-from-pdf).
 You can [toggle menu bar](CmdToggleMenuBar) with (Key/CmdToggleMenuBar).
 You can [toggle toolbar](CmdToggleToolbar) with (Key/CmdToggleToolbar).
+You can [edit PDF annotations](Help/Editing-annotations).
 Try [Edna](https://edna.arslexis.io): a note taking web app for power users.
 Try [MarkLexis](https://marklexis.arslexis.io): a bookmarking web application.
 )";

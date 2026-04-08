@@ -77,7 +77,7 @@ export const commands = [
     "CmdSaveAnnotations", "Save Annotations to existing PDF",
     "CmdSaveAnnotationsNewFile", "Save Annotations to a new PDF",
     "CmdPdfBake", "Bake PDF File",
-    "CmdPdfExtractText", "Extract PDF Text",
+    "CmdDocumentExtractText", "Extract Text From Document",
     "CmdEditAnnotations", "Edit Annotations",
     "CmdDeleteAnnotation", "Delete Annotation",
     "CmdZoomFitPage", "Zoom: Fit Page",
