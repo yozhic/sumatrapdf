@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-b2c7a1ed27e7d218b53f340e7637d4e018898f22
+972eb897e185bec9d1ba56fefc3b011dc1c00233
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -2978,6 +2978,7 @@ tw:設定(&S)...
 uk:Налаштування
 uz:&Moslamalar
 vn:Cài đặt
+:&Show password
 :&Shrink To Fit
 br:&Encolher pra Ajustar
 cn:缩小至合适尺寸(&S)
@@ -3884,7 +3885,7 @@ hi:नियंत्रण
 it:> Comandi
 ja:> コマンド
 ml:കമാൻഡുകൾ
-nl:> Commando's
+nl:> Opdrachten
 pl:> Polecenia
 ru:> Команды
 sk:> Príkazy
@@ -6895,7 +6896,7 @@ kr:명령 팔레트
 lv:Komandu palete
 ml:കമാൻഡ് പാലറ്റ്
 my:Palet Perintah
-nl:Opdrachten
+nl:Opdrachtenpalet
 no:Kommandopalett
 pl:Paleta poleceń
 pt:Paleta de Comandos
@@ -10770,7 +10771,7 @@ it:Tempo esposizione:
 nl:Blootstelling Tijd:
 pl:Czas ekspozycji:
 sk:Čas expozície:
-:Extract PDF Text
+:Extract Text From Document
 :F&avorites
 am:Ը&նտրյալներ
 ar:المفضلة
@@ -21809,6 +21810,7 @@ tw:顯示書籤(&M)
 uk:Показати закладки
 uz:Belgilangan sahifalarni ko‘rsatish
 vn:Hiển thị Dấu &trang
+:Show Document Outline
 :Show Document Properties...
 am:Ցուցադրել փաստաթղթի հատկությունները...
 br:Mostrar as Propriedades do Documento...
@@ -21932,15 +21934,6 @@ it:Mostra info PDF
 nl:Toon PDF Info
 pl:Pokaż informacje o PDF
 sk:Zobraziť informácie o PDF
-:Show PDF Outline
-br:Mostrar o Contorno do PDF
-cn:显示 PDF 轮廓线
-co:Affissà u cuntornu di u PDF
-de:PDF-Gliederung anzeigen
-it:Mostra struttura PDF
-nl:Toon PDF Overzicht
-pl:Pokaż konspekt PDF
-sk:Zobraziť osnovu PDF
 :Show frequently read
 am:Ցուցադրել հաճախակի բացվածները
 ar:إظهار الأكثر قراءة
@@ -23198,7 +23191,7 @@ lv:Atzīmēts PDF
 mk:Означен PDF
 my:PDF ditanda
 ne:ट्याग गरिएको PDF
-nl:Tagged PDF
+nl:Getagde PDF
 nn:Merka PDF
 no:Merket PDF
 pl:Tagowany plik PDF
@@ -24027,12 +24020,6 @@ nl:Pagina Info Tonen/Verbergen
 pl:Przełącz informacje o stronie
 sk:Prepnúť Informácie o strane
 tw:切換頁面資訊
-:Toggle Promotions
-br:Ativar/Desativar Promoções
-cn:开启/关闭提示
-de:Werbeangebote anzeigen/ausblenden
-it:Commuta Promozioni
-pl:Przełącz promowanie
 :Toggle Scrollbar In Single Page
 br:Ativar/Desativar a Barra de Rolagem na Página Única
 cn:开启/关闭单页面滚动条
@@ -24096,6 +24083,7 @@ it:Commuta Ordine schede usate di recente
 nl:IN/UIT Schakelen Tabbladen MRU Volgorde
 pl:Przełącz kolejność ostatnio używanych kart
 sk:Prepnúť poradie kariet od najnovších
+:Toggle Tips
 :Toggle Toolbar
 am:Գործիքագոտու միացում/անջատում
 br:Ativar/Desativar a Barra de Ferramentas

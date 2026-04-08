@@ -3723,6 +3723,79 @@ tw:設定(&S)...
 uk:Налаштування
 uz:&Moslamalar
 vn:Cài đặt
+:&Show password
+af:Wys wagwoord
+am:የይለፍ ቃል አሳይ
+ar:إظهار كلمة المرور
+az:Şifrəni göstər
+bg:Покажи парола
+bn:পাসওয়ার্ড দেখান
+br:Diskouez ar ger-tremen
+bs:Prikaži lozinku
+by:Паказаць пароль
+ca:Mostra la contrasenya
+ca-xv:Mostra la contrasenya
+cn:显示密码
+co:Mustrà a chjave d'accessu
+cy:Dangos cyfrinair
+cz:Zobrazit heslo
+de:Passwort anzeigen
+dk:Vis adgangskode
+el:Εμφάνιση κωδικού πρόσβασης
+es:Mostrar contraseña
+et:Kuva parooli
+eu:Erakutsi pasahitza
+fa:نمایش رمز عبور
+fi:Näytä salasana
+fo:Vís loyniorð
+fr:Afficher le mot de passe
+fy-nl:Wachtwurd toane
+ga:Taispeáin pasfhocal
+gl:Mostrar contrasinal
+he:הצג סיסמה
+hi:पासवर्ड दिखाएं
+hr:Prikaži lozinku
+hu:Jelszó megjelenítése
+id:Tampilkan kata sandi
+it:Mostra password
+ja:パスワードを表示
+jv:Tuduhake sandhi
+ka:პაროლის ჩვენება
+kr:비밀번호 표시
+ku:Şîfreyê nîşan bide
+kw:Diskwedhes ger-tremena
+lt:Rodyti slaptažodį
+lv:Rādīt paroli
+mk:Прикажи лозинка
+ml:പാസ്‌വേഡ് കാണിക്കുക
+mm:စကားဝှက်ပြရန်
+my:စကားဝှက်ပြရန်
+ne:पासवर्ड देखाउनुहोस्
+nl:Toon wachtwoord
+nn:Vis passord
+no:Vis passord
+pa:ਪਾਸਵਰਡ ਦਿਖਾਓ
+pl:Pokaż hasło
+pt:Mostrar senha
+ro:Afișează parola
+ru:Показать пароль
+sat:ᱯᱟᱥᱣᱟᱨᱰ ᱩᱫᱩᱜᱽ ᱢᱮ
+si:මුරපදය පෙන්වන්න
+sk:Zobraziť heslo
+sl:Prikaži geslo
+sn:Ratidza password
+sp-rs:Prikaži lozinku
+sq:Shfaq fjalëkalimin
+sr-rs:Прикажи лозинку
+sv:Visa lösenord
+ta:கடவுச்சொல்லைக் காட்டு
+th:แสดงรหัสผ่าน
+tl:Ipakita ang password
+tr:Şifreyi göster
+tw:顯示密碼
+uk:Показати пароль
+uz:Parolni ko'rsatish
+vn:Hiển thị mật khẩu
 :&Shrink To Fit
 af:Krimp Om Te Pas
 am:በመጠን እንዲያጣጥም ቀንስ
@@ -5012,7 +5085,7 @@ ml:കമാൻഡുകൾ
 mm:> အမိန့်များ
 my:> ညွှန်ကြားချက်များ
 ne:> आदेशहरू
-nl:> Commando's
+nl:> Opdrachten
 nn:> Kommandoar
 no:> Kommandoer
 pa:> ਕਮਾਂਡਾਂ
@@ -9611,7 +9684,7 @@ ml:കമാൻഡ് പാലറ്റ്
 mm:Command Palette
 my:Palet Perintah
 ne:आदेश प्यालेट
-nl:Opdrachten
+nl:Opdrachtenpalet
 nn:Kommandopalett
 no:Kommandopalett
 pa:ਕਮਾਂਡ ਪੈਲੇਟ
@@ -17009,79 +17082,79 @@ tw:曝光時間：
 uk:Час експозиції:
 uz:Ekspozitsiya vaqti:
 vn:Thời Gian Phơi Sáng:
-:Extract PDF Text
-af:Onttrek PDF-teks
-am:የPDF ጽሁፍ ቅጂ አውጣ
-ar:استخراج نص PDF
-az:PDF Mətni Çıxart
-bg:Извличане на текст от PDF
-bn:PDF টেক্সট এক্সট্র্যাক্ট করুন
-br:Tennañ testenn PDF
-bs:Ekstraktuj PDF tekst
-by:Здабыць тэкст з PDF
-ca:Extreure text del PDF
-ca-xv:Extraure text del PDF
-cn:提取PDF文本
-co:Estrae u testu PDF
-cy:Echdynnu Testun PDF
-cz:Extrahovat text z PDF
-de:PDF-Text extrahieren
-dk:Udtræk PDF-tekst
-el:Εξαγωγή κειμένου PDF
-es:Extraer texto de PDF
-et:Ekstrakti PDF-i tekst
-eu:Erauzi PDF testua
-fa:استخراج متن PDF
-fi:Pura PDF-teksti
-fo:Útdráttur PDF tekstur
-fr:Extraire le texte du PDF
-fy-nl:PDF-tekst ekstrahearje
-ga:Bain Téacs PDF
-gl:Extraer texto do PDF
-he:חילוץ טקסט מ-PDF
-hi:PDF टेक्स्ट निकालें
-hr:Izdvoji tekst iz PDF-a
-hu:PDF szöveg kinyerése
-id:Ekstrak Teks PDF
-it:Estrai testo PDF
-ja:PDFテキストを抽出
-jv:Ekstrak Teks PDF
-ka:PDF ტექსტის ამოღება
-kr:PDF 텍스트 추출
-ku:Nivîsa PDF Derxîne
-kw:Dyrghynna Tekst PDF
-lt:Išgauti PDF tekstą
-lv:Izvilkt PDF tekstu
-mk:Извлечи текст од PDF
-ml:PDF ടെക്സ്റ്റ് എക്സ്ട്രാക്റ്റ് ചെയ്യുക
-mm:PDF စာသားထုတ်ယူရန်
-my:PDF စာသားကို ထုတ်ယူရန်
-ne:PDF पाठ निकाल्नुहोस्
-nl:PDF-tekst extraheren
-nn:Ekstraher PDF-tekst
-no:Trekk ut PDF-tekst
-pa:PDF ਟੈਕਸਟ ਕੱਢੋ
-pl:Wyodrębnij tekst z PDF
-pt:Extrair Texto do PDF
-ro:Extrage text din PDF
-ru:Извлечь текст из PDF
-sat:PDF ᱚᱞ ᱚᱰᱚᱠ ᱢᱮ
-si:PDF පෙළ නිස්සාරණය කරන්න
-sk:Extrahovať text z PDF
-sl:Izvleci besedilo PDF
-sn:Budisa Rugwaro rwePDF
-sp-rs:Ekstraktuj tekst iz PDF-a
-sq:Nxirr Tekstin e PDF-së
-sr-rs:Извуци текст из PDF-а
-sv:Extrahera PDF-text
-ta:PDF உரையைப் பிரித்தெடு
-th:แยกข้อความ PDF
-tl:Kunin ang Teksto ng PDF
-tr:PDF Metnini Çıkar
-tw:擷取 PDF 文字
-uk:Витягти текст з PDF
-uz:PDF matnini chiqarish
-vn:Trích xuất văn bản PDF
+:Extract Text From Document
+af:Onttrek Teks Uit Dokument
+am:ከሰነድ ጽሑፍ አውጣ
+ar:استخراج النص من المستند
+az:Sənəddən Mətni Çıxar
+bg:Извлечи текст от документ
+bn:ডকুমেন্ট থেকে টেক্সট বের করুন
+br:Tennañ an testenn eus an teul
+bs:Izvuci tekst iz dokumenta
+by:Выняць тэкст з дакумента
+ca:Extreu text del document
+ca-xv:Extreu el text del document
+cn:从文档中提取文本
+co:Estrae u testu da u ducumentu
+cy:Echdynnu Testun o Ddogfen
+cz:Extrahovat text z dokumentu
+de:Text aus Dokument extrahieren
+dk:Udtræk tekst fra dokument
+el:Εξαγωγή κειμένου από έγγραφο
+es:Extraer texto del documento
+et:Eralda tekst dokumendist
+eu:Atera testua dokumentutik
+fa:استخراج متن از سند
+fi:Pura teksti asiakirjasta
+fo:Útdrúgv tekst úr skjali
+fr:Extraire le texte du document
+fy-nl:Tekst út dokumint helje
+ga:Bain Téacs as Cáipéis
+gl:Extraer texto do documento
+he:חלץ טקסט ממסמך
+hi:दस्तावेज़ से टेक्स्ट निकालें
+hr:Izvuci tekst iz dokumenta
+hu:Szöveg kinyerése a dokumentumból
+id:Ekstrak Teks Dari Dokumen
+it:Estrai testo dal documento
+ja:ドキュメントからテキストを抽出
+jv:Ekstrak Teks Saka Dokumen
+ka:ტექსტის ამოღება დოკუმენტიდან
+kr:문서에서 텍스트 추출
+ku:Nivîsê ji Belgeya Derxîne
+kw:Dynna tekst dhyworth an skrif
+lt:Išgauti tekstą iš dokumento
+lv:Izvilkt tekstu no dokumenta
+mk:Извлечи текст од документ
+ml:ഡോക്യുമെന്റിൽ നിന്ന് ടെക്‌സ്റ്റ് എക്‌സ്‌ട്രാക്റ്റ് ചെയ്യുക
+mm:စာရွက်စာတမ်းမှ စာသားထုတ်ယူရန်
+my:စာရွက်စာတမ်းမှ စာသားထုတ်ယူရန်
+ne:कागजातबाट पाठ निकाल्नुहोस्
+nl:Tekst uit document extraheren
+nn:Trekk ut tekst frå dokument
+no:Trekk ut tekst fra dokument
+pa:ਦਸਤਾਵੇਜ਼ ਤੋਂ ਟੈਕਸਟ ਕੱਢੋ
+pl:Wyodrębnij tekst z dokumentu
+pt:Extrair texto do documento
+ro:Extrage text din document
+ru:Извлечь текст из документа
+sat:ᱫᱚᱞᱤᱞ ᱠᱷᱚᱱ ᱚᱞ ᱚᱰᱚᱠ ᱢᱮ
+si:ලේඛනයෙන් පෙළ නිස්සාරණය කරන්න
+sk:Extrahovať text z dokumentu
+sl:Ekstrahiraj besedilo iz dokumenta
+sn:Bvisa Mavara Kubva Mugwaro
+sp-rs:Izdvoj tekst iz dokumenta
+sq:Nxirr Tekst Nga Dokumenti
+sr-rs:Издвој текст из документа
+sv:Extrahera text från dokument
+ta:ஆவணத்திலிருந்து உரையைப் பிரித்தெடு
+th:แยกข้อความจากเอกสาร
+tl:Kunin ang Teksto Mula sa Dokumento
+tr:Belgeden Metin Çıkar
+tw:從文件中提取文字
+uk:Витягти текст з документа
+uz:Hujjatdan matnni ajratib olish
+vn:Trích xuất văn bản từ tài liệu
 :F&avorites
 af:Gunstelinge
 am:Ը&նտրյալներ
@@ -36354,6 +36427,79 @@ tw:顯示書籤(&M)
 uk:Показати закладки
 uz:Belgilangan sahifalarni ko‘rsatish
 vn:Hiển thị Dấu &trang
+:Show Document Outline
+af:Wys Dokument Uiteensetting
+am:የሰነድ ረቂቅ አሳይ
+ar:إظهار مخطط المستند
+az:Sənəd Konturunu Göstər
+bg:Покажи структура на документа
+bn:ডকুমেন্টের রূপরেখা দেখান
+br:Diskouez framm an teul
+bs:Prikaži konturu dokumenta
+by:Паказаць структуру дакумента
+ca:Mostra l'esquema del document
+ca-xv:Mostra l'esquema del document
+cn:显示文档大纲
+co:Mustrà a struttura di u ducumentu
+cy:Dangos Amlinelliad Dogfen
+cz:Zobrazit osnovu dokumentu
+de:Dokumentgliederung anzeigen
+dk:Vis dokumentoversigt
+el:Εμφάνιση διάρθρωσης εγγράφου
+es:Mostrar esquema del documento
+et:Kuva dokumendi struktuur
+eu:Erakutsi dokumentuaren eskema
+fa:نمایش طرح کلی سند
+fi:Näytä asiakirjan jäsennys
+fo:Vís skjalsskipan
+fr:Afficher le plan du document
+fy-nl:Dokumintstruktuer toane
+ga:Taispeáin Imlíne Cáipéise
+gl:Mostrar esquema do documento
+he:הצג מתאר מסמך
+hi:दस्तावेज़ की रूपरेखा दिखाएं
+hr:Prikaži strukturu dokumenta
+hu:Dokumentum vázlat megjelenítése
+id:Tampilkan Garis Besar Dokumen
+it:Mostra struttura documento
+ja:ドキュメントのアウトラインを表示
+jv:Tuduhake Garis Gedhe Dokumen
+ka:დოკუმენტის სტრუქტურის ჩვენება
+kr:문서 개요 보기
+ku:Xêza Belgeyê Nîşan Bide
+kw:Diskwedhes gorlinenn an skrif
+lt:Rodyti dokumento struktūrą
+lv:Rādīt dokumenta struktūru
+mk:Прикажи контура на документот
+ml:ഡോക്യുമെന്റ് ഔട്ട്‌ലൈൻ കാണിക്കുക
+mm:စာရွက်စာတမ်း အကျဉ်းချုပ်ပြရန်
+my:စာရွက်စာတမ်းအကြမ်းဖျင်းပြရန်
+ne:कागजातको रूपरेखा देखाउनुहोस्
+nl:Toon documentoverzicht
+nn:Vis dokumentoversikt
+no:Vis dokumentoversikt
+pa:ਦਸਤਾਵੇਜ਼ ਦੀ ਰੂਪਰੇਖਾ ਦਿਖਾਓ
+pl:Pokaż konspekt dokumentu
+pt:Mostrar estrutura do documento
+ro:Afișează structura documentului
+ru:Показать структуру документа
+sat:ᱫᱚᱞᱤᱞ ᱨᱮᱠᱷᱟᱠᱷᱚᱸᱰ ᱩᱫᱩᱜᱽ ᱢᱮ
+si:ලේඛන පිළිවෙළ පෙන්වන්න
+sk:Zobraziť osnovu dokumentu
+sl:Prikaži oris dokumenta
+sn:Ratidza Muumbiro weGwaro
+sp-rs:Prikaži strukturu dokumenta
+sq:Shfaq Strukturën e Dokumentit
+sr-rs:Прикажи структуру документа
+sv:Visa dokumentöversikt
+ta:ஆவண அமைப்பைக் காட்டு
+th:แสดงเค้าโครงเอกสาร
+tl:Ipakita ang Balangkas ng Dokumento
+tr:Belge Taslağını Göster
+tw:顯示文件大綱
+uk:Показати структуру документа
+uz:Hujjat konturini ko'rsatish
+vn:Hiển thị khung tài liệu
 :Show Document Properties...
 af:Wys Dokument Eienskappe...
 am:Ցուցադրել փաստաթղթի հատկությունները...
@@ -36792,79 +36938,6 @@ tw:顯示 PDF 資訊
 uk:Показати інформацію про PDF
 uz:PDF ma'lumotlarini ko'rsatish
 vn:Hiển thị thông tin PDF
-:Show PDF Outline
-af:Wys PDF-uiteensetting
-am:የPDF ረቂቅ አሳይ
-ar:عرض مخطط PDF
-az:PDF Konturunu Göstər
-bg:Показване на структурата на PDF
-bn:PDF রূপরেখা দেখান
-br:Mostrar o Contorno do PDF
-bs:Prikaži strukturu PDF-a
-by:Паказаць структуру PDF
-ca:Mostra l'esquema del PDF
-ca-xv:Mostra l'índex del PDF
-cn:显示 PDF 轮廓线
-co:Affissà u cuntornu di u PDF
-cy:Dangos Amlinelliad PDF
-cz:Zobrazit osnovu PDF
-de:PDF-Gliederung anzeigen
-dk:Vis PDF-indholdsfortegnelse
-el:Εμφάνιση περιγράμματος PDF
-es:Mostrar esquema del PDF
-et:Kuva PDF-i struktuur
-eu:Erakutsi PDF eskema
-fa:نمایش طرح کلی PDF
-fi:Näytä PDF-jäsennys
-fo:Vís PDF yvirlit
-fr:Afficher le plan du PDF
-fy-nl:PDF-oersjoch toane
-ga:Taispeáin Imlíne PDF
-gl:Mostrar esquema do PDF
-he:הצג מתאר PDF
-hi:PDF रूपरेखा दिखाएं
-hr:Prikaži obris PDF-a
-hu:PDF vázlat megjelenítése
-id:Tampilkan Kerangka PDF
-it:Mostra struttura PDF
-ja:PDFアウトラインを表示
-jv:Tuduhake Garis Gedhe PDF
-ka:PDF მოხაზულობის ჩვენება
-kr:PDF 개요 표시
-ku:Xêzika PDF Nîşan Bide
-kw:Diskwedhes Amlinell PDF
-lt:Rodyti PDF struktūrą
-lv:Rādīt PDF struktūru
-mk:Прикажи PDF контура
-ml:PDF ഔട്ട്‌ലൈൻ കാണിക്കുക
-mm:PDF အကြမ်းဖျင်းကို ပြရန်
-my:PDF အကြမ်းဖျင်းကို ပြပါ
-ne:PDF रूपरेखा देखाउनुहोस्
-nl:Toon PDF Overzicht
-nn:Vis PDF-disposisjon
-no:Vis PDF-disposisjon
-pa:PDF ਰੂਪਰੇਖਾ ਦਿਖਾਓ
-pl:Pokaż konspekt PDF
-pt:Mostrar estrutura do PDF
-ro:Afișează contur PDF
-ru:Показать структуру PDF
-sat:PDF ᱨᱮᱫ ᱵᱟᱦᱨᱮ ᱫᱷᱟᱨᱮ ᱩᱫᱩᱜ ᱢᱮ
-si:PDF දළ විශ්ලේෂණය පෙන්වන්න
-sk:Zobraziť osnovu PDF
-sl:Prikaži oris PDF
-sn:Ratidza Muumbire wePDF
-sp-rs:Prikaži strukturu PDF-a
-sq:Shfaq skicën e PDF-së
-sr-rs:Prikaži strukturu PDF-a
-sv:Visa PDF-disposition
-ta:PDF அவுட்லைனைக் காட்டு
-th:แสดงโครงร่าง PDF
-tl:Ipakita ang PDF Outline
-tr:PDF Anahattını Göster
-tw:顯示 PDF 大綱
-uk:Показати структуру PDF
-uz:PDF konturini ko'rsatish
-vn:Hiển thị mục lục PDF
 :Show frequently read
 af:Wys gereeld gelees
 am:Ցուցադրել հաճախակի բացվածները
@@ -38592,7 +38665,7 @@ ml:ടാഗ് ചെയ്ത PDF
 mm:တဂ်တပ်ထားသော PDF
 my:PDF ditanda
 ne:ट्याग गरिएको PDF
-nl:Tagged PDF
+nl:Getagde PDF
 nn:Merka PDF
 no:Merket PDF
 pa:ਟੈਗ ਕੀਤਾ PDF
@@ -40515,79 +40588,6 @@ tw:切換頁面資訊
 uk:Перемкнути інформацію про сторінку
 uz:Sahifa ma'lumotlarini yoqish/o'chirish
 vn:Bật/tắt thông tin trang
-:Toggle Promotions
-af:Skakel promosies
-am:ማስተዋወቂያዎችን ቀይር
-ar:تبديل العروض الترويجية
-az:Reklamları Aç/Bağla
-bg:Превключване на промоции
-bn:প্রচার টগল করুন
-br:Ativar/Desativar Promoções
-bs:Preklopite promocije
-by:Пераключыць акцыі
-ca:Commuta promocions
-ca-xv:Commuta promocions
-cn:开启/关闭提示
-co:Attivà/Disattivà e Promozioni
-cy:Toglo Hyrwyddiadau
-cz:Přepnout propagace
-de:Werbeangebote anzeigen/ausblenden
-dk:Skift kampagner
-el:Εναλλαγή προωθητικών ενεργειών
-es:Alternar promociones
-et:Lülita reklaamid
-eu:Txandakatu promozioak
-fa:تغییر وضعیت تبلیغات
-fi:Näytä/piilota tarjoukset
-fo:Skifta kynningar
-fr:Activer/Désactiver les promotions
-fy-nl:Skeakelje promoasjes
-ga:Scoránaigh Promóisin
-gl:Activar/desactivar promocións
-he:החלף מבצעים
-hi:प्रमोशन टॉगल करें
-hr:Uključi/isključi promocije
-hu:Promóciók kapcsolása
-id:Tampilkan Promosi
-it:Commuta Promozioni
-ja:プロモーションを切り替え
-jv:Alih Promosi
-ka:აქციების გადართვა
-kr:프로모션 전환
-ku:Pêşvebiran Veguherîne
-kw:Togglelhe Promovyansow
-lt:Perjungti akcijas
-lv:Pārslēgt akcijas
-mk:Вклучи/исклучи промоции
-ml:പ്രമോഷനുകൾ ടോഗിൾ ചെയ്യുക
-mm:ပရိုမိုးရှင်းများဖွင့်/ပိတ်ရန်
-my:ပရိုမိုးရှင်းများကို ဖွင့်/ပိတ်ရန်
-ne:प्रवर्द्धनहरू टगल गर्नुहोस्
-nl:Schakel promoties
-nn:Veksle kampanjar
-no:Veksle kampanjer
-pa:ਪ੍ਰਮੋਸ਼ਨ ਟੌਗਲ ਕਰੋ
-pl:Przełącz promowanie
-pt:Alternar Promoções
-ro:Comută Promoții
-ru:Переключить промоакции
-sat:ᱯᱨᱚᱢᱚᱥᱚᱱ ᱴᱚᱜᱚᱞ ᱢᱮ
-si:ප්‍රවර්ධන ටොගල් කරන්න
-sk:Prepnúť propagácie
-sl:Preklopi promocije
-sn:Shandura Zvinokwidziridza
-sp-rs:Prikaži/sakrij promocije
-sq:Aktivizo/Çaktivizo Promovime
-sr-rs:Прикажи/сакриј промоције
-sv:Växla kampanjer
-ta:விளம்பரங்களை நிலைமாற்று
-th:สลับโปรโมชั่น
-tl:I-toggle ang mga Promosyon
-tr:Promosyonları Aç/Kapat
-tw:切換促銷
-uk:Перемкнути акції
-uz:Aksiyalarni yoqish/o'chirish
-vn:Bật/Tắt Khuyến mãi
 :Toggle Scrollbar In Single Page
 af:Wissel rolbalk in enkele bladsy
 am:በነጠላ ገጽ ውስጥ የማሸብለያ አሞሌ ቀያይር
@@ -41026,6 +41026,79 @@ tw:切換分頁 MRU 順序
 uk:Перемкнути порядок вкладок MRU
 uz:Tablarning MRU tartibini almashtirish
 vn:Chuyển đổi thứ tự tab MRU
+:Toggle Tips
+af:Wissel Wenke
+am:ምክሮችን ቀያይር
+ar:تبديل النصائح
+az:Məsləhətləri Aç/Bağla
+bg:Превключи съвети
+bn:টিপস টগল করুন
+br:Kemmañ ar tunioù
+bs:Uključi/isključi savjete
+by:Пераключыць падказкі
+ca:Commuta els consells
+ca-xv:Commuta els consells
+cn:切换提示
+co:Attivà/Disattivà i cunsiglii
+cy:Toglo Awgrymiadau
+cz:Přepnout tipy
+de:Tipps umschalten
+dk:Slå tips til/fra
+el:Εναλλαγή συμβουλών
+es:Alternar consejos
+et:Lülita näpunäited sisse/välja
+eu:Txandakatu aholkuak
+fa:تغییر وضعیت نکات
+fi:Näytä/piilota vihjeet
+fo:Vísa/fjal ábendingar
+fr:Afficher/Masquer les astuces
+fy-nl:Tips yn-/útskeakelje
+ga:Scoránaigh Leideanna
+gl:Alternar consellos
+he:הצג/הסתר עצות
+hi:सुझाव टॉगल करें
+hr:Uključi/isključi savjete
+hu:Tippek be/ki
+id:Aktifkan/Nonaktifkan Tips
+it:Attiva/Disattiva suggerimenti
+ja:ヒントの切り替え
+jv:Ganti Tips
+ka:რჩევების ჩართვა/გამორთვა
+kr:팁 전환
+ku:Amojiyên Veguherînê
+kw:Kelmya kengorow
+lt:Perjungti patarimus
+lv:Pārslēgt padomus
+mk:Вклучи/исклучи совети
+ml:നുറുങ്ങുകൾ ടോഗിൾ ചെയ്യുക
+mm:အကြံပြုချက်များ ဖွင့်/ပိုရန်
+my:အကြံပြုချက်များဖွင့်ပိတ်ရန်
+ne:सुझावहरू टगल गर्नुहोस्
+nl:Tips aan/uit
+nn:Slå tips av/på
+no:Slå på/av tips
+pa:ਸੁਝਾਅ ਟੌਗਲ ਕਰੋ
+pl:Przełącz wskazówki
+pt:Alternar dicas
+ro:Comută sfaturile
+ru:Переключить подсказки
+sat:ᱜᱚᱲᱚᱠ ᱠᱚ ᱵᱚᱫᱚᱞ ᱢᱮ
+si:ඉඟි ටොගල් කරන්න
+sk:Prepnúť tipy
+sl:Preklopi namige
+sn:Shandura Mazano
+sp-rs:Uključi/isključi savete
+sq:Ndërroni Këshillat
+sr-rs:Укључи/искључи савете
+sv:Växla tips
+ta:குறிப்புகளை மாற்று
+th:เปิด/ปิดคำแนะนำ
+tl:I-toggle ang mga Tip
+tr:İpuçlarını Aç/Kapat
+tw:切換提示
+uk:Перемкнути підказки
+uz:Maslahatlarni almashtirish
+vn:Bật/tắt gợi ý
 :Toggle Toolbar
 af:Wissel Nutsbalk
 am:Գործիքագոտու միացում/անջատում

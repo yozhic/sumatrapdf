@@ -44240,3 +44240,579 @@ vn:Trích xuất văn bản PDF
 vn:Nhấn Esc để Thoát
 :Toggle Promotions
 vn:Bật/Tắt Khuyến mãi
+:&Show password
+am:የይለፍ ቃል አሳይ
+:Extract Text From Document
+am:ከሰነድ ጽሑፍ አውጣ
+:Show Document Outline
+am:የሰነድ ረቂቅ አሳይ
+:Toggle Tips
+am:ምክሮችን ቀያይር
+:&Show password
+ar:إظهار كلمة المرور
+:Extract Text From Document
+ar:استخراج النص من المستند
+:Show Document Outline
+ar:إظهار مخطط المستند
+:Toggle Tips
+ar:تبديل النصائح
+:&Show password
+br:Diskouez ar ger-tremen
+:Extract Text From Document
+br:Tennañ an testenn eus an teul
+:Show Document Outline
+br:Diskouez framm an teul
+:Toggle Tips
+br:Kemmañ ar tunioù
+:&Show password
+cn:显示密码
+:Extract Text From Document
+cn:从文档中提取文本
+:Show Document Outline
+cn:显示文档大纲
+:Toggle Tips
+cn:切换提示
+:&Show password
+co:Mustrà a chjave d'accessu
+:Extract Text From Document
+co:Estrae u testu da u ducumentu
+:Show Document Outline
+co:Mustrà a struttura di u ducumentu
+:Toggle Tips
+co:Attivà/Disattivà i cunsiglii
+:&Show password
+de:Passwort anzeigen
+:Extract Text From Document
+de:Text aus Dokument extrahieren
+:Show Document Outline
+de:Dokumentgliederung anzeigen
+:Toggle Tips
+de:Tipps umschalten
+:&Show password
+el:Εμφάνιση κωδικού πρόσβασης
+:Extract Text From Document
+el:Εξαγωγή κειμένου από έγγραφο
+:Show Document Outline
+el:Εμφάνιση διάρθρωσης εγγράφου
+:Toggle Tips
+el:Εναλλαγή συμβουλών
+:&Show password
+hi:पासवर्ड दिखाएं
+:Extract Text From Document
+hi:दस्तावेज़ से टेक्स्ट निकालें
+:Show Document Outline
+hi:दस्तावेज़ की रूपरेखा दिखाएं
+:Toggle Tips
+hi:सुझाव टॉगल करें
+:&Show password
+it:Mostra password
+:Extract Text From Document
+it:Estrai testo dal documento
+:Show Document Outline
+it:Mostra struttura documento
+:Toggle Tips
+it:Attiva/Disattiva suggerimenti
+:&Show password
+ja:パスワードを表示
+:Extract Text From Document
+ja:ドキュメントからテキストを抽出
+:Show Document Outline
+ja:ドキュメントのアウトラインを表示
+:Toggle Tips
+ja:ヒントの切り替え
+:&Show password
+ml:പാസ്‌വേഡ് കാണിക്കുക
+:Extract Text From Document
+ml:ഡോക്യുമെന്റിൽ നിന്ന് ടെക്‌സ്റ്റ് എക്‌സ്‌ട്രാക്റ്റ് ചെയ്യുക
+:Show Document Outline
+ml:ഡോക്യുമെന്റ് ഔട്ട്‌ലൈൻ കാണിക്കുക
+:Toggle Tips
+ml:നുറുങ്ങുകൾ ടോഗിൾ ചെയ്യുക
+:&Show password
+nl:Toon wachtwoord
+:Extract Text From Document
+nl:Tekst uit document extraheren
+:Show Document Outline
+nl:Toon documentoverzicht
+:Toggle Tips
+nl:Tips aan/uit
+:&Show password
+pl:Pokaż hasło
+:Extract Text From Document
+pl:Wyodrębnij tekst z dokumentu
+:Show Document Outline
+pl:Pokaż konspekt dokumentu
+:Toggle Tips
+pl:Przełącz wskazówki
+:&Show password
+ru:Показать пароль
+:Extract Text From Document
+ru:Извлечь текст из документа
+:Show Document Outline
+ru:Показать структуру документа
+:Toggle Tips
+ru:Переключить подсказки
+:&Show password
+sk:Zobraziť heslo
+:Extract Text From Document
+sk:Extrahovať text z dokumentu
+:Show Document Outline
+sk:Zobraziť osnovu dokumentu
+:Toggle Tips
+sk:Prepnúť tipy
+:&Show password
+sr-rs:Прикажи лозинку
+:Extract Text From Document
+sr-rs:Издвој текст из документа
+:Show Document Outline
+sr-rs:Прикажи структуру документа
+:Toggle Tips
+sr-rs:Укључи/искључи савете
+:&Show password
+tw:顯示密碼
+:Extract Text From Document
+tw:從文件中提取文字
+:Show Document Outline
+tw:顯示文件大綱
+:Toggle Tips
+tw:切換提示
+:&Show password
+az:Şifrəni göstər
+:Extract Text From Document
+az:Sənəddən Mətni Çıxar
+:Show Document Outline
+az:Sənəd Konturunu Göstər
+:Toggle Tips
+az:Məsləhətləri Aç/Bağla
+:&Show password
+by:Паказаць пароль
+:Extract Text From Document
+by:Выняць тэкст з дакумента
+:Show Document Outline
+by:Паказаць структуру дакумента
+:Toggle Tips
+by:Пераключыць падказкі
+:&Show password
+ca:Mostra la contrasenya
+:Extract Text From Document
+ca:Extreu text del document
+:Show Document Outline
+ca:Mostra l'esquema del document
+:Toggle Tips
+ca:Commuta els consells
+:&Show password
+cy:Dangos cyfrinair
+:Extract Text From Document
+cy:Echdynnu Testun o Ddogfen
+:Show Document Outline
+cy:Dangos Amlinelliad Dogfen
+:Toggle Tips
+cy:Toglo Awgrymiadau
+:&Show password
+cz:Zobrazit heslo
+:Extract Text From Document
+cz:Extrahovat text z dokumentu
+:Show Document Outline
+cz:Zobrazit osnovu dokumentu
+:Toggle Tips
+cz:Přepnout tipy
+:&Show password
+es:Mostrar contraseña
+:Extract Text From Document
+es:Extraer texto del documento
+:Show Document Outline
+es:Mostrar esquema del documento
+:Toggle Tips
+es:Alternar consejos
+:&Show password
+fa:نمایش رمز عبور
+:Extract Text From Document
+fa:استخراج متن از سند
+:Show Document Outline
+fa:نمایش طرح کلی سند
+:Toggle Tips
+fa:تغییر وضعیت نکات
+:&Show password
+fi:Näytä salasana
+:Extract Text From Document
+fi:Pura teksti asiakirjasta
+:Show Document Outline
+fi:Näytä asiakirjan jäsennys
+:Toggle Tips
+fi:Näytä/piilota vihjeet
+:&Show password
+fo:Vís loyniorð
+:Extract Text From Document
+fo:Útdrúgv tekst úr skjali
+:Show Document Outline
+fo:Vís skjalsskipan
+:Toggle Tips
+fo:Vísa/fjal ábendingar
+:&Show password
+fr:Afficher le mot de passe
+:Extract Text From Document
+fr:Extraire le texte du document
+:Show Document Outline
+fr:Afficher le plan du document
+:Toggle Tips
+fr:Afficher/Masquer les astuces
+:&Show password
+ga:Taispeáin pasfhocal
+:Extract Text From Document
+ga:Bain Téacs as Cáipéis
+:Show Document Outline
+ga:Taispeáin Imlíne Cáipéise
+:Toggle Tips
+ga:Scoránaigh Leideanna
+:&Show password
+gl:Mostrar contrasinal
+:Extract Text From Document
+gl:Extraer texto do documento
+:Show Document Outline
+gl:Mostrar esquema do documento
+:Toggle Tips
+gl:Alternar consellos
+:&Show password
+he:הצג סיסמה
+:Extract Text From Document
+he:חלץ טקסט ממסמך
+:Show Document Outline
+he:הצג מתאר מסמך
+:Toggle Tips
+he:הצג/הסתר עצות
+:&Show password
+hu:Jelszó megjelenítése
+:Extract Text From Document
+hu:Szöveg kinyerése a dokumentumból
+:Show Document Outline
+hu:Dokumentum vázlat megjelenítése
+:Toggle Tips
+hu:Tippek be/ki
+:&Show password
+id:Tampilkan kata sandi
+:Extract Text From Document
+id:Ekstrak Teks Dari Dokumen
+:Show Document Outline
+id:Tampilkan Garis Besar Dokumen
+:Toggle Tips
+id:Aktifkan/Nonaktifkan Tips
+:&Show password
+kr:비밀번호 표시
+:Extract Text From Document
+kr:문서에서 텍스트 추출
+:Show Document Outline
+kr:문서 개요 보기
+:Toggle Tips
+kr:팁 전환
+:&Show password
+lv:Rādīt paroli
+:Extract Text From Document
+lv:Izvilkt tekstu no dokumenta
+:Show Document Outline
+lv:Rādīt dokumenta struktūru
+:Toggle Tips
+lv:Pārslēgt padomus
+:&Show password
+my:စကားဝှက်ပြရန်
+:Extract Text From Document
+my:စာရွက်စာတမ်းမှ စာသားထုတ်ယူရန်
+:Show Document Outline
+my:စာရွက်စာတမ်းအကြမ်းဖျင်းပြရန်
+:Toggle Tips
+my:အကြံပြုချက်များဖွင့်ပိတ်ရန်
+:&Show password
+pt:Mostrar senha
+:Extract Text From Document
+pt:Extrair texto do documento
+:Show Document Outline
+pt:Mostrar estrutura do documento
+:Toggle Tips
+pt:Alternar dicas
+:&Show password
+ro:Afișează parola
+:Extract Text From Document
+ro:Extrage text din document
+:Show Document Outline
+ro:Afișează structura documentului
+:Toggle Tips
+ro:Comută sfaturile
+:&Show password
+sat:ᱯᱟᱥᱣᱟᱨᱰ ᱩᱫᱩᱜᱽ ᱢᱮ
+:Extract Text From Document
+sat:ᱫᱚᱞᱤᱞ ᱠᱷᱚᱱ ᱚᱞ ᱚᱰᱚᱠ ᱢᱮ
+:Show Document Outline
+sat:ᱫᱚᱞᱤᱞ ᱨᱮᱠᱷᱟᱠᱷᱚᱸᱰ ᱩᱫᱩᱜᱽ ᱢᱮ
+:Toggle Tips
+sat:ᱜᱚᱲᱚᱠ ᱠᱚ ᱵᱚᱫᱚᱞ ᱢᱮ
+:&Show password
+sl:Prikaži geslo
+:Extract Text From Document
+sl:Ekstrahiraj besedilo iz dokumenta
+:Show Document Outline
+sl:Prikaži oris dokumenta
+:Toggle Tips
+sl:Preklopi namige
+:&Show password
+sv:Visa lösenord
+:Extract Text From Document
+sv:Extrahera text från dokument
+:Show Document Outline
+sv:Visa dokumentöversikt
+:Toggle Tips
+sv:Växla tips
+:&Show password
+ta:கடவுச்சொல்லைக் காட்டு
+:Extract Text From Document
+ta:ஆவணத்திலிருந்து உரையைப் பிரித்தெடு
+:Show Document Outline
+ta:ஆவண அமைப்பைக் காட்டு
+:Toggle Tips
+ta:குறிப்புகளை மாற்று
+:&Show password
+tr:Şifreyi göster
+:Extract Text From Document
+tr:Belgeden Metin Çıkar
+:Show Document Outline
+tr:Belge Taslağını Göster
+:Toggle Tips
+tr:İpuçlarını Aç/Kapat
+:&Show password
+uz:Parolni ko'rsatish
+:Extract Text From Document
+uz:Hujjatdan matnni ajratib olish
+:Show Document Outline
+uz:Hujjat konturini ko'rsatish
+:Toggle Tips
+uz:Maslahatlarni almashtirish
+:&Show password
+af:Wys wagwoord
+:Extract Text From Document
+af:Onttrek Teks Uit Dokument
+:Show Document Outline
+af:Wys Dokument Uiteensetting
+:Toggle Tips
+af:Wissel Wenke
+:&Show password
+bg:Покажи парола
+:Extract Text From Document
+bg:Извлечи текст от документ
+:Show Document Outline
+bg:Покажи структура на документа
+:Toggle Tips
+bg:Превключи съвети
+:&Show password
+bn:পাসওয়ার্ড দেখান
+:Extract Text From Document
+bn:ডকুমেন্ট থেকে টেক্সট বের করুন
+:Show Document Outline
+bn:ডকুমেন্টের রূপরেখা দেখান
+:Toggle Tips
+bn:টিপস টগল করুন
+:&Show password
+bs:Prikaži lozinku
+:Extract Text From Document
+bs:Izvuci tekst iz dokumenta
+:Show Document Outline
+bs:Prikaži konturu dokumenta
+:Toggle Tips
+bs:Uključi/isključi savjete
+:&Show password
+ca-xv:Mostra la contrasenya
+:Extract Text From Document
+ca-xv:Extreu el text del document
+:Show Document Outline
+ca-xv:Mostra l'esquema del document
+:Toggle Tips
+ca-xv:Commuta els consells
+:&Show password
+dk:Vis adgangskode
+:Extract Text From Document
+dk:Udtræk tekst fra dokument
+:Show Document Outline
+dk:Vis dokumentoversigt
+:Toggle Tips
+dk:Slå tips til/fra
+:&Show password
+et:Kuva parooli
+:Extract Text From Document
+et:Eralda tekst dokumendist
+:Show Document Outline
+et:Kuva dokumendi struktuur
+:Toggle Tips
+et:Lülita näpunäited sisse/välja
+:&Show password
+eu:Erakutsi pasahitza
+:Extract Text From Document
+eu:Atera testua dokumentutik
+:Show Document Outline
+eu:Erakutsi dokumentuaren eskema
+:Toggle Tips
+eu:Txandakatu aholkuak
+:&Show password
+fy-nl:Wachtwurd toane
+:Extract Text From Document
+fy-nl:Tekst út dokumint helje
+:Show Document Outline
+fy-nl:Dokumintstruktuer toane
+:Toggle Tips
+fy-nl:Tips yn-/útskeakelje
+:&Show password
+hr:Prikaži lozinku
+:Extract Text From Document
+hr:Izvuci tekst iz dokumenta
+:Show Document Outline
+hr:Prikaži strukturu dokumenta
+:Toggle Tips
+hr:Uključi/isključi savjete
+:&Show password
+jv:Tuduhake sandhi
+:Extract Text From Document
+jv:Ekstrak Teks Saka Dokumen
+:Show Document Outline
+jv:Tuduhake Garis Gedhe Dokumen
+:Toggle Tips
+jv:Ganti Tips
+:&Show password
+ka:პაროლის ჩვენება
+:Extract Text From Document
+ka:ტექსტის ამოღება დოკუმენტიდან
+:Show Document Outline
+ka:დოკუმენტის სტრუქტურის ჩვენება
+:Toggle Tips
+ka:რჩევების ჩართვა/გამორთვა
+:&Show password
+ku:Şîfreyê nîşan bide
+:Extract Text From Document
+ku:Nivîsê ji Belgeya Derxîne
+:Show Document Outline
+ku:Xêza Belgeyê Nîşan Bide
+:Toggle Tips
+ku:Amojiyên Veguherînê
+:&Show password
+kw:Diskwedhes ger-tremena
+:Extract Text From Document
+kw:Dynna tekst dhyworth an skrif
+:Show Document Outline
+kw:Diskwedhes gorlinenn an skrif
+:Toggle Tips
+kw:Kelmya kengorow
+:&Show password
+lt:Rodyti slaptažodį
+:Extract Text From Document
+lt:Išgauti tekstą iš dokumento
+:Show Document Outline
+lt:Rodyti dokumento struktūrą
+:Toggle Tips
+lt:Perjungti patarimus
+:&Show password
+mk:Прикажи лозинка
+:Extract Text From Document
+mk:Извлечи текст од документ
+:Show Document Outline
+mk:Прикажи контура на документот
+:Toggle Tips
+mk:Вклучи/исклучи совети
+:&Show password
+mm:စကားဝှက်ပြရန်
+:Extract Text From Document
+mm:စာရွက်စာတမ်းမှ စာသားထုတ်ယူရန်
+:Show Document Outline
+mm:စာရွက်စာတမ်း အကျဉ်းချုပ်ပြရန်
+:Toggle Tips
+mm:အကြံပြုချက်များ ဖွင့်/ပိုရန်
+:&Show password
+ne:पासवर्ड देखाउनुहोस्
+:Extract Text From Document
+ne:कागजातबाट पाठ निकाल्नुहोस्
+:Show Document Outline
+ne:कागजातको रूपरेखा देखाउनुहोस्
+:Toggle Tips
+ne:सुझावहरू टगल गर्नुहोस्
+:&Show password
+nn:Vis passord
+:Extract Text From Document
+nn:Trekk ut tekst frå dokument
+:Show Document Outline
+nn:Vis dokumentoversikt
+:Toggle Tips
+nn:Slå tips av/på
+:&Show password
+no:Vis passord
+:Extract Text From Document
+no:Trekk ut tekst fra dokument
+:Show Document Outline
+no:Vis dokumentoversikt
+:Toggle Tips
+no:Slå på/av tips
+:&Show password
+pa:ਪਾਸਵਰਡ ਦਿਖਾਓ
+:Extract Text From Document
+pa:ਦਸਤਾਵੇਜ਼ ਤੋਂ ਟੈਕਸਟ ਕੱਢੋ
+:Show Document Outline
+pa:ਦਸਤਾਵੇਜ਼ ਦੀ ਰੂਪਰੇਖਾ ਦਿਖਾਓ
+:Toggle Tips
+pa:ਸੁਝਾਅ ਟੌਗਲ ਕਰੋ
+:&Show password
+si:මුරපදය පෙන්වන්න
+:Extract Text From Document
+si:ලේඛනයෙන් පෙළ නිස්සාරණය කරන්න
+:Show Document Outline
+si:ලේඛන පිළිවෙළ පෙන්වන්න
+:Toggle Tips
+si:ඉඟි ටොගල් කරන්න
+:&Show password
+sn:Ratidza password
+:Extract Text From Document
+sn:Bvisa Mavara Kubva Mugwaro
+:Show Document Outline
+sn:Ratidza Muumbiro weGwaro
+:Toggle Tips
+sn:Shandura Mazano
+:&Show password
+sp-rs:Prikaži lozinku
+:Extract Text From Document
+sp-rs:Izdvoj tekst iz dokumenta
+:Show Document Outline
+sp-rs:Prikaži strukturu dokumenta
+:Toggle Tips
+sp-rs:Uključi/isključi savete
+:&Show password
+sq:Shfaq fjalëkalimin
+:Extract Text From Document
+sq:Nxirr Tekst Nga Dokumenti
+:Show Document Outline
+sq:Shfaq Strukturën e Dokumentit
+:Toggle Tips
+sq:Ndërroni Këshillat
+:&Show password
+th:แสดงรหัสผ่าน
+:Extract Text From Document
+th:แยกข้อความจากเอกสาร
+:Show Document Outline
+th:แสดงเค้าโครงเอกสาร
+:Toggle Tips
+th:เปิด/ปิดคำแนะนำ
+:&Show password
+tl:Ipakita ang password
+:Extract Text From Document
+tl:Kunin ang Teksto Mula sa Dokumento
+:Show Document Outline
+tl:Ipakita ang Balangkas ng Dokumento
+:Toggle Tips
+tl:I-toggle ang mga Tip
+:&Show password
+uk:Показати пароль
+:Extract Text From Document
+uk:Витягти текст з документа
+:Show Document Outline
+uk:Показати структуру документа
+:Toggle Tips
+uk:Перемкнути підказки
+:&Show password
+vn:Hiển thị mật khẩu
+:Extract Text From Document
+vn:Trích xuất văn bản từ tài liệu
+:Show Document Outline
+vn:Hiển thị khung tài liệu
+:Toggle Tips
+vn:Bật/tắt gợi ý
