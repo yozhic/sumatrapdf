@@ -1518,6 +1518,24 @@ bool EngineCbx::FinishLoading() {
         return false;
     }
 
+    // verify password by trying to extract the smallest file
+    if (cbxArchive->isEncrypted && cbxArchive->password) {
+        MultiFormatArchive::FileInfo* smallest = pageFiles[0];
+        for (int i = 1; i < nFiles; i++) {
+            if (pageFiles[i]->fileSizeUncompressed < smallest->fileSizeUncompressed) {
+                smallest = pageFiles[i];
+            }
+        }
+        ByteSlice d = cbxArchive->GetFileDataById(smallest->fileId);
+        if (!d) {
+            logf("EngineCbx::FinishLoading(): wrong password, failed to extract file\n");
+            delete cbxArchive;
+            cbxArchive = nullptr;
+            return false;
+        }
+        d.Free();
+    }
+
     std::sort(pageFiles.begin(), pageFiles.end(), cmpArchFileInfoByName);
 
     for (int i = 0; i < nFiles; i++) {
