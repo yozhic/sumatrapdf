@@ -154,7 +154,10 @@ EngineBase* CreateEngineFromFile(const char* path, PasswordUI* pwdUI, bool enabl
     }
 
     Kind newKind = GuessFileTypeFromContent(path);
-    if (kind != newKind) {
+    // avoid trying the same engine type twice (e.g. kindFileCbz vs kindFileZip
+    // both use the cbx engine, causing duplicate password prompts)
+    bool sameCbx = IsEngineCbxSupportedFileType(kind) && IsEngineCbxSupportedFileType(newKind);
+    if (kind != newKind && !sameCbx) {
         engine = CreateEngineForKind(newKind, path, pwdUI, enableChmEngine);
     }
     if (engine) {
