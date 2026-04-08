@@ -318,7 +318,7 @@ static Bitmap* WICDecodeImageFromStream(IStream* stream) {
     if (iRot >= 0 && iRot < dimof(rfts)) {
         bmp.RotateFlip(rfts[iRot]);
     }
-    return bmp.Clone(0, 0, w, h, PixelFormat32bppARGB);
+    return bmp.Clone(0, 0, bmp.GetWidth(), bmp.GetHeight(), PixelFormat32bppARGB);
 }
 
 static void MaybeFlipBitmap(Bitmap* bmp) {
@@ -529,6 +529,69 @@ static bool JpegSizeFromExif(ByteReader r, size_t tiffBase, Size& result) {
     return !result.IsEmpty();
 }
 
+// Read EXIF orientation from IFD0 (tag 0x0112).
+// Returns 1-8 (EXIF orientation value) or 0 if not found.
+static int JpegExifOrientationFromTiff(ByteReader r, size_t tiffBase) {
+    size_t n = r.len;
+    if (tiffBase + 8 > n) {
+        return 0;
+    }
+    bool isBE = r.Byte(tiffBase) == 'M';
+    size_t ifdOff = r.DWord(tiffBase + 4, isBE);
+    size_t ifdAbs = tiffBase + ifdOff;
+    if (ifdAbs + 2 > n) {
+        return 0;
+    }
+    WORD count = r.Word(ifdAbs, isBE);
+    for (WORD i = 0; i < count; i++) {
+        size_t entryOff = ifdAbs + 2 + (size_t)i * 12;
+        if (entryOff + 12 > n) {
+            break;
+        }
+        WORD tag = r.Word(entryOff, isBE);
+        if (tag == 0x0112) { // Orientation tag
+            return r.Word(entryOff + 8, isBE);
+        }
+    }
+    return 0;
+}
+
+// Read EXIF orientation from JPEG data. Returns 1-8 or 0 if not found.
+static int JpegExifOrientation(ByteReader r) {
+    size_t n = r.len;
+    size_t idx = 2;
+    for (;;) {
+        if (idx + 4 > n) {
+            return 0;
+        }
+        if (r.Byte(idx) != 0xff) {
+            return 0;
+        }
+        u8 marker = r.Byte(idx + 1);
+        if (marker == 0xDA) { // start of scan, stop
+            return 0;
+        }
+        size_t segLen = (size_t)r.WordBE(idx + 2);
+        if (marker == 0xE1 && idx + 10 <= n) {
+            // APP1 - check for EXIF
+            if (r.Byte(idx + 4) == 'E' && r.Byte(idx + 5) == 'x' && r.Byte(idx + 6) == 'i' && r.Byte(idx + 7) == 'f' &&
+                r.Byte(idx + 8) == 0 && r.Byte(idx + 9) == 0) {
+                return JpegExifOrientationFromTiff(r, idx + 10);
+            }
+        }
+        size_t nextIdx = idx + segLen + 2;
+        if (nextIdx <= idx) {
+            return 0; // overflow protection
+        }
+        idx = nextIdx;
+    }
+}
+
+// EXIF orientations 5-8 swap width and height
+static bool ExifOrientationSwapsDimensions(int orientation) {
+    return orientation >= 5 && orientation <= 8;
+}
+
 static bool JpegSizeFromData(ByteReader r, Size& result) {
     // find the last start of frame marker for non-differential Huffman/arithmetic coding
     size_t n = r.len;
@@ -683,6 +746,9 @@ Size ImageSizeFromData(const ByteSlice& d) {
         ok = GifSizeFromData(r, result);
     } else if (kind == kindFileJpeg) {
         ok = JpegSizeFromData(r, result);
+        if (ok && ExifOrientationSwapsDimensions(JpegExifOrientation(r))) {
+            std::swap(result.dx, result.dy);
+        }
     } else if (kind == kindFileJxr || kind == kindFileTiff) {
         ok = TiffSizeFromData(r, result);
     } else if (kind == kindFilePng) {
@@ -723,6 +789,9 @@ Size ImageSizeFromHeader(const ByteSlice& d) {
         ok = GifSizeFromData(r, result);
     } else if (kind == kindFileJpeg) {
         ok = JpegSizeFromData(r, result);
+        if (ok && ExifOrientationSwapsDimensions(JpegExifOrientation(r))) {
+            std::swap(result.dx, result.dy);
+        }
     } else if (kind == kindFileJxr || kind == kindFileTiff) {
         ok = TiffSizeFromData(r, result);
     } else if (kind == kindFilePng) {
