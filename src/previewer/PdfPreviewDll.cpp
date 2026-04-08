@@ -11,7 +11,7 @@
 #include "DocController.h"
 #include "EngineBase.h"
 #include "RegistryPreview.h"
-#include "PdfPreviewBase.h"
+#include "PdfPreview.h"
 
 #include "utils/Log.h"
 
@@ -54,27 +54,29 @@ class PreviewClassFactory : public IClassFactory {
             return CLASS_E_NOAGGREGATION;
         }
 
-        ScopedComPtr<IInitializeWithStream> pObject;
-
+        PreviewType type;
         if (IsClsid(kPdfPreviewClsid)) {
-            pObject = new PdfPreview(&g_lRefCount);
+            type = PreviewType::Pdf;
         } else if (IsClsid(kXpsPreviewClsid)) {
-            pObject = new XpsPreview(&g_lRefCount);
+            type = PreviewType::Xps;
         } else if (IsClsid(kDjVuPreviewClsid)) {
-            pObject = new DjVuPreview(&g_lRefCount);
+            type = PreviewType::DjVu;
         } else if (IsClsid(kEpubPreviewClsid)) {
-            pObject = new EpubPreview(&g_lRefCount);
+            type = PreviewType::Epub;
         } else if (IsClsid(kFb2PreviewClsid)) {
-            pObject = new Fb2Preview(&g_lRefCount);
+            type = PreviewType::Fb2;
         } else if (IsClsid(kMobiPreviewClsid)) {
-            pObject = new MobiPreview(&g_lRefCount);
+            type = PreviewType::Mobi;
         } else if (IsClsid(kCbxPreviewClsid)) {
-            pObject = new CbxPreview(&g_lRefCount);
+            type = PreviewType::Cbx;
         } else if (IsClsid(kTgaPreviewClsid)) {
-            pObject = new TgaPreview(&g_lRefCount);
+            type = PreviewType::Tga;
         } else {
             return E_NOINTERFACE;
         }
+
+        ScopedComPtr<IInitializeWithStream> pObject;
+        pObject = new PdfPreview(&g_lRefCount, type);
 
         if (!pObject) {
             return E_OUTOFMEMORY;

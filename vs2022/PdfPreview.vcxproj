@@ -966,7 +966,7 @@
     <ClInclude Include="..\src\SumatraConfig.h" />
     <ClInclude Include="..\src\mui\Mui.h" />
     <ClInclude Include="..\src\mui\TextRender.h" />
-    <ClInclude Include="..\src\previewer\PdfPreviewBase.h" />
+    <ClInclude Include="..\src\previewer\PdfPreview.h" />
     <ClInclude Include="..\src\utils\Archive.h" />
     <ClInclude Include="..\src\utils\Log.h" />
   </ItemGroup>

@@ -32,7 +32,7 @@
     <ClInclude Include="..\src\mui\TextRender.h">
       <Filter>mui</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\previewer\PdfPreviewBase.h">
+    <ClInclude Include="..\src\previewer\PdfPreview.h">
       <Filter>previewer</Filter>
     </ClInclude>
     <ClInclude Include="..\src\utils\Archive.h">

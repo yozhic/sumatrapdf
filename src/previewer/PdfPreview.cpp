@@ -16,8 +16,7 @@
 #include "Annotation.h"
 #include "RegistryPreview.h"
 
-// TODO: move code to PdfPreviewBase.cpp
-#include "PdfPreviewBase.h"
+#include "PdfPreview.h"
 
 #include "utils/Log.h"
 
@@ -29,14 +28,14 @@ EBookUI* GetEBookUI() {
     return nullptr;
 }
 
-IFACEMETHODIMP PreviewBase::GetThumbnail(uint cx, HBITMAP* phbmp, WTS_ALPHATYPE* pdwAlpha) {
+IFACEMETHODIMP PdfPreview::GetThumbnail(uint cx, HBITMAP* phbmp, WTS_ALPHATYPE* pdwAlpha) {
     EngineBase* engine = GetEngine();
     if (!engine) {
-        logf("PreviewBase::GetThumbnail: failed to get the engine\n");
+        logf("PdfPreview::GetThumbnail: failed to get the engine\n");
         return E_FAIL;
     }
 
-    logf("PreviewBase::GetThumbnail(cx=%d, engine: %s\n", (int)cx, engine->kind);
+    logf("PdfPreview::GetThumbnail(cx=%d, engine: %s\n", (int)cx, engine->kind);
 
     RectF page = engine->Transform(engine->PageMediabox(1), 1, 1.0, 0);
     float zoom = std::min(cx / (float)page.dx, cx / (float)page.dy) - 0.001f;
@@ -53,7 +52,7 @@ IFACEMETHODIMP PreviewBase::GetThumbnail(uint cx, HBITMAP* phbmp, WTS_ALPHATYPE*
     u8* bmpData = nullptr;
     HBITMAP hthumb = CreateDIBSection(nullptr, &bmi, DIB_RGB_COLORS, (void**)&bmpData, nullptr, 0);
     if (!hthumb) {
-        log("PreviewBase::GetThumbnail: CreateDIBSection() failed\n");
+        log("PdfPreview::GetThumbnail: CreateDIBSection() failed\n");
         return E_OUTOFMEMORY;
     }
 
@@ -72,11 +71,11 @@ IFACEMETHODIMP PreviewBase::GetThumbnail(uint cx, HBITMAP* phbmp, WTS_ALPHATYPE*
         if (pdwAlpha) {
             *pdwAlpha = WTSAT_RGB;
         }
-        log("PreviewBase::GetThumbnail: provided thumbnail\n");
+        log("PdfPreview::GetThumbnail: provided thumbnail\n");
     } else {
         DeleteObject(hthumb);
         hthumb = nullptr;
-        log("PreviewBase::GetThumbnail: GetDIBits() failed\n");
+        log("PdfPreview::GetThumbnail: GetDIBits() failed\n");
     }
 
     ReleaseDC(nullptr, hdc);
@@ -200,7 +199,7 @@ static LRESULT OnPaint(HWND hwnd) {
     RECT rcClient = ToRECT(rect);
     FillRect(hdc, &rcClient, brushBg);
 
-    PreviewBase* preview = (PreviewBase*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    PdfPreview* preview = (PdfPreview*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
     if (preview && preview->renderer) {
         int pageNo = GetScrollPos(hwnd, SB_VERT);
         RectF page = preview->renderer->GetPageRect(pageNo);
@@ -282,7 +281,7 @@ static LRESULT OnKeydown(HWND hwnd, WPARAM key) {
 }
 
 static LRESULT OnDestroy(HWND hwnd) {
-    PreviewBase* preview = (PreviewBase*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    PdfPreview* preview = (PdfPreview*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
     if (preview) {
         delete preview->renderer;
         preview->renderer = nullptr;
@@ -317,8 +316,8 @@ static LRESULT CALLBACK PreviewWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp
     }
 }
 
-IFACEMETHODIMP PreviewBase::DoPreview() {
-    log("PreviewBase::DoPreview()\n");
+IFACEMETHODIMP PdfPreview::DoPreview() {
+    log("PdfPreview::DoPreview()\n");
 
     WNDCLASSEX wcex{};
     wcex.cbSize = sizeof(wcex);
@@ -359,69 +358,55 @@ IFACEMETHODIMP PreviewBase::DoPreview() {
     return S_OK;
 }
 
+static bool NeedsGdiPlus(PreviewType type) {
+    return type == PreviewType::DjVu || type == PreviewType::Epub || type == PreviewType::Fb2 ||
+           type == PreviewType::Mobi || type == PreviewType::Cbx || type == PreviewType::Tga;
+}
+
+static bool NeedsMui(PreviewType type) {
+    return type == PreviewType::Epub || type == PreviewType::Fb2 || type == PreviewType::Mobi;
+}
+
+PdfPreview::PdfPreview(long* plRefCount, PreviewType type) {
+    m_type = type;
+    m_plModuleRef = plRefCount;
+    InterlockedIncrement(m_plModuleRef);
+    if (NeedsGdiPlus(type)) {
+        m_gdiScope = new ScopedGdiPlus();
+    }
+    if (NeedsMui(type)) {
+        mui::Initialize();
+        m_muiInitialized = true;
+    }
+}
+
+PdfPreview::~PdfPreview() {
+    Unload();
+    if (m_muiInitialized) {
+        mui::Destroy();
+    }
+    delete m_gdiScope;
+    InterlockedDecrement(m_plModuleRef);
+}
+
 EngineBase* PdfPreview::LoadEngine(IStream* stream) {
-    log("PdfPreview::LoadEngine()\n");
-    return CreateEngineMupdfFromStream(stream, "foo.pdf");
-}
-
-EngineBase* XpsPreview::LoadEngine(IStream* stream) {
-    return CreateEngineMupdfFromStream(stream, "foo.xps");
-}
-
-EngineBase* DjVuPreview::LoadEngine(IStream* stream) {
-    log("DjVuPreview::LoadEngine()\n");
-    return CreateEngineDjVuFromStream(stream);
-}
-
-EpubPreview::EpubPreview(long* plRefCount) : PreviewBase(plRefCount, kEpubPreviewClsid) {
-    log("EpubPreview::EpubPreview()\n");
-    m_gdiScope = new ScopedGdiPlus();
-    mui::Initialize();
-}
-
-EpubPreview::~EpubPreview() {
-    mui::Destroy();
-}
-
-EngineBase* EpubPreview::LoadEngine(IStream* stream) {
-    log("EpubPreview::LoadEngine()\n");
-    return CreateEngineEpubFromStream(stream);
-}
-
-Fb2Preview::Fb2Preview(long* plRefCount) : PreviewBase(plRefCount, kFb2PreviewClsid) {
-    m_gdiScope = new ScopedGdiPlus();
-    mui::Initialize();
-}
-
-Fb2Preview::~Fb2Preview() {
-    mui::Destroy();
-}
-
-EngineBase* Fb2Preview::LoadEngine(IStream* stream) {
-    log("Fb2Preview::LoadEngine()\n");
-    return CreateEngineFb2FromStream(stream);
-}
-
-MobiPreview::MobiPreview(long* plRefCount) : PreviewBase(plRefCount, kMobiPreviewClsid) {
-    m_gdiScope = new ScopedGdiPlus();
-    mui::Initialize();
-}
-
-MobiPreview::~MobiPreview() {
-    mui::Destroy();
-}
-
-EngineBase* MobiPreview::LoadEngine(IStream* stream) {
-    log("MobiPreview::LoadEngine()\n");
-    return CreateEngineMobiFromStream(stream);
-}
-
-EngineBase* CbxPreview::LoadEngine(IStream* stream) {
-    log("CbxPreview::LoadEngine()\n");
-    return CreateEngineCbxFromStream(stream);
-}
-
-EngineBase* TgaPreview::LoadEngine(IStream* stream) {
-    log("TgaPreview::LoadEngine()\n");
-    return CreateEngineImageFromStream(stream);
+    switch (m_type) {
+        case PreviewType::Pdf:
+            return CreateEngineMupdfFromStream(stream, "foo.pdf");
+        case PreviewType::Xps:
+            return CreateEngineMupdfFromStream(stream, "foo.xps");
+        case PreviewType::DjVu:
+            return CreateEngineDjVuFromStream(stream);
+        case PreviewType::Epub:
+            return CreateEngineEpubFromStream(stream);
+        case PreviewType::Fb2:
+            return CreateEngineFb2FromStream(stream);
+        case PreviewType::Mobi:
+            return CreateEngineMobiFromStream(stream);
+        case PreviewType::Cbx:
+            return CreateEngineCbxFromStream(stream);
+        case PreviewType::Tga:
+            return CreateEngineImageFromStream(stream);
+    }
+    return nullptr;
 }

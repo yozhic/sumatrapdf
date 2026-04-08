@@ -1340,7 +1340,6 @@ end
 function pdf_preview_files()
   files_in_dir("src/previewer", {
     "PdfPreview.*",
-    "PdfPreviewBase.h",
     "PdfPreviewDll.cpp",
   })
   files_in_dir("src/utils", {
@@ -1414,7 +1413,6 @@ end
 function pdf_preview2_files()
   files_in_dir("src/previewer2", {
     "PdfPreview.*",
-    "PdfPreviewBase.h",
     "PdfPreviewDll.cpp",
   })
 
