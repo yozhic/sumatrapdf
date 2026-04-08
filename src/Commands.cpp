@@ -184,7 +184,7 @@ static SeqStrings gCommandNames =
     "CmdCommandPalette\0"
     "CmdShowLog\0"
     "CmdShowPdfInfo\0"
-    "CmdShowPdfOutline\0"
+    "CmdShowDocumentOutline\0"
     "CmdShowErrors\0"
     "CmdClearHistory\0"
     "CmdReopenLastClosedFile\0"
@@ -400,7 +400,7 @@ static i32 gCommandIds[] = {
     CmdCommandPalette,
     CmdShowLog,
     CmdShowPdfInfo,
-    CmdShowPdfOutline,
+    CmdShowDocumentOutline,
     CmdShowErrors,
     CmdClearHistory,
     CmdReopenLastClosedFile,
@@ -616,7 +616,7 @@ SeqStrings gCommandDescriptions =
     "Command Palette\0"
     "Show Logs\0"
     "Show PDF Info\0"
-    "Show PDF Outline\0"
+    "Show Document Outline\0"
     "Show Errors\0"
     "Clear History\0"
     "Reopen Last Closed\0"

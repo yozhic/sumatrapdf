@@ -4118,11 +4118,6 @@ extern "C" fz_buffer* pdfinfo_to_buffer(fz_context* ctx, const char* filename);
 
 static void outline_to_buffer_rec(fz_context* ctx, fz_output* out, fz_outline* outline, int level) {
     while (outline) {
-        if (outline->down) {
-            fz_write_byte(ctx, out, outline->is_open ? '-' : '+');
-        } else {
-            fz_write_byte(ctx, out, '|');
-        }
         for (int i = 0; i < level; i++) {
             fz_write_byte(ctx, out, '\t');
         }
@@ -4153,7 +4148,7 @@ TempStr EngineMupdfGetPdfOutline(const char* path) {
         } else {
             buf = fz_new_buffer(ctx, 1024);
             out = fz_new_output_with_buffer(ctx, buf);
-            outline_to_buffer_rec(ctx, out, outline, 1);
+            outline_to_buffer_rec(ctx, out, outline, 0);
             fz_close_output(ctx, out);
             unsigned char* data;
             size_t len = fz_buffer_storage(ctx, buf, &data);

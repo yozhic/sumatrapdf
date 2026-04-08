@@ -179,7 +179,7 @@ enum {
     CmdCommandPalette = 368,
     CmdShowLog = 369,
     CmdShowPdfInfo = 370,
-    CmdShowPdfOutline = 371,
+    CmdShowDocumentOutline = 371,
     CmdShowErrors = 372,
     CmdClearHistory = 373,
     CmdReopenLastClosedFile = 374,

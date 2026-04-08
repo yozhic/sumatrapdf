@@ -211,7 +211,7 @@ CmdZoom800,,Zoom: 800%,
 ```commands
 Command IDs,Keyboard shortcuts,Command Palette,Notes
 CmdShowPdfInfo,,Show PDF Info,shows information about currently opened PDF file
-CmdShowPdfOutline,,Show PDF Outline,shows the outline (table of contents) of currently opened PDF file
+CmdShowDocumentOutline,,Show Document Outline,shows the outline (table of contents) of currently opened document
 CmdPdfBake,,Bake PDF File,bakes interactive form and annotation content into static graphics; saves to a new PDF file and opens it
 CmdPdfExtractText,,Extract PDF Text,"extract text from PDF pages to a .txt file, with configurable page ranges, ver 3.7+"
 ```

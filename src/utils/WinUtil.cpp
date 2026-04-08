@@ -3296,6 +3296,10 @@ static HWND CreateTextViewWindow(const WCHAR* className, const char* title, cons
         SendMessageW(hwndEdit, WM_SETFONT, (WPARAM)font, TRUE);
     }
 
+    // set tab stop to 4 spaces (16 dialog units; default is 32 = 8 spaces)
+    DWORD tabStop = 16;
+    SendMessageW(hwndEdit, EM_SETTABSTOPS, 1, (LPARAM)&tabStop);
+
     // edit control needs \r\n line endings
     str::Str crlfText;
     for (const char* s = text; *s; s++) {

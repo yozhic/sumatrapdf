@@ -4998,7 +4998,7 @@ static void OnFrameKeyEsc(MainWindow* win) {
         ToolbarUpdateStateForWindow(win, false);
         return;
     }
-   if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
+    if (gGlobalPrefs->escToExit && CanCloseWindow(win)) {
         CloseWindow(win, true, false);
         return;
     }
@@ -6051,6 +6051,23 @@ static void PasteImageFromClipboard(MainWindow* win) {
     }
 }
 
+static void TocItemToText(str::Str& s, TocItem* item, int level) {
+    while (item) {
+        if (item->title) {
+            for (int i = 0; i < level; i++) {
+                s.AppendChar('\t');
+            }
+            s.Append(item->title);
+            s.AppendChar('\n');
+        }
+        if (item->child) {
+            int nextLevel = item->title ? level + 1 : level;
+            TocItemToText(s, item->child, nextLevel);
+        }
+        item = item->next;
+    }
+}
+
 static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     int cmdId = LOWORD(wp);
     bool openAnnotationEdit = false;
@@ -6736,14 +6753,16 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
-        case CmdShowPdfOutline: {
-            if (tab && tab->filePath && CouldBePDFDoc(tab)) {
+        case CmdShowDocumentOutline: {
+            if (tab && tab->ctrl && tab->ctrl->HasToc()) {
                 if (tab->hwndPDFOutline && IsWindow(tab->hwndPDFOutline)) {
                     SetForegroundWindow(tab->hwndPDFOutline);
                 } else {
-                    TempStr outline = EngineMupdfGetPdfOutline(tab->filePath);
-                    if (outline) {
-                        tab->hwndPDFOutline = ShowTextInWindow("PDF Outline", outline, &tab->hwndPDFOutline);
+                    TocTree* tocTree = tab->ctrl->GetToc();
+                    if (tocTree && tocTree->root) {
+                        str::Str s;
+                        TocItemToText(s, tocTree->root, 0);
+                        tab->hwndPDFOutline = ShowTextInWindow("Document Outline", s.CStr(), &tab->hwndPDFOutline);
                     }
                 }
             }

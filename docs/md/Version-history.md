@@ -6,7 +6,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 
 - add cmd-line tools `SumatraPDF <tool> <args>`. Tools: draw, convert, audit, bake, clean, create, extract, info, merge, pages, poster, recolor, show, trim, grep, trace
 - add `CmdShowPdfInfo` (`Show PDF Info` in `Ctrl + k` [command palette](Command-Palette.md))
-- add `CmdShowPdfOutline` (`Show PDF Outline` in `Ctrl + k` [command palette](Command-Palette.md))
+- add `CmdShowDocumentOutline` (`Show Document Outline` in `Ctrl + k` [command palette](Command-Palette.md))
 - improved overlay scrollbar
 - make thumbnails on home page scrollable
 - add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette. Use "Register Windows Preview", Un-register Windows Preview", "Register Windows Search Filter", "Un-register Windows Search Filter".
