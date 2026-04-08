@@ -120,9 +120,6 @@ struct Flags {
     // before proceeding
     int sleepMs = 0;
 
-    // for ifilter pipe mode (used by ifilter DLL)
-    char* ifilterPipeName = nullptr;
-
     Flags() = default;
     ~Flags();
 };

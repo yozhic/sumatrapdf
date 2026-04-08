@@ -38,7 +38,7 @@ enum class Arg {
     FwdSearchOffset = 64, FwdSearchWidth = 65, FwdSearchColor = 66, FwdSearchPermanent = 67,
     MangaMode = 68, Search = 69, AllUsers = 70, AllUsers2 = 71,
     RunInstallNow = 72, Adobe = 73, DDE = 74, EngineDump = 75,
-    SetColorRange = 76, IFilterPipe = 77, UpgradeFrom = 78,
+    SetColorRange = 76, UpgradeFrom = 77,
 };
 
 static const char* gArgNames =
@@ -61,7 +61,7 @@ static const char* gArgNames =
     "fwdsearch-offset\0" "fwdsearch-width\0" "fwdsearch-color\0" "fwdsearch-permanent\0"
     "manga-mode\0" "search\0" "all-users\0" "allusers\0"
     "run-install-now\0" "a\0" "dde\0" "engine-dump\0"
-    "set-color-range\0" "ifilter-pipe\0" "upgrade-from\0";
+    "set-color-range\0" "upgrade-from\0";
 // clang-format on
 // @gen-end flags
 
@@ -662,10 +662,6 @@ void ParseFlags(const WCHAR* cmdLine, Flags& i) {
             i.globalPrefArgs.Append(args.EatParam());
             continue;
         }
-        if (arg == Arg::IFilterPipe) {
-            i.ifilterPipeName = str::Dup(param);
-            continue;
-        }
         // again, argName is any of the known args, so assume it's a file starting with '-'
         args.RewindParam();
 
@@ -708,5 +704,4 @@ Flags::~Flags() {
     str::Free(search);
     str::Free(logFile);
     str::Free(dde);
-    str::Free(ifilterPipeName);
 }
