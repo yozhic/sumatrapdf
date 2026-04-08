@@ -193,6 +193,7 @@ static INT_PTR CALLBACK Dialog_GetPassword_Proc(HWND hDlg, UINT msg, WPARAM wp, 
         HwndSetDlgItemText(hDlg, IDC_GET_PASSWORD_LABEL, txt);
         HwndSetDlgItemText(hDlg, IDC_GET_PASSWORD_EDIT, "");
         HwndSetDlgItemText(hDlg, IDC_STATIC, _TRA("&Password:"));
+        HwndSetDlgItemText(hDlg, IDC_SHOW_PASSWORD, _TRA("&Show password"));
         HwndSetDlgItemText(hDlg, IDC_REMEMBER_PASSWORD, _TRA("&Remember the password for this document"));
         HwndSetDlgItemText(hDlg, IDOK, _TRA("OK"));
         HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("Cancel"));
@@ -221,6 +222,14 @@ static INT_PTR CALLBACK Dialog_GetPassword_Proc(HWND hDlg, UINT msg, WPARAM wp, 
                 case IDCANCEL:
                     EndDialog(hDlg, IDCANCEL);
                     return TRUE;
+
+                case IDC_SHOW_PASSWORD: {
+                    HWND hwndEdit = GetDlgItem(hDlg, IDC_GET_PASSWORD_EDIT);
+                    bool show = BST_CHECKED == IsDlgButtonChecked(hDlg, IDC_SHOW_PASSWORD);
+                    SendMessageW(hwndEdit, EM_SETPASSWORDCHAR, show ? 0 : (WPARAM)L'\x25CF', 0);
+                    InvalidateRect(hwndEdit, nullptr, TRUE);
+                    return TRUE;
+                }
             }
             break;
     }
