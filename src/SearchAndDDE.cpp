@@ -422,6 +422,7 @@ bool AbortFinding(MainWindow* win, bool hideMessage) {
         logf("AboftFinding: setting win->findCancelled to true\n");
         win->findCancelled = true;
         WaitForSingleObject(win->findThread, INFINITE);
+        win->findThread = nullptr;
     }
     win->findCancelled = false;
 
