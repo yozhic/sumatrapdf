@@ -127,6 +127,18 @@ static struct {
     {"SourceSansPro-BoldItalic", "SegoeUI-BoldItalic"},
     {"SourceSansPro-Light", "SegoeUI-Light"},
     {"SourceSansPro-Semibold", "SegoeUI-Semibold"},
+    {"HelveticaNeue", "ArialMT"},
+    {"HelveticaNeue-Bold", "Arial-BoldMT"},
+    {"HelveticaNeue-Italic", "Arial-ItalicMT"},
+    {"HelveticaNeue-BoldItalic", "Arial-BoldItalicMT"},
+    {"HelveticaNeue-Light", "ArialMT"},
+    {"HelveticaNeueLight", "ArialMT"},
+    {"LucidaSans", "SegoeUI"},
+    {"LucidaGrande", "SegoeUI"},
+    {"LucidaConsole", "Consolas"},
+    {"LucidaBright", "Georgia"},
+    {"Handwriting", "SegoeScript"},
+    {"Console", "Consolas"},
 };
 
 static win_fonts g_win_fonts;
