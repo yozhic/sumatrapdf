@@ -171,13 +171,6 @@ static int ResolveLink(fz_context* ctx, fz_document* doc, const char* uri, float
     return pageNo + 1;
 }
 
-static int FzGetPageNo(fz_context* ctx, fz_document* doc, fz_link* link, fz_outline* outline) {
-    float x, y;
-    const char* uri = link ? link->uri : outline ? outline->uri : nullptr;
-    int pageNo = ResolveLink(ctx, doc, uri, &x, &y);
-    return pageNo;
-}
-
 static IPageDestination* NewPageDestinationMupdf(fz_context* ctx, fz_document* doc, fz_link* link,
                                                  fz_outline* outline) {
     ReportIf(link && outline);
@@ -225,7 +218,7 @@ static IPageDestination* NewPageDestinationMupdf(fz_context* ctx, fz_document* d
 
     auto dest = new PageDestinationMupdf(link, outline);
     dest->rect = FzGetRectF(link, outline);
-    dest->pageNo = FzGetPageNo(ctx, doc, link, outline);
+    // pageNo is resolved lazily in HandleLinkMupdf when navigating
     return dest;
 }
 
@@ -2499,8 +2492,6 @@ TocItem* EngineMupdf::BuildTocTree(TocItem* parent, fz_outline* outline, int& id
             name = str::Dup("");
         }
 
-        int pageNo = FzGetPageNo(ctx, _doc, nullptr, outline);
-
         IPageDestination* dest = nullptr;
         if (isAttachment) {
             dest = DestFromAttachment(this, outline);
@@ -2513,8 +2504,8 @@ TocItem* EngineMupdf::BuildTocTree(TocItem* parent, fz_outline* outline, int& id
         item->isOpenDefault = outline->is_open;
         item->id = ++idCounter;
         item->fontFlags = 0; // TODO: had outline->flags; but mupdf changed outline
-        item->pageNo = pageNo;
-        ReportIf(!isAttachment && !item->PageNumbersMatch());
+        // pageNo is resolved lazily in HandleLinkMupdf when navigating
+        item->pageNo = 0;
 
         // TODO: had outline->n_color and outline->color but mupdf changed outline
         /*
