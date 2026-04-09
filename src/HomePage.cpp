@@ -51,21 +51,10 @@ You can [extract text from PDF file](Help/Tool-x-extract-text-from-pdf).
 You can [toggle menu bar](CmdToggleMenuBar) with (Key/CmdToggleMenuBar).
 You can [toggle toolbar](CmdToggleToolbar) with (Key/CmdToggleToolbar).
 You can [edit PDF annotations](Help/Editing-annotations).
-Try [Edna](https://edna.arslexis.io): a note taking web app for power users.
-Try [MarkLexis](https://marklexis.arslexis.io): a bookmarking web application.
 )";
 
-constexpr const char* promoBuiltIn = R"(
-[
-    Name = Edna
-    URL = https://edna.arslexis.io
-    Info = Note taking web app for power users
-]
-[
-    Name = MarkLexis
-    URL = https://marklexis.arslexis.io
-    Info = Bookmarking web application
-]
+constexpr const char* sumatraPromos = R"(Try [Edna](https://edna.arslexis.io): a note taking web app for power users.
+Try [MarkLexis](https://marklexis.arslexis.io): a bookmarking web application.
 )";
 
 // TODO: leaks if set
@@ -252,15 +241,14 @@ static void LayoutTip(ParsedTip& tip, int areaWidth, int startX, int startY) {
 
 static ParsedTip* gParsedTips = nullptr;
 static int gParsedTipCount = 0;
+static ParsedTip* gParsedPromos = nullptr;
+static int gParsedPromoCount = 0;
+static bool gSelectedIsPromo = false;
 static int gSelectedTipIdx = -1;
 
-static void EnsureTipsParsed() {
-    if (gParsedTips) {
-        return;
-    }
+static int ParseTipsFromString(const char* src, const char* prefix, ParsedTip*& outTips) {
     StrVec lines;
-    Split(&lines, sumatraTips, "\n");
-    // count non-empty lines
+    Split(&lines, src, "\n");
     int n = 0;
     for (int i = 0; i < lines.Size(); i++) {
         const char* line = lines.At(i);
@@ -269,30 +257,56 @@ static void EnsureTipsParsed() {
         }
     }
     if (n == 0) {
-        return;
+        return 0;
     }
-    gParsedTips = new ParsedTip[n];
-    gParsedTipCount = 0;
+    outTips = new ParsedTip[n];
+    int count = 0;
     for (int i = 0; i < lines.Size(); i++) {
         const char* line = lines.At(i);
         if (str::IsEmptyOrWhiteSpace(line)) {
             continue;
         }
-        ParseTip(gParsedTips[gParsedTipCount], line);
-        gParsedTipCount++;
+        if (prefix) {
+            TempStr prefixed = str::FormatTemp("%s%s", prefix, line);
+            ParseTip(outTips[count], prefixed);
+        } else {
+            ParseTip(outTips[count], line);
+        }
+        count++;
     }
-    if (gParsedTipCount > 0) {
+    return count;
+}
+
+static void PickRandomTipOrPromo() {
+    bool pickPromo = (gParsedPromoCount > 0) && (rand() % 100 < 30);
+    if (pickPromo) {
+        gSelectedIsPromo = true;
+        gSelectedTipIdx = rand() % gParsedPromoCount;
+    } else if (gParsedTipCount > 0) {
+        gSelectedIsPromo = false;
         gSelectedTipIdx = rand() % gParsedTipCount;
     }
 }
 
-static void PickAnotherRandomTip() {
-    if (gParsedTipCount <= 1) {
+static void EnsureTipsParsed() {
+    if (gParsedTips || gParsedPromos) {
         return;
     }
+    gParsedTipCount = ParseTipsFromString(sumatraTips, "Tip: ", gParsedTips);
+    gParsedPromoCount = ParseTipsFromString(sumatraPromos, nullptr, gParsedPromos);
+    PickRandomTipOrPromo();
+}
+
+static void PickAnotherRandomTip() {
+    bool prevIsPromo = gSelectedIsPromo;
     int prev = gSelectedTipIdx;
-    while (gSelectedTipIdx == prev) {
-        gSelectedTipIdx = rand() % gParsedTipCount;
+    // keep picking until we get a different one
+    int maxIter = 100;
+    while (maxIter-- > 0) {
+        PickRandomTipOrPromo();
+        if (gSelectedIsPromo != prevIsPromo || gSelectedTipIdx != prev) {
+            return;
+        }
     }
 }
 
@@ -895,7 +909,7 @@ struct HomePageLayout {
 
     // tip layout
     Rect rcTip;               // background rect for tip area
-    ParsedTip* tip = nullptr; // points to gParsedTips[gSelectedTipIdx], not owned
+    ParsedTip* tip = nullptr; // points to gParsedTips or gParsedPromos, not owned
 
     ~HomePageLayout();
 };
@@ -1010,8 +1024,14 @@ void LayoutHomePage(HomePageLayout& l) {
     int tipHeight = 0;
     HFONT fontTip = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
     ParsedTip* tip = nullptr;
-    if (gGlobalPrefs->showPromo && gSelectedTipIdx >= 0 && gSelectedTipIdx < gParsedTipCount) {
-        tip = &gParsedTips[gSelectedTipIdx];
+    if (gGlobalPrefs->showPromo && gSelectedTipIdx >= 0) {
+        if (gSelectedIsPromo && gSelectedTipIdx < gParsedPromoCount) {
+            tip = &gParsedPromos[gSelectedTipIdx];
+        } else if (!gSelectedIsPromo && gSelectedTipIdx < gParsedTipCount) {
+            tip = &gParsedTips[gSelectedTipIdx];
+        }
+    }
+    if (tip) {
         MeasureTipWords(*tip, hdc, fontTip);
         int tipPadding = DpiScale(hdc, 8);
         // do a preliminary layout to get the height (use thumbnails content width)
