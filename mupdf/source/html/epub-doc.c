@@ -67,6 +67,10 @@ typedef struct
 	 * to the most recently used html block here, thus
 	 * ensuring that the stored copy won't be evicted. */
 	fz_html *most_recent_html;
+
+	/* cached array of chapter pointers for O(1) access by index */
+	epub_chapter **chapters_cached;
+	int chapters_cached_len;
 } epub_document;
 
 struct epub_chapter
@@ -285,31 +289,41 @@ epub_layout(fz_context *ctx, fz_document *doc_, float w, float h, float em)
 	invalidate_accelerator(ctx, doc->accel);
 }
 
+static void
+epub_build_chapters_cached(epub_document *doc, fz_context *ctx)
+{
+	epub_chapter *ch;
+	int n = 0;
+	for (ch = doc->spine; ch; ch = ch->next)
+		n++;
+	fz_free(ctx, doc->chapters_cached);
+	doc->chapters_cached = fz_malloc_array(ctx, n, epub_chapter*);
+	doc->chapters_cached_len = n;
+	int i = 0;
+	for (ch = doc->spine; ch; ch = ch->next)
+		doc->chapters_cached[i++] = ch;
+}
+
 static int
 epub_count_chapters(fz_context *ctx, fz_document *doc_)
 {
 	epub_document *doc = (epub_document*)doc_;
-	epub_chapter *ch;
-	int count = 0;
-	for (ch = doc->spine; ch; ch = ch->next)
-		++count;
-	return count;
+	if (doc->chapters_cached_len == 0)
+		epub_build_chapters_cached(doc, ctx);
+	return doc->chapters_cached_len;
 }
 
 static int
 epub_count_pages(fz_context *ctx, fz_document *doc_, int chapter)
 {
 	epub_document *doc = (epub_document*)doc_;
-	epub_chapter *ch;
-	int i;
-	for (i = 0, ch = doc->spine; ch; ++i, ch = ch->next)
-	{
-		if (i == chapter)
-		{
-			return count_chapter_pages(ctx, doc, ch);
-		}
-	}
-	return 0;
+	if (chapter < 0)
+		return 0;
+	if (chapter >= doc->chapters_cached_len)
+		epub_build_chapters_cached(doc, ctx);
+	if (chapter >= doc->chapters_cached_len)
+		return 0;
+	return count_chapter_pages(ctx, doc, doc->chapters_cached[chapter]);
 }
 
 #define MAGIC_ACCELERATOR 0xacce1e7a
@@ -654,6 +668,7 @@ epub_drop_document(fz_context *ctx, fz_document *doc_)
 	fz_free(ctx, doc->dc_title);
 	fz_free(ctx, doc->dc_creator);
 	fz_drop_html(ctx, doc->most_recent_html);
+	fz_free(ctx, doc->chapters_cached);
 	fz_purge_stored_html(ctx, doc);
 }
 
