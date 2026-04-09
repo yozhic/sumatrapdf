@@ -119,6 +119,14 @@ static struct {
     {"monospace", "CourierNewPSMT"},
     {"cursive", "ComicSansMS"},
     {"fantasy", "Impact"},
+    // fallbacks for fonts commonly used in EPUBs that may not be installed
+    {"DroidSansMono", "Consolas"},
+    {"SourceSansPro", "SegoeUI"},
+    {"SourceSansPro-Bold", "SegoeUI-Bold"},
+    {"SourceSansPro-Italic", "SegoeUI-Italic"},
+    {"SourceSansPro-BoldItalic", "SegoeUI-BoldItalic"},
+    {"SourceSansPro-Light", "SegoeUI-Light"},
+    {"SourceSansPro-Semibold", "SegoeUI-Semibold"},
 };
 
 static win_fonts g_win_fonts;
