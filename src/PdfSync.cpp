@@ -584,7 +584,7 @@ int SyncTex::RebuildIndexIfNeeded() {
     // Note: https://github.com/sumatrapdfreader/sumatrapdf/discussions/2640#discussioncomment-2861368
     // reported failure to parse a large (12 MB) .synctex.gz even though file exists
     i64 fsize;
-    if (!file::Exists(pathSyncGz)) {
+    if (!file::Exists(pathSyncGz) && !file::Exists(pathSyncTemp)) {
         logfa("SyncTex::RebuildIndexIfNeeded: '.synctex.gz' file NOT found '%s'\n", pathSyncGz);
         return PDFSYNCERR_SYNCFILE_NOTFOUND;
     }

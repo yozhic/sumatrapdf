@@ -36,6 +36,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `TabsMru` advanced setting and `CmdToggleTabsMru` (`Toggle Tabs MRU`) command to toggle it. It changes order of navigating tabs when usint `Ctrl + Tab` (`CmdNextTabSmart`)
 - improve document properties for comic book files (CBZ, CBR, CB7, CBT). We now show list of image files.
 - improve document properties for image files: size, dimensions, DPI, exif metadata
+- support encrypted .cbz, .cbr files
 
 ## 3.6.1 (2026-04-06)
 
