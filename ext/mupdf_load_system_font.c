@@ -146,6 +146,34 @@ static win_fonts g_win_fonts;
 static int did_init = 0;
 static CRITICAL_SECTION cs_fonts;
 
+// cache of font names that failed to load, to avoid repeated lookups
+// names are stored 0-separated in gFontsFailedToLoad
+static char gFontsFailedToLoad[256];
+static int gFontsFailedToLoadLen = 0;
+
+static int is_font_failed(const char* name) {
+    int nameLen = (int)strlen(name);
+    int pos = 0;
+    while (pos < gFontsFailedToLoadLen) {
+        const char* entry = gFontsFailedToLoad + pos;
+        int entryLen = (int)strlen(entry);
+        if (entryLen == nameLen && memcmp(entry, name, nameLen) == 0) {
+            return 1;
+        }
+        pos += entryLen + 1;
+    }
+    return 0;
+}
+
+static void add_font_failed(const char* name) {
+    int n = (int)strlen(name) + 1;
+    if (gFontsFailedToLoadLen + n > (int)sizeof(gFontsFailedToLoad)) {
+        return; // buffer full, just skip
+    }
+    memcpy(gFontsFailedToLoad + gFontsFailedToLoadLen, name, n);
+    gFontsFailedToLoadLen += n;
+}
+
 static int streq(const char* s1, const char* s2) {
     if (strcmp(s1, s2) == 0) {
         return 1;
@@ -672,6 +700,10 @@ static fz_font* load_windows_font_by_name(fz_context* ctx, const char* orig_name
     fz_font* font;
     fz_buffer* buffer;
 
+    if (is_font_failed(orig_name)) {
+        return NULL;
+    }
+
     EnterCriticalSection(&cs_fonts);
     if (g_win_fonts.len == 0) {
         fz_try(ctx) {
@@ -758,6 +790,7 @@ Exit:
     fz_free(ctx, fontname);
     if (!found) {
         fz_warn(ctx, "couldn't find system font '%s'", orig_name);
+        add_font_failed(orig_name);
         return NULL;
     }
     buffer = load_and_cache_font(ctx, found, orig_name);
