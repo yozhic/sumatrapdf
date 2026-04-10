@@ -1354,7 +1354,8 @@ class EngineCbx : public EngineImages {
 
     TocTree* GetToc() override;
 
-    static EngineBase* CreateFromFile(const char* path, const char* password = nullptr);
+    static EngineBase* CreateFromFile(const char* path, const char* password = nullptr,
+                                      MultiFormatArchive::Format* formatOut = nullptr, bool* isEncryptedOut = nullptr);
     static EngineBase* CreateFromStream(IStream* stream);
 
   protected:
@@ -1445,6 +1446,8 @@ static const char* GetExtFromArchiveType(MultiFormatArchive* cbxFile) {
             return ".cb7";
         case MultiFormatArchive::Format::Tar:
             return ".cbt";
+        case MultiFormatArchive::Format::Unknown:
+            break;
     }
     ReportIf(true);
     return nullptr;
@@ -1682,7 +1685,8 @@ RectF EngineCbx::LoadMediabox(int pageNo) {
     return RectF(0, 0, 595, 842);
 }
 
-EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password) {
+EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password, MultiFormatArchive::Format* formatOut,
+                                      bool* isEncryptedOut) {
     auto timeStart = TimeGet();
     // we sniff the type from content first because the
     // files can be mis-named e.g. .cbr archive with .cbz ext
@@ -1700,21 +1704,20 @@ EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password) {
     MultiFormatArchive* archive = nullptr;
     auto openArchive = [&]() -> MultiFormatArchive* {
         MultiFormatArchive* a = nullptr;
-        if (kind == kindFileZip) {
-            a = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
-        } else if (kind == kindFileRar) {
-            a = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
-        } else if (kind == kindFile7Z) {
-            a = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
+        if (kind == kindFileZip || kind == kindFileRar || kind == kindFile7Z) {
+            a = new MultiFormatArchive();
         }
         if (!a) {
             Kind nameKind = GuessFileTypeFromName(path);
             if (nameKind == kindFileCbt || nameKind == kindFileTar) {
-                a = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
+                a = new MultiFormatArchive();
             }
         }
         if (!a) {
             return nullptr;
+        }
+        if (kind == kindFileRar) {
+            a->format = MultiFormatArchive::Format::Rar;
         }
         a->password = str::Dup(password);
         if (!a->Open(path)) {
@@ -1727,6 +1730,12 @@ EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password) {
     archive = openArchive();
     if (!archive) {
         return nullptr;
+    }
+    if (formatOut) {
+        *formatOut = archive->format;
+    }
+    if (isEncryptedOut) {
+        *isEncryptedOut = archive->isEncrypted;
     }
     logf("EngineCbx::CreateFromFile(): opening archive took %.2f\n", TimeSinceInMs(timeStart));
 
@@ -1787,24 +1796,19 @@ bool IsEngineCbxSupportedFileType(Kind kind) {
     return KindIndexOf(cbxKinds, n, kind) >= 0;
 }
 
-// check if a file is an encrypted 7z archive
-// libarchive doesn't support decrypting 7z, so we can't open these
-static bool IsEncrypted7z(const char* path) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
-    archive->Open(path);
-    bool encrypted = archive->isEncrypted;
-    delete archive;
-    return encrypted;
-}
-
 EngineBase* CreateEngineCbxFromFile(const char* path, PasswordUI* pwdUI) {
-    EngineBase* engine = EngineCbx::CreateFromFile(path);
+    MultiFormatArchive::Format fmt = MultiFormatArchive::Format::Unknown;
+    bool isEncrypted = false;
+    EngineBase* engine = EngineCbx::CreateFromFile(path, nullptr, &fmt, &isEncrypted);
     if (engine || !pwdUI) {
         return engine;
     }
+    if (!isEncrypted) {
+        return nullptr;
+    }
     // libarchive can't decrypt 7z archives, so don't prompt for password
-    if (IsEncrypted7z(path)) {
-        logf("CreateEngineCbxFromFile: encrypted 7z not supported\n");
+    if (fmt == MultiFormatArchive::Format::SevenZip || fmt == MultiFormatArchive::Format::Unknown) {
+        logf("CreateEngineCbxFromFile: encrypted 7z/unknown not supported\n");
         return nullptr;
     }
     // if opening failed, try with password

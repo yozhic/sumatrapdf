@@ -26,10 +26,24 @@ FILETIME MultiFormatArchive::FileInfo::GetWinFileTime() const {
     return ft;
 }
 
-MultiFormatArchive::MultiFormatArchive(MultiFormatArchive::Format format) : format(format) {
-    if (format == Format::Tar) {
-        loadOnOpen = true;
+MultiFormatArchive::MultiFormatArchive() {}
+
+static MultiFormatArchive::Format FormatFromArchive(struct archive* a) {
+    int fmt = archive_format(a);
+    // archive_format returns a bitmask; the high bits identify the family
+    if ((fmt & ARCHIVE_FORMAT_ZIP) == ARCHIVE_FORMAT_ZIP) {
+        return MultiFormatArchive::Format::Zip;
     }
+    if ((fmt & ARCHIVE_FORMAT_RAR) == ARCHIVE_FORMAT_RAR || (fmt & ARCHIVE_FORMAT_RAR_V5) == ARCHIVE_FORMAT_RAR_V5) {
+        return MultiFormatArchive::Format::Rar;
+    }
+    if ((fmt & ARCHIVE_FORMAT_7ZIP) == ARCHIVE_FORMAT_7ZIP) {
+        return MultiFormatArchive::Format::SevenZip;
+    }
+    if ((fmt & ARCHIVE_FORMAT_TAR) == ARCHIVE_FORMAT_TAR) {
+        return MultiFormatArchive::Format::Tar;
+    }
+    return MultiFormatArchive::Format::Unknown;
 }
 
 MultiFormatArchive::~MultiFormatArchive() {
@@ -148,6 +162,7 @@ bool MultiFormatArchive::Open(IStream* stream) {
     }
     // no file path to re-open from, so load all file data now
     loadOnOpen = true;
+    format = FormatFromArchive(a);
     bool ok = ParseEntries(a);
     if (archive_read_has_encrypted_entries(a) > 0) {
         isEncrypted = true;
@@ -162,13 +177,20 @@ bool MultiFormatArchive::OpenArchive(const char* path) {
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
     SetArchivePassword(a, password);
-    int r = archive_read_open_filename(a, path, 10240);
+    auto pathW = ToWStrTemp(path);
+    int r = archive_read_open_filename_w(a, pathW, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
         return false;
     }
     archivePath_ = str::Dup(path);
     bool ok = ParseEntries(a);
+    if (ok) {
+        format = FormatFromArchive(a);
+    }
+    if (format == Format::Tar) {
+        loadOnOpen = true;
+    }
     if (archive_read_has_encrypted_entries(a) > 0) {
         isEncrypted = true;
     }
@@ -233,7 +255,8 @@ ByteSlice MultiFormatArchive::GetFileDataByIdLibarchive(size_t fileId) {
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
     SetArchivePassword(a, password);
-    int r = archive_read_open_filename(a, archivePath_, 10240);
+    auto pathW = ToWStrTemp(archivePath_);
+    int r = archive_read_open_filename_w(a, pathW, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
         return {};
@@ -298,7 +321,8 @@ ByteSlice MultiFormatArchive::GetFileDataPartById(size_t fileId, size_t sizeHint
     archive_read_support_format_all(a);
     archive_read_support_filter_all(a);
     SetArchivePassword(a, password);
-    int r = archive_read_open_filename(a, archivePath_, 10240);
+    auto pathW = ToWStrTemp(archivePath_);
+    int r = archive_read_open_filename_w(a, pathW, 10240);
     if (r != ARCHIVE_OK) {
         archive_read_free(a);
         return {};
@@ -356,42 +380,44 @@ static MultiFormatArchive* open(MultiFormatArchive* archive, IStream* stream) {
 }
 
 MultiFormatArchive* OpenZipArchive(const char* path, bool /*deflatedOnly*/) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
+    auto* archive = new MultiFormatArchive();
     return open(archive, path);
 }
 
 MultiFormatArchive* Open7zArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
+    auto* archive = new MultiFormatArchive();
     return open(archive, path);
 }
 
 MultiFormatArchive* OpenTarArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
+    auto* archive = new MultiFormatArchive();
     return open(archive, path);
 }
 
 MultiFormatArchive* OpenRarArchive(const char* path) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
+    auto* archive = new MultiFormatArchive();
+    archive->format = MultiFormatArchive::Format::Rar;
     return open(archive, path);
 }
 
 MultiFormatArchive* OpenZipArchive(IStream* stream, bool /*deflatedOnly*/) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Zip);
+    auto* archive = new MultiFormatArchive();
     return open(archive, stream);
 }
 
 MultiFormatArchive* Open7zArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::SevenZip);
+    auto* archive = new MultiFormatArchive();
     return open(archive, stream);
 }
 
 MultiFormatArchive* OpenTarArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Tar);
+    auto* archive = new MultiFormatArchive();
     return open(archive, stream);
 }
 
 MultiFormatArchive* OpenRarArchive(IStream* stream) {
-    auto* archive = new MultiFormatArchive(MultiFormatArchive::Format::Rar);
+    auto* archive = new MultiFormatArchive();
+    archive->format = MultiFormatArchive::Format::Rar;
     return open(archive, stream);
 }
 

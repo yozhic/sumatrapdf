@@ -7,6 +7,7 @@ struct archive_entry;
 class MultiFormatArchive {
   public:
     enum class Format {
+        Unknown,
         Zip,
         Rar,
         SevenZip,
@@ -26,10 +27,10 @@ class MultiFormatArchive {
         FILETIME GetWinFileTime() const;
     };
 
-    MultiFormatArchive(Format format);
+    MultiFormatArchive();
     ~MultiFormatArchive();
 
-    Format format;
+    Format format = Format::Unknown;
 
     bool Open(const char* path);
     bool Open(IStream* stream);
