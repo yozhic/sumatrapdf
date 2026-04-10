@@ -44816,3 +44816,147 @@ vn:Trích xuất văn bản từ tài liệu
 vn:Hiển thị khung tài liệu
 :Toggle Tips
 vn:Bật/tắt gợi ý
+:Change Background Color
+am:የበስተጀርባ ቀለም ቀይር
+:Change Background Color
+ar:تغيير لون الخلفية
+:Change Background Color
+br:Kemmañ liv an drekva
+:Change Background Color
+cn:更改背景颜色
+:Change Background Color
+co:Cambià u Culore di Fondu
+:Change Background Color
+de:Hintergrundfarbe ändern
+:Change Background Color
+el:Αλλαγή Χρώματος Φόντου
+:Change Background Color
+hi:पृष्ठभूमि का रंग बदलें
+:Change Background Color
+it:Cambia colore di sfondo
+:Change Background Color
+ja:背景色を変更
+:Change Background Color
+ml:പശ്ചാത്തല നിറം മാറ്റുക
+:Change Background Color
+nl:Achtergrondkleur wijzigen
+:Change Background Color
+pl:Zmień kolor tła
+:Change Background Color
+ru:Изменить цвет фона
+:Change Background Color
+sk:Zmeniť farbu pozadia
+:Change Background Color
+sr-rs:Promeni boju pozadine
+:Change Background Color
+tw:變更背景顏色
+:Change Background Color
+az:Arxa Plan Rəngini Dəyişdir
+:Change Background Color
+by:Змяніць колер фону
+:Change Background Color
+ca:Canvia el color de fons
+:Change Background Color
+cy:Newid Lliw Cefndir
+:Change Background Color
+cz:Změnit barvu pozadí
+:Change Background Color
+es:Cambiar color de fondo
+:Change Background Color
+fa:تغییر رنگ پس‌زمینه
+:Change Background Color
+fi:Vaihda taustaväriä
+:Change Background Color
+fo:Broyt bakgrundslit
+:Change Background Color
+fr:Changer la couleur d'arrière-plan
+:Change Background Color
+ga:Athraigh Dath an Chúlra
+:Change Background Color
+gl:Cambiar a cor de fondo
+:Change Background Color
+he:שינוי צבע רקע
+:Change Background Color
+hu:Háttérszín megváltoztatása
+:Change Background Color
+id:Ubah Warna Latar Belakang
+:Change Background Color
+kr:배경색 변경
+:Change Background Color
+lv:Mainīt fona krāsu
+:Change Background Color
+my:နောက်ခံအရောင်ပြောင်းရန်
+:Change Background Color
+pt:Alterar Cor de Fundo
+:Change Background Color
+ro:Schimbă culoarea fundalului
+:Change Background Color
+sat:ᱯᱟᱹᱪᱷᱟᱹᱛ ᱨᱚᱝ ᱵᱚᱫᱚᱞ ᱢᱮ
+:Change Background Color
+sl:Spremeni barvo ozadja
+:Change Background Color
+sv:Ändra bakgrundsfärg
+:Change Background Color
+ta:பின்புல நிறத்தை மாற்று
+:Change Background Color
+tr:Arka Plan Rengini Değiştir
+:Change Background Color
+uz:Fon rangini o'zgartirish
+:Change Background Color
+af:Verander Agtergrondkleur
+:Change Background Color
+bg:Промяна на цвета на фона
+:Change Background Color
+bn:পটভূমির রঙ পরিবর্তন করুন
+:Change Background Color
+bs:Promijeni boju pozadine
+:Change Background Color
+ca-xv:Canvia el color de fons
+:Change Background Color
+dk:Skift baggrundsfarve
+:Change Background Color
+et:Muuda taustavärvi
+:Change Background Color
+eu:Aldatu atzeko planoaren kolorea
+:Change Background Color
+fy-nl:Eftergrûnkleur wizigje
+:Change Background Color
+hr:Promijeni boju pozadine
+:Change Background Color
+jv:Ganti Werna Latar Mburi
+:Change Background Color
+ka:ფონის ფერის შეცვლა
+:Change Background Color
+ku:Rengê Paşrûyê Biguherîne
+:Change Background Color
+kw:Chanjya Liw an Kilva
+:Change Background Color
+lt:Keisti fono spalvą
+:Change Background Color
+mk:Промени боја на позадина
+:Change Background Color
+mm:နောက်ခံအရောင်ပြောင်းရန်
+:Change Background Color
+ne:पृष्ठभूमि रंग परिवर्तन गर्नुहोस्
+:Change Background Color
+nn:Endre bakgrunnsfarge
+:Change Background Color
+no:Endre bakgrunnsfarge
+:Change Background Color
+pa:ਬੈਕਗ੍ਰਾਉਂਡ ਰੰਗ ਬਦਲੋ
+:Change Background Color
+si:පසුබිම් වර්ණය වෙනස් කරන්න
+:Change Background Color
+sn:Chinja Ruvara Rwekumashure
+:Change Background Color
+sp-rs:Промени боју позадине
+:Change Background Color
+sq:Ndrysho Ngjyrën e Sfondit
+:Change Background Color
+th:เปลี่ยนสีพื้นหลัง
+:Change Background Color
+tl:Baguhin ang Kulay ng Background
+:Change Background Color
+uk:Змінити колір фону
+:Change Background Color
+vn:Thay đổi màu nền

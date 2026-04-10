@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-972eb897e185bec9d1ba56fefc3b011dc1c00233
+756e5df7e642e96f89469e542516fc8d983161e0
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -1877,7 +1877,7 @@ hi:&अगला पृष्ठ
 hr:Sljedeća stra&nica
 hu:&Következő oldal
 id:Halaman selanjutnya
-it:Pagina successiva
+it:Pagi&na successiva
 ja:次のページ(&N)
 kr:다음 페이지(&N)
 lv:&Nākamo lappusi
@@ -2979,6 +2979,12 @@ uk:Налаштування
 uz:&Moslamalar
 vn:Cài đặt
 :&Show password
+br:&Mostrar senha
+co:&Affissà a parolla d’intesa
+de:Pa&sswort anzeigen
+it:Mo&stra la password
+pl:Pokaż &hasło
+sk:Zobraziť &heslo
 :&Shrink To Fit
 br:&Encolher pra Ajustar
 cn:缩小至合适尺寸(&S)
@@ -5138,7 +5144,7 @@ br:Assar o Arquivo PDF
 cn:展平 PDF 文件
 co:Creà un schedariu PDF
 de:PDF-Datei erstellen
-it:Stampa il file PDF
+it:Stampa file PDF
 nl:Creëer PDF Bestand
 pl:Upiecz plik PDF
 sk:Vytvoriť súbor PDF
@@ -5949,6 +5955,7 @@ it:Modifica barra &scorrimento
 nl:Wijzig &Scrolbalk
 pl:Zmień pasek &przewijania
 sk:Zmeniť po&suvník
+:Change Background Color
 :Change Language
 af:Verander Taal (Change Language)
 am:Փոխել լեզուն (Change Language)
@@ -9414,7 +9421,7 @@ cn:调试：开启/关闭预测性渲染
 co:Spannatura : Attivà o disattivà a restituzione di predizzione
 de:Debug: Vorschau-Rendering umschalten
 el:Εντοπισμός σφαλμάτων: Εναλλαγή προγνωστικής απόδοσης
-it:Debug: Commuta rendering predittivo
+it:Debug: Commuta Rendering predittivo
 nl:Foutopsporing: IN-/UIT Schakelen Voorspellende Weergave
 pl:Debugowanie: przełącz renderowanie predykcyjne
 sk:Ladenie: Prepnúť Prediktívne vykresľovanie
@@ -10355,7 +10362,7 @@ hi:पहचान शब्द भरें
 hr:Unesi lozinku
 hu:Írja be a jelszót
 id:Masukkan kata sandi
-it:Inserisci password
+it:Inserire la password
 ja:パスワードの入力
 jv:Lebokno sandi
 ka:შეიყვანეთ პაროლი
@@ -10428,7 +10435,7 @@ hi:%s के लिए पहचान शब्द भरें
 hr:Unesi lozinku za %s
 hu:Írja be a(z) %s jelszavát
 id:Masukkan kata sandi untuk %s
-it:Inserisci password per %s
+it:Inserire la password per %s
 ja:%s のパスワードを入力します
 ka:შეიყვანეთ პაროლი %s-ისთვის
 kr:%s의 비밀번호를 입력하세요.
@@ -10772,6 +10779,12 @@ nl:Blootstelling Tijd:
 pl:Czas ekspozycji:
 sk:Čas expozície:
 :Extract Text From Document
+br:Extrair Texto do Documento
+co:Estrae testu da u ducumentu
+de:Text aus Dokument extrahieren
+it:Estrai il testo dal documento
+pl:Wyodrębnij tekst z dokumentu
+sk:Extrahovať text z dokumentu
 :F&avorites
 am:Ը&նտրյալներ
 ar:المفضلة
@@ -20156,7 +20169,7 @@ cn:文件另存为…
 co:Arregistrà u schedariu cù u nome…
 de:Datei speichern unter…
 el:Αποθήκευση αρχείου ως...
-it:Salva file come...
+it:Salva file con nome...
 nl:Bestand Opslaan Als...
 pl:Zapisz plik jako...
 ru:Сохранить файл как...
@@ -21811,6 +21824,12 @@ uk:Показати закладки
 uz:Belgilangan sahifalarni ko‘rsatish
 vn:Hiển thị Dấu &trang
 :Show Document Outline
+br:Mostrar o Contorno do Documento
+co:Affissà u cuntornu di u ducumentu
+de:Dokumentgliederung anzeigen
+it:Mostra Struttura documento
+pl:Pokaż konspekt dokumentu
+sk:Zobraziť osnovu dokumentu
 :Show Document Properties...
 am:Ցուցադրել փաստաթղթի հատկությունները...
 br:Mostrar as Propriedades do Documento...
@@ -21818,7 +21837,7 @@ cn:显示文档属性…
 co:Affissà i pruprietà di u ducumentu…
 de:Dokumenteigenschaften anzeigen…
 el:Εμφάνιση ιδιοτήτων εγγράφου...
-it:Mostra proprietà documento...
+it:Mostra Proprietà documento...
 nl:Toon Document Eigenschappen...
 pl:Pokaż właściwości dokumentu...
 ru:Показать свойства документа...
@@ -22276,7 +22295,7 @@ cn:智能切换到下一标签页
 co:Frizzulà l’unghjetta seguente
 de:Intelligenter nächster Tab
 el:Έξυπνη επόμενη καρτέλα
-it:Scheda successiva smart
+it:Scheda successiva intelligente
 nl:Slim Volgende Tab
 pl:Następna karta inteligentnie
 sk:Inteligentné prepínanie kariet
@@ -23978,7 +23997,7 @@ cn:开启/关闭漫画模式
 co:Attivà o disattivà u mode Manga
 de:Manga-Modus umschalten
 el:Εναλλαγή Λειτουργίας Manga
-it:Commuta modalità Manga
+it:Commuta Modalità Manga
 nl:Manga Modus IN/UIT Schakelen
 pl:Przełącz tryb mangi
 sk:Prepnúť Režim Manga
@@ -23990,7 +24009,7 @@ cn:开启/关闭区分大小写
 co:Attivà o disattivà u rispettu di a cassa
 de:Groß-/Kleinschreibung umschalten
 el:Εναλλαγή αντιστοίχισης πεζοκεφαλαίων
-it:Commuta MAIUSCOLO/minuscolo
+it:Commuta MAIUSCOLE/minuscole
 nl:Hoofdlettergebruik IN\UIT Schakelen
 pl:Przełącz uwzględnianie wielkości liter
 sk:Prepnúť Rozlišovanie veľkých/malých písmen
@@ -24084,6 +24103,12 @@ nl:IN/UIT Schakelen Tabbladen MRU Volgorde
 pl:Przełącz kolejność ostatnio używanych kart
 sk:Prepnúť poradie kariet od najnovších
 :Toggle Tips
+br:Ativar/Desativar as Dicas
+co:Attivà o disattivà i cunsiglii
+de:Tipps anzeigen/ausblenden
+it:Commuta Suggerimenti
+pl:Przełącz wskazówki
+sk:Prepnúť Tipy
 :Toggle Toolbar
 am:Գործիքագոտու միացում/անջատում
 br:Ativar/Desativar a Barra de Ferramentas
@@ -24101,7 +24126,7 @@ br:Ativar/Desativar o Uso das Abas
 cn:开启/关闭标签功能
 co:Attivà o disattivà l’unghjette d’impiegu
 de:Tabs ein-/ausblenden
-it:Commuta Usa schede
+it:Commuta Utilizza schede
 nl:Tabbladen IN\UIT Schakelen
 pl:Przełącz używanie kart
 sk:Prepnúť Použiť karty
