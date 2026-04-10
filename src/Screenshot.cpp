@@ -445,10 +445,14 @@ static TempStr MakeUniquePathTemp(const char* dir, const char* base) {
     return nullptr;
 }
 
-// Create a scaled thumbnail of a bitmap
+// Create a scaled thumbnail of a bitmap (only downscale, never upscale)
 static HBITMAP CreateThumbnail(HBITMAP src, int srcW, int srcH, int* outW, int* outH) {
     int tw, th;
-    if (srcW >= srcH) {
+    if (srcW <= kMaxThumbSize && srcH <= kMaxThumbSize) {
+        // source fits within thumbnail size, use original size
+        tw = srcW;
+        th = srcH;
+    } else if (srcW >= srcH) {
         tw = kMaxThumbSize;
         th = MulDiv(srcH, kMaxThumbSize, srcW);
     } else {

@@ -579,12 +579,32 @@ static HCURSOR GetCursorForEdge(DragEdge edge) {
     }
 }
 
+// draw a checkerboard transparency pattern behind the image area
+static void PaintCheckerboard(HDC hdc, int x, int y, int w, int h) {
+    constexpr int kCheckerSize = 8;
+    COLORREF lightColor = RGB(255, 255, 255);
+    COLORREF darkColor = RGB(204, 204, 204);
+    HBRUSH lightBrush = CreateSolidBrush(lightColor);
+    HBRUSH darkBrush = CreateSolidBrush(darkColor);
+
+    for (int cy = 0; cy < h; cy += kCheckerSize) {
+        for (int cx = 0; cx < w; cx += kCheckerSize) {
+            int cellW = std::min(kCheckerSize, w - cx);
+            int cellH = std::min(kCheckerSize, h - cy);
+            RECT rc = {x + cx, y + cy, x + cx + cellW, y + cy + cellH};
+            bool isDark = ((cx / kCheckerSize) + (cy / kCheckerSize)) % 2 != 0;
+            FillRect(hdc, &rc, isDark ? darkBrush : lightBrush);
+        }
+    }
+
+    DeleteObject(lightBrush);
+    DeleteObject(darkBrush);
+}
+
 static void PaintSaveImage(ImageEditWindow* ew, HDC hdc) {
     Rect cRc = ClientRect(ew->hwnd);
 
-    HBRUSH bgBrush = (HBRUSH)GetStockObject(DKGRAY_BRUSH);
-    RECT rcImg = {0, 0, cRc.dx, ew->imgAreaH};
-    FillRect(hdc, &rcImg, bgBrush);
+    PaintCheckerboard(hdc, 0, 0, cRc.dx, ew->imgAreaH);
 
     if (!ew->srcBitmap || ew->imgDisplayW <= 0 || ew->imgDisplayH <= 0) {
         return;
@@ -597,10 +617,7 @@ static void PaintSaveImage(ImageEditWindow* ew, HDC hdc) {
 static void PaintCropImage(ImageEditWindow* ew, HDC hdc) {
     Rect cRc = ClientRect(ew->hwnd);
 
-    // fill image area background
-    HBRUSH bgBrush = (HBRUSH)GetStockObject(DKGRAY_BRUSH);
-    RECT rcImg = {0, 0, cRc.dx, ew->imgAreaH};
-    FillRect(hdc, &rcImg, bgBrush);
+    PaintCheckerboard(hdc, 0, 0, cRc.dx, ew->imgAreaH);
 
     if (!ew->srcBitmap || ew->imgDisplayW <= 0 || ew->imgDisplayH <= 0) {
         return;
@@ -679,10 +696,7 @@ static void PaintCropImage(ImageEditWindow* ew, HDC hdc) {
 static void PaintResizeImage(ImageEditWindow* ew, HDC hdc) {
     Rect cRc = ClientRect(ew->hwnd);
 
-    // fill image area background
-    HBRUSH bgBrush = (HBRUSH)GetStockObject(DKGRAY_BRUSH);
-    RECT rcImg = {0, 0, cRc.dx, ew->imgAreaH};
-    FillRect(hdc, &rcImg, bgBrush);
+    PaintCheckerboard(hdc, 0, 0, cRc.dx, ew->imgAreaH);
 
     if (!ew->srcBitmap || ew->imgDisplayW <= 0 || ew->imgDisplayH <= 0) {
         return;
@@ -1247,44 +1261,42 @@ LRESULT CALLBACK WndProcImageEdit(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         case WM_PAINT: {
             ew = FindImageEditWindowByHwnd(hwnd);
-            if (ew) {
-                PAINTSTRUCT ps;
-                HDC hdc = BeginPaint(hwnd, &ps);
-                // double-buffer only the image area to avoid flicker
-                Rect cRc = ClientRect(hwnd);
-                int paintH = ew->imgAreaH;
-                if (paintH > cRc.dy) {
-                    paintH = cRc.dy;
-                }
-                HDC memDC = CreateCompatibleDC(hdc);
-                HBITMAP memBmp = CreateCompatibleBitmap(hdc, cRc.dx, paintH);
-                HBITMAP oldBmp = (HBITMAP)SelectObject(memDC, memBmp);
-                if (ew->mode == ImageEditMode::Save) {
-                    PaintSaveImage(ew, memDC);
-                } else if (ew->mode == ImageEditMode::Crop) {
-                    PaintCropImage(ew, memDC);
-                } else {
-                    PaintResizeImage(ew, memDC);
-                }
-                BitBlt(hdc, 0, 0, cRc.dx, paintH, memDC, 0, 0, SRCCOPY);
-                SelectObject(memDC, oldBmp);
-                DeleteObject(memBmp);
-                DeleteDC(memDC);
-                EndPaint(hwnd, &ps);
+            if (!ew) return 0;
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+            // double-buffer only the image area to avoid flicker
+            Rect cRc = ClientRect(hwnd);
+            int paintH = ew->imgAreaH;
+            if (paintH > cRc.dy) {
+                paintH = cRc.dy;
             }
+            HDC memDC = CreateCompatibleDC(hdc);
+            HBITMAP memBmp = CreateCompatibleBitmap(hdc, cRc.dx, paintH);
+            HBITMAP oldBmp = (HBITMAP)SelectObject(memDC, memBmp);
+            if (ew->mode == ImageEditMode::Save) {
+                PaintSaveImage(ew, memDC);
+            } else if (ew->mode == ImageEditMode::Crop) {
+                PaintCropImage(ew, memDC);
+            } else {
+                PaintResizeImage(ew, memDC);
+            }
+            BitBlt(hdc, 0, 0, cRc.dx, paintH, memDC, 0, 0, SRCCOPY);
+            SelectObject(memDC, oldBmp);
+            DeleteObject(memBmp);
+            DeleteDC(memDC);
+            EndPaint(hwnd, &ps);
             return 0;
         }
 
         case WM_ERASEBKGND: {
             ew = FindImageEditWindowByHwnd(hwnd);
-            if (ew) {
-                // paint control area background, skip image area (double-buffered)
-                HDC hdc = (HDC)wp;
-                RECT crc;
-                GetClientRect(hwnd, &crc);
-                RECT ctrlRc = {0, ew->imgAreaH, crc.right, crc.bottom};
-                FillRect(hdc, &ctrlRc, GetSysColorBrush(COLOR_BTNFACE));
-            }
+            if (!ew) return 0;
+            // paint control area background, skip image area (double-buffered)
+            HDC hdc = (HDC)wp;
+            RECT crc;
+            GetClientRect(hwnd, &crc);
+            RECT ctrlRc = {0, ew->imgAreaH, crc.right, crc.bottom};
+            FillRect(hdc, &ctrlRc, GetSysColorBrush(COLOR_BTNFACE));
             return 1;
         }
 
