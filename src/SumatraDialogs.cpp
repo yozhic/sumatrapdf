@@ -732,7 +732,7 @@ static INT_PTR CALLBACK Dialog_ChangeScrollbar_Proc(HWND hDlg, UINT msg, WPARAM 
             if (UseDarkModeLib()) {
                 DarkMode::setDarkWndSafe(hDlg);
             }
-            const char* s = gGlobalPrefs->fixedPageUI.scrollbars;
+            const char* s = gGlobalPrefs->scrollbars;
             int checkId = IDC_SCROLLBAR_WINDOWS;
             if (str::EqI(s, "smart")) {
                 checkId = IDC_SCROLLBAR_SMART;
@@ -759,7 +759,7 @@ static INT_PTR CALLBACK Dialog_ChangeScrollbar_Proc(HWND hDlg, UINT msg, WPARAM 
                     } else if (IsDlgButtonChecked(hDlg, IDC_SCROLLBAR_HIDDEN) == BST_CHECKED) {
                         val = "hidden";
                     }
-                    str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, val);
+                    str::ReplaceWithCopy(&gGlobalPrefs->scrollbars, val);
                     EndDialog(hDlg, IDOK);
                     return TRUE;
                 }

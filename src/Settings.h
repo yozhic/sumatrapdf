@@ -67,10 +67,6 @@ struct FixedPageUI {
     // if true, TextColor and BackgroundColor of the document will be
     // swapped
     bool invertColors;
-    // scrollbar mode: windows (standard Windows scrollbar), smart (overlay
-    // scrollbar with auto-hide), overlay (always visible overlay
-    // scrollbar), hidden (no scrollbars)
-    char* scrollbars;
 };
 
 // customization options for eBookUI
@@ -163,7 +159,7 @@ struct ExternalViewer {
     char* filter;
     // optional: keyboard shortcut e.g. Alt + 7
     char* key;
-    // if given, shows a button in the toolbar
+    // if given, shows in toolbar
     char* toolbarText;
 };
 
@@ -444,6 +440,10 @@ struct GlobalPrefs {
     bool showStartPage;
     // width of favorites/bookmarks sidebar (if shown)
     int sidebarDx;
+    // scrollbar mode: windows (standard Windows scrollbar), smart (overlay
+    // scrollbar with auto-hide), overlay (always visible overlay
+    // scrollbar), hidden (no scrollbars)
+    char* scrollbars;
     // if true, we show scrollbar in single page mode
     bool scrollbarInSinglePage;
     // if true, implements smooth scrolling
@@ -583,11 +583,10 @@ static const FieldInfo gFixedPageUIFields[] = {
     {offsetof(FixedPageUI, pageSpacing), SettingType::Compact, (intptr_t)&gSizeInfo},
     {offsetof(FixedPageUI, gradientColors), SettingType::ColorArray, 0},
     {offsetof(FixedPageUI, invertColors), SettingType::Bool, false},
-    {offsetof(FixedPageUI, scrollbars), SettingType::String, (intptr_t)"windows"},
 };
 static const StructInfo gFixedPageUIInfo = {
-    sizeof(FixedPageUI), 8, gFixedPageUIFields,
-    "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0GradientColors\0InvertColors\0Scrollbars"};
+    sizeof(FixedPageUI), 7, gFixedPageUIFields,
+    "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0GradientColors\0InvertColors"};
 
 static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, fontSize), SettingType::Float, (intptr_t)"0"},
@@ -844,6 +843,7 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {offsetof(GlobalPrefs, showLinks), SettingType::Bool, false},
     {offsetof(GlobalPrefs, showStartPage), SettingType::Bool, true},
     {offsetof(GlobalPrefs, sidebarDx), SettingType::Int, 0},
+    {offsetof(GlobalPrefs, scrollbars), SettingType::String, (intptr_t)"windows"},
     {offsetof(GlobalPrefs, scrollbarInSinglePage), SettingType::Bool, false},
     {offsetof(GlobalPrefs, smoothScroll), SettingType::Bool, false},
     {offsetof(GlobalPrefs, fastScrollOverScrollbar), SettingType::Bool, false},
@@ -902,17 +902,17 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 85, gGlobalPrefsFields,
+    sizeof(GlobalPrefs), 86, gGlobalPrefsFields,
     "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
     "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
     "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
     "howMenubar\0ShowMenubarWithTabs\0ShowPromo\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStartPage\0Sidebar"
-    "Dx\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0Theme\0TocDy"
-    "\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMru\0ZoomLevel"
-    "s\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ChmUI\0\0Annotations\0\0ExternalViewers\0\0ForwardSea"
-    "rch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0DefaultPasswords\0UiLanguage"
-    "\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdateCheck\0OpenCountWeek"
-    "\0PropWinPos\0\0"};
+    "Dx\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0"
+    "Theme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMr"
+    "u\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ChmUI\0\0Annotations\0\0ExternalViewers\0"
+    "\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0DefaultPasswords"
+    "\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdateCheck\0O"
+    "penCountWeek\0PropWinPos\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

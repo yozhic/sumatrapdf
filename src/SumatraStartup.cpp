@@ -1382,7 +1382,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
     LoadSettings();
     UpdateGlobalPrefs(flags);
     if (gMyWindowWasEmbedded) {
-        str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
+        str::ReplaceWithCopy(&gGlobalPrefs->scrollbars, "windows");
     }
     SetCurrentLang(flags.lang ? flags.lang : gGlobalPrefs->uiLanguage);
     FileWatcherInit();

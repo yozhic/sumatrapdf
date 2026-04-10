@@ -129,6 +129,11 @@ ShowStartPage = true
 ; width of favorites/bookmarks sidebar (if shown)
 SidebarDx = 0
 
+; scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar
+; with auto-hide), overlay (always visible overlay scrollbar), hidden (no
+; scrollbars) (introduced in version 3.7)
+Scrollbars = windows
+
 ; if true, we show scrollbar in single page mode (introduced in version 3.6)
 ScrollbarInSinglePage = false
 
@@ -221,11 +226,6 @@ FixedPageUI [
 
     ; if true, TextColor and BackgroundColor of the document will be swapped
     InvertColors = false
-
-    ; scrollbar mode: windows (standard Windows scrollbar), smart (overlay
-    ; scrollbar with auto-hide), overlay (always visible overlay scrollbar),
-    ; hidden (no scrollbars) (introduced in version 3.7)
-    Scrollbars = windows
 ]
 
 ; customization options for eBookUI
@@ -332,7 +332,7 @@ ExternalViewers [
     ; optional: keyboard shortcut e.g. Alt + 7 (introduced in version 3.6)
     Key =
 
-    ; if given, shows a button in the toolbar (introduced in version 3.6)
+    ; if given, shows in toolbar (introduced in version 3.7)
     ToolbarText =
   ]
 ]

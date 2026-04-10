@@ -284,10 +284,6 @@ const fixedPageUI: Field[] = [
       "suggested values: #2828aa #28aa28 #aa2828",
   ),
   mkField("InvertColors", Bool, false, "if true, TextColor and BackgroundColor of the document will be swapped"),
-  setVersion(
-    mkField("Scrollbars", Str, "windows", "scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar with auto-hide), overlay (always visible overlay scrollbar), hidden (no scrollbars)"),
-    "3.7",
-  ),
 ];
 
 const comicBookUI: Field[] = [
@@ -697,6 +693,10 @@ const globalPrefs: Field[] = [
     "if true, we show a list of frequently read documents when no document is loaded",
   ),
   mkField("SidebarDx", Int, 0, "width of favorites/bookmarks sidebar (if shown)"),
+  setVersion(
+    mkField("Scrollbars", Str, "windows", "scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar with auto-hide), overlay (always visible overlay scrollbar), hidden (no scrollbars)"),
+    "3.7",
+  ),
   setVersion(mkField("ScrollbarInSinglePage", Bool, false, "if true, we show scrollbar in single page mode"), "3.6"),
   setVersion(mkField("SmoothScroll", Bool, false, "if true, implements smooth scrolling"), "3.6"),
   setVersion(

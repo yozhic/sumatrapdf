@@ -270,8 +270,8 @@ bool LoadSettings() {
     setMinMax(gprefs->toolbarSize, 8, 64);
     setMinMax(gprefs->annotations.freeTextOpacity, 0, 100);
 
-    if (seqstrings::StrToIdxIS(gScrollbarModeNames, gprefs->fixedPageUI.scrollbars) < 0) {
-        str::ReplaceWithCopy(&gprefs->fixedPageUI.scrollbars, "windows");
+    if (seqstrings::StrToIdxIS(gScrollbarModeNames, gprefs->scrollbars) < 0) {
+        str::ReplaceWithCopy(&gprefs->scrollbars, "windows");
     }
 
     if (!gprefs->treeFontName) {

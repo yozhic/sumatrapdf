@@ -995,7 +995,7 @@ static void makeFullScrollbar(SCROLLINFO& si) {
 SeqStrings gScrollbarModeNames = "windows\0smart\0overlay\0hidden\0";
 
 int ScrollbarModeFromPrefs() {
-    int idx = seqstrings::StrToIdxIS(gScrollbarModeNames, gGlobalPrefs->fixedPageUI.scrollbars);
+    int idx = seqstrings::StrToIdxIS(gScrollbarModeNames, gGlobalPrefs->scrollbars);
     if (idx < 0) {
         idx = kScrollbarWindows;
     }
@@ -8007,7 +8007,7 @@ LRESULT CALLBACK WndProcSumatraFrame(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) 
     if (win && !gMyWindowWasEmbedded && isChildWindow) {
         logf("Detected window embedded in another window\n");
         gMyWindowWasEmbedded = true;
-        str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.scrollbars, "windows");
+        str::ReplaceWithCopy(&gGlobalPrefs->scrollbars, "windows");
         SetTabsInTitlebar(win, false);
         DestroyMenuBarRebar(win);
         SetMenu(hwnd, nullptr);
