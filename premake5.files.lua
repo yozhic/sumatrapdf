@@ -713,6 +713,7 @@ function freetype_files()
   })
 
   files_in_dir("ext/freetype/src", {
+    "gzip/ftgzip.c",
     "cff/cff.c",
     "cid/type1cid.c",
     "psaux/psaux.c",

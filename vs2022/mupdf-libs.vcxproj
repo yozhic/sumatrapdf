@@ -1054,6 +1054,7 @@
     <ClCompile Include="..\ext\freetype\src\base\fttype1.c" />
     <ClCompile Include="..\ext\freetype\src\cff\cff.c" />
     <ClCompile Include="..\ext\freetype\src\cid\type1cid.c" />
+    <ClCompile Include="..\ext\freetype\src\gzip\ftgzip.c" />
     <ClCompile Include="..\ext\freetype\src\psaux\psaux.c" />
     <ClCompile Include="..\ext\freetype\src\pshinter\pshinter.c" />
     <ClCompile Include="..\ext\freetype\src\psnames\psnames.c" />

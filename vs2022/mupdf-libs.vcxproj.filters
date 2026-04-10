@@ -37,6 +37,9 @@
     <Filter Include="freetype\src\cid">
       <UniqueIdentifier>{FF6CF3F7-EB65-124A-1498-F7CE00F0F155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="freetype\src\gzip">
+      <UniqueIdentifier>{C98763F6-359E-618C-7E15-EDADEA6A3214}</UniqueIdentifier>
+    </Filter>
     <Filter Include="freetype\src\psaux">
       <UniqueIdentifier>{E06573C3-CC49-3419-35AA-2E6C21AD1E9B}</UniqueIdentifier>
     </Filter>
@@ -688,6 +691,9 @@
     </ClCompile>
     <ClCompile Include="..\ext\freetype\src\cid\type1cid.c">
       <Filter>freetype\src\cid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\freetype\src\gzip\ftgzip.c">
+      <Filter>freetype\src\gzip</Filter>
     </ClCompile>
     <ClCompile Include="..\ext\freetype\src\psaux\psaux.c">
       <Filter>freetype\src\psaux</Filter>
