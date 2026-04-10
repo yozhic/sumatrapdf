@@ -18,6 +18,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `ComicBookUI.BackgroundColor` advanced setting to override the default black background for comic book files
 - add `ImageUI.BackgroundColor` advanced setting to override the default black background for image files
 - background color settings (`FixedPageUI.BackgroundColor`, `EBookUI.BackgroundColor`, `ComicBookUI.BackgroundColor`, `ImageUI.BackgroundColor`) accept `checkered` value to show a checkerboard transparency pattern
+- add `CmdChangeBackgroundColor` (`Change Background Color` in `Ctrl + k` [command palette](Command-Palette.md)) to change document background color per-file or for all files of the same type
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
 - you can now drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers

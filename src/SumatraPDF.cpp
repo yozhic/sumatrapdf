@@ -4351,6 +4351,76 @@ static void OnMenuViewShowHideToolbar() {
     }
 }
 
+static void OnMenuChangeBackgroundColor(MainWindow* win) {
+    WindowTab* tab = win->CurrentTab();
+    if (!tab || !tab->ctrl) {
+        return;
+    }
+    COLORREF curColor = tab->bgColor;
+    bool isCur = (curColor != kColorUnset);
+    bool isCheckered = (curColor == kColorUnset);
+
+    // if tab has no per-doc color, check global settings for the appropriate type
+    if (!isCur) {
+        COLORREF bg;
+        ThemeDocumentColors(bg);
+        curColor = bg;
+        isCheckered = false;
+    }
+
+    BgColorResult result;
+    if (!Dialog_ChangeBackgroundColor(win->hwndFrame, curColor, isCheckered, result)) {
+        return;
+    }
+
+    const char* colorStr;
+    if (result.isCheckered) {
+        colorStr = "checkered";
+    } else {
+        colorStr = SerializeColorTemp(result.color);
+    }
+    COLORREF newColor = result.isCheckered ? kColorUnset : result.color;
+
+    if (result.applyToAllFiles) {
+        auto* engine = tab->GetEngine();
+        bool isImage = engine && engine->IsImageCollection();
+        bool isCbx = engine && engine->kind == kindEngineComicBooks;
+        bool isEbook = engine && engine->kind == kindEngineMupdf && !str::EqI(engine->defaultExt, ".pdf");
+
+        if (isCbx) {
+            str::ReplaceWithCopy(&gGlobalPrefs->comicBookUI.backgroundColor, colorStr);
+            gGlobalPrefs->comicBookUI.backgroundColorParsed.wasParsed = false;
+        } else if (isImage) {
+            str::ReplaceWithCopy(&gGlobalPrefs->imageUI.backgroundColor, colorStr);
+            gGlobalPrefs->imageUI.backgroundColorParsed.wasParsed = false;
+        } else if (isEbook) {
+            str::ReplaceWithCopy(&gGlobalPrefs->eBookUI.backgroundColor, colorStr);
+            gGlobalPrefs->eBookUI.backgroundColorParsed.wasParsed = false;
+        } else {
+            str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.backgroundColor, colorStr);
+            gGlobalPrefs->fixedPageUI.backgroundColorParsed.wasParsed = false;
+        }
+        // clear per-file override so it inherits the global setting
+        FileState* fs = gFileHistory.FindByPath(tab->filePath);
+        if (fs) {
+            str::ReplaceWithCopy(&fs->backgroundColor, "");
+        }
+        tab->bgColor = kColorUnset;
+        SaveSettings();
+    } else {
+        // apply to this file only
+        FileState* fs = gFileHistory.FindByPath(tab->filePath);
+        if (fs) {
+            str::ReplaceWithCopy(&fs->backgroundColor, colorStr);
+            fs->backgroundColorParsed.wasParsed = false;
+        }
+        tab->bgColor = newColor;
+        SaveSettings();
+    }
+    // trigger repaint
+    InvalidateRect(win->hwndCanvas, nullptr, TRUE);
+}
+
 static void OnMenuChangeScrollbar(HWND hwnd) {
     if (Dialog_ChangeScrollbar(hwnd)) {
         UpdateFixedPageScrollbarsVisibility();
@@ -6410,6 +6480,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
 
         case CmdChangeScrollbar:
             OnMenuChangeScrollbar(win->hwndFrame);
+            break;
+
+        case CmdChangeBackgroundColor:
+            OnMenuChangeBackgroundColor(win);
             break;
 
         case CmdToggleUseTabs:

@@ -41,4 +41,14 @@ struct Print_Advanced_Data {
 
 HPROPSHEETPAGE CreatePrintAdvancedPropSheet(Print_Advanced_Data* data, ScopedMem<DLGTEMPLATE>& dlgTemplate);
 
+struct MainWindow;
+
+struct BgColorResult {
+    COLORREF color;
+    bool isCheckered;
+    bool applyToAllFiles; // true = all files like this, false = this file only
+};
+
+bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, BgColorResult& result);
+
 TempStr ZoomLevelStr(float zoom);

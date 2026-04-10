@@ -221,7 +221,8 @@ enum {
     CmdTabGroupSave = 410,
     CmdTabGroupRestore = 411,
     CmdToggleTips = 412,
-    CmdNone = 413,
+    CmdChangeBackgroundColor = 413,
+    CmdNone = 414,
 
     /* range for file history */
     CmdFileHistoryFirst,

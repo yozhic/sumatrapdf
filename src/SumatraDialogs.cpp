@@ -1092,6 +1092,264 @@ static INT_PTR CALLBACK Dialog_AddFav_Proc(HWND hDlg, UINT msg, WPARAM wp, LPARA
 // returns true if the user wants to add a favorite.
 // favName is the name the user wants the favorite to have
 // (passing in a non-nullptr favName will use it as default name)
+// --- Change Background Color dialog ---
+
+struct BgColorDlgData {
+    COLORREF currentColor; // current selected color
+    bool isCheckered;      // true if "checkered" is selected
+    bool applyToAll;       // radio: all files like this
+};
+
+// preset colors: checkered, black, 5 grays, white
+static const COLORREF kBgPresetColors[] = {
+    kColorUnset,        // checkered
+    RGB(0, 0, 0),       // black
+    RGB(42, 42, 42),    // dark gray
+    RGB(85, 85, 85),    // medium-dark gray
+    RGB(128, 128, 128), // medium gray
+    RGB(170, 170, 170), // medium-light gray
+    RGB(212, 212, 212), // light gray
+    RGB(255, 255, 255), // white
+};
+static const int kNumPresets = 8;
+
+static void HsvToRgb(float h, float s, float v, u8& r, u8& g, u8& b) {
+    float c = v * s;
+    float x = c * (1.0f - fabsf(fmodf(h / 60.0f, 2.0f) - 1.0f));
+    float m = v - c;
+    float rf, gf, bf;
+    if (h < 60) {
+        rf = c;
+        gf = x;
+        bf = 0;
+    } else if (h < 120) {
+        rf = x;
+        gf = c;
+        bf = 0;
+    } else if (h < 180) {
+        rf = 0;
+        gf = c;
+        bf = x;
+    } else if (h < 240) {
+        rf = 0;
+        gf = x;
+        bf = c;
+    } else if (h < 300) {
+        rf = x;
+        gf = 0;
+        bf = c;
+    } else {
+        rf = c;
+        gf = 0;
+        bf = x;
+    }
+    r = (u8)((rf + m) * 255.0f);
+    g = (u8)((gf + m) * 255.0f);
+    b = (u8)((bf + m) * 255.0f);
+}
+
+static void PaintColorArea(HDC hdc, RECT* rc) {
+    int w = rc->right - rc->left;
+    int h = rc->bottom - rc->top;
+    for (int y = 0; y < h; y++) {
+        float val = 1.0f - (float)y / (float)h; // value: top=bright, bottom=dark
+        for (int x = 0; x < w; x++) {
+            float hue = (float)x / (float)w * 360.0f; // hue: left to right
+            u8 r, g, b;
+            HsvToRgb(hue, 1.0f, val, r, g, b);
+            SetPixel(hdc, rc->left + x, rc->top + y, RGB(r, g, b));
+        }
+    }
+}
+
+static void UpdateBgColorEditFromColor(HWND hDlg, BgColorDlgData* data) {
+    if (data->isCheckered) {
+        HwndSetDlgItemText(hDlg, IDC_BGCOL_EDIT, "checkered");
+    } else {
+        TempStr s = SerializeColorTemp(data->currentColor);
+        HwndSetDlgItemText(hDlg, IDC_BGCOL_EDIT, s);
+    }
+    // refresh preview button
+    InvalidateRect(GetDlgItem(hDlg, IDC_BGCOL_PREVIEW), nullptr, TRUE);
+}
+
+static bool TryParseBgColorEdit(HWND hDlg, BgColorDlgData* data) {
+    TempStr text = HwndGetTextTemp(GetDlgItem(hDlg, IDC_BGCOL_EDIT));
+    if (!text || !*text) {
+        return false;
+    }
+    ParsedColor parsed;
+    ParseColor(parsed, text);
+    if (!parsed.parsedOk) {
+        return false;
+    }
+    if (parsed.col == kColorUnset) {
+        data->isCheckered = true;
+    } else {
+        data->isCheckered = false;
+        data->currentColor = parsed.col;
+    }
+    return true;
+}
+
+static void PickColorFromArea(HWND hwndCA, BgColorDlgData* data, HWND hDlg) {
+    POINT pt;
+    GetCursorPos(&pt);
+    ScreenToClient(hwndCA, &pt);
+    HDC hdcCA = GetDC(hwndCA);
+    COLORREF picked = GetPixel(hdcCA, pt.x, pt.y);
+    ReleaseDC(hwndCA, hdcCA);
+    if (picked != CLR_INVALID) {
+        data->isCheckered = false;
+        data->currentColor = picked;
+        UpdateBgColorEditFromColor(hDlg, data);
+        InvalidateRect(GetDlgItem(hDlg, IDC_BGCOL_PREVIEW), nullptr, TRUE);
+    }
+}
+
+static WNDPROC gOrigColorAreaProc = nullptr;
+
+static LRESULT CALLBACK ColorAreaSubclassProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    HWND hDlg = GetParent(hwnd);
+    BgColorDlgData* data = (BgColorDlgData*)GetWindowLongPtrW(hDlg, GWLP_USERDATA);
+
+    switch (msg) {
+        case WM_LBUTTONDOWN:
+            SetCapture(hwnd);
+            PickColorFromArea(hwnd, data, hDlg);
+            return 0;
+        case WM_MOUSEMOVE:
+            if (wp & MK_LBUTTON) {
+                PickColorFromArea(hwnd, data, hDlg);
+            }
+            return 0;
+        case WM_LBUTTONUP:
+            ReleaseCapture();
+            return 0;
+    }
+    return CallWindowProcW(gOrigColorAreaProc, hwnd, msg, wp, lp);
+}
+
+static INT_PTR CALLBACK Dialog_ChangeBgColor_Proc(HWND hDlg, UINT msg, WPARAM wp, LPARAM lp) {
+    BgColorDlgData* data;
+    if (msg == WM_INITDIALOG) {
+        data = (BgColorDlgData*)lp;
+        SetWindowLongPtrW(hDlg, GWLP_USERDATA, (LONG_PTR)data);
+    } else {
+        data = (BgColorDlgData*)GetWindowLongPtrW(hDlg, GWLP_USERDATA);
+    }
+
+    switch (msg) {
+        case WM_INITDIALOG: {
+            if (UseDarkModeLib()) {
+                DarkMode::setDarkWndSafe(hDlg);
+            }
+            HwndSetText(hDlg, _TRA("Change Background Color"));
+            HwndSetDlgItemText(hDlg, IDOK, _TRA("OK"));
+            HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("Cancel"));
+            CheckRadioButton(hDlg, IDC_BGCOL_THIS_FILE, IDC_BGCOL_ALL_FILES,
+                             data->applyToAll ? IDC_BGCOL_ALL_FILES : IDC_BGCOL_THIS_FILE);
+            UpdateBgColorEditFromColor(hDlg, data);
+            // subclass color area for mouse drag tracking
+            HWND hwndCA = GetDlgItem(hDlg, IDC_BGCOL_COLORAREA);
+            gOrigColorAreaProc = (WNDPROC)SetWindowLongPtrW(hwndCA, GWLP_WNDPROC, (LONG_PTR)ColorAreaSubclassProc);
+            CenterDialog(hDlg);
+            return TRUE;
+        }
+
+        case WM_DRAWITEM: {
+            DRAWITEMSTRUCT* dis = (DRAWITEMSTRUCT*)lp;
+            int ctlId = (int)dis->CtlID;
+            if (ctlId == IDC_BGCOL_COLORAREA) {
+                PaintColorArea(dis->hDC, &dis->rcItem);
+                return TRUE;
+            }
+            // preview button shows the currently selected color
+            if (ctlId == IDC_BGCOL_PREVIEW) {
+                if (data->isCheckered) {
+                    PaintCheckerboard(dis->hDC, dis->rcItem.left, dis->rcItem.top, dis->rcItem.right - dis->rcItem.left,
+                                      dis->rcItem.bottom - dis->rcItem.top);
+                } else {
+                    HBRUSH br = CreateSolidBrush(data->currentColor);
+                    FillRect(dis->hDC, &dis->rcItem, br);
+                    DeleteObject(br);
+                }
+                return TRUE;
+            }
+            // preset color buttons
+            if (ctlId >= IDC_BGCOL_PRESET_FIRST && ctlId < IDC_BGCOL_PRESET_FIRST + kNumPresets) {
+                int idx = ctlId - IDC_BGCOL_PRESET_FIRST;
+                COLORREF col = kBgPresetColors[idx];
+                if (col == kColorUnset) {
+                    PaintCheckerboard(dis->hDC, dis->rcItem.left, dis->rcItem.top, dis->rcItem.right - dis->rcItem.left,
+                                      dis->rcItem.bottom - dis->rcItem.top);
+                } else {
+                    HBRUSH br = CreateSolidBrush(col);
+                    FillRect(dis->hDC, &dis->rcItem, br);
+                    DeleteObject(br);
+                }
+                // draw focus rect if focused
+                if (dis->itemState & ODS_FOCUS) {
+                    DrawFocusRect(dis->hDC, &dis->rcItem);
+                }
+                return TRUE;
+            }
+            break;
+        }
+
+        case WM_COMMAND:
+            switch (LOWORD(wp)) {
+                case IDOK:
+                    TryParseBgColorEdit(hDlg, data);
+                    data->applyToAll = IsDlgButtonChecked(hDlg, IDC_BGCOL_ALL_FILES) == BST_CHECKED;
+                    EndDialog(hDlg, IDOK);
+                    return TRUE;
+                case IDCANCEL:
+                    EndDialog(hDlg, IDCANCEL);
+                    return TRUE;
+                case IDC_BGCOL_EDIT:
+                    if (HIWORD(wp) == EN_CHANGE) {
+                        // live preview: try to parse as user types
+                        TryParseBgColorEdit(hDlg, data);
+                    }
+                    break;
+                default:
+                    // preset buttons
+                    if (LOWORD(wp) >= IDC_BGCOL_PRESET_FIRST && LOWORD(wp) < IDC_BGCOL_PRESET_FIRST + kNumPresets) {
+                        int idx = LOWORD(wp) - IDC_BGCOL_PRESET_FIRST;
+                        COLORREF col = kBgPresetColors[idx];
+                        if (col == kColorUnset) {
+                            data->isCheckered = true;
+                        } else {
+                            data->isCheckered = false;
+                            data->currentColor = col;
+                        }
+                        UpdateBgColorEditFromColor(hDlg, data);
+                    }
+                    break;
+            }
+            break;
+    }
+    return FALSE;
+}
+
+bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, BgColorResult& result) {
+    BgColorDlgData data;
+    data.currentColor = currentColor;
+    data.isCheckered = isCheckered;
+    data.applyToAll = false;
+
+    INT_PTR res = CreateDialogBox(IDD_DIALOG_CHANGE_BG_COLOR, hwnd, Dialog_ChangeBgColor_Proc, (LPARAM)&data);
+    if (res != IDOK) {
+        return false;
+    }
+
+    result.color = data.currentColor;
+    result.isCheckered = data.isCheckered;
+    result.applyToAllFiles = data.applyToAll;
+    return true;
+}
+
 bool Dialog_AddFavorite(HWND hwnd, const char* pageNo, AutoFreeStr& favName) {
     Dialog_AddFav_Data data;
     data.pageNo = str::Dup(pageNo);

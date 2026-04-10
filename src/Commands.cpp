@@ -226,6 +226,7 @@ static SeqStrings gCommandNames =
     "CmdTabGroupSave\0"
     "CmdTabGroupRestore\0"
     "CmdToggleTips\0"
+    "CmdChangeBackgroundColor\0"
     "CmdNone\0"
     "\0";
 
@@ -442,6 +443,7 @@ static i32 gCommandIds[] = {
     CmdTabGroupSave,
     CmdTabGroupRestore,
     CmdToggleTips,
+    CmdChangeBackgroundColor,
     CmdNone,
 };
 
@@ -658,6 +660,7 @@ SeqStrings gCommandDescriptions =
     "Save Tab Group\0"
     "Restore Tab Group\0"
     "Toggle Tips\0"
+    "Change Background Color\0"
     "Do nothing\0"
     "\0";
 // clang-format on
