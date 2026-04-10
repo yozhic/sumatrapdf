@@ -6,6 +6,7 @@
 #include "utils/ScopedWin.h"
 #include "utils/WinUtil.h"
 #include "utils/CryptoUtil.h"
+#include "utils/GuessFileType.h"
 
 #include "utils/Archive.h"
 
@@ -101,22 +102,36 @@ bool MultiFormatArchive::Open(const char* path) {
     if (!path) {
         return false;
     }
+    char buf[2048 + 1]{};
+    int n = file::ReadN(path, buf, dimof(buf) - 1);
+    Kind kind = nullptr;
+    if (n > 0) {
+        ByteSlice d = {(u8*)buf, (size_t)n};
+        kind = GuessFileTypeFromContent(d);
+    }
 
-    if (gUnrarFirst && format == Format::Rar) {
+    bool isRar = kind == kindFileRar;
+    if (gUnrarFirst && isRar) {
         bool ok = OpenUnrarFallback(path);
+        format = MultiFormatArchive::Format::Rar;
         if (ok) {
             return true;
         }
     }
-
+    if (kind == kindFileTar){
+        loadOnOpen = true;
+    }
     bool ok = OpenArchive(path);
     if (ok) {
         return true;
     }
 
     // for .rar files, fall back to unrar.dll if libarchive fails
-    if (!gUnrarFirst && format == Format::Rar) {
+    // note: libarchive can open rar file but then fail to read files
+    // which is why we set gUnrarFirst to true by default
+    if (!gUnrarFirst && isRar) {
         ok = OpenUnrarFallback(path);
+        format = MultiFormatArchive::Format::Rar;
         if (ok) {
             return true;
         }
@@ -187,9 +202,6 @@ bool MultiFormatArchive::OpenArchive(const char* path) {
     bool ok = ParseEntries(a);
     if (ok) {
         format = FormatFromArchive(a);
-    }
-    if (format == Format::Tar) {
-        loadOnOpen = true;
     }
     if (archive_read_has_encrypted_entries(a) > 0) {
         isEncrypted = true;

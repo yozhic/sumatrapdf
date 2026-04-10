@@ -1693,42 +1693,10 @@ EngineBase* EngineCbx::CreateFromFile(const char* path, const char* password, Mu
     // we only need the archive format (zip/rar/7z), not the sub-type
     // (epub/xps/fb2z), so use the ByteSlice overload to avoid
     // opening a full archive just for type detection
-
-    char buf[2048 + 1]{};
-    int n = file::ReadN(path, buf, dimof(buf) - 1);
-    Kind kind = nullptr;
-    if (n > 0) {
-        ByteSlice d = {(u8*)buf, (size_t)n};
-        kind = GuessFileTypeFromContent(d);
-    }
-    MultiFormatArchive* archive = nullptr;
-    auto openArchive = [&]() -> MultiFormatArchive* {
-        MultiFormatArchive* a = nullptr;
-        if (kind == kindFileZip || kind == kindFileRar || kind == kindFile7Z) {
-            a = new MultiFormatArchive();
-        }
-        if (!a) {
-            Kind nameKind = GuessFileTypeFromName(path);
-            if (nameKind == kindFileCbt || nameKind == kindFileTar) {
-                a = new MultiFormatArchive();
-            }
-        }
-        if (!a) {
-            return nullptr;
-        }
-        if (kind == kindFileRar) {
-            a->format = MultiFormatArchive::Format::Rar;
-        }
-        a->password = str::Dup(password);
-        if (!a->Open(path)) {
-            delete a;
-            return nullptr;
-        }
-        return a;
-    };
-
-    archive = openArchive();
-    if (!archive) {
+    MultiFormatArchive* archive = new MultiFormatArchive();
+    archive->password = str::Dup(password);
+    if (!archive->Open(path)) {
+        delete archive;
         return nullptr;
     }
     if (formatOut) {
