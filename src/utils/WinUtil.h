@@ -88,6 +88,7 @@ bool CreateProcessHelper(const char* exe, const char* args);
 bool LaunchFileShell(const char* path, const char* params = nullptr, const char* verb = nullptr, bool hidden = false);
 bool LaunchBrowser(const char* url);
 void OpenPathInDefaultFileManager(const char* path);
+void PaintCheckerboard(HDC hdc, int x, int y, int w, int h);
 
 void RunNonElevated(const char* exePath);
 bool LaunchElevated(const char* path, const char* cmdline);

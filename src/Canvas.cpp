@@ -1485,9 +1485,19 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
     bool shouldPaint = false;
     auto* gcols = gGlobalPrefs->fixedPageUI.gradientColors;
     auto nGCols = gcols->size();
+    auto paintBgOrCheckerboard = [&](COLORREF col, RECT* rc) {
+        if (col == kColorUnset) {
+            PaintCheckerboard(hdc, rc->left, rc->top, rc->right - rc->left, rc->bottom - rc->top);
+        } else {
+            AutoDeleteBrush brush = CreateSolidBrush(col);
+            FillRect(hdc, rc, brush);
+        }
+    };
+
     if (paintOnBlackWithoutShadow) {
-        AutoDeleteBrush brush = CreateSolidBrush(colDocBg);
-        FillRect(hdc, rcArea, brush);
+        paintBgOrCheckerboard(colDocBg, rcArea);
+    } else if (colDocBg == kColorUnset) {
+        paintBgOrCheckerboard(colDocBg, rcArea);
     } else if (0 == nGCols) {
         auto col = ThemeMainWindowBackgroundColor();
         AutoDeleteBrush brush = CreateSolidBrush(col);

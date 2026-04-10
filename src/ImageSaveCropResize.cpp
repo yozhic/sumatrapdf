@@ -579,28 +579,6 @@ static HCURSOR GetCursorForEdge(DragEdge edge) {
     }
 }
 
-// draw a checkerboard transparency pattern behind the image area
-static void PaintCheckerboard(HDC hdc, int x, int y, int w, int h) {
-    constexpr int kCheckerSize = 8;
-    COLORREF lightColor = RGB(255, 255, 255);
-    COLORREF darkColor = RGB(204, 204, 204);
-    HBRUSH lightBrush = CreateSolidBrush(lightColor);
-    HBRUSH darkBrush = CreateSolidBrush(darkColor);
-
-    for (int cy = 0; cy < h; cy += kCheckerSize) {
-        for (int cx = 0; cx < w; cx += kCheckerSize) {
-            int cellW = std::min(kCheckerSize, w - cx);
-            int cellH = std::min(kCheckerSize, h - cy);
-            RECT rc = {x + cx, y + cy, x + cx + cellW, y + cy + cellH};
-            bool isDark = ((cx / kCheckerSize) + (cy / kCheckerSize)) % 2 != 0;
-            FillRect(hdc, &rc, isDark ? darkBrush : lightBrush);
-        }
-    }
-
-    DeleteObject(lightBrush);
-    DeleteObject(darkBrush);
-}
-
 static void PaintSaveImage(ImageEditWindow* ew, HDC hdc) {
     Rect cRc = ClientRect(ew->hwnd);
 
