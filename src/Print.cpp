@@ -1520,9 +1520,9 @@ static void ApplyPrintSettings(Printer* printer, const char* settings, int pageC
             if (val < 0) {
                 val = 1;
             }
-            if (val > 1000) {
-                logf("limiting number of print copies from %d to %d\n", val, 1000);
-                val = 1000;
+            if (val > 9999) {
+                logf("limiting number of print copies from %d to %d\n", val, 9999);
+                val = 9999;
             }
             devMode->dmCopies = (short)val;
             devMode->dmFields |= DM_COPIES;
