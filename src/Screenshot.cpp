@@ -7,6 +7,7 @@
 #include "utils/FileUtil.h"
 #include "utils/WinUtil.h"
 #include "utils/GdiPlusUtil.h"
+#include "utils/Dpi.h"
 #include "utils/Log.h"
 
 #include "Notifications.h"
@@ -139,18 +140,155 @@ static HBITMAP CaptureDesktop() {
     return hbm;
 }
 
-// replace black corner pixels from PrintWindow with bgColor using a rounded corner mask
-static void FixRoundedCorners(HBITMAP hbm, int w, int h, COLORREF bgColor) {
-    // get DWM corner radius; typical Windows 11 value is 8
-    int radius = 8;
+static bool IsNearBlack(DWORD px) {
+    BYTE r = (px >> 16) & 0xFF;
+    BYTE g = (px >> 8) & 0xFF;
+    BYTE b = px & 0xFF;
+    return r < 10 && g < 10 && b < 10;
+}
 
-    BITMAPINFO bmi{};
+static void InitBitmapInfo32(BITMAPINFO& bmi, int w, int h) {
+    bmi = {};
     bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
     bmi.bmiHeader.biWidth = w;
     bmi.bmiHeader.biHeight = -h; // top-down
     bmi.bmiHeader.biPlanes = 1;
     bmi.bmiHeader.biBitCount = 32;
     bmi.bmiHeader.biCompression = BI_RGB;
+}
+
+// check if a specific edge row/column is predominantly near-black
+// uses stride to handle sub-regions within a larger pixel buffer
+// edge: 0=left, 1=right, 2=top, 3=bottom
+static bool IsEdgeMostlyBlackEx(DWORD* pixels, int stride, int x0, int y0, int w, int h, int edge) {
+    int blackCount = 0;
+    int total = 0;
+    switch (edge) {
+        case 0: // left column
+            for (int y = y0; y < y0 + h; y++) {
+                if (IsNearBlack(pixels[y * stride + x0] & 0x00FFFFFF)) {
+                    blackCount++;
+                }
+                total++;
+            }
+            break;
+        case 1: // right column
+            for (int y = y0; y < y0 + h; y++) {
+                if (IsNearBlack(pixels[y * stride + x0 + w - 1] & 0x00FFFFFF)) {
+                    blackCount++;
+                }
+                total++;
+            }
+            break;
+        case 2: // top row
+            for (int x = x0; x < x0 + w; x++) {
+                if (IsNearBlack(pixels[y0 * stride + x] & 0x00FFFFFF)) {
+                    blackCount++;
+                }
+                total++;
+            }
+            break;
+        case 3: // bottom row
+            for (int x = x0; x < x0 + w; x++) {
+                if (IsNearBlack(pixels[(y0 + h - 1) * stride + x] & 0x00FFFFFF)) {
+                    blackCount++;
+                }
+                total++;
+            }
+            break;
+    }
+    return total > 0 && blackCount > (total * 7 / 10);
+}
+
+// trim black border pixels left by PrintWindow on DWM-composited windows
+// returns a new cropped bitmap (caller owns it), or the original if no trimming needed
+static HBITMAP TrimBlackBorders(HBITMAP hbm, int* pW, int* pH) {
+    int origW = *pW, origH = *pH;
+
+    BITMAPINFO bmi;
+    InitBitmapInfo32(bmi, origW, origH);
+
+    HDC hdc = GetDC(nullptr);
+    DWORD* pixels = (DWORD*)malloc((size_t)origW * origH * 4);
+    if (!pixels) {
+        ReleaseDC(nullptr, hdc);
+        return hbm;
+    }
+    GetDIBits(hdc, hbm, 0, origH, pixels, &bmi, DIB_RGB_COLORS);
+
+    // detect trim amounts by scanning edges; trim up to 2px per edge
+    int trimLeft = 0, trimRight = 0, trimTop = 0, trimBottom = 0;
+    int x0 = 0, y0 = 0, w = origW, h = origH;
+
+    for (int i = 0; i < 2 && w > 0; i++) {
+        if (IsEdgeMostlyBlackEx(pixels, origW, x0, y0, w, h, 0)) {
+            trimLeft++;
+            x0++;
+            w--;
+        } else {
+            break;
+        }
+    }
+    for (int i = 0; i < 2 && w > 0; i++) {
+        if (IsEdgeMostlyBlackEx(pixels, origW, x0, y0, w, h, 1)) {
+            trimRight++;
+            w--;
+        } else {
+            break;
+        }
+    }
+    for (int i = 0; i < 2 && h > 0; i++) {
+        if (IsEdgeMostlyBlackEx(pixels, origW, x0, y0, w, h, 2)) {
+            trimTop++;
+            y0++;
+            h--;
+        } else {
+            break;
+        }
+    }
+    for (int i = 0; i < 2 && h > 0; i++) {
+        if (IsEdgeMostlyBlackEx(pixels, origW, x0, y0, w, h, 3)) {
+            trimBottom++;
+            h--;
+        } else {
+            break;
+        }
+    }
+
+    free(pixels);
+
+    if (trimLeft == 0 && trimRight == 0 && trimTop == 0 && trimBottom == 0) {
+        ReleaseDC(nullptr, hdc);
+        return hbm;
+    }
+
+    int newW = origW - trimLeft - trimRight;
+    int newH = origH - trimTop - trimBottom;
+    if (newW <= 0 || newH <= 0) {
+        ReleaseDC(nullptr, hdc);
+        return hbm;
+    }
+
+    HDC hdcSrc = CreateCompatibleDC(hdc);
+    HDC hdcDst = CreateCompatibleDC(hdc);
+    HBITMAP hbmNew = CreateCompatibleBitmap(hdc, newW, newH);
+    SelectObject(hdcSrc, hbm);
+    SelectObject(hdcDst, hbmNew);
+    BitBlt(hdcDst, 0, 0, newW, newH, hdcSrc, trimLeft, trimTop, SRCCOPY);
+    DeleteDC(hdcSrc);
+    DeleteDC(hdcDst);
+    ReleaseDC(nullptr, hdc);
+    DeleteObject(hbm);
+
+    *pW = newW;
+    *pH = newH;
+    return hbmNew;
+}
+
+// replace black corner pixels from PrintWindow with bgColor using a rounded corner mask
+static void FixRoundedCorners(HBITMAP hbm, int w, int h, COLORREF bgColor, int radius) {
+    BITMAPINFO bmi;
+    InitBitmapInfo32(bmi, w, h);
 
     HDC hdc = GetDC(nullptr);
     DWORD* pixels = (DWORD*)malloc(w * h * 4);
@@ -162,6 +300,13 @@ static void FixRoundedCorners(HBITMAP hbm, int w, int h, COLORREF bgColor) {
 
     DWORD bg = (GetRValue(bgColor) << 16) | (GetGValue(bgColor) << 8) | GetBValue(bgColor);
 
+    // only replace pixels that are actually near-black (avoids clobbering legitimate content)
+    auto replaceIfBlack = [&](int idx) {
+        if (IsNearBlack(pixels[idx] & 0x00FFFFFF)) {
+            pixels[idx] = bg;
+        }
+    };
+
     // fix the four corners
     for (int cy = 0; cy < radius; cy++) {
         for (int cx = 0; cx < radius; cx++) {
@@ -169,15 +314,11 @@ static void FixRoundedCorners(HBITMAP hbm, int w, int h, COLORREF bgColor) {
             int dx = radius - 1 - cx;
             int dy = radius - 1 - cy;
             if (dx * dx + dy * dy > radius * radius) {
-                // outside the rounded corner — replace with background
-                // top-left
-                pixels[cy * w + cx] = bg;
-                // top-right
-                pixels[cy * w + (w - 1 - cx)] = bg;
-                // bottom-left
-                pixels[(h - 1 - cy) * w + cx] = bg;
-                // bottom-right
-                pixels[(h - 1 - cy) * w + (w - 1 - cx)] = bg;
+                // outside the rounded corner — replace with background if black
+                replaceIfBlack(cy * w + cx);                     // top-left
+                replaceIfBlack(cy * w + (w - 1 - cx));           // top-right
+                replaceIfBlack((h - 1 - cy) * w + cx);           // bottom-left
+                replaceIfBlack((h - 1 - cy) * w + (w - 1 - cx)); // bottom-right
             }
         }
     }
@@ -244,12 +385,22 @@ static HBITMAP CaptureWindowBmp(HWND hwnd, int* outW, int* outH) {
         }
     }
 
+    // trim black border pixels left by PrintWindow on DWM-composited windows
+    hbmFull = TrimBlackBorders(hbmFull, &fullW, &fullH);
+
     // fix black corners from DWM rounded windows
     DWM_WINDOW_CORNER_PREFERENCE cornerPref = DWMWCP_DEFAULT;
     dwm::GetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPref, sizeof(cornerPref));
     if (cornerPref == DWMWCP_DEFAULT || cornerPref == DWMWCP_ROUND || cornerPref == DWMWCP_ROUNDSMALL) {
         COLORREF bgColor = GetSysColor(COLOR_WINDOW);
-        FixRoundedCorners(hbmFull, fullW, fullH, bgColor);
+        // DWM corner radius is 8 logical pixels (4 for ROUNDSMALL), scale by DPI
+        int baseRadius = (cornerPref == DWMWCP_ROUNDSMALL) ? 4 : 8;
+        int dpi = DpiGetForHwnd(hwnd);
+        int radius = MulDiv(baseRadius, dpi, 96);
+        if (radius < baseRadius) {
+            radius = baseRadius;
+        }
+        FixRoundedCorners(hbmFull, fullW, fullH, bgColor, radius);
     }
 
     *outW = fullW;
