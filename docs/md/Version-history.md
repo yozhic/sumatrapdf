@@ -12,6 +12,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add ability to register / unregister Windows preview handler and search filter from `Ctrl + k` command palette. Use "Register Windows Preview", Un-register Windows Preview", "Register Windows Search Filter", "Un-register Windows Search Filter".
 - add `CmdToggleEscToExit` (`Toggle Esc to Exit` in `Ctrl + k` [command palette](Command-Palette.md)) to toggle `EscToExit` advanced setting
 - add `CmdDocumentExtractText` (`Extract Text From Document` in `Ctrl + k` [command palette](Command-Palette.md)) to extract text from document pages to a .txt file
+- add `ToolbarText` parameter for `ExternalViewers` advanced setting to show external viewer as a toolbar button
 - `Ctrl + click` on a PDF link opens it in a new tab (instead of navigating in the current tab)
 - you can now drag&drop selected text to another application, like a text editor
 - added `List Printers` (`CmdListPrinters`) command to `Ctrl + k` Command Palette to list available printers

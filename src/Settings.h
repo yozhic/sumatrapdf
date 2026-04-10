@@ -163,6 +163,8 @@ struct ExternalViewer {
     char* filter;
     // optional: keyboard shortcut e.g. Alt + 7
     char* key;
+    // if given, shows a button in the toolbar
+    char* toolbarText;
 };
 
 // customization options for how we show forward search results (used
@@ -649,9 +651,10 @@ static const FieldInfo gExternalViewerFields[] = {
     {offsetof(ExternalViewer, name), SettingType::String, 0},
     {offsetof(ExternalViewer, filter), SettingType::String, 0},
     {offsetof(ExternalViewer, key), SettingType::String, 0},
+    {offsetof(ExternalViewer, toolbarText), SettingType::String, 0},
 };
-static const StructInfo gExternalViewerInfo = {sizeof(ExternalViewer), 4, gExternalViewerFields,
-                                               "CommandLine\0Name\0Filter\0Key"};
+static const StructInfo gExternalViewerInfo = {sizeof(ExternalViewer), 5, gExternalViewerFields,
+                                               "CommandLine\0Name\0Filter\0Key\0ToolbarText"};
 
 static const FieldInfo gForwardSearchFields[] = {
     {offsetof(ForwardSearch, highlightOffset), SettingType::Int, 0},

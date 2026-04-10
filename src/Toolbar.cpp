@@ -1198,6 +1198,22 @@ void CreateToolbar(MainWindow* win) {
         gCustomButtons[gCustomButtonsCount++] = tbi;
     }
 
+    // add toolbar buttons from custom commands with ToolbarText (e.g. ExternalViewers)
+    for (auto cc = gFirstCustomCommand; cc; cc = cc->next) {
+        if (gCustomButtonsCount >= kMaxCustomButtons) {
+            break;
+        }
+        const char* tbText = GetCommandStringArg(cc, kCmdArgToolbarText, nullptr);
+        if (str::IsEmptyOrWhiteSpace(tbText)) {
+            continue;
+        }
+        ToolbarButtonInfo tbi;
+        tbi.bmpIndex = TbIcon::Text;
+        tbi.cmdId = cc->id;
+        tbi.toolTip = tbText;
+        gCustomButtons[gCustomButtonsCount++] = tbi;
+    }
+
     TBBUTTON* buttons = AllocArrayTemp<TBBUTTON>(gCustomButtonsCount);
     for (int i = 0; i < gCustomButtonsCount; i++) {
         ToolbarButtonInfo& tbi = gCustomButtons[i];

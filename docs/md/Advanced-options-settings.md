@@ -331,6 +331,9 @@ ExternalViewers [
 
     ; optional: keyboard shortcut e.g. Alt + 7 (introduced in version 3.6)
     Key =
+
+    ; if given, shows a button in the toolbar (introduced in version 3.6)
+    ToolbarText =
   ]
 ]
 

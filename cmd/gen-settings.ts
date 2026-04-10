@@ -338,6 +338,7 @@ const externalViewer: Field[] = [
     "optional filter for which file types the menu item is to be shown; separate multiple entries using ';' and don't include any spaces (e.g. *.pdf;*.xps for all PDF and XPS documents)",
   ),
   setVersion(mkField("Key", Str, null, "optional: keyboard shortcut e.g. Alt + 7"), "3.6"),
+  setVersion(mkField("ToolbarText", Str, null, "if given, shows in toolbar"), "3.7"),
 ];
 
 const selectionHandler: Field[] = [
