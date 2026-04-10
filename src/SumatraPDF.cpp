@@ -1423,6 +1423,10 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         if (win->ctrl && win->presentation) {
             showToc = tab->showTocPresentation;
         }
+        ParsedColor* bgParsed = GetPrefsColor(fs->backgroundColor);
+        if (bgParsed->parsedOk) {
+            tab->bgColor = bgParsed->col;
+        }
     }
 
     AbortFinding(args->win, true);

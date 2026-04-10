@@ -55,6 +55,9 @@ struct WindowTab {
     HWND hwndPDFInfo = nullptr;
     HWND hwndPDFOutline = nullptr;
 
+    // per-document background color from FileState; kColorUnset = use default
+    COLORREF bgColor = kColorUnset;
+
     // TODO: arguably a hack
     bool ignoreNextAutoReload = false;
 

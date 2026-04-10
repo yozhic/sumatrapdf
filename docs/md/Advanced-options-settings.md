@@ -541,6 +541,10 @@ FileStates [
     ; modes (only used for comic book documents)
     DisplayR2L = false
 
+    ; if given, overrides the background color for this document (introduced in
+    ; version 3.7)
+    BackgroundColor = 
+
     ; data required to restore the last read page in the ebook UI
     ReparseIdx = 0
 

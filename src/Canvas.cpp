@@ -1482,6 +1482,12 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
         }
     }
 
+    // per-document background color from FileState overrides everything
+    WindowTab* curTab = win->CurrentTab();
+    if (curTab && curTab->bgColor != kColorUnset) {
+        colDocBg = curTab->bgColor;
+    }
+
     bool shouldPaint = false;
     auto* gcols = gGlobalPrefs->fixedPageUI.gradientColors;
     auto nGCols = gcols->size();

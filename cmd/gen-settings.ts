@@ -498,6 +498,10 @@ const fileSettings: Field[] = [
     "if true, the document is displayed right-to-left in facing and book view modes " +
       "(only used for comic book documents)",
   ),
+  setVersion(
+    mkField("BackgroundColor", Color, "", "if given, overrides the background color for this document"),
+    "3.7",
+  ),
   setDoc(
     mkField(
       "ReparseIdx",
