@@ -244,9 +244,13 @@ EBookUI [
 
     ; custom CSS. Might need to set IgnoreDocumentCSS = true
     CustomCSS =
+
+    ; if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub,
+    ; mobi etc.) (introduced in version 3.7)
+    BackgroundColor = 
 ]
 
-; customization options for Comic Book and images UI
+; customization options for Comic Book UI
 ComicBookUI [
     ; top, right, bottom and left margin (in that order) between window and
     ; document
@@ -259,6 +263,17 @@ ComicBookUI [
     ; if true, default to displaying Comic Book files in manga mode (from right
     ; to left if showing 2 pages at a time)
     CbxMangaMode = false
+
+    ; if given, overrides the default black background color for comic book
+    ; files (introduced in version 3.7)
+    BackgroundColor = 
+]
+
+; customization options for image files UI
+ImageUI [
+    ; if given, overrides the default black background color for image files
+    ; (introduced in version 3.7)
+    BackgroundColor = 
 ]
 
 ; customization options for CHM UI. If UseFixedPageUI is true, FixedPageUI

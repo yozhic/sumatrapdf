@@ -81,9 +81,13 @@ struct EBookUI {
     bool ignoreDocumentCSS;
     // custom CSS. Might need to set IgnoreDocumentCSS = true
     char* customCSS;
+    // if given, overrides FixedPageUI.BackgroundColor for ebook documents
+    // (epub, mobi etc.)
+    char* backgroundColor;
+    ParsedColor backgroundColorParsed;
 };
 
-// customization options for Comic Book and images UI
+// customization options for Comic Book UI
 struct ComicBookUI {
     // top, right, bottom and left margin (in that order) between window
     // and document
@@ -94,6 +98,18 @@ struct ComicBookUI {
     // if true, default to displaying Comic Book files in manga mode (from
     // right to left if showing 2 pages at a time)
     bool cbxMangaMode;
+    // if given, overrides the default black background color for comic
+    // book files
+    char* backgroundColor;
+    ParsedColor backgroundColorParsed;
+};
+
+// customization options for image files UI
+struct ImageUI {
+    // if given, overrides the default black background color for image
+    // files
+    char* backgroundColor;
+    ParsedColor backgroundColorParsed;
 };
 
 // customization options for CHM UI. If UseFixedPageUI is true,
@@ -493,8 +509,10 @@ struct GlobalPrefs {
     FixedPageUI fixedPageUI;
     // customization options for eBookUI
     EBookUI eBookUI;
-    // customization options for Comic Book and images UI
+    // customization options for Comic Book UI
     ComicBookUI comicBookUI;
+    // customization options for image files UI
+    ImageUI imageUI;
     // customization options for CHM UI. If UseFixedPageUI is true,
     // FixedPageUI settings apply instead
     ChmUI chmUI;
@@ -594,9 +612,10 @@ static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, layoutDy), SettingType::Float, (intptr_t)"0"},
     {offsetof(EBookUI, ignoreDocumentCSS), SettingType::Bool, false},
     {offsetof(EBookUI, customCSS), SettingType::String, 0},
+    {offsetof(EBookUI, backgroundColor), SettingType::Color, (intptr_t)""},
 };
-static const StructInfo gEBookUIInfo = {sizeof(EBookUI), 5, gEBookUIFields,
-                                        "FontSize\0LayoutDx\0LayoutDy\0IgnoreDocumentCSS\0CustomCSS"};
+static const StructInfo gEBookUIInfo = {sizeof(EBookUI), 6, gEBookUIFields,
+                                        "FontSize\0LayoutDx\0LayoutDy\0IgnoreDocumentCSS\0CustomCSS\0BackgroundColor"};
 
 static const FieldInfo gWindowMargin_1_Fields[] = {
     {offsetof(WindowMargin, top), SettingType::Int, 0},
@@ -617,9 +636,15 @@ static const FieldInfo gComicBookUIFields[] = {
     {offsetof(ComicBookUI, windowMargin), SettingType::Compact, (intptr_t)&gWindowMargin_1_Info},
     {offsetof(ComicBookUI, pageSpacing), SettingType::Compact, (intptr_t)&gSize_1_Info},
     {offsetof(ComicBookUI, cbxMangaMode), SettingType::Bool, false},
+    {offsetof(ComicBookUI, backgroundColor), SettingType::Color, (intptr_t)""},
 };
-static const StructInfo gComicBookUIInfo = {sizeof(ComicBookUI), 3, gComicBookUIFields,
-                                            "WindowMargin\0PageSpacing\0CbxMangaMode"};
+static const StructInfo gComicBookUIInfo = {sizeof(ComicBookUI), 4, gComicBookUIFields,
+                                            "WindowMargin\0PageSpacing\0CbxMangaMode\0BackgroundColor"};
+
+static const FieldInfo gImageUIFields[] = {
+    {offsetof(ImageUI, backgroundColor), SettingType::Color, (intptr_t)""},
+};
+static const StructInfo gImageUIInfo = {sizeof(ImageUI), 1, gImageUIFields, "BackgroundColor"};
 
 static const FieldInfo gChmUIFields[] = {
     {offsetof(ChmUI, useFixedPageUI), SettingType::Bool, false},
@@ -868,6 +893,8 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, comicBookUI), SettingType::Struct, (intptr_t)&gComicBookUIInfo},
     {(size_t)-1, SettingType::Comment, 0},
+    {offsetof(GlobalPrefs, imageUI), SettingType::Struct, (intptr_t)&gImageUIInfo},
+    {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, chmUI), SettingType::Struct, (intptr_t)&gChmUIInfo},
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, annotations), SettingType::Struct, (intptr_t)&gAnnotationsInfo},
@@ -902,17 +929,17 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 86, gGlobalPrefsFields,
+    sizeof(GlobalPrefs), 88, gGlobalPrefsFields,
     "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
     "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
     "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
     "howMenubar\0ShowMenubarWithTabs\0ShowPromo\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStartPage\0Sidebar"
     "Dx\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0"
     "Theme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMr"
-    "u\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ChmUI\0\0Annotations\0\0ExternalViewers\0"
-    "\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0DefaultPasswords"
-    "\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdateCheck\0O"
-    "penCountWeek\0PropWinPos\0\0"};
+    "u\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotations\0\0Extern"
+    "alViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0Defaul"
+    "tPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpda"
+    "teCheck\0OpenCountWeek\0PropWinPos\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

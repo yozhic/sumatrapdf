@@ -157,6 +157,10 @@ const ebookUI: Field[] = [
   mkField("LayoutDy", Float, 0, "default is 595"),
   mkField("IgnoreDocumentCSS", Bool, false, "if true, we ignore ebook's CSS"),
   mkField("CustomCSS", Str, null, "custom CSS. Might need to set IgnoreDocumentCSS = true"),
+  setVersion(
+    mkField("BackgroundColor", Color, "", "if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub, mobi etc.)"),
+    "3.7",
+  ),
 ];
 
 const theme: Field[] = [
@@ -305,6 +309,17 @@ const comicBookUI: Field[] = [
     Bool,
     false,
     "if true, default to displaying Comic Book files in manga mode (from right to left if showing 2 pages at a time)",
+  ),
+  setVersion(
+    mkField("BackgroundColor", Color, "", "if given, overrides the default black background color for comic book files"),
+    "3.7",
+  ),
+];
+
+const imageUI: Field[] = [
+  setVersion(
+    mkField("BackgroundColor", Color, "", "if given, overrides the default black background color for image files"),
+    "3.7",
   ),
 ];
 
@@ -781,7 +796,9 @@ const globalPrefs: Field[] = [
   mkEmptyLine(),
   setExpert(mkStruct("EBookUI", ebookUI, "customization options for eBookUI")),
   mkEmptyLine(),
-  setExpert(mkStruct("ComicBookUI", comicBookUI, "customization options for Comic Book and images UI")),
+  setExpert(mkStruct("ComicBookUI", comicBookUI, "customization options for Comic Book UI")),
+  mkEmptyLine(),
+  setExpert(mkStruct("ImageUI", imageUI, "customization options for image files UI")),
   mkEmptyLine(),
   setExpert(
     mkStruct(

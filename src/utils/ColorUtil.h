@@ -5,9 +5,8 @@
 
 // a "unset" state for COLORREF value. technically all colors are valid
 // this one is hopefully not used in practice
-// can't use constexpr because they'll end up in multiple .lib and conflict
 constexpr COLORREF kColorUnset = ((COLORREF)(0xfeffffff));
-// ColorNoChange indicates that we shouldn't change the color
+// kColorNoChange indicates that we shouldn't change the color
 constexpr COLORREF kColorNoChange((COLORREF)(0xfdffffff));
 
 // PdfColor is aarrggbb, where 0xff alpha is opaque and 0x0 alpha is transparent

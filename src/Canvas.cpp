@@ -1459,22 +1459,34 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
     DisplayModel* dm = win->AsFixed();
     // logf("DrawDocument RenderCache:\n");
 
-    bool isImage = dm->GetEngine()->IsImageCollection();
+    auto* engine = dm->GetEngine();
+    bool isImage = engine->IsImageCollection();
     // draw comic books and single images on a black background
     // (without frame and shadow)
     bool paintOnBlackWithoutShadow = win->presentation || isImage;
+    bool isEbook = engine->kind == kindEngineMupdf && !str::EqI(engine->defaultExt, ".pdf");
     COLORREF colDocBg;
-    COLORREF colDocTxt = ThemeDocumentColors(colDocBg);
+    COLORREF colDocTxt = ThemeDocumentColors(colDocBg, isEbook);
     if (isImage) {
         colDocBg = 0x0;
         colDocTxt = 0xffffff;
+        // allow ComicBookUI/ImageUI BackgroundColor to override the default black
+        ParsedColor* bgOverride = nullptr;
+        if (engine->kind == kindEngineComicBooks) {
+            bgOverride = GetPrefsColor(gGlobalPrefs->comicBookUI.backgroundColor);
+        } else {
+            bgOverride = GetPrefsColor(gGlobalPrefs->imageUI.backgroundColor);
+        }
+        if (bgOverride->parsedOk) {
+            colDocBg = bgOverride->col;
+        }
     }
 
     bool shouldPaint = false;
     auto* gcols = gGlobalPrefs->fixedPageUI.gradientColors;
     auto nGCols = gcols->size();
     if (paintOnBlackWithoutShadow) {
-        AutoDeleteBrush brush = CreateSolidBrush(WIN_COL_BLACK);
+        AutoDeleteBrush brush = CreateSolidBrush(colDocBg);
         FillRect(hdc, rcArea, brush);
     } else if (0 == nGCols) {
         auto col = ThemeMainWindowBackgroundColor();

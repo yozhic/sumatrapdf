@@ -303,7 +303,7 @@ COLORREF AccentColor(COLORREF col, int light, int dark) {
 
 #define GetThemeCol(name, def) GetParsedCOLORREF(name, name##Parsed, def)
 
-COLORREF ThemeDocumentColors(COLORREF& bg) {
+COLORREF ThemeDocumentColors(COLORREF& bg, bool isEbook) {
     COLORREF text = kColBlack;
     bg = kColWhite;
 
@@ -316,6 +316,14 @@ COLORREF ThemeDocumentColors(COLORREF& bg) {
     parsedCol = GetPrefsColor(gGlobalPrefs->fixedPageUI.backgroundColor);
     if (parsedCol->parsedOk) {
         bg = parsedCol->col;
+    }
+
+    // ebook-specific background color overrides FixedPageUI.BackgroundColor
+    if (isEbook) {
+        parsedCol = GetPrefsColor(gGlobalPrefs->eBookUI.backgroundColor);
+        if (parsedCol->parsedOk) {
+            bg = parsedCol->col;
+        }
     }
 
     if (!gGlobalPrefs->fixedPageUI.invertColors) {
