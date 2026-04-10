@@ -1003,6 +1003,11 @@ void OpenPathInDefaultFileManager(const char* path) {
         return;
     }
 
+    // strip \\?\ prefix — shell APIs (ILCreateFromPath, explorer.exe) don't understand it
+    if (str::StartsWith(path, "\\\\?\\")) {
+        path = path + 4;
+    }
+
     // Use SHOpenFolderAndSelectItems which respects the default file manager
     // (e.g. Directory Opus) instead of hardcoding explorer.exe
     TempWStr pathW = ToWStrTemp(path);
