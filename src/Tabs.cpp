@@ -31,6 +31,9 @@
 #include "Menu.h"
 #include "TableOfContents.h"
 #include "Tabs.h"
+#include "SumatraDialogs.h"
+#include "FileHistory.h"
+#include "Theme.h"
 #include "Translations.h"
 
 #include "utils/Log.h"
@@ -257,6 +260,10 @@ static MenuDef menuDefContextTab[] = {
         CmdDuplicateInNewWindow,
     },
     {
+        _TRN("Set Tab Color"),
+        CmdSetTabColor,
+    },
+    {
         kMenuSeparator,
         0,
     },
@@ -360,6 +367,9 @@ static void TabsContextMenu(ContextMenuEvent* ev) {
     Vec<WindowTab*> toCloseLeft;
     CollectTabsToClose(win, tabUnderMouse, toCloseOther, toCloseRight, toCloseLeft);
 
+    if (!tabUnderMouse->ctrl) {
+        MenuSetEnabled(popup, CmdSetTabColor, false);
+    }
     if (toCloseOther.IsEmpty()) {
         MenuSetEnabled(popup, CmdCloseOtherTabs, false);
     }
@@ -419,6 +429,38 @@ static void TabsContextMenu(ContextMenuEvent* ev) {
         }
         case CmdProperties: {
             ShowProperties(win->hwndFrame, tabUnderMouse->ctrl);
+            return;
+        }
+        case CmdSetTabColor: {
+            COLORREF curColor = tabUnderMouse->tabColor;
+            bool isUnset = (curColor == kColorUnset);
+            if (isUnset) {
+                curColor = ThemeControlBackgroundColor();
+            }
+            COLORREF newColor;
+            bool newIsUnset;
+            if (!Dialog_SetTabColor(win->hwndFrame, curColor, isUnset, newColor, newIsUnset)) {
+                return;
+            }
+            tabUnderMouse->tabColor = newIsUnset ? kColorUnset : newColor;
+            // update TabInfo
+            TabInfo* ti = tabsCtrl->GetTab(tabIdx);
+            if (ti) {
+                ti->tabColor = tabUnderMouse->tabColor;
+            }
+            // persist to FileState
+            FileState* fs = gFileHistory.FindByPath(tabUnderMouse->filePath);
+            if (fs) {
+                if (newIsUnset) {
+                    str::ReplaceWithCopy(&fs->tabCol, "");
+                } else {
+                    TempStr colorStr = SerializeColorTemp(newColor);
+                    str::ReplaceWithCopy(&fs->tabCol, colorStr);
+                }
+                fs->tabColParsed.wasParsed = false;
+            }
+            SaveSettings();
+            tabsCtrl->ScheduleRepaint();
             return;
         }
     }
@@ -572,6 +614,7 @@ WindowTab* AddTabToWindow(MainWindow* win, WindowTab* tab) {
     newTab->text = str::Dup(tab->GetTabTitle());
     newTab->tooltip = str::Dup(tab->filePath);
     newTab->userData = (UINT_PTR)tab;
+    newTab->tabColor = tab->tabColor;
 
     int insertedIdx = tabs->InsertTab(idx, newTab);
     ReportIf(insertedIdx == -1);

@@ -50,5 +50,6 @@ struct BgColorResult {
 };
 
 bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, BgColorResult& result);
+bool Dialog_SetTabColor(HWND hwnd, COLORREF currentColor, bool isUnset, COLORREF& resultColor, bool& resultIsUnset);
 
 TempStr ZoomLevelStr(float zoom);

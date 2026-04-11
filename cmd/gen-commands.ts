@@ -217,6 +217,7 @@ export const commands = [
     "CmdTabGroupRestore", "Restore Tab Group",
     "CmdToggleTips", "Toggle Tips",
     "CmdChangeBackgroundColor", "Change Background Color",
+    "CmdSetTabColor", "Set Tab Color",
     "CmdNone", "Do nothing",
 ];
 

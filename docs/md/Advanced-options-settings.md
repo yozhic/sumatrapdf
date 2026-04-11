@@ -549,6 +549,10 @@ FileStates [
     ; version 3.7)
     BgCol = 
 
+    ; if given, overrides the tab color for this document (introduced in version
+    ; 3.7)
+    TabCol = 
+
     ; data required to restore the last read page in the ebook UI
     ReparseIdx = 0
 

@@ -5363,7 +5363,7 @@ hi:पृष्ठ %s को पसंदीदा सूचि में जो
 hr:Dodaj stranicu %s u favorite
 hu:%s. oldal hozzáadása a kedvencekhez
 id:Tambah halaman %s ke favorit
-it:Aggiungi pagina '%s' ai Preferiti
+it:Aggiungi pagina '%s' a Preferiti
 ja:お気に入りにページ%sを追加
 jv:Nambah kaca %s ning favorit
 ka:%s გვერდის რჩეულებში დამატება
@@ -5436,7 +5436,7 @@ hi:पृष्ठ %s को पसंदीदा सूचि में ना
 hr:Dodaj stranicu %s u favorite sa (opcijnalno) imenom:
 hu:%s. oldal hozzáadása a kedvencekhez, megnevezéssel (nem kötelező):
 id:Tambah halaman %s ke favorit dengan nama (opsional):
-it:Aggiungi pagina %s ai Preferiti con nome (opzionale):
+it:Aggiungi pagina %s a Preferiti con nome (opzionale):
 ja:ページ %s に名前を付けて追加
 jv:Nambah kaca %s ning favorit nganggo jeneng (opsional):
 ka:%s გვერდის დამატება რჩეულებში (არასავალდებულო) სახელწოდებით:
@@ -5509,7 +5509,7 @@ hi:पसंदीदा सूचि में जोड़ें
 hr:Dodaj u favorite
 hu:Hozzáadás a kedvencekhez
 id:Tambah ke favorit
-it:Aggiungi ai Preferiti
+it:Aggiungi a Preferiti
 ja:お気に入りに追加
 jv:Nambah ning favorit
 ka:რჩეულებში დამატება
@@ -7957,79 +7957,6 @@ tw:無法進行反向搜尋。請檢查設定的命令列。
 uk:Неможливо запустити команду зворотнього пошуку. Перевірте налашутвання командного рядка.
 uz:Qayta qidirish buyrug'i xatosi. Buyruq satri parametrlarini tekshiring.
 vn:Không thể bắt đầu lệnh tìm kiếm ngược. Xin kiểm tra phần dòng lệnh trong Cài đặt.
-:Change &Scrollbar
-af:Verander Rolbalk
-am:ማሸብለያ ዘንግ ቀይር
-ar:تغيير شريط التمرير
-az:Sürüşdürmə Çubuğunu Dəyişdir
-bg:Промяна на лентата за превъртане
-bn:স্ক্রলবার পরিবর্তন করুন
-br:Mudar a &Barra de Rolagem
-bs:Promijeni traku za pomicanje
-by:Змяніць паласу пракруткі
-ca:Canviar barra de desplaçament
-ca-xv:Canvia la barra de desplaçament
-cn:更改滚动条(&S)
-co:Cambià a barra di &sfilarata
-cy:Newid Bar Sgrolio
-cz:Změnit posuvník
-de:&Bildlaufleiste ändern
-dk:Skift rullebjælke
-el:Αλλαγή Γραμμής Κύλισης
-es:Cambiar barra de desplazamiento
-et:Muuda kerimisriba
-eu:Aldatu korritze-barra
-fa:تغییر نوار پیمایش
-fi:Vaihda vierityspalkkia
-fo:Broyt rullilist
-fr:Modifier la barre de défilement
-fy-nl:Scrollbar wizigje
-ga:Athraigh Scrollbharra
-gl:Cambiar barra de desprazamento
-he:שינוי פס גלילה
-hi:स्क्रॉलबार बदलें
-hr:Promijeni kliznu traku
-hu:Görgetősáv módosítása
-id:Ubah Bilah Gulir
-it:Modifica barra &scorrimento
-ja:スクロールバーを変更
-jv:Ganti Scrollbar
-ka:სქროლბარის შეცვლა
-kr:스크롤바 변경
-ku:Scrollbarê Biguherîne
-kw:Chanjya an Barr Gorra
-lt:Keisti slinkties juostą
-lv:Mainīt ritjoslu
-mk:Промени лента за лизгање
-ml:സ്ക്രോൾബാർ മാറ്റുക
-mm:လှိမ့်တန်းကို ပြောင်းရန်
-my:လှိမ့်ဘားကို ပြောင်းလဲရန်
-ne:स्क्रोलबार परिवर्तन गर्नुहोस्
-nl:Wijzig &Scrolbalk
-nn:Endre rullefeltet
-no:Endre rullefelt
-pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
-pl:Zmień pasek &przewijania
-pt:Alterar Barra de Rolagem
-ro:Schimbă bara de derulare
-ru:Изменить полосу прокрутки
-sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
-si:අනුචලන තීරුව වෙනස් කරන්න
-sk:Zmeniť po&suvník
-sl:Spremeni drsnik
-sn:Chinja Scrollbar
-sp-rs:Промени траку за померање
-sq:Ndrysho Scrollbar
-sr-rs:Promeni traku za pomeranje
-sv:Ändra rullningslist
-ta:உருளைப்பட்டையை மாற்று
-th:เปลี่ยนแถบเลื่อน
-tl:Baguhin ang Scrollbar
-tr:Kaydırma Çubuğunu Değiştir
-tw:變更捲軸
-uk:Змінити смугу прокрутки
-uz:Aylantirish panelini o'zgartirish
-vn:Thay đổi thanh cuộn
 :Change Background Color
 af:Verander Agtergrondkleur
 am:የበስተጀርባ ቀለም ቀይር
@@ -8249,79 +8176,6 @@ tw:變更語言…
 uk:Змінити мову...
 uz:Tilni o'zgartirish...
 vn:Thay đổi ngôn ngữ...
-:Change Scr&ollbar
-af:Verander Rolbalk
-am:የመዘዋወሪያ አሞሌ ቀይር
-ar:تغيير شريط التمرير
-az:Sürüşdürmə çubuğunu dəyişdir
-bg:Промяна на лентата за превъртане
-bn:স্ক্রলবার পরিবর্তন করুন
-br:Mudar a Bar&ra de Rolagem
-bs:Promijeni klizač
-by:Змяніць паласу пракруткі
-ca:Canviar barra de desplaçament
-ca-xv:Canviar barra de desplaçament
-cn:更改滚动条(&O)
-co:Cambià a barra di s&filarata
-cy:Newid Bar Sgrolio
-cz:Změnit posuvník
-de:Bildlaufleiste &ändern
-dk:Skift rullepanel
-el:Αλλαγή Γραμμής Κύλισης
-es:Cambiar barra de desplazamiento
-et:Muuda kerimisriba
-eu:Aldatu korritze-barra
-fa:تغییر نوار پیمایش
-fi:Vaihda vierityspalkkia
-fo:Broyt rullilest
-fr:Modifier la barre de défilement
-fy-nl:Skowbalke Feroarje
-ga:Athraigh Scrollbharra
-gl:Cambiar barra de desprazamento
-he:שנה פס גלילה
-hi:स्क्रॉलबार बदलें
-hr:Promijeni kliznu traku
-hu:Görgetősáv módosítása
-id:Ubah Scrollbar
-it:Modifica barra sc&orrimento
-ja:スクロールバーを変更
-jv:Ganti Scrollbar
-ka:გადახვევის ზოლის შეცვლა
-kr:스크롤바 변경
-ku:Darika Rêzikê Biguherîne
-kw:Chanjya Barr Skrolya
-lt:Keisti slinkties juostą
-lv:Mainīt ritjoslu
-mk:Промени лента за лизгање
-ml:സ്ക്രോൾബാർ മാറ്റുക
-mm:လှိမ့်ဘား ပြောင်းပါ
-my:လှိမ့်တန်း ပြောင်းရန်
-ne:स्क्रोलबार परिवर्तन गर्नुहोस्
-nl:Wijzig Scr&olbalk
-nn:Endre rullefeltet
-no:Endre rullefelt
-pa:ਸਕ੍ਰੋਲਬਾਰ ਬਦਲੋ
-pl:Zmień pasek prze&wijania
-pt:Alterar Barra de Rolagem
-ro:Schimbă bara de defilare
-ru:Изменить полосу прокрутки
-sat:ᱥᱠᱨᱚᱞᱵᱟᱨ ᱵᱚᱫᱚᱞ ᱢᱮ
-si:අනුචලන තීරුව වෙනස් කරන්න
-sk:Zmeniť p&osuvník
-sl:Spremeni drsnik
-sn:Shandura Bha Rekukwevera
-sp-rs:Promeni traku za pomeranje
-sq:Ndrysho Shiritin e Rrëshqitjes
-sr-rs:Promeni traku za pomeranje
-sv:Ändra rullningslist
-ta:உருட்டுபட்டையை மாற்று
-th:เปลี่ยนแถบเลื่อน
-tl:Baguhin ang Scrollbar
-tr:Kaydırma Çubuğunu Değiştir
-tw:變更捲軸
-uk:Змінити смугу прокручування
-uz:Aylantirish panelini o'zgartirish
-vn:Thay đổi thanh cuộn
 :Change Scrollbar
 af:Verander Rolbalk
 am:የማሸብለያ አሞሌ ቀይር
@@ -35843,6 +35697,79 @@ tw:透過電子郵件傳送(&E)...
 uk:Надіслати через E-mail...
 uz:&Elektron pochta orqali yuborish...
 vn:Gửi qua &email...
+:Set Tab Color
+af:Stel Oortjie Kleur
+am:የትር ቀለም ያስይዙ
+ar:تعيين لون علامة التبويب
+az:Vərəq Rəngini Təyin Et
+bg:Задаване на цвят на раздел
+bn:ট্যাব রঙ সেট করুন
+br:Arventennañ liv an ivinell
+bs:Postavi boju kartice
+by:Усталяваць колер укладкі
+ca:Estableix el color de la pestanya
+ca-xv:Estableix el color de la pestanya
+cn:设置标签颜色
+co:Definisce u culore di a scheda
+cy:Gosod Lliw Tab
+cz:Nastavit barvu karty
+de:Tab-Farbe festlegen
+dk:Indstil fanefarve
+el:Ορισμός χρώματος καρτέλας
+es:Establecer color de pestaña
+et:Määra vahelehe värv
+eu:Ezarri fitxaren kolorea
+fa:تنظیم رنگ برگه
+fi:Aseta välilehden väri
+fo:Set faneblað lit
+fr:Définir la couleur de l'onglet
+fy-nl:Ljepblêdkleur ynstelle
+ga:Socraigh Dath an Chluaisín
+gl:Establecer cor da pestana
+he:הגדר צבע כרטיסייה
+hi:टैब का रंग सेट करें
+hr:Postavi boju kartice
+hu:Lap színének beállítása
+id:Atur Warna Tab
+it:Imposta colore scheda
+ja:タブの色を設定
+jv:Setel Warna Tab
+ka:ჩანართის ფერის დაყენება
+kr:탭 색상 설정
+ku:Rengê Hilpekîna Diyar Bike
+kw:Settya Liw an Tab
+lt:Nustatyti skirtuko spalvą
+lv:Iestatīt cilnes krāsu
+mk:Постави боја на картичка
+ml:ടാബ് നിറം സജ്ജമാക്കുക
+mm:တက်ဘ်အရောင်သတ်မှတ်ရန်
+my:တက်ဘ်အရောင်သတ်မှတ်ရန်
+ne:ट्याबको रङ सेट गर्नुहोस्
+nl:Tabkleur instellen
+nn:Vel fanefarge
+no:Angi fanefarge
+pa:ਟੈਬ ਰੰਗ ਸੈੱਟ ਕਰੋ
+pl:Ustaw kolor karty
+pt:Definir Cor da Guia
+ro:Setează culoarea filei
+ru:Установить цвет вкладки
+sat:ᱴᱮᱵ ᱨᱚᱝ ᱥᱮᱴ ᱢᱮ
+si:ටැබ් වර්ණය සකසන්න
+sk:Nastaviť farbu karty
+sl:Nastavi barvo zavihka
+sn:Isa Ruvara rweChidimbu
+sp-rs:Postavi boju kartice
+sq:Vendos Ngjyrën e Skedës
+sr-rs:Постави боју картице
+sv:Ange flikfärg
+ta:தாவல் நிறத்தை அமை
+th:ตั้งค่าสีแท็บ
+tl:Itakda ang Kulay ng Tab
+tr:Sekme Rengini Ayarla
+tw:設定分頁顏色
+uk:Встановити колір вкладки
+uz:Varaq rangini o'rnatish
+vn:Đặt màu tab
 :Set inverse search command-line
 af:Stel Die Teenoorgestelde Soek Command-Line
 am:Նշել որոնման հրամանների տողը

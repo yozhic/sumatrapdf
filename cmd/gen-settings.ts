@@ -507,6 +507,10 @@ const fileSettings: Field[] = [
     mkField("BgCol", Color, "", "if given, overrides the background color for this document"),
     "3.7",
   ),
+  setVersion(
+    mkField("TabCol", Color, "", "if given, overrides the tab color for this document"),
+    "3.7",
+  ),
   setDoc(
     mkField(
       "ReparseIdx",

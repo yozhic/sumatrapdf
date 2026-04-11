@@ -45104,3 +45104,147 @@ tl:I-download ang update
 uk:Завантажити оновлення
 :Download update
 vn:Tải xuống bản cập nhật
+:Set Tab Color
+am:የትር ቀለም ያስይዙ
+:Set Tab Color
+ar:تعيين لون علامة التبويب
+:Set Tab Color
+br:Arventennañ liv an ivinell
+:Set Tab Color
+cn:设置标签颜色
+:Set Tab Color
+co:Definisce u culore di a scheda
+:Set Tab Color
+de:Tab-Farbe festlegen
+:Set Tab Color
+el:Ορισμός χρώματος καρτέλας
+:Set Tab Color
+hi:टैब का रंग सेट करें
+:Set Tab Color
+it:Imposta colore scheda
+:Set Tab Color
+ja:タブの色を設定
+:Set Tab Color
+ml:ടാബ് നിറം സജ്ജമാക്കുക
+:Set Tab Color
+nl:Tabkleur instellen
+:Set Tab Color
+pl:Ustaw kolor karty
+:Set Tab Color
+ru:Установить цвет вкладки
+:Set Tab Color
+sat:ᱴᱮᱵ ᱨᱚᱝ ᱥᱮᱴ ᱢᱮ
+:Set Tab Color
+sk:Nastaviť farbu karty
+:Set Tab Color
+sr-rs:Постави боју картице
+:Set Tab Color
+tw:設定分頁顏色
+:Set Tab Color
+az:Vərəq Rəngini Təyin Et
+:Set Tab Color
+by:Усталяваць колер укладкі
+:Set Tab Color
+ca:Estableix el color de la pestanya
+:Set Tab Color
+cy:Gosod Lliw Tab
+:Set Tab Color
+cz:Nastavit barvu karty
+:Set Tab Color
+es:Establecer color de pestaña
+:Set Tab Color
+fa:تنظیم رنگ برگه
+:Set Tab Color
+fi:Aseta välilehden väri
+:Set Tab Color
+fo:Set faneblað lit
+:Set Tab Color
+fr:Définir la couleur de l'onglet
+:Set Tab Color
+ga:Socraigh Dath an Chluaisín
+:Set Tab Color
+gl:Establecer cor da pestana
+:Set Tab Color
+he:הגדר צבע כרטיסייה
+:Set Tab Color
+hu:Lap színének beállítása
+:Set Tab Color
+id:Atur Warna Tab
+:Set Tab Color
+kr:탭 색상 설정
+:Set Tab Color
+lv:Iestatīt cilnes krāsu
+:Set Tab Color
+my:တက်ဘ်အရောင်သတ်မှတ်ရန်
+:Set Tab Color
+pt:Definir Cor da Guia
+:Set Tab Color
+ro:Setează culoarea filei
+:Set Tab Color
+sl:Nastavi barvo zavihka
+:Set Tab Color
+sv:Ange flikfärg
+:Set Tab Color
+ta:தாவல் நிறத்தை அமை
+:Set Tab Color
+tr:Sekme Rengini Ayarla
+:Set Tab Color
+uz:Varaq rangini o'rnatish
+:Set Tab Color
+af:Stel Oortjie Kleur
+:Set Tab Color
+bg:Задаване на цвят на раздел
+:Set Tab Color
+bn:ট্যাব রঙ সেট করুন
+:Set Tab Color
+bs:Postavi boju kartice
+:Set Tab Color
+ca-xv:Estableix el color de la pestanya
+:Set Tab Color
+dk:Indstil fanefarve
+:Set Tab Color
+et:Määra vahelehe värv
+:Set Tab Color
+eu:Ezarri fitxaren kolorea
+:Set Tab Color
+fy-nl:Ljepblêdkleur ynstelle
+:Set Tab Color
+hr:Postavi boju kartice
+:Set Tab Color
+jv:Setel Warna Tab
+:Set Tab Color
+ka:ჩანართის ფერის დაყენება
+:Set Tab Color
+ku:Rengê Hilpekîna Diyar Bike
+:Set Tab Color
+kw:Settya Liw an Tab
+:Set Tab Color
+lt:Nustatyti skirtuko spalvą
+:Set Tab Color
+mk:Постави боја на картичка
+:Set Tab Color
+mm:တက်ဘ်အရောင်သတ်မှတ်ရန်
+:Set Tab Color
+ne:ट्याबको रङ सेट गर्नुहोस्
+:Set Tab Color
+nn:Vel fanefarge
+:Set Tab Color
+no:Angi fanefarge
+:Set Tab Color
+pa:ਟੈਬ ਰੰਗ ਸੈੱਟ ਕਰੋ
+:Set Tab Color
+si:ටැබ් වර්ණය සකසන්න
+:Set Tab Color
+sn:Isa Ruvara rweChidimbu
+:Set Tab Color
+sp-rs:Postavi boju kartice
+:Set Tab Color
+sq:Vendos Ngjyrën e Skedës
+:Set Tab Color
+th:ตั้งค่าสีแท็บ
+:Set Tab Color
+tl:Itakda ang Kulay ng Tab
+:Set Tab Color
+uk:Встановити колір вкладки
+:Set Tab Color
+vn:Đặt màu tab

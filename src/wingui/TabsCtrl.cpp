@@ -244,7 +244,15 @@ void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
         }
 
         ti = GetTab(i);
-        // logfa("rClose: pos: (%d, %d) size: (%d, %d)\n", r.x, r.y, r.dx, r.dy);
+
+        // use per-tab color if explicitly set
+        constexpr COLORREF kUnset = (COLORREF)(0xfeffffff);
+        if (ti->tabColor != kUnset) {
+            tabBgCol = ti->tabColor;
+            if (!isSelected) {
+                tabBgCol = AccentColor(ti->tabColor, isUnderMouse ? 35 : 25);
+            }
+        }
 
         gfx.SetCompositingMode(Gdiplus::CompositingModeSourceCopy);
 

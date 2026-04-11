@@ -289,7 +289,7 @@ static void UpdateSaveButtonText(ImageEditWindow* ew) {
     WCHAR destW[MAX_PATH + 1]{};
     GetWindowTextW(ew->hwndDestEdit, destW, MAX_PATH);
     TempStr dest = ToUtf8Temp(destW);
-    const char* text = file::Exists(dest) ? _TRA("Overwrite") : _TRA("Save");
+    const char* text = file::Exists(dest) ? _TRN("Overwrite") : _TRN("Save");
     ew->btnSave->SetText(text);
     // re-layout since button width may have changed
     LayoutControls(ew);
@@ -1058,20 +1058,20 @@ static bool IsResizeChanged(ImageEditWindow* ew) {
 
 static void UpdateModeButtons(ImageEditWindow* ew) {
     if (ew->mode == ImageEditMode::Crop) {
-        ew->btnCrop->SetText(_TRA("Apply Crop"));
+        ew->btnCrop->SetText(_TRN("Apply Crop"));
         ew->btnCrop->SetIsEnabled(IsCropChanged(ew));
-        ew->btnResize->SetText(_TRA("Resize"));
+        ew->btnResize->SetText(_TRN("Resize"));
         ew->btnResize->SetIsEnabled(true);
     } else if (ew->mode == ImageEditMode::Resize) {
-        ew->btnCrop->SetText(_TRA("Crop"));
+        ew->btnCrop->SetText(_TRN("Crop"));
         ew->btnCrop->SetIsEnabled(true);
-        ew->btnResize->SetText(_TRA("Apply Resize"));
+        ew->btnResize->SetText(_TRN("Apply Resize"));
         ew->btnResize->SetIsEnabled(IsResizeChanged(ew));
     } else {
         // Save mode
-        ew->btnCrop->SetText(_TRA("Crop"));
+        ew->btnCrop->SetText(_TRN("Crop"));
         ew->btnCrop->SetIsEnabled(true);
-        ew->btnResize->SetText(_TRA("Resize"));
+        ew->btnResize->SetText(_TRN("Resize"));
         ew->btnResize->SetIsEnabled(true);
     }
 }
@@ -1802,7 +1802,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = _TRA("Save");
+        args.text = _TRN("Save");
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnSave, ew);
         ew->btnSave = btn;
@@ -1811,7 +1811,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = _TRA("Crop");
+        args.text = _TRN("Crop");
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnCropButton, ew);
         ew->btnCrop = btn;
@@ -1820,7 +1820,7 @@ void ShowImageEditWindow(MainWindow* win, ImageEditMode mode, const char* filePa
         auto* btn = new Button();
         Button::CreateArgs args;
         args.parent = hwnd;
-        args.text = _TRA("Resize");
+        args.text = _TRN("Resize");
         btn->Create(args);
         btn->onClick = MkFunc0<ImageEditWindow>(OnResizeButton, ew);
         ew->btnResize = btn;

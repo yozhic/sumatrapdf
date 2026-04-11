@@ -692,6 +692,7 @@ struct TabInfo {
     bool canClose = true; // TODO: same as !isPinned?
     bool isDirty = false;
     UINT_PTR userData = 0;
+    COLORREF tabColor = (COLORREF)(0xfeffffff); // kColorUnset; use default tab color
 
     TabInfo() = default;
     ~TabInfo();

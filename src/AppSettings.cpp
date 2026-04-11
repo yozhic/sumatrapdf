@@ -347,6 +347,9 @@ static void RememberSessionState() {
                 // use the saved state from previous session
                 // note: might stil have issues if multiple tabs with same file
                 bool didFind = false;
+                if (!gInitialSessionData) {
+                    continue;
+                }
                 int nWindows = gInitialSessionData->Size();
                 for (int i = 0; i < nWindows; i++) {
                     SessionData* psd = gInitialSessionData->At(i);

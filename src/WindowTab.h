@@ -57,6 +57,8 @@ struct WindowTab {
 
     // per-document background color from FileState; kColorUnset = use default
     COLORREF bgColor = kColorUnset;
+    // per-document tab color from FileState; kColorUnset = use default
+    COLORREF tabColor = kColorUnset;
 
     // TODO: arguably a hack
     bool ignoreNextAutoReload = false;

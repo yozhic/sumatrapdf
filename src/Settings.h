@@ -330,6 +330,9 @@ struct FileState {
     // if given, overrides the background color for this document
     char* bgCol;
     ParsedColor bgColParsed;
+    // if given, overrides the tab color for this document
+    char* tabCol;
+    ParsedColor tabColParsed;
     // index into an ebook's HTML data from which reparsing has to happen
     // in order to restore the last viewed page (i.e. the equivalent of
     // PageNo for the ebook UI)
@@ -787,13 +790,14 @@ static const FieldInfo gFileStateFields[] = {
     {offsetof(FileState, sidebarDx), SettingType::Int, 0},
     {offsetof(FileState, displayR2L), SettingType::Bool, false},
     {offsetof(FileState, bgCol), SettingType::Color, (intptr_t)""},
+    {offsetof(FileState, tabCol), SettingType::Color, (intptr_t)""},
     {offsetof(FileState, reparseIdx), SettingType::Int, 0},
     {offsetof(FileState, tocState), SettingType::IntArray, 0},
 };
 static StructInfo gFileStateInfo = {
-    sizeof(FileState), 20, gFileStateFields,
+    sizeof(FileState), 21, gFileStateFields,
     "FilePath\0Favorites\0IsPinned\0IsMissing\0OpenCount\0DecryptionKey\0UseDefaultState\0DisplayMode\0ScrollPos\0PageN"
-    "o\0Zoom\0Rotation\0WindowState\0WindowPos\0ShowToc\0SidebarDx\0DisplayR2L\0BgCol\0ReparseIdx\0TocState"};
+    "o\0Zoom\0Rotation\0WindowState\0WindowPos\0ShowToc\0SidebarDx\0DisplayR2L\0BgCol\0TabCol\0ReparseIdx\0TocState"};
 
 static const FieldInfo gPointF_1_Fields[] = {
     {offsetof(PointF, x), SettingType::Float, (intptr_t)"0"},

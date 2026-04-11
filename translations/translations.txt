@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-0244d7368d291b1a80d3d6c3aa258b2075630072
+771017575cb95d55ce7917ebb812d3c031c35f54
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -4095,7 +4095,7 @@ hi:पृष्ठ %s को पसंदीदा सूचि में जो
 hr:Dodaj stranicu %s u favorite
 hu:%s. oldal hozzáadása a kedvencekhez
 id:Tambah halaman %s ke favorit
-it:Aggiungi pagina '%s' ai Preferiti
+it:Aggiungi pagina '%s' a Preferiti
 ja:お気に入りにページ%sを追加
 jv:Nambah kaca %s ning favorit
 ka:%s გვერდის რჩეულებში დამატება
@@ -4166,7 +4166,7 @@ hi:पृष्ठ %s को पसंदीदा सूचि में ना
 hr:Dodaj stranicu %s u favorite sa (opcijnalno) imenom:
 hu:%s. oldal hozzáadása a kedvencekhez, megnevezéssel (nem kötelező):
 id:Tambah halaman %s ke favorit dengan nama (opsional):
-it:Aggiungi pagina %s ai Preferiti con nome (opzionale):
+it:Aggiungi pagina %s a Preferiti con nome (opzionale):
 ja:ページ %s に名前を付けて追加
 jv:Nambah kaca %s ning favorit nganggo jeneng (opsional):
 ka:%s გვერდის დამატება რჩეულებში (არასავალდებულო) სახელწოდებით:
@@ -4235,7 +4235,7 @@ hi:पसंदीदा सूचि में जोड़ें
 hr:Dodaj u favorite
 hu:Hozzáadás a kedvencekhez
 id:Tambah ke favorit
-it:Aggiungi ai Preferiti
+it:Aggiungi a Preferiti
 ja:お気に入りに追加
 jv:Nambah ning favorit
 ka:რჩეულებში დამატება
@@ -5955,15 +5955,6 @@ tw:無法進行反向搜尋。請檢查設定的命令列。
 uk:Неможливо запустити команду зворотнього пошуку. Перевірте налашутвання командного рядка.
 uz:Qayta qidirish buyrug'i xatosi. Buyruq satri parametrlarini tekshiring.
 vn:Không thể bắt đầu lệnh tìm kiếm ngược. Xin kiểm tra phần dòng lệnh trong Cài đặt.
-:Change &Scrollbar
-br:Mudar a &Barra de Rolagem
-cn:更改滚动条(&S)
-co:Cambià a barra di &sfilarata
-de:&Bildlaufleiste ändern
-it:Modifica barra &scorrimento
-nl:Wijzig &Scrolbalk
-pl:Zmień pasek &przewijania
-sk:Zmeniť po&suvník
 :Change Background Color
 br:Mudar a Cor de Fundo
 co:Cambià u culore di u sfondulu
@@ -6060,15 +6051,6 @@ ru:Изменить Язык
 sk:Zmeniť jazyk…
 sr-rs:Промени језик...
 tw:變更語言…
-:Change Scr&ollbar
-br:Mudar a Bar&ra de Rolagem
-cn:更改滚动条(&O)
-co:Cambià a barra di s&filarata
-de:Bildlaufleiste &ändern
-it:Modifica barra sc&orrimento
-nl:Wijzig Scr&olbalk
-pl:Zmień pasek prze&wijania
-sk:Zmeniť p&osuvník
 :Change Scrollbar
 br:Mudar a Barra de Rolagem
 cn:更改滚动条
@@ -21415,6 +21397,7 @@ tw:透過電子郵件傳送(&E)...
 uk:Надіслати через E-mail...
 uz:&Elektron pochta orqali yuborish...
 vn:Gửi qua &email...
+:Set Tab Color
 :Set inverse search command-line
 af:Stel Die Teenoorgestelde Soek Command-Line
 am:Նշել որոնման հրամանների տողը
