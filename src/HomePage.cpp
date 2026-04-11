@@ -928,8 +928,8 @@ HomePageLayout::~HomePageLayout() {
 constexpr int kOpenDocumentYShift = 7;
 constexpr int kThumbsMiddleMargin = 32;
 constexpr int kSearchEditDy = 28;
-constexpr int kHeaderSearchGapY = 16;
-constexpr int kSearchThumbnailsGapY = 0;
+constexpr int kHeaderSearchGapY = 12;
+constexpr int kSearchThumbnailsGapY = 12;
 
 static WNDPROC DefWndProcHomeSearch = nullptr;
 
@@ -1132,7 +1132,9 @@ void LayoutHomePage(HomePageLayout& l) {
         int editY = borderY + 1 + (searchEditDy - editDy) / 2;
         MoveWindow(win->hwndHomeSearch, borderX + 1, editY, borderDx - 2, editDy, TRUE);
     }
-    headerBottomY += headerSearchGap + searchEditDy + 2 + searchThumbsGap;
+    // border is 1px top + 1px bottom = 2px
+    int searchAreaDy = headerSearchGap + searchEditDy + 2 + searchThumbsGap;
+    headerBottomY += searchAreaDy;
 
     // --- Step 2: calculate tip area at the bottom (before thumbnails) ---
     int tipHeight = 0;
@@ -1155,7 +1157,8 @@ void LayoutHomePage(HomePageLayout& l) {
     }
 
     // --- Step 3: middle area for thumbnails ---
-    int thumbsTopY = headerBottomY + kThumbsMiddleMargin;
+    // thumbnails start directly after headerBottomY (which includes kSearchThumbnailsGapY)
+    int thumbsTopY = headerBottomY;
     int thumbsBottomY = rc.dy - tipHeight - kThumbsMiddleMargin;
     int thumbsVisibleDy = std::max(0, thumbsBottomY - thumbsTopY);
 
