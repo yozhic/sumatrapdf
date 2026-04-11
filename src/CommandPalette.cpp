@@ -1006,7 +1006,7 @@ bool CommandPaletteWnd::PreTranslateMessage(MSG& msg) {
 }
 
 // all words must be present in str, ignoring the case
-static bool FilterMatches(const char* str, const StrVec& words) {
+bool FilterMatches(const char* str, const StrVec& words) {
     int nWords = words.Size();
     for (int i = 0; i < nWords; i++) {
         auto word = words.At(i);
@@ -1017,7 +1017,7 @@ static bool FilterMatches(const char* str, const StrVec& words) {
     return true;
 }
 
-static void SplitFilterToWords(const char* filter, StrVec& words) {
+void SplitFilterToWords(const char* filter, StrVec& words) {
     char* s = str::DupTemp(filter);
     char* wordStart = s;
     bool wasWs = false;

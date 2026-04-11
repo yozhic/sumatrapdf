@@ -8,3 +8,6 @@ constexpr const char* kPalettePrefixEverything = ":";
 
 void RunCommandPalette(MainWindow*, const char* prefix, int smartTabAdvance);
 HWND CommandPaletteHwndForAccelerator(HWND hwnd);
+
+void SplitFilterToWords(const char* filter, StrVec& words);
+bool FilterMatches(const char* str, const StrVec& words);

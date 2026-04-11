@@ -25,6 +25,7 @@
 #include "resource.h"
 #include "Commands.h"
 #include "Accelerators.h"
+#include "CommandPalette.h"
 #include "FileThumbnails.h"
 #include "HomePage.h"
 #include "Translations.h"
@@ -908,8 +909,8 @@ struct HomePageLayout {
     Rect rcThumbsArea;               // clip rect for thumbnails
 
     // search filter
-    const char* searchQuery = nullptr; // not owned, points to temp string
-    Rect rcSearchBorder;               // border rect drawn around the edit control
+    StrVec filterWords;
+    Rect rcSearchBorder; // border rect drawn around the edit control
 
     // tip layout
     Rect rcTip;               // background rect for tip area
@@ -1007,15 +1008,16 @@ void LayoutHomePage(HomePageLayout& l) {
     if (win->hwndHomeSearch) {
         searchQuery = HwndGetTextTemp(win->hwndHomeSearch);
     }
-    if (searchQuery && searchQuery[0]) {
-        l.searchQuery = searchQuery;
+    bool hasFilter = searchQuery && searchQuery[0];
+    if (hasFilter) {
+        SplitFilterToWords(searchQuery, l.filterWords);
     }
     Vec<FileState*> fileStates;
     for (int i = 0; i < allFileStates.Size(); i++) {
         FileState* fs = allFileStates.at(i);
-        if (searchQuery && searchQuery[0]) {
+        if (hasFilter) {
             TempStr baseName = path::GetBaseNameTemp(fs->filePath);
-            if (!str::ContainsI(baseName, searchQuery)) {
+            if (!FilterMatches(baseName, l.filterWords)) {
                 continue;
             }
         }
@@ -1349,19 +1351,26 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
         TempStr fileName = path::GetBaseNameTemp(path);
         UINT fmt = DT_SINGLELINE | DT_END_ELLIPSIS | DT_NOPREFIX | (isRtl ? DT_RIGHT : DT_LEFT);
 
-        if (l.searchQuery) {
-            // draw with search match highlighting
+        int nFilterWords = l.filterWords.Size();
+        if (nFilterWords > 0) {
+            // draw with search match highlighting (same logic as CommandPalette)
             SelectObject(hdc, fontText);
             int textLen = str::Leni(fileName);
-            int queryLen = str::Leni(l.searchQuery);
             u8* highlighted = AllocArrayTemp<u8>(textLen);
-            const char* p = fileName;
-            while ((p = str::FindI(p, l.searchQuery)) != nullptr) {
-                int off = (int)(p - fileName);
-                for (int k = 0; k < queryLen && off + k < textLen; k++) {
-                    highlighted[off + k] = 1;
+            for (int w = 0; w < nFilterWords; w++) {
+                const char* word = l.filterWords.At(w);
+                int wordLen = str::Leni(word);
+                if (wordLen == 0) {
+                    continue;
                 }
-                p += queryLen;
+                const char* p = fileName;
+                while ((p = str::FindI(p, word)) != nullptr) {
+                    int off = (int)(p - fileName);
+                    for (int k = 0; k < wordLen && off + k < textLen; k++) {
+                        highlighted[off + k] = 1;
+                    }
+                    p += wordLen;
+                }
             }
 
             // collect contiguous highlighted ranges
