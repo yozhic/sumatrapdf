@@ -158,7 +158,12 @@ const ebookUI: Field[] = [
   mkField("IgnoreDocumentCSS", Bool, false, "if true, we ignore ebook's CSS"),
   mkField("CustomCSS", Str, null, "custom CSS. Might need to set IgnoreDocumentCSS = true"),
   setVersion(
-    mkField("BackgroundColor", Color, "", "if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub, mobi etc.)"),
+    mkField(
+      "BackgroundColor",
+      Color,
+      "",
+      "if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub, mobi etc.)",
+    ),
     "3.7",
   ),
 ];
@@ -172,9 +177,7 @@ const theme: Field[] = [
   mkField("ColorizeControls", Bool, false, "should we colorize Windows controls and window areas"),
 ];
 
-const tabFile: Field[] = [
-  mkField("Path", Str, "", "file path"),
-];
+const tabFile: Field[] = [mkField("Path", Str, "", "file path")];
 
 const tabGroup: Field[] = [
   mkField("Name", Str, "", "name of the tab group"),
@@ -188,10 +191,7 @@ const windowPos: Field[] = [
   mkField("Dy", Int, 0, "height"),
 ];
 
-const pointPos: Field[] = [
-  mkField("X", Int, 0, "x coordinate"),
-  mkField("Y", Int, 0, "y coordinate"),
-];
+const pointPos: Field[] = [mkField("X", Int, 0, "x coordinate"), mkField("Y", Int, 0, "y coordinate")];
 
 const keyboardShortcut: Field[] = [
   mkField("Cmd", Str, "", "command"),
@@ -311,7 +311,12 @@ const comicBookUI: Field[] = [
     "if true, default to displaying Comic Book files in manga mode (from right to left if showing 2 pages at a time)",
   ),
   setVersion(
-    mkField("BackgroundColor", Color, "", "if given, overrides the default black background color for comic book files"),
+    mkField(
+      "BackgroundColor",
+      Color,
+      "",
+      "if given, overrides the default black background color for comic book files",
+    ),
     "3.7",
   ),
 ];
@@ -687,15 +692,10 @@ const globalPrefs: Field[] = [
     "2.5",
   ),
   setVersion(
-    mkField(
-      "ShowMenubarWithTabs",
-      Bool,
-      false,
-      "if true, show the menu bar when using tabs (useTabs = true)",
-    ),
+    mkField("ShowMenubarWithTabs", Bool, false, "if true, show the menu bar when using tabs (useTabs = true)"),
     "3.7",
   ),
-  mkField("ShowPromo", Bool, true, "if true, we show promotions on the home page"),
+  setVersion(mkField("ShowTips", Bool, true, "if true, we show tips on the home page"), "3.7"),
   mkField("ShowToolbar", Bool, true, "if true, we show the toolbar at the top of the window"),
   mkField("ShowFavorites", Bool, false, "if true, we show the Favorites sidebar"),
   mkField(
@@ -713,7 +713,12 @@ const globalPrefs: Field[] = [
   ),
   mkField("SidebarDx", Int, 0, "width of favorites/bookmarks sidebar (if shown)"),
   setVersion(
-    mkField("Scrollbars", Str, "windows", "scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar with auto-hide), overlay (always visible overlay scrollbar), hidden (no scrollbars)"),
+    mkField(
+      "Scrollbars",
+      Str,
+      "windows",
+      "scrollbar mode: windows (standard Windows scrollbar), smart (overlay scrollbar with auto-hide), overlay (always visible overlay scrollbar), hidden (no scrollbars)",
+    ),
     "3.7",
   ),
   setVersion(mkField("ScrollbarInSinglePage", Bool, false, "if true, we show scrollbar in single page mode"), "3.6"),
@@ -770,7 +775,12 @@ const globalPrefs: Field[] = [
     ),
   ),
   setVersion(mkField("UseTabs", Bool, true, "if true, documents are opened in tabs instead of new windows"), "3.0"),
-  mkField("TabsMru", Bool, false, "if true, Ctrl+Tab and Ctrl+Shift+Tab show the tab switcher in most recently used order instead of tab-strip order"),
+  mkField(
+    "TabsMru",
+    Bool,
+    false,
+    "if true, Ctrl+Tab and Ctrl+Shift+Tab show the tab switcher in most recently used order instead of tab-strip order",
+  ),
   setDoc(
     setExpert(
       mkCompactArray(
@@ -913,10 +923,7 @@ const globalPrefs: Field[] = [
   ),
   notSaved(mkField("DefaultZoomFloat", Float, -1, "value of DefaultZoom for internal usage")),
   notSaved(mkField("DefaultImageZoomFloat", Float, 0, "value of DefaultImageZoom for internal usage. 0 means not set")),
-  setStructName(
-    mkCompactStruct("PropWinPos", pointPos, "position of the document properties window"),
-    "Point",
-  ),
+  setStructName(mkCompactStruct("PropWinPos", pointPos, "position of the document properties window"), "Point"),
   mkEmptyLine(),
   mkComment("Settings below are not recognized by the current version"),
 ];

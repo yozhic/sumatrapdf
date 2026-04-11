@@ -1140,7 +1140,7 @@ void LayoutHomePage(HomePageLayout& l) {
     int tipHeight = 0;
     HFONT fontTip = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
     ParsedTip* tip = nullptr;
-    if (gGlobalPrefs->showPromo && gSelectedTipIdx >= 0) {
+    if (gGlobalPrefs->showTips && gSelectedTipIdx >= 0) {
         if (gSelectedIsPromo && gSelectedTipIdx < gParsedPromoCount) {
             tip = &gParsedPromos[gSelectedTipIdx];
         } else if (!gSelectedIsPromo && gSelectedTipIdx < gParsedTipCount) {

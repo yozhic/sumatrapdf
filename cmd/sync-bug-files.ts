@@ -118,7 +118,7 @@ function syncDirs(dirs: string[]) {
         // look for a file with same bug number and file size
         const match = dstFiles.find((f) => f.bugNumber === srcFile.bugNumber && f.fileSize === srcFile.fileSize);
         if (match) {
-          if (match.fileName !== srcFile.fileName) {
+          if (match.fileName.toLowerCase() !== srcFile.fileName.toLowerCase()) {
             // rename the shorter-named file to the longer name in both places
             const longer = srcFile.fileName.length >= match.fileName.length ? srcFile.fileName : match.fileName;
             const shorter = srcFile.fileName.length >= match.fileName.length ? match.fileName : srcFile.fileName;

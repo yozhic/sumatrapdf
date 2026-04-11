@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-c9f9ad4c8a82d96372cf678bc799f818b8530ff0
+0244d7368d291b1a80d3d6c3aa258b2075630072
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -2698,7 +2698,7 @@ hi:&इतिहास से हटाएँ
 hr:&Ukloni iz povijesti
 hu:&Eltávolítás a listából
 id:&Hapus dari Riwayat
-it:&Rimuovi dalla Cronologia
+it:&Rimuovi da Cronologia
 ja:履歴から削除(&R)
 ka:&ისტორიიდან წაშლა
 kr:히스토리에서 제거(&R)
@@ -7391,7 +7391,7 @@ hi:&लिंक पता नक़ल करें
 hr:Kopiraj adresu &linka
 hu:&Hivatkozás címének másolása
 id:Salin A&lamat Tautan
-it:Copia co&llegamento
+it:Copia indirizzo co&llegamento
 ja:リンク先のアドレスをコピー(&L)
 ka:&ბმულის კოპირება
 kr:링크 주소 복사(&L)
@@ -8893,7 +8893,7 @@ hi:रचित
 hr:Stvoreno:
 hu:Készült:
 id:Dibuat:
-it:Data creazione:
+it:Data/Ora creazione:
 ja:作成日時:
 jv:Digawe:
 ka:შექმნილია:
@@ -9436,7 +9436,7 @@ cn:调试：开启/关闭预测性渲染
 co:Spannatura : Attivà o disattivà a restituzione di predizzione
 de:Debug: Vorschau-Rendering umschalten
 el:Εντοπισμός σφαλμάτων: Εναλλαγή προγνωστικής απόδοσης
-it:Debug: Commuta Rendering predittivo
+it:Debug: Attiva Rendering predittivo
 nl:Foutopsporing: IN-/UIT Schakelen Voorspellende Weergave
 pl:Debugowanie: przełącz renderowanie predykcyjne
 sk:Ladenie: Prepnúť Prediktívne vykresľovanie
@@ -9448,7 +9448,7 @@ cn:调试：开启/关闭从右向左模式
 co:Spannatura : Attivà o disattivà Rtl
 de:Debug: RTL umschalten
 el:Αποσφαλμάτωση: Εναλλαγή Rtl
-it:Debug: Commuta Da destra a sinistra
+it:Debug: Attiva Da destra a sinistra
 nl:Foutopsporing: IN/UIT Schakelen Rtl
 pl:Debugowanie: przełącz RTL
 sk:Ladenie: Prepnúť RTL
@@ -12261,7 +12261,7 @@ cn:查找：开启/关闭区分大小写
 co:Circà : Attivà o disattivà u rispettu di a cassa
 de:Suchen: Groß-/Kleinschreibung umschalten
 el:Εύρεση: Εναλλαγή θήκης αντιστοίχισης
-it:Ricerca: Commuta MAIUSCOLE/minuscole
+it:Ricerca: Attiva MAIUSCOLE/minuscole
 nl:Zoek: Hoofdlettergevoeligheid IN/UIT Schakelen
 pl: Znajdź: przełącz uwzględnianie wielkości liter
 sk:Hľadať: Prepnúť Rozlišovanie veľkých/malých písmen
@@ -14402,7 +14402,7 @@ cn:对选中内容启动浏览器或运行命令
 co:Lancià un navigatore o una cumanda cù a selezzione
 de:Browser starten oder Befehl mit Auswahl ausführen
 el:Εκκινήστε ένα πρόγραμμα περιήγησης ή εκτελέστε την εντολή με επιλογή
-it:Avvia un browser o esegui un comando con selezione
+it:Avvia un browser o esegui un comando con la selezione
 nl:Start een Browser of voer een opdracht uit met selectie
 pl:Uruchom przeglądarkę lub polecenie z zaznaczeniem
 sk:Spustiť prehliadač alebo spustiť príkaz s výberom
@@ -19441,7 +19441,7 @@ cn:从历史记录中移除所选文档
 co:Caccià da a cronolugia u ducumentu selezziunatu
 de:Ausgewähltes Dokument aus dem Verlauf entfernen
 el:Αφαίρεση επιλεγμένου εγγράφου από το ιστορικό
-it:Rimuovi documento selezionato dalla Cronologia
+it:Rimuovi dalla Cronologia il documento selezionato
 nl:Verwijder Geselecteerde Document uit Geschiedenis
 pl:Usuń zaznaczony dokument z historii
 sk:Odstrániť vybraný dokument z histórie
@@ -19479,7 +19479,7 @@ hi:पसंदीदा से निकालें
 hr:Ukloni iz favorita
 hu:Eltávolítás a kedvencek közül
 id:Hapus dari favorit
-it:Rimuovi dai Preferiti
+it:Rimuovi da Preferiti
 ja:お気に入りから削除
 ka:რჩეულებიდან წაშლა
 kr:즐겨찾기에서 제거
@@ -19544,7 +19544,7 @@ hi:पसंदीदा से %s पृष्ठ को निकालें
 hr:Ukloni stranicu %s iz favorita
 hu:%s. oldal eltávolítása a kedvencek közül
 id:Hapus halaman %s dari favorit
-it:Rimuovi pagina %s dai Preferiti
+it:Rimuovi pagina %s da Preferiti
 ja:ページ %s をお気に入りから削除
 ka:%s გვერდის წაშლა რჩეულებიდან
 kr:즐겨찾기에서 %s 페이지 제거
@@ -23907,7 +23907,7 @@ cn:开启/关闭抗锯齿渲染
 co:Attivà o disattivà a restituzione antimerlata
 de:Anti-Aliasing-Rendering umschalten
 el:Εναλλαγή απόδοσης Anti-Alias
-it:Commuta Rendering Anti-Alias
+it:Attiva Rendering Anti-Alias
 nl:Anti Aliasing IN-/UIT Schakelen
 pl:Przełącz renderowanie antyaliasingowe
 sk:Prepnúť Vykresľovanie s vyhladzovaním
@@ -23919,7 +23919,7 @@ cn:开启/关闭书签
 co:Attivà o disattivà l’indette
 de:Lesezeichen umschalten
 el:Εναλλαγή σελιδοδεικτών
-it:Commuta Segnalibri
+it:Attiva Segnalibri
 nl:Bladwijzers IN/UIT Schakelen
 pl:Przełącz zakładki
 sk:Prepnúť Záložky
@@ -23931,7 +23931,7 @@ cn:开启/关闭连续显示
 co:Attivà o disattivà a vista in cuntinuu
 de:Fortlaufende Ansicht umschalten
 el:Εναλλαγή συνεχούς προβολής
-it:Commuta Visualizzazione continua
+it:Attiva Visualizzazione continua
 nl:Continue Tonen IN/UIT Schakelen
 pl:Przełącz widok ciągły
 sk:Prepnúť Priebežné zobrazenie
@@ -23943,7 +23943,7 @@ cn:开启/关闭光标位置显示
 co:Attivà o disattivà a pusizione di u cursore
 de:Cursorposition umschalten
 el:Εναλλαγή θέσης δρομέα
-it:Commuta Posizione cursore
+it:Attiva Posizione cursore
 nl:Cursor Positie Wisselen
 pl:Przełącz pozycję kursora
 sk:Prepnúť Polohu kurzora
@@ -23964,7 +23964,7 @@ cn:开启/关闭收藏夹
 co:Attivà o disattivà i favuriti
 de:Favoriten umschalten
 el:Εναλλαγή αγαπημένων
-it:Commuta Preferiti
+it:Attiva Preferiti
 nl:Favorieten IN/UIT Schakelen
 pl:Przełącz ulubione
 sk:Prepnúť Obľúbené
@@ -23976,7 +23976,7 @@ cn:开启/关闭经常打开的文件
 co:Attivà o disattivà i ducumenti letti aspessu
 de:Häufig gelesene anzeigen/ausblenden
 el:Εναλλαγή συχνά διαβασμένων
-it:Commuta Letti di frequente
+it:Attiva Letti di frequente
 nl:Veelgelezen Berichten Tonen/Verbergen
 pl:Przełącz ostatnio otwierane
 sk:Prepnúť Často čítané
@@ -23988,7 +23988,7 @@ cn:开启/关闭全屏
 co:Attivà o disattivà u screnu sanu
 de:Vollbild umschalten
 el:Εναλλαγή πλήρους οθόνης
-it:Commuta Schermo intero
+it:Attiva Schermo intero
 nl:Volledig Scherm IN\UIT Schakelen
 pl:Przełącz tryb pełnoekranowy
 sk:Prepnúť Zobrazenie na celú obrazovku
@@ -24000,7 +24000,7 @@ cn:开启/关闭逆向搜索
 co:Attivà o disattivà a ricerca à l’arritrosa
 de:Rückwärtssuche umschalten
 el:Εναλλαγή αντίστροφης αναζήτησης
-it:Commuta Ricerca inversa
+it:Attiva Ricerca inversa
 nl:Omgekeerd Zoeken IN/UIT Schakelen
 pl:Przełącz odwrotne wyszukiwanie
 sk:Prepnúť Inverzné vyhľadávanie
@@ -24021,7 +24021,7 @@ cn:开启/关闭漫画模式
 co:Attivà o disattivà u mode Manga
 de:Manga-Modus umschalten
 el:Εναλλαγή Λειτουργίας Manga
-it:Commuta Modalità Manga
+it:Attiva Modalità Manga
 nl:Manga Modus IN/UIT Schakelen
 pl:Przełącz tryb mangi
 sk:Prepnúť Režim Manga
@@ -24033,7 +24033,7 @@ cn:开启/关闭区分大小写
 co:Attivà o disattivà u rispettu di a cassa
 de:Groß-/Kleinschreibung umschalten
 el:Εναλλαγή αντιστοίχισης πεζοκεφαλαίων
-it:Commuta MAIUSCOLE/minuscole
+it:Attiva MAIUSCOLE/minuscole
 nl:Hoofdlettergebruik IN\UIT Schakelen
 pl:Przełącz uwzględnianie wielkości liter
 sk:Prepnúť Rozlišovanie veľkých/malých písmen
@@ -24046,7 +24046,7 @@ cn:开启/关闭菜单栏
 co:Attivà o disattivà a barra di listinu
 de:Menüleiste umschalten
 el:Εναλλαγή γραμμής μενού
-it:Commuta Barra menu
+it:Attiva Barra dei menu
 nl:Menubalk Tonen/Verbergen
 pl:Przełącz pasek menu
 sk:Prepnúť Panel s ponukami
@@ -24058,7 +24058,7 @@ cn:开启/关闭页面信息
 co:Attivà o disattivà l’infurmazione nant’à a pagina
 de:Seiteninfo umschalten
 el:Εναλλαγή πληροφοριών σελίδας
-it:Commuta Informazioni pagina
+it:Attiva Informazioni pagina
 nl:Pagina Info Tonen/Verbergen
 pl:Przełącz informacje o stronie
 sk:Prepnúť Informácie o strane
@@ -24079,7 +24079,7 @@ cn:开启/关闭显示标注
 co:Attivà o disattivà l’affissera di l’annutazioni
 de:Anmerkungen anzeigen/ausblenden
 el:Εναλλαγή εμφάνισης σχολιασμών
-it:Commuta Mostra annotazioni
+it:Attiva Mostra annotazioni
 nl:Notaties Tonen/Verbergen
 pl:Przełącz pokazywanie adnotacji
 sk:Prepnúť Zobraziť anotácie
@@ -24091,7 +24091,7 @@ cn:开启/关闭显示链接
 co:Attivà o disattivà l’affissera di i liami
 de:Links anzeigen/ausblenden
 el:Εναλλαγή εμφάνισης συνδέσμων
-it:Commuta Mostra collegamenti
+it:Attiva Mostra collegamenti
 nl:Links Tonen/Verbergen
 pl:Przełącz pokazywanie odnośników
 sk:Prepnúť Zobraziť odkazy
@@ -24112,7 +24112,7 @@ cn:开启/关闭目录
 co:Attivà o disattivà a tavula di cuntenutu
 de:Inhaltsverzeichnis umschalten
 el:Εναλλαγή πίνακα περιεχομένων
-it:Commuta Indice contenuti
+it:Attiva Sommario
 nl:Inhoudsopgave Tonen/Verbergen
 pl:Przełącz spis treści
 sk:Prepnúť Obsah
@@ -24141,7 +24141,7 @@ cn:开启/关闭工具栏
 co:Attivà o disattivà a barra d’attrezzi
 de:Werkzeugleiste umschalten
 el:Εναλλαγή γραμμής εργαλείων
-it:Commuta Barra strumenti
+it:Attiva Barra degli strumenti
 nl:Werkbalk Tonen/Verbergen
 pl:Przełącz pasek narzędzi
 sk:Prepnúť Panel nástrojov
@@ -24162,7 +24162,7 @@ cn:开启/关闭缩放
 co:Attivà o disattivà l’ingrandamentu
 de:Zoom umschalten
 el:Εναλλαγή ζουμ
-it:Commuta Zoom
+it:Attiva Zoom
 nl:Zoom IN/UIT Schakelen
 pl:Przełącz powiększenie
 sk:Prepnúť Zväčšenie
@@ -25342,7 +25342,7 @@ hi:ब​ङा करें
 hr:Uvećaj
 hu:Nagyítás
 id:Perbesar
-it:Zoom +
+it:Zoom avanti
 ja:拡大
 jv:Nggedhekake
 ka:გადიდება
@@ -25415,7 +25415,7 @@ hi:छोटा करें
 hr:Umanji
 hu:Kicsinyítés
 id:Perkecil
-it:Zoom -
+it:Zoom indietro
 ja:縮小
 jv:Nyilikake
 ka:დაპატარავება
@@ -25528,7 +25528,7 @@ cn:缩放：100%
 co:Ingrandamentu : 100%
 de:Zoom: 100 %
 el:Ζουμ: 100%
-it:Zoom: al 100%
+it:Zoom: 100%
 ja:ズーム: 100%
 nl:Zoom: 100%
 pl:Powiększenie: 100%
@@ -25542,7 +25542,7 @@ cn:缩放：12.5%
 co:Ingrandamentu : 12,5%
 de:Zoom: 12,5 %
 el:Ζουμ: 12,5%
-it:Zoom: al 12.5%
+it:Zoom: 12.5%
 ja:ズーム: 12.5%
 nl:Zoom: 12.5%
 pl:Powiększenie: 12,5%
@@ -25556,7 +25556,7 @@ cn:缩放：125%
 co:Ingrandamentu : 125%
 de:Zoom: 125 %
 el:Ζουμ: 125%
-it:Zoom: al 125%
+it:Zoom: 125%
 ja:ズーム: 125%
 nl:Zoom: 125%
 pl:Powiększenie: 125%
@@ -25570,7 +25570,7 @@ cn:缩放：150%
 co:Ingrandamentu : 150%
 de:Zoom: 150 %
 el:Ζουμ: 150%
-it:Zoom: al 150%
+it:Zoom: 150%
 ja:ズーム: 150%
 nl:Zoom: 150%
 pl:Powiększenie: 150%
@@ -25584,7 +25584,7 @@ cn:缩放：1600%
 co:Ingrandamentu : 1600%
 de:Zoom: 1600 %
 el:Zoom: 1600%
-it:Zoom: al 1600%
+it:Zoom: 1600%
 ja:ズーム: 1600%
 nl:Zoom: 1600%
 pl:Powiększenie: 1600%
@@ -25598,7 +25598,7 @@ cn:缩放：200%
 co:Ingrandamentu : 200%
 de:Zoom: 200 %
 el:Ζουμ: 200%
-it:Zoom: al 200%
+it:Zoom: 200%
 ja:ズーム: 200%
 nl:Zoom: 200%
 pl:Powiększenie: 200%
@@ -25612,7 +25612,7 @@ cn:缩放：25%
 co:Ingrandamentu : 25%
 de:Zoom: 25 %
 el:Ζουμ: 25%
-it:Zoom: al 15%
+it:Zoom: 15%
 ja:ズーム: 25%
 nl:Zoom: 25%
 pl:Powiększenie: 25%
@@ -25626,7 +25626,7 @@ cn:缩放：3200%
 co:Ingrandamentu : 3200%
 de:Zoom: 3200 %
 el:Ζουμ: 3200%
-it:Zoom: al 3200%
+it:Zoom: 3200%
 ja:ズーム: 3200%
 nl:Zoom: 3200%
 pl:Powiększenie: 3200%
@@ -25640,7 +25640,7 @@ cn:缩放：400%
 co:Ingrandamentu : 400%
 de:Zoom: 400 %
 el:Ζουμ: 400%
-it:Zoom: al 400%
+it:Zoom: 400%
 ja:ズーム: 400%
 nl:Zoom: 400%
 pl:Powiększenie: 400%
@@ -25654,7 +25654,7 @@ cn:缩放：50%
 co:Ingrandamentu : 50%
 de:Zoom: 50 %
 el:Ζουμ: 50%
-it:Zoom: al 50%
+it:Zoom: 50%
 ja:ズーム: 50%
 nl:Zoom: 50%
 pl:Powiększenie: 50%
@@ -25668,7 +25668,7 @@ cn:缩放：6400%
 co:Ingrandamentu : 6400%
 de:Zoom: 6400 %
 el:Ζουμ: 6400%
-it:Zoom: al 6400%
+it:Zoom: 6400%
 ja:ズーム: 6400%
 nl:Zoom: 6400%
 pl:Powiększenie: 6400%
@@ -25682,7 +25682,7 @@ cn:缩放：8.33%
 co:Ingrandamentu : 8,33%
 de:Zoom: 8,33 %
 el:Zoom: 8.33%
-it:Zoom: al 8.33%
+it:Zoom: 8.33%
 ja:ズーム: 8.33%
 nl:Zoom: 8.33%
 pl:Powiększenie: 8,33%
@@ -25696,7 +25696,7 @@ cn:缩放：800%
 co:Ingrandamentu : 800%
 de:Zoom: 800 %
 el:Ζουμ: 800%
-it:Zoom: al 800%
+it:Zoom: 800%
 ja:ズーム: 800%
 nl:Zoom: 800%
 pl:Powiększenie: 800%

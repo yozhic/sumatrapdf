@@ -98,21 +98,22 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugTestApp,
     CmdDebugTogglePredictiveRender,
     CmdDebugToggleRtl,
+    CmdChangeScrollbar,
     CmdToggleAntiAlias,
     CmdToggleSmoothScroll,
-    CmdChangeScrollbar,
     CmdToggleScrollbarInSinglePage,
     CmdToggleLazyLoading,
     CmdToggleFullscreen,
     CmdToggleMenuBar,
     CmdToggleToolbar,
     CmdToggleUseTabs,
+    CmdToggleTips,
+    CmdToggleFrequentlyRead,
     CmdFavoriteToggle,
     CmdShowLog,
     CmdClearHistory,
     CmdReopenLastClosedFile,
     CmdSelectNextTheme,
-    CmdToggleFrequentlyRead,
     CmdListPrinters,
     CmdDebugCrashMe,
     CmdDebugCorruptMemory,
@@ -571,7 +572,7 @@ static const char* UpdateCommandNameTemp(MainWindow* win, int cmdId, const char*
         } break;
         case CmdToggleTips: {
             isToggle = true;
-            newIsOn = !gGlobalPrefs->showPromo;
+            newIsOn = !gGlobalPrefs->showTips;
         } break;
     }
     if (isToggle) {

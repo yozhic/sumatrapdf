@@ -7113,10 +7113,15 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
 
-        case CmdToggleTips:
-            gGlobalPrefs->showPromo = !gGlobalPrefs->showPromo;
+        case CmdToggleTips: {
+            gGlobalPrefs->showTips = !gGlobalPrefs->showTips;
             SaveSettings();
+            tab = win->CurrentTab();
+            if (!tab || tab->IsAboutTab()) {
+                win->RedrawAll(true);
+            }
             break;
+        }
 
         case CmdNavigateBack:
             if (ctrl) {
