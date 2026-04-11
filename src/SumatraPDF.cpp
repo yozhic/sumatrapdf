@@ -1629,6 +1629,7 @@ void ReloadDocument(MainWindow* win, bool autoRefresh) {
     }
 
     tab->selectedAnnotation = nullptr;
+    tab->ignoreNextAutoReload = false;
 
     if (!tab->IsDocLoaded()) {
         if (!autoRefresh) {
