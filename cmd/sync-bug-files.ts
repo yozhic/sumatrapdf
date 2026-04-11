@@ -153,8 +153,10 @@ function syncDirs(dirs: string[]) {
         }
         // copy the file
         const srcPath = join(srcDir, srcFile.fileName);
-        console.log(`copy: ${srcFile.fileName} -> ${dstDir}`);
+        const copyStart = performance.now();
         copyFileSync(srcPath, dstPath);
+        const copyMs = (performance.now() - copyStart).toFixed(0);
+        console.log(`copy: ${srcFile.fileName} -> ${dstDir} (${copyMs}ms)`);
         // add to dstFiles so we don't copy it again from another source
         dstFiles.push({
           bugNumber: srcFile.bugNumber,
