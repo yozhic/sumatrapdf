@@ -1029,40 +1029,91 @@ int fz_redirect_io_to_existing_console();
 #define FZ_ENABLE_BARCODE 0
 #define FZ_VERSION "1.27.2"
 
-static struct {
-    int (*func)(int argc, char* argv[]);
-    const char* name;
-    const char* desc;
-} tools[] = {
+using MutoolFunc = int (*)(int argc, char* argv[]);
+
+static MutoolFunc toolFuncs[] = {
 #if FZ_ENABLE_JS
-    {murun_main, "run", "run javascript"},
+    murun_main,
 #endif
-    {mudraw_main, "draw", "convert document"},
-    {muconvert_main, "convert", "convert document (with simpler options)"},
+    mudraw_main,
+    muconvert_main,
 #if FZ_ENABLE_PDF
-    {pdfaudit_main, "audit", "produce usage stats from PDF files"},
-    {pdfbake_main, "bake", "bake PDF form into static content"},
-    {pdfclean_main, "clean", "rewrite PDF file"},
-    {pdfcreate_main, "create", "create PDF document"},
-    {pdfextract_main, "extract", "extract font and image resources"},
-    {pdfinfo_main, "info", "show information about PDF resources"},
-    {pdfmerge_main, "merge", "merge pages from multiple PDF sources into a new PDF"},
-    {pdfpages_main, "pages", "show information about PDF pages"},
-    {pdfposter_main, "poster", "split large PDF page into many tiles"},
-    {pdfrecolor_main, "recolor", "change colorspace of PDF document"},
-    {pdfshow_main, "show", "show internal PDF objects"},
-    //{ pdfsign_main, "sign", "manipulate PDF digital signatures" },
-    {pdftrim_main, "trim", "trim PDF page contents"},
-// #ifndef NDEBUG
-//{ cmapdump_main, "cmapdump", "dump CMap resource as C source file" },
-// #endif
+    pdfaudit_main,
+    pdfbake_main,
+    pdfclean_main,
+    pdfcreate_main,
+    pdfextract_main,
+    pdfinfo_main,
+    pdfmerge_main,
+    pdfpages_main,
+    pdfposter_main,
+    pdfrecolor_main,
+    pdfshow_main,
+    // pdfsign_main,
+    pdftrim_main,
 #endif
-    {mugrep_main, "grep", "search for text"},
-    {mutrace_main, "trace", "trace device calls"},
+    mugrep_main,
+    mutrace_main,
 #if FZ_ENABLE_BARCODE
-    {mubar_main, "barcode", "encode/decode barcodes"},
+    mubar_main,
 #endif
 };
+
+static SeqStrings toolNames =
+#if FZ_ENABLE_JS
+    "run\0"
+#endif
+    "draw\0"
+    "convert\0"
+#if FZ_ENABLE_PDF
+    "audit\0"
+    "bake\0"
+    "clean\0"
+    "create\0"
+    "extract\0"
+    "info\0"
+    "merge\0"
+    "pages\0"
+    "poster\0"
+    "recolor\0"
+    "show\0"
+    // "sign\0"
+    "trim\0"
+#endif
+    "grep\0"
+    "trace\0"
+#if FZ_ENABLE_BARCODE
+    "barcode\0"
+#endif
+    "\0";
+
+static SeqStrings toolDescs =
+#if FZ_ENABLE_JS
+    "run javascript\0"
+#endif
+    "convert document\0"
+    "convert document (with simpler options)\0"
+#if FZ_ENABLE_PDF
+    "produce usage stats from PDF files\0"
+    "bake PDF form into static content\0"
+    "rewrite PDF file\0"
+    "create PDF document\0"
+    "extract font and image resources\0"
+    "show information about PDF resources\0"
+    "merge pages from multiple PDF sources into a new PDF\0"
+    "show information about PDF pages\0"
+    "split large PDF page into many tiles\0"
+    "change colorspace of PDF document\0"
+    "show internal PDF objects\0"
+    // "manipulate PDF digital signatures\0"
+    "trim PDF page contents\0"
+#endif
+    "search for text\0"
+    "trace device calls\0"
+#if FZ_ENABLE_BARCODE
+    "encode/decode barcodes\0"
+#endif
+    "\0";
 
 constexpr int kNoMutool = -1234321; // arbitrary negative value that won't collide with any mutool exit code
 
@@ -1094,12 +1145,11 @@ static int MaybeRunMutool() {
     argv = fz_argv_from_wargv(argc, wargv);
     {
         const char* toolName = argv[0];
-        for (int i = 0; i < dimofi(tools); i++) {
-            if (str::EqI(toolName, tools[i].name)) {
-                fz_redirect_io_to_existing_console();
-                res = tools[i].func(argc, argv);
-                goto Exit;
-            }
+        int idx = seqstrings::StrToIdxIS(toolNames, toolName);
+        if (idx >= 0) {
+            fz_redirect_io_to_existing_console();
+            res = toolFuncs[idx](argc, argv);
+            goto Exit;
         }
     }
 
