@@ -1154,7 +1154,7 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     dlg->pageCount = pageCount;
 
     int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, 500, kDeletePageDlgPadding);
-    int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + kDeletePageDlgPadding;
+    int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + 8 + kDeletePageDlgPadding;
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, L"Delete Page From PDF",
@@ -1191,9 +1191,10 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
 
     // row 3: "Pages To Delete:" label + pages edit + total pages label
+    // offset static labels vertically to align text baseline with edit control text
     int labelW = 100;
-    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages To Delete:", WS_CHILD | WS_VISIBLE | SS_LEFT, x, y,
-                                          labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages To Delete:", WS_CHILD | WS_VISIBLE | SS_LEFT, x,
+                                          y + kEditTextXOffset, labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     TempStr totalStr = str::FormatTemp("of %d", pageCount);
@@ -1207,8 +1208,9 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
                         y, editW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndTotalLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(totalStr), WS_CHILD | WS_VISIBLE | SS_LEFT,
-                                          editX + editW + 4, y, totalW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndTotalLabel =
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(totalStr), WS_CHILD | WS_VISIBLE | SS_LEFT, editX + editW + 4,
+                        y + kEditTextXOffset, totalW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndTotalLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
 
