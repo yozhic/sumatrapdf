@@ -1,4 +1,4 @@
-import { readdirSync, renameSync, copyFileSync, statSync, existsSync } from "fs";
+import { readdirSync, renameSync, copyFileSync, statSync, existsSync, unlinkSync } from "fs";
 import { join } from "path";
 
 function dot() {
@@ -119,9 +119,29 @@ function syncDirs(dirs: string[]) {
         const match = dstFiles.find((f) => f.bugNumber === srcFile.bugNumber && f.fileSize === srcFile.fileSize);
         if (match) {
           if (match.fileName.toLowerCase() !== srcFile.fileName.toLowerCase()) {
-            // rename the shorter-named file to the longer name in both places
-            const longer = srcFile.fileName.length >= match.fileName.length ? srcFile.fileName : match.fileName;
-            const shorter = srcFile.fileName.length >= match.fileName.length ? match.fileName : srcFile.fileName;
+            // rename the worse-named file to the better name
+            // prefer longer name; if same length, prefer name with file extension (dot)
+            let longer: string;
+            let shorter: string;
+            if (srcFile.fileName.length !== match.fileName.length) {
+              longer = srcFile.fileName.length > match.fileName.length ? srcFile.fileName : match.fileName;
+              shorter = srcFile.fileName.length > match.fileName.length ? match.fileName : srcFile.fileName;
+            } else {
+              // same length: prefer the one with a dot-extension
+              const srcHasDot = srcFile.fileName.includes(".");
+              const matchHasDot = match.fileName.includes(".");
+              if (srcHasDot && !matchHasDot) {
+                longer = srcFile.fileName;
+                shorter = match.fileName;
+              } else if (!srcHasDot && matchHasDot) {
+                longer = match.fileName;
+                shorter = srcFile.fileName;
+              } else {
+                // both have or both lack extension, pick src
+                longer = srcFile.fileName;
+                shorter = match.fileName;
+              }
+            }
             if (longer !== shorter) {
               // figure out which entry has the shorter name and rename it
               const shorterInSrc = srcFile.fileName === shorter;
@@ -134,9 +154,10 @@ function syncDirs(dirs: string[]) {
                 renameSync(oldPath, newPath);
                 renameInfo.fileName = longer;
               } else {
-                console.log(
-                  `note: same bug #${srcFile.bugNumber}, same size, different names: "${srcFile.fileName}" vs "${match.fileName}" (cannot rename, target exists)`,
-                );
+                // better-named file already exists, delete the worse-named duplicate
+                console.log(`delete duplicate: ${shorter} in ${renameDir} (keeping ${longer})`);
+                unlinkSync(oldPath);
+                renameInfo.fileName = longer;
               }
             }
           }
