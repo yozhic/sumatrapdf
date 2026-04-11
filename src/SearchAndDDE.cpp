@@ -73,28 +73,26 @@ void FindFirst(MainWindow* win) {
     bool hadFindFocus = HwndIsFocused(win->hwndFindEdit);
 
     // If focus was in the document (not find bar), copy selected text
-    // and set search position at the selection so FindNext advances from it
+    // to find edit only if it's different from current text
     if (!hadFindFocus && dm->textSelection->result.len > 0) {
         AutoFreeWStr selection(dm->textSelection->ExtractText(" "));
         str::NormalizeWSInPlace(selection);
         if (!str::IsEmpty(selection.Get())) {
             TempStr s = ToUtf8Temp(selection);
-            AbortFinding(win, false);
-            dm->textSearch->SetLastResult(dm->textSelection);
-            Edit_SetModify(win->hwndFindEdit, FALSE);
-            HwndSetText(win->hwndFindEdit, s);
-            // EN_UPDATE from HwndSetText triggers search with wasModified=false,
-            // which uses FindNext() from the selection position
-            Edit_SetModify(win->hwndFindEdit, FALSE);
+            TempStr current = HwndGetTextTemp(win->hwndFindEdit);
+            if (!str::EqI(s, current)) {
+                AbortFinding(win, false);
+                dm->textSearch->SetLastResult(dm->textSelection);
+                Edit_SetModify(win->hwndFindEdit, FALSE);
+                HwndSetText(win->hwndFindEdit, s);
+                Edit_SetModify(win->hwndFindEdit, FALSE);
+            }
         }
     }
 
     // Don't show a dialog if we don't have to - use the Toolbar instead
     if (gGlobalPrefs->showToolbar && !win->isFullScreen && !win->presentation) {
-        if (hadFindFocus) {
-            // find bar already focused: treat Ctrl+F as "find next"
-            FindTextOnThread(win, TextSearch::Direction::Forward, true);
-        } else if (!HwndIsFocused(win->hwndFindEdit)) {
+        if (!HwndIsFocused(win->hwndFindEdit)) {
             HwndSetFocus(win->hwndFindEdit);
         }
         return;

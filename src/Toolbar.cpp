@@ -543,9 +543,12 @@ static LRESULT CALLBACK WndProcToolbar(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp
     if (WM_COMMAND == msg) {
         HWND hEdit = (HWND)lp;
         MainWindow* win = FindMainWindowByHwnd(hEdit);
-        // "find as you type"
+        // "find as you type" - skip if edit was not modified by user (e.g. programmatic text set)
         if (EN_UPDATE == HIWORD(wp) && hEdit == win->hwndFindEdit && gGlobalPrefs->showToolbar) {
-            FindTextOnThread(win, TextSearch::Direction::Forward, false);
+            bool wasModified = Edit_GetModify(win->hwndFindEdit);
+            if (wasModified) {
+                FindTextOnThread(win, TextSearch::Direction::Forward, false);
+            }
         }
     }
 
