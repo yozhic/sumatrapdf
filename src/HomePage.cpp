@@ -910,6 +910,7 @@ struct HomePageLayout {
 
     // search filter
     StrVec filterWords;
+    Vec<u8> highlighted;
     Rect rcSearchBorder; // border rect drawn around the edit control
 
     // tip layout
@@ -1268,7 +1269,7 @@ static void GetFileStateIcon(FileState* fs) {
     fs->iconIdx = sfi.iIcon;
 }
 
-static void DrawHomePageLayout(const HomePageLayout& l) {
+static void DrawHomePageLayout(HomePageLayout& l) {
     bool isRtl = IsUIRtl();
     auto hdc = l.hdc;
     auto win = l.win;
@@ -1351,84 +1352,17 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
         TempStr fileName = path::GetBaseNameTemp(path);
         UINT fmt = DT_SINGLELINE | DT_END_ELLIPSIS | DT_NOPREFIX | (isRtl ? DT_RIGHT : DT_LEFT);
 
-        int nFilterWords = l.filterWords.Size();
-        if (nFilterWords > 0) {
-            // draw with search match highlighting (same logic as CommandPalette)
-            SelectObject(hdc, fontText);
-            int textLen = str::Leni(fileName);
-            u8* highlighted = AllocArrayTemp<u8>(textLen);
-            for (int w = 0; w < nFilterWords; w++) {
-                const char* word = l.filterWords.At(w);
-                int wordLen = str::Leni(word);
-                if (wordLen == 0) {
-                    continue;
-                }
-                const char* p = fileName;
-                while ((p = str::FindI(p, word)) != nullptr) {
-                    int off = (int)(p - fileName);
-                    for (int k = 0; k < wordLen && off + k < textLen; k++) {
-                        highlighted[off + k] = 1;
-                    }
-                    p += wordLen;
-                }
-            }
-
-            // collect contiguous highlighted ranges
-            struct ByteRange {
-                int start;
-                int end;
-            };
-            ByteRange byteRanges[16];
-            int nRanges = 0;
-            {
-                int pos = 0;
-                while (pos < textLen && nRanges < 16) {
-                    if (highlighted[pos]) {
-                        int start = pos;
-                        while (pos < textLen && highlighted[pos]) {
-                            pos++;
-                        }
-                        byteRanges[nRanges++] = {start, pos};
-                    } else {
-                        pos++;
-                    }
-                }
-            }
-
-            WCHAR* fileNameW = ToWStrTemp(fileName);
-            int strOriginX = rect.x;
-
-            // draw highlight background
-            COLORREF highlightCol;
-            if (IsCurrentThemeDefault()) {
-                highlightCol = RGB(255, 255, 0);
-            } else {
-                highlightCol = AccentColor(backgroundColor, 40);
-            }
-            HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
-            for (int i = 0; i < nRanges; i++) {
-                WCHAR* prefixToStart = ToWStrTemp(fileName, (size_t)byteRanges[i].start);
-                int wStart = str::Leni(prefixToStart);
-                WCHAR* prefixToEnd = ToWStrTemp(fileName, (size_t)byteRanges[i].end);
-                int wEnd = str::Leni(prefixToEnd);
-
-                SIZE szStart, szEnd;
-                GetTextExtentPoint32W(hdc, fileNameW, wStart, &szStart);
-                GetTextExtentPoint32W(hdc, fileNameW, wEnd, &szEnd);
-
-                RECT hlRect;
-                hlRect.top = rect.y;
-                hlRect.bottom = rect.y + rect.dy;
-                hlRect.left = strOriginX + szStart.cx;
-                hlRect.right = strOriginX + szEnd.cx;
-                FillRect(hdc, &hlRect, hbrHighlight);
-            }
-            DeleteObject(hbrHighlight);
-
-            // draw text over highlights
-            HdcDrawText(hdc, fileName, rect, fmt, fontText);
-        } else {
-            HdcDrawText(hdc, fileName, rect, fmt, fontText);
+        SelectObject(hdc, fontText);
+        {
+            RECT rcText = {rect.x, rect.y, rect.x + rect.dx, rect.y + rect.dy};
+            DrawMaybeHighlightedTextArgs hlArgs(l.filterWords, l.highlighted);
+            hlArgs.hdc = hdc;
+            hlArgs.rc = rcText;
+            hlArgs.text = fileName;
+            hlArgs.colBg = backgroundColor;
+            hlArgs.isRtl = isRtl;
+            hlArgs.drawFmt = fmt;
+            DrawMaybeHighlightedText(hlArgs);
         }
 
         GetFileStateIcon(fs);

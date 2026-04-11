@@ -1176,6 +1176,112 @@ static void PositionCommandPalette(HWND hwnd, HWND hwndRelative) {
     SetWindowPos(hwnd, nullptr, r2.x, r2.y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
 }
 
+void DrawMaybeHighlightedText(DrawMaybeHighlightedTextArgs& args) {
+    HDC hdc = args.hdc;
+    RECT rc = args.rc;
+    const char* text = args.text;
+    const StrVec& filterWords = args.filterWords;
+    COLORREF colBg = args.colBg;
+    bool isRtl = args.isRtl;
+    uint drawFmt = args.drawFmt;
+
+    int nWords = filterWords.Size();
+    if (nWords == 0) {
+        WCHAR* textW = ToWStrTemp(text);
+        DrawTextW(hdc, textW, -1, &rc, drawFmt);
+        return;
+    }
+
+    // find all match ranges in text
+    int textLen = str::Leni(text);
+    u8* hl = args.highlighted.EnsureCap((size_t)textLen);
+    memset(hl, 0, textLen);
+    for (int w = 0; w < nWords; w++) {
+        const char* word = filterWords.At(w);
+        int wordLen = str::Leni(word);
+        if (wordLen == 0) {
+            continue;
+        }
+        const char* p = text;
+        while ((p = str::FindI(p, word)) != nullptr) {
+            int off = (int)(p - text);
+            for (int k = 0; k < wordLen && off + k < textLen; k++) {
+                hl[off + k] = 1;
+            }
+            p += wordLen;
+        }
+    }
+
+    // collect contiguous highlighted ranges (up to 16)
+    struct ByteRange {
+        int start;
+        int end;
+    };
+    ByteRange byteRanges[16];
+    int nRanges = 0;
+    {
+        int pos = 0;
+        while (pos < textLen && nRanges < 16) {
+            if (hl[pos]) {
+                int start = pos;
+                while (pos < textLen && hl[pos]) {
+                    pos++;
+                }
+                byteRanges[nRanges++] = {start, pos};
+            } else {
+                pos++;
+            }
+        }
+    }
+
+    WCHAR* textW = ToWStrTemp(text);
+    int textWLen = str::Leni(textW);
+
+    // measure total string width for RTL positioning
+    int strOriginX = rc.left;
+    if (isRtl) {
+        SIZE szTotal;
+        GetTextExtentPoint32W(hdc, textW, textWLen, &szTotal);
+        strOriginX = rc.right - szTotal.cx;
+    }
+
+    // compute pixel rectangles for each highlighted range
+    RECT highlightRects[16];
+    for (int i = 0; i < nRanges; i++) {
+        WCHAR* prefixToStart = ToWStrTemp(text, (size_t)byteRanges[i].start);
+        int wStart = str::Leni(prefixToStart);
+        WCHAR* prefixToEnd = ToWStrTemp(text, (size_t)byteRanges[i].end);
+        int wEnd = str::Leni(prefixToEnd);
+
+        SIZE szStart, szEnd;
+        GetTextExtentPoint32W(hdc, textW, wStart, &szStart);
+        GetTextExtentPoint32W(hdc, textW, wEnd, &szEnd);
+
+        highlightRects[i].top = rc.top;
+        highlightRects[i].bottom = rc.bottom;
+        highlightRects[i].left = strOriginX + szStart.cx;
+        highlightRects[i].right = strOriginX + szEnd.cx;
+    }
+
+    // draw highlight background rectangles for matches
+    {
+        COLORREF highlightCol;
+        if (IsCurrentThemeDefault()) {
+            highlightCol = RGB(255, 255, 0); // yellow for default theme
+        } else {
+            highlightCol = AccentColor(colBg, 40);
+        }
+        HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
+        for (int i = 0; i < nRanges; i++) {
+            FillRect(hdc, &highlightRects[i], hbrHighlight);
+        }
+        DeleteObject(hbrHighlight);
+    }
+
+    // draw the whole string at once over the highlights
+    DrawTextW(hdc, textW, -1, &rc, drawFmt);
+}
+
 void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
     ListBox* lb = ev->listBox;
     auto m = (ListBoxModelCP*)lb->model;
@@ -1241,105 +1347,16 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
     rc.right -= padX;
 
     // draw command name on the left, highlighting matched words
-    int nWords = filterWords.Size();
-    if (nWords == 0) {
-        WCHAR* itemTextW = ToWStrTemp(itemText);
-        uint fmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
-        fmt |= isRtl ? (DT_RIGHT | DT_RTLREADING) : DT_LEFT;
-        DrawTextW(hdc, itemTextW, -1, &rc, fmt);
-    } else {
-        // find all match ranges in itemText
-        int textLen = str::Leni(itemText);
-        // marks which chars are part of a match; reuse member vec to avoid per-call alloc
-        u8* hl = highlighted.EnsureCap((size_t)textLen);
-        memset(hl, 0, textLen);
-        const StrVec& words = filterWords;
-        for (int w = 0; w < nWords; w++) {
-            const char* word = words.At(w);
-            int wordLen = str::Leni(word);
-            if (wordLen == 0) {
-                continue;
-            }
-            const char* p = itemText;
-            while ((p = str::FindI(p, word)) != nullptr) {
-                int off = (int)(p - itemText);
-                for (int k = 0; k < wordLen && off + k < textLen; k++) {
-                    hl[off + k] = 1;
-                }
-                p += wordLen;
-            }
-        }
-
-        // collect contiguous highlighted ranges (up to 16)
-        struct ByteRange {
-            int start;
-            int end;
-        };
-        ByteRange byteRanges[16];
-        int nRanges = 0;
-        {
-            int pos = 0;
-            while (pos < textLen && nRanges < 16) {
-                if (hl[pos]) {
-                    int start = pos;
-                    while (pos < textLen && hl[pos]) {
-                        pos++;
-                    }
-                    byteRanges[nRanges++] = {start, pos};
-                } else {
-                    pos++;
-                }
-            }
-        }
-
-        WCHAR* itemTextW = ToWStrTemp(itemText);
-        int itemTextWLen = str::Leni(itemTextW);
-
-        // measure total string width for RTL positioning
-        int strOriginX = rc.left;
-        if (isRtl) {
-            SIZE szTotal;
-            GetTextExtentPoint32W(hdc, itemTextW, itemTextWLen, &szTotal);
-            strOriginX = rc.right - szTotal.cx;
-        }
-
-        // compute pixel rectangles for each highlighted range
-        RECT highlightRects[16];
-        for (int i = 0; i < nRanges; i++) {
-            WCHAR* prefixToStart = ToWStrTemp(itemText, (size_t)byteRanges[i].start);
-            int wStart = str::Leni(prefixToStart);
-            WCHAR* prefixToEnd = ToWStrTemp(itemText, (size_t)byteRanges[i].end);
-            int wEnd = str::Leni(prefixToEnd);
-
-            SIZE szStart, szEnd;
-            GetTextExtentPoint32W(hdc, itemTextW, wStart, &szStart);
-            GetTextExtentPoint32W(hdc, itemTextW, wEnd, &szEnd);
-
-            highlightRects[i].top = rc.top;
-            highlightRects[i].bottom = rc.bottom;
-            highlightRects[i].left = strOriginX + szStart.cx;
-            highlightRects[i].right = strOriginX + szEnd.cx;
-        }
-
-        // draw highlight background rectangles for matches
-        {
-            COLORREF highlightCol;
-            if (IsCurrentThemeDefault()) {
-                highlightCol = RGB(255, 255, 0); // yellow for default theme
-            } else {
-                highlightCol = AccentColor(colBg, 40);
-            }
-            HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
-            for (int i = 0; i < nRanges; i++) {
-                FillRect(hdc, &highlightRects[i], hbrHighlight);
-            }
-            DeleteObject(hbrHighlight);
-        }
-
-        // draw the whole string at once over the highlights
-        uint fmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
-        fmt |= isRtl ? (DT_RIGHT | DT_RTLREADING) : DT_LEFT;
-        DrawTextW(hdc, itemTextW, -1, &rc, fmt);
+    {
+        DrawMaybeHighlightedTextArgs args(filterWords, highlighted);
+        args.hdc = hdc;
+        args.rc = rc;
+        args.text = itemText;
+        args.colBg = colBg;
+        args.isRtl = isRtl;
+        args.drawFmt = DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX;
+        args.drawFmt |= isRtl ? (DT_RIGHT | DT_RTLREADING) : DT_LEFT;
+        DrawMaybeHighlightedText(args);
     }
 
     // draw right-side text (shortcut or directory), truncated to avoid overlapping left text
