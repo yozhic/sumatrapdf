@@ -9782,6 +9782,79 @@ tw:相容性
 uk:Сумісність
 uz:Mosligi
 vn:Tính tương thích
+:Compress PDF
+af:Komprimeer PDF
+am:ፒዲኤፍ አመቅ
+ar:ضغط PDF
+az:PDF-i sıxışdır
+bg:Компресиране на PDF
+bn:পিডিএফ সংকুচিত করুন
+br:Kompresiñ PDF
+bs:Kompresuj PDF
+by:Сціснуць PDF
+ca:Comprimir PDF
+ca-xv:Comprimir PDF
+cn:压缩 PDF
+co:Cumprime PDF
+cy:Cywasgu PDF
+cz:Komprimovat PDF
+de:PDF komprimieren
+dk:Komprimer PDF
+el:Συμπίεση PDF
+es:Comprimir PDF
+et:Tihenda PDF
+eu:Konprimitu PDF
+fa:فشرده‌سازی PDF
+fi:Pakkaa PDF
+fo:Komprimer PDF
+fr:Compresser PDF
+fy-nl:PDF komprimearje
+ga:Comhbhrúigh PDF
+gl:Comprimir PDF
+he:דחוס PDF
+hi:PDF को संपीड़ित करें
+hr:Komprimiraj PDF
+hu:PDF tömörítése
+id:Kompres PDF
+it:Comprimi PDF
+ja:PDFを圧縮
+jv:Kompres PDF
+ka:PDF-ის შეკუმშვა
+kr:PDF 압축
+ku:PDFê Pişt Bike
+kw:Kompresstya PDF
+lt:Suspausti PDF
+lv:Saspiest PDF
+mk:Компресирај PDF
+ml:PDF കംപ്രസ് ചെയ്യുക
+mm:PDF ကိုချုံ့ပါ
+my:PDF ကို ချုံ့ပါ
+ne:PDF संकुचित गर्नुहोस्
+nl:PDF comprimeren
+nn:Komprimer PDF
+no:Komprimer PDF
+pa:PDF ਨੂੰ ਸੰਕੁਚਿਤ ਕਰੋ
+pl:Kompresuj PDF
+pt:Comprimir PDF
+ro:Comprimă PDF
+ru:Сжать PDF
+sat:PDF कॉम्प्रेस करे
+si:PDF සම්පීඩනය කරන්න
+sk:Komprimovať PDF
+sl:Stisni PDF
+sn:Dzvinyirira PDF
+sp-rs:Kompresuj PDF
+sq:Ngjesh PDF
+sr-rs:Kompresuj PDF
+sv:Komprimera PDF
+ta:PDF ஐ சுருக்கவும்
+th:บีบอัด PDF
+tl:I-compress ang PDF
+tr:PDF Sıkıştır
+tw:壓縮 PDF
+uk:Стиснути PDF
+uz:PDF ni siqish
+vn:Nén PDF
 :Contents:
 af:Inhoud:
 am:Բովանդակությունը՝
@@ -14673,6 +14746,79 @@ tw:除錯：切換從右向左模式
 uk:Налагодження: Перемкнути RTL
 uz:Nosozlik: O'ngdan chapga rejimini almashtirish
 vn:Gỡ lỗi: Bật/tắt RTL
+:Decompress PDF
+af:Dekomprimeer PDF
+am:ፒዲኤፍ አፍታ
+ar:فك ضغط PDF
+az:PDF-i aç
+bg:Dekомпресиране на PDF
+bn:পিডিএফ ডিকম্প্রেস করুন
+br:Dikompresiñ PDF
+bs:Dekompresuj PDF
+by:Распакаваць PDF
+ca:Descomprimir PDF
+ca-xv:Descomprimir PDF
+cn:解压 PDF
+co:Dicumprime PDF
+cy:Dadgywasgu PDF
+cz:Dekomprimovat PDF
+de:PDF dekomprimieren
+dk:Dekomprimer PDF
+el:Αποσυμπίεση PDF
+es:Descomprimir PDF
+et:Paki PDF lahti
+eu:Deskonprimitu PDF
+fa:استخراج PDF
+fi:Pura PDF
+fo:Dekomprimera PDF
+fr:Décompresser PDF
+fy-nl:PDF dekomprimearje
+ga:Díchomhbhrúigh PDF
+gl:Descomprimir PDF
+he:בטל דחיסת PDF
+hi:PDF को विसंपीड़ित करें
+hr:Dekomprimiraj PDF
+hu:PDF kicsomagolása
+id:Dekompres PDF
+it:Decomprimi PDF
+ja:PDFを解凍
+jv:Dekompres PDF
+ka:PDF-ის განშლა
+kr:PDF 압축 해제
+ku:PDFê Veke
+kw:Diskompresstya PDF
+lt:Išskleisti PDF
+lv:Atsaspiest PDF
+mk:Декомпресирај PDF
+ml:PDF ഡീകംപ്രസ് ചെയ്യുക
+mm:PDF ကိုဖြေလျှော့ပါ
+my:PDF ကို ဖြည်ပါ
+ne:PDF विस्तार गर्नुहोस्
+nl:PDF decomprimeren
+nn:Dekkomprimer PDF
+no:Dekomprimer PDF
+pa:PDF ਨੂੰ ਵਿਸਤਾਰਿਤ ਕਰੋ
+pl:Dekompresuj PDF
+pt:Descomprimir PDF
+ro:Decomprimă PDF
+ru:Распаковать PDF
+sat:PDF डीकॉम्प्रेस करे
+si:PDF විසංයුක්ත කරන්න
+sk:Dekomprimovať PDF
+sl:Razširi PDF
+sn:Bvisa kudzvinyirira PDF
+sp-rs:Dekompresuj PDF
+sq:Çngjesh PDF
+sr-rs:Dekompresuj PDF
+sv:Dekomprimera PDF
+ta:PDF ஐ விரிவாக்கவும்
+th:คลายการบีบอัด PDF
+tl:I-decompress ang PDF
+tr:PDF Açıklama
+tw:解壓縮 PDF
+uk:Розпакувати PDF
+uz:PDF ni ochish
+vn:Giải nén PDF
 :Default &Layout:
 af:Verstek Uitleg:
 am:Ծրագրային &դասավորություն՝

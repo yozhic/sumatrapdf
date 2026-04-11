@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-771017575cb95d55ce7917ebb812d3c031c35f54
+eee3b5ffad1b65a2e62180872128d1bbd22137d9
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -6995,6 +6995,7 @@ tw:相容性
 uk:Сумісність
 uz:Mosligi
 vn:Tính tương thích
+:Compress PDF
 :Contents:
 am:Բովանդակությունը՝
 ar:المحتويات:
@@ -9435,6 +9436,7 @@ nl:Foutopsporing: IN/UIT Schakelen Rtl
 pl:Debugowanie: przełącz RTL
 sk:Ladenie: Prepnúť RTL
 tw:除錯：切換從右向左模式
+:Decompress PDF
 :Default &Layout:
 am:Ծրագրային &դասավորություն՝
 ar:التخطيط الافتراضي&

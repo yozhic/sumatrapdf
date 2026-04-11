@@ -45248,3 +45248,291 @@ tl:Itakda ang Kulay ng Tab
 uk:Встановити колір вкладки
 :Set Tab Color
 vn:Đặt màu tab
+:Compress PDF
+am:ፒዲኤፍ አመቅ
+:Decompress PDF
+am:ፒዲኤፍ አፍታ
+:Compress PDF
+ar:ضغط PDF
+:Decompress PDF
+ar:فك ضغط PDF
+:Compress PDF
+br:Kompresiñ PDF
+:Decompress PDF
+br:Dikompresiñ PDF
+:Compress PDF
+cn:压缩 PDF
+:Decompress PDF
+cn:解压 PDF
+:Compress PDF
+co:Cumprime PDF
+:Decompress PDF
+co:Dicumprime PDF
+:Compress PDF
+de:PDF komprimieren
+:Decompress PDF
+de:PDF dekomprimieren
+:Compress PDF
+el:Συμπίεση PDF
+:Decompress PDF
+el:Αποσυμπίεση PDF
+:Compress PDF
+hi:PDF को संपीड़ित करें
+:Decompress PDF
+hi:PDF को विसंपीड़ित करें
+:Compress PDF
+it:Comprimi PDF
+:Decompress PDF
+it:Decomprimi PDF
+:Compress PDF
+ja:PDFを圧縮
+:Decompress PDF
+ja:PDFを解凍
+:Compress PDF
+ml:PDF കംപ്രസ് ചെയ്യുക
+:Decompress PDF
+ml:PDF ഡീകംപ്രസ് ചെയ്യുക
+:Compress PDF
+nl:PDF comprimeren
+:Decompress PDF
+nl:PDF decomprimeren
+:Compress PDF
+pl:Kompresuj PDF
+:Decompress PDF
+pl:Dekompresuj PDF
+:Compress PDF
+ru:Сжать PDF
+:Decompress PDF
+ru:Распаковать PDF
+:Compress PDF
+sat:PDF कॉम्प्रेस करे
+:Decompress PDF
+sat:PDF डीकॉम्प्रेस करे
+:Compress PDF
+sk:Komprimovať PDF
+:Decompress PDF
+sk:Dekomprimovať PDF
+:Compress PDF
+sr-rs:Kompresuj PDF
+:Decompress PDF
+sr-rs:Dekompresuj PDF
+:Compress PDF
+tw:壓縮 PDF
+:Decompress PDF
+tw:解壓縮 PDF
+:Compress PDF
+az:PDF-i sıxışdır
+:Decompress PDF
+az:PDF-i aç
+:Compress PDF
+by:Сціснуць PDF
+:Decompress PDF
+by:Распакаваць PDF
+:Compress PDF
+ca:Comprimir PDF
+:Decompress PDF
+ca:Descomprimir PDF
+:Compress PDF
+cy:Cywasgu PDF
+:Decompress PDF
+cy:Dadgywasgu PDF
+:Compress PDF
+cz:Komprimovat PDF
+:Decompress PDF
+cz:Dekomprimovat PDF
+:Compress PDF
+es:Comprimir PDF
+:Decompress PDF
+es:Descomprimir PDF
+:Compress PDF
+fa:فشرده‌سازی PDF
+:Decompress PDF
+fa:استخراج PDF
+:Compress PDF
+fi:Pakkaa PDF
+:Decompress PDF
+fi:Pura PDF
+:Compress PDF
+fo:Komprimer PDF
+:Decompress PDF
+fo:Dekomprimera PDF
+:Compress PDF
+fr:Compresser PDF
+:Decompress PDF
+fr:Décompresser PDF
+:Compress PDF
+ga:Comhbhrúigh PDF
+:Decompress PDF
+ga:Díchomhbhrúigh PDF
+:Compress PDF
+gl:Comprimir PDF
+:Decompress PDF
+gl:Descomprimir PDF
+:Compress PDF
+he:דחוס PDF
+:Decompress PDF
+he:בטל דחיסת PDF
+:Compress PDF
+hu:PDF tömörítése
+:Decompress PDF
+hu:PDF kicsomagolása
+:Compress PDF
+id:Kompres PDF
+:Decompress PDF
+id:Dekompres PDF
+:Compress PDF
+kr:PDF 압축
+:Decompress PDF
+kr:PDF 압축 해제
+:Compress PDF
+lv:Saspiest PDF
+:Decompress PDF
+lv:Atsaspiest PDF
+:Compress PDF
+my:PDF ကို ချုံ့ပါ
+:Decompress PDF
+my:PDF ကို ဖြည်ပါ
+:Compress PDF
+pt:Comprimir PDF
+:Decompress PDF
+pt:Descomprimir PDF
+:Compress PDF
+ro:Comprimă PDF
+:Decompress PDF
+ro:Decomprimă PDF
+:Compress PDF
+sl:Stisni PDF
+:Decompress PDF
+sl:Razširi PDF
+:Compress PDF
+sv:Komprimera PDF
+:Decompress PDF
+sv:Dekomprimera PDF
+:Compress PDF
+ta:PDF ஐ சுருக்கவும்
+:Decompress PDF
+ta:PDF ஐ விரிவாக்கவும்
+:Compress PDF
+tr:PDF Sıkıştır
+:Decompress PDF
+tr:PDF Açıklama
+:Compress PDF
+uz:PDF ni siqish
+:Decompress PDF
+uz:PDF ni ochish
+:Compress PDF
+af:Komprimeer PDF
+:Decompress PDF
+af:Dekomprimeer PDF
+:Compress PDF
+bg:Компресиране на PDF
+:Decompress PDF
+bg:Dekомпресиране на PDF
+:Compress PDF
+bn:পিডিএফ সংকুচিত করুন
+:Decompress PDF
+bn:পিডিএফ ডিকম্প্রেস করুন
+:Compress PDF
+bs:Kompresuj PDF
+:Decompress PDF
+bs:Dekompresuj PDF
+:Compress PDF
+ca-xv:Comprimir PDF
+:Decompress PDF
+ca-xv:Descomprimir PDF
+:Compress PDF
+dk:Komprimer PDF
+:Decompress PDF
+dk:Dekomprimer PDF
+:Compress PDF
+et:Tihenda PDF
+:Decompress PDF
+et:Paki PDF lahti
+:Compress PDF
+eu:Konprimitu PDF
+:Decompress PDF
+eu:Deskonprimitu PDF
+:Compress PDF
+fy-nl:PDF komprimearje
+:Decompress PDF
+fy-nl:PDF dekomprimearje
+:Compress PDF
+hr:Komprimiraj PDF
+:Decompress PDF
+hr:Dekomprimiraj PDF
+:Compress PDF
+jv:Kompres PDF
+:Decompress PDF
+jv:Dekompres PDF
+:Compress PDF
+ka:PDF-ის შეკუმშვა
+:Decompress PDF
+ka:PDF-ის განშლა
+:Compress PDF
+ku:PDFê Pişt Bike
+:Decompress PDF
+ku:PDFê Veke
+:Compress PDF
+kw:Kompresstya PDF
+:Decompress PDF
+kw:Diskompresstya PDF
+:Compress PDF
+lt:Suspausti PDF
+:Decompress PDF
+lt:Išskleisti PDF
+:Compress PDF
+mk:Компресирај PDF
+:Decompress PDF
+mk:Декомпресирај PDF
+:Compress PDF
+mm:PDF ကိုချုံ့ပါ
+:Decompress PDF
+mm:PDF ကိုဖြေလျှော့ပါ
+:Compress PDF
+ne:PDF संकुचित गर्नुहोस्
+:Decompress PDF
+ne:PDF विस्तार गर्नुहोस्
+:Compress PDF
+nn:Komprimer PDF
+:Decompress PDF
+nn:Dekkomprimer PDF
+:Compress PDF
+no:Komprimer PDF
+:Decompress PDF
+no:Dekomprimer PDF
+:Compress PDF
+pa:PDF ਨੂੰ ਸੰਕੁਚਿਤ ਕਰੋ
+:Decompress PDF
+pa:PDF ਨੂੰ ਵਿਸਤਾਰਿਤ ਕਰੋ
+:Compress PDF
+si:PDF සම්පීඩනය කරන්න
+:Decompress PDF
+si:PDF විසංයුක්ත කරන්න
+:Compress PDF
+sn:Dzvinyirira PDF
+:Decompress PDF
+sn:Bvisa kudzvinyirira PDF
+:Compress PDF
+sp-rs:Kompresuj PDF
+:Decompress PDF
+sp-rs:Dekompresuj PDF
+:Compress PDF
+sq:Ngjesh PDF
+:Decompress PDF
+sq:Çngjesh PDF
+:Compress PDF
+th:บีบอัด PDF
+:Decompress PDF
+th:คลายการบีบอัด PDF
+:Compress PDF
+tl:I-compress ang PDF
+:Decompress PDF
+tl:I-decompress ang PDF
+:Compress PDF
+uk:Стиснути PDF
+:Decompress PDF
+uk:Розпакувати PDF
+:Compress PDF
+vn:Nén PDF
+:Decompress PDF
+vn:Giải nén PDF
