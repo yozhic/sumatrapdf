@@ -118,7 +118,11 @@ void SetAppDataDir(const char* dir) {
     bool isRootDir = str::Len(dir) == 3 && dir[1] == ':' && dir[2] == '\\';
     if (!isRootDir) {
         bool ok = dir::CreateAll(dir);
-        ReportIf(!ok);
+        if (!ok) {
+            logf("SetAppDataDir: failed to create directory '%s'\n", dir);
+            LogLastError();
+            ReportIf(true);
+        }
     }
     str::ReplaceWithCopy(&gAppDataDir, dir);
 }
