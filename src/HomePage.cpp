@@ -909,6 +909,7 @@ struct HomePageLayout {
 
     // search filter
     const char* searchQuery = nullptr; // not owned, points to temp string
+    Rect rcSearchBorder;               // border rect drawn around the edit control
 
     // tip layout
     Rect rcTip;               // background rect for tip area
@@ -930,18 +931,6 @@ constexpr int kSearchThumbnailsGapY = 0;
 
 static WNDPROC DefWndProcHomeSearch = nullptr;
 
-static void DrawHomeSearchBorder(HWND hwnd) {
-    HDC hdc = GetDC(hwnd);
-    RECT rc;
-    GetClientRect(hwnd, &rc);
-    COLORREF bgCol = ThemeControlBackgroundColor();
-    COLORREF borderCol = AccentColor(bgCol, 40);
-    HBRUSH br = CreateSolidBrush(borderCol);
-    FrameRect(hdc, &rc, br);
-    DeleteObject(br);
-    ReleaseDC(hwnd, hdc);
-}
-
 static LRESULT CALLBACK WndProcHomeSearch(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     if (msg == WM_KEYDOWN && wp == VK_ESCAPE) {
         HwndSetText(hwnd, "");
@@ -956,11 +945,6 @@ static LRESULT CALLBACK WndProcHomeSearch(HWND hwnd, UINT msg, WPARAM wp, LPARAM
         HWND parent = GetParent(hwnd);
         return SendMessageW(parent, msg, wp, lp);
     }
-    if (msg == WM_PAINT || msg == WM_NCPAINT) {
-        LRESULT res = CallWindowProcW(DefWndProcHomeSearch, hwnd, msg, wp, lp);
-        DrawHomeSearchBorder(hwnd);
-        return res;
-    }
     return CallWindowProcW(DefWndProcHomeSearch, hwnd, msg, wp, lp);
 }
 
@@ -974,7 +958,7 @@ static void EnsureHomeSearchCreated(MainWindow* win) {
     win->hwndHomeSearch = CreateWindowExW(exStyle, WC_EDITW, L"", style, 0, 0, 100, kSearchEditDy, win->hwndCanvas,
                                           nullptr, hmod, nullptr);
     HDC hdc = GetDC(win->hwndCanvas);
-    HFONT font = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
+    HFONT font = CreateSimpleFont(hdc, "MS Shell Dlg", 14);
     ReleaseDC(win->hwndCanvas, hdc);
     SetWindowFont(win->hwndHomeSearch, font, TRUE);
     if (!DefWndProcHomeSearch) {
@@ -982,8 +966,9 @@ static void EnsureHomeSearchCreated(MainWindow* win) {
     }
     SetWindowLongPtr(win->hwndHomeSearch, GWLP_WNDPROC, (LONG_PTR)WndProcHomeSearch);
     Edit_SetCueBannerText(win->hwndHomeSearch, L"search files (Ctrl + F)");
-    // add internal left/right padding so text doesn't touch the border
-    SendMessage(win->hwndHomeSearch, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELPARAM(4, 4));
+    // add left/right padding so text doesn't overlap the border
+    int margin = DpiScale(win->hwndCanvas, 6);
+    SendMessage(win->hwndHomeSearch, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELPARAM(margin, margin));
 }
 
 void HomePageDestroySearch(MainWindow* win) {
@@ -1124,15 +1109,26 @@ void LayoutHomePage(HomePageLayout& l) {
     int searchThumbsGap = DpiScale(hdc, kSearchThumbnailsGapY);
     {
         int thumbsContentWidth = thumbsColsForLayout * kThumbnailDx + (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX;
-        int editDx = thumbsContentWidth * 3 / 4;
-        if (editDx < DpiScale(hdc, 200)) {
-            editDx = DpiScale(hdc, 200);
+        int borderDx = thumbsContentWidth * 3 / 4;
+        if (borderDx < DpiScale(hdc, 200)) {
+            borderDx = DpiScale(hdc, 200);
         }
-        int editX = thumbsStartX + (thumbsContentWidth - editDx) / 2;
-        int editY = headerBottomY + headerSearchGap;
-        MoveWindow(win->hwndHomeSearch, editX, editY, editDx, searchEditDy, TRUE);
+        int borderX = thumbsStartX + (thumbsContentWidth - borderDx) / 2;
+        int borderY = headerBottomY + headerSearchGap;
+        int borderDy = searchEditDy + 2; // 1px border on each side
+        l.rcSearchBorder = {borderX, borderY, borderDx, borderDy};
+        // measure font height so we can vertically center the edit
+        HFONT editFont = (HFONT)SendMessage(win->hwndHomeSearch, WM_GETFONT, 0, 0);
+        TEXTMETRIC tm;
+        HFONT oldFont = (HFONT)SelectObject(hdc, editFont);
+        GetTextMetrics(hdc, &tm);
+        SelectObject(hdc, oldFont);
+        int fontDy = tm.tmHeight + tm.tmExternalLeading + 2; // +2 for caret padding
+        int editDy = std::min(fontDy, searchEditDy);
+        int editY = borderY + 1 + (searchEditDy - editDy) / 2;
+        MoveWindow(win->hwndHomeSearch, borderX + 1, editY, borderDx - 2, editDy, TRUE);
     }
-    headerBottomY += headerSearchGap + searchEditDy + searchThumbsGap;
+    headerBottomY += headerSearchGap + searchEditDy + 2 + searchThumbsGap;
 
     // --- Step 2: calculate tip area at the bottom (before thumbnails) ---
     int tipHeight = 0;
@@ -1280,6 +1276,22 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
         Rect rc = ClientRect(win->hwndCanvas);
         auto color = ThemeMainWindowBackgroundColor();
         FillRect(hdc, rc, color);
+    }
+
+    // draw search edit border and background on the canvas
+    {
+        COLORREF bgCol = ThemeControlBackgroundColor();
+        const Rect& sb = l.rcSearchBorder;
+        RECT rcBorder = {sb.x, sb.y, sb.x + sb.dx, sb.y + sb.dy};
+        // fill interior with control background so padding matches the edit
+        HBRUSH brBg = CreateSolidBrush(bgCol);
+        FillRect(hdc, &rcBorder, brBg);
+        DeleteObject(brBg);
+        // draw border frame
+        COLORREF borderCol = AccentColor(bgCol, 40);
+        HBRUSH brBorder = CreateSolidBrush(borderCol);
+        FrameRect(hdc, &rcBorder, brBorder);
+        DeleteObject(brBorder);
     }
 
     if (false) {
