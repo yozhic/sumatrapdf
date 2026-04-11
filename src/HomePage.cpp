@@ -1037,7 +1037,8 @@ void LayoutHomePage(HomePageLayout& l) {
     l.rcLine = {0, sz.dy, rc.dx, 0};
 
     // --- Pre-compute thumbnail grid x offset so header can align with it ---
-    int nFilesForLayout = fileStates.Size();
+    // use unfiltered count so layout stays stable when search filters results
+    int nFilesForLayout = allFileStates.Size();
     int colsForLayout =
         (rc.dx - kThumbsMarginLeft - kThumbsMarginRight + kThumbsSpaceBetweenX) / (kThumbnailDx + kThumbsSpaceBetweenX);
     int thumbsColsForLayout = std::max(colsForLayout, 1);
@@ -1157,7 +1158,7 @@ void LayoutHomePage(HomePageLayout& l) {
 
     l.rcThumbsArea = {0, thumbsTopY, rc.dx, thumbsVisibleDy};
 
-    int nFiles = nFilesForLayout;
+    int nFiles = fileStates.Size();
     int thumbsCols = thumbsColsForLayout;
     int thumbsRows = (nFiles + thumbsCols - 1) / thumbsCols;
     int thumbsContentDy = thumbsRows * (kThumbnailDy + kThumbsSpaceBetweenY) - kThumbsSpaceBetweenY;
