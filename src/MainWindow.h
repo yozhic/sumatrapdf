@@ -218,6 +218,9 @@ struct MainWindow {
     // home page thumbnail scrolling
     int homePageScrollY = 0;
 
+    // home page search filter
+    HWND hwndHomeSearch = nullptr;
+
     bool isToolbarVisible = false;
     bool isFullScreen = false;
     PresentationMode presentation = PM_DISABLED;

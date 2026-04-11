@@ -44,6 +44,7 @@ static void OnPaintAbout(MainWindow* win) {
     if (drawHome) {
         DrawHomePage(win, bufDC);
     } else {
+        HomePageDestroySearch(win);
         DrawAboutPage(win, bufDC);
     }
     win->buffer->Flush(hdc);
@@ -149,6 +150,26 @@ LRESULT WndProcCanvasAbout(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPAR
     int x = GET_X_LPARAM(lp);
     int y = GET_Y_LPARAM(lp);
     switch (msg) {
+        case WM_CTLCOLOREDIT:
+            if ((HWND)lp == win->hwndHomeSearch) {
+                HDC hdcEdit = (HDC)wp;
+                SetTextColor(hdcEdit, ThemeWindowTextColor());
+                SetBkColor(hdcEdit, ThemeControlBackgroundColor());
+                if (!win->brControlBgColor) {
+                    win->brControlBgColor = CreateSolidBrush(ThemeControlBackgroundColor());
+                }
+                return (LRESULT)win->brControlBgColor;
+            }
+            break;
+
+        case WM_COMMAND:
+            if (HIWORD(wp) == EN_CHANGE && (HWND)lp == win->hwndHomeSearch) {
+                win->homePageScrollY = 0;
+                InvalidateRect(win->hwndCanvas, nullptr, FALSE);
+                return 0;
+            }
+            break;
+
         case WM_LBUTTONDOWN:
             OnMouseLeftButtonDownAbout(win, x, y, wp);
             return 0;
@@ -199,4 +220,5 @@ LRESULT WndProcCanvasAbout(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPAR
         default:
             return DefWindowProc(hwnd, msg, wp, lp);
     }
+    return DefWindowProc(hwnd, msg, wp, lp);
 }

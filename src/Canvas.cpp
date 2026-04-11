@@ -3074,10 +3074,12 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         default:
             // TODO: achieve this split through subclassing or different window classes
             if (win->AsFixed()) {
+                HomePageDestroySearch(win);
                 return WndProcCanvasFixedPageUI(win, hwnd, msg, wp, lp);
             }
 
             if (win->AsChm()) {
+                HomePageDestroySearch(win);
                 return WndProcCanvasChmUI(win, hwnd, msg, wp, lp);
             }
 
@@ -3085,6 +3087,7 @@ LRESULT CALLBACK WndProcCanvas(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 return WndProcCanvasAbout(win, hwnd, msg, wp, lp);
             }
 
+            HomePageDestroySearch(win);
             return WndProcCanvasLoadError(win, hwnd, msg, wp, lp);
     }
 }

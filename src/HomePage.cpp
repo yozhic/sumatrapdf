@@ -907,6 +907,9 @@ struct HomePageLayout {
     int thumbsVisibleDy = 0;         // visible height for thumbnails area
     Rect rcThumbsArea;               // clip rect for thumbnails
 
+    // search filter
+    const char* searchQuery = nullptr; // not owned, points to temp string
+
     // tip layout
     Rect rcTip;               // background rect for tip area
     ParsedTip* tip = nullptr; // points to gParsedTips or gParsedPromos, not owned
@@ -921,6 +924,80 @@ HomePageLayout::~HomePageLayout() {
 
 constexpr int kOpenDocumentYShift = 7;
 constexpr int kThumbsMiddleMargin = 32;
+constexpr int kSearchEditDy = 24;
+constexpr int kHeaderSearchGapY = 16;
+constexpr int kSearchThumbnailsGapY = 0;
+
+static WNDPROC DefWndProcHomeSearch = nullptr;
+
+static void DrawHomeSearchBorder(HWND hwnd) {
+    HDC hdc = GetDC(hwnd);
+    RECT rc;
+    GetClientRect(hwnd, &rc);
+    COLORREF bgCol = ThemeControlBackgroundColor();
+    COLORREF borderCol = AccentColor(bgCol, 40);
+    HBRUSH br = CreateSolidBrush(borderCol);
+    FrameRect(hdc, &rc, br);
+    DeleteObject(br);
+    ReleaseDC(hwnd, hdc);
+}
+
+static LRESULT CALLBACK WndProcHomeSearch(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    if (msg == WM_KEYDOWN && wp == VK_ESCAPE) {
+        HwndSetText(hwnd, "");
+        MainWindow* win = FindMainWindowByHwnd(GetParent(hwnd));
+        if (win) {
+            HwndSetFocus(win->hwndCanvas);
+            win->RedrawAll(true);
+        }
+        return 0;
+    }
+    if (msg == WM_MOUSEWHEEL) {
+        HWND parent = GetParent(hwnd);
+        return SendMessageW(parent, msg, wp, lp);
+    }
+    if (msg == WM_PAINT || msg == WM_NCPAINT) {
+        LRESULT res = CallWindowProcW(DefWndProcHomeSearch, hwnd, msg, wp, lp);
+        DrawHomeSearchBorder(hwnd);
+        return res;
+    }
+    return CallWindowProcW(DefWndProcHomeSearch, hwnd, msg, wp, lp);
+}
+
+static void EnsureHomeSearchCreated(MainWindow* win) {
+    if (win->hwndHomeSearch) {
+        return;
+    }
+    HMODULE hmod = GetModuleHandleW(nullptr);
+    DWORD style = WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL;
+    DWORD exStyle = 0;
+    win->hwndHomeSearch = CreateWindowExW(exStyle, WC_EDITW, L"", style, 0, 0, 100, kSearchEditDy, win->hwndCanvas,
+                                          nullptr, hmod, nullptr);
+    HDC hdc = GetDC(win->hwndCanvas);
+    HFONT font = CreateSimpleFont(hdc, "MS Shell Dlg", 16);
+    ReleaseDC(win->hwndCanvas, hdc);
+    SetWindowFont(win->hwndHomeSearch, font, TRUE);
+    if (!DefWndProcHomeSearch) {
+        DefWndProcHomeSearch = (WNDPROC)GetWindowLongPtr(win->hwndHomeSearch, GWLP_WNDPROC);
+    }
+    SetWindowLongPtr(win->hwndHomeSearch, GWLP_WNDPROC, (LONG_PTR)WndProcHomeSearch);
+    Edit_SetCueBannerText(win->hwndHomeSearch, L"search files (Ctrl + F)");
+    // add internal left/right padding so text doesn't touch the border
+    SendMessage(win->hwndHomeSearch, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELPARAM(4, 4));
+}
+
+void HomePageDestroySearch(MainWindow* win) {
+    if (win->hwndHomeSearch) {
+        DestroyWindow(win->hwndHomeSearch);
+        win->hwndHomeSearch = nullptr;
+    }
+}
+
+void HomePageFocusSearch(MainWindow* win) {
+    EnsureHomeSearchCreated(win);
+    ShowWindow(win->hwndHomeSearch, SW_SHOW);
+    HwndSetFocus(win->hwndHomeSearch);
+}
 
 void PickAnotherRandomPromotion() {
     PickAnotherRandomTip();
@@ -929,16 +1006,36 @@ void PickAnotherRandomPromotion() {
 void LayoutHomePage(HomePageLayout& l) {
     EnsureTipsParsed();
 
-    Vec<FileState*> fileStates;
+    Vec<FileState*> allFileStates;
     if (gGlobalPrefs->homePageSortByFrequentlyRead) {
-        gFileHistory.GetFrequencyOrder(fileStates);
+        gFileHistory.GetFrequencyOrder(allFileStates);
     } else {
-        gFileHistory.GetRecentlyOpenedOrder(fileStates);
+        gFileHistory.GetRecentlyOpenedOrder(allFileStates);
     }
     auto hwnd = l.hwnd;
     auto hdc = l.hdc;
     auto rc = l.rc;
     auto win = l.win;
+
+    // filter by search query if present
+    TempStr searchQuery = nullptr;
+    if (win->hwndHomeSearch) {
+        searchQuery = HwndGetTextTemp(win->hwndHomeSearch);
+    }
+    if (searchQuery && searchQuery[0]) {
+        l.searchQuery = searchQuery;
+    }
+    Vec<FileState*> fileStates;
+    for (int i = 0; i < allFileStates.Size(); i++) {
+        FileState* fs = allFileStates.at(i);
+        if (searchQuery && searchQuery[0]) {
+            TempStr baseName = path::GetBaseNameTemp(fs->filePath);
+            if (!str::ContainsI(baseName, searchQuery)) {
+                continue;
+            }
+        }
+        fileStates.Append(fs);
+    }
 
     bool isRtl = IsUIRtl();
     HFONT fontText = CreateSimpleFont(hdc, "MS Shell Dlg", 14);
@@ -1019,6 +1116,23 @@ void LayoutHomePage(HomePageLayout& l) {
     win->staticLinks.Append(sl);
 
     int headerBottomY = rcHdr.y + rcHdr.dy;
+
+    // --- Position search edit below header ---
+    EnsureHomeSearchCreated(win);
+    int searchEditDy = DpiScale(hdc, kSearchEditDy);
+    int headerSearchGap = DpiScale(hdc, kHeaderSearchGapY);
+    int searchThumbsGap = DpiScale(hdc, kSearchThumbnailsGapY);
+    {
+        int thumbsContentWidth = thumbsColsForLayout * kThumbnailDx + (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX;
+        int editDx = thumbsContentWidth / 2;
+        if (editDx < DpiScale(hdc, 200)) {
+            editDx = DpiScale(hdc, 200);
+        }
+        int editX = thumbsStartX + (thumbsContentWidth - editDx) / 2;
+        int editY = headerBottomY + headerSearchGap;
+        MoveWindow(win->hwndHomeSearch, editX, editY, editDx, searchEditDy, TRUE);
+    }
+    headerBottomY += headerSearchGap + searchEditDy + searchThumbsGap;
 
     // --- Step 2: calculate tip area at the bottom (before thumbnails) ---
     int tipHeight = 0;
@@ -1221,7 +1335,79 @@ static void DrawHomePageLayout(const HomePageLayout& l) {
         char* path = fs->filePath;
         TempStr fileName = path::GetBaseNameTemp(path);
         UINT fmt = DT_SINGLELINE | DT_END_ELLIPSIS | DT_NOPREFIX | (isRtl ? DT_RIGHT : DT_LEFT);
-        HdcDrawText(hdc, fileName, rect, fmt, fontText);
+
+        if (l.searchQuery) {
+            // draw with search match highlighting
+            SelectObject(hdc, fontText);
+            int textLen = str::Leni(fileName);
+            int queryLen = str::Leni(l.searchQuery);
+            u8* highlighted = AllocArrayTemp<u8>(textLen);
+            const char* p = fileName;
+            while ((p = str::FindI(p, l.searchQuery)) != nullptr) {
+                int off = (int)(p - fileName);
+                for (int k = 0; k < queryLen && off + k < textLen; k++) {
+                    highlighted[off + k] = 1;
+                }
+                p += queryLen;
+            }
+
+            // collect contiguous highlighted ranges
+            struct ByteRange {
+                int start;
+                int end;
+            };
+            ByteRange byteRanges[16];
+            int nRanges = 0;
+            {
+                int pos = 0;
+                while (pos < textLen && nRanges < 16) {
+                    if (highlighted[pos]) {
+                        int start = pos;
+                        while (pos < textLen && highlighted[pos]) {
+                            pos++;
+                        }
+                        byteRanges[nRanges++] = {start, pos};
+                    } else {
+                        pos++;
+                    }
+                }
+            }
+
+            WCHAR* fileNameW = ToWStrTemp(fileName);
+            int strOriginX = rect.x;
+
+            // draw highlight background
+            COLORREF highlightCol;
+            if (IsCurrentThemeDefault()) {
+                highlightCol = RGB(255, 255, 0);
+            } else {
+                highlightCol = AccentColor(backgroundColor, 40);
+            }
+            HBRUSH hbrHighlight = CreateSolidBrush(highlightCol);
+            for (int i = 0; i < nRanges; i++) {
+                WCHAR* prefixToStart = ToWStrTemp(fileName, (size_t)byteRanges[i].start);
+                int wStart = str::Leni(prefixToStart);
+                WCHAR* prefixToEnd = ToWStrTemp(fileName, (size_t)byteRanges[i].end);
+                int wEnd = str::Leni(prefixToEnd);
+
+                SIZE szStart, szEnd;
+                GetTextExtentPoint32W(hdc, fileNameW, wStart, &szStart);
+                GetTextExtentPoint32W(hdc, fileNameW, wEnd, &szEnd);
+
+                RECT hlRect;
+                hlRect.top = rect.y;
+                hlRect.bottom = rect.y + rect.dy;
+                hlRect.left = strOriginX + szStart.cx;
+                hlRect.right = strOriginX + szEnd.cx;
+                FillRect(hdc, &hlRect, hbrHighlight);
+            }
+            DeleteObject(hbrHighlight);
+
+            // draw text over highlights
+            HdcDrawText(hdc, fileName, rect, fmt, fontText);
+        } else {
+            HdcDrawText(hdc, fileName, rect, fmt, fontText);
+        }
 
         GetFileStateIcon(fs);
         int x = isRtl ? page.x + page.dx - DpiScale(hdc, 16) : page.x;

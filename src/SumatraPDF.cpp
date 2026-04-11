@@ -6751,7 +6751,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdFindFirst:
-            FindFirst(win);
+            if (win->IsCurrentTabAbout()) {
+                HomePageFocusSearch(win);
+            } else {
+                FindFirst(win);
+            }
             break;
 
         case CmdFindNext:
