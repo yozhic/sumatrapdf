@@ -252,6 +252,9 @@ static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
     auto fmt = _TRA("You have version '%s' and version '%s' is available.\nDo you want to install new version?");
     auto content = str::Format(fmt, CURR_VERSION_STRA, ver);
 
+    auto installerPath = updateInfo->installerPath;
+    bool didDownloadInstaller = file::Exists(installerPath);
+
     constexpr int kBtnIdDontInstall = 100;
     constexpr int kBtnIdInstall = 101;
     auto title = _TRA("SumatraPDF Update");
@@ -262,7 +265,11 @@ static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
     auto s = _TRA("Don't install");
     buttons[0].pszButtonText = ToWStrTemp(s);
     buttons[1].nButtonID = kBtnIdInstall;
-    s = _TRA("Install and relaunch");
+    if (didDownloadInstaller) {
+        s = _TRA("Install and relaunch");
+    } else {
+        s = _TRA("Download update");
+    }
     buttons[1].pszButtonText = ToWStrTemp(s);
 
     DWORD flags =
@@ -290,8 +297,6 @@ static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
     ReportIf(hr == E_INVALIDARG);
     bool doInstall = (hr == S_OK) && (buttonPressedId == kBtnIdInstall);
 
-    auto installerPath = updateInfo->installerPath;
-
     // persist timeOfLastUpdateCheck
     SaveSettings();
     if (!doInstall) {
@@ -300,7 +305,7 @@ static void NotifyUserOfUpdate(UpdateInfo* updateInfo) {
     }
 
     // if installer not downloaded tell user to download from website
-    if (!installerPath || !file::Exists(installerPath)) {
+    if (!didDownloadInstaller) {
         SumatraLaunchBrowser(kWebisteDownloadPageURL);
         return;
     }

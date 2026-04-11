@@ -44960,3 +44960,147 @@ tl:Baguhin ang Kulay ng Background
 uk:Змінити колір фону
 :Change Background Color
 vn:Thay đổi màu nền
+:Download update
+am:ማሻሻያ አውርድ
+:Download update
+ar:تنزيل التحديث
+:Download update
+br:Pellgargañ an hizivadenn
+:Download update
+cn:下载更新
+:Download update
+co:Scaricà l'aghjurnamentu
+:Download update
+de:Update herunterladen
+:Download update
+el:Λήψη ενημέρωσης
+:Download update
+hi:अपडेट डाउनलोड करें
+:Download update
+it:Scarica aggiornamento
+:Download update
+ja:アップデートをダウンロード
+:Download update
+ml:അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്യുക
+:Download update
+nl:Update downloaden
+:Download update
+pl:Pobierz aktualizację
+:Download update
+ru:Загрузить обновление
+:Download update
+sk:Stiahnuť aktualizáciu
+:Download update
+sr-rs:Преузми ажурирање
+:Download update
+tw:下載更新
+:Download update
+az:Yeniləməni endirin
+:Download update
+by:Спампаваць абнаўленне
+:Download update
+ca:Descarrega l'actualització
+:Download update
+cy:Lawrlwytho diweddariad
+:Download update
+cz:Stáhnout aktualizaci
+:Download update
+es:Descargar actualización
+:Download update
+fa:دریافت به‌روزرسانی
+:Download update
+fi:Lataa päivitys
+:Download update
+fo:Heinta dagføring
+:Download update
+fr:Télécharger la mise à jour
+:Download update
+ga:Íosluchtaigh nuashonrú
+:Download update
+gl:Descargar actualización
+:Download update
+he:הורד עדכון
+:Download update
+hu:Frissítés letöltése
+:Download update
+id:Unduh pembaruan
+:Download update
+kr:업데이트 다운로드
+:Download update
+lv:Lejupielādēt atjauninājumu
+:Download update
+my:အပ်ဒိတ်ကို ဒေါင်းလုဒ်လုပ်ရန်
+:Download update
+pt:Baixar atualização
+:Download update
+ro:Descarcă actualizarea
+:Download update
+sat:अपडेट डाउनलोड करॉय
+:Download update
+sl:Prenesi posodobitev
+:Download update
+sv:Ladda ner uppdatering
+:Download update
+ta:புதுப்பிப்பைப் பதிவிறக்கவும்
+:Download update
+tr:Güncellemeyi indir
+:Download update
+uz:Yangilanishni yuklab olish
+:Download update
+af:Laai opdatering af
+:Download update
+bg:Изтегляне на актуализация
+:Download update
+bn:আপডেট ডাউনলোড করুন
+:Download update
+bs:Preuzmi ažuriranje
+:Download update
+ca-xv:Baixar actualització
+:Download update
+dk:Download opdatering
+:Download update
+et:Laadi värskendus alla
+:Download update
+eu:Deskargatu eguneratzea
+:Download update
+fy-nl:Fernijing downloade
+:Download update
+hr:Preuzmi ažuriranje
+:Download update
+jv:Undhuh nganyari
+:Download update
+ka:განახლების ჩამოტვირთვა
+:Download update
+ku:Nûvekirinê daxe
+:Download update
+kw:Iskarga devednans
+:Download update
+lt:Atsisiųsti atnaujinimą
+:Download update
+mk:Преземи ажурирање
+:Download update
+mm:အပ်ဒိတ်ဒေါင်းလုဒ်လုပ်ရန်
+:Download update
+ne:अद्यावधिक डाउनलोड गर्नुहोस्
+:Download update
+nn:Last ned oppdatering
+:Download update
+no:Last ned oppdatering
+:Download update
+pa:ਅੱਪਡੇਟ ਡਾਊਨਲੋਡ ਕਰੋ
+:Download update
+si:යාවත්කාලීනය බාගන්න
+:Download update
+sn:Dhawunirodha zvigadziriso
+:Download update
+sp-rs:Преузми ажурирање
+:Download update
+sq:Shkarko përditësimin
+:Download update
+th:ดาวน์โหลดการอัปเดต
+:Download update
+tl:I-download ang update
+:Download update
+uk:Завантажити оновлення
+:Download update
+vn:Tải xuống bản cập nhật

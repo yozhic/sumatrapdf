@@ -538,8 +538,10 @@ static void OnInstallationFinished(Flags* cli) {
         gWnd->btnExit->onClick = MkFunc0Void(OnButtonExit);
         SetMsg(_TRA("Installation failed!"), COLOR_MSG_FAILED);
     } else {
-        gWnd->btnRunSumatra = CreateDefaultButton(gWnd->hwnd, _TRA("Start SumatraPDF"), isRtl);
-        gWnd->btnRunSumatra->onClick = MkFunc0Void(OnButtonStartSumatra);
+        if (!cli->fastInstall) {
+            gWnd->btnRunSumatra = CreateDefaultButton(gWnd->hwnd, _TRA("Start SumatraPDF"), isRtl);
+            gWnd->btnRunSumatra->onClick = MkFunc0Void(OnButtonStartSumatra);
+        }
         SetMsg(_TRA("Thank you! SumatraPDF has been installed."), COLOR_MSG_OK);
     }
     gMsgError = gFirstError;
