@@ -222,6 +222,7 @@ struct CommandPaletteWnd : Wnd {
     Static* staticInfo = nullptr;
 
     StrVec filterWords;
+    Vec<u8> highlighted; // reused across DrawListBoxItem calls
 
     int currTabIdx = 0;
     bool smartTabMode = false;
@@ -1249,8 +1250,9 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
     } else {
         // find all match ranges in itemText
         int textLen = str::Leni(itemText);
-        // marks which chars are part of a match
-        u8* highlighted = AllocArrayTemp<u8>(textLen);
+        // marks which chars are part of a match; reuse member vec to avoid per-call alloc
+        u8* hl = highlighted.EnsureCap((size_t)textLen);
+        memset(hl, 0, textLen);
         const StrVec& words = filterWords;
         for (int w = 0; w < nWords; w++) {
             const char* word = words.At(w);
@@ -1262,7 +1264,7 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
             while ((p = str::FindI(p, word)) != nullptr) {
                 int off = (int)(p - itemText);
                 for (int k = 0; k < wordLen && off + k < textLen; k++) {
-                    highlighted[off + k] = 1;
+                    hl[off + k] = 1;
                 }
                 p += wordLen;
             }
@@ -1278,9 +1280,9 @@ void CommandPaletteWnd::DrawListBoxItem(ListBox::DrawItemEvent* ev) {
         {
             int pos = 0;
             while (pos < textLen && nRanges < 16) {
-                if (highlighted[pos]) {
+                if (hl[pos]) {
                     int start = pos;
-                    while (pos < textLen && highlighted[pos]) {
+                    while (pos < textLen && hl[pos]) {
                         pos++;
                     }
                     byteRanges[nRanges++] = {start, pos};

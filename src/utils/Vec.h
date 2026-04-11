@@ -25,7 +25,7 @@ class Vec {
     static constexpr size_t kPadding = 1;
     static constexpr size_t kElSize = sizeof(T);
 
-  protected:
+  private:
     NO_INLINE bool EnsureCapSlow(size_t needed) {
         size_t newCap = cap * 2;
         if (needed > newCap) {
@@ -62,18 +62,22 @@ class Vec {
         return true;
     }
 
-    inline bool EnsureCap(size_t capNeeded) {
+  public:
+    inline T* EnsureCap(size_t capNeeded) {
         // this is frequent, fast path that should be inlined
         if (cap >= capNeeded) {
-            return true;
+            return els;
         }
         // slow path
-        return EnsureCapSlow(capNeeded);
+        if (!EnsureCapSlow(capNeeded)) {
+            return nullptr;
+        }
+        return els;
     }
 
     T* MakeSpaceAt(size_t idx, size_t count) {
         size_t newLen = std::max(len, idx) + count;
-        bool ok = EnsureCap(newLen);
+        T* ok = EnsureCap(newLen);
         if (!ok) {
             return nullptr;
         }
