@@ -70,8 +70,13 @@ void TabsCtrl::LayoutTabs() {
         HwndScheduleRepaint(hwnd);
         return;
     }
-    auto maxDx = (rect.dx - 5) / nTabs;
-    int dx = std::min(tabDefaultDx, maxDx);
+    int dx;
+    if (tabWidthFrozen && frozenTabDx > 0) {
+        dx = frozenTabDx;
+    } else {
+        auto maxDx = (rect.dx - 5) / nTabs;
+        dx = std::min(tabDefaultDx, maxDx);
+    }
     tabSize = {dx, dy};
     // logfa("TabsCtrl::Layout size: (%d, %d), tab size: (%d, %d)\n", rect.dx, rect.dy, tabSize.dx, tabSize.dy);
 
@@ -531,6 +536,10 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             break;
 
         case WM_MOUSELEAVE:
+            if (tabWidthFrozen) {
+                tabWidthFrozen = false;
+                LayoutTabs();
+            }
             if (tabHighlighted != tabUnderMouse || tabHighlightedClose != -1) {
                 tabHighlighted = tabUnderMouse;
                 tabHighlightedClose = -1;
@@ -637,6 +646,10 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 ReleaseCapture();
             }
             if (tabBeingClosed != -1 && tabUnderMouse == tabBeingClosed && overClose) {
+                // freeze tab widths so next close button stays under cursor
+                // unfreezes when mouse leaves the tab control
+                frozenTabDx = tabSize.dx;
+                tabWidthFrozen = true;
                 // send notification that the tab is closed
                 TriggerTabClosed(this, tabBeingClosed);
                 // TriggerTabClosed() might have destroyed the window and this TabsCtrl

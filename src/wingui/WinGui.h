@@ -778,6 +778,10 @@ struct TabsCtrl : Wnd {
     // if >= 0 will paint this tab as selected vs. the real selected
     int tabForceShowSelected = -1;
 
+    // Chrome-like close: keep tab widths frozen briefly after closing via close button
+    bool tabWidthFrozen = false;
+    int frozenTabDx = 0;
+
     ClosedHandler onTabClosed;
     SelectionChangingHandler onSelectionChanging;
     SelectionChangedHandler onSelectionChanged;
