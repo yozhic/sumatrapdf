@@ -1652,6 +1652,22 @@ void ReloadDocument(MainWindow* win, bool autoRefresh) {
         return;
     }
     logfa("ReloadDocument: %s, auto refresh: %d\n", path, (int)autoRefresh);
+
+    // Save display state before potentially destroying the old controller
+    FileState* fs = NewFileState(path);
+    tab->ctrl->GetDisplayState(fs);
+    UpdateDisplayStateWindowRect(win, fs);
+    UpdateSidebarDisplayState(tab, fs);
+
+    // DjVu: libdjvulibre caches file info by path, so we must close the old
+    // engine before opening the new one to avoid stale cached data (issue #1298)
+    bool isDjVu = str::EndsWithI(path, ".djvu") || str::EndsWithI(path, ".djv");
+    if (isDjVu) {
+        delete tab->ctrl;
+        tab->ctrl = nullptr;
+        win->ctrl = nullptr;
+    }
+
     DocController* ctrl = CreateControllerForEngineOrFile(nullptr, path, &pwdUI, win);
     // We don't allow PDF-repair if it is an autorefresh because
     // a refresh event can occur before the file is finished being written,
@@ -1660,13 +1676,9 @@ void ReloadDocument(MainWindow* win, bool autoRefresh) {
     if (!ctrl && autoRefresh) {
         SetFrameTitleForTab(tab, true);
         HwndSetText(win->hwndFrame, tab->frameTitle);
+        DeleteFileState(fs);
         return;
     }
-
-    FileState* fs = NewFileState(path);
-    tab->ctrl->GetDisplayState(fs);
-    UpdateDisplayStateWindowRect(win, fs);
-    UpdateSidebarDisplayState(tab, fs);
     // Set the windows state based on the actual window's placement
     int wstate = WIN_STATE_NORMAL;
     if (win->isFullScreen) {
