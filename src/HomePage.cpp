@@ -1124,7 +1124,7 @@ void LayoutHomePage(HomePageLayout& l) {
     int searchThumbsGap = DpiScale(hdc, kSearchThumbnailsGapY);
     {
         int thumbsContentWidth = thumbsColsForLayout * kThumbnailDx + (thumbsColsForLayout - 1) * kThumbsSpaceBetweenX;
-        int editDx = thumbsContentWidth / 2;
+        int editDx = thumbsContentWidth * 3 / 4;
         if (editDx < DpiScale(hdc, 200)) {
             editDx = DpiScale(hdc, 200);
         }
