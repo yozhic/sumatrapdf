@@ -1201,15 +1201,36 @@ static void HsvToRgb(float h, float s, float v, u8& r, u8& g, u8& b) {
 static void PaintColorArea(HDC hdc, RECT* rc) {
     int w = rc->right - rc->left;
     int h = rc->bottom - rc->top;
+    if (w <= 0 || h <= 0) {
+        return;
+    }
+    // rows must be DWORD-aligned; each pixel is 3 bytes (BGR)
+    int stride = (w * 3 + 3) & ~3;
+    u8* bits = (u8*)malloc(stride * h);
+    if (!bits) {
+        return;
+    }
     for (int y = 0; y < h; y++) {
-        float val = 1.0f - (float)y / (float)h; // value: top=bright, bottom=dark
+        float val = 1.0f - (float)y / (float)h;
+        u8* row = bits + y * stride;
         for (int x = 0; x < w; x++) {
-            float hue = (float)x / (float)w * 360.0f; // hue: left to right
+            float hue = (float)x / (float)w * 360.0f;
             u8 r, g, b;
             HsvToRgb(hue, 1.0f, val, r, g, b);
-            SetPixel(hdc, rc->left + x, rc->top + y, RGB(r, g, b));
+            row[x * 3] = b;
+            row[x * 3 + 1] = g;
+            row[x * 3 + 2] = r;
         }
     }
+    BITMAPINFO bmi{};
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = w;
+    bmi.bmiHeader.biHeight = -h; // top-down
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 24;
+    bmi.bmiHeader.biCompression = BI_RGB;
+    SetDIBitsToDevice(hdc, rc->left, rc->top, w, h, 0, 0, 0, h, bits, &bmi, DIB_RGB_COLORS);
+    free(bits);
 }
 
 static void SelectPreviewButton(HWND hDlg, BgColorDlgData* data) {
