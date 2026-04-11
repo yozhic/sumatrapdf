@@ -30,6 +30,10 @@ extern "C" int pdfbake_main(int argc, char** argv);
 extern "C" int pdfclean_main(int argc, char** argv);
 extern "C" int muconvert_main(int argc, char** argv);
 
+// offset to align static label text with text inside an edit control
+// accounts for WS_EX_CLIENTEDGE border (2px) + edit internal left margin (~2px)
+constexpr int kEditTextXOffset = 4;
+
 static int CalcDlgWidth(HFONT font, const char* path, int minW, int padding) {
     HDC hdc = GetDC(nullptr);
     HFONT oldFont = (HFONT)SelectObject(hdc, font);
@@ -195,10 +199,10 @@ void ShowPdfBakeDialog(MainWindow* win) {
     int y = kBakeDlgPadding;
     int w = dlgW - 2 * kBakeDlgPadding - 16; // account for non-client area
 
-    // row 1: source path label
+    // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
-                        y, w, kBakeDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
+                        x + kEditTextXOffset, y, w - kEditTextXOffset, kBakeDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kBakeDlgRowH + kBakeDlgRowGap;
 
@@ -430,10 +434,10 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     int y = kExtractDlgPadding;
     int w = dlgW - 2 * kExtractDlgPadding - 16; // account for non-client area
 
-    // row 1: source path label
+    // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
-                        y, w, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
+                        x + kEditTextXOffset, y, w - kEditTextXOffset, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kExtractDlgRowH + kExtractDlgRowGap;
 
@@ -640,10 +644,10 @@ void ShowPdfCompressDialog(MainWindow* win) {
     int y = kCompressDlgPadding;
     int w = dlgW - 2 * kCompressDlgPadding - 16;
 
-    // row 1: source path label
+    // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
-                        y, w, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
+                        x + kEditTextXOffset, y, w - kEditTextXOffset, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kCompressDlgRowH + kCompressDlgRowGap;
 
@@ -825,9 +829,10 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     int y = kCompressDlgPadding;
     int w = dlgW - 2 * kCompressDlgPadding - 16;
 
+    // source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
-                        y, w, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
+                        x + kEditTextXOffset, y, w - kEditTextXOffset, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kCompressDlgRowH + kCompressDlgRowGap;
 
@@ -1165,10 +1170,10 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     int y = kDeletePageDlgPadding;
     int w = dlgW - 2 * kDeletePageDlgPadding - 16;
 
-    // row 1: source path label
+    // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
-                        y, w, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
+                        x + kEditTextXOffset, y, w - kEditTextXOffset, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
 
