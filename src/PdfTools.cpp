@@ -19,6 +19,7 @@
 #include "SumatraPDF.h"
 #include "MainWindow.h"
 #include "WindowTab.h"
+#include "Translations.h"
 #include "ExternalViewers.h"
 #include "Flags.h"
 #include "DisplayModel.h"
@@ -867,7 +868,7 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     ShowWindow(hwnd, SW_SHOW);
 }
 
-// --- Delete Page From PDF dialog ---
+// --- Delete Pages From PDF dialog ---
 
 struct PdfDeletePageDialog {
     HWND hwnd = nullptr;
@@ -1157,7 +1158,9 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + 8 + kDeletePageDlgPadding;
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, L"Delete Page From PDF",
+    const char* title = _TRA("Delete Pages From PDF");
+    TempWStr ws = ToWStrTemp(title);
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, ws,
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -1191,16 +1194,17 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
 
     // row 3: "Pages To Delete:" label + pages edit + total pages label
-    // offset static labels vertically to align text baseline with edit control text
+    // offset static labels to align with text inside edit control (same as input path label)
     int labelW = 100;
-    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages To Delete:", WS_CHILD | WS_VISIBLE | SS_LEFT, x,
+    int labelX = x + kEditTextXOffset;
+    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages To Delete:", WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
                                           y + kEditTextXOffset, labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     TempStr totalStr = str::FormatTemp("of %d", pageCount);
     int totalW = 60;
-    int editX = x + labelW + 4;
-    int editW = w - labelW - 4 - totalW - 4;
+    int editX = labelX + labelW + 8;
+    int editW = x + w - editX - totalW - 4;
     int currentPage = win->ctrl ? win->ctrl->CurrentPageNo() : 1;
     TempStr pagesStr = str::FormatTemp("%d", currentPage);
     dlg->hwndPagesEdit =
@@ -1214,15 +1218,21 @@ void ShowPdfDeletePageDialog(MainWindow* win) {
     SendMessageW(dlg->hwndTotalLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
 
-    // row 4: Delete + Cancel buttons (right-aligned)
+    // row 4: syntax hint (left) + Delete + Cancel buttons (right)
     int btnW = 85;
     int btnH = 24;
+
+    // syntax hint label, x-aligned with "Pages To Delete:" and baseline-aligned with button text
+    HWND hwndSyntax = CreateWindowExW(0, L"STATIC", L"Syntax: 2,5-7,13-N", WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
+                                      y + kEditTextXOffset, w / 2, btnH, hwnd, nullptr, h, nullptr);
+    SendMessageW(hwndSyntax, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
     int bx = x + w - btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
                                          btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndDeleteBtn = CreateWindowExW(0, L"BUTTON", L"Delete", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
+    dlg->hwndDeleteBtn = CreateWindowExW(0, L"BUTTON", L"Delete Pages", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
                                          btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDeleteBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 

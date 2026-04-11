@@ -225,7 +225,7 @@ enum {
     CmdSetTabColor = 414,
     CmdCompressPdf = 415,
     CmdDecompressPdf = 416,
-    CmdPdfDeletePage = 417,
+    CmdPdfDeletePages = 417,
     CmdNone = 418,
 
     /* range for file history */

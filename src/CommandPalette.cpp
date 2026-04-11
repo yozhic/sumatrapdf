@@ -398,7 +398,7 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdPdfDeletePage) {
+    if (!ctx.isPdf && cmdId == CmdPdfDeletePages) {
         return false;
     }
 

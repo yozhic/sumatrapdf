@@ -15,7 +15,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdSetTabColor` (`Set Tab Color`) to set a custom color for a document's tab, available from tab right-click context menu
 - add `CmdCompressPdf` (`Compress PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to compress a PDF file
 - add `CmdDecompressPdf` (`Decompress PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to decompress a PDF file
-- add `CmdPdfDeletePage` (`Delete Page From PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to delete pages from a PDF file
+- add `CmdPdfDeletePages` (`Delete Pages From PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to delete pages from a PDF file
 - add `CmdDocumentExtractText` (`Extract Text From Document` in `Ctrl + k` [command palette](Command-Palette.md)) to extract text from document pages to a .txt file
 - add `ToolbarText` parameter for `ExternalViewers` advanced setting to show external viewer as a toolbar button
 - move `Scrollbars` advanced setting from `FixedPageUI` to top-level

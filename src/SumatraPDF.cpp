@@ -6890,7 +6890,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             ShowPdfDecompressDialog(win);
             break;
 
-        case CmdPdfDeletePage:
+        case CmdPdfDeletePages:
             ShowPdfDeletePageDialog(win);
             break;
 
