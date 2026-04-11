@@ -263,6 +263,9 @@ struct MainWindow {
     IPageElement* linkOnLastButtonDown = nullptr;
     AutoFreeStr urlOnLastButtonDown;
     Annotation* annotationUnderCursor = nullptr;
+    // highlight rectangle for element under cursor during context menu (in page coordinates)
+    RectF contextMenuHighlightRect{};
+    int contextMenuHighlightPageNo = 0;
     HBRUSH brControlBgColor = nullptr;
 
     DocControllerCallback* cbHandler = nullptr;

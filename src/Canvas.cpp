@@ -1649,6 +1649,15 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
     WindowTab* tab = win->CurrentTab();
     PaintCurrentEditAnnotationMark(tab, hdc, dm);
 
+    // draw highlight rectangle around element under cursor during context menu
+    if (win->contextMenuHighlightPageNo > 0 && dm->PageVisible(win->contextMenuHighlightPageNo)) {
+        Rect rc = dm->CvtToScreen(win->contextMenuHighlightPageNo, win->contextMenuHighlightRect);
+        Gdiplus::Graphics gs(hdc);
+        Gdiplus::Color col(128, 0, 100, 255);
+        Gdiplus::Pen pen(col, 2);
+        gs.DrawRectangle(&pen, rc.x, rc.y, rc.dx, rc.dy);
+    }
+
     if (win->showSelection) {
         PaintSelection(win, hdc);
     }

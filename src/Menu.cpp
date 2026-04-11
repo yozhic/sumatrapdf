@@ -1837,7 +1837,8 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
 
     Point cursorPos{x, y};
     WindowTab* tab = win->CurrentTab();
-    IPageElement* pageEl = dm->GetElementAtPos(cursorPos, nullptr);
+    int pageNoUnderEl = 0;
+    IPageElement* pageEl = dm->GetElementAtPos(cursorPos, &pageNoUnderEl);
 
     char* value = nullptr;
     if (pageEl) {
@@ -1943,6 +1944,13 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     }
     RemoveBadMenuSeparators(popup);
 
+    // highlight the element under cursor while context menu is open
+    if (pageEl && pageNoUnderEl > 0) {
+        win->contextMenuHighlightRect = pageEl->GetRect();
+        win->contextMenuHighlightPageNo = pageNoUnderEl;
+        HwndRepaintNow(win->hwndCanvas);
+    }
+
     POINT pt = {x, y};
     MapWindowPoints(win->hwndCanvas, HWND_DESKTOP, &pt, 1);
     MarkMenuOwnerDraw(popup);
@@ -1956,6 +1964,12 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     // If that happened, all our cached pointers (win, dm, pageEl, etc.) are dangling.
     if (!IsMainWindowValid(win)) {
         return;
+    }
+
+    // clear the highlight after context menu closes
+    if (win->contextMenuHighlightPageNo > 0) {
+        win->contextMenuHighlightPageNo = 0;
+        HwndRepaintNow(win->hwndCanvas);
     }
 
     auto cmd = FindCustomCommand(cmdId);
