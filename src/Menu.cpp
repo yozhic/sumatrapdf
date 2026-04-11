@@ -281,10 +281,6 @@ static MenuDef menuDefView[] = {
         CmdToggleToolbar,
     },
     {
-        _TRN("Change Scr&ollbar"),
-        CmdChangeScrollbar,
-    },
-    {
         nullptr,
         0,
     },
@@ -875,10 +871,6 @@ static MenuDef menuDefContext[] = {
         CmdToggleToolbar,
     },
     {
-        _TRN("Change &Scrollbar"),
-        CmdChangeScrollbar,
-    },
-    {
         kMenuSeparator,
         kMenuSeparatorID,
     },
@@ -1121,7 +1113,6 @@ UINT_PTR removeIfChm[] = {
     CmdRotateLeft,
     CmdRotateRight,
     CmdTogglePresentationMode,
-    CmdChangeScrollbar,
     CmdZoomFitPage,
     CmdZoomActualSize,
     CmdZoomFitWidth,
