@@ -218,6 +218,7 @@ export const commands = [
     "CmdToggleTips", "Toggle Tips",
     "CmdChangeBackgroundColor", "Change Background Color",
     "CmdSetTabColor", "Set Tab Color",
+    "CmdCompressPdf", "Compress PDF",
     "CmdNone", "Do nothing",
 ];
 

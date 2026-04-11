@@ -290,6 +290,7 @@ CmdToggleTips,,Toggle Tips,"Toggle ShowTips advanced setting, ver 3.7+"
 CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only available when SumatraPDF is installed. Registers or un-registers the PDF preview handler for Windows Explorer preview pane, ver 3.7+"
 CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only available when SumatraPDF is installed. Registers or un-registers the PDF search filter for Windows Search indexing, ver 3.7+"
 CmdSetTabColor,,Set Tab Color,"Set a custom color for the tab of the current document, available from tab context menu, ver 3.7+"
+CmdCompressPdf,,Compress PDF,"Compress a PDF file using aggressive garbage collection and optimization, ver 3.7+"
 ```
 
 ## Debug

@@ -223,7 +223,8 @@ enum {
     CmdToggleTips = 412,
     CmdChangeBackgroundColor = 413,
     CmdSetTabColor = 414,
-    CmdNone = 415,
+    CmdCompressPdf = 415,
+    CmdNone = 416,
 
     /* range for file history */
     CmdFileHistoryFirst,
