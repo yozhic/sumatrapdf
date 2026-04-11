@@ -1445,8 +1445,15 @@ static INT_PTR CALLBACK Dialog_ChangeBgColor_Proc(HWND hDlg, UINT msg, WPARAM wp
                     return TRUE;
                 case IDC_BGCOL_EDIT:
                     if (HIWORD(wp) == EN_CHANGE) {
-                        // live preview: try to parse as user types
-                        TryParseBgColorEdit(hDlg, data);
+                        if (TryParseBgColorEdit(hDlg, data)) {
+                            // update selected button color
+                            if (data->selectedCustomIdx >= 0 && !data->isCheckered) {
+                                data->customColors[data->selectedCustomIdx] = data->currentColor;
+                                data->customColorSet[data->selectedCustomIdx] = true;
+                                data->customColorsChanged = true;
+                            }
+                            InvalidatePreview(hDlg, data);
+                        }
                     }
                     break;
                 case IDC_BGCOL_PREVIEW:
