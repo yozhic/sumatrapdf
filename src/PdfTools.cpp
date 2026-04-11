@@ -861,3 +861,371 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     }
     ShowWindow(hwnd, SW_SHOW);
 }
+
+// --- Delete Page From PDF dialog ---
+
+struct PdfDeletePageDialog {
+    HWND hwnd = nullptr;
+    HWND hwndPathLabel = nullptr;
+    HWND hwndDestEdit = nullptr;
+    HWND hwndBrowseBtn = nullptr;
+    HWND hwndPagesLabel = nullptr;
+    HWND hwndPagesEdit = nullptr;
+    HWND hwndTotalLabel = nullptr;
+    HWND hwndDeleteBtn = nullptr;
+    HWND hwndCancelBtn = nullptr;
+    HFONT hFont = nullptr;
+    char* srcPath = nullptr;
+    MainWindow* win = nullptr;
+    int pageCount = 0;
+};
+
+constexpr int kDeletePageDlgPadding = 10;
+constexpr int kDeletePageDlgRowH = 22;
+constexpr int kDeletePageDlgRowGap = 6;
+
+// Parse delete page ranges like "1,3-8,13-N" where N means last page.
+// Returns a sorted list of unique 1-based page numbers to delete.
+// Returns false if the syntax is invalid or any page is out of range.
+static bool ParseDeletePages(const char* s, int pageCount, Vec<int>& pagesToDelete) {
+    if (!s || !*s) {
+        return false;
+    }
+    StrVec parts;
+    Split(&parts, s, ",", true);
+    if (parts.Size() == 0) {
+        return false;
+    }
+    for (char* part : parts) {
+        str::TrimWSInPlace(part, str::TrimOpt::Both);
+        if (str::IsEmpty(part)) {
+            return false;
+        }
+        // check for range "A-B" where A/B can be a number or "N"
+        char* dash = (char*)str::FindChar(part, '-');
+        if (dash) {
+            *dash = 0;
+            char* startStr = part;
+            char* endStr = dash + 1;
+            str::TrimWSInPlace(startStr, str::TrimOpt::Both);
+            str::TrimWSInPlace(endStr, str::TrimOpt::Both);
+            if (str::IsEmpty(startStr) || str::IsEmpty(endStr)) {
+                return false;
+            }
+            int start, end;
+            if (str::EqI(startStr, "N")) {
+                start = pageCount;
+            } else {
+                start = str::Parse(startStr, "%d%$", &start) ? start : -1;
+            }
+            if (str::EqI(endStr, "N")) {
+                end = pageCount;
+            } else {
+                end = str::Parse(endStr, "%d%$", &end) ? end : -1;
+            }
+            if (start < 1 || start > pageCount || end < 1 || end > pageCount || start > end) {
+                return false;
+            }
+            for (int i = start; i <= end; i++) {
+                pagesToDelete.Append(i);
+            }
+        } else {
+            // single page
+            int page;
+            if (str::EqI(part, "N")) {
+                page = pageCount;
+            } else {
+                page = str::Parse(part, "%d%$", &page) ? page : -1;
+            }
+            if (page < 1 || page > pageCount) {
+                return false;
+            }
+            pagesToDelete.Append(page);
+        }
+    }
+    if (pagesToDelete.Size() == 0) {
+        return false;
+    }
+    // sort and deduplicate
+    pagesToDelete.SortTyped([](const int* a, const int* b) -> int { return *a - *b; });
+    int prev = -1;
+    Vec<int> unique;
+    for (int p : pagesToDelete) {
+        if (p != prev) {
+            unique.Append(p);
+            prev = p;
+        }
+    }
+    pagesToDelete = unique;
+    // can't delete all pages
+    if (pagesToDelete.Size() >= pageCount) {
+        return false;
+    }
+    return true;
+}
+
+// Build the page range string of pages to KEEP (complement of pagesToDelete).
+static TempStr BuildKeepPagesRange(int pageCount, const Vec<int>& pagesToDelete) {
+    str::Str s;
+    int delIdx = 0;
+    int rangeStart = -1;
+    int rangeEnd = -1;
+    for (int p = 1; p <= pageCount; p++) {
+        bool shouldDelete = (delIdx < pagesToDelete.Size() && pagesToDelete[delIdx] == p);
+        if (shouldDelete) {
+            delIdx++;
+            if (rangeStart != -1) {
+                if (s.Size() > 0) {
+                    s.AppendChar(',');
+                }
+                if (rangeStart == rangeEnd) {
+                    s.AppendFmt("%d", rangeStart);
+                } else {
+                    s.AppendFmt("%d-%d", rangeStart, rangeEnd);
+                }
+                rangeStart = -1;
+            }
+        } else {
+            if (rangeStart == -1) {
+                rangeStart = p;
+            }
+            rangeEnd = p;
+        }
+    }
+    if (rangeStart != -1) {
+        if (s.Size() > 0) {
+            s.AppendChar(',');
+        }
+        if (rangeStart == rangeEnd) {
+            s.AppendFmt("%d", rangeStart);
+        } else {
+            s.AppendFmt("%d-%d", rangeStart, rangeEnd);
+        }
+    }
+    return str::DupTemp(s.Get());
+}
+
+static void PdfDeletePageUpdateButton(PdfDeletePageDialog* dlg) {
+    char pages[256]{};
+    GetWindowTextA(dlg->hwndPagesEdit, pages, dimof(pages) - 1);
+    Vec<int> pagesToDelete;
+    bool valid = ParseDeletePages(pages, dlg->pageCount, pagesToDelete);
+    EnableWindow(dlg->hwndDeleteBtn, valid);
+}
+
+static void PdfDeletePageOnBrowse(PdfDeletePageDialog* dlg) {
+    WCHAR dstFileName[MAX_PATH + 1]{};
+    GetWindowTextW(dlg->hwndDestEdit, dstFileName, MAX_PATH);
+
+    OPENFILENAME ofn{};
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = dlg->hwnd;
+    ofn.lpstrFile = dstFileName;
+    ofn.nMaxFile = dimof(dstFileName);
+    ofn.lpstrFilter = L"PDF Files\0*.pdf\0All Files\0*.*\0";
+    ofn.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = L"pdf";
+
+    if (GetSaveFileNameW(&ofn)) {
+        SetWindowTextW(dlg->hwndDestEdit, dstFileName);
+    }
+}
+
+static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
+    char destPath[MAX_PATH + 1]{};
+    GetWindowTextA(dlg->hwndDestEdit, destPath, MAX_PATH);
+    if (str::IsEmpty(destPath)) {
+        return;
+    }
+
+    char pages[256]{};
+    GetWindowTextA(dlg->hwndPagesEdit, pages, dimof(pages) - 1);
+
+    Vec<int> pagesToDelete;
+    if (!ParseDeletePages(pages, dlg->pageCount, pagesToDelete)) {
+        return;
+    }
+
+    TempStr keepRange = BuildKeepPagesRange(dlg->pageCount, pagesToDelete);
+
+    // equivalent of: clean input.pdf output.pdf <keep-pages>
+    char* argv[] = {(char*)"clean", dlg->srcPath, destPath, keepRange};
+    int argc = 4;
+
+    int res = pdfclean_main(argc, argv);
+    if (res == 0) {
+        MainWindow* win = dlg->win;
+        TempStr path = str::DupTemp(destPath);
+        DestroyWindow(dlg->hwnd);
+        LoadArgs args(path, win);
+        StartLoadDocument(&args);
+    } else {
+        MessageBoxWarning(dlg->hwnd, "Failed to delete pages from PDF file.", "Delete Page From PDF");
+    }
+}
+
+static LRESULT CALLBACK PdfDeletePageDlgProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    PdfDeletePageDialog* dlg = nullptr;
+    if (msg == WM_CREATE) {
+        CREATESTRUCTW* cs = (CREATESTRUCTW*)lp;
+        dlg = (PdfDeletePageDialog*)cs->lpCreateParams;
+        dlg->hwnd = hwnd;
+        SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)dlg);
+        return 0;
+    }
+    dlg = (PdfDeletePageDialog*)GetWindowLongPtrW(hwnd, GWLP_USERDATA);
+    if (!dlg) {
+        return DefWindowProc(hwnd, msg, wp, lp);
+    }
+
+    switch (msg) {
+        case WM_COMMAND: {
+            int code = HIWORD(wp);
+            HWND ctl = (HWND)lp;
+            if (ctl == dlg->hwndBrowseBtn && code == BN_CLICKED) {
+                PdfDeletePageOnBrowse(dlg);
+                return 0;
+            }
+            if (ctl == dlg->hwndDeleteBtn && code == BN_CLICKED) {
+                PdfDeletePageDoIt(dlg);
+                return 0;
+            }
+            if (ctl == dlg->hwndCancelBtn && code == BN_CLICKED) {
+                DestroyWindow(hwnd);
+                return 0;
+            }
+            if (ctl == dlg->hwndPagesEdit && code == EN_CHANGE) {
+                PdfDeletePageUpdateButton(dlg);
+                return 0;
+            }
+            break;
+        }
+        case WM_CLOSE:
+            DestroyWindow(hwnd);
+            return 0;
+        case WM_DESTROY:
+            return 0;
+    }
+    return DefWindowProc(hwnd, msg, wp, lp);
+}
+
+static constexpr const WCHAR* kPdfDeletePageWinClassName = L"SUMATRA_PDF_DELETE_PAGE";
+static bool gPdfDeletePageWinClassRegistered = false;
+
+void ShowPdfDeletePageDialog(MainWindow* win) {
+    if (!win || !win->IsDocLoaded()) {
+        return;
+    }
+    WindowTab* tab = win->CurrentTab();
+    if (!tab || !tab->filePath) {
+        return;
+    }
+    if (!CouldBePDFDoc(tab)) {
+        return;
+    }
+
+    int pageCount = win->ctrl ? win->ctrl->PageCount() : 0;
+    if (pageCount < 2) {
+        return;
+    }
+
+    if (!gPdfDeletePageWinClassRegistered) {
+        WNDCLASSEXW wc{};
+        wc.cbSize = sizeof(wc);
+        wc.style = CS_HREDRAW | CS_VREDRAW;
+        wc.lpfnWndProc = PdfDeletePageDlgProc;
+        wc.hInstance = GetModuleHandleW(nullptr);
+        wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+        wc.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
+        wc.lpszClassName = kPdfDeletePageWinClassName;
+        RegisterClassExW(&wc);
+        gPdfDeletePageWinClassRegistered = true;
+    }
+
+    PdfDeletePageDialog* dlg = new PdfDeletePageDialog();
+    dlg->srcPath = str::Dup(tab->filePath);
+    dlg->win = win;
+    dlg->hFont = GetDefaultGuiFont();
+    dlg->pageCount = pageCount;
+
+    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, 500, kDeletePageDlgPadding);
+    int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + kDeletePageDlgPadding;
+
+    HINSTANCE h = GetModuleHandleW(nullptr);
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, L"Delete Page From PDF",
+                                WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
+    if (!hwnd) {
+        str::Free(dlg->srcPath);
+        delete dlg;
+        return;
+    }
+
+    int x = kDeletePageDlgPadding;
+    int y = kDeletePageDlgPadding;
+    int w = dlgW - 2 * kDeletePageDlgPadding - 16;
+
+    // row 1: source path label
+    dlg->hwndPathLabel =
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
+                        y, w, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+
+    // row 2: dest edit + browse button
+    TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
+    int browseW = 30;
+    dlg->hwndDestEdit =
+        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
+                        w - browseW - 4, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
+                                         y, browseW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+
+    // row 3: "Pages To Delete:" label + pages edit + total pages label
+    int labelW = 100;
+    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages To Delete:", WS_CHILD | WS_VISIBLE | SS_LEFT, x, y,
+                                          labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    TempStr totalStr = str::FormatTemp("of %d", pageCount);
+    int totalW = 60;
+    int editX = x + labelW + 4;
+    int editW = w - labelW - 4 - totalW - 4;
+    int currentPage = win->ctrl ? win->ctrl->CurrentPageNo() : 1;
+    TempStr pagesStr = str::FormatTemp("%d", currentPage);
+    dlg->hwndPagesEdit =
+        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(pagesStr), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, editX,
+                        y, editW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndPagesEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    dlg->hwndTotalLabel = CreateWindowExW(0, L"STATIC", ToWStrTemp(totalStr), WS_CHILD | WS_VISIBLE | SS_LEFT,
+                                          editX + editW + 4, y, totalW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndTotalLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+
+    // row 4: Delete + Cancel buttons (right-aligned)
+    int btnW = 85;
+    int btnH = 24;
+    int bx = x + w - btnW;
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
+                                         btnH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    bx -= btnW + 4;
+    dlg->hwndDeleteBtn = CreateWindowExW(0, L"BUTTON", L"Delete", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
+                                         btnH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndDeleteBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    // validate initial state
+    PdfDeletePageUpdateButton(dlg);
+
+    CenterDialog(hwnd, win->hwndFrame);
+    if (UseDarkModeLib()) {
+        DarkMode::setDarkWndSafe(hwnd);
+        DarkMode::setWindowEraseBgSubclass(hwnd);
+    }
+    ShowWindow(hwnd, SW_SHOW);
+}

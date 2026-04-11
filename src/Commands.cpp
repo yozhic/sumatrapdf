@@ -230,6 +230,7 @@ static SeqStrings gCommandNames =
     "CmdSetTabColor\0"
     "CmdCompressPdf\0"
     "CmdDecompressPdf\0"
+    "CmdPdfDeletePage\0"
     "CmdNone\0"
     "\0";
 
@@ -450,6 +451,7 @@ static i32 gCommandIds[] = {
     CmdSetTabColor,
     CmdCompressPdf,
     CmdDecompressPdf,
+    CmdPdfDeletePage,
     CmdNone,
 };
 
@@ -670,6 +672,7 @@ SeqStrings gCommandDescriptions =
     "Set Tab Color\0"
     "Compress PDF\0"
     "Decompress PDF\0"
+    "Delete Page From PDF\0"
     "Do nothing\0"
     "\0";
 // clang-format on

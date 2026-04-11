@@ -220,6 +220,7 @@ export const commands = [
     "CmdSetTabColor", "Set Tab Color",
     "CmdCompressPdf", "Compress PDF",
     "CmdDecompressPdf", "Decompress PDF",
+    "CmdPdfDeletePage", "Delete Page From PDF",
     "CmdNone", "Do nothing",
 ];
 
