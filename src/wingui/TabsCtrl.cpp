@@ -174,9 +174,16 @@ bool TabsCtrl::IsValidIdx(int idx) {
 }
 
 void TabsCtrl::Paint(HDC hdc, const RECT& rc) {
-    TabsCtrl::MouseState tabState = TabStateFromMousePosition(lastMousePos);
+    // verify the cursor is actually inside the tab control; if not, ignore stale lastMousePos
+    Point cursorPos = HwndGetCursorPos(hwnd);
+    Rect clientRc = ClientRect(hwnd);
+    bool mouseInside = clientRc.Contains(cursorPos);
+    TabsCtrl::MouseState tabState;
+    if (mouseInside) {
+        tabState = TabStateFromMousePosition(cursorPos);
+    }
     int tabUnderMouse = tabState.tabIdx;
-    bool overClose = tabState.overClose && tabState.tabInfo->canClose;
+    bool overClose = tabState.overClose && tabState.tabInfo && tabState.tabInfo->canClose;
     int selectedIdx = GetSelected();
     if (IsValidIdx(tabForceShowSelected)) {
         selectedIdx = tabForceShowSelected;
@@ -524,8 +531,9 @@ LRESULT TabsCtrl::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             break;
 
         case WM_MOUSELEAVE:
-            if (tabHighlighted != tabUnderMouse) {
+            if (tabHighlighted != tabUnderMouse || tabHighlightedClose != -1) {
                 tabHighlighted = tabUnderMouse;
+                tabHighlightedClose = -1;
                 HwndScheduleRepaint(hwnd);
             }
             break;
