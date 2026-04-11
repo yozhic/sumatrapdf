@@ -268,11 +268,14 @@ static TempWStr NormalizeTemp(const WCHAR* path) {
         }
         return shortPath;
     }
-    // else mark the path as overlong
+    // only add \\?\ prefix for paths that are actually overlong
     if (str::StartsWith(normPath, L"\\\\?\\")) {
         return normPath;
     }
-    return str::JoinTemp(L"\\\\?\\", normPath);
+    if (str::Len(normPath) >= MAX_PATH) {
+        return str::JoinTemp(L"\\\\?\\", normPath);
+    }
+    return normPath;
 }
 
 TempStr NormalizeTemp(const char* path) {
