@@ -105,8 +105,12 @@ ShowMenubar = true
 ; version 3.7)
 ShowMenubarWithTabs = false
 
-; if true, we show tips on the home page
+; if true, we show tips on the home page (introduced in version 3.7)
 ShowTips = true
+
+; up to 13 custom colors for the background color picker, separated by space
+; (e.g. '#ff0000 #00ff00 #0000ff') (introduced in version 3.7)
+CustomColors =
 
 ; if true, we show the toolbar at the top of the window
 ShowToolbar = true
@@ -543,7 +547,7 @@ FileStates [
 
     ; if given, overrides the background color for this document (introduced in
     ; version 3.7)
-    BackgroundColor = 
+    BgCol = 
 
     ; data required to restore the last read page in the ebook UI
     ReparseIdx = 0

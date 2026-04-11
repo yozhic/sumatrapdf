@@ -328,8 +328,8 @@ struct FileState {
     // view modes (only used for comic book documents)
     bool displayR2L;
     // if given, overrides the background color for this document
-    char* backgroundColor;
-    ParsedColor backgroundColorParsed;
+    char* bgCol;
+    ParsedColor bgColParsed;
     // index into an ebook's HTML data from which reparsing has to happen
     // in order to restore the last viewed page (i.e. the equivalent of
     // PageNo for the ebook UI)
@@ -445,6 +445,9 @@ struct GlobalPrefs {
     bool showMenubarWithTabs;
     // if true, we show tips on the home page
     bool showTips;
+    // up to 13 custom colors for the background color picker, separated by
+    // space (e.g. '#ff0000 #00ff00 #0000ff')
+    char* customColors;
     // if true, we show the toolbar at the top of the window
     bool showToolbar;
     // if true, we show the Favorites sidebar
@@ -783,14 +786,14 @@ static const FieldInfo gFileStateFields[] = {
     {offsetof(FileState, showToc), SettingType::Bool, true},
     {offsetof(FileState, sidebarDx), SettingType::Int, 0},
     {offsetof(FileState, displayR2L), SettingType::Bool, false},
-    {offsetof(FileState, backgroundColor), SettingType::Color, (intptr_t)""},
+    {offsetof(FileState, bgCol), SettingType::Color, (intptr_t)""},
     {offsetof(FileState, reparseIdx), SettingType::Int, 0},
     {offsetof(FileState, tocState), SettingType::IntArray, 0},
 };
 static StructInfo gFileStateInfo = {
     sizeof(FileState), 20, gFileStateFields,
     "FilePath\0Favorites\0IsPinned\0IsMissing\0OpenCount\0DecryptionKey\0UseDefaultState\0DisplayMode\0ScrollPos\0PageN"
-    "o\0Zoom\0Rotation\0WindowState\0WindowPos\0ShowToc\0SidebarDx\0DisplayR2L\0BackgroundColor\0ReparseIdx\0TocState"};
+    "o\0Zoom\0Rotation\0WindowState\0WindowPos\0ShowToc\0SidebarDx\0DisplayR2L\0BgCol\0ReparseIdx\0TocState"};
 
 static const FieldInfo gPointF_1_Fields[] = {
     {offsetof(PointF, x), SettingType::Float, (intptr_t)"0"},
@@ -866,6 +869,7 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {offsetof(GlobalPrefs, showMenubar), SettingType::Bool, true},
     {offsetof(GlobalPrefs, showMenubarWithTabs), SettingType::Bool, false},
     {offsetof(GlobalPrefs, showTips), SettingType::Bool, true},
+    {offsetof(GlobalPrefs, customColors), SettingType::String, 0},
     {offsetof(GlobalPrefs, showToolbar), SettingType::Bool, true},
     {offsetof(GlobalPrefs, showFavorites), SettingType::Bool, false},
     {offsetof(GlobalPrefs, showToc), SettingType::Bool, true},
@@ -933,17 +937,17 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 88, gGlobalPrefsFields,
+    sizeof(GlobalPrefs), 89, gGlobalPrefsFields,
     "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
     "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
     "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
-    "howMenubar\0ShowMenubarWithTabs\0ShowTips\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStartPage\0SidebarD"
-    "x\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0T"
-    "heme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMru"
-    "\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotations\0\0Externa"
-    "lViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0\0\0Default"
-    "Passwords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0TimeOfLastUpdat"
-    "eCheck\0OpenCountWeek\0PropWinPos\0\0"};
+    "howMenubar\0ShowMenubarWithTabs\0ShowTips\0CustomColors\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStart"
+    "Page\0SidebarDx\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscree"
+    "n\0TabWidth\0Theme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0Us"
+    "eTabs\0TabsMru\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotati"
+    "ons\0\0ExternalViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroup"
+    "s\0\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0T"
+    "imeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

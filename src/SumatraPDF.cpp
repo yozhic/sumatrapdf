@@ -1423,7 +1423,7 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         if (win->ctrl && win->presentation) {
             showToc = tab->showTocPresentation;
         }
-        ParsedColor* bgParsed = GetPrefsColor(fs->backgroundColor);
+        ParsedColor* bgParsed = GetPrefsColor(fs->bgCol);
         if (bgParsed->parsedOk) {
             tab->bgColor = bgParsed->col;
         }
@@ -4413,7 +4413,7 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
         // clear per-file override so it inherits the global setting
         FileState* fs = gFileHistory.FindByPath(tab->filePath);
         if (fs) {
-            str::ReplaceWithCopy(&fs->backgroundColor, "");
+            str::ReplaceWithCopy(&fs->bgCol, "");
         }
         tab->bgColor = kColorUnset;
         SaveSettings();
@@ -4421,8 +4421,8 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
         // apply to this file only
         FileState* fs = gFileHistory.FindByPath(tab->filePath);
         if (fs) {
-            str::ReplaceWithCopy(&fs->backgroundColor, colorStr);
-            fs->backgroundColorParsed.wasParsed = false;
+            str::ReplaceWithCopy(&fs->bgCol, colorStr);
+            fs->bgColParsed.wasParsed = false;
         }
         tab->bgColor = newColor;
         SaveSettings();

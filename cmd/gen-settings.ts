@@ -504,7 +504,7 @@ const fileSettings: Field[] = [
       "(only used for comic book documents)",
   ),
   setVersion(
-    mkField("BackgroundColor", Color, "", "if given, overrides the background color for this document"),
+    mkField("BgCol", Color, "", "if given, overrides the background color for this document"),
     "3.7",
   ),
   setDoc(
@@ -696,6 +696,7 @@ const globalPrefs: Field[] = [
     "3.7",
   ),
   setVersion(mkField("ShowTips", Bool, true, "if true, we show tips on the home page"), "3.7"),
+  setVersion(mkField("CustomColors", Str, null, "up to 13 custom colors for the background color picker, separated by space (e.g. '#ff0000 #00ff00 #0000ff')"), "3.7"),
   mkField("ShowToolbar", Bool, true, "if true, we show the toolbar at the top of the window"),
   mkField("ShowFavorites", Bool, false, "if true, we show the Favorites sidebar"),
   mkField(
