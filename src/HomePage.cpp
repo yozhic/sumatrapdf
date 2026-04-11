@@ -924,7 +924,7 @@ HomePageLayout::~HomePageLayout() {
 
 constexpr int kOpenDocumentYShift = 7;
 constexpr int kThumbsMiddleMargin = 32;
-constexpr int kSearchEditDy = 24;
+constexpr int kSearchEditDy = 28;
 constexpr int kHeaderSearchGapY = 16;
 constexpr int kSearchThumbnailsGapY = 0;
 
