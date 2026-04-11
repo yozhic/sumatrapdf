@@ -1223,7 +1223,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         return RunInstaller();
     }
 
-    ParseFlags(GetCommandLineW(), flags);
+    ParseFlags(GetCommandLineW(), flags, toolNames);
     gCli = &flags;
     bool isInstaller = flags.install || flags.runInstallNow || flags.fastInstall || IsInstallerAndNamedAsSuch();
     bool isUninstaller = flags.uninstall;

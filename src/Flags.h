@@ -124,7 +124,7 @@ struct Flags {
     ~Flags();
 };
 
-void ParseFlags(const WCHAR* cmdLine, Flags&);
+void ParseFlags(const WCHAR* cmdLine, Flags&, const char* toolNames = nullptr);
 
 bool IsValidPageRange(const char* ranges);
 bool IsBenchPagesInfo(const char* s);

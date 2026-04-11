@@ -302,9 +302,17 @@ FileArgs* ParseFileArgs(const char* path) {
 }
 
 /* parse argument list. we assume that all unrecognized arguments are file names. */
-void ParseFlags(const WCHAR* cmdLine, Flags& i) {
+void ParseFlags(const WCHAR* cmdLine, Flags& i, const char* toolNames) {
     // logf("ParseFlags: cmdLine: '%s'\n", ToUtf8Temp(cmdLine));
     CmdLineArgsIter args(cmdLine);
+
+    // if the first argument is a tool name, skip parsing flags entirely
+    if (toolNames && args.curr < args.nArgs) {
+        const char* firstArg = args.at(args.curr);
+        if (firstArg && seqstrings::StrToIdxIS(toolNames, firstArg) >= 0) {
+            return;
+        }
+    }
 
     const char* param = nullptr;
     int paramInt = 0;
