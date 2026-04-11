@@ -2,7 +2,7 @@ import { readdirSync, renameSync, copyFileSync, statSync, existsSync } from "fs"
 import { join } from "path";
 
 function dot() {
-  dot();
+  process.stdout.write(".");
   // @ts-ignore - Bun-specific API for flushing stdout
   if (typeof Bun !== "undefined") Bun.stdout.flush?.();
 }
@@ -119,9 +119,26 @@ function syncDirs(dirs: string[]) {
         const match = dstFiles.find((f) => f.bugNumber === srcFile.bugNumber && f.fileSize === srcFile.fileSize);
         if (match) {
           if (match.fileName !== srcFile.fileName) {
-            console.log(
-              `note: same bug #${srcFile.bugNumber}, same size, different names: "${srcFile.fileName}" vs "${match.fileName}"`,
-            );
+            // rename the shorter-named file to the longer name in both places
+            const longer = srcFile.fileName.length >= match.fileName.length ? srcFile.fileName : match.fileName;
+            const shorter = srcFile.fileName.length >= match.fileName.length ? match.fileName : srcFile.fileName;
+            if (longer !== shorter) {
+              // figure out which entry has the shorter name and rename it
+              const shorterInSrc = srcFile.fileName === shorter;
+              const renameDir = shorterInSrc ? srcDir : dstDir;
+              const renameInfo = shorterInSrc ? srcFile : match;
+              const oldPath = join(renameDir, shorter);
+              const newPath = join(renameDir, longer);
+              if (!existsSync(newPath)) {
+                console.log(`rename: ${shorter} -> ${longer} in ${renameDir}`);
+                renameSync(oldPath, newPath);
+                renameInfo.fileName = longer;
+              } else {
+                console.log(
+                  `note: same bug #${srcFile.bugNumber}, same size, different names: "${srcFile.fileName}" vs "${match.fileName}" (cannot rename, target exists)`,
+                );
+              }
+            }
           }
           continue;
         }
