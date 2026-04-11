@@ -224,7 +224,8 @@ enum {
     CmdChangeBackgroundColor = 413,
     CmdSetTabColor = 414,
     CmdCompressPdf = 415,
-    CmdNone = 416,
+    CmdDecompressPdf = 416,
+    CmdNone = 417,
 
     /* range for file history */
     CmdFileHistoryFirst,

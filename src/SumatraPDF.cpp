@@ -6886,6 +6886,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             ShowPdfCompressDialog(win);
             break;
 
+        case CmdDecompressPdf:
+            ShowPdfDecompressDialog(win);
+            break;
+
         case CmdDocumentExtractText:
             ShowPdfExtractTextDialog(win);
             break;

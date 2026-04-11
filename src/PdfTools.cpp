@@ -30,6 +30,21 @@ extern "C" int pdfbake_main(int argc, char** argv);
 extern "C" int pdfclean_main(int argc, char** argv);
 extern "C" int muconvert_main(int argc, char** argv);
 
+static int CalcDlgWidth(HFONT font, const char* path, int minW, int padding) {
+    HDC hdc = GetDC(nullptr);
+    HFONT oldFont = (HFONT)SelectObject(hdc, font);
+    TempWStr pathW = ToWStrTemp(path);
+    SIZE sz{};
+    GetTextExtentPoint32W(hdc, pathW, str::Leni(pathW), &sz);
+    SelectObject(hdc, oldFont);
+    ReleaseDC(nullptr, hdc);
+    int dlgW = sz.cx + 2 * padding + 32;
+    dlgW = std::max(dlgW, minW);
+    int screenW = GetSystemMetrics(SM_CXSCREEN);
+    dlgW = std::min(dlgW, screenW * 80 / 100);
+    return dlgW;
+}
+
 struct PdfBakeDialog {
     HWND hwnd = nullptr;
     HWND hwndPathLabel = nullptr;
@@ -162,22 +177,23 @@ void ShowPdfBakeDialog(MainWindow* win) {
     PdfBakeDialog* dlg = new PdfBakeDialog();
     dlg->srcPath = str::Dup(tab->filePath);
     dlg->win = win;
+    dlg->hFont = GetDefaultGuiFont();
+
+    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kBakeDlgW, kBakeDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfBakeWinClassName, L"Bake PDF",
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                kBakeDlgW, kBakeDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, kBakeDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    dlg->hFont = GetDefaultGuiFont();
-
     int x = kBakeDlgPadding;
     int y = kBakeDlgPadding;
-    int w = kBakeDlgW - 2 * kBakeDlgPadding - 16; // account for non-client area
+    int w = dlgW - 2 * kBakeDlgPadding - 16; // account for non-client area
 
     // row 1: source path label
     dlg->hwndPathLabel =
@@ -396,22 +412,23 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     PdfExtractTextDialog* dlg = new PdfExtractTextDialog();
     dlg->srcPath = str::Dup(tab->filePath);
     dlg->win = win;
+    dlg->hFont = GetDefaultGuiFont();
+
+    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kExtractDlgW, kExtractDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, L"Extract Text",
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                kExtractDlgW, kExtractDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, kExtractDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    dlg->hFont = GetDefaultGuiFont();
-
     int x = kExtractDlgPadding;
     int y = kExtractDlgPadding;
-    int w = kExtractDlgW - 2 * kExtractDlgPadding - 16; // account for non-client area
+    int w = dlgW - 2 * kExtractDlgPadding - 16; // account for non-client area
 
     // row 1: source path label
     dlg->hwndPathLabel =
@@ -469,6 +486,12 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     ShowWindow(hwnd, SW_SHOW);
 }
 
+constexpr int kCompressDlgW = 500;
+constexpr int kCompressDlgH = 140;
+constexpr int kCompressDlgPadding = 10;
+constexpr int kCompressDlgRowH = 22;
+constexpr int kCompressDlgRowGap = 6;
+
 // --- Compress PDF dialog ---
 
 struct PdfCompressDialog {
@@ -482,12 +505,6 @@ struct PdfCompressDialog {
     char* srcPath = nullptr;
     MainWindow* win = nullptr;
 };
-
-constexpr int kCompressDlgW = 500;
-constexpr int kCompressDlgH = 140;
-constexpr int kCompressDlgPadding = 10;
-constexpr int kCompressDlgRowH = 22;
-constexpr int kCompressDlgRowGap = 6;
 
 static void PdfCompressOnBrowse(PdfCompressDialog* dlg) {
     WCHAR dstFileName[MAX_PATH + 1]{};
@@ -605,22 +622,23 @@ void ShowPdfCompressDialog(MainWindow* win) {
     PdfCompressDialog* dlg = new PdfCompressDialog();
     dlg->srcPath = str::Dup(tab->filePath);
     dlg->win = win;
+    dlg->hFont = GetDefaultGuiFont();
+
+    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfCompressWinClassName, L"Compress PDF",
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                kCompressDlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    dlg->hFont = GetDefaultGuiFont();
-
     int x = kCompressDlgPadding;
     int y = kCompressDlgPadding;
-    int w = kCompressDlgW - 2 * kCompressDlgPadding - 16;
+    int w = dlgW - 2 * kCompressDlgPadding - 16;
 
     // row 1: source path label
     dlg->hwndPathLabel =
@@ -653,6 +671,188 @@ void ShowPdfCompressDialog(MainWindow* win) {
     dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", L"Compress", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
                                            btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    CenterDialog(hwnd, win->hwndFrame);
+    if (UseDarkModeLib()) {
+        DarkMode::setDarkWndSafe(hwnd);
+        DarkMode::setWindowEraseBgSubclass(hwnd);
+    }
+    ShowWindow(hwnd, SW_SHOW);
+}
+
+// --- Decompress PDF dialog ---
+
+struct PdfDecompressDialog {
+    HWND hwnd = nullptr;
+    HWND hwndPathLabel = nullptr;
+    HWND hwndDestEdit = nullptr;
+    HWND hwndBrowseBtn = nullptr;
+    HWND hwndDecompressBtn = nullptr;
+    HWND hwndCancelBtn = nullptr;
+    HFONT hFont = nullptr;
+    char* srcPath = nullptr;
+    MainWindow* win = nullptr;
+};
+
+static void PdfDecompressOnBrowse(PdfDecompressDialog* dlg) {
+    WCHAR dstFileName[MAX_PATH + 1]{};
+    GetWindowTextW(dlg->hwndDestEdit, dstFileName, MAX_PATH);
+
+    OPENFILENAME ofn{};
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = dlg->hwnd;
+    ofn.lpstrFile = dstFileName;
+    ofn.nMaxFile = dimof(dstFileName);
+    ofn.lpstrFilter = L"PDF Files\0*.pdf\0All Files\0*.*\0";
+    ofn.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = L"pdf";
+
+    if (GetSaveFileNameW(&ofn)) {
+        SetWindowTextW(dlg->hwndDestEdit, dstFileName);
+    }
+}
+
+static void PdfDecompressDoIt(PdfDecompressDialog* dlg) {
+    char destPath[MAX_PATH + 1]{};
+    GetWindowTextA(dlg->hwndDestEdit, destPath, MAX_PATH);
+    if (str::IsEmpty(destPath)) {
+        return;
+    }
+
+    // equivalent of: clean -d input output
+    char* argv[] = {(char*)"clean", (char*)"-d", dlg->srcPath, destPath};
+    int argc = 4;
+
+    int res = pdfclean_main(argc, argv);
+    if (res == 0) {
+        MainWindow* win = dlg->win;
+        TempStr path = str::DupTemp(destPath);
+        DestroyWindow(dlg->hwnd);
+        LoadArgs args(path, win);
+        StartLoadDocument(&args);
+    } else {
+        MessageBoxWarning(dlg->hwnd, "Failed to decompress PDF file.", "Decompress PDF");
+    }
+}
+
+static LRESULT CALLBACK PdfDecompressDlgProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    PdfDecompressDialog* dlg = nullptr;
+    if (msg == WM_CREATE) {
+        CREATESTRUCTW* cs = (CREATESTRUCTW*)lp;
+        dlg = (PdfDecompressDialog*)cs->lpCreateParams;
+        dlg->hwnd = hwnd;
+        SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)dlg);
+        return 0;
+    }
+    dlg = (PdfDecompressDialog*)GetWindowLongPtrW(hwnd, GWLP_USERDATA);
+    if (!dlg) {
+        return DefWindowProc(hwnd, msg, wp, lp);
+    }
+
+    switch (msg) {
+        case WM_COMMAND: {
+            int code = HIWORD(wp);
+            HWND ctl = (HWND)lp;
+            if (ctl == dlg->hwndBrowseBtn && code == BN_CLICKED) {
+                PdfDecompressOnBrowse(dlg);
+                return 0;
+            }
+            if (ctl == dlg->hwndDecompressBtn && code == BN_CLICKED) {
+                PdfDecompressDoIt(dlg);
+                return 0;
+            }
+            if (ctl == dlg->hwndCancelBtn && code == BN_CLICKED) {
+                DestroyWindow(hwnd);
+                return 0;
+            }
+            break;
+        }
+        case WM_CLOSE:
+            DestroyWindow(hwnd);
+            return 0;
+        case WM_DESTROY:
+            return 0;
+    }
+    return DefWindowProc(hwnd, msg, wp, lp);
+}
+
+static constexpr const WCHAR* kPdfDecompressWinClassName = L"SUMATRA_PDF_DECOMPRESS";
+static bool gPdfDecompressWinClassRegistered = false;
+
+void ShowPdfDecompressDialog(MainWindow* win) {
+    if (!win || !win->IsDocLoaded()) {
+        return;
+    }
+    WindowTab* tab = win->CurrentTab();
+    if (!tab || !tab->filePath) {
+        return;
+    }
+    if (!CouldBePDFDoc(tab)) {
+        return;
+    }
+
+    if (!gPdfDecompressWinClassRegistered) {
+        WNDCLASSEXW wc{};
+        wc.cbSize = sizeof(wc);
+        wc.style = CS_HREDRAW | CS_VREDRAW;
+        wc.lpfnWndProc = PdfDecompressDlgProc;
+        wc.hInstance = GetModuleHandleW(nullptr);
+        wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+        wc.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
+        wc.lpszClassName = kPdfDecompressWinClassName;
+        RegisterClassExW(&wc);
+        gPdfDecompressWinClassRegistered = true;
+    }
+
+    PdfDecompressDialog* dlg = new PdfDecompressDialog();
+    dlg->srcPath = str::Dup(tab->filePath);
+    dlg->win = win;
+    dlg->hFont = GetDefaultGuiFont();
+
+    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
+
+    HINSTANCE h = GetModuleHandleW(nullptr);
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDecompressWinClassName, L"Decompress PDF",
+                                WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
+                                dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
+    if (!hwnd) {
+        str::Free(dlg->srcPath);
+        delete dlg;
+        return;
+    }
+
+    int x = kCompressDlgPadding;
+    int y = kCompressDlgPadding;
+    int w = dlgW - 2 * kCompressDlgPadding - 16;
+
+    dlg->hwndPathLabel =
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS, x,
+                        y, w, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    y += kCompressDlgRowH + kCompressDlgRowGap;
+
+    TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
+    int browseW = 30;
+    dlg->hwndDestEdit =
+        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
+                        w - browseW - 4, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
+                                         y, browseW, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    y += kCompressDlgRowH + kCompressDlgRowGap;
+
+    int btnW = 95;
+    int btnH = 24;
+    int bx = x + w - btnW;
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
+                                         btnH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
+    bx -= btnW + 4;
+    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", L"Decompress", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
+                                             y, btnW, btnH, hwnd, nullptr, h, nullptr);
+    SendMessageW(dlg->hwndDecompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
     if (UseDarkModeLib()) {

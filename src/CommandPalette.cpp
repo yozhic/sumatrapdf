@@ -394,6 +394,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
+    if (!ctx.isPdf && cmdId == CmdDecompressPdf) {
+        return false;
+    }
+
     if (cmdId == CmdDocumentExtractText) {
         bool canExtract = ctx.engineKind == kindEngineMupdf || ctx.engineKind == kindEngineDjVu;
         if (!canExtract) {

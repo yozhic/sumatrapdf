@@ -291,6 +291,7 @@ CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only availa
 CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only available when SumatraPDF is installed. Registers or un-registers the PDF search filter for Windows Search indexing, ver 3.7+"
 CmdSetTabColor,,Set Tab Color,"Set a custom color for the tab of the current document, available from tab context menu, ver 3.7+"
 CmdCompressPdf,,Compress PDF,"Compress a PDF file using aggressive garbage collection and optimization, ver 3.7+"
+CmdDecompressPdf,,Decompress PDF,"Decompress a PDF file for easier inspection, ver 3.7+"
 ```
 
 ## Debug
