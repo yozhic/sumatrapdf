@@ -139,6 +139,17 @@ static struct {
     {"LucidaBright", "Georgia"},
     {"Handwriting", "SegoeScript"},
     {"Console", "Consolas"},
+    // Chinese Kai (regular script) font fallbacks
+    {"MKai PRC", "KaiTi"},
+    {"MKaiPRC-Regular", "KaiTi"},
+    {"MKaiPRC", "KaiTi"},
+    {"STKaiti", "KaiTi"},
+    {"STKaiti-Regular", "KaiTi"},
+    {"STKai", "KaiTi"},
+    {"Kai", "KaiTi"},
+    {"Kaiti_GB2312", "KaiTi"},
+    {"Kaiti SC", "KaiTi"},
+    {"Kaiti TC", "KaiTi"},
 };
 
 static win_fonts g_win_fonts;
