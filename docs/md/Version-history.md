@@ -42,6 +42,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - Can save images in different formats: PNG, JPEG, BMP, GIF, TIFF.
 - add `CmdPdfBake` (`Bake PDF File` in `Ctrl + k` [command palette](Command-Palette.md)) to bake interactive form and annotation content into static graphics in a new PDF file
 - add `Fullscreen` advanced setting with `ShowToolbar` and `ShowMenubar` options to show toolbar and menu bar in fullscreen mode. Use `F9` / `F8` to toggle them while in fullscreen
+- add `CmdSetScreenshotHotkey` (`Set Screenshot Hotkey` in `Ctrl + k` [command palette](Command-Palette.md)) to set or remove a global hotkey for taking screenshots
 - add `Show Errors` in right-click context menu for PDF documents that have mupdf warnings/errors
 - add `CmdToggleSmoothScroll` (`Toggle Smooth Scroll`) command to toggle `SmoothScroll` advanced setting
 - replace `HideScrollbars` and `UseOverlayScrollbar` settings with `Scrollbars` setting (values: `windows`, `smart`, `overlay`, `hidden`)

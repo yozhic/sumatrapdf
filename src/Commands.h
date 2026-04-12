@@ -229,7 +229,8 @@ enum {
     CmdPdShowInfo = 418,
     CmdDocumentExtractText = 419,
     CmdDocumentShowOutline = 420,
-    CmdNone = 421,
+    CmdSetScreenshotHotkey = 421,
+    CmdNone = 422,
 
     /* range for file history */
     CmdFileHistoryFirst,

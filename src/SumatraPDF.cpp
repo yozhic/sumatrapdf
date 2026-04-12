@@ -6375,6 +6375,10 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             TakeScreenshots();
             break;
 
+        case CmdSetScreenshotHotkey:
+            ShowSetScreenshotHotkeyDialog(win->hwndFrame);
+            break;
+
         case CmdCropImage:
             ShowImageEditWindow(win, ImageEditMode::Crop);
             break;

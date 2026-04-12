@@ -119,6 +119,7 @@ static i32 gDocumentNotOpenWhitelist[] = {
     CmdDebugCorruptMemory,
     CmdScreenshot,
     CmdTabGroupRestore,
+    CmdSetScreenshotHotkey,
     0,
 };
 

@@ -234,6 +234,7 @@ static SeqStrings gCommandNames =
     "CmdPdShowInfo\0"
     "CmdDocumentExtractText\0"
     "CmdDocumentShowOutline\0"
+    "CmdSetScreenshotHotkey\0"
     "CmdNone\0"
     "\0";
 
@@ -458,6 +459,7 @@ static i32 gCommandIds[] = {
     CmdPdShowInfo,
     CmdDocumentExtractText,
     CmdDocumentShowOutline,
+    CmdSetScreenshotHotkey,
     CmdNone,
 };
 
@@ -682,6 +684,7 @@ SeqStrings gCommandDescriptions =
     "Show PDF Info\0"
     "Extract Text From Document\0"
     "Show Document Bookmarks\0"
+    "Set Screenshot Hotkey\0"
     "Do nothing\0"
     "\0";
 // clang-format on

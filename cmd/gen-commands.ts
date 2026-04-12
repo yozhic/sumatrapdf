@@ -224,6 +224,7 @@ export const commands = [
     "CmdPdShowInfo", "Show PDF Info",
     "CmdDocumentExtractText", "Extract Text From Document",
     "CmdDocumentShowOutline", "Show Document Bookmarks",
+    "CmdSetScreenshotHotkey", "Set Screenshot Hotkey",
     "CmdNone", "Do nothing",
 ];
 
