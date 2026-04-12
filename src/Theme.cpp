@@ -358,6 +358,34 @@ COLORREF ThemeDocumentColors(COLORREF& bg, bool isEbook) {
     return text;
 }
 
+// colors for page bitmap recoloring (render cache)
+// only affected by invertColors / theme, not by engine-type background color settings
+// (those only affect the canvas/window background around the page)
+COLORREF ThemePageRenderColors(COLORREF& bg) {
+    COLORREF text = kColBlack;
+    bg = kColWhite;
+
+    if (!gGlobalPrefs->fixedPageUI.invertColors) {
+        return text;
+    }
+
+    // default colors
+    if (gCurrentTheme == gThemeLight) {
+        std::swap(text, bg);
+        return text;
+    }
+
+    // if we're inverting in non-default themes, the colors
+    // should match the colors of the window
+    text = ThemeWindowTextColor();
+    bg = ThemeMainWindowBackgroundColor();
+
+    if (gCurrThemeIndex < 3) {
+        bg = AccentColor(bg, 8);
+    }
+    return text;
+}
+
 COLORREF ThemeControlBackgroundColor() {
     // note: we can change it in ThemeUpdateAfterLoadSettings()
     auto col = GetThemeCol(gCurrentTheme->controlBackgroundColor, kRedColor);

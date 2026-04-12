@@ -2687,8 +2687,10 @@ static void RerenderFixedPage() {
 
 void UpdateDocumentColors() {
     COLORREF bg;
-    COLORREF text = ThemeDocumentColors(bg);
-    // logfa("retrieved doc colors in UpdateDocumentColors: 0x%x 0x%x\n", text, bg);
+    // use ThemePageRenderColors instead of ThemeDocumentColors
+    // so that engine-type background color settings (fixedPageUI.backgroundColor etc.)
+    // only affect the canvas/window background, not the PDF page rendering
+    COLORREF text = ThemePageRenderColors(bg);
 
     if ((text == gRenderCache->textColor) && (bg == gRenderCache->backgroundColor)) {
         return; // colors didn't change
