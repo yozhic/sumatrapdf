@@ -2,6 +2,20 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+## In application
+
+To compress a PDF in SumatraPDF:
+- open PDF document
+- `Ctrl + k` for [command palette](Command-Palette.md)
+- `Compress PDF`
+
+Or:
+- open PDF document
+- right-click for context menu
+- `Document` > `Compress PDF`
+
+## From command-line
+
 To compress a PDF using SumatraPDF from command-line:
 
 `SumatraPDF clean -gggg -e 100 -f -i -t -Z foo.pdf foo-compressed.pdf`

@@ -2,6 +2,20 @@
 
 **Available in [pre-release 3.7](https://www.sumatrapdfreader.org/prerelease)**
 
+## In application
+
+To extract pages from a PDF in SumatraPDF:
+- open PDF document
+- `Ctrl + k` for [command palette](Command-Palette.md)
+- `Extract Pages From PDF`
+
+Or:
+- open PDF document
+- right-click for context menu
+- `Document` > `Extract Pages From PDF`
+
+## From command-line
+
 To extract pages from a PDF using SumatraPDF on a command line:
 
 `SumatraPDF clean input.pdf output.pdf 1,2-5,8-N`
