@@ -916,16 +916,18 @@ static bool ParseDeletePages(const char* s, int pageCount, Vec<int>& pagesToDele
             char* endStr = dash + 1;
             str::TrimWSInPlace(startStr, str::TrimOpt::Both);
             str::TrimWSInPlace(endStr, str::TrimOpt::Both);
-            if (str::IsEmpty(startStr) || str::IsEmpty(endStr)) {
+            if (str::IsEmpty(startStr)) {
                 return false;
             }
+            // "8-" means "8-N" (from page 8 to the last page)
+            bool endIsEmpty = str::IsEmpty(endStr);
             int start, end;
             if (str::EqI(startStr, "N")) {
                 start = pageCount;
             } else {
                 start = str::Parse(startStr, "%d%$", &start) ? start : -1;
             }
-            if (str::EqI(endStr, "N")) {
+            if (endIsEmpty || str::EqI(endStr, "N")) {
                 end = pageCount;
             } else {
                 end = str::Parse(endStr, "%d%$", &end) ? end : -1;
@@ -1263,7 +1265,7 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     int btnH = 24;
 
     // syntax hint label, x-aligned with pages label and baseline-aligned with button text
-    HWND hwndSyntax = CreateWindowExW(0, L"STATIC", L"Syntax: 2,5-7,13-N", WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
+    HWND hwndSyntax = CreateWindowExW(0, L"STATIC", L"Syntax: 2,5-7,13-", WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
                                       y + kEditTextXOffset, w / 2, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(hwndSyntax, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
