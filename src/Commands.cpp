@@ -224,16 +224,16 @@ static SeqStrings gCommandNames =
     "CmdToggleTips\0"
     "CmdChangeBackgroundColor\0"
     "CmdSetTabColor\0"
-    "CmdCompressPdf\0"
-    "CmdDecompressPdf\0"
+    "CmdPdfCompress\0"
+    "CmdPdfDecompress\0"
     "CmdPdfDeletePages\0"
     "CmdPdfExtractPages\0"
     "CmdPdfEncrypt\0"
     "CmdPdfDecrypt\0"
     "CmdPdfBake\0"
+    "CmdPdShowInfo\0"
     "CmdDocumentExtractText\0"
-    "CmdShowPdfInfo\0"
-    "CmdShowDocumentOutline\0"
+    "CmdDocumentShowOutline\0"
     "CmdNone\0"
     "\0";
 
@@ -448,16 +448,16 @@ static i32 gCommandIds[] = {
     CmdToggleTips,
     CmdChangeBackgroundColor,
     CmdSetTabColor,
-    CmdCompressPdf,
-    CmdDecompressPdf,
+    CmdPdfCompress,
+    CmdPdfDecompress,
     CmdPdfDeletePages,
     CmdPdfExtractPages,
     CmdPdfEncrypt,
     CmdPdfDecrypt,
     CmdPdfBake,
+    CmdPdShowInfo,
     CmdDocumentExtractText,
-    CmdShowPdfInfo,
-    CmdShowDocumentOutline,
+    CmdDocumentShowOutline,
     CmdNone,
 };
 
@@ -679,9 +679,9 @@ SeqStrings gCommandDescriptions =
     "Encrypt PDF\0"
     "Decrypt PDF\0"
     "Bake PDF File\0"
-    "Extract Text From Document\0"
     "Show PDF Info\0"
-    "Show Document Outline\0"
+    "Extract Text From Document\0"
+    "Show Document Bookmarks\0"
     "Do nothing\0"
     "\0";
 // clang-format on

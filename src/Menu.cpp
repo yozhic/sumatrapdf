@@ -840,11 +840,11 @@ static MenuDef menuDefDocumentOperations[] = {
     },
     {
         _TRN("Compress PDF"),
-        CmdCompressPdf,
+        CmdPdfCompress,
     },
     {
         _TRN("Decompress PDF"),
-        CmdDecompressPdf,
+        CmdPdfDecompress,
     },
     {
         _TRN("Delete Pages From PDF"),
@@ -856,11 +856,11 @@ static MenuDef menuDefDocumentOperations[] = {
     },
     {
         _TRN("Show PDF Info"),
-        CmdShowPdfInfo,
+        CmdPdShowInfo,
     },
     {
         _TRN("Show Document Outline"),
-        CmdShowDocumentOutline,
+        CmdDocumentShowOutline,
     },
     {
         _TRN("Bake PDF File"),
@@ -1470,8 +1470,8 @@ std::pair<bool, bool> GetCommandIdState(BuildMenuCtx* ctx, int cmdId) {
     if (!ctx->isPdf) {
         remove |= (cmdId == CmdPdfEncrypt);
         remove |= (cmdId == CmdPdfDecrypt);
-        remove |= (cmdId == CmdCompressPdf);
-        remove |= (cmdId == CmdDecompressPdf);
+        remove |= (cmdId == CmdPdfCompress);
+        remove |= (cmdId == CmdPdfDecompress);
         remove |= (cmdId == CmdPdfDeletePages);
         remove |= (cmdId == CmdPdfExtractPages);
     }
@@ -1482,7 +1482,7 @@ std::pair<bool, bool> GetCommandIdState(BuildMenuCtx* ctx, int cmdId) {
         remove |= (cmdId == CmdPdfDecrypt);
     }
 
-    remove |= (!ctx->hasToc && cmdId == CmdShowDocumentOutline);
+    remove |= (!ctx->hasToc && cmdId == CmdDocumentShowOutline);
 
     if (cmdId == CmdTabGroupSave) {
         disable |= !ctx->tab || !ctx->tab->win || !HasOpenedDocuments(ctx->tab->win);

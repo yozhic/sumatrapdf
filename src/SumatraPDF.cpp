@@ -6848,7 +6848,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
-        case CmdShowPdfInfo: {
+        case CmdPdShowInfo: {
             if (tab && tab->filePath && CouldBePDFDoc(tab)) {
                 if (tab->hwndPDFInfo && IsWindow(tab->hwndPDFInfo)) {
                     SetForegroundWindow(tab->hwndPDFInfo);
@@ -6862,7 +6862,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
-        case CmdShowDocumentOutline: {
+        case CmdDocumentShowOutline: {
             if (tab && tab->ctrl && tab->ctrl->HasToc()) {
                 if (tab->hwndPDFOutline && IsWindow(tab->hwndPDFOutline)) {
                     SetForegroundWindow(tab->hwndPDFOutline);
@@ -6887,11 +6887,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             ShowPdfBakeDialog(win);
             break;
 
-        case CmdCompressPdf:
+        case CmdPdfCompress:
             ShowPdfCompressDialog(win);
             break;
 
-        case CmdDecompressPdf:
+        case CmdPdfDecompress:
             ShowPdfDecompressDialog(win);
             break;
 

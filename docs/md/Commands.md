@@ -211,8 +211,8 @@ CmdZoom800,,Zoom: 800%,
 
 ```commands
 Command IDs,Keyboard shortcuts,Command Palette,Notes
-CmdShowPdfInfo,,Show PDF Info,shows information about currently opened PDF file
-CmdShowDocumentOutline,,Show Document Outline,shows the outline (table of contents) of currently opened document
+CmdPdShowInfo,,Show PDF Info,shows information about currently opened PDF file
+CmdDocumentShowOutline,,Show Document Outline,shows the outline (table of contents) of currently opened document
 CmdPdfBake,,Bake PDF File,bakes interactive form and annotation content into static graphics; saves to a new PDF file and opens it
 CmdDocumentExtractText,,Extract Text From Document,"extract text from document pages to a .txt file, with configurable page ranges, ver 3.7+"
 ```
@@ -290,8 +290,8 @@ CmdToggleTips,,Toggle Tips,"Toggle ShowTips advanced setting, ver 3.7+"
 CmdToggleWindowsPreviewer,,Register / Un-register Windows Previewer,"Only available when SumatraPDF is installed. Registers or un-registers the PDF preview handler for Windows Explorer preview pane, ver 3.7+"
 CmdToggleWindowsSearchFilter,,Register / Un-register Windows Search Filter,"Only available when SumatraPDF is installed. Registers or un-registers the PDF search filter for Windows Search indexing, ver 3.7+"
 CmdSetTabColor,,Set Tab Color,"Set a custom color for the tab of the current document, available from tab context menu, ver 3.7+"
-CmdCompressPdf,,Compress PDF,"Compress a PDF file using aggressive garbage collection and optimization, ver 3.7+"
-CmdDecompressPdf,,Decompress PDF,"Decompress a PDF file for easier inspection, ver 3.7+"
+CmdPdfCompress,,Compress PDF,"Compress a PDF file using aggressive garbage collection and optimization, ver 3.7+"
+CmdPdfDecompress,,Decompress PDF,"Decompress a PDF file for easier inspection, ver 3.7+"
 CmdPdfDeletePages,,Delete Pages From PDF,"Delete pages from a PDF file using page ranges like 1,3-8,13-N where N is the last page, ver 3.7+"
 CmdPdfExtractPages,,Extract Pages From PDF,"Extract pages from a PDF file using page ranges like 1,3-8,13-N where N is the last page, ver 3.7+"
 CmdPdfEncrypt,,Encrypt PDF,"Encrypt a PDF file with a password using AES-256 encryption, ver 3.7+"

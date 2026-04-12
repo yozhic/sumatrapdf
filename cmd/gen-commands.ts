@@ -214,16 +214,16 @@ export const commands = [
     "CmdToggleTips", "Toggle Tips",
     "CmdChangeBackgroundColor", "Change Background Color",
     "CmdSetTabColor", "Set Tab Color",
-    "CmdCompressPdf", "Compress PDF",
-    "CmdDecompressPdf", "Decompress PDF",
+    "CmdPdfCompress", "Compress PDF",
+    "CmdPdfDecompress", "Decompress PDF",
     "CmdPdfDeletePages", "Delete Pages From PDF",
     "CmdPdfExtractPages", "Extract Pages From PDF",
     "CmdPdfEncrypt", "Encrypt PDF",
     "CmdPdfDecrypt", "Decrypt PDF",
     "CmdPdfBake", "Bake PDF File",
+    "CmdPdShowInfo", "Show PDF Info",
     "CmdDocumentExtractText", "Extract Text From Document",
-    "CmdShowPdfInfo", "Show PDF Info",
-    "CmdShowDocumentOutline", "Show Document Outline",
+    "CmdDocumentShowOutline", "Show Document Bookmarks",
     "CmdNone", "Do nothing",
 ];
 
@@ -328,12 +328,7 @@ function generateArrays(): string {
   return lines.join("\n");
 }
 
-function replaceBetweenMarkers(
-  content: string,
-  startMarker: string,
-  endMarker: string,
-  generated: string,
-): string {
+function replaceBetweenMarkers(content: string, startMarker: string, endMarker: string, generated: string): string {
   const startIdx = content.indexOf(startMarker);
   const endIdx = content.indexOf(endMarker);
   if (startIdx < 0 || endIdx < 0) {
@@ -354,22 +349,12 @@ function main() {
   let cppContent = readFileSync(cppPath, "utf-8");
 
   const enumCode = generateEnum();
-  headerContent = replaceBetweenMarkers(
-    headerContent,
-    "// @gen-start cmd-enum",
-    "// @gen-end cmd-enum",
-    enumCode,
-  );
+  headerContent = replaceBetweenMarkers(headerContent, "// @gen-start cmd-enum", "// @gen-end cmd-enum", enumCode);
   writeFileSync(headerPath, headerContent, "utf-8");
   console.log("Generated enum in src/Commands.h");
 
   const arraysCode = generateArrays();
-  cppContent = replaceBetweenMarkers(
-    cppContent,
-    "// @gen-start cmd-c",
-    "// @gen-end cmd-c",
-    arraysCode,
-  );
+  cppContent = replaceBetweenMarkers(cppContent, "// @gen-start cmd-c", "// @gen-end cmd-c", arraysCode);
   writeFileSync(cppPath, cppContent, "utf-8");
   console.log("Generated arrays in src/Commands.cpp");
 }

@@ -137,8 +137,8 @@ static i32 gCommandsNoActivate[] = {
     CmdProperties,
     CmdNewWindow,
     CmdDuplicateInNewWindow,
-    CmdShowPdfInfo,
-    CmdShowDocumentOutline,
+    CmdPdShowInfo,
+    CmdDocumentShowOutline,
     CmdListPrinters,
     CmdCropImage,
     CmdResizeImage,
@@ -379,11 +379,11 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdShowPdfInfo) {
+    if (!ctx.isPdf && cmdId == CmdPdShowInfo) {
         return false;
     }
 
-    if (!ctx.hasToc && cmdId == CmdShowDocumentOutline) {
+    if (!ctx.hasToc && cmdId == CmdDocumentShowOutline) {
         return false;
     }
 
@@ -391,11 +391,11 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdCompressPdf) {
+    if (!ctx.isPdf && cmdId == CmdPdfCompress) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdDecompressPdf) {
+    if (!ctx.isPdf && cmdId == CmdPdfDecompress) {
         return false;
     }
 
