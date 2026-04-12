@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "fast-glob": "^3.2.2",
-    "pdfjs-dist": "^4.2.67"
-  }
-}
