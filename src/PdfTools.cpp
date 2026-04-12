@@ -690,8 +690,8 @@ void ShowPdfCompressDialog(MainWindow* win) {
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
-                                           y, btnW, btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+                                           bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -878,8 +878,9 @@ void ShowPdfDecompressDialog(MainWindow* win) {
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Decompress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-                                             bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndDecompressBtn =
+        CreateWindowExW(0, L"BUTTON", _TRW("Decompress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
+                        btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDecompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -1131,8 +1132,8 @@ static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfDeletePageDoIt: pdfclean_main failed with %d for %s\n", res, op);
-        const char* msg = dlg->isExtract ? "Failed to extract pages from PDF file."
-                                         : "Failed to delete pages from PDF file.";
+        const char* msg =
+            dlg->isExtract ? "Failed to extract pages from PDF file." : "Failed to delete pages from PDF file.";
         const char* title = dlg->isExtract ? _TRA("Extract Pages From PDF") : _TRA("Delete Pages From PDF");
         MessageBoxWarning(dlg->hwnd, msg, title);
     }
@@ -1616,12 +1617,12 @@ static void PdfDecryptDoIt(PdfDecryptDialog* dlg) {
     logf("PdfDecryptDoIt: decrypting '%s' to '%s', password len: %d\n", dlg->srcPath, destPath,
          (int)str::Len(dlg->password));
 
-    // equivalent of: clean -D -U <pwd> -O <pwd> input output
-    // -D removes encryption, -U/-O provide the password to authenticate
+    // equivalent of: clean -p <pwd> -D input output
+    // -p provides the password to open the encrypted input, -D removes encryption from output
     char* argv[] = {
-        (char*)"clean", (char*)"-D", (char*)"-U", dlg->password, (char*)"-O", dlg->password, dlg->srcPath, destPath,
+        (char*)"clean", (char*)"-p", dlg->password, (char*)"-D", dlg->srcPath, destPath,
     };
-    int argc = 8;
+    int argc = 6;
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
