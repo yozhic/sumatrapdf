@@ -1920,6 +1920,19 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     AutoDelete delCtx(ctx);
     HMENU popup = BuildMenuFromDef(menuDefContext, CreatePopupMenu(), ctx);
 
+    // in fullscreen, add "Menu" as first item containing the full menu bar
+    bool isFullScreen = win->isFullScreen || win->presentation;
+    if (isFullScreen) {
+        HMENU menuBarCopy = BuildMenuFromDef(menuDefMenubar, CreatePopupMenu(), ctx);
+        TempWStr menuLabel = ToWStrTemp(_TRA("Menu"));
+        MENUITEMINFOW mii{};
+        mii.cbSize = sizeof(mii);
+        mii.fMask = MIIM_STRING | MIIM_SUBMENU;
+        mii.hSubMenu = menuBarCopy;
+        mii.dwTypeData = menuLabel;
+        InsertMenuItemW(popup, 0, TRUE, &mii);
+    }
+
     int pageNoUnderCursor = dm->GetPageNoByPoint(cursorPos);
     PointF ptOnPage = dm->CvtFromScreen(cursorPos, pageNoUnderCursor);
     EngineBase* engine = dm->GetEngine();
@@ -1961,7 +1974,6 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         MenuRemove(popup, CmdShowErrors);
     }
 
-    bool isFullScreen = win->isFullScreen || win->presentation;
     if (!isFullScreen) {
         MenuRemove(popup, CmdToggleFullscreen);
     }
