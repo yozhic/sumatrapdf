@@ -471,8 +471,9 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
 
     // row 3: "Pages:" label + pages edit
     int labelW = 42;
-    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", _TRW("Pages:"), WS_CHILD | WS_VISIBLE | SS_LEFT, x, y, labelW,
-                                          kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndPagesLabel =
+        CreateWindowExW(0, L"STATIC", _TRW("Pages:"), WS_CHILD | WS_VISIBLE | SS_LEFT, x + kEditTextXOffset,
+                        y + kEditTextXOffset, labelW, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     int pageCount = win->ctrl ? win->ctrl->PageCount() : 1;
