@@ -106,7 +106,7 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
-        MessageBoxWarning(dlg->hwnd, "Failed to bake PDF file.", "Bake PDF");
+        MessageBoxWarning(dlg->hwnd, _TRA("Failed to bake PDF file."), _TRA("Bake PDF"));
     }
 }
 
@@ -187,7 +187,7 @@ void ShowPdfBakeDialog(MainWindow* win) {
     int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kBakeDlgW, kBakeDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfBakeWinClassName, L"Bake PDF",
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfBakeWinClassName, _TRW("Bake PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, kBakeDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -224,12 +224,12 @@ void ShowPdfBakeDialog(MainWindow* win) {
     int btnW = 75;
     int btnH = 24;
     int bx = x + w - btnW;
-    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
-                                         btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
+                                         btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndBakeBtn = CreateWindowExW(0, L"BUTTON", L"Bake", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
-                                       btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBakeBtn = CreateWindowExW(0, L"BUTTON", _TRW("Bake"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
+                                       btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBakeBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -345,7 +345,7 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
         DestroyWindow(dlg->hwnd);
         OpenPathInDefaultFileManager(destPath);
     } else {
-        MessageBoxWarning(dlg->hwnd, "Failed to extract text.", "Extract Text");
+        MessageBoxWarning(dlg->hwnd, _TRA("Failed to extract text."), _TRA("Extract Text"));
     }
 }
 
@@ -422,7 +422,7 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kExtractDlgW, kExtractDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, L"Extract Text",
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, _TRW("Extract Text"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, kExtractDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -459,7 +459,7 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
 
     // row 3: "Pages:" label + pages edit
     int labelW = 42;
-    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", L"Pages:", WS_CHILD | WS_VISIBLE | SS_LEFT, x, y, labelW,
+    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", _TRW("Pages:"), WS_CHILD | WS_VISIBLE | SS_LEFT, x, y, labelW,
                                           kExtractDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
@@ -475,12 +475,12 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     int btnW = 85;
     int btnH = 24;
     int bx = x + w - btnW;
-    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
-                                         btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
+                                         btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndExtractBtn = CreateWindowExW(0, L"BUTTON", L"Extract Text", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
-                                          y, btnW, btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndExtractBtn = CreateWindowExW(0, L"BUTTON", _TRW("Extract Text"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+                                          bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndExtractBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -551,7 +551,7 @@ static void PdfCompressDoIt(PdfCompressDialog* dlg) {
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
-        MessageBoxWarning(dlg->hwnd, "Failed to compress PDF file.", "Compress PDF");
+        MessageBoxWarning(dlg->hwnd, _TRA("Failed to compress PDF file."), _TRA("Compress PDF"));
     }
 }
 
@@ -632,7 +632,7 @@ void ShowPdfCompressDialog(MainWindow* win) {
     int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfCompressWinClassName, L"Compress PDF",
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfCompressWinClassName, _TRW("Compress PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -669,12 +669,12 @@ void ShowPdfCompressDialog(MainWindow* win) {
     int btnW = 85;
     int btnH = 24;
     int bx = x + w - btnW;
-    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
-                                         btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
+                                         btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", L"Compress", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
-                                           btnW, btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
+                                           y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -736,7 +736,7 @@ static void PdfDecompressDoIt(PdfDecompressDialog* dlg) {
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
-        MessageBoxWarning(dlg->hwnd, "Failed to decompress PDF file.", "Decompress PDF");
+        MessageBoxWarning(dlg->hwnd, _TRA("Failed to decompress PDF file."), _TRA("Decompress PDF"));
     }
 }
 
@@ -817,7 +817,7 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDecompressWinClassName, L"Decompress PDF",
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDecompressWinClassName, _TRW("Decompress PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -852,12 +852,12 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     int btnW = 95;
     int btnH = 24;
     int bx = x + w - btnW;
-    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
-                                         btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
+                                         btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", L"Decompress", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
-                                             y, btnW, btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Decompress"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+                                             bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDecompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -1103,9 +1103,9 @@ static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
-        const char* msg =
-            dlg->isExtract ? "Failed to extract pages from PDF file." : "Failed to delete pages from PDF file.";
-        const char* title = dlg->isExtract ? "Extract Pages From PDF" : "Delete Pages From PDF";
+        const char* msg = dlg->isExtract ? _TRA("Failed to extract pages from PDF file.")
+                                         : _TRA("Failed to delete pages from PDF file.");
+        const char* title = dlg->isExtract ? _TRA("Extract Pages From PDF") : _TRA("Delete Pages From PDF");
         MessageBoxWarning(dlg->hwnd, msg, title);
     }
 }
@@ -1199,9 +1199,8 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + 8 + kDeletePageDlgPadding;
 
     HINSTANCE h = GetModuleHandleW(nullptr);
-    const char* title = isExtract ? _TRA("Extract Pages From PDF") : _TRA("Delete Pages From PDF");
-    TempWStr ws = ToWStrTemp(title);
-    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, ws,
+    WCHAR* dlgTitle = isExtract ? _TRW("Extract Pages From PDF") : _TRW("Delete Pages From PDF");
+    HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDeletePageWinClassName, dlgTitle,
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
                                 dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
@@ -1238,7 +1237,7 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     // offset static labels to align with text inside edit control (same as input path label)
     int labelW = 100;
     int labelX = x + kEditTextXOffset;
-    const WCHAR* pagesLabelText = isExtract ? L"Pages To Extract:" : L"Pages To Delete:";
+    WCHAR* pagesLabelText = isExtract ? _TRW("Pages To Extract:") : _TRW("Pages To Delete:");
     dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", pagesLabelText, WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
                                           y + kEditTextXOffset, labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
@@ -1270,11 +1269,11 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     SendMessageW(hwndSyntax, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     int bx = x + w - btnW;
-    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", L"Cancel", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y, btnW,
-                                         btnH, hwnd, nullptr, h, nullptr);
+    dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
+                                         btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    const WCHAR* actionBtnText = isExtract ? L"Extract Pages" : L"Delete Pages";
+    WCHAR* actionBtnText = isExtract ? _TRW("Extract Pages") : _TRW("Delete Pages");
     dlg->hwndDeleteBtn = CreateWindowExW(0, L"BUTTON", actionBtnText, WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDeleteBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);

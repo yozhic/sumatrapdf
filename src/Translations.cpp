@@ -268,3 +268,7 @@ void Destroy() {
 const char* _TRA(const char* s) {
     return trans::GetTranslation(s);
 }
+
+TempWStr _TRW(const char* s) {
+    return ToWStrTemp(trans::GetTranslation(s));
+}

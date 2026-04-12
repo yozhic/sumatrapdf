@@ -14,7 +14,7 @@ const apptranslatorServer = "https://www.apptranslator.org";
 const translationsDir = "translations";
 const translationsTxtPath = join(translationsDir, "translations.txt");
 
-const translationPattern = /\b_TR[AN]?\("(.*?)"\)/g;
+const translationPattern = /\b_TR[ANW]?\("(.*?)"\)/g;
 
 function extractTranslations(s: string): string[] {
   const res: string[] = [];
