@@ -139,6 +139,10 @@ static struct {
     {"LucidaBright", "Georgia"},
     {"Handwriting", "SegoeScript"},
     {"Console", "Consolas"},
+    {"FuturaStd-Bold", "SegoeUI-Bold"},
+    {"DINPro", "SegoeUI"},
+    {"ACaslonPro-Regular", "Georgia"},
+    {"ACaslonPro-Italic", "Georgia-Italic"},
     // Chinese Kai (regular script) font fallbacks
     {"MKai PRC", "KaiTi"},
     {"MKaiPRC-Regular", "KaiTi"},
