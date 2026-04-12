@@ -800,6 +800,7 @@ static MenuDef menuDefCreateAnnotUnderCursor[] = {
 };
 //] ACCESSKEY_GROUP Context Menu (Create annot under cursor)
 
+//[ ACCESSKEY_GROUP Context Menu (Image)
 static MenuDef menuDefContextImage[] = {
     {
         _TRN("C&opy To Clipboard"),
@@ -822,8 +823,58 @@ static MenuDef menuDefContextImage[] = {
         0,
     },
 };
+//] ACCESSKEY_GROUP Context Menu (Image)
 
-//[ ACCESSKEY_GROUP Context Menu (Content)
+//[ ACCESSKEY_GROUP Context Menu (Document )
+static MenuDef menuDefDocumentOperations[] = {
+    {
+        _TRN("Encrypt PDF"),
+        CmdPdfEncrypt,
+    },
+    {
+        _TRN("Decrypt PDF"),
+        CmdPdfDecrypt,
+    },
+    {
+        _TRN("Compress PDF"),
+        CmdCompressPdf,
+    },
+    {
+        _TRN("Decompress PDF"),
+        CmdDecompressPdf,
+    },
+    {
+        _TRN("Delete Pages From PDF"),
+        CmdPdfDeletePages,
+    },
+    {
+        _TRN("Extract Pages From PDF"),
+        CmdPdfExtractPages,
+    },
+    {
+        _TRN("Show PDF Info"),
+        CmdShowPdfInfo,
+    },
+    {
+        _TRN("Show Document Outline"),
+        CmdShowDocumentOutline,
+    },
+    {
+        _TRN("Bake PDF File"),
+        CmdPdfBake,
+    },
+    {
+        _TRN("Extract Text From Document"),
+        CmdDocumentExtractText,
+    },
+    {
+        nullptr,
+        0,
+    },
+};
+//] ACCESSKEY_GROUP Context Menu (Document)
+
+//[ ACCESSKEY_GROUP Context Menu (Main)
 static MenuDef menuDefContext[] = {
     {
         _TRN("&Copy Selection"),
@@ -875,6 +926,10 @@ static MenuDef menuDefContext[] = {
         kMenuSeparatorID,
     },
     {
+        _TRN("Document"),
+        (UINT_PTR)menuDefDocumentOperations,
+    },
+    {
         _TRN("Edit Annotations"),
         CmdEditAnnotations,
     },
@@ -907,7 +962,7 @@ static MenuDef menuDefContext[] = {
         0,
     },
 };
-//] ACCESSKEY_GROUP Context Menu (Content)
+//] ACCESSKEY_GROUP Context Menu (Main)
 
 //[ ACCESSKEY_GROUP Context Menu (Start)
 static MenuDef menuDefContextStart[] = {

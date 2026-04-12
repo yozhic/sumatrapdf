@@ -87,8 +87,6 @@ static SeqStrings gCommandNames =
     "CmdFindToggleMatchCase\0"
     "CmdSaveAnnotations\0"
     "CmdSaveAnnotationsNewFile\0"
-    "CmdPdfBake\0"
-    "CmdDocumentExtractText\0"
     "CmdEditAnnotations\0"
     "CmdDeleteAnnotation\0"
     "CmdZoomFitPage\0"
@@ -183,8 +181,6 @@ static SeqStrings gCommandNames =
     "CmdOpenPrevFileInFolder\0"
     "CmdCommandPalette\0"
     "CmdShowLog\0"
-    "CmdShowPdfInfo\0"
-    "CmdShowDocumentOutline\0"
     "CmdShowErrors\0"
     "CmdClearHistory\0"
     "CmdReopenLastClosedFile\0"
@@ -234,6 +230,10 @@ static SeqStrings gCommandNames =
     "CmdPdfExtractPages\0"
     "CmdPdfEncrypt\0"
     "CmdPdfDecrypt\0"
+    "CmdPdfBake\0"
+    "CmdDocumentExtractText\0"
+    "CmdShowPdfInfo\0"
+    "CmdShowDocumentOutline\0"
     "CmdNone\0"
     "\0";
 
@@ -311,8 +311,6 @@ static i32 gCommandIds[] = {
     CmdFindToggleMatchCase,
     CmdSaveAnnotations,
     CmdSaveAnnotationsNewFile,
-    CmdPdfBake,
-    CmdDocumentExtractText,
     CmdEditAnnotations,
     CmdDeleteAnnotation,
     CmdZoomFitPage,
@@ -407,8 +405,6 @@ static i32 gCommandIds[] = {
     CmdOpenPrevFileInFolder,
     CmdCommandPalette,
     CmdShowLog,
-    CmdShowPdfInfo,
-    CmdShowDocumentOutline,
     CmdShowErrors,
     CmdClearHistory,
     CmdReopenLastClosedFile,
@@ -458,6 +454,10 @@ static i32 gCommandIds[] = {
     CmdPdfExtractPages,
     CmdPdfEncrypt,
     CmdPdfDecrypt,
+    CmdPdfBake,
+    CmdDocumentExtractText,
+    CmdShowPdfInfo,
+    CmdShowDocumentOutline,
     CmdNone,
 };
 
@@ -535,8 +535,6 @@ SeqStrings gCommandDescriptions =
     "Find: Toggle Match Case\0"
     "Save Annotations to existing PDF\0"
     "Save Annotations to a new PDF\0"
-    "Bake PDF File\0"
-    "Extract Text From Document\0"
     "Edit Annotations\0"
     "Delete Annotation\0"
     "Zoom: Fit Page\0"
@@ -631,8 +629,6 @@ SeqStrings gCommandDescriptions =
     "Open Previous File In Folder\0"
     "Command Palette\0"
     "Show Logs\0"
-    "Show PDF Info\0"
-    "Show Document Outline\0"
     "Show Errors\0"
     "Clear History\0"
     "Reopen Last Closed\0"
@@ -682,6 +678,10 @@ SeqStrings gCommandDescriptions =
     "Extract Pages From PDF\0"
     "Encrypt PDF\0"
     "Decrypt PDF\0"
+    "Bake PDF File\0"
+    "Extract Text From Document\0"
+    "Show PDF Info\0"
+    "Show Document Outline\0"
     "Do nothing\0"
     "\0";
 // clang-format on

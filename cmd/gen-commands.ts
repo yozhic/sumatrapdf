@@ -76,8 +76,6 @@ export const commands = [
     "CmdFindToggleMatchCase", "Find: Toggle Match Case",
     "CmdSaveAnnotations", "Save Annotations to existing PDF",
     "CmdSaveAnnotationsNewFile", "Save Annotations to a new PDF",
-    "CmdPdfBake", "Bake PDF File",
-    "CmdDocumentExtractText", "Extract Text From Document",
     "CmdEditAnnotations", "Edit Annotations",
     "CmdDeleteAnnotation", "Delete Annotation",
     "CmdZoomFitPage", "Zoom: Fit Page",
@@ -172,8 +170,6 @@ export const commands = [
     "CmdOpenPrevFileInFolder", "Open Previous File In Folder",
     "CmdCommandPalette", "Command Palette",
     "CmdShowLog", "Show Logs",
-    "CmdShowPdfInfo", "Show PDF Info",
-    "CmdShowDocumentOutline", "Show Document Outline",
     "CmdShowErrors", "Show Errors",
     "CmdClearHistory", "Clear History",
     "CmdReopenLastClosedFile", "Reopen Last Closed",
@@ -224,6 +220,10 @@ export const commands = [
     "CmdPdfExtractPages", "Extract Pages From PDF",
     "CmdPdfEncrypt", "Encrypt PDF",
     "CmdPdfDecrypt", "Decrypt PDF",
+    "CmdPdfBake", "Bake PDF File",
+    "CmdDocumentExtractText", "Extract Text From Document",
+    "CmdShowPdfInfo", "Show PDF Info",
+    "CmdShowDocumentOutline", "Show Document Outline",
     "CmdNone", "Do nothing",
 ];
 
