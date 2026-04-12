@@ -270,6 +270,7 @@ struct CommandPaletteBuildCtx {
     bool canCloseTabsToRight = false;
     bool canCloseTabsToLeft = false;
     bool isPdf = false;
+    bool isPdfEncrypted = false;
     bool isSinglePage = false;
     bool hasDocTabs = false;
     Kind engineKind = nullptr;
@@ -403,6 +404,10 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
     }
 
     if (!ctx.isPdf && cmdId == CmdPdfExtractPages) {
+        return false;
+    }
+
+    if (cmdId == CmdPdfEncrypt && (!ctx.isPdf || ctx.isPdfEncrypted)) {
         return false;
     }
 
@@ -683,6 +688,9 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     ctx.hasSelection = ctx.isDocLoaded && currTab && mainWin->showSelection && currTab->selectionOnPage;
     ctx.canSendEmail = CanSendAsEmailAttachment(currTab);
     ctx.isPdf = ctx.isDocLoaded && CouldBePDFDoc(currTab);
+    if (ctx.isPdf && currTab) {
+        ctx.isPdfEncrypted = EngineMupdfIsEncrypted(currTab->GetEngine());
+    }
     if (ctx.isDocLoaded && currTab) {
         ctx.engineKind = currTab->GetEngineType();
     }

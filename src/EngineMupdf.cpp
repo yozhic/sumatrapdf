@@ -3696,6 +3696,14 @@ const pdf_write_options pdf_default_write_options2 = {
     "", /* upwd_utf8[128] */
 };
 
+bool EngineMupdfIsEncrypted(EngineBase* engine) {
+    EngineMupdf* epdf = AsEngineMupdf(engine);
+    if (!epdf || !epdf->pdfdoc) {
+        return false;
+    }
+    return epdf->pdfdoc->crypt != nullptr;
+}
+
 // re-save current pdf document using mupdf (as opposed to just saving the data)
 // this is used after the PDF was modified by the user (e.g. by adding / changing
 // annotations).

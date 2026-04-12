@@ -232,6 +232,7 @@ static SeqStrings gCommandNames =
     "CmdDecompressPdf\0"
     "CmdPdfDeletePages\0"
     "CmdPdfExtractPages\0"
+    "CmdPdfEncrypt\0"
     "CmdNone\0"
     "\0";
 
@@ -454,6 +455,7 @@ static i32 gCommandIds[] = {
     CmdDecompressPdf,
     CmdPdfDeletePages,
     CmdPdfExtractPages,
+    CmdPdfEncrypt,
     CmdNone,
 };
 
@@ -676,6 +678,7 @@ SeqStrings gCommandDescriptions =
     "Decompress PDF\0"
     "Delete Pages From PDF\0"
     "Extract Pages From PDF\0"
+    "Encrypt PDF\0"
     "Do nothing\0"
     "\0";
 // clang-format on

@@ -227,7 +227,8 @@ enum {
     CmdDecompressPdf = 416,
     CmdPdfDeletePages = 417,
     CmdPdfExtractPages = 418,
-    CmdNone = 419,
+    CmdPdfEncrypt = 419,
+    CmdNone = 420,
 
     /* range for file history */
     CmdFileHistoryFirst,

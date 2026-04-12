@@ -55,6 +55,7 @@ Annotation* EngineMupdfCreateAnnotation(EngineBase*, int pageNo, PointF pos, Ann
 void EngineMupdfGetAnnotations(EngineBase*, Vec<Annotation*>&);
 bool EngineMupdfHasUnsavedAnnotations(EngineBase*);
 bool EngineMupdfSupportsAnnotations(EngineBase*);
+bool EngineMupdfIsEncrypted(EngineBase* engine);
 bool EngineMupdfSaveUpdated(EngineBase* engine, const char* path, const ShowErrorCb& showErrorFunc);
 Annotation* EngineMupdfGetAnnotationAtPos(EngineBase*, int pageNo, PointF pos, Annotation*);
 ByteSlice EngineMupdfLoadAttachment(EngineBase*, int attachmentNo);

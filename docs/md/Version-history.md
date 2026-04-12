@@ -17,6 +17,7 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdDecompressPdf` (`Decompress PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to decompress a PDF file
 - add `CmdPdfDeletePages` (`Delete Pages From PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to delete pages from a PDF file
 - add `CmdPdfExtractPages` (`Extract Pages From PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to extract pages from a PDF file
+- add `CmdPdfEncrypt` (`Encrypt PDF` in `Ctrl + k` [command palette](Command-Palette.md)) to encrypt a PDF file with a password using AES-256
 - add `CmdDocumentExtractText` (`Extract Text From Document` in `Ctrl + k` [command palette](Command-Palette.md)) to extract text from document pages to a .txt file
 - add `ToolbarText` parameter for `ExternalViewers` advanced setting to show external viewer as a toolbar button
 - move `Scrollbars` advanced setting from `FixedPageUI` to top-level
