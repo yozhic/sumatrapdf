@@ -440,8 +440,24 @@ void LinkHandler::GotoLink(IPageDestination* dest) {
         return;
     }
     if (kindDestinationLaunchEmbedded == kind) {
-        // Not handled here. Must use context menu to trigger launching
-        // embedded files
+        PageDestination* pd = (PageDestination*)dest;
+        if (pd->embedObjNum > 0) {
+            EngineBase* engine = win->CurrentTab()->AsFixed()->GetEngine();
+            ByteSlice data = EngineMupdfLoadAnnotAttachment(engine, pd->embedObjNum);
+            if (!data.empty()) {
+                const char* fileName = pd->GetValue2();
+                logf("GotoLink: opening file attachment annotation '%s', objNum: %d, size: %d\n", fileName,
+                     pd->embedObjNum, (int)data.sz);
+                TempStr tmpDir = GetTempDirTemp();
+                if (tmpDir) {
+                    TempStr tmpPath = path::JoinTemp(tmpDir, path::GetBaseNameTemp(fileName));
+                    if (file::WriteFile(tmpPath, data)) {
+                        SumatraLaunchBrowser(tmpPath);
+                    }
+                }
+                str::Free(data.data());
+            }
+        }
         return;
     }
 

@@ -901,6 +901,10 @@ static MenuDef menuDefContext[] = {
         CmdCopyComment,
     },
     {
+        _TRN("Save Attachment"),
+        CmdSaveAttachment,
+    },
+    {
         _TRN("&Image"),
         (UINT_PTR)menuDefContextImage,
     },
@@ -1949,6 +1953,19 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
     if (!pageEl || !pageEl->Is(kindPageElementComment) || !value) {
         MenuRemove(popup, CmdCopyComment);
     }
+    // show "Save Attachment" only for file attachment annotations
+    {
+        bool isFileAttachment = false;
+        if (pageEl && pageEl->Is(kindPageElementDest)) {
+            IPageDestination* elDest = pageEl->AsLink();
+            if (elDest && elDest->GetKind() == kindDestinationLaunchEmbedded) {
+                isFileAttachment = true;
+            }
+        }
+        if (!isFileAttachment) {
+            MenuRemove(popup, CmdSaveAttachment);
+        }
+    }
     {
         bool onImage = pageEl && pageEl->Is(kindPageElementImage);
         bool isImageEngine = tab && tab->GetEngineType() == kindEngineImage;
@@ -2118,6 +2135,25 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
         case CmdCopyComment: {
             if (!str::IsEmpty(value)) {
                 CopyTextToClipboard(value);
+            }
+            return;
+        }
+
+        case CmdSaveAttachment: {
+            if (pageEl && pageEl->Is(kindPageElementDest)) {
+                IPageDestination* elDest = pageEl->AsLink();
+                PageDestination* pd = (PageDestination*)elDest;
+                if (pd && pd->embedObjNum > 0) {
+                    ByteSlice data = EngineMupdfLoadAnnotAttachment(engine, pd->embedObjNum);
+                    if (!data.empty()) {
+                        const char* fileName = pd->GetValue2();
+                        TempStr dir = path::GetDirTemp(filePath);
+                        fileName = path::GetBaseNameTemp(fileName);
+                        TempStr dstPath = path::JoinTemp(dir, fileName);
+                        SaveDataToFile(win->hwndFrame, dstPath, data);
+                        str::Free(data.data());
+                    }
+                }
             }
             return;
         }

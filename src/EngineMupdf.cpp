@@ -1355,6 +1355,31 @@ static ByteSlice PdfLoadAttachment(fz_context* ctx, pdf_document* doc, int no) {
     return res;
 }
 
+// load embedded file data from a file attachment annotation by PDF object number
+static ByteSlice PdfLoadAnnotationAttachment(fz_context* ctx, pdf_document* doc, int objNum) {
+    ByteSlice res;
+    fz_try(ctx) {
+        pdf_obj* obj = pdf_new_indirect(ctx, doc, objNum, 0);
+        pdf_obj* fs = pdf_dict_get(ctx, obj, PDF_NAME(FS));
+        if (!fs) {
+            pdf_drop_obj(ctx, obj);
+            break;
+        }
+        fz_buffer* buf = pdf_load_embedded_file_contents(ctx, fs);
+        if (buf) {
+            res.d = (u8*)memdup(buf->data, buf->len);
+            res.sz = buf->len;
+            fz_drop_buffer(ctx, buf);
+        }
+        pdf_drop_obj(ctx, obj);
+    }
+    fz_catch(ctx) {
+        fz_report_error(ctx);
+        logfa("PdfLoadAnnotationAttachment(objNum=%d) failed\n", objNum);
+    }
+    return res;
+}
+
 // Note: make sure to only call with ctxAccess
 static fz_outline* PdfLoadAttachments(fz_context* ctx, pdf_document* doc, const char* path) {
     fz_outline root{};
@@ -2725,9 +2750,9 @@ static void RebuildCommentsFromAnnotationsInner(fz_context* ctx, pdf_annot* anno
         logf("attachment: %s, num: %d\n", attname, num);
 
         auto dest = new PageDestination();
-        // TODO: kindDestinationAttachment ?
         dest->kind = kindDestinationLaunchEmbedded;
         dest->value = str::Dup(attname);
+        dest->embedObjNum = num;
 
         auto el = new PageElementDestination(dest);
         el->pageNo = pageNo;
@@ -3980,6 +4005,15 @@ ByteSlice EngineMupdfLoadAttachment(EngineBase* engine, int attachmentNo) {
 
     ByteSlice res = PdfLoadAttachment(epdf->Ctx(), epdf->pdfdoc, attachmentNo);
     return res;
+}
+
+ByteSlice EngineMupdfLoadAnnotAttachment(EngineBase* engine, int objNum) {
+    EngineMupdf* epdf = AsEngineMupdf(engine);
+    if (!epdf->pdfdoc) {
+        return {};
+    }
+    ScopedCritSec scope(epdf->ctxAccess);
+    return PdfLoadAnnotationAttachment(epdf->Ctx(), epdf->pdfdoc, objNum);
 }
 
 // if an elements fully obscures another, remove it from the list

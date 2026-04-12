@@ -155,6 +155,7 @@ struct PageDestinationFile : IPageDestination {
 struct PageDestination : IPageDestination {
     char* value = nullptr;
     char* name = nullptr;
+    int embedObjNum = 0; // PDF object number for embedded file attachment annotations
 
     PageDestination() = default;
 
