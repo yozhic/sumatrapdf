@@ -57,6 +57,8 @@ struct WindowTab {
 
     // per-document background color from FileState; kColorUnset = use default
     COLORREF bgColor = kColorUnset;
+    // true if per-document background is explicitly set to checkered pattern
+    bool bgColorCheckered = false;
     // per-document tab color from FileState; kColorUnset = use default
     COLORREF tabColor = kColorUnset;
 

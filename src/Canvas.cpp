@@ -1484,7 +1484,9 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
 
     // per-document background color from FileState overrides everything
     WindowTab* curTab = win->CurrentTab();
-    if (curTab && curTab->bgColor != kColorUnset) {
+    if (curTab && curTab->bgColorCheckered) {
+        colDocBg = kColorUnset;
+    } else if (curTab && curTab->bgColor != kColorUnset) {
         colDocBg = curTab->bgColor;
     }
 
@@ -1505,8 +1507,7 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
     } else if (colDocBg == kColorUnset) {
         paintBgOrCheckerboard(colDocBg, rcArea);
     } else if (0 == nGCols) {
-        auto col = ThemeMainWindowBackgroundColor();
-        AutoDeleteBrush brush = CreateSolidBrush(col);
+        AutoDeleteBrush brush = CreateSolidBrush(colDocBg);
         FillRect(hdc, rcArea, brush);
     } else {
         COLORREF colors[3];

@@ -1426,6 +1426,7 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
         ParsedColor* bgParsed = GetPrefsColor(fs->bgCol);
         if (bgParsed->parsedOk) {
             tab->bgColor = bgParsed->col;
+            tab->bgColorCheckered = (bgParsed->col == kColorUnset);
         }
         ParsedColor* tabColParsed = GetPrefsColor(fs->tabCol);
         if (tabColParsed->parsedOk) {
@@ -4438,6 +4439,7 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
             str::ReplaceWithCopy(&fs->bgCol, "");
         }
         tab->bgColor = kColorUnset;
+        tab->bgColorCheckered = false;
         SaveSettings();
     } else {
         // apply to this file only
@@ -4447,6 +4449,7 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
             fs->bgColParsed.wasParsed = false;
         }
         tab->bgColor = newColor;
+        tab->bgColorCheckered = result.isCheckered;
         SaveSettings();
     }
     // trigger repaint
