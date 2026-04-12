@@ -60,6 +60,7 @@ struct BuildMenuCtx {
     bool isPdf = false;
     bool isPdfEncrypted = false;
     bool hasToc = false;
+    int pageCount = 0;
     BuildMenuCtx() = default;
     ~BuildMenuCtx() = default;
 };
@@ -1280,6 +1281,7 @@ BuildMenuCtx* NewBuildMenuCtx(WindowTab* tab, Point pt) {
     }
     ctx->hasSelection = tab->win->showSelection && tab->selectionOnPage;
     ctx->hasToc = tab->ctrl && tab->ctrl->HasToc();
+    ctx->pageCount = tab->ctrl ? tab->ctrl->PageCount() : 0;
     return ctx;
 }
 
@@ -1472,6 +1474,10 @@ std::pair<bool, bool> GetCommandIdState(BuildMenuCtx* ctx, int cmdId) {
         remove |= (cmdId == CmdPdfDecrypt);
         remove |= (cmdId == CmdPdfCompress);
         remove |= (cmdId == CmdPdfDecompress);
+        remove |= (cmdId == CmdPdfDeletePages);
+        remove |= (cmdId == CmdPdfExtractPages);
+    }
+    if (ctx->pageCount < 2) {
         remove |= (cmdId == CmdPdfDeletePages);
         remove |= (cmdId == CmdPdfExtractPages);
     }

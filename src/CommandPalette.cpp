@@ -271,6 +271,7 @@ struct CommandPaletteBuildCtx {
     bool canCloseTabsToLeft = false;
     bool isPdf = false;
     bool isPdfEncrypted = false;
+    int pageCount = 0;
     bool isSinglePage = false;
     bool hasDocTabs = false;
     Kind engineKind = nullptr;
@@ -399,11 +400,11 @@ static bool AllowCommand(const CommandPaletteBuildCtx& ctx, i32 cmdId) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdPdfDeletePages) {
+    if (cmdId == CmdPdfDeletePages && (!ctx.isPdf || ctx.pageCount < 2)) {
         return false;
     }
 
-    if (!ctx.isPdf && cmdId == CmdPdfExtractPages) {
+    if (cmdId == CmdPdfExtractPages && (!ctx.isPdf || ctx.pageCount < 2)) {
         return false;
     }
 
@@ -700,6 +701,7 @@ void CommandPaletteWnd::CollectStrings(MainWindow* mainWin) {
     }
     if (ctx.isDocLoaded && mainWin->ctrl) {
         ctx.isSinglePage = IsSingle(mainWin->ctrl->GetDisplayMode());
+        ctx.pageCount = mainWin->ctrl->PageCount();
     }
     ctx.allowToggleMenuBar = true;
 
