@@ -6866,6 +6866,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             if (tab && tab->ctrl && tab->ctrl->HasToc()) {
                 if (tab->hwndPDFOutline && IsWindow(tab->hwndPDFOutline)) {
                     SetForegroundWindow(tab->hwndPDFOutline);
+                } else if (tab->filePath && CouldBePDFDoc(tab)) {
+                    TempStr outline = EngineMupdfGetPdfOutline(tab->filePath);
+                    if (outline) {
+                        tab->hwndPDFOutline = ShowTextInWindow("Document Outline", outline, &tab->hwndPDFOutline);
+                    }
                 } else {
                     TocTree* tocTree = tab->ctrl->GetToc();
                     if (tocTree && tocTree->root) {
