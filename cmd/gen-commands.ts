@@ -221,6 +221,7 @@ export const commands = [
     "CmdCompressPdf", "Compress PDF",
     "CmdDecompressPdf", "Decompress PDF",
     "CmdPdfDeletePages", "Delete Pages From PDF",
+    "CmdPdfExtractPages", "Extract Pages From PDF",
     "CmdNone", "Do nothing",
 ];
 

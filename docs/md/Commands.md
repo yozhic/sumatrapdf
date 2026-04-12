@@ -293,6 +293,7 @@ CmdSetTabColor,,Set Tab Color,"Set a custom color for the tab of the current doc
 CmdCompressPdf,,Compress PDF,"Compress a PDF file using aggressive garbage collection and optimization, ver 3.7+"
 CmdDecompressPdf,,Decompress PDF,"Decompress a PDF file for easier inspection, ver 3.7+"
 CmdPdfDeletePages,,Delete Pages From PDF,"Delete pages from a PDF file using page ranges like 1,3-8,13-N where N is the last page, ver 3.7+"
+CmdPdfExtractPages,,Extract Pages From PDF,"Extract pages from a PDF file using page ranges like 1,3-8,13-N where N is the last page, ver 3.7+"
 ```
 
 ## Debug

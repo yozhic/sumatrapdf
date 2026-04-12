@@ -8,3 +8,4 @@ void ShowPdfExtractTextDialog(MainWindow* win);
 void ShowPdfCompressDialog(MainWindow* win);
 void ShowPdfDecompressDialog(MainWindow* win);
 void ShowPdfDeletePageDialog(MainWindow* win);
+void ShowPdfExtractPagesDialog(MainWindow* win);
