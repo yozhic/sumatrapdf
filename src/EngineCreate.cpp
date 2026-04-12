@@ -66,7 +66,7 @@ static EngineBase* CreateEngineForKind(Kind kind, const char* path, PasswordUI* 
     }
     int dpi = DpiGet(nullptr);
     EngineBase* engine = nullptr;
-    if (kind == kindFilePDF) {
+    if (kind == kindFilePDF || kind == kindFileXps) {
         engine = CreateEngineMupdfFromFile(path, kind, dpi, pwdUI);
         return engine;
     }
