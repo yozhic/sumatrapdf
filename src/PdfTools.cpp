@@ -5,6 +5,7 @@
 #include "utils/ScopedWin.h"
 #include "utils/FileUtil.h"
 #include "utils/WinUtil.h"
+#include "utils/Log.h"
 
 #include "wingui/UIModels.h"
 #include "wingui/Layout.h"
@@ -93,12 +94,15 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
         return;
     }
 
+    logf("PdfBakeDoIt: baking '%s' to '%s'\n", dlg->srcPath, destPath);
+
     // build argv for pdfbake_main: "bake" input output
     char* argv[] = {(char*)"bake", dlg->srcPath, destPath};
     int argc = 3;
 
     int res = pdfbake_main(argc, argv);
     if (res == 0) {
+        logf("PdfBakeDoIt: baked successfully\n");
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
@@ -106,6 +110,7 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfBakeDoIt: pdfbake_main failed with %d\n", res);
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to bake PDF file."), _TRA("Bake PDF"));
     }
 }
@@ -165,6 +170,7 @@ void ShowPdfBakeDialog(MainWindow* win) {
     if (!CouldBePDFDoc(tab)) {
         return;
     }
+    logf("ShowPdfBakeDialog: opening for '%s'\n", tab->filePath);
 
     if (!gPdfBakeWinClassRegistered) {
         WNDCLASSEXW wc{};
@@ -328,6 +334,8 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
         return;
     }
 
+    logf("PdfExtractTextDoIt: extracting text from '%s' to '%s', pages: %s\n", dlg->srcPath, destPath, pages);
+
     bool ok = false;
     WindowTab* tab = dlg->win ? dlg->win->CurrentTab() : nullptr;
     bool isPdf = tab && CouldBePDFDoc(tab);
@@ -342,9 +350,11 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
     }
 
     if (ok) {
+        logf("PdfExtractTextDoIt: extracted successfully\n");
         DestroyWindow(dlg->hwnd);
         OpenPathInDefaultFileManager(destPath);
     } else {
+        logf("PdfExtractTextDoIt: failed to extract text, isPdf: %d\n", (int)isPdf);
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to extract text."), _TRA("Extract Text"));
     }
 }
@@ -401,6 +411,8 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     if (!tab || !tab->filePath) {
         return;
     }
+    logf("ShowPdfExtractTextDialog: opening for '%s'\n", tab->filePath);
+
     if (!gPdfExtractTextWinClassRegistered) {
         WNDCLASSEXW wc{};
         wc.cbSize = sizeof(wc);
@@ -536,6 +548,8 @@ static void PdfCompressDoIt(PdfCompressDialog* dlg) {
         return;
     }
 
+    logf("PdfCompressDoIt: compressing '%s' to '%s'\n", dlg->srcPath, destPath);
+
     // equivalent of: clean -gggg -e 100 -f -i -t -Z input output
     char* argv[] = {
         (char*)"clean", (char*)"-gggg", (char*)"-e", (char*)"100", (char*)"-f",
@@ -545,12 +559,14 @@ static void PdfCompressDoIt(PdfCompressDialog* dlg) {
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
+        logf("PdfCompressDoIt: compressed successfully\n");
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfCompressDoIt: pdfclean_main failed with %d\n", res);
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to compress PDF file."), _TRA("Compress PDF"));
     }
 }
@@ -610,6 +626,7 @@ void ShowPdfCompressDialog(MainWindow* win) {
     if (!CouldBePDFDoc(tab)) {
         return;
     }
+    logf("ShowPdfCompressDialog: opening for '%s'\n", tab->filePath);
 
     if (!gPdfCompressWinClassRegistered) {
         WNDCLASSEXW wc{};
@@ -724,18 +741,22 @@ static void PdfDecompressDoIt(PdfDecompressDialog* dlg) {
         return;
     }
 
+    logf("PdfDecompressDoIt: decompressing '%s' to '%s'\n", dlg->srcPath, destPath);
+
     // equivalent of: clean -d input output
     char* argv[] = {(char*)"clean", (char*)"-d", dlg->srcPath, destPath};
     int argc = 4;
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
+        logf("PdfDecompressDoIt: decompressed successfully\n");
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfDecompressDoIt: pdfclean_main failed with %d\n", res);
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to decompress PDF file."), _TRA("Decompress PDF"));
     }
 }
@@ -795,6 +816,7 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     if (!CouldBePDFDoc(tab)) {
         return;
     }
+    logf("ShowPdfDecompressDialog: opening for '%s'\n", tab->filePath);
 
     if (!gPdfDecompressWinClassRegistered) {
         WNDCLASSEXW wc{};
@@ -1091,18 +1113,24 @@ static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
         pageRange = BuildKeepPagesRange(dlg->pageCount, parsedPages);
     }
 
+    const char* op = dlg->isExtract ? "extract" : "delete";
+    logf("PdfDeletePageDoIt: %s pages '%s' from '%s' to '%s', range for pdfclean: %s\n", op, pages, dlg->srcPath,
+         destPath, pageRange);
+
     // equivalent of: clean input.pdf output.pdf <page-range>
     char* argv[] = {(char*)"clean", dlg->srcPath, destPath, pageRange};
     int argc = 4;
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
+        logf("PdfDeletePageDoIt: %s pages successfully\n", op);
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfDeletePageDoIt: pdfclean_main failed with %d for %s\n", res, op);
         const char* msg = dlg->isExtract ? _TRA("Failed to extract pages from PDF file.")
                                          : _TRA("Failed to delete pages from PDF file.");
         const char* title = dlg->isExtract ? _TRA("Extract Pages From PDF") : _TRA("Delete Pages From PDF");
@@ -1174,6 +1202,8 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     if (pageCount < 2) {
         return;
     }
+    logf("ShowPdfPageRangeDialog: opening %s dialog for '%s', %d pages\n", isExtract ? "extract" : "delete",
+         tab->filePath, pageCount);
 
     if (!gPdfDeletePageWinClassRegistered) {
         WNDCLASSEXW wc{};
@@ -1357,6 +1387,8 @@ static void PdfEncryptDoIt(PdfEncryptDialog* dlg) {
         return;
     }
 
+    logf("PdfEncryptDoIt: encrypting '%s' to '%s' with AES-256\n", dlg->srcPath, destPath);
+
     // equivalent of: clean -E aes-256 -U <pwd> -O <pwd> input output
     char* argv[] = {
         (char*)"clean", (char*)"-E", (char*)"aes-256", (char*)"-U", pwd, (char*)"-O", pwd, dlg->srcPath, destPath,
@@ -1365,12 +1397,14 @@ static void PdfEncryptDoIt(PdfEncryptDialog* dlg) {
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
+        logf("PdfEncryptDoIt: encrypted successfully\n");
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfEncryptDoIt: pdfclean_main failed with %d\n", res);
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to encrypt PDF file."), _TRA("Encrypt PDF"));
     }
 }
@@ -1436,8 +1470,10 @@ void ShowPdfEncryptDialog(MainWindow* win) {
     }
     EngineBase* engine = tab->GetEngine();
     if (EngineMupdfIsEncrypted(engine)) {
+        logf("ShowPdfEncryptDialog: '%s' is already encrypted, skipping\n", tab->filePath);
         return;
     }
+    logf("ShowPdfEncryptDialog: opening for '%s'\n", tab->filePath);
 
     if (!gPdfEncryptWinClassRegistered) {
         WNDCLASSEXW wc{};
@@ -1577,6 +1613,9 @@ static void PdfDecryptDoIt(PdfDecryptDialog* dlg) {
         return;
     }
 
+    logf("PdfDecryptDoIt: decrypting '%s' to '%s', password len: %d\n", dlg->srcPath, destPath,
+         (int)str::Len(dlg->password));
+
     // equivalent of: clean -D -U <pwd> -O <pwd> input output
     // -D removes encryption, -U/-O provide the password to authenticate
     char* argv[] = {
@@ -1586,12 +1625,15 @@ static void PdfDecryptDoIt(PdfDecryptDialog* dlg) {
 
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
+        logf("PdfDecryptDoIt: decrypted successfully\n");
         MainWindow* win = dlg->win;
         TempStr path = str::DupTemp(destPath);
         DestroyWindow(dlg->hwnd);
         LoadArgs args(path, win);
         StartLoadDocument(&args);
     } else {
+        logf("PdfDecryptDoIt: pdfclean_main failed with %d, src: '%s', password len: %d\n", res, dlg->srcPath,
+             (int)str::Len(dlg->password));
         MessageBoxWarning(dlg->hwnd, _TRA("Failed to decrypt PDF file."), _TRA("Decrypt PDF"));
     }
 }
@@ -1653,12 +1695,15 @@ void ShowPdfDecryptDialog(MainWindow* win) {
     }
     EngineBase* engine = tab->GetEngine();
     if (!EngineMupdfIsEncrypted(engine)) {
+        logf("ShowPdfDecryptDialog: '%s' is not encrypted, skipping\n", tab->filePath);
         return;
     }
     const char* pwd = EngineMupdfGetPassword(engine);
     if (str::IsEmpty(pwd)) {
+        logf("ShowPdfDecryptDialog: '%s' is encrypted but no password available\n", tab->filePath);
         return;
     }
+    logf("ShowPdfDecryptDialog: opening for '%s', password len: %d\n", tab->filePath, (int)str::Len(pwd));
 
     if (!gPdfDecryptWinClassRegistered) {
         WNDCLASSEXW wc{};
