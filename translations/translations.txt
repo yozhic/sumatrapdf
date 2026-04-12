@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-eee3b5ffad1b65a2e62180872128d1bbd22137d9
+51692b4d1e196a212c7624b72c29ba88a82c496f
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -4656,7 +4656,7 @@ br:Aplicar Corte
 cn:应用裁切
 co:Appiecà a runzicatura
 de:Zuschneiden anwenden
-it:Applica ritaglio
+it:Ritaglia
 nl:Bijsnijden Toepassen
 pl:Zastosuj przycięcie
 sat:ᱠᱨᱚᱯ ᱮᱢᱪᱷᱚᱭ ᱢᱮ
@@ -4666,7 +4666,7 @@ br:Aplicar Redimensionamento
 cn:应用调整后的尺寸
 co:Appiecà a ridimensione
 de:Größe anpassen
-it:Applica ridimensionamento
+it:Ridimensiona
 nl:Wijzig Formaat Toepassen
 pl:Zastosuj zmianę rozmiaru
 sat:ᱫᱩᱦᱲᱟᱹ ᱢᱟᱯ ᱮᱢᱪᱷᱚᱭ ᱢᱮ
@@ -5147,12 +5147,13 @@ tw:背景顏色:
 uk:Колір фону
 uz:Fon rangi:
 vn:Màu nền
+:Bake PDF
 :Bake PDF File
 br:Assar o Arquivo PDF
 cn:展平 PDF 文件
 co:Creà un schedariu PDF
 de:PDF-Datei erstellen
-it:Incorpora elementi nel file PDF
+it:Incorpora elementi nel PDF
 nl:Creëer PDF Bestand
 pl:Upiecz plik PDF
 sat:PDF ᱨᱮᱫ ᱵᱮᱠ ᱢᱮ
@@ -6996,6 +6997,9 @@ uk:Сумісність
 uz:Mosligi
 vn:Tính tương thích
 :Compress PDF
+br:Comprimir PDF
+co:Cumprime u PDF
+it:Comprimi PDF
 :Contents:
 am:Բովանդակությունը՝
 ar:المحتويات:
@@ -8693,7 +8697,7 @@ cn:创建墨迹标注
 co:Creà un’annutazione lnk
 de:Freihandanmerkung erstellen
 el:Δημιουργία μελανιού σχολιασμού
-it:Crea annotazione Collegamento
+it:Crea annotazione Inchiostro
 nl:Maak .Ink Notatie
 pl:Utwórz adnotację atramentem
 sk:Vytvoriť anotáciu atramentom
@@ -9419,7 +9423,7 @@ cn:调试：开启/关闭预测性渲染
 co:Spannatura : Attivà o disattivà a restituzione di predizzione
 de:Debug: Vorschau-Rendering umschalten
 el:Εντοπισμός σφαλμάτων: Εναλλαγή προγνωστικής απόδοσης
-it:Debug: Attiva Rendering predittivo
+it:Debug: Attiva/Disattiva Rendering predittivo
 nl:Foutopsporing: IN-/UIT Schakelen Voorspellende Weergave
 pl:Debugowanie: przełącz renderowanie predykcyjne
 sk:Ladenie: Prepnúť Prediktívne vykresľovanie
@@ -9431,12 +9435,16 @@ cn:调试：开启/关闭从右向左模式
 co:Spannatura : Attivà o disattivà Rtl
 de:Debug: RTL umschalten
 el:Αποσφαλμάτωση: Εναλλαγή Rtl
-it:Debug: Attiva Da destra a sinistra
+it:Debug: Attiva/Disattiva Da destra a sinistra
 nl:Foutopsporing: IN/UIT Schakelen Rtl
 pl:Debugowanie: przełącz RTL
 sk:Ladenie: Prepnúť RTL
 tw:除錯：切換從右向左模式
 :Decompress PDF
+br:Descomprimir PDF
+co:Scumprime u PDF
+it:Decomprimi PDF
+:Decrypt PDF
 :Default &Layout:
 am:Ծրագրային &դասավորություն՝
 ar:التخطيط الافتراضي&
@@ -9688,6 +9696,8 @@ ru:Удалить Файл
 sk:Odstrániť súbor
 sr-rs:Избриши датотеку
 tw:刪除檔案
+:Delete Pages
+:Delete Pages From PDF
 :Denied Permissions:
 am:Լիազորությունները մերժված են.
 ar:رفض الأذونات:
@@ -9838,6 +9848,7 @@ pl:Nic nie rób
 ru:Ничего не делать
 sk:Nič nerobiť
 tw:不執行任何動作
+:Document
 :Document Properties
 am:Ֆայլի հատկությունները
 ar:خصائص المستند
@@ -10324,6 +10335,7 @@ pl:Osadź...
 sk:Vložiť…
 sr-rs:Угради...
 tw:内嵌…
+:Encrypt PDF
 :Encryption:
 br:Criptografia:
 cn:加密
@@ -10783,6 +10795,9 @@ it:Tempo esposizione:
 nl:Blootstelling Tijd:
 pl:Czas ekspozycji:
 sk:Čas expozície:
+:Extract Pages
+:Extract Pages From PDF
+:Extract Text
 :Extract Text From Document
 br:Extrair Texto do Documento
 co:Estrae testu da u ducumentu
@@ -12245,7 +12260,7 @@ cn:查找：开启/关闭区分大小写
 co:Circà : Attivà o disattivà u rispettu di a cassa
 de:Suchen: Groß-/Kleinschreibung umschalten
 el:Εύρεση: Εναλλαγή θήκης αντιστοίχισης
-it:Ricerca: Attiva MAIUSCOLE/minuscole
+it:Ricerca: Attiva/Disattiva MAIUSCOLE/minuscole
 nl:Zoek: Hoofdlettergevoeligheid IN/UIT Schakelen
 pl: Znajdź: przełącz uwzględnianie wielkości liter
 sk:Hľadať: Prepnúť Rozlišovanie veľkých/malých písmen
@@ -17928,6 +17943,9 @@ tw:頁:
 uk:Сторінка:
 uz:Bet:
 vn:Trang:
+:Pages To Delete:
+:Pages To Extract:
+:Pages:
 :PalmDoc documents
 am:PalmDoc փաստաթղթեր
 ar:مستندات PalmDoc
@@ -17993,6 +18011,7 @@ tw:PalmDoc 文件
 uk:Документи PalmDoc
 uz:PalmDoc ho'jjatlari
 vn:Tài liệu PalmDoc
+:Password:
 :Paste Image From Clipboard
 br:Colar Imagem da Área de Transferência
 cn:从剪贴板复制图像
@@ -21400,6 +21419,9 @@ uk:Надіслати через E-mail...
 uz:&Elektron pochta orqali yuborish...
 vn:Gửi qua &email...
 :Set Tab Color
+br:Definir a Cor da Aba
+co:Definisce u culore di l’unghjetta
+it:Imposta colore scheda
 :Set inverse search command-line
 af:Stel Die Teenoorgestelde Soek Command-Line
 am:Նշել որոնման հրամանների տողը
@@ -21830,6 +21852,7 @@ tw:顯示書籤(&M)
 uk:Показати закладки
 uz:Belgilangan sahifalarni ko‘rsatish
 vn:Hiển thị Dấu &trang
+:Show Document Bookmarks
 :Show Document Outline
 br:Mostrar o Contorno do Documento
 co:Affissà u cuntornu di u ducumentu
@@ -23928,7 +23951,7 @@ cn:开启/关闭光标位置显示
 co:Attivà o disattivà a pusizione di u cursore
 de:Cursorposition umschalten
 el:Εναλλαγή θέσης δρομέα
-it:Attiva Posizione cursore
+it:Attiva/Disattiva Posizione cursore
 nl:Cursor Positie Wisselen
 pl:Przełącz pozycję kursora
 sk:Prepnúť Polohu kurzora
@@ -23938,7 +23961,7 @@ br:Pressione o Esc pra Sair
 cn:开启/关闭 Esc 键退出功能
 co:Attivà o disattivà u Scap. per esce
 de:Esc zum Beenden aktivieren
-it:Commuta Esc per uscire
+it:Attiva Esc per uscire
 nl:Gebruik Esc voor Afsluiten
 pl:Przełączenie Esc, aby wyjść
 sk:Prepnúť Ukončiť klávesom Esc
@@ -23995,7 +24018,7 @@ br:Ativar/Desativar o Carregamento Lento
 cn:开启/关闭延迟加载功能
 co:Attivà o disattivà u caricamentu fannullone
 de:Träges Laden ein-/ausschalten
-it:Commuta Caricamento differito
+it:Attiva Caricamento differito
 nl:Langzaam laden IN\UIT Schakelen
 pl:Przełącz leniwe ładowanie
 sk:Prepnúť Odložené načítanie
@@ -24053,7 +24076,7 @@ br:Ativar/Desativar a Barra de Rolagem na Página Única
 cn:开启/关闭单页面滚动条
 co:Attivà o disattivà a barra di sfilarata nant’à una pagina unica
 de:Bildlaufleiste auf einer Seite ein-/ausblenden
-it:Commuta Barra scorrimento su pagina singola
+it:Attiva Barra di scorrimento su pagina singola
 nl:Schuifbalk IN/UIT Schakelen op enkele pagina
 pl:Przełącz pasek przewijania na pojedynczej stronie
 sk:Prepnúť Posuvník v zobrazení jednej strany
@@ -24086,7 +24109,7 @@ br:Ativar/Desativar a Rolagem Suave
 cn:开启/关闭平滑滚动
 co:Attivà o disattivà a barra di sfilarata dolce
 de:Sanftes Scrollen umschalten
-it:Commuta Scorrimento attenuato
+it:Attiva Scorrimento attenuato
 nl:Vloeiend Scrollen IN/UIT Schakelen
 pl:Przełącz płynne przewijanie
 sk:Prepnúť Plynulé posúvanie
@@ -24107,7 +24130,7 @@ br:Ativar/Desativar a Ordem da MRU das Abas
 cn:开启/关闭按最近使用的顺序排列标签
 co:Attivà o disattivà l’ordine MRU di l’unghjette
 de:Reihenfolge der zuletzt verwendeten Tabs umkehren
-it:Commuta Ordine schede usate di recente
+it:Attiva Ordine schede recenti
 nl:IN/UIT Schakelen Tabbladen MRU Volgorde
 pl:Przełącz kolejność ostatnio używanych kart
 sk:Prepnúť poradie kariet od najnovších
@@ -24115,7 +24138,7 @@ sk:Prepnúť poradie kariet od najnovších
 br:Ativar/Desativar as Dicas
 co:Attivà o disattivà i cunsiglii
 de:Tipps anzeigen/ausblenden
-it:Commuta Suggerimenti
+it:Attiva Suggerimenti
 nl:Toon/Verberg Tips
 pl:Przełącz wskazówki
 sk:Prepnúť Tipy
@@ -24136,7 +24159,7 @@ br:Ativar/Desativar o Uso das Abas
 cn:开启/关闭标签功能
 co:Attivà o disattivà l’unghjette d’impiegu
 de:Tabs ein-/ausblenden
-it:Commuta Utilizza schede
+it:Attiva Utilizza le schede
 nl:Tabbladen IN\UIT Schakelen
 pl:Przełącz używanie kart
 sk:Prepnúť Použiť karty
@@ -24147,7 +24170,7 @@ cn:开启/关闭缩放
 co:Attivà o disattivà l’ingrandamentu
 de:Zoom umschalten
 el:Εναλλαγή ζουμ
-it:Attiva Zoom
+it:Attiva/Disattiva Zoom
 nl:Zoom IN/UIT Schakelen
 pl:Przełącz powiększenie
 sk:Prepnúť Zväčšenie

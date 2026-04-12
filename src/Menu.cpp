@@ -863,7 +863,7 @@ static MenuDef menuDefDocumentOperations[] = {
         CmdDocumentShowOutline,
     },
     {
-        _TRN("Bake PDF File"),
+        _TRN("Bake PDF"),
         CmdPdfBake,
     },
     {

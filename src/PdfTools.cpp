@@ -111,7 +111,7 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfBakeDoIt: pdfbake_main failed with %d\n", res);
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to bake PDF file."), _TRA("Bake PDF"));
+        MessageBoxWarning(dlg->hwnd, "Failed to bake PDF file.", _TRA("Bake PDF"));
     }
 }
 
@@ -234,7 +234,7 @@ void ShowPdfBakeDialog(MainWindow* win) {
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndBakeBtn = CreateWindowExW(0, L"BUTTON", _TRW("Bake"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
+    dlg->hwndBakeBtn = CreateWindowExW(0, L"BUTTON", _TRW("Bake PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
                                        btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBakeBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
@@ -355,7 +355,7 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
         OpenPathInDefaultFileManager(destPath);
     } else {
         logf("PdfExtractTextDoIt: failed to extract text, isPdf: %d\n", (int)isPdf);
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to extract text."), _TRA("Extract Text"));
+        MessageBoxWarning(dlg->hwnd, "Failed to extract text.", _TRA("Extract Text"));
     }
 }
 
@@ -567,7 +567,7 @@ static void PdfCompressDoIt(PdfCompressDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfCompressDoIt: pdfclean_main failed with %d\n", res);
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to compress PDF file."), _TRA("Compress PDF"));
+        MessageBoxWarning(dlg->hwnd, "Failed to compress PDF file.", _TRA("Compress PDF"));
     }
 }
 
@@ -690,7 +690,7 @@ void ShowPdfCompressDialog(MainWindow* win) {
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
+    dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx,
                                            y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
@@ -757,7 +757,7 @@ static void PdfDecompressDoIt(PdfDecompressDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfDecompressDoIt: pdfclean_main failed with %d\n", res);
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to decompress PDF file."), _TRA("Decompress PDF"));
+        MessageBoxWarning(dlg->hwnd, "Failed to decompress PDF file.", _TRA("Decompress PDF"));
     }
 }
 
@@ -878,7 +878,7 @@ void ShowPdfDecompressDialog(MainWindow* win) {
                                          btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
     bx -= btnW + 4;
-    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Decompress"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+    dlg->hwndDecompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Decompress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
                                              bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDecompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
@@ -1131,8 +1131,8 @@ static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfDeletePageDoIt: pdfclean_main failed with %d for %s\n", res, op);
-        const char* msg = dlg->isExtract ? _TRA("Failed to extract pages from PDF file.")
-                                         : _TRA("Failed to delete pages from PDF file.");
+        const char* msg = dlg->isExtract ? "Failed to extract pages from PDF file."
+                                         : "Failed to delete pages from PDF file.";
         const char* title = dlg->isExtract ? _TRA("Extract Pages From PDF") : _TRA("Delete Pages From PDF");
         MessageBoxWarning(dlg->hwnd, msg, title);
     }
@@ -1405,7 +1405,7 @@ static void PdfEncryptDoIt(PdfEncryptDialog* dlg) {
         StartLoadDocument(&args);
     } else {
         logf("PdfEncryptDoIt: pdfclean_main failed with %d\n", res);
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to encrypt PDF file."), _TRA("Encrypt PDF"));
+        MessageBoxWarning(dlg->hwnd, "Failed to encrypt PDF file.", _TRA("Encrypt PDF"));
     }
 }
 
@@ -1634,7 +1634,7 @@ static void PdfDecryptDoIt(PdfDecryptDialog* dlg) {
     } else {
         logf("PdfDecryptDoIt: pdfclean_main failed with %d, src: '%s', password len: %d\n", res, dlg->srcPath,
              (int)str::Len(dlg->password));
-        MessageBoxWarning(dlg->hwnd, _TRA("Failed to decrypt PDF file."), _TRA("Decrypt PDF"));
+        MessageBoxWarning(dlg->hwnd, "Failed to decrypt PDF file.", _TRA("Decrypt PDF"));
     }
 }
 

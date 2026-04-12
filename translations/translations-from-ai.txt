@@ -45536,3 +45536,2683 @@ uk:Розпакувати PDF
 vn:Nén PDF
 :Decompress PDF
 vn:Giải nén PDF
+:Bake
+am:ጋግር
+:Bake PDF
+am:ፒዲኤፍ ጋግር
+:Compress
+am:አመቅ
+:Decompress
+am:ፍታ
+:Decrypt PDF
+am:ፒዲኤፍ ምስጠራ ፍታ
+:Delete Pages
+am:ገጾችን ሰርዝ
+:Delete Pages From PDF
+am:ከፒዲኤፍ ገጾችን ሰርዝ
+:Document
+am:ሰነድ
+:Encrypt PDF
+am:ፒዲኤፍ አመስጥር
+:Extract Pages
+am:ገጾችን አውጣ
+:Extract Pages From PDF
+am:ከፒዲኤፍ ገጾችን አውጣ
+:Extract Text
+am:ጽሑፍ አውጣ
+:Failed to bake PDF file.
+am:ፒዲኤፍ ፋይል መጋገር አልተሳካም።
+:Failed to compress PDF file.
+am:ፒዲኤፍ ፋይል ማመቅ አልተሳካም።
+:Failed to decompress PDF file.
+am:ፒዲኤፍ ፋይል መፍታት አልተሳካም።
+:Failed to decrypt PDF file.
+am:ፒዲኤፍ ፋይል ምስጠራ መፍታት አልተሳካም።
+:Failed to delete pages from PDF file.
+am:ከፒዲኤፍ ፋይል ገጾችን መሰረዝ አልተሳካም።
+:Failed to encrypt PDF file.
+am:ፒዲኤፍ ፋይል ማመስጠር አልተሳካም።
+:Failed to extract pages from PDF file.
+am:ከፒዲኤፍ ፋይል ገጾችን ማውጣት አልተሳካም።
+:Failed to extract text.
+am:ጽሑፍ ማውጣት አልተሳካም።
+:Pages To Delete:
+am:ሊሰረዙ የሚገቡ ገጾች፡
+:Pages To Extract:
+am:ሊወጡ የሚገቡ ገጾች፡
+:Pages:
+am:ገጾች፡
+:Show Document Bookmarks
+am:የሰነድ ዕልባቶችን አሳይ
+:Bake
+ar:تثبيت
+:Bake PDF
+ar:تثبيت PDF
+:Compress
+ar:ضغط
+:Decompress
+ar:فك الضغط
+:Decrypt PDF
+ar:فك تشفير PDF
+:Delete Pages
+ar:حذف الصفحات
+:Delete Pages From PDF
+ar:حذف صفحات من PDF
+:Document
+ar:مستند
+:Encrypt PDF
+ar:تشفير PDF
+:Extract Pages
+ar:استخراج الصفحات
+:Extract Pages From PDF
+ar:استخراج صفحات من PDF
+:Extract Text
+ar:استخراج النص
+:Failed to bake PDF file.
+ar:فشل تثبيت ملف PDF.
+:Failed to compress PDF file.
+ar:فشل ضغط ملف PDF.
+:Failed to decompress PDF file.
+ar:فشل فك ضغط ملف PDF.
+:Failed to decrypt PDF file.
+ar:فشل فك تشفير ملف PDF.
+:Failed to delete pages from PDF file.
+ar:فشل حذف صفحات من ملف PDF.
+:Failed to encrypt PDF file.
+ar:فشل تشفير ملف PDF.
+:Failed to extract pages from PDF file.
+ar:فشل استخراج صفحات من ملف PDF.
+:Failed to extract text.
+ar:فشل استخراج النص.
+:Pages To Delete:
+ar:الصفحات المراد حذفها:
+:Pages To Extract:
+ar:الصفحات المراد استخراجها:
+:Pages:
+ar:الصفحات:
+:Show Document Bookmarks
+ar:إظهار إشارات المستند
+:Bake
+br:Poazhañ
+:Bake PDF
+br:Poazhañ PDF
+:Compress
+br:Gwaskañ
+:Decompress
+br:Digwaskañ
+:Decrypt PDF
+br:Dichoachañ PDF
+:Delete Pages
+br:Dilemel pajennoù
+:Delete Pages From PDF
+br:Dilemel pajennoù eus PDF
+:Document
+br:Teul
+:Encrypt PDF
+br:Choachañ PDF
+:Extract Pages
+br:Diazilañ pajennoù
+:Extract Pages From PDF
+br:Diazilañ pajennoù eus PDF
+:Extract Text
+br:Diazilañ testenn
+:Failed to bake PDF file.
+br:C'hwitet eo poazhañ ar restr PDF.
+:Failed to compress PDF file.
+br:C'hwitet eo gwaskañ ar restr PDF.
+:Failed to decompress PDF file.
+br:C'hwitet eo digwaskañ ar restr PDF.
+:Failed to decrypt PDF file.
+br:C'hwitet eo dichoachañ ar restr PDF.
+:Failed to delete pages from PDF file.
+br:C'hwitet eo dilemel pajennoù eus ar restr PDF.
+:Failed to encrypt PDF file.
+br:C'hwitet eo choachañ ar restr PDF.
+:Failed to extract pages from PDF file.
+br:C'hwitet eo diazilañ pajennoù eus ar restr PDF.
+:Failed to extract text.
+br:C'hwitet eo diazilañ an destenn.
+:Pages To Delete:
+br:Pajennoù da zilemel:
+:Pages To Extract:
+br:Pajennoù da ziazilañ:
+:Pages:
+br:Pajennoù:
+:Show Document Bookmarks
+br:Diskouez sinedoù al levr
+:Bake
+cn:烘焙
+:Bake PDF
+cn:烘焙PDF
+:Compress
+cn:压缩
+:Decompress
+cn:解压缩
+:Decrypt PDF
+cn:解密PDF
+:Delete Pages
+cn:删除页面
+:Delete Pages From PDF
+cn:从PDF删除页面
+:Document
+cn:文档
+:Encrypt PDF
+cn:加密PDF
+:Extract Pages
+cn:提取页面
+:Extract Pages From PDF
+cn:从PDF提取页面
+:Extract Text
+cn:提取文本
+:Failed to bake PDF file.
+cn:烘焙PDF文件失败。
+:Failed to compress PDF file.
+cn:压缩PDF文件失败。
+:Failed to decompress PDF file.
+cn:解压缩PDF文件失败。
+:Failed to decrypt PDF file.
+cn:解密PDF文件失败。
+:Failed to delete pages from PDF file.
+cn:从PDF文件删除页面失败。
+:Failed to encrypt PDF file.
+cn:加密PDF文件失败。
+:Failed to extract pages from PDF file.
+cn:从PDF文件提取页面失败。
+:Failed to extract text.
+cn:提取文本失败。
+:Pages To Delete:
+cn:要删除的页面：
+:Pages To Extract:
+cn:要提取的页面：
+:Pages:
+cn:页面：
+:Show Document Bookmarks
+cn:显示文档书签
+:Bake
+co:Cucia
+:Bake PDF
+co:Cucia PDF
+:Compress
+co:Cumprime
+:Decompress
+co:Dicumprime
+:Decrypt PDF
+co:Dicifra PDF
+:Delete Pages
+co:Sguassà Pagine
+:Delete Pages From PDF
+co:Sguassà Pagine da u PDF
+:Document
+co:Ducumentu
+:Encrypt PDF
+co:Cifra PDF
+:Extract Pages
+co:Estrae Pagine
+:Extract Pages From PDF
+co:Estrae Pagine da u PDF
+:Extract Text
+co:Estrae Testu
+:Failed to bake PDF file.
+co:Fiascu à cucia u schedariu PDF.
+:Failed to compress PDF file.
+co:Fiascu à cumprime u schedariu PDF.
+:Failed to decompress PDF file.
+co:Fiascu à dicumprime u schedariu PDF.
+:Failed to decrypt PDF file.
+co:Fiascu à dicifra u schedariu PDF.
+:Failed to delete pages from PDF file.
+co:Fiascu à sguassà e pagine da u schedariu PDF.
+:Failed to encrypt PDF file.
+co:Fiascu à cifra u schedariu PDF.
+:Failed to extract pages from PDF file.
+co:Fiascu à estrae e pagine da u schedariu PDF.
+:Failed to extract text.
+co:Fiascu à estrae u testu.
+:Pages To Delete:
+co:Pagine da Sguassà:
+:Pages To Extract:
+co:Pagine da Estrae:
+:Pages:
+co:Pagine:
+:Show Document Bookmarks
+co:Mustrà i Segnalibri di u Ducumentu
+:Bake
+de:Einbrennen
+:Bake PDF
+de:PDF einbrennen
+:Compress
+de:Komprimieren
+:Decompress
+de:Dekomprimieren
+:Decrypt PDF
+de:PDF entschlüsseln
+:Delete Pages
+de:Seiten löschen
+:Delete Pages From PDF
+de:Seiten aus PDF löschen
+:Document
+de:Dokument
+:Encrypt PDF
+de:PDF verschlüsseln
+:Extract Pages
+de:Seiten extrahieren
+:Extract Pages From PDF
+de:Seiten aus PDF extrahieren
+:Extract Text
+de:Text extrahieren
+:Failed to bake PDF file.
+de:PDF-Datei konnte nicht eingebrannt werden.
+:Failed to compress PDF file.
+de:PDF-Datei konnte nicht komprimiert werden.
+:Failed to decompress PDF file.
+de:PDF-Datei konnte nicht dekomprimiert werden.
+:Failed to decrypt PDF file.
+de:PDF-Datei konnte nicht entschlüsselt werden.
+:Failed to delete pages from PDF file.
+de:Seiten konnten nicht aus PDF-Datei gelöscht werden.
+:Failed to encrypt PDF file.
+de:PDF-Datei konnte nicht verschlüsselt werden.
+:Failed to extract pages from PDF file.
+de:Seiten konnten nicht aus PDF-Datei extrahiert werden.
+:Failed to extract text.
+de:Text konnte nicht extrahiert werden.
+:Pages To Delete:
+de:Zu löschende Seiten:
+:Pages To Extract:
+de:Zu extrahierende Seiten:
+:Pages:
+de:Seiten:
+:Show Document Bookmarks
+de:Dokumentlesezeichen anzeigen
+:Bake
+el:Ψήσιμο
+:Bake PDF
+el:Ψήσιμο PDF
+:Compress
+el:Συμπίεση
+:Decompress
+el:Αποσυμπίεση
+:Decrypt PDF
+el:Αποκρυπτογράφηση PDF
+:Delete Pages
+el:Διαγραφή Σελίδων
+:Delete Pages From PDF
+el:Διαγραφή Σελίδων Από PDF
+:Document
+el:Έγγραφο
+:Encrypt PDF
+el:Κρυπτογράφηση PDF
+:Extract Pages
+el:Εξαγωγή Σελίδων
+:Extract Pages From PDF
+el:Εξαγωγή Σελίδων Από PDF
+:Extract Text
+el:Εξαγωγή Κειμένου
+:Failed to bake PDF file.
+el:Αποτυχία ψησίματος αρχείου PDF.
+:Failed to compress PDF file.
+el:Αποτυχία συμπίεσης αρχείου PDF.
+:Failed to decompress PDF file.
+el:Αποτυχία αποσυμπίεσης αρχείου PDF.
+:Failed to decrypt PDF file.
+el:Αποτυχία αποκρυπτογράφησης αρχείου PDF.
+:Failed to delete pages from PDF file.
+el:Αποτυχία διαγραφής σελίδων από αρχείο PDF.
+:Failed to encrypt PDF file.
+el:Αποτυχία κρυπτογράφησης αρχείου PDF.
+:Failed to extract pages from PDF file.
+el:Αποτυχία εξαγωγής σελίδων από αρχείο PDF.
+:Failed to extract text.
+el:Αποτυχία εξαγωγής κειμένου.
+:Pages To Delete:
+el:Σελίδες Προς Διαγραφή:
+:Pages To Extract:
+el:Σελίδες Προς Εξαγωγή:
+:Pages:
+el:Σελίδες:
+:Show Document Bookmarks
+el:Εμφάνιση Σελιδοδεικτών Εγγράφου
+:Bake
+hi:बेक करें
+:Bake PDF
+hi:PDF बेक करें
+:Compress
+hi:संपीड़ित करें
+:Decompress
+hi:विसंपीड़ित करें
+:Decrypt PDF
+hi:PDF डिक्रिप्ट करें
+:Delete Pages
+hi:पेज हटाएं
+:Delete Pages From PDF
+hi:PDF से पेज हटाएं
+:Document
+hi:दस्तावेज़
+:Encrypt PDF
+hi:PDF एन्क्रिप्ट करें
+:Extract Pages
+hi:पेज निकालें
+:Extract Pages From PDF
+hi:PDF से पेज निकालें
+:Extract Text
+hi:टेक्स्ट निकालें
+:Failed to bake PDF file.
+hi:PDF फ़ाइल बेक करने में विफल।
+:Failed to compress PDF file.
+hi:PDF फ़ाइल संपीड़ित करने में विफल।
+:Failed to decompress PDF file.
+hi:PDF फ़ाइल विसंपीड़ित करने में विफल।
+:Failed to decrypt PDF file.
+hi:PDF फ़ाइल डिक्रिप्ट करने में विफल।
+:Failed to delete pages from PDF file.
+hi:PDF फ़ाइल से पेज हटाने में विफल।
+:Failed to encrypt PDF file.
+hi:PDF फ़ाइल एन्क्रिप्ट करने में विफल।
+:Failed to extract pages from PDF file.
+hi:PDF फ़ाइल से पेज निकालने में विफल।
+:Failed to extract text.
+hi:टेक्स्ट निकालने में विफल।
+:Pages To Delete:
+hi:हटाने के लिए पेज:
+:Pages To Extract:
+hi:निकालने के लिए पेज:
+:Pages:
+hi:पेज:
+:Show Document Bookmarks
+hi:दस्तावेज़ बुकमार्क दिखाएं
+:Bake
+it:Finalizza
+:Bake PDF
+it:Finalizza PDF
+:Compress
+it:Comprimi
+:Decompress
+it:Decomprimi
+:Decrypt PDF
+it:Decripta PDF
+:Delete Pages
+it:Elimina pagine
+:Delete Pages From PDF
+it:Elimina pagine dal PDF
+:Document
+it:Documento
+:Encrypt PDF
+it:Cripta PDF
+:Extract Pages
+it:Estrai pagine
+:Extract Pages From PDF
+it:Estrai pagine dal PDF
+:Extract Text
+it:Estrai testo
+:Failed to bake PDF file.
+it:Impossibile finalizzare il file PDF.
+:Failed to compress PDF file.
+it:Impossibile comprimere il file PDF.
+:Failed to decompress PDF file.
+it:Impossibile decomprimere il file PDF.
+:Failed to decrypt PDF file.
+it:Impossibile decriptare il file PDF.
+:Failed to delete pages from PDF file.
+it:Impossibile eliminare le pagine dal file PDF.
+:Failed to encrypt PDF file.
+it:Impossibile criptare il file PDF.
+:Failed to extract pages from PDF file.
+it:Impossibile estrarre le pagine dal file PDF.
+:Failed to extract text.
+it:Impossibile estrarre il testo.
+:Pages To Delete:
+it:Pagine da eliminare:
+:Pages To Extract:
+it:Pagine da estrarre:
+:Pages:
+it:Pagine:
+:Show Document Bookmarks
+it:Mostra segnalibri del documento
+:Bake
+ja:ベイク
+:Bake PDF
+ja:PDFをベイク
+:Compress
+ja:圧縮
+:Decompress
+ja:解凍
+:Decrypt PDF
+ja:PDFを復号化
+:Delete Pages
+ja:ページを削除
+:Delete Pages From PDF
+ja:PDFからページを削除
+:Document
+ja:ドキュメント
+:Encrypt PDF
+ja:PDFを暗号化
+:Extract Pages
+ja:ページを抽出
+:Extract Pages From PDF
+ja:PDFからページを抽出
+:Extract Text
+ja:テキストを抽出
+:Failed to bake PDF file.
+ja:PDFファイルのベイクに失敗しました。
+:Failed to compress PDF file.
+ja:PDFファイルの圧縮に失敗しました。
+:Failed to decompress PDF file.
+ja:PDFファイルの解凍に失敗しました。
+:Failed to decrypt PDF file.
+ja:PDFファイルの復号化に失敗しました。
+:Failed to delete pages from PDF file.
+ja:PDFファイルからのページ削除に失敗しました。
+:Failed to encrypt PDF file.
+ja:PDFファイルの暗号化に失敗しました。
+:Failed to extract pages from PDF file.
+ja:PDFファイルからのページ抽出に失敗しました。
+:Failed to extract text.
+ja:テキストの抽出に失敗しました。
+:Pages To Delete:
+ja:削除するページ:
+:Pages To Extract:
+ja:抽出するページ:
+:Pages:
+ja:ページ:
+:Show Document Bookmarks
+ja:ドキュメントのブックマークを表示
+:Bake
+ml:ബേക്ക്
+:Bake PDF
+ml:PDF ബേക്ക് ചെയ്യുക
+:Compress
+ml:കംപ്രസ് ചെയ്യുക
+:Decompress
+ml:ഡീകംപ്രസ് ചെയ്യുക
+:Decrypt PDF
+ml:PDF ഡീക്രിപ്റ്റ് ചെയ്യുക
+:Delete Pages
+ml:പേജുകൾ ഇല്ലാതാക്കുക
+:Delete Pages From PDF
+ml:PDF-ൽ നിന്ന് പേജുകൾ ഇല്ലാതാക്കുക
+:Document
+ml:ഡോക്യുമെന്റ്
+:Encrypt PDF
+ml:PDF എൻക്രിപ്റ്റ് ചെയ്യുക
+:Extract Pages
+ml:പേജുകൾ എക്സ്ട്രാക്റ്റ് ചെയ്യുക
+:Extract Pages From PDF
+ml:PDF-ൽ നിന്ന് പേജുകൾ എക്സ്ട്രാക്റ്റ് ചെയ്യുക
+:Extract Text
+ml:ടെക്സ്റ്റ് എക്സ്ട്രാക്റ്റ് ചെയ്യുക
+:Failed to bake PDF file.
+ml:PDF ഫയൽ ബേക്ക് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to compress PDF file.
+ml:PDF ഫയൽ കംപ്രസ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to decompress PDF file.
+ml:PDF ഫയൽ ഡീകംപ്രസ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to decrypt PDF file.
+ml:PDF ഫയൽ ഡീക്രിപ്റ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to delete pages from PDF file.
+ml:PDF ഫയലിൽ നിന്ന് പേജുകൾ ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to encrypt PDF file.
+ml:PDF ഫയൽ എൻക്രിപ്റ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to extract pages from PDF file.
+ml:PDF ഫയലിൽ നിന്ന് പേജുകൾ എക്സ്ട്രാക്റ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Failed to extract text.
+ml:ടെക്സ്റ്റ് എക്സ്ട്രാക്റ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.
+:Pages To Delete:
+ml:ഇല്ലാതാക്കേണ്ട പേജുകൾ:
+:Pages To Extract:
+ml:എക്സ്ട്രാക്റ്റ് ചെയ്യേണ്ട പേജുകൾ:
+:Pages:
+ml:പേജുകൾ:
+:Show Document Bookmarks
+ml:ഡോക്യുമെന്റ് ബുക്ക്മാർക്കുകൾ കാണിക്കുക
+:Bake
+nl:Bakken
+:Bake PDF
+nl:PDF bakken
+:Compress
+nl:Comprimeren
+:Decompress
+nl:Decomprimeren
+:Decrypt PDF
+nl:PDF ontsleutelen
+:Delete Pages
+nl:Pagina's verwijderen
+:Delete Pages From PDF
+nl:Pagina's uit PDF verwijderen
+:Document
+nl:Document
+:Encrypt PDF
+nl:PDF versleutelen
+:Extract Pages
+nl:Pagina's extraheren
+:Extract Pages From PDF
+nl:Pagina's uit PDF extraheren
+:Extract Text
+nl:Tekst extraheren
+:Failed to bake PDF file.
+nl:Bakken van PDF-bestand mislukt.
+:Failed to compress PDF file.
+nl:Comprimeren van PDF-bestand mislukt.
+:Failed to decompress PDF file.
+nl:Decomprimeren van PDF-bestand mislukt.
+:Failed to decrypt PDF file.
+nl:Ontsleutelen van PDF-bestand mislukt.
+:Failed to delete pages from PDF file.
+nl:Verwijderen van pagina's uit PDF-bestand mislukt.
+:Failed to encrypt PDF file.
+nl:Versleutelen van PDF-bestand mislukt.
+:Failed to extract pages from PDF file.
+nl:Extraheren van pagina's uit PDF-bestand mislukt.
+:Failed to extract text.
+nl:Extraheren van tekst mislukt.
+:Pages To Delete:
+nl:Te verwijderen pagina's:
+:Pages To Extract:
+nl:Te extraheren pagina's:
+:Pages:
+nl:Pagina's:
+:Show Document Bookmarks
+nl:Documentbladwijzers weergeven
+:Bake
+pl:Wypiecz
+:Bake PDF
+pl:Wypiecz PDF
+:Compress
+pl:Kompresuj
+:Decompress
+pl:Dekompresuj
+:Decrypt PDF
+pl:Odszyfruj PDF
+:Delete Pages
+pl:Usuń strony
+:Delete Pages From PDF
+pl:Usuń strony z PDF
+:Document
+pl:Dokument
+:Encrypt PDF
+pl:Zaszyfruj PDF
+:Extract Pages
+pl:Wyodrębnij strony
+:Extract Pages From PDF
+pl:Wyodrębnij strony z PDF
+:Extract Text
+pl:Wyodrębnij tekst
+:Failed to bake PDF file.
+pl:Nie udało się wypiec pliku PDF.
+:Failed to compress PDF file.
+pl:Nie udało się skompresować pliku PDF.
+:Failed to decompress PDF file.
+pl:Nie udało się zdekompresować pliku PDF.
+:Failed to decrypt PDF file.
+pl:Nie udało się odszyfrować pliku PDF.
+:Failed to delete pages from PDF file.
+pl:Nie udało się usunąć stron z pliku PDF.
+:Failed to encrypt PDF file.
+pl:Nie udało się zaszyfrować pliku PDF.
+:Failed to extract pages from PDF file.
+pl:Nie udało się wyodrębnić stron z pliku PDF.
+:Failed to extract text.
+pl:Nie udało się wyodrębnić tekstu.
+:Pages To Delete:
+pl:Strony do usunięcia:
+:Pages To Extract:
+pl:Strony do wyodrębnienia:
+:Pages:
+pl:Strony:
+:Show Document Bookmarks
+pl:Pokaż zakładki dokumentu
+:Bake
+ru:Запечь
+:Bake PDF
+ru:Запечь PDF
+:Compress
+ru:Сжать
+:Decompress
+ru:Распаковать
+:Decrypt PDF
+ru:Расшифровать PDF
+:Delete Pages
+ru:Удалить страницы
+:Delete Pages From PDF
+ru:Удалить страницы из PDF
+:Document
+ru:Документ
+:Encrypt PDF
+ru:Зашифровать PDF
+:Extract Pages
+ru:Извлечь страницы
+:Extract Pages From PDF
+ru:Извлечь страницы из PDF
+:Extract Text
+ru:Извлечь текст
+:Failed to bake PDF file.
+ru:Не удалось запечь PDF-файл.
+:Failed to compress PDF file.
+ru:Не удалось сжать PDF-файл.
+:Failed to decompress PDF file.
+ru:Не удалось распаковать PDF-файл.
+:Failed to decrypt PDF file.
+ru:Не удалось расшифровать PDF-файл.
+:Failed to delete pages from PDF file.
+ru:Не удалось удалить страницы из PDF-файла.
+:Failed to encrypt PDF file.
+ru:Не удалось зашифровать PDF-файл.
+:Failed to extract pages from PDF file.
+ru:Не удалось извлечь страницы из PDF-файла.
+:Failed to extract text.
+ru:Не удалось извлечь текст.
+:Pages To Delete:
+ru:Страницы для удаления:
+:Pages To Extract:
+ru:Страницы для извлечения:
+:Pages:
+ru:Страницы:
+:Show Document Bookmarks
+ru:Показать закладки документа
+:Bake
+sat:ᱵᱮᱠ
+:Bake PDF
+sat:PDF ᱵᱮᱠ
+:Compress
+sat:ᱠᱚᱢᱯᱨᱮᱥ
+:Decompress
+sat:ᱰᱤᱠᱚᱢᱯᱨᱮᱥ
+:Decrypt PDF
+sat:PDF ᱰᱤᱠᱨᱤᱯᱴ
+:Delete Pages
+sat:ᱥᱟᱦᱴᱟᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱮ
+:Delete Pages From PDF
+sat:PDF ᱠᱷᱚᱱ ᱥᱟᱦᱴᱟᱠᱚ ᱢᱮᱴᱟᱣ ᱢᱮ
+:Document
+sat:ᱫᱚᱞᱤᱞ
+:Encrypt PDF
+sat:PDF ᱤᱱᱠᱨᱤᱯᱴ
+:Extract Pages
+sat:ᱥᱟᱦᱴᱟᱠᱚ ᱚᱰᱚᱠ ᱢᱮ
+:Extract Pages From PDF
+sat:PDF ᱠᱷᱚᱱ ᱥᱟᱦᱴᱟᱠᱚ ᱚᱰᱚᱠ ᱢᱮ
+:Extract Text
+sat:ᱚᱞ ᱚᱰᱚᱠ ᱢᱮ
+:Failed to bake PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱵᱮᱠ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to compress PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱠᱚᱢᱯᱨᱮᱥ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to decompress PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱰᱤᱠᱚᱢᱯᱨᱮᱥ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to decrypt PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱰᱤᱠᱨᱤᱯᱴ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to delete pages from PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱠᱷᱚᱱ ᱥᱟᱦᱴᱟᱠᱚ ᱢᱮᱴᱟᱣ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to encrypt PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱤᱱᱠᱨᱤᱯᱴ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to extract pages from PDF file.
+sat:PDF ᱨᱮᱫᱽ ᱠᱷᱚᱱ ᱥᱟᱦᱴᱟᱠᱚ ᱚᱰᱚᱠ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Failed to extract text.
+sat:ᱚᱞ ᱚᱰᱚᱠ ᱵᱟᱭ ᱦᱩᱭ ᱫᱟᱲᱮᱭᱟᱠᱟᱱᱟ᱾
+:Pages To Delete:
+sat:ᱢᱮᱴᱟᱣ ᱞᱟᱹᱜᱤᱫ ᱥᱟᱦᱴᱟᱠᱚ:
+:Pages To Extract:
+sat:ᱚᱰᱚᱠ ᱞᱟᱹᱜᱤᱫ ᱥᱟᱦᱴᱟᱠᱚ:
+:Pages:
+sat:ᱥᱟᱦᱴᱟᱠᱚ:
+:Show Document Bookmarks
+sat:ᱫᱚᱞᱤᱞ ᱪᱤᱱᱦᱟᱹᱠᱚ ᱩᱫᱩᱜ ᱢᱮ
+:Bake
+sk:Zapiecť
+:Bake PDF
+sk:Zapiecť PDF
+:Compress
+sk:Komprimovať
+:Decompress
+sk:Dekomprimovať
+:Decrypt PDF
+sk:Dešifrovať PDF
+:Delete Pages
+sk:Odstrániť strany
+:Delete Pages From PDF
+sk:Odstrániť strany z PDF
+:Document
+sk:Dokument
+:Encrypt PDF
+sk:Zašifrovať PDF
+:Extract Pages
+sk:Extrahovať strany
+:Extract Pages From PDF
+sk:Extrahovať strany z PDF
+:Extract Text
+sk:Extrahovať text
+:Failed to bake PDF file.
+sk:Nepodarilo sa zapiecť PDF súbor.
+:Failed to compress PDF file.
+sk:Nepodarilo sa komprimovať PDF súbor.
+:Failed to decompress PDF file.
+sk:Nepodarilo sa dekomprimovať PDF súbor.
+:Failed to decrypt PDF file.
+sk:Nepodarilo sa dešifrovať PDF súbor.
+:Failed to delete pages from PDF file.
+sk:Nepodarilo sa odstrániť strany z PDF súboru.
+:Failed to encrypt PDF file.
+sk:Nepodarilo sa zašifrovať PDF súbor.
+:Failed to extract pages from PDF file.
+sk:Nepodarilo sa extrahovať strany z PDF súboru.
+:Failed to extract text.
+sk:Nepodarilo sa extrahovať text.
+:Pages To Delete:
+sk:Strany na odstránenie:
+:Pages To Extract:
+sk:Strany na extrahovanie:
+:Pages:
+sk:Strany:
+:Show Document Bookmarks
+sk:Zobraziť záložky dokumentu
+:Bake
+sr-rs:Пеци
+:Bake PDF
+sr-rs:Пеци PDF
+:Compress
+sr-rs:Компресуј
+:Decompress
+sr-rs:Декомпресуј
+:Decrypt PDF
+sr-rs:Дешифруј PDF
+:Delete Pages
+sr-rs:Обриши странице
+:Delete Pages From PDF
+sr-rs:Обриши странице из PDF-а
+:Document
+sr-rs:Документ
+:Encrypt PDF
+sr-rs:Шифруј PDF
+:Extract Pages
+sr-rs:Извуци странице
+:Extract Pages From PDF
+sr-rs:Извуци странице из PDF-а
+:Extract Text
+sr-rs:Извуци текст
+:Failed to bake PDF file.
+sr-rs:Неуспешно печење PDF фајла.
+:Failed to compress PDF file.
+sr-rs:Неуспешна компресија PDF фајла.
+:Failed to decompress PDF file.
+sr-rs:Неуспешна декомпресија PDF фајла.
+:Failed to decrypt PDF file.
+sr-rs:Неуспешно дешифровање PDF фајла.
+:Failed to delete pages from PDF file.
+sr-rs:Неуспешно брисање страница из PDF фајла.
+:Failed to encrypt PDF file.
+sr-rs:Неуспешно шифровање PDF фајла.
+:Failed to extract pages from PDF file.
+sr-rs:Неуспешно извлачење страница из PDF фајла.
+:Failed to extract text.
+sr-rs:Неуспешно извлачење текста.
+:Pages To Delete:
+sr-rs:Странице за брисање:
+:Pages To Extract:
+sr-rs:Странице за извлачење:
+:Pages:
+sr-rs:Странице:
+:Show Document Bookmarks
+sr-rs:Прикажи обележиваче документа
+:Bake
+tw:烘焙
+:Bake PDF
+tw:烘焙 PDF
+:Compress
+tw:壓縮
+:Decompress
+tw:解壓縮
+:Decrypt PDF
+tw:解密 PDF
+:Delete Pages
+tw:刪除頁面
+:Delete Pages From PDF
+tw:從 PDF 刪除頁面
+:Document
+tw:文件
+:Encrypt PDF
+tw:加密 PDF
+:Extract Pages
+tw:擷取頁面
+:Extract Pages From PDF
+tw:從 PDF 擷取頁面
+:Extract Text
+tw:擷取文字
+:Failed to bake PDF file.
+tw:烘焙 PDF 檔案失敗。
+:Failed to compress PDF file.
+tw:壓縮 PDF 檔案失敗。
+:Failed to decompress PDF file.
+tw:解壓縮 PDF 檔案失敗。
+:Failed to decrypt PDF file.
+tw:解密 PDF 檔案失敗。
+:Failed to delete pages from PDF file.
+tw:從 PDF 檔案刪除頁面失敗。
+:Failed to encrypt PDF file.
+tw:加密 PDF 檔案失敗。
+:Failed to extract pages from PDF file.
+tw:從 PDF 檔案擷取頁面失敗。
+:Failed to extract text.
+tw:擷取文字失敗。
+:Pages To Delete:
+tw:要刪除的頁面：
+:Pages To Extract:
+tw:要擷取的頁面：
+:Pages:
+tw:頁面：
+:Show Document Bookmarks
+tw:顯示文件書籤
+:Bake
+az:Bişir
+:Bake PDF
+az:PDF-i Bişir
+:Compress
+az:Sıxışdır
+:Decompress
+az:Sıxışdırmağı Ləğv Et
+:Decrypt PDF
+az:PDF-in Şifrəsini Aç
+:Delete Pages
+az:Səhifələri Sil
+:Delete Pages From PDF
+az:PDF-dən Səhifələri Sil
+:Document
+az:Sənəd
+:Encrypt PDF
+az:PDF-i Şifrələ
+:Extract Pages
+az:Səhifələri Çıxart
+:Extract Pages From PDF
+az:PDF-dən Səhifələri Çıxart
+:Extract Text
+az:Mətni Çıxart
+:Failed to bake PDF file.
+az:PDF faylını bişirmək alınmadı.
+:Failed to compress PDF file.
+az:PDF faylını sıxışdırmaq alınmadı.
+:Failed to decompress PDF file.
+az:PDF faylının sıxışdırmasını ləğv etmək alınmadı.
+:Failed to decrypt PDF file.
+az:PDF faylının şifrəsini açmaq alınmadı.
+:Failed to delete pages from PDF file.
+az:PDF faylından səhifələri silmək alınmadı.
+:Failed to encrypt PDF file.
+az:PDF faylını şifrələmək alınmadı.
+:Failed to extract pages from PDF file.
+az:PDF faylından səhifələri çıxartmaq alınmadı.
+:Failed to extract text.
+az:Mətni çıxartmaq alınmadı.
+:Pages To Delete:
+az:Silinəcək Səhifələr:
+:Pages To Extract:
+az:Çıxarılacaq Səhifələr:
+:Pages:
+az:Səhifələr:
+:Show Document Bookmarks
+az:Sənəd Əlfəcinlərini Göstər
+:Bake
+by:Запекчы
+:Bake PDF
+by:Запекчы PDF
+:Compress
+by:Сціснуць
+:Decompress
+by:Разархіваваць
+:Decrypt PDF
+by:Расшыфраваць PDF
+:Delete Pages
+by:Выдаліць старонкі
+:Delete Pages From PDF
+by:Выдаліць старонкі з PDF
+:Document
+by:Дакумент
+:Encrypt PDF
+by:Зашыфраваць PDF
+:Extract Pages
+by:Выняць старонкі
+:Extract Pages From PDF
+by:Выняць старонкі з PDF
+:Extract Text
+by:Выняць тэкст
+:Failed to bake PDF file.
+by:Не атрымалася запекчы PDF файл.
+:Failed to compress PDF file.
+by:Не атрымалася сціснуць PDF файл.
+:Failed to decompress PDF file.
+by:Не атрымалася разархіваваць PDF файл.
+:Failed to decrypt PDF file.
+by:Не атрымалася расшыфраваць PDF файл.
+:Failed to delete pages from PDF file.
+by:Не атрымалася выдаліць старонкі з PDF файла.
+:Failed to encrypt PDF file.
+by:Не атрымалася зашыфраваць PDF файл.
+:Failed to extract pages from PDF file.
+by:Не атрымалася выняць старонкі з PDF файла.
+:Failed to extract text.
+by:Не атрымалася выняць тэкст.
+:Pages To Delete:
+by:Старонкі для выдалення:
+:Pages To Extract:
+by:Старонкі для вынімання:
+:Pages:
+by:Старонкі:
+:Show Document Bookmarks
+by:Паказаць закладкі дакумента
+:Bake
+ca:Aplanar
+:Bake PDF
+ca:Aplanar PDF
+:Compress
+ca:Comprimir
+:Decompress
+ca:Descomprimir
+:Decrypt PDF
+ca:Desxifrar PDF
+:Delete Pages
+ca:Eliminar pàgines
+:Delete Pages From PDF
+ca:Eliminar pàgines del PDF
+:Document
+ca:Document
+:Encrypt PDF
+ca:Xifrar PDF
+:Extract Pages
+ca:Extreure pàgines
+:Extract Pages From PDF
+ca:Extreure pàgines del PDF
+:Extract Text
+ca:Extreure text
+:Failed to bake PDF file.
+ca:No s'ha pogut aplanar el fitxer PDF.
+:Failed to compress PDF file.
+ca:No s'ha pogut comprimir el fitxer PDF.
+:Failed to decompress PDF file.
+ca:No s'ha pogut descomprimir el fitxer PDF.
+:Failed to decrypt PDF file.
+ca:No s'ha pogut desxifrar el fitxer PDF.
+:Failed to delete pages from PDF file.
+ca:No s'han pogut eliminar les pàgines del fitxer PDF.
+:Failed to encrypt PDF file.
+ca:No s'ha pogut xifrar el fitxer PDF.
+:Failed to extract pages from PDF file.
+ca:No s'han pogut extreure les pàgines del fitxer PDF.
+:Failed to extract text.
+ca:No s'ha pogut extreure el text.
+:Pages To Delete:
+ca:Pàgines a eliminar:
+:Pages To Extract:
+ca:Pàgines a extreure:
+:Pages:
+ca:Pàgines:
+:Show Document Bookmarks
+ca:Mostra les adreces d'interès del document
+:Bake
+cy:Pobi
+:Bake PDF
+cy:Pobi PDF
+:Compress
+cy:Cywasgu
+:Decompress
+cy:Dadgywasgu
+:Decrypt PDF
+cy:Dadgryptio PDF
+:Delete Pages
+cy:Dileu Tudalennau
+:Delete Pages From PDF
+cy:Dileu Tudalennau o PDF
+:Document
+cy:Dogfen
+:Encrypt PDF
+cy:Amgryptio PDF
+:Extract Pages
+cy:Echdynnu Tudalennau
+:Extract Pages From PDF
+cy:Echdynnu Tudalennau o PDF
+:Extract Text
+cy:Echdynnu Testun
+:Failed to bake PDF file.
+cy:Methodd pobi ffeil PDF.
+:Failed to compress PDF file.
+cy:Methodd cywasgu ffeil PDF.
+:Failed to decompress PDF file.
+cy:Methodd dadgywasgu ffeil PDF.
+:Failed to decrypt PDF file.
+cy:Methodd dadgryptio ffeil PDF.
+:Failed to delete pages from PDF file.
+cy:Methodd dileu tudalennau o ffeil PDF.
+:Failed to encrypt PDF file.
+cy:Methodd amgryptio ffeil PDF.
+:Failed to extract pages from PDF file.
+cy:Methodd echdynnu tudalennau o ffeil PDF.
+:Failed to extract text.
+cy:Methodd echdynnu testun.
+:Pages To Delete:
+cy:Tudalennau i'w Dileu:
+:Pages To Extract:
+cy:Tudalennau i'w Echdynnu:
+:Pages:
+cy:Tudalennau:
+:Show Document Bookmarks
+cy:Dangos Nodau Tudalen Dogfen
+:Bake
+cz:Vypéct
+:Bake PDF
+cz:Vypéct PDF
+:Compress
+cz:Komprimovat
+:Decompress
+cz:Dekomprimovat
+:Decrypt PDF
+cz:Dešifrovat PDF
+:Delete Pages
+cz:Smazat stránky
+:Delete Pages From PDF
+cz:Smazat stránky z PDF
+:Document
+cz:Dokument
+:Encrypt PDF
+cz:Šifrovat PDF
+:Extract Pages
+cz:Extrahovat stránky
+:Extract Pages From PDF
+cz:Extrahovat stránky z PDF
+:Extract Text
+cz:Extrahovat text
+:Failed to bake PDF file.
+cz:Nepodařilo se vypéct PDF soubor.
+:Failed to compress PDF file.
+cz:Nepodařilo se komprimovat PDF soubor.
+:Failed to decompress PDF file.
+cz:Nepodařilo se dekomprimovat PDF soubor.
+:Failed to decrypt PDF file.
+cz:Nepodařilo se dešifrovat PDF soubor.
+:Failed to delete pages from PDF file.
+cz:Nepodařilo se smazat stránky z PDF souboru.
+:Failed to encrypt PDF file.
+cz:Nepodařilo se šifrovat PDF soubor.
+:Failed to extract pages from PDF file.
+cz:Nepodařilo se extrahovat stránky z PDF souboru.
+:Failed to extract text.
+cz:Nepodařilo se extrahovat text.
+:Pages To Delete:
+cz:Stránky ke smazání:
+:Pages To Extract:
+cz:Stránky k extrahování:
+:Pages:
+cz:Stránky:
+:Show Document Bookmarks
+cz:Zobrazit záložky dokumentu
+:Bake
+es:Hornear
+:Bake PDF
+es:Hornear PDF
+:Compress
+es:Comprimir
+:Decompress
+es:Descomprimir
+:Decrypt PDF
+es:Descifrar PDF
+:Delete Pages
+es:Eliminar páginas
+:Delete Pages From PDF
+es:Eliminar páginas del PDF
+:Document
+es:Documento
+:Encrypt PDF
+es:Cifrar PDF
+:Extract Pages
+es:Extraer páginas
+:Extract Pages From PDF
+es:Extraer páginas del PDF
+:Extract Text
+es:Extraer texto
+:Pages To Delete:
+es:Páginas a eliminar:
+:Pages To Extract:
+es:Páginas a extraer:
+:Pages:
+es:Páginas:
+:Show Document Bookmarks
+es:Mostrar marcadores del documento
+:Bake
+fa:پخت
+:Bake PDF
+fa:پخت PDF
+:Compress
+fa:فشرده‌سازی
+:Decompress
+fa:باز کردن فشرده
+:Decrypt PDF
+fa:رمزگشایی PDF
+:Delete Pages
+fa:حذف صفحات
+:Delete Pages From PDF
+fa:حذف صفحات از PDF
+:Document
+fa:سند
+:Encrypt PDF
+fa:رمزگذاری PDF
+:Extract Pages
+fa:استخراج صفحات
+:Extract Pages From PDF
+fa:استخراج صفحات از PDF
+:Extract Text
+fa:استخراج متن
+:Pages To Delete:
+fa:صفحات برای حذف:
+:Pages To Extract:
+fa:صفحات برای استخراج:
+:Pages:
+fa:صفحات:
+:Show Document Bookmarks
+fa:نمایش نشانک‌های سند
+:Bake
+fi:Polta
+:Bake PDF
+fi:Polta PDF
+:Compress
+fi:Pakkaa
+:Decompress
+fi:Pura
+:Decrypt PDF
+fi:Pura PDF:n salaus
+:Delete Pages
+fi:Poista sivut
+:Delete Pages From PDF
+fi:Poista sivut PDF:stä
+:Document
+fi:Asiakirja
+:Encrypt PDF
+fi:Salaa PDF
+:Extract Pages
+fi:Pura sivut
+:Extract Pages From PDF
+fi:Pura sivut PDF:stä
+:Extract Text
+fi:Pura teksti
+:Pages To Delete:
+fi:Poistettavat sivut:
+:Pages To Extract:
+fi:Purettavat sivut:
+:Pages:
+fi:Sivut:
+:Show Document Bookmarks
+fi:Näytä asiakirjan kirjanmerkit
+:Bake
+fo:Baka
+:Bake PDF
+fo:Baka PDF
+:Compress
+fo:Compress
+:Decompress
+fo:Decompress
+:Decrypt PDF
+fo:Avkryptera PDF
+:Delete Pages
+fo:Strika Síður
+:Delete Pages From PDF
+fo:Strika Síður úr PDF
+:Document
+fo:Skjal
+:Encrypt PDF
+fo:Kryptera PDF
+:Extract Pages
+fo:Útdráttur av Síðum
+:Extract Pages From PDF
+fo:Útdráttur av Síðum úr PDF
+:Extract Text
+fo:Útdráttur av Teksti
+:Pages To Delete:
+fo:Síður at strika:
+:Pages To Extract:
+fo:Síður at útvinna:
+:Pages:
+fo:Síður:
+:Show Document Bookmarks
+fo:Vís Skjalabókamerki
+:Bake
+fr:Aplatir
+:Bake PDF
+fr:Aplatir le PDF
+:Compress
+fr:Compresser
+:Decompress
+fr:Décompresser
+:Decrypt PDF
+fr:Déchiffrer le PDF
+:Delete Pages
+fr:Supprimer les pages
+:Delete Pages From PDF
+fr:Supprimer les pages du PDF
+:Document
+fr:Document
+:Encrypt PDF
+fr:Chiffrer le PDF
+:Extract Pages
+fr:Extraire les pages
+:Extract Pages From PDF
+fr:Extraire les pages du PDF
+:Extract Text
+fr:Extraire le texte
+:Pages To Delete:
+fr:Pages à supprimer :
+:Pages To Extract:
+fr:Pages à extraire :
+:Pages:
+fr:Pages :
+:Show Document Bookmarks
+fr:Afficher les signets du document
+:Bake
+ga:Báigh
+:Bake PDF
+ga:Báigh PDF
+:Compress
+ga:Comhbhrúigh
+:Decompress
+ga:Dí-chomhbhrúigh
+:Decrypt PDF
+ga:Díchriptigh PDF
+:Delete Pages
+ga:Scrios Leathanaigh
+:Delete Pages From PDF
+ga:Scrios Leathanaigh ó PDF
+:Document
+ga:Cáipéis
+:Encrypt PDF
+ga:Criptigh PDF
+:Extract Pages
+ga:Bain Leathanaigh Amach
+:Extract Pages From PDF
+ga:Bain Leathanaigh Amach ó PDF
+:Extract Text
+ga:Bain Téacs Amach
+:Pages To Delete:
+ga:Leathanaigh Le Scriosadh:
+:Pages To Extract:
+ga:Leathanaigh Le Baint Amach:
+:Pages:
+ga:Leathanaigh:
+:Show Document Bookmarks
+ga:Taispeáin Leabharmharcanna Cáipéise
+:Bake
+gl:Procesar
+:Bake PDF
+gl:Procesar PDF
+:Compress
+gl:Comprimir
+:Decompress
+gl:Descomprimir
+:Decrypt PDF
+gl:Descifrar PDF
+:Delete Pages
+gl:Eliminar páxinas
+:Delete Pages From PDF
+gl:Eliminar páxinas do PDF
+:Document
+gl:Documento
+:Encrypt PDF
+gl:Cifrar PDF
+:Extract Pages
+gl:Extraer páxinas
+:Extract Pages From PDF
+gl:Extraer páxinas do PDF
+:Extract Text
+gl:Extraer texto
+:Pages To Delete:
+gl:Páxinas a eliminar:
+:Pages To Extract:
+gl:Páxinas a extraer:
+:Pages:
+gl:Páxinas:
+:Show Document Bookmarks
+gl:Mostrar marcadores do documento
+:Bake
+he:אפייה
+:Bake PDF
+he:אפיית PDF
+:Compress
+he:דחיסה
+:Decompress
+he:ביטול דחיסה
+:Decrypt PDF
+he:פענוח PDF
+:Delete Pages
+he:מחיקת עמודים
+:Delete Pages From PDF
+he:מחיקת עמודים מ-PDF
+:Document
+he:מסמך
+:Encrypt PDF
+he:הצפנת PDF
+:Extract Pages
+he:חילוץ עמודים
+:Extract Pages From PDF
+he:חילוץ עמודים מ-PDF
+:Extract Text
+he:חילוץ טקסט
+:Pages To Delete:
+he:עמודים למחיקה:
+:Pages To Extract:
+he:עמודים לחילוץ:
+:Pages:
+he:עמודים:
+:Show Document Bookmarks
+he:הצגת סימניות מסמך
+:Bake
+hu:Beégetés
+:Bake PDF
+hu:PDF beégetése
+:Compress
+hu:Tömörítés
+:Decompress
+hu:Kicsomagolás
+:Decrypt PDF
+hu:PDF visszafejtése
+:Delete Pages
+hu:Oldalak törlése
+:Delete Pages From PDF
+hu:Oldalak törlése PDF-ből
+:Document
+hu:Dokumentum
+:Encrypt PDF
+hu:PDF titkosítása
+:Extract Pages
+hu:Oldalak kivonása
+:Extract Pages From PDF
+hu:Oldalak kivonása PDF-ből
+:Extract Text
+hu:Szöveg kivonása
+:Pages To Delete:
+hu:Törlendő oldalak:
+:Pages To Extract:
+hu:Kivonandó oldalak:
+:Pages:
+hu:Oldalak:
+:Show Document Bookmarks
+hu:Dokumentum könyvjelzők megjelenítése
+:Bake
+id:Bakar
+:Bake PDF
+id:Bakar PDF
+:Compress
+id:Kompres
+:Decompress
+id:Dekompres
+:Decrypt PDF
+id:Dekripsi PDF
+:Delete Pages
+id:Hapus Halaman
+:Delete Pages From PDF
+id:Hapus Halaman Dari PDF
+:Document
+id:Dokumen
+:Encrypt PDF
+id:Enkripsi PDF
+:Extract Pages
+id:Ekstrak Halaman
+:Extract Pages From PDF
+id:Ekstrak Halaman Dari PDF
+:Extract Text
+id:Ekstrak Teks
+:Pages To Delete:
+id:Halaman Yang Akan Dihapus:
+:Pages To Extract:
+id:Halaman Yang Akan Diekstrak:
+:Pages:
+id:Halaman:
+:Show Document Bookmarks
+id:Tampilkan Penanda Dokumen
+:Bake
+kr:굽기
+:Bake PDF
+kr:PDF 굽기
+:Compress
+kr:압축
+:Decompress
+kr:압축 해제
+:Decrypt PDF
+kr:PDF 암호 해독
+:Delete Pages
+kr:페이지 삭제
+:Delete Pages From PDF
+kr:PDF에서 페이지 삭제
+:Document
+kr:문서
+:Encrypt PDF
+kr:PDF 암호화
+:Extract Pages
+kr:페이지 추출
+:Extract Pages From PDF
+kr:PDF에서 페이지 추출
+:Extract Text
+kr:텍스트 추출
+:Pages To Delete:
+kr:삭제할 페이지:
+:Pages To Extract:
+kr:추출할 페이지:
+:Pages:
+kr:페이지:
+:Show Document Bookmarks
+kr:문서 책갈피 표시
+:Bake
+lv:Sagatavot
+:Bake PDF
+lv:Sagatavot PDF
+:Compress
+lv:Saspiests
+:Decompress
+lv:Atspiests
+:Decrypt PDF
+lv:Atšifrēt PDF
+:Delete Pages
+lv:Dzēst lapas
+:Delete Pages From PDF
+lv:Dzēst lapas no PDF
+:Document
+lv:Dokuments
+:Encrypt PDF
+lv:Šifrēt PDF
+:Extract Pages
+lv:Izvilkt lapas
+:Extract Pages From PDF
+lv:Izvilkt lapas no PDF
+:Extract Text
+lv:Izvilkt tekstu
+:Pages To Delete:
+lv:Dzēšamās lapas:
+:Pages To Extract:
+lv:Izvilkamās lapas:
+:Pages:
+lv:Lapas:
+:Show Document Bookmarks
+lv:Rādīt dokumenta grāmatzīmes
+:Bake
+my:ဖုတ်ရန်
+:Bake PDF
+my:PDF ဖုတ်ရန်
+:Compress
+my:ချုံ့ရန်
+:Decompress
+my:ဖြည်ရန်
+:Decrypt PDF
+my:PDF စာဝှက်ဖြည်ရန်
+:Delete Pages
+my:စာမျက်နှာများ ဖျက်ရန်
+:Delete Pages From PDF
+my:PDF မှ စာမျက်နှာများ ဖျက်ရန်
+:Document
+my:စာရွက်စာတမ်း
+:Encrypt PDF
+my:PDF စာဝှက်ရန်
+:Extract Pages
+my:စာမျက်နှာများ ထုတ်ယူရန်
+:Extract Pages From PDF
+my:PDF မှ စာမျက်နှာများ ထုတ်ယူရန်
+:Extract Text
+my:စာသား ထုတ်ယူရန်
+:Pages To Delete:
+my:ဖျက်မည့် စာမျက်နှာများ:
+:Pages To Extract:
+my:ထုတ်ယူမည့် စာမျက်နှာများ:
+:Pages:
+my:စာမျက်နှာများ:
+:Show Document Bookmarks
+my:စာရွက်စာတမ်း စာညှပ်များ ပြရန်
+:Bake
+pt:Finalizar
+:Bake PDF
+pt:Finalizar PDF
+:Compress
+pt:Comprimir
+:Decompress
+pt:Descomprimir
+:Decrypt PDF
+pt:Descriptografar PDF
+:Delete Pages
+pt:Excluir Páginas
+:Delete Pages From PDF
+pt:Excluir Páginas do PDF
+:Document
+pt:Documento
+:Encrypt PDF
+pt:Criptografar PDF
+:Extract Pages
+pt:Extrair Páginas
+:Extract Pages From PDF
+pt:Extrair Páginas do PDF
+:Extract Text
+pt:Extrair Texto
+:Pages To Delete:
+pt:Páginas a Excluir:
+:Pages To Extract:
+pt:Páginas a Extrair:
+:Pages:
+pt:Páginas:
+:Show Document Bookmarks
+pt:Mostrar Marcadores do Documento
+:Bake
+ro:Procesare
+:Bake PDF
+ro:Procesare PDF
+:Compress
+ro:Comprimare
+:Decompress
+ro:Decomprimare
+:Decrypt PDF
+ro:Decriptare PDF
+:Delete Pages
+ro:Ștergere pagini
+:Delete Pages From PDF
+ro:Ștergere pagini din PDF
+:Document
+ro:Document
+:Encrypt PDF
+ro:Criptare PDF
+:Extract Pages
+ro:Extragere pagini
+:Extract Pages From PDF
+ro:Extragere pagini din PDF
+:Extract Text
+ro:Extragere text
+:Pages To Delete:
+ro:Pagini de șters:
+:Pages To Extract:
+ro:Pagini de extras:
+:Pages:
+ro:Pagini:
+:Show Document Bookmarks
+ro:Afișare semne de carte document
+:Bake
+sl:Zapeči
+:Bake PDF
+sl:Zapeči PDF
+:Compress
+sl:Stisni
+:Decompress
+sl:Razširi
+:Decrypt PDF
+sl:Dešифриraj PDF
+:Delete Pages
+sl:Izbriši strani
+:Delete Pages From PDF
+sl:Izbriši strani iz PDF
+:Document
+sl:Dokument
+:Encrypt PDF
+sl:Šифриraj PDF
+:Extract Pages
+sl:Izvleci strani
+:Extract Pages From PDF
+sl:Izvleci strani iz PDF
+:Extract Text
+sl:Izvleci besedilo
+:Pages To Delete:
+sl:Strani za izbris:
+:Pages To Extract:
+sl:Strani za izvleček:
+:Pages:
+sl:Strani:
+:Show Document Bookmarks
+sl:Prikaži zaznamke dokumenta
+:Bake
+sv:Baka
+:Bake PDF
+sv:Baka PDF
+:Compress
+sv:Komprimera
+:Decompress
+sv:Dekomprimera
+:Decrypt PDF
+sv:Dekryptera PDF
+:Delete Pages
+sv:Ta bort sidor
+:Delete Pages From PDF
+sv:Ta bort sidor från PDF
+:Document
+sv:Dokument
+:Encrypt PDF
+sv:Kryptera PDF
+:Extract Pages
+sv:Extrahera sidor
+:Extract Pages From PDF
+sv:Extrahera sidor från PDF
+:Extract Text
+sv:Extrahera text
+:Pages To Delete:
+sv:Sidor att ta bort:
+:Pages To Extract:
+sv:Sidor att extrahera:
+:Pages:
+sv:Sidor:
+:Show Document Bookmarks
+sv:Visa dokumentbokmärken
+:Bake
+ta:சுடவும்
+:Bake PDF
+ta:PDF ஐ சுடவும்
+:Compress
+ta:சுருக்கவும்
+:Decompress
+ta:விரிக்கவும்
+:Decrypt PDF
+ta:PDF ஐ மறைகுறியாக்கம் நீக்கவும்
+:Delete Pages
+ta:பக்கங்களை நீக்கவும்
+:Delete Pages From PDF
+ta:PDF இலிருந்து பக்கங்களை நீக்கவும்
+:Document
+ta:ஆவணம்
+:Encrypt PDF
+ta:PDF ஐ மறைகுறியாக்கம் செய்யவும்
+:Extract Pages
+ta:பக்கங்களை பிரித்தெடுக்கவும்
+:Extract Pages From PDF
+ta:PDF இலிருந்து பக்கங்களை பிரித்தெடுக்கவும்
+:Extract Text
+ta:உரையை பிரித்தெடுக்கவும்
+:Pages To Delete:
+ta:நீக்க வேண்டிய பக்கங்கள்:
+:Pages To Extract:
+ta:பிரித்தெடுக்க வேண்டிய பக்கங்கள்:
+:Pages:
+ta:பக்கங்கள்:
+:Show Document Bookmarks
+ta:ஆவண புத்தகக்குறிகளை காட்டவும்
+:Bake
+tr:Pişir
+:Bake PDF
+tr:PDF'yi Pişir
+:Compress
+tr:Sıkıştır
+:Decompress
+tr:Sıkıştırmayı Aç
+:Decrypt PDF
+tr:PDF Şifresini Çöz
+:Delete Pages
+tr:Sayfaları Sil
+:Delete Pages From PDF
+tr:PDF'den Sayfaları Sil
+:Document
+tr:Belge
+:Encrypt PDF
+tr:PDF'yi Şifrele
+:Extract Pages
+tr:Sayfaları Ayıkla
+:Extract Pages From PDF
+tr:PDF'den Sayfaları Ayıkla
+:Extract Text
+tr:Metni Ayıkla
+:Pages To Delete:
+tr:Silinecek Sayfalar:
+:Pages To Extract:
+tr:Ayıklanacak Sayfalar:
+:Pages:
+tr:Sayfalar:
+:Show Document Bookmarks
+tr:Belge Yer İmlerini Göster
+:Bake
+uz:Pishirish
+:Bake PDF
+uz:PDF ni pishirish
+:Compress
+uz:Siqish
+:Decompress
+uz:Ochish
+:Decrypt PDF
+uz:PDF shifrini ochish
+:Delete Pages
+uz:Sahifalarni o'chirish
+:Delete Pages From PDF
+uz:PDF dan sahifalarni o'chirish
+:Document
+uz:Hujjat
+:Encrypt PDF
+uz:PDF ni shifrlash
+:Extract Pages
+uz:Sahifalarni ajratib olish
+:Extract Pages From PDF
+uz:PDF dan sahifalarni ajratib olish
+:Extract Text
+uz:Matnni ajratib olish
+:Pages To Delete:
+uz:O'chiriladigan sahifalar:
+:Pages To Extract:
+uz:Ajratib olinadigan sahifalar:
+:Pages:
+uz:Sahifalar:
+:Show Document Bookmarks
+uz:Hujjat xatcho'plarini ko'rsatish
+:Bake
+af:Bak
+:Bake PDF
+af:Bak PDF
+:Compress
+af:Komprimeer
+:Decompress
+af:Dekomprimeer
+:Decrypt PDF
+af:Ontsleutel PDF
+:Delete Pages
+af:Skrap Bladsye
+:Delete Pages From PDF
+af:Skrap Bladsye Van PDF
+:Document
+af:Dokument
+:Encrypt PDF
+af:Versleutel PDF
+:Extract Pages
+af:Onttrek Bladsye
+:Extract Pages From PDF
+af:Onttrek Bladsye Van PDF
+:Extract Text
+af:Onttrek Teks
+:Pages To Delete:
+af:Bladsye Om Te Skrap:
+:Pages To Extract:
+af:Bladsye Om Te Onttrek:
+:Pages:
+af:Bladsye:
+:Password:
+af:Wagwoord:
+:Show Document Bookmarks
+af:Wys Dokument Boekmerke
+:Bake
+bg:Изпичане
+:Bake PDF
+bg:Изпичане на PDF
+:Compress
+bg:Компресиране
+:Decompress
+bg:Декомпресиране
+:Decrypt PDF
+bg:Декриптиране на PDF
+:Delete Pages
+bg:Изтриване на страници
+:Delete Pages From PDF
+bg:Изтриване на страници от PDF
+:Document
+bg:Документ
+:Encrypt PDF
+bg:Криптиране на PDF
+:Extract Pages
+bg:Извличане на страници
+:Extract Pages From PDF
+bg:Извличане на страници от PDF
+:Extract Text
+bg:Извличане на текст
+:Pages To Delete:
+bg:Страници за изтриване:
+:Pages To Extract:
+bg:Страници за извличане:
+:Pages:
+bg:Страници:
+:Show Document Bookmarks
+bg:Показване на отметки в документа
+:Bake
+bn:বেক করুন
+:Bake PDF
+bn:পিডিএফ বেক করুন
+:Compress
+bn:সংকুচিত করুন
+:Decompress
+bn:ডিকম্প্রেস করুন
+:Decrypt PDF
+bn:পিডিএফ ডিক্রিপ্ট করুন
+:Delete Pages
+bn:পৃষ্ঠা মুছুন
+:Delete Pages From PDF
+bn:পিডিএফ থেকে পৃষ্ঠা মুছুন
+:Document
+bn:নথি
+:Encrypt PDF
+bn:পিডিএফ এনক্রিপ্ট করুন
+:Extract Pages
+bn:পৃষ্ঠা বের করুন
+:Extract Pages From PDF
+bn:পিডিএফ থেকে পৃষ্ঠা বের করুন
+:Extract Text
+bn:টেক্সট বের করুন
+:Pages To Delete:
+bn:মুছে ফেলার পৃষ্ঠা:
+:Pages To Extract:
+bn:বের করার পৃষ্ঠা:
+:Pages:
+bn:পৃষ্ঠা:
+:Show Document Bookmarks
+bn:নথির বুকমার্ক দেখান
+:Bake
+bs:Peći
+:Bake PDF
+bs:Peći PDF
+:Compress
+bs:Kompresuj
+:Decompress
+bs:Dekompresuj
+:Decrypt PDF
+bs:Dešifruj PDF
+:Delete Pages
+bs:Obriši stranice
+:Delete Pages From PDF
+bs:Obriši stranice iz PDF-a
+:Document
+bs:Dokument
+:Encrypt PDF
+bs:Šifruj PDF
+:Extract Pages
+bs:Izdvoji stranice
+:Extract Pages From PDF
+bs:Izdvoji stranice iz PDF-a
+:Extract Text
+bs:Izdvoji tekst
+:Pages To Delete:
+bs:Stranice za brisanje:
+:Pages To Extract:
+bs:Stranice za izdvajanje:
+:Pages:
+bs:Stranice:
+:Show Document Bookmarks
+bs:Prikaži knjižne oznake dokumenta
+:Bake
+ca-xv:Aplatir
+:Bake PDF
+ca-xv:Aplatir PDF
+:Compress
+ca-xv:Comprimir
+:Decompress
+ca-xv:Descomprimir
+:Decrypt PDF
+ca-xv:Desxifrar PDF
+:Delete Pages
+ca-xv:Eliminar pàgines
+:Delete Pages From PDF
+ca-xv:Eliminar pàgines del PDF
+:Document
+ca-xv:Document
+:Encrypt PDF
+ca-xv:Xifrar PDF
+:Extract Pages
+ca-xv:Extreure pàgines
+:Extract Pages From PDF
+ca-xv:Extreure pàgines del PDF
+:Extract Text
+ca-xv:Extreure text
+:Pages To Delete:
+ca-xv:Pàgines a eliminar:
+:Pages To Extract:
+ca-xv:Pàgines a extreure:
+:Pages:
+ca-xv:Pàgines:
+:Show Document Bookmarks
+ca-xv:Mostrar marcadors del document
+:Bake
+dk:Bag
+:Bake PDF
+dk:Bag PDF
+:Compress
+dk:Komprimer
+:Decompress
+dk:Dekomprimer
+:Decrypt PDF
+dk:Dekrypter PDF
+:Delete Pages
+dk:Slet sider
+:Delete Pages From PDF
+dk:Slet sider fra PDF
+:Document
+dk:Dokument
+:Encrypt PDF
+dk:Krypter PDF
+:Extract Pages
+dk:Udtræk sider
+:Extract Pages From PDF
+dk:Udtræk sider fra PDF
+:Extract Text
+dk:Udtræk tekst
+:Pages To Delete:
+dk:Sider der skal slettes:
+:Pages To Extract:
+dk:Sider der skal udtrækkes:
+:Pages:
+dk:Sider:
+:Show Document Bookmarks
+dk:Vis dokumentbogmærker
+:Bake
+et:Küpseta
+:Bake PDF
+et:Küpseta PDF
+:Compress
+et:Tihenda
+:Decompress
+et:Paki lahti
+:Decrypt PDF
+et:Dekrüpteeri PDF
+:Delete Pages
+et:Kustuta leheküljed
+:Delete Pages From PDF
+et:Kustuta leheküljed PDF-ist
+:Document
+et:Dokument
+:Encrypt PDF
+et:Krüpteeri PDF
+:Extract Pages
+et:Ekstrakti leheküljed
+:Extract Pages From PDF
+et:Ekstrakti leheküljed PDF-ist
+:Extract Text
+et:Ekstrakti tekst
+:Pages To Delete:
+et:Kustutatavad leheküljed:
+:Pages To Extract:
+et:Ekstraktitavad leheküljed:
+:Pages:
+et:Leheküljed:
+:Show Document Bookmarks
+et:Kuva dokumendi järjehoidjad
+:Bake
+eu:Labean
+:Bake PDF
+eu:Labean PDFa
+:Compress
+eu:Konprimitu
+:Decompress
+eu:Deskonprimitu
+:Decrypt PDF
+eu:Deszifratu PDFa
+:Delete Pages
+eu:Ezabatu Orriak
+:Delete Pages From PDF
+eu:Ezabatu Orriak PDFtik
+:Document
+eu:Dokumentua
+:Encrypt PDF
+eu:Zifratu PDFa
+:Extract Pages
+eu:Atera Orriak
+:Extract Pages From PDF
+eu:Atera Orriak PDFtik
+:Extract Text
+eu:Atera Testua
+:Pages To Delete:
+eu:Ezabatzeko Orriak:
+:Pages To Extract:
+eu:Ateratzeko Orriak:
+:Pages:
+eu:Orriak:
+:Show Document Bookmarks
+eu:Erakutsi Dokumentuaren Laster-markak
+:Bake
+fy-nl:Bakke
+:Bake PDF
+fy-nl:PDF Bakke
+:Compress
+fy-nl:Komprimearje
+:Decompress
+fy-nl:Dekomprimearje
+:Decrypt PDF
+fy-nl:PDF Untsiferje
+:Delete Pages
+fy-nl:Siden Wiskje
+:Delete Pages From PDF
+fy-nl:Siden Ut PDF Wiskje
+:Document
+fy-nl:Dokumint
+:Encrypt PDF
+fy-nl:PDF Fersifere
+:Extract Pages
+fy-nl:Siden Ekstrahearje
+:Extract Pages From PDF
+fy-nl:Siden Ut PDF Ekstrahearje
+:Extract Text
+fy-nl:Tekst Ekstrahearje
+:Pages To Delete:
+fy-nl:Siden Om Te Wiskjen:
+:Pages To Extract:
+fy-nl:Siden Om Te Ekstrahearjen:
+:Pages:
+fy-nl:Siden:
+:Show Document Bookmarks
+fy-nl:Dokumint Blêdwizers Sjen Litte
+:Bake
+hr:Sažmi
+:Bake PDF
+hr:Sažmi PDF
+:Compress
+hr:Komprimiraj
+:Decompress
+hr:Dekomprimiraj
+:Decrypt PDF
+hr:Dešifriraj PDF
+:Delete Pages
+hr:Izbriši stranice
+:Delete Pages From PDF
+hr:Izbriši stranice iz PDF-a
+:Document
+hr:Dokument
+:Encrypt PDF
+hr:Šifriraj PDF
+:Extract Pages
+hr:Izdvoji stranice
+:Extract Pages From PDF
+hr:Izdvoji stranice iz PDF-a
+:Extract Text
+hr:Izdvoji tekst
+:Pages To Delete:
+hr:Stranice za brisanje:
+:Pages To Extract:
+hr:Stranice za izdvajanje:
+:Pages:
+hr:Stranice:
+:Show Document Bookmarks
+hr:Prikaži knjižne oznake dokumenta
+:Bake
+jv:Bake
+:Bake PDF
+jv:Bake PDF
+:Compress
+jv:Kompres
+:Decompress
+jv:Dekompresi
+:Decrypt PDF
+jv:Dekripsi PDF
+:Delete Pages
+jv:Busek Kaca
+:Delete Pages From PDF
+jv:Busek Kaca saka PDF
+:Document
+jv:Dokumen
+:Encrypt PDF
+jv:Enkripsi PDF
+:Extract Pages
+jv:Ekstrak Kaca
+:Extract Pages From PDF
+jv:Ekstrak Kaca saka PDF
+:Extract Text
+jv:Ekstrak Teks
+:Pages To Delete:
+jv:Kaca Sing Arep Dibusek:
+:Pages To Extract:
+jv:Kaca Sing Arep Diekstrak:
+:Pages:
+jv:Kaca:
+:Password:
+jv:Sandhi:
+:Show Document Bookmarks
+jv:Tuduhake Tetenger Dokumen
+:Bake
+ka:გამოსახვა
+:Bake PDF
+ka:PDF-ის გამოსახვა
+:Compress
+ka:შეკუმშვა
+:Decompress
+ka:გაშლა
+:Decrypt PDF
+ka:PDF-ის გაშიფვრა
+:Delete Pages
+ka:გვერდების წაშლა
+:Delete Pages From PDF
+ka:გვერდების წაშლა PDF-იდან
+:Document
+ka:დოკუმენტი
+:Encrypt PDF
+ka:PDF-ის დაშიფვრა
+:Extract Pages
+ka:გვერდების ამოღება
+:Extract Pages From PDF
+ka:გვერდების ამოღება PDF-იდან
+:Extract Text
+ka:ტექსტის ამოღება
+:Pages To Delete:
+ka:წასაშლელი გვერდები:
+:Pages To Extract:
+ka:ამოსაღები გვერდები:
+:Pages:
+ka:გვერდები:
+:Show Document Bookmarks
+ka:დოკუმენტის სანიშნების ჩვენება
+:Bake
+ku:Piştin
+:Bake PDF
+ku:Piştinê PDF
+:Compress
+ku:Piçûk bike
+:Decompress
+ku:Vekirinê piçûkbûnê
+:Decrypt PDF
+ku:Şîfre rake ji PDF
+:Delete Pages
+ku:Rûpelan jê bibe
+:Delete Pages From PDF
+ku:Rûpelan ji PDF jê bibe
+:Document
+ku:Belge
+:Encrypt PDF
+ku:Şîfre bike PDF
+:Extract Pages
+ku:Rûpelan derxîne
+:Extract Pages From PDF
+ku:Rûpelan ji PDF derxîne
+:Extract Text
+ku:Nivîsê derxîne
+:Pages To Delete:
+ku:Rûpelên ku jê bibin:
+:Pages To Extract:
+ku:Rûpelên ku derxînin:
+:Pages:
+ku:Rûpel:
+:Show Document Bookmarks
+ku:Nîşanikên belgeyê nîşan bide
+:Bake
+kw:Pobas
+:Bake PDF
+kw:Pobas PDF
+:Compress
+kw:Kompressa
+:Decompress
+kw:Dikompressa
+:Decrypt PDF
+kw:Diskrifya PDF
+:Delete Pages
+kw:Dilea Folennow
+:Delete Pages From PDF
+kw:Dilea Folennow a PDF
+:Document
+kw:Skrif
+:Encrypt PDF
+kw:Krifya PDF
+:Extract Pages
+kw:Estrynna Folennow
+:Extract Pages From PDF
+kw:Estrynna Folennow a PDF
+:Extract Text
+kw:Estrynna Tekst
+:Pages To Delete:
+kw:Folennow dhe Dhilea:
+:Pages To Extract:
+kw:Folennow dhe Estrynna:
+:Pages:
+kw:Folennow:
+:Show Document Bookmarks
+kw:Diskwedhes Markyow Lyver an Skrif
+:Bake
+lt:Kepti
+:Bake PDF
+lt:Kepti PDF
+:Compress
+lt:Suspausti
+:Decompress
+lt:Išskleisti
+:Decrypt PDF
+lt:Iššifruoti PDF
+:Delete Pages
+lt:Ištrinti puslapius
+:Delete Pages From PDF
+lt:Ištrinti puslapius iš PDF
+:Document
+lt:Dokumentas
+:Encrypt PDF
+lt:Užšifruoti PDF
+:Extract Pages
+lt:Ištraukti puslapius
+:Extract Pages From PDF
+lt:Ištraukti puslapius iš PDF
+:Extract Text
+lt:Ištraukti tekstą
+:Pages To Delete:
+lt:Puslapiai trynimui:
+:Pages To Extract:
+lt:Puslapiai ištraukimui:
+:Pages:
+lt:Puslapiai:
+:Show Document Bookmarks
+lt:Rodyti dokumento žymeles
+:Bake
+mk:Испечи
+:Bake PDF
+mk:Испечи PDF
+:Compress
+mk:Компресирај
+:Decompress
+mk:Декомпресирај
+:Decrypt PDF
+mk:Дешифрирај PDF
+:Delete Pages
+mk:Избриши страници
+:Delete Pages From PDF
+mk:Избриши страници од PDF
+:Document
+mk:Документ
+:Encrypt PDF
+mk:Шифрирај PDF
+:Extract Pages
+mk:Извлечи страници
+:Extract Pages From PDF
+mk:Извлечи страници од PDF
+:Extract Text
+mk:Извлечи текст
+:Pages To Delete:
+mk:Страници за бришење:
+:Pages To Extract:
+mk:Страници за извлекување:
+:Pages:
+mk:Страници:
+:Show Document Bookmarks
+mk:Прикажи обележувачи на документот
+:Bake
+mm:ဖုတ်ရန်
+:Bake PDF
+mm:PDF ဖုတ်ရန်
+:Compress
+mm:ချုံ့ရန်
+:Decompress
+mm:ဖြည်ရန်
+:Decrypt PDF
+mm:PDF စာဝှက်ဖြည်ရန်
+:Delete Pages
+mm:စာမျက်နှာများ ဖျက်ရန်
+:Delete Pages From PDF
+mm:PDF မှ စာမျက်နှာများ ဖျက်ရန်
+:Document
+mm:စာရွက်စာတမ်း
+:Encrypt PDF
+mm:PDF စာဝှက်ရန်
+:Extract Pages
+mm:စာမျက်နှာများ ထုတ်ယူရန်
+:Extract Pages From PDF
+mm:PDF မှ စာမျက်နှာများ ထုတ်ယူရန်
+:Extract Text
+mm:စာသား ထုတ်ယူရန်
+:Pages To Delete:
+mm:ဖျက်မည့် စာမျက်နှာများ:
+:Pages To Extract:
+mm:ထုတ်ယူမည့် စာမျက်နှာများ:
+:Pages:
+mm:စာမျက်နှာများ:
+:Password:
+mm:စကားဝှက်:
+:Show Document Bookmarks
+mm:စာရွက်စာတမ်း မှတ်သားချက်များ ပြရန်
+:Bake
+ne:बेक
+:Bake PDF
+ne:PDF बेक गर्नुहोस्
+:Compress
+ne:संकुचित गर्नुहोस्
+:Decompress
+ne:विस्तार गर्नुहोस्
+:Decrypt PDF
+ne:PDF डिक्रिप्ट गर्नुहोस्
+:Delete Pages
+ne:पृष्ठहरू मेट्नुहोस्
+:Delete Pages From PDF
+ne:PDF बाट पृष्ठहरू मेट्नुहोस्
+:Document
+ne:कागजात
+:Encrypt PDF
+ne:PDF इन्क्रिप्ट गर्नुहोस्
+:Extract Pages
+ne:पृष्ठहरू निकाल्नुहोस्
+:Extract Pages From PDF
+ne:PDF बाट पृष्ठहरू निकाल्नुहोस्
+:Extract Text
+ne:पाठ निकाल्नुहोस्
+:Pages To Delete:
+ne:मेट्नका लागि पृष्ठहरू:
+:Pages To Extract:
+ne:निकाल्नका लागि पृष्ठहरू:
+:Pages:
+ne:पृष्ठहरू:
+:Show Document Bookmarks
+ne:कागजात बुकमार्कहरू देखाउनुहोस्
+:Bake
+nn:Bak
+:Bake PDF
+nn:Bak PDF
+:Compress
+nn:Komprimer
+:Decompress
+nn:Dekomprimer
+:Decrypt PDF
+nn:Dekrypter PDF
+:Delete Pages
+nn:Slett sider
+:Delete Pages From PDF
+nn:Slett sider frå PDF
+:Document
+nn:Dokument
+:Encrypt PDF
+nn:Krypter PDF
+:Extract Pages
+nn:Trekk ut sider
+:Extract Pages From PDF
+nn:Trekk ut sider frå PDF
+:Extract Text
+nn:Trekk ut tekst
+:Pages To Delete:
+nn:Sider som skal slettast:
+:Pages To Extract:
+nn:Sider som skal trekkjast ut:
+:Pages:
+nn:Sider:
+:Show Document Bookmarks
+nn:Vis dokumentbokmerke
+:Bake
+no:Bak
+:Bake PDF
+no:Bak PDF
+:Compress
+no:Komprimer
+:Decompress
+no:Dekomprimer
+:Decrypt PDF
+no:Dekrypter PDF
+:Delete Pages
+no:Slett sider
+:Delete Pages From PDF
+no:Slett sider fra PDF
+:Document
+no:Dokument
+:Encrypt PDF
+no:Krypter PDF
+:Extract Pages
+no:Hent ut sider
+:Extract Pages From PDF
+no:Hent ut sider fra PDF
+:Extract Text
+no:Hent ut tekst
+:Pages To Delete:
+no:Sider som skal slettes:
+:Pages To Extract:
+no:Sider som skal hentes ut:
+:Pages:
+no:Sider:
+:Show Document Bookmarks
+no:Vis dokumentbokmerker
+:Bake
+pa:ਬੇਕ
+:Bake PDF
+pa:PDF ਬੇਕ ਕਰੋ
+:Compress
+pa:ਸੰਕੁਚਿਤ ਕਰੋ
+:Decompress
+pa:ਵਿਸਤਾਰ ਕਰੋ
+:Decrypt PDF
+pa:PDF ਡੀਕ੍ਰਿਪਟ ਕਰੋ
+:Delete Pages
+pa:ਪੰਨੇ ਮਿਟਾਓ
+:Delete Pages From PDF
+pa:PDF ਤੋਂ ਪੰਨੇ ਮਿਟਾਓ
+:Document
+pa:ਦਸਤਾਵੇਜ਼
+:Encrypt PDF
+pa:PDF ਐਨਕ੍ਰਿਪਟ ਕਰੋ
+:Extract Pages
+pa:ਪੰਨੇ ਕੱਢੋ
+:Extract Pages From PDF
+pa:PDF ਤੋਂ ਪੰਨੇ ਕੱਢੋ
+:Extract Text
+pa:ਟੈਕਸਟ ਕੱਢੋ
+:Pages To Delete:
+pa:ਮਿਟਾਉਣ ਵਾਲੇ ਪੰਨੇ:
+:Pages To Extract:
+pa:ਕੱਢਣ ਵਾਲੇ ਪੰਨੇ:
+:Pages:
+pa:ਪੰਨੇ:
+:Show Document Bookmarks
+pa:ਦਸਤਾਵੇਜ਼ ਬੁੱਕਮਾਰਕ ਦਿਖਾਓ
+:Bake
+si:පුළුස්සන්න
+:Bake PDF
+si:PDF පුළුස්සන්න
+:Compress
+si:සංකෝචනය කරන්න
+:Decompress
+si:විසංකෝචනය කරන්න
+:Decrypt PDF
+si:PDF විකේතනය කරන්න
+:Delete Pages
+si:පිටු මකන්න
+:Delete Pages From PDF
+si:PDF වලින් පිටු මකන්න
+:Document
+si:ලේඛනය
+:Encrypt PDF
+si:PDF සංකේතනය කරන්න
+:Extract Pages
+si:පිටු උකහා ගන්න
+:Extract Pages From PDF
+si:PDF වලින් පිටු උකහා ගන්න
+:Extract Text
+si:පෙළ උකහා ගන්න
+:Pages To Delete:
+si:මකා දැමීමට පිටු:
+:Pages To Extract:
+si:උකහා ගැනීමට පිටු:
+:Pages:
+si:පිටු:
+:Show Document Bookmarks
+si:ලේඛන පිටු සලකුණු පෙන්වන්න
+:Bake
+sn:Bika
+:Bake PDF
+sn:Bika PDF
+:Compress
+sn:Dzvinyirira
+:Decompress
+sn:Tambanudza
+:Decrypt PDF
+sn:Bvisa Chakavanzwa PDF
+:Delete Pages
+sn:Dzima Mapeji
+:Delete Pages From PDF
+sn:Dzima Mapeji Kubva muPDF
+:Document
+sn:Gwaro
+:Encrypt PDF
+sn:Vanza PDF
+:Extract Pages
+sn:Budisa Mapeji
+:Extract Pages From PDF
+sn:Budisa Mapeji Kubva muPDF
+:Extract Text
+sn:Budisa Rugwaro
+:Pages To Delete:
+sn:Mapeji Ekudzima:
+:Pages To Extract:
+sn:Mapeji Ekubudisa:
+:Pages:
+sn:Mapeji:
+:Password:
+sn:Password:
+:Show Document Bookmarks
+sn:Ratidza Mabhukmaki eGwaro
+:Bake
+sp-rs:Peci
+:Bake PDF
+sp-rs:Peci PDF
+:Compress
+sp-rs:Kompresuj
+:Decompress
+sp-rs:Dekompresuj
+:Decrypt PDF
+sp-rs:Dešifruj PDF
+:Delete Pages
+sp-rs:Obriši stranice
+:Delete Pages From PDF
+sp-rs:Obriši stranice iz PDF-a
+:Document
+sp-rs:Dokument
+:Encrypt PDF
+sp-rs:Šifruj PDF
+:Extract Pages
+sp-rs:Izvuci stranice
+:Extract Pages From PDF
+sp-rs:Izvuci stranice iz PDF-a
+:Extract Text
+sp-rs:Izvuci tekst
+:Pages To Delete:
+sp-rs:Stranice za brisanje:
+:Pages To Extract:
+sp-rs:Stranice za izvlačenje:
+:Pages:
+sp-rs:Stranice:
+:Show Document Bookmarks
+sp-rs:Prikaži markere dokumenta
+:Bake
+sq:Pjek
+:Bake PDF
+sq:Pjek PDF
+:Compress
+sq:Ngjesh
+:Decompress
+sq:Çngjesh
+:Decrypt PDF
+sq:Deshifro PDF
+:Delete Pages
+sq:Fshi Faqet
+:Delete Pages From PDF
+sq:Fshi Faqet Nga PDF
+:Document
+sq:Dokument
+:Encrypt PDF
+sq:Enkripto PDF
+:Extract Pages
+sq:Nxirr Faqet
+:Extract Pages From PDF
+sq:Nxirr Faqet Nga PDF
+:Extract Text
+sq:Nxirr Tekstin
+:Pages To Delete:
+sq:Faqet Për T'u Fshirë:
+:Pages To Extract:
+sq:Faqet Për T'u Nxjerrë:
+:Pages:
+sq:Faqet:
+:Show Document Bookmarks
+sq:Shfaq Shënuesit e Dokumentit
+:Bake
+th:อบ
+:Bake PDF
+th:อบ PDF
+:Compress
+th:บีบอัด
+:Decompress
+th:คลายการบีบอัด
+:Decrypt PDF
+th:ถอดรหัส PDF
+:Delete Pages
+th:ลบหน้า
+:Delete Pages From PDF
+th:ลบหน้าจาก PDF
+:Document
+th:เอกสาร
+:Encrypt PDF
+th:เข้ารหัส PDF
+:Extract Pages
+th:แยกหน้า
+:Extract Pages From PDF
+th:แยกหน้าจาก PDF
+:Extract Text
+th:แยกข้อความ
+:Pages To Delete:
+th:หน้าที่จะลบ:
+:Pages To Extract:
+th:หน้าที่จะแยก:
+:Pages:
+th:หน้า:
+:Show Document Bookmarks
+th:แสดงบุ๊กมาร์กเอกสาร
+:Bake
+tl:Bake
+:Bake PDF
+tl:Bake PDF
+:Compress
+tl:I-compress
+:Decompress
+tl:I-decompress
+:Decrypt PDF
+tl:I-decrypt ang PDF
+:Delete Pages
+tl:Tanggalin ang mga Pahina
+:Delete Pages From PDF
+tl:Tanggalin ang mga Pahina mula sa PDF
+:Document
+tl:Dokumento
+:Encrypt PDF
+tl:I-encrypt ang PDF
+:Extract Pages
+tl:Kunin ang mga Pahina
+:Extract Pages From PDF
+tl:Kunin ang mga Pahina mula sa PDF
+:Extract Text
+tl:Kunin ang Teksto
+:Pages To Delete:
+tl:Mga Pahinang Tatanggalin:
+:Pages To Extract:
+tl:Mga Pahinang Kukunin:
+:Pages:
+tl:Mga Pahina:
+:Show Document Bookmarks
+tl:Ipakita ang mga Bookmark ng Dokumento
+:Bake
+uk:Запікти
+:Bake PDF
+uk:Запікти PDF
+:Compress
+uk:Стиснути
+:Decompress
+uk:Розпакувати
+:Decrypt PDF
+uk:Розшифрувати PDF
+:Delete Pages
+uk:Видалити сторінки
+:Delete Pages From PDF
+uk:Видалити сторінки з PDF
+:Document
+uk:Документ
+:Encrypt PDF
+uk:Зашифрувати PDF
+:Extract Pages
+uk:Витягти сторінки
+:Extract Pages From PDF
+uk:Витягти сторінки з PDF
+:Extract Text
+uk:Витягти текст
+:Pages To Delete:
+uk:Сторінки для видалення:
+:Pages To Extract:
+uk:Сторінки для витягування:
+:Pages:
+uk:Сторінки:
+:Show Document Bookmarks
+uk:Показати закладки документа
+:Bake
+vn:Nướng
+:Bake PDF
+vn:Nướng PDF
+:Compress
+vn:Nén
+:Decompress
+vn:Giải nén
+:Decrypt PDF
+vn:Giải mã PDF
+:Delete Pages
+vn:Xóa trang
+:Delete Pages From PDF
+vn:Xóa trang khỏi PDF
+:Document
+vn:Tài liệu
+:Encrypt PDF
+vn:Mã hóa PDF
+:Extract Pages
+vn:Trích xuất trang
+:Extract Pages From PDF
+vn:Trích xuất trang từ PDF
+:Extract Text
+vn:Trích xuất văn bản
+:Pages To Delete:
+vn:Trang cần xóa:
+:Pages To Extract:
+vn:Trang cần trích xuất:
+:Pages:
+vn:Trang:
+:Show Document Bookmarks
+vn:Hiển thị dấu trang tài liệu
