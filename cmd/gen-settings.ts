@@ -326,6 +326,16 @@ const imageUI: Field[] = [
     mkField("BackgroundColor", Color, "", "if given, overrides the default black background color for image files"),
     "3.7",
   ),
+  setVersion(
+    mkField(
+      "DefaultZoom",
+      Str,
+      "shrink to fit",
+      "default zoom for image files. valid values: fit page, fit width, fit content, shrink to fit or percent like 100%",
+    ),
+    "3.7",
+  ),
+  notSaved(mkField("DefaultZoomFloat", Float, 0, "value of DefaultZoom for internal usage")),
 ];
 
 const chmUI: Field[] = [
@@ -617,12 +627,6 @@ const globalPrefs: Field[] = [
     Str,
     "fit page",
     "default zoom. valid values: fit page, fit width, fit content or percent like 100%",
-  ),
-  mkField(
-    "DefaultImageZoom",
-    Str,
-    "",
-    "default zoom for image files. valid values: fit page, fit width, fit content or percent like 100%",
   ),
   mkField(
     "EnableTeXEnhancements",
@@ -934,7 +938,6 @@ const globalPrefs: Field[] = [
     ),
   ),
   notSaved(mkField("DefaultZoomFloat", Float, -1, "value of DefaultZoom for internal usage")),
-  notSaved(mkField("DefaultImageZoomFloat", Float, 0, "value of DefaultImageZoom for internal usage. 0 means not set")),
   setStructName(mkCompactStruct("PropWinPos", pointPos, "position of the document properties window"), "Point"),
   mkEmptyLine(),
   mkComment("Settings below are not recognized by the current version"),

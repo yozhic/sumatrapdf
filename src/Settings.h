@@ -110,6 +110,11 @@ struct ImageUI {
     // files
     char* backgroundColor;
     ParsedColor backgroundColorParsed;
+    // default zoom for image files. valid values: fit page, fit width, fit
+    // content, shrink to fit or percent like 100%
+    char* defaultZoom;
+    // value of DefaultZoom for internal usage
+    float defaultZoomFloat;
 };
 
 // customization options for CHM UI. If UseFixedPageUI is true,
@@ -412,9 +417,6 @@ struct GlobalPrefs {
     // default zoom. valid values: fit page, fit width, fit content or
     // percent like 100%
     char* defaultZoom;
-    // default zoom for image files. valid values: fit page, fit width, fit
-    // content or percent like 100%
-    char* defaultImageZoom;
     // if true, we expose the SyncTeX inverse search command line in
     // Settings -> Options
     bool enableTeXEnhancements;
@@ -585,8 +587,6 @@ struct GlobalPrefs {
     DisplayMode defaultDisplayModeEnum;
     // value of DefaultZoom for internal usage
     float defaultZoomFloat;
-    // value of DefaultImageZoom for internal usage. 0 means not set
-    float defaultImageZoomFloat;
     // position of the document properties window
     Point propWinPos;
 };
@@ -662,8 +662,9 @@ static const StructInfo gComicBookUIInfo = {sizeof(ComicBookUI), 4, gComicBookUI
 
 static const FieldInfo gImageUIFields[] = {
     {offsetof(ImageUI, backgroundColor), SettingType::Color, (intptr_t)""},
+    {offsetof(ImageUI, defaultZoom), SettingType::String, (intptr_t)"shrink to fit"},
 };
-static const StructInfo gImageUIInfo = {sizeof(ImageUI), 1, gImageUIFields, "BackgroundColor"};
+static const StructInfo gImageUIInfo = {sizeof(ImageUI), 2, gImageUIFields, "BackgroundColor\0DefaultZoom"};
 
 static const FieldInfo gChmUIFields[] = {
     {offsetof(ChmUI, useFixedPageUI), SettingType::Bool, false},
@@ -872,7 +873,6 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {offsetof(GlobalPrefs, customScreenDPI), SettingType::Int, 0},
     {offsetof(GlobalPrefs, defaultDisplayMode), SettingType::String, (intptr_t)"automatic"},
     {offsetof(GlobalPrefs, defaultZoom), SettingType::String, (intptr_t)"fit page"},
-    {offsetof(GlobalPrefs, defaultImageZoom), SettingType::String, (intptr_t)""},
     {offsetof(GlobalPrefs, enableTeXEnhancements), SettingType::Bool, false},
     {offsetof(GlobalPrefs, escToExit), SettingType::Bool, false},
     {offsetof(GlobalPrefs, fullPathInTitle), SettingType::Bool, false},
@@ -959,17 +959,17 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 91, gGlobalPrefsFields,
-    "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
-    "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
-    "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
-    "howMenubar\0ShowMenubarWithTabs\0ShowTips\0CustomColors\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStart"
-    "Page\0SidebarDx\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscree"
-    "n\0TabWidth\0Theme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0Us"
-    "eTabs\0TabsMru\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotati"
-    "ons\0\0ExternalViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0Fullscreen\0\0SelectionHandlers\0\0Shortcuts\0\0Them"
-    "es\0\0TabGroups\0\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData"
-    "\0ReopenOnce\0TimeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
+    sizeof(GlobalPrefs), 90, gGlobalPrefsFields,
+    "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0EnableTeXEnhancements\0EscToExit\0FullPathI"
+    "nTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFrequentlyRead\0ReloadMo"
+    "difiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0ShowMenubar\0ShowMe"
+    "nubarWithTabs\0ShowTips\0CustomColors\0ShowToolbar\0ShowFavorites\0ShowToc\0ShowLinks\0ShowStartPage\0SidebarDx\0S"
+    "crollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscreen\0TabWidth\0Theme"
+    "\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0UseTabs\0TabsMru\0Zo"
+    "omLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotations\0\0ExternalVie"
+    "wers\0\0ForwardSearch\0\0PrinterDefaults\0\0Fullscreen\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroups\0"
+    "\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0Time"
+    "OfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

@@ -1443,7 +1443,7 @@ static void ReplaceDocumentInCurrentTab(LoadArgs* args, DocController* ctrl, Fil
     EngineBase* engine = tab->GetEngine();
     if (engine) {
         engine->hideAnnotations = tab->hideAnnotations;
-        float imageZoom = gGlobalPrefs->defaultImageZoomFloat;
+        float imageZoom = gGlobalPrefs->imageUI.defaultZoomFloat;
         if (engine->kind == kindEngineImage && imageZoom != 0) {
             zoomVirtual = imageZoom;
         }

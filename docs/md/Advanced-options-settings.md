@@ -47,10 +47,6 @@ DefaultDisplayMode = automatic
 ; 100%
 DefaultZoom = fit page
 
-; default zoom for image files. valid values: fit page, fit width, fit content
-; or percent like 100%
-DefaultImageZoom = 
-
 ; if true, we expose the SyncTeX inverse search command line in Settings ->
 ; Options
 EnableTeXEnhancements = false
@@ -278,6 +274,10 @@ ImageUI [
     ; if given, overrides the default black background color for image files
     ; (introduced in version 3.7)
     BackgroundColor = 
+
+    ; default zoom for image files. valid values: fit page, fit width, fit
+    ; content, shrink to fit or percent like 100% (introduced in version 3.7)
+    DefaultZoom = shrink to fit
 ]
 
 ; customization options for CHM UI. If UseFixedPageUI is true, FixedPageUI

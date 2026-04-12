@@ -212,8 +212,8 @@ bool LoadSettings() {
     gprefs->defaultDisplayModeEnum = DisplayModeFromString(gprefs->defaultDisplayMode, DisplayMode::Automatic);
     gprefs->defaultZoomFloat = ZoomFromString(gprefs->defaultZoom, kZoomActualSize);
     ReportIf(!IsValidZoom(gprefs->defaultZoomFloat));
-    if (gprefs->defaultImageZoom) {
-        gprefs->defaultImageZoomFloat = ZoomFromString(gprefs->defaultImageZoom, 0);
+    if (gprefs->imageUI.defaultZoom) {
+        gprefs->imageUI.defaultZoomFloat = ZoomFromString(gprefs->imageUI.defaultZoom, 0);
     }
 
     int weekDiff = GetWeekCount() - gprefs->openCountWeek;
@@ -423,8 +423,8 @@ bool SaveSettings() {
     // update display mode and zoom fields from internal values
     str::ReplaceWithCopy(&gGlobalPrefs->defaultDisplayMode, DisplayModeToString(gGlobalPrefs->defaultDisplayModeEnum));
     ZoomToString(&gGlobalPrefs->defaultZoom, gGlobalPrefs->defaultZoomFloat, nullptr);
-    if (gGlobalPrefs->defaultImageZoomFloat != 0) {
-        ZoomToString(&gGlobalPrefs->defaultImageZoom, gGlobalPrefs->defaultImageZoomFloat, nullptr);
+    if (gGlobalPrefs->imageUI.defaultZoomFloat != 0) {
+        ZoomToString(&gGlobalPrefs->imageUI.defaultZoom, gGlobalPrefs->imageUI.defaultZoomFloat, nullptr);
     }
 
     TempStr path = GetSettingsPathTemp();
