@@ -337,6 +337,11 @@ const chmUI: Field[] = [
   ),
 ];
 
+const fullscreen: Field[] = [
+  mkField("ShowToolbar", Bool, false, "if true, show the toolbar in fullscreen mode"),
+  mkField("ShowMenubar", Bool, false, "if true, show the menu bar in fullscreen mode"),
+];
+
 const externalViewer: Field[] = [
   mkField(
     "CommandLine",
@@ -847,6 +852,8 @@ const globalPrefs: Field[] = [
   ),
   mkEmptyLine(),
   setExpert(mkStruct("PrinterDefaults", printerDefaults, "these override the default settings in the Print dialog")),
+  mkEmptyLine(),
+  setVersion(setExpert(mkStruct("Fullscreen", fullscreen, "options for fullscreen mode")), "3.7"),
   mkEmptyLine(),
   mkArray(
     "SelectionHandlers",

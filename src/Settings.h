@@ -202,6 +202,14 @@ struct PrinterDefaults {
     char* printScale;
 };
 
+// options for fullscreen mode
+struct Fullscreen {
+    // if true, show the toolbar in fullscreen mode
+    bool showToolbar;
+    // if true, show the menu bar in fullscreen mode
+    bool showMenubar;
+};
+
 // list of handlers for selected text, shown in context menu when text
 // selection is active. See [docs for more
 // information](https://www.sumatrapdfreader.org/docs/Customize-search-translation-services)
@@ -536,6 +544,8 @@ struct GlobalPrefs {
     ForwardSearch forwardSearch;
     // these override the default settings in the Print dialog
     PrinterDefaults printerDefaults;
+    // options for fullscreen mode
+    Fullscreen fullscreen;
     // list of handlers for selected text, shown in context menu when text
     // selection is active. See [docs for more
     // information](https://www.sumatrapdfreader.org/docs/Customize-search-translation-services)
@@ -702,6 +712,12 @@ static const FieldInfo gPrinterDefaultsFields[] = {
     {offsetof(PrinterDefaults, printScale), SettingType::String, (intptr_t)"shrink"},
 };
 static const StructInfo gPrinterDefaultsInfo = {sizeof(PrinterDefaults), 1, gPrinterDefaultsFields, "PrintScale"};
+
+static const FieldInfo gFullscreenFields[] = {
+    {offsetof(Fullscreen, showToolbar), SettingType::Bool, false},
+    {offsetof(Fullscreen, showMenubar), SettingType::Bool, false},
+};
+static const StructInfo gFullscreenInfo = {sizeof(Fullscreen), 2, gFullscreenFields, "ShowToolbar\0ShowMenubar"};
 
 static const FieldInfo gSelectionHandlerFields[] = {
     {offsetof(SelectionHandler, url), SettingType::String, 0},
@@ -917,6 +933,8 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, printerDefaults), SettingType::Struct, (intptr_t)&gPrinterDefaultsInfo},
     {(size_t)-1, SettingType::Comment, 0},
+    {offsetof(GlobalPrefs, fullscreen), SettingType::Struct, (intptr_t)&gFullscreenInfo},
+    {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, selectionHandlers), SettingType::Array, (intptr_t)&gSelectionHandlerInfo},
     {(size_t)-1, SettingType::Comment, 0},
     {offsetof(GlobalPrefs, shortcuts), SettingType::Array, (intptr_t)&gShortcutInfo},
@@ -941,7 +959,7 @@ static const FieldInfo gGlobalPrefsFields[] = {
     {(size_t)-1, SettingType::Comment, (intptr_t)"Settings below are not recognized by the current version"},
 };
 static const StructInfo gGlobalPrefsInfo = {
-    sizeof(GlobalPrefs), 89, gGlobalPrefsFields,
+    sizeof(GlobalPrefs), 91, gGlobalPrefsFields,
     "\0\0CheckForUpdates\0CustomScreenDPI\0DefaultDisplayMode\0DefaultZoom\0DefaultImageZoom\0EnableTeXEnhancements\0Es"
     "cToExit\0FullPathInTitle\0InverseSearchCmdLine\0LazyLoading\0MainWindowBackground\0NoHomeTab\0HomePageSortByFreque"
     "ntlyRead\0ReloadModifiedDocuments\0RememberOpenedFiles\0RememberStatePerDocument\0RestoreSession\0ReuseInstance\0S"
@@ -949,9 +967,9 @@ static const StructInfo gGlobalPrefsInfo = {
     "Page\0SidebarDx\0Scrollbars\0ScrollbarInSinglePage\0SmoothScroll\0FastScrollOverScrollbar\0PreventSleepInFullscree"
     "n\0TabWidth\0Theme\0TocDy\0ToolbarSize\0TreeFontName\0TreeFontSize\0UIFontSize\0DisableAntiAlias\0UseSysColors\0Us"
     "eTabs\0TabsMru\0ZoomLevels\0ZoomIncrement\0\0FixedPageUI\0\0EBookUI\0\0ComicBookUI\0\0ImageUI\0\0ChmUI\0\0Annotati"
-    "ons\0\0ExternalViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0SelectionHandlers\0\0Shortcuts\0\0Themes\0\0TabGroup"
-    "s\0\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData\0ReopenOnce\0T"
-    "imeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
+    "ons\0\0ExternalViewers\0\0ForwardSearch\0\0PrinterDefaults\0\0Fullscreen\0\0SelectionHandlers\0\0Shortcuts\0\0Them"
+    "es\0\0TabGroups\0\0\0DefaultPasswords\0UiLanguage\0VersionToSkip\0WindowState\0WindowPos\0FileStates\0SessionData"
+    "\0ReopenOnce\0TimeOfLastUpdateCheck\0OpenCountWeek\0PropWinPos\0\0"};
 static const FieldInfo gTheme_1_Fields[] = {
     {offsetof(Theme, name), SettingType::String, (intptr_t)""},
     {offsetof(Theme, textColor), SettingType::Color, (intptr_t)""},

@@ -4176,8 +4176,9 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
             rc.dy -= tabHeight;
         }
     }
-    if (!win->tabsInTitlebar && IsShowingMenuBarRebar(win)) {
-        // non-titlebar case: menu bar rebar below tabs
+    bool showMenuRebar = IsShowingMenuBarRebar(win) && (!win->tabsInTitlebar || win->isFullScreen);
+    if (showMenuRebar) {
+        // menu bar rebar in client area (non-titlebar case, or fullscreen where there's no titlebar)
         int menuBarDy = (int)SendMessageW(win->hwndMenuReBar, RB_GETBARHEIGHT, 0, 0) + 1;
         if (updateToolbars) {
             dh.SetWindowPos(win->hwndMenuReBar, nullptr, rc.x, rc.y, rc.dx, menuBarDy, SWP_NOZORDER);
@@ -4279,7 +4280,7 @@ static void RelayoutFrame(MainWindow* win, bool updateToolbars, int sidebarDx) {
     if (updateToolbars && win->isToolbarVisible) {
         RedrawWindow(win->hwndReBar, nullptr, nullptr, RDW_ERASE | RDW_INVALIDATE | RDW_ALLCHILDREN);
     }
-    if (updateToolbars && win->tabsInTitlebar) {
+    if (updateToolbars && win->tabsInTitlebar && !win->isFullScreen) {
         RECT r = ToRECT(win->captionRect);
         InvalidateRect(win->hwndFrame, &r, TRUE);
         if (win->hwndMenuReBar && IsWindowVisible(win->hwndMenuReBar)) {
@@ -4371,10 +4372,14 @@ static void OnMenuChangeLanguage(HWND hwnd) {
     SetCurrentLanguageAndRefreshUI(newLangCode);
 }
 
-static void OnMenuViewShowHideToolbar() {
-    gGlobalPrefs->showToolbar = !gGlobalPrefs->showToolbar;
-    for (MainWindow* win : gWindows) {
-        ShowOrHideToolbar(win);
+static void OnMenuViewShowHideToolbar(MainWindow* win) {
+    if (win->isFullScreen) {
+        gGlobalPrefs->fullscreen.showToolbar = !gGlobalPrefs->fullscreen.showToolbar;
+    } else {
+        gGlobalPrefs->showToolbar = !gGlobalPrefs->showToolbar;
+    }
+    for (MainWindow* w : gWindows) {
+        ShowOrHideToolbar(w);
     }
 }
 
@@ -4799,16 +4804,22 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
 
     // Set state flags; RelayoutFrame (triggered by SetWindowPos/WM_SIZE)
     // will handle the actual showing/hiding of toolbar and tabs.
-    win->isToolbarVisible = false;
+    bool showToolbarInFS = !presentation && gGlobalPrefs->fullscreen.showToolbar && gGlobalPrefs->showToolbar;
+    bool showMenubarInFS = !presentation && gGlobalPrefs->fullscreen.showMenubar;
+    win->isToolbarVisible = showToolbarInFS;
     win->tabsCtrl->SetIsVisible(false);
 
     // suppress redraws before any operations that trigger WM_SIZE
     // (SetMenu, SetWindowLong, SetWindowPos all change non-client area)
     BeginFrameRedrawSuppression(win);
 
+    // always remove native menu in fullscreen (WS_CAPTION is stripped, so SetMenu won't work)
     SetMenu(win->hwndFrame, nullptr);
-    if (win->hwndMenuReBar) {
-        ShowWindow(win->hwndMenuReBar, SW_HIDE);
+    if (showMenubarInFS) {
+        // use rebar-based menu bar which renders in the client area
+        CreateMenuBarRebar(win);
+    } else {
+        DestroyMenuBarRebar(win);
     }
 
     // remove window styles that add to non-client area
@@ -4833,6 +4844,10 @@ void EnterFullScreen(MainWindow* win, bool presentation) {
     // restore gGlobalPrefs->showFavorites changed by SetSidebarVisibility()
     gGlobalPrefs->showFavorites = showFavoritesTmp;
     EndFrameRedrawSuppression(win);
+    // ensure layout is correct after fullscreen transition
+    RelayoutFrame(win);
+    // show menu bar rebar after layout positions it correctly
+    ShowMenuBarRebar(win);
 
     if (gGlobalPrefs->preventSleepInFullscreen) {
         SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
@@ -4876,6 +4891,8 @@ void ExitFullScreen(MainWindow* win) {
     if (win->isToolbarVisible) {
         ShowWindow(win->hwndReBar, SW_SHOW);
     }
+    // destroy any fullscreen menu rebar before restoring normal menu
+    DestroyMenuBarRebar(win);
     if (IsMenubarVisible()) {
         if (win->tabsInTitlebar) {
             CreateMenuBarRebar(win);
@@ -6502,7 +6519,7 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
 
         case CmdToggleToolbar:
-            OnMenuViewShowHideToolbar();
+            OnMenuViewShowHideToolbar(win);
             break;
 
         case CmdChangeScrollbar:
@@ -7816,6 +7833,9 @@ static LRESULT CustomCaptionFrameProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp,
         }
 
         case WM_PAINT: {
+            if (win->isFullScreen || win->presentation) {
+                break; // no custom caption painting in fullscreen
+            }
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
             LogRedraw("WM_PAINT", hwnd, &ps.rcPaint);

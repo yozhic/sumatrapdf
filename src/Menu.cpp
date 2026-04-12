@@ -2499,7 +2499,7 @@ void UpdateAppMenu(MainWindow* win, HMENU m) {
 void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
     ReportIf(!win->menu);
 
-    if (win->presentation || win->isFullScreen) {
+    if (win->presentation) {
         return;
     }
 
@@ -2511,6 +2511,19 @@ void ToggleMenuBar(MainWindow* win, bool showTemporarily) {
             return;
         }
         SetMenu(hwnd, win->menu);
+        return;
+    }
+
+    if (win->isFullScreen) {
+        gGlobalPrefs->fullscreen.showMenubar = !gGlobalPrefs->fullscreen.showMenubar;
+        if (gGlobalPrefs->fullscreen.showMenubar) {
+            // use rebar-based menu bar (WS_CAPTION is stripped in fullscreen, so SetMenu won't work)
+            CreateMenuBarRebar(win);
+        } else {
+            DestroyMenuBarRebar(win);
+        }
+        RelayoutWindow(win);
+        ShowMenuBarRebar(win);
         return;
     }
 

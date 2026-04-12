@@ -382,8 +382,11 @@ bool ShouldShowToolbar(MainWindow* win) {
     if (!gGlobalPrefs->showToolbar) {
         return false;
     }
-    if (win->presentation || win->isFullScreen) {
+    if (win->presentation) {
         return false;
+    }
+    if (win->isFullScreen) {
+        return gGlobalPrefs->fullscreen.showToolbar;
     }
     // hide toolbar on about/home page when not using tabs
     if (!SettingsUseTabs() && win->IsCurrentTabAbout()) {
@@ -1592,7 +1595,7 @@ bool IsShowingMenuBarRebar(MainWindow* win) {
     if (!win->hwndMenuReBar) {
         return false;
     }
-    if (win->presentation || win->isFullScreen) {
+    if (win->presentation) {
         return false;
     }
     return true;

@@ -381,6 +381,15 @@ PrinterDefaults [
     PrintScale = shrink
 ]
 
+; options for fullscreen mode (introduced in version 3.7)
+Fullscreen [
+    ; if true, show the toolbar in fullscreen mode
+    ShowToolbar = false
+
+    ; if true, show the menu bar in fullscreen mode
+    ShowMenubar = false
+]
+
 ; list of handlers for selected text, shown in context menu when text selection
 ; is active. See docs for more information (https://www.sumatrapdfreader.org/docs/Customize-search-translation-services)
 SelectionHandlers [
