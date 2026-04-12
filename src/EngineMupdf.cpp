@@ -1751,6 +1751,7 @@ EngineMupdf::~EngineMupdf() {
     fz_purge_glyph_cache(ctx);
     fz_drop_context(ctx);
 
+    str::Free(pdfPassword);
     delete pageLabels;
     delete tocTree;
     DeleteVecMembers(pages);
@@ -2192,6 +2193,9 @@ bool EngineMupdf::LoadFromStream(fz_stream* stm, const char* nameHint, PasswordU
             TempWStr pwdCp1252 = strconv::StrCPToWStrTemp(pwd_ansi, 1252);
             pwdA = ToUtf8Temp(pwdCp1252);
             ok = fz_authenticate_password(ctx, _doc, pwdA);
+        }
+        if (ok) {
+            str::ReplaceWithCopy(&pdfPassword, pwdA);
         }
     }
 
@@ -3702,6 +3706,14 @@ bool EngineMupdfIsEncrypted(EngineBase* engine) {
         return false;
     }
     return epdf->pdfdoc->crypt != nullptr;
+}
+
+const char* EngineMupdfGetPassword(EngineBase* engine) {
+    EngineMupdf* epdf = AsEngineMupdf(engine);
+    if (!epdf) {
+        return nullptr;
+    }
+    return epdf->pdfPassword;
 }
 
 // re-save current pdf document using mupdf (as opposed to just saving the data)

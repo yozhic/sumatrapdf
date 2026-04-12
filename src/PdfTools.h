@@ -10,3 +10,4 @@ void ShowPdfDecompressDialog(MainWindow* win);
 void ShowPdfDeletePageDialog(MainWindow* win);
 void ShowPdfExtractPagesDialog(MainWindow* win);
 void ShowPdfEncryptDialog(MainWindow* win);
+void ShowPdfDecryptDialog(MainWindow* win);

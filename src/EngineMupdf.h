@@ -93,6 +93,9 @@ class EngineMupdf : public EngineBase {
 
     TocTree* tocTree = nullptr;
 
+    // password used to decrypt the document (needed for re-encryption/decryption)
+    char* pdfPassword = nullptr;
+
     // used to track "dirty" state of annotations. not perfect because if we add and delete
     // the same annotation, we should be back to 0
     bool modifiedAnnotations = false;
