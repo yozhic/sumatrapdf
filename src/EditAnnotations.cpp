@@ -989,9 +989,43 @@ static void UpdateUIForSelectedAnnotation(EditAnnotationsWindow* ew, Annotation*
 }
 
 static void ButtonSaveAttachment(EditAnnotationsWindow* ew) {
-    ReportIf(!ew->tab->selectedAnnotation);
-    // TODO: implement me
-    MessageBoxNYI(ew->hwnd);
+    Annotation* annot = ew->tab->selectedAnnotation;
+    ReportIf(!annot);
+    if (!annot || annot->type != AnnotationType::FileAttachment) {
+        return;
+    }
+    EngineMupdf* engine = GetEngineMupdf(ew);
+    if (!engine) {
+        return;
+    }
+    fz_context* ctx = engine->Ctx();
+    pdf_annot* pdfannot = annot->pdfannot;
+    if (!pdfannot) {
+        return;
+    }
+
+    int objNum = pdf_to_num(ctx, pdf_annot_obj(ctx, pdfannot));
+    ByteSlice data = EngineMupdfLoadAnnotAttachment((EngineBase*)engine, objNum);
+    if (data.empty()) {
+        return;
+    }
+
+    const char* fileName = nullptr;
+    pdf_obj* fs = pdf_annot_filespec(ctx, pdfannot);
+    if (fs) {
+        pdf_filespec_params fileParams = {};
+        pdf_get_filespec_params(ctx, fs, &fileParams);
+        fileName = fileParams.filename;
+    }
+    if (str::IsEmpty(fileName)) {
+        fileName = "attachment";
+    }
+
+    TempStr dir = path::GetDirTemp(ew->tab->filePath);
+    fileName = path::GetBaseNameTemp(fileName);
+    TempStr dstPath = path::JoinTemp(dir, fileName);
+    SaveDataToFile(ew->hwnd, dstPath, data);
+    str::Free(data.data());
 }
 
 static void ButtonEmbedAttachment(EditAnnotationsWindow* ew) {
