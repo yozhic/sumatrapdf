@@ -57,6 +57,9 @@ struct BuildMenuCtx {
     bool hasUnsavedAnnotations = false;
     bool isCursorOnPage = false;
     bool canSendEmail = false;
+    bool isPdf = false;
+    bool isPdfEncrypted = false;
+    bool hasToc = false;
     BuildMenuCtx() = default;
     ~BuildMenuCtx() = default;
 };
@@ -1262,6 +1265,10 @@ BuildMenuCtx* NewBuildMenuCtx(WindowTab* tab, Point pt) {
     ctx->supportsAnnotations = EngineSupportsAnnotations(engine) && !tab->win->isFullScreen;
     ctx->hasUnsavedAnnotations = EngineHasUnsavedAnnotations(engine);
     ctx->canSendEmail = CanSendAsEmailAttachment(tab);
+    ctx->isPdf = CouldBePDFDoc(tab);
+    if (ctx->isPdf) {
+        ctx->isPdfEncrypted = EngineMupdfIsEncrypted(engine);
+    }
 
     DisplayModel* dm = tab->AsFixed();
     if (dm && ctx->supportsAnnotations) {
@@ -1272,6 +1279,7 @@ BuildMenuCtx* NewBuildMenuCtx(WindowTab* tab, Point pt) {
         ctx->annotationUnderCursor = dm->GetAnnotationAtPos(pt, nullptr);
     }
     ctx->hasSelection = tab->win->showSelection && tab->selectionOnPage;
+    ctx->hasToc = tab->ctrl && tab->ctrl->HasToc();
     return ctx;
 }
 
@@ -1458,6 +1466,23 @@ std::pair<bool, bool> GetCommandIdState(BuildMenuCtx* ctx, int cmdId) {
     disable |= (!ctx->hasSelection && cmdIdInList(disableIfNoSelection));
     disable |= (!ctx->annotationUnderCursor && (cmdId == CmdDeleteAnnotation));
     disable |= !ctx->hasUnsavedAnnotations && (cmdId == CmdSaveAnnotations);
+
+    if (!ctx->isPdf) {
+        remove |= (cmdId == CmdPdfEncrypt);
+        remove |= (cmdId == CmdPdfDecrypt);
+        remove |= (cmdId == CmdCompressPdf);
+        remove |= (cmdId == CmdDecompressPdf);
+        remove |= (cmdId == CmdPdfDeletePages);
+        remove |= (cmdId == CmdPdfExtractPages);
+    }
+    if (ctx->isPdf && ctx->isPdfEncrypted) {
+        remove |= (cmdId == CmdPdfEncrypt);
+    }
+    if (ctx->isPdf && !ctx->isPdfEncrypted) {
+        remove |= (cmdId == CmdPdfDecrypt);
+    }
+
+    remove |= (!ctx->hasToc && cmdId == CmdShowDocumentOutline);
 
     if (cmdId == CmdTabGroupSave) {
         disable |= !ctx->tab || !ctx->tab->win || !HasOpenedDocuments(ctx->tab->win);
