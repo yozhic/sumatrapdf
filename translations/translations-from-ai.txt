@@ -48216,3 +48216,1023 @@ vn:Trang cần trích xuất:
 vn:Trang:
 :Show Document Bookmarks
 vn:Hiển thị dấu trang tài liệu
+:Menu
+am:ምናሌ
+:Press a key combination:
+am:የቁልፍ ጥምረት ይጫኑ፡
+:Remove
+am:አስወግድ
+:Save Attachment
+am:ማያያዣ አስቀምጥ
+:Set
+am:አስቀምጥ
+:Set Screenshot Hotkey
+am:የስክሪንሾት አቋራጭ ቁልፍ አዘጋጅ
+:Menu
+ar:القائمة
+:Press a key combination:
+ar:اضغط على مجموعة مفاتيح:
+:Remove
+ar:إزالة
+:Save Attachment
+ar:حفظ المرفق
+:Set
+ar:تعيين
+:Set Screenshot Hotkey
+ar:تعيين اختصار لقطة الشاشة
+:Menu
+br:Lañser
+:Press a key combination:
+br:Pouezit war ur c'hevrenad stokelloù:
+:Remove
+br:Dilemel
+:Save Attachment
+br:Enrollañ ar c'henstagadur
+:Set
+br:Arventañ
+:Set Screenshot Hotkey
+br:Arventañ stokell herrek an tapadenn-skramm
+:Menu
+cn:菜单
+:Press a key combination:
+cn:请按下组合键：
+:Remove
+cn:移除
+:Save Attachment
+cn:保存附件
+:Set
+cn:设置
+:Set Screenshot Hotkey
+cn:设置截图快捷键
+:Menu
+co:Menu
+:Press a key combination:
+co:Appughjate una cumminazione di tasti:
+:Remove
+co:Caccià
+:Save Attachment
+co:Salvà l'Allegatu
+:Set
+co:Definisce
+:Set Screenshot Hotkey
+co:Definisce a Scorciatoia di Cattura di Schermu
+:Menu
+de:Menü
+:Press a key combination:
+de:Drücken Sie eine Tastenkombination:
+:Remove
+de:Entfernen
+:Save Attachment
+de:Anhang speichern
+:Set
+de:Festlegen
+:Set Screenshot Hotkey
+de:Screenshot-Hotkey festlegen
+:Menu
+el:Μενού
+:Press a key combination:
+el:Πατήστε έναν συνδυασμό πλήκτρων:
+:Remove
+el:Αφαίρεση
+:Save Attachment
+el:Αποθήκευση Συνημμένου
+:Set
+el:Ορισμός
+:Set Screenshot Hotkey
+el:Ορισμός Συντόμευσης Στιγμιότυπου
+:Menu
+hi:मेनू
+:Press a key combination:
+hi:कुंजी संयोजन दबाएं:
+:Remove
+hi:हटाएं
+:Save Attachment
+hi:अटैचमेंट सहेजें
+:Set
+hi:सेट करें
+:Set Screenshot Hotkey
+hi:स्क्रीनशॉट हॉटकी सेट करें
+:Menu
+it:Menu
+:Press a key combination:
+it:Premi una combinazione di tasti:
+:Remove
+it:Rimuovi
+:Save Attachment
+it:Salva allegato
+:Set
+it:Imposta
+:Set Screenshot Hotkey
+it:Imposta tasto rapido screenshot
+:Menu
+ja:メニュー
+:Press a key combination:
+ja:キーの組み合わせを押してください:
+:Remove
+ja:削除
+:Save Attachment
+ja:添付ファイルを保存
+:Set
+ja:設定
+:Set Screenshot Hotkey
+ja:スクリーンショットのホットキーを設定
+:Menu
+ml:മെനു
+:Press a key combination:
+ml:ഒരു കീ കോമ്പിനേഷൻ അമർത്തുക:
+:Remove
+ml:നീക്കം ചെയ്യുക
+:Save Attachment
+ml:അറ്റാച്ച്‌മെന്റ് സേവ് ചെയ്യുക
+:Set
+ml:സെറ്റ് ചെയ്യുക
+:Set Screenshot Hotkey
+ml:സ്‌ക്രീൻഷോട്ട് ഹോട്ട്‌കീ സെറ്റ് ചെയ്യുക
+:Menu
+nl:Menu
+:Press a key combination:
+nl:Druk op een toetsencombinatie:
+:Remove
+nl:Verwijderen
+:Save Attachment
+nl:Bijlage opslaan
+:Set
+nl:Instellen
+:Set Screenshot Hotkey
+nl:Sneltoets voor schermafbeelding instellen
+:Menu
+pl:Menu
+:Press a key combination:
+pl:Naciśnij kombinację klawiszy:
+:Remove
+pl:Usuń
+:Save Attachment
+pl:Zapisz załącznik
+:Set
+pl:Ustaw
+:Set Screenshot Hotkey
+pl:Ustaw skrót klawiszowy zrzutu ekranu
+:Menu
+ru:Меню
+:Press a key combination:
+ru:Нажмите сочетание клавиш:
+:Remove
+ru:Удалить
+:Save Attachment
+ru:Сохранить вложение
+:Set
+ru:Установить
+:Set Screenshot Hotkey
+ru:Установить горячую клавишу для скриншота
+:Menu
+sat:मेनू
+:Press a key combination:
+sat:की संयोजन दबाव:
+:Remove
+sat:हटाव
+:Save Attachment
+sat:संलग्नक बाँचाव
+:Set
+sat:सेट
+:Set Screenshot Hotkey
+sat:स्क्रीनशॉट हॉटकी सेट करे
+:Menu
+sk:Ponuka
+:Press a key combination:
+sk:Stlačte kombináciu klávesov:
+:Remove
+sk:Odstrániť
+:Save Attachment
+sk:Uložiť prílohu
+:Set
+sk:Nastaviť
+:Set Screenshot Hotkey
+sk:Nastaviť klávesovú skratku pre snímku obrazovky
+:Menu
+sr-rs:Мени
+:Press a key combination:
+sr-rs:Притисните комбинацију тастера:
+:Remove
+sr-rs:Уклони
+:Save Attachment
+sr-rs:Сачувај прилог
+:Set
+sr-rs:Постави
+:Set Screenshot Hotkey
+sr-rs:Постави пречицу за снимак екрана
+:Menu
+tw:選單
+:Press a key combination:
+tw:請按下組合鍵：
+:Remove
+tw:移除
+:Save Attachment
+tw:儲存附件
+:Set
+tw:設定
+:Set Screenshot Hotkey
+tw:設定螢幕截圖快捷鍵
+:Menu
+az:Menyu
+:Press a key combination:
+az:Klaviş kombinasiyasını basın:
+:Remove
+az:Sil
+:Save Attachment
+az:Əlavəni Saxla
+:Set
+az:Təyin et
+:Set Screenshot Hotkey
+az:Ekran Görüntüsü Qısa Yolunu Təyin Et
+:Menu
+by:Меню
+:Press a key combination:
+by:Націсніце камбінацыю клавіш:
+:Remove
+by:Выдаліць
+:Save Attachment
+by:Захаваць укладанне
+:Set
+by:Усталяваць
+:Set Screenshot Hotkey
+by:Усталяваць гарачую клавішу здымка экрана
+:Menu
+ca:Menú
+:Press a key combination:
+ca:Premeu una combinació de tecles:
+:Remove
+ca:Elimina
+:Save Attachment
+ca:Desa l'adjunt
+:Set
+ca:Estableix
+:Set Screenshot Hotkey
+ca:Estableix la drecera de captura de pantalla
+:Menu
+cy:Dewislen
+:Press a key combination:
+cy:Pwyswch gyfuniad o allweddi:
+:Remove
+cy:Tynnu
+:Save Attachment
+cy:Cadw Atodiad
+:Set
+cy:Gosod
+:Set Screenshot Hotkey
+cy:Gosod Bysell Brys Sgrinlun
+:Menu
+cz:Nabídka
+:Press a key combination:
+cz:Stiskněte kombinaci kláves:
+:Remove
+cz:Odebrat
+:Save Attachment
+cz:Uložit přílohu
+:Set
+cz:Nastavit
+:Set Screenshot Hotkey
+cz:Nastavit klávesovou zkratku pro snímek obrazovky
+:Menu
+es:Menú
+:Press a key combination:
+es:Presiona una combinación de teclas:
+:Remove
+es:Eliminar
+:Save Attachment
+es:Guardar adjunto
+:Set
+es:Establecer
+:Set Screenshot Hotkey
+es:Establecer atajo de captura de pantalla
+:Menu
+fa:منو
+:Press a key combination:
+fa:یک ترکیب کلید فشار دهید:
+:Remove
+fa:حذف
+:Save Attachment
+fa:ذخیره پیوست
+:Set
+fa:تنظیم
+:Set Screenshot Hotkey
+fa:تنظیم کلید میانبر اسکرین‌شات
+:Menu
+fi:Valikko
+:Press a key combination:
+fi:Paina näppäinyhdistelmä:
+:Remove
+fi:Poista
+:Save Attachment
+fi:Tallenna liite
+:Set
+fi:Aseta
+:Set Screenshot Hotkey
+fi:Aseta kuvakaappauksen pikanäppäin
+:Menu
+fo:Skrá
+:Press a key combination:
+fo:Trýst á eina knappasamanseting:
+:Remove
+fo:Strika
+:Save Attachment
+fo:Goym viðheftis
+:Set
+fo:Set
+:Set Screenshot Hotkey
+fo:Set skjámyndaflýtiknapp
+:Menu
+fr:Menu
+:Press a key combination:
+fr:Appuyez sur une combinaison de touches :
+:Remove
+fr:Supprimer
+:Save Attachment
+fr:Enregistrer la pièce jointe
+:Set
+fr:Définir
+:Set Screenshot Hotkey
+fr:Définir le raccourci de capture d'écran
+:Menu
+ga:Roghchlár
+:Press a key combination:
+ga:Brúigh comhcheangal eochrach:
+:Remove
+ga:Bain
+:Save Attachment
+ga:Sábháil Ceangaltán
+:Set
+ga:Socraigh
+:Set Screenshot Hotkey
+ga:Socraigh Eochair Aicearra Gabháil Scáileáin
+:Menu
+gl:Menú
+:Press a key combination:
+gl:Preme unha combinación de teclas:
+:Remove
+gl:Eliminar
+:Save Attachment
+gl:Gardar anexo
+:Set
+gl:Establecer
+:Set Screenshot Hotkey
+gl:Establecer atallo de teclado para captura de pantalla
+:Menu
+he:תפריט
+:Press a key combination:
+he:לחץ על צירוף מקשים:
+:Remove
+he:הסר
+:Save Attachment
+he:שמור קובץ מצורף
+:Set
+he:הגדר
+:Set Screenshot Hotkey
+he:הגדר מקש קיצור לצילום מסך
+:Menu
+hu:Menü
+:Press a key combination:
+hu:Nyomj meg egy billentyűkombinációt:
+:Remove
+hu:Eltávolítás
+:Save Attachment
+hu:Melléklet mentése
+:Set
+hu:Beállítás
+:Set Screenshot Hotkey
+hu:Képernyőkép gyorsbillentyű beállítása
+:Menu
+id:Menu
+:Press a key combination:
+id:Tekan kombinasi tombol:
+:Remove
+id:Hapus
+:Save Attachment
+id:Simpan Lampiran
+:Set
+id:Atur
+:Set Screenshot Hotkey
+id:Atur Tombol Pintas Tangkapan Layar
+:Menu
+kr:메뉴
+:Press a key combination:
+kr:키 조합을 누르세요:
+:Remove
+kr:제거
+:Save Attachment
+kr:첨부 파일 저장
+:Set
+kr:설정
+:Set Screenshot Hotkey
+kr:스크린샷 단축키 설정
+:Menu
+lv:Izvēlne
+:Press a key combination:
+lv:Nospiediet taustiņu kombināciju:
+:Remove
+lv:Noņemt
+:Save Attachment
+lv:Saglabāt pielikumu
+:Set
+lv:Iestatīt
+:Set Screenshot Hotkey
+lv:Iestatīt ekrānuzņēmuma karstotaustiņu
+:Menu
+my:မီနူး
+:Press a key combination:
+my:ကီးပေါင်းစပ်မှုကို နှိပ်ပါ:
+:Remove
+my:ဖယ်ရှားရန်
+:Save Attachment
+my:ပူးတွဲဖိုင်ကို သိမ်းဆည်းရန်
+:Set
+my:သတ်မှတ်ရန်
+:Set Screenshot Hotkey
+my:ဖန်သားပြင်ဓာတ်ပုံရိုက် Hotkey သတ်မှတ်ရန်
+:Menu
+pt:Menu
+:Press a key combination:
+pt:Pressione uma combinação de teclas:
+:Remove
+pt:Remover
+:Save Attachment
+pt:Guardar Anexo
+:Set
+pt:Definir
+:Set Screenshot Hotkey
+pt:Definir Atalho de Captura de Ecrã
+:Menu
+ro:Meniu
+:Press a key combination:
+ro:Apăsați o combinație de taste:
+:Remove
+ro:Elimină
+:Save Attachment
+ro:Salvează atașamentul
+:Set
+ro:Setează
+:Set Screenshot Hotkey
+ro:Setează tasta rapidă pentru captură de ecran
+:Menu
+sl:Meni
+:Press a key combination:
+sl:Pritisnite kombinacijo tipk:
+:Remove
+sl:Odstrani
+:Save Attachment
+sl:Shrani prilogo
+:Set
+sl:Nastavi
+:Set Screenshot Hotkey
+sl:Nastavi bližnjico za posnetek zaslona
+:Menu
+sv:Meny
+:Press a key combination:
+sv:Tryck en tangentkombination:
+:Remove
+sv:Ta bort
+:Save Attachment
+sv:Spara bilaga
+:Set
+sv:Ställ in
+:Set Screenshot Hotkey
+sv:Ställ in tangentbordsgenväg för skärmdump
+:Menu
+ta:பட்டி
+:Press a key combination:
+ta:விசை சேர்க்கையை அழுத்தவும்:
+:Remove
+ta:அகற்று
+:Save Attachment
+ta:இணைப்பைச் சேமி
+:Set
+ta:அமை
+:Set Screenshot Hotkey
+ta:திரைப்பிடிப்பு விசைப்பாட்டை அமை
+:Menu
+tr:Menü
+:Press a key combination:
+tr:Bir tuş kombinasyonu basın:
+:Remove
+tr:Kaldır
+:Save Attachment
+tr:Eki Kaydet
+:Set
+tr:Ayarla
+:Set Screenshot Hotkey
+tr:Ekran Görüntüsü Kısayol Tuşunu Ayarla
+:Menu
+uz:Menyu
+:Press a key combination:
+uz:Tugmalar kombinatsiyasini bosing:
+:Remove
+uz:O'chirish
+:Save Attachment
+uz:Ilovani saqlash
+:Set
+uz:O'rnatish
+:Set Screenshot Hotkey
+uz:Skrinshot tugmasini o'rnatish
+:Menu
+af:Kieslys
+:Press a key combination:
+af:Druk 'n sleutelkombinasie:
+:Remove
+af:Verwyder
+:Save Attachment
+af:Stoor Aanhegsel
+:Set
+af:Stel
+:Set Screenshot Hotkey
+af:Stel Skermkiekie Kortpad
+:Menu
+bg:Меню
+:Press a key combination:
+bg:Натиснете комбинация от клавиши:
+:Remove
+bg:Премахни
+:Save Attachment
+bg:Запази прикачен файл
+:Set
+bg:Задай
+:Set Screenshot Hotkey
+bg:Задай клавишна комбинация за екранна снимка
+:Menu
+bn:মেনু
+:Press a key combination:
+bn:একটি কী সমন্বয় চাপুন:
+:Remove
+bn:সরান
+:Save Attachment
+bn:সংযুক্তি সংরক্ষণ করুন
+:Set
+bn:সেট করুন
+:Set Screenshot Hotkey
+bn:স্ক্রিনশট হটকি সেট করুন
+:Menu
+bs:Meni
+:Press a key combination:
+bs:Pritisnite kombinaciju tipki:
+:Remove
+bs:Ukloni
+:Save Attachment
+bs:Sačuvaj prilog
+:Set
+bs:Postavi
+:Set Screenshot Hotkey
+bs:Postavi prečicu za snimak ekrana
+:Menu
+ca-xv:Menú
+:Press a key combination:
+ca-xv:Prem una combinació de tecles:
+:Remove
+ca-xv:Elimina
+:Save Attachment
+ca-xv:Desa l'adjunt
+:Set
+ca-xv:Estableix
+:Set Screenshot Hotkey
+ca-xv:Estableix la drecera de captura de pantalla
+:Menu
+dk:Menu
+:Press a key combination:
+dk:Tryk på en tastekombination:
+:Remove
+dk:Fjern
+:Save Attachment
+dk:Gem vedhæftning
+:Set
+dk:Indstil
+:Set Screenshot Hotkey
+dk:Indstil genvejstast til skærmbillede
+:Menu
+et:Menüü
+:Press a key combination:
+et:Vajuta klahvikombinatsiooni:
+:Remove
+et:Eemalda
+:Save Attachment
+et:Salvesta manus
+:Set
+et:Määra
+:Set Screenshot Hotkey
+et:Määra ekraanipildi kiirklahv
+:Menu
+eu:Menua
+:Press a key combination:
+eu:Sakatu tekla-konbinazio bat:
+:Remove
+eu:Kendu
+:Save Attachment
+eu:Gorde eranskina
+:Set
+eu:Ezarri
+:Set Screenshot Hotkey
+eu:Ezarri pantaila-argazkiaren laster-tekla
+:Menu
+fy-nl:Menu
+:Press a key combination:
+fy-nl:Druk op in toetskombinaasje:
+:Remove
+fy-nl:Fuortsmite
+:Save Attachment
+fy-nl:Bylage bewarje
+:Set
+fy-nl:Ynstelle
+:Set Screenshot Hotkey
+fy-nl:Skermôfdruk fluchtoets ynstelle
+:Menu
+hr:Izbornik
+:Press a key combination:
+hr:Pritisnite kombinaciju tipki:
+:Remove
+hr:Ukloni
+:Save Attachment
+hr:Spremi privitak
+:Set
+hr:Postavi
+:Set Screenshot Hotkey
+hr:Postavi prečac za snimku zaslona
+:Menu
+jv:Menu
+:Press a key combination:
+jv:Pencet kombinasi tombol:
+:Remove
+jv:Busak
+:Save Attachment
+jv:Simpen Lampiran
+:Set
+jv:Setel
+:Set Screenshot Hotkey
+jv:Setel Tombol Cepet Screenshot
+:Menu
+ka:მენიუ
+:Press a key combination:
+ka:დააჭირეთ კლავიშთა კომბინაციას:
+:Remove
+ka:წაშლა
+:Save Attachment
+ka:დანართის შენახვა
+:Set
+ka:დაყენება
+:Set Screenshot Hotkey
+ka:სკრინშოტის ცხელი კლავიშის დაყენება
+:Menu
+ku:Menû
+:Press a key combination:
+ku:Kombînasyonek bişkojkê bitikîne:
+:Remove
+ku:Rake
+:Save Attachment
+ku:Pêvekê Tomar bike
+:Set
+ku:Saz bike
+:Set Screenshot Hotkey
+ku:Bişkoja Kurteya Dîmengrtnê Saz bike
+:Menu
+kw:Gwythell
+:Press a key combination:
+kw:Gwask kesunya alhwedh:
+:Remove
+kw:Dilea
+:Save Attachment
+kw:Gwitha Kestava
+:Set
+kw:Settya
+:Set Screenshot Hotkey
+kw:Settya Alhwedh Tomm Skeusva Sgryn
+:Menu
+lt:Meniu
+:Press a key combination:
+lt:Paspauskite klavišų kombinaciją:
+:Remove
+lt:Pašalinti
+:Save Attachment
+lt:Išsaugoti priedą
+:Set
+lt:Nustatyti
+:Set Screenshot Hotkey
+lt:Nustatyti ekrano kopijos sparčiuosius klavišus
+:Menu
+mk:Мени
+:Press a key combination:
+mk:Притиснете комбинација на тастери:
+:Remove
+mk:Отстрани
+:Save Attachment
+mk:Зачувај прилог
+:Set
+mk:Постави
+:Set Screenshot Hotkey
+mk:Постави кратенка за снимка на екран
+:Menu
+mm:မီနူး
+:Press a key combination:
+mm:ကီးပေါင်းစပ်မှုကို နှိပ်ပါ:
+:Remove
+mm:ဖယ်ရှားမည်
+:Save Attachment
+mm:ပူးတွဲဖိုင်ကို သိမ်းဆည်းမည်
+:Set
+mm:သတ်မှတ်မည်
+:Set Screenshot Hotkey
+mm:ဖန်သားပြင်ဓာတ်ပုံ Hotkey သတ်မှတ်မည်
+:Menu
+mm:မီနူး
+:Press a key combination:
+mm:ကီးပေါင်းစပ်မှုကို နှိပ်ပါ:
+:Remove
+mm:ဖယ်ရှားရန်
+:Save Attachment
+mm:ပူးတွဲဖိုင်ကို သိမ်းဆည်းရန်
+:Set
+mm:သတ်မှတ်ရန်
+:Set Screenshot Hotkey
+mm:မျက်နှာပြင်ဓာတ်ပုံ ဟော့ကီးကို သတ်မှတ်ရန်
+:Menu
+ne:मेनु
+:Press a key combination:
+ne:कुञ्जी संयोजन थिच्नुहोस्:
+:Remove
+ne:हटाउनुहोस्
+:Save Attachment
+ne:संलग्न सुरक्षित गर्नुहोस्
+:Set
+ne:सेट गर्नुहोस्
+:Set Screenshot Hotkey
+ne:स्क्रिनसट हटकी सेट गर्नुहोस्
+:Menu
+ne:मेनु
+:Press a key combination:
+ne:कुञ्जी संयोजन थिच्नुहोस्:
+:Remove
+ne:हटाउनुहोस्
+:Save Attachment
+ne:संलग्नक बचत गर्नुहोस्
+:Set
+ne:सेट गर्नुहोस्
+:Set Screenshot Hotkey
+ne:स्क्रिनसट हटकी सेट गर्नुहोस्
+:Menu
+nn:Meny
+:Press a key combination:
+nn:Trykk ein tastekombinasjon:
+:Remove
+nn:Fjern
+:Save Attachment
+nn:Lagre vedlegg
+:Set
+nn:Angi
+:Set Screenshot Hotkey
+nn:Angi snarveg for skjermbilete
+:Menu
+nn:Meny
+:Press a key combination:
+nn:Trykk ei tastekombinasjon:
+:Remove
+nn:Fjern
+:Save Attachment
+nn:Lagre vedlegg
+:Set
+nn:Angi
+:Set Screenshot Hotkey
+nn:Angi snøggtast for skjermbilete
+:Menu
+no:Meny
+:Press a key combination:
+no:Trykk en tastekombinasjon:
+:Remove
+no:Fjern
+:Save Attachment
+no:Lagre vedlegg
+:Set
+no:Angi
+:Set Screenshot Hotkey
+no:Angi hurtigtast for skjermbilde
+:Menu
+no:Meny
+:Press a key combination:
+no:Trykk en tastekombinasjon:
+:Remove
+no:Fjern
+:Save Attachment
+no:Lagre vedlegg
+:Set
+no:Angi
+:Set Screenshot Hotkey
+no:Angi hurtigtast for skjermbilde
+:Menu
+pa:ਮੀਨੂ
+:Press a key combination:
+pa:ਇੱਕ ਕੁੰਜੀ ਸੰਯੋਜਨ ਦਬਾਓ:
+:Remove
+pa:ਹਟਾਓ
+:Save Attachment
+pa:ਅਟੈਚਮੈਂਟ ਸੰਭਾਲੋ
+:Set
+pa:ਸੈੱਟ ਕਰੋ
+:Set Screenshot Hotkey
+pa:ਸਕਰੀਨਸ਼ਾਟ ਹੌਟਕੀ ਸੈੱਟ ਕਰੋ
+:Menu
+pa:ਮੀਨੂ
+:Press a key combination:
+pa:ਇੱਕ ਕੁੰਜੀ ਸੰਯੋਜਨ ਦਬਾਓ:
+:Remove
+pa:ਹਟਾਓ
+:Save Attachment
+pa:ਨੱਥੀ ਸੰਭਾਲੋ
+:Set
+pa:ਸੈੱਟ ਕਰੋ
+:Set Screenshot Hotkey
+pa:ਸਕਰੀਨਸ਼ਾਟ ਹੌਟਕੀ ਸੈੱਟ ਕਰੋ
+:Menu
+si:මෙනුව
+:Press a key combination:
+si:යතුරු සංයෝජනයක් ඔබන්න:
+:Remove
+si:ඉවත් කරන්න
+:Save Attachment
+si:ඇමුණුම සුරකින්න
+:Set
+si:සකසන්න
+:Set Screenshot Hotkey
+si:තිර රුව උණුසුම් යතුර සකසන්න
+:Menu
+si:මෙනුව
+:Press a key combination:
+si:යතුරු සංයෝජනයක් ඔබන්න:
+:Remove
+si:ඉවත් කරන්න
+:Save Attachment
+si:ඇමුණුම සුරකින්න
+:Set
+si:සකසන්න
+:Set Screenshot Hotkey
+si:තිරපිටපත් උණුසුම් යතුර සකසන්න
+:Menu
+sn:Menyu
+:Press a key combination:
+sn:Dzvanya mabatanidzo emakiyi:
+:Remove
+sn:Bvisa
+:Save Attachment
+sn:Chengetedza Chinyorwa Chakabatanidzwa
+:Set
+sn:Isa
+:Set Screenshot Hotkey
+sn:Isa Kiyi Inokurumidza yeScreenshot
+:Menu
+sn:Menyu
+:Press a key combination:
+sn:Dzvanya sangano rekinatiso:
+:Remove
+sn:Bvisa
+:Save Attachment
+sn:Chengetedza Chinyorwa Chakabatanidzwa
+:Set
+sn:Gadzirisa
+:Set Screenshot Hotkey
+sn:Gadzirisa Kiyi Yekukurumidza Mufananidzo Wescreen
+:Menu
+sp-rs:Meni
+:Press a key combination:
+sp-rs:Pritisnite kombinaciju tastera:
+:Remove
+sp-rs:Ukloni
+:Save Attachment
+sp-rs:Sačuvaj prilog
+:Set
+sp-rs:Podesi
+:Set Screenshot Hotkey
+sp-rs:Podesi prečicu za snimak ekrana
+:Menu
+sp-rs:Meni
+:Press a key combination:
+sp-rs:Pritisnite kombinaciju tastera:
+:Remove
+sp-rs:Ukloni
+:Save Attachment
+sp-rs:Sačuvaj prilog
+:Set
+sp-rs:Postavi
+:Set Screenshot Hotkey
+sp-rs:Postavi prečicu za snimak ekrana
+:Menu
+sq:Meny
+:Press a key combination:
+sq:Shtyp një kombinim tastesh:
+:Remove
+sq:Hiq
+:Save Attachment
+sq:Ruaj Bashkëngjitjen
+:Set
+sq:Cakto
+:Set Screenshot Hotkey
+sq:Cakto Tastin e Shkurtuar për Foto Ekrani
+:Menu
+sq:Meny
+:Press a key combination:
+sq:Shtyp një kombinim tastesh:
+:Remove
+sq:Hiq
+:Save Attachment
+sq:Ruaj Bashkëngjitjen
+:Set
+sq:Vendos
+:Set Screenshot Hotkey
+sq:Vendos Tastin e Shkurtër për Pamje Ekrani
+:Menu
+th:เมนู
+:Press a key combination:
+th:กดปุ่มผสม:
+:Remove
+th:ลบ
+:Save Attachment
+th:บันทึกไฟล์แนบ
+:Set
+th:ตั้งค่า
+:Set Screenshot Hotkey
+th:ตั้งค่าปุ่มลัดสำหรับจับภาพหน้าจอ
+:Menu
+th:เมนู
+:Press a key combination:
+th:กดชุดปุ่ม:
+:Remove
+th:ลบ
+:Save Attachment
+th:บันทึกไฟล์แนบ
+:Set
+th:ตั้งค่า
+:Set Screenshot Hotkey
+th:ตั้งค่าปุ่มลัดสำหรับจับภาพหน้าจอ
+:Menu
+tl:Menu
+:Press a key combination:
+tl:Pindutin ang kombinasyon ng mga key:
+:Remove
+tl:Alisin
+:Save Attachment
+tl:I-save ang Attachment
+:Set
+tl:Itakda
+:Set Screenshot Hotkey
+tl:Itakda ang Screenshot Hotkey
+:Menu
+tl:Menu
+:Press a key combination:
+tl:Pindutin ang kombinasyon ng mga key:
+:Remove
+tl:Alisin
+:Save Attachment
+tl:I-save ang Attachment
+:Set
+tl:Itakda
+:Set Screenshot Hotkey
+tl:Itakda ang Screenshot Hotkey
+:Menu
+uk:Меню
+:Press a key combination:
+uk:Натисніть комбінацію клавіш:
+:Remove
+uk:Видалити
+:Save Attachment
+uk:Зберегти вкладення
+:Set
+uk:Встановити
+:Set Screenshot Hotkey
+uk:Встановити гарячу клавішу для знімка екрана
+:Menu
+uk:Меню
+:Press a key combination:
+uk:Натисніть комбінацію клавіш:
+:Remove
+uk:Видалити
+:Save Attachment
+uk:Зберегти вкладення
+:Set
+uk:Встановити
+:Set Screenshot Hotkey
+uk:Встановити гарячу клавішу для скріншота
+:Menu
+vn:Trình đơn
+:Press a key combination:
+vn:Nhấn tổ hợp phím:
+:Remove
+vn:Xóa
+:Save Attachment
+vn:Lưu tệp đính kèm
+:Set
+vn:Đặt
+:Set Screenshot Hotkey
+vn:Đặt phím tắt chụp màn hình
+:Menu
+vn:Trình đơn
+:Press a key combination:
+vn:Nhấn tổ hợp phím:
+:Remove
+vn:Xóa
+:Save Attachment
+vn:Lưu tệp đính kèm
+:Set
+vn:Đặt
+:Set Screenshot Hotkey
+vn:Đặt phím tắt chụp màn hình
