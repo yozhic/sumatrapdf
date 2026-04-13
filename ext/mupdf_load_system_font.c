@@ -143,6 +143,18 @@ static struct {
     {"DINPro", "SegoeUI"},
     {"ACaslonPro-Regular", "Georgia"},
     {"ACaslonPro-Italic", "Georgia-Italic"},
+    // PingFang SC (macOS/iOS Simplified Chinese) fallbacks
+    {"PingFangSC-Regular", "Microsoft YaHei"},
+    {"PingFangSC-Medium", "Microsoft YaHei"},
+    {"PingFangSC-Semibold", "Microsoft YaHei Bold"},
+    {"PingFangSC-Bold", "Microsoft YaHei Bold"},
+    {"PingFangSC-Light", "Microsoft YaHei Light"},
+    {"PingFangSC-Ultralight", "Microsoft YaHei Light"},
+    {"PingFangSC-Thin", "Microsoft YaHei Light"},
+    {"PingFang SC", "Microsoft YaHei"},
+    // Founder FangSong font fallback
+    {"FZFangSong-Z02", "FangSong"},
+    {"FZFangSong-Z02S", "FangSong"},
     // Chinese Kai (regular script) font fallbacks
     {"MKai PRC", "KaiTi"},
     {"MKaiPRC-Regular", "KaiTi"},
