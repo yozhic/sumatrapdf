@@ -30,8 +30,7 @@ typedef uint32_t u32;
 
 #define MAX_FACENAME 256
 
-#define MAX_FONT_FILES 1024
-#define MAX_FONTS 4096
+#define GROW_BY 128
 
 typedef struct {
     const char* file_path;
@@ -46,13 +45,13 @@ typedef struct {
 } win_font_info;
 
 typedef struct {
-    win_font_info fontmap[MAX_FONTS];
+    win_font_info* fontmap;
     int len;
     int cap;
 } win_fonts;
 
 typedef struct {
-    font_file files[MAX_FONT_FILES];
+    font_file* files;
     int len;
     int cap;
 } font_files;
@@ -346,7 +345,14 @@ static int get_or_append_font_file(const char* file_path) {
         return i;
     }
     if (g_font_files.len >= g_font_files.cap) {
-        return -1;
+        int newCap = g_font_files.cap + GROW_BY;
+        font_file* newFiles = (font_file*)realloc(g_font_files.files, newCap * sizeof(font_file));
+        if (!newFiles) {
+            return -1;
+        }
+        memset(newFiles + g_font_files.cap, 0, GROW_BY * sizeof(font_file));
+        g_font_files.files = newFiles;
+        g_font_files.cap = newCap;
     }
     i = g_font_files.len;
     ff = &g_font_files.files[i];
@@ -365,8 +371,14 @@ static void append_mapping(fz_context* ctx, const char* facename, const char* pa
         return;
     }
     if (fl->len >= fl->cap) {
-        // fz_throw(ctx, FZ_ERROR_GENERIC, "fonterror : fontlist overflow");
-        return;
+        int newCap = fl->cap + GROW_BY;
+        win_font_info* newMap = (win_font_info*)realloc(fl->fontmap, newCap * sizeof(win_font_info));
+        if (!newMap) {
+            return;
+        }
+        memset(newMap + fl->cap, 0, GROW_BY * sizeof(win_font_info));
+        fl->fontmap = newMap;
+        fl->cap = newCap;
     }
 
     win_font_info* i = &fl->fontmap[fl->len];
@@ -1069,10 +1081,12 @@ void init_system_font_list(void) {
         return;
     }
     InitializeCriticalSection(&cs_fonts);
+    g_win_fonts.fontmap = NULL;
     g_win_fonts.len = 0;
-    g_win_fonts.cap = MAX_FONTS;
+    g_win_fonts.cap = 0;
+    g_font_files.files = NULL;
     g_font_files.len = 0;
-    g_font_files.cap = MAX_FONT_FILES;
+    g_font_files.cap = 0;
     did_init = 1;
 }
 
@@ -1081,12 +1095,18 @@ void destroy_system_font_list(void) {
     for (i = 0; i < g_win_fonts.len; i++) {
         free((void*)g_win_fonts.fontmap[i].fontface);
     }
+    free(g_win_fonts.fontmap);
+    g_win_fonts.fontmap = NULL;
     g_win_fonts.len = 0;
+    g_win_fonts.cap = 0;
     for (i = 0; i < g_font_files.len; i++) {
         free((void*)g_font_files.files[i].file_path);
         free(g_font_files.files[i].data);
     }
+    free(g_font_files.files);
+    g_font_files.files = NULL;
     g_font_files.len = 0;
+    g_font_files.cap = 0;
     DeleteCriticalSection(&cs_fonts);
 }
 
