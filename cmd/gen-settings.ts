@@ -159,10 +159,10 @@ const ebookUI: Field[] = [
   mkField("CustomCSS", Str, null, "custom CSS. Might need to set IgnoreDocumentCSS = true"),
   setVersion(
     mkField(
-      "BackgroundColor",
+      "WindowBgCol",
       Color,
       "",
-      "if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub, mobi etc.)",
+      "if given, sets the canvas background color for ebook documents (epub, mobi etc.)",
     ),
     "3.7",
   ),
@@ -288,6 +288,15 @@ const fixedPageUI: Field[] = [
       "suggested values: #2828aa #28aa28 #aa2828",
   ),
   mkField("InvertColors", Bool, false, "if true, TextColor and BackgroundColor of the document will be swapped"),
+  setVersion(
+    mkField(
+      "WindowBgCol",
+      Color,
+      "",
+      "if given, sets the canvas background color for PDF files",
+    ),
+    "3.7",
+  ),
 ];
 
 const comicBookUI: Field[] = [
@@ -312,10 +321,10 @@ const comicBookUI: Field[] = [
   ),
   setVersion(
     mkField(
-      "BackgroundColor",
+      "WindowBgCol",
       Color,
       "",
-      "if given, overrides the default black background color for comic book files",
+      "if given, sets the canvas background color for comic book files",
     ),
     "3.7",
   ),
@@ -323,7 +332,7 @@ const comicBookUI: Field[] = [
 
 const imageUI: Field[] = [
   setVersion(
-    mkField("BackgroundColor", Color, "", "if given, overrides the default black background color for image files"),
+    mkField("WindowBgCol", Color, "", "if given, sets the canvas background color for image files"),
     "3.7",
   ),
   setVersion(

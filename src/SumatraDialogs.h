@@ -49,7 +49,8 @@ struct BgColorResult {
     bool applyToAllFiles; // true = all files like this, false = this file only
 };
 
-bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, BgColorResult& result);
+bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, const char* allFilesLabel,
+                                  BgColorResult& result);
 bool Dialog_SetTabColor(HWND hwnd, COLORREF currentColor, bool isUnset, COLORREF& resultColor, bool& resultIsUnset);
 
 TempStr ZoomLevelStr(float zoom);

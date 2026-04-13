@@ -6,7 +6,7 @@ void SetCurrentThemeFromSettings();
 void SelectNextTheme();
 void CreateThemeCommands();
 
-COLORREF ThemeDocumentColors(COLORREF&, bool isEbook = false);
+COLORREF ThemeDocumentColors(COLORREF&);
 COLORREF ThemePageRenderColors(COLORREF&);
 COLORREF ThemeMainWindowBackgroundColor();
 COLORREF ThemeControlBackgroundColor();

@@ -1103,10 +1103,11 @@ struct BgColorDlgData {
     COLORREF customColors[kMaxCustomColors];
     bool customColorSet[kMaxCustomColors]; // true if slot has a color
     bool customColorsChanged;
-    int selectedCustomIdx; // -1 = no custom button selected
-    bool previewSelected;  // true if preview button is selected
-    const char* title;     // dialog title (nullptr = default)
-    bool showRadioButtons; // show "this file" / "all files" radio buttons
+    int selectedCustomIdx;     // -1 = no custom button selected
+    bool previewSelected;      // true if preview button is selected
+    const char* title;         // dialog title (nullptr = default)
+    bool showRadioButtons;     // show "this file" / "all files" radio buttons
+    const char* allFilesLabel; // label for "all files" radio button (nullptr = default)
 };
 
 // fixed preset colors: checkered, black, white
@@ -1361,6 +1362,9 @@ static INT_PTR CALLBACK Dialog_ChangeBgColor_Proc(HWND hDlg, UINT msg, WPARAM wp
             HwndSetDlgItemText(hDlg, IDOK, _TRA("OK"));
             HwndSetDlgItemText(hDlg, IDCANCEL, _TRA("Cancel"));
             if (data->showRadioButtons) {
+                if (data->allFilesLabel) {
+                    HwndSetDlgItemText(hDlg, IDC_BGCOL_ALL_FILES, data->allFilesLabel);
+                }
                 CheckRadioButton(hDlg, IDC_BGCOL_THIS_FILE, IDC_BGCOL_ALL_FILES,
                                  data->applyToAll ? IDC_BGCOL_ALL_FILES : IDC_BGCOL_THIS_FILE);
             } else {
@@ -1543,7 +1547,8 @@ static INT_PTR CALLBACK Dialog_ChangeBgColor_Proc(HWND hDlg, UINT msg, WPARAM wp
     return FALSE;
 }
 
-bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, BgColorResult& result) {
+bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheckered, const char* allFilesLabel,
+                                  BgColorResult& result) {
     BgColorDlgData data;
     data.currentColor = currentColor;
     data.isCheckered = isCheckered;
@@ -1552,6 +1557,7 @@ bool Dialog_ChangeBackgroundColor(HWND hwnd, COLORREF currentColor, bool isCheck
     data.previewSelected = true;
     data.title = nullptr;
     data.showRadioButtons = true;
+    data.allFilesLabel = allFilesLabel;
 
     INT_PTR res = CreateDialogBox(IDD_DIALOG_CHANGE_BG_COLOR, hwnd, Dialog_ChangeBgColor_Proc, (LPARAM)&data);
     if (res != IDOK) {

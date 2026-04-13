@@ -1311,6 +1311,7 @@ static void PaintPageFrameAndShadow(HDC hdc, Rect& bounds, Rect&, bool) {
     AutoDeletePen pen(CreatePen(PS_NULL, 0, 0));
     COLORREF bgCol;
     ThemeDocumentColors(bgCol);
+    // use canvas background color, not page rendering color
     AutoDeleteBrush brush(CreateSolidBrush(bgCol));
     ScopedSelectPen restorePen(hdc, pen);
     ScopedSelectObject restoreBrush(hdc, brush);
@@ -1465,18 +1466,29 @@ static bool DrawDocument(MainWindow* win, HDC hdc, RECT* rcArea) {
     // (without frame and shadow)
     bool paintOnBlackWithoutShadow = win->presentation || isImage;
     bool isEbook = engine->kind == kindEngineMupdf && !str::EqI(engine->defaultExt, ".pdf");
+    bool isPdf = engine->kind == kindEngineMupdf && str::EqI(engine->defaultExt, ".pdf");
     COLORREF colDocBg;
-    COLORREF colDocTxt = ThemeDocumentColors(colDocBg, isEbook);
+    COLORREF colDocTxt = ThemeDocumentColors(colDocBg);
     if (isImage) {
         colDocBg = 0x0;
         colDocTxt = 0xffffff;
-        // allow ComicBookUI/ImageUI BackgroundColor to override the default black
+        // allow ComicBookUI/ImageUI WindowBgCol to override the default black
         ParsedColor* bgOverride = nullptr;
         if (engine->kind == kindEngineComicBooks) {
-            bgOverride = GetPrefsColor(gGlobalPrefs->comicBookUI.backgroundColor);
+            bgOverride = GetPrefsColor(gGlobalPrefs->comicBookUI.windowBgCol);
         } else {
-            bgOverride = GetPrefsColor(gGlobalPrefs->imageUI.backgroundColor);
+            bgOverride = GetPrefsColor(gGlobalPrefs->imageUI.windowBgCol);
         }
+        if (bgOverride->parsedOk) {
+            colDocBg = bgOverride->col;
+        }
+    } else if (isEbook) {
+        ParsedColor* bgOverride = GetPrefsColor(gGlobalPrefs->eBookUI.windowBgCol);
+        if (bgOverride->parsedOk) {
+            colDocBg = bgOverride->col;
+        }
+    } else if (isPdf) {
+        ParsedColor* bgOverride = GetPrefsColor(gGlobalPrefs->fixedPageUI.windowBgCol);
         if (bgOverride->parsedOk) {
             colDocBg = bgOverride->col;
         }

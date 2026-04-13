@@ -308,7 +308,27 @@ COLORREF AccentColor(COLORREF col, int light, int dark) {
 
 #define GetThemeCol(name, def) GetParsedCOLORREF(name, name##Parsed, def)
 
-COLORREF ThemeDocumentColors(COLORREF& bg, bool isEbook) {
+// canvas/window background color around the document pages
+// not affected by FixedPageUI.TextColor/BackgroundColor (those affect page rendering)
+COLORREF ThemeDocumentColors(COLORREF& bg) {
+    bg = ThemeMainWindowBackgroundColor();
+
+    if (!gGlobalPrefs->fixedPageUI.invertColors) {
+        return ThemeWindowTextColor();
+    }
+
+    COLORREF text = ThemeWindowTextColor();
+    bg = ThemeMainWindowBackgroundColor();
+
+    if (gCurrThemeIndex < 3) {
+        bg = AccentColor(bg, 8);
+    }
+    return text;
+}
+
+// colors for page bitmap recoloring (render cache)
+// TextColor substitutes black, BackgroundColor substitutes white in rendered pages
+COLORREF ThemePageRenderColors(COLORREF& bg) {
     COLORREF text = kColBlack;
     bg = kColWhite;
 
@@ -323,14 +343,6 @@ COLORREF ThemeDocumentColors(COLORREF& bg, bool isEbook) {
         bg = parsedCol->col;
     }
 
-    // ebook-specific background color overrides FixedPageUI.BackgroundColor
-    if (isEbook) {
-        parsedCol = GetPrefsColor(gGlobalPrefs->eBookUI.backgroundColor);
-        if (parsedCol->parsedOk) {
-            bg = parsedCol->col;
-        }
-    }
-
     if (!gGlobalPrefs->fixedPageUI.invertColors) {
         return text;
     }
@@ -339,38 +351,6 @@ COLORREF ThemeDocumentColors(COLORREF& bg, bool isEbook) {
     bool userDidChange = text != kColBlack || bg != kColWhite;
     if (userDidChange) {
         std::swap(text, bg);
-        return text;
-    }
-
-    // default colors
-    if (gCurrentTheme == gThemeLight) {
-        std::swap(text, bg);
-        return text;
-    }
-
-    // if we're inverting in non-default themes, the colors
-    // should match the colors of the window
-    text = ThemeWindowTextColor();
-    bg = ThemeMainWindowBackgroundColor();
-
-    if (gCurrThemeIndex < 3) {
-        // https://github.com/sumatrapdfreader/sumatrapdf/issues/4465
-        // this is probably not expected for custom colors but we used to do
-        // it for built-in themes
-        // so do it for legacy themes but not for custom themes or new Dark theme
-        bg = AccentColor(bg, 8);
-    }
-    return text;
-}
-
-// colors for page bitmap recoloring (render cache)
-// only affected by invertColors / theme, not by engine-type background color settings
-// (those only affect the canvas/window background around the page)
-COLORREF ThemePageRenderColors(COLORREF& bg) {
-    COLORREF text = kColBlack;
-    bg = kColWhite;
-
-    if (!gGlobalPrefs->fixedPageUI.invertColors) {
         return text;
     }
 

@@ -2687,9 +2687,6 @@ static void RerenderFixedPage() {
 
 void UpdateDocumentColors() {
     COLORREF bg;
-    // use ThemePageRenderColors instead of ThemeDocumentColors
-    // so that engine-type background color settings (fixedPageUI.backgroundColor etc.)
-    // only affect the canvas/window background, not the PDF page rendering
     COLORREF text = ThemePageRenderColors(bg);
 
     if ((text == gRenderCache->textColor) && (bg == gRenderCache->backgroundColor)) {
@@ -4391,6 +4388,11 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
     if (!tab || !tab->ctrl) {
         return;
     }
+    auto* engine = tab->GetEngine();
+    bool isImage = engine && engine->IsImageCollection();
+    bool isCbx = engine && engine->kind == kindEngineComicBooks;
+    bool isEbook = engine && engine->kind == kindEngineMupdf && !str::EqI(engine->defaultExt, ".pdf");
+
     COLORREF curColor = tab->bgColor;
     bool isCur = (curColor != kColorUnset);
     bool isCheckered = (curColor == kColorUnset);
@@ -4403,8 +4405,17 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
         isCheckered = false;
     }
 
+    const char* allFilesLabel = "For all &PDF files";
+    if (isCbx) {
+        allFilesLabel = "For all &comic books";
+    } else if (isImage) {
+        allFilesLabel = "For all &images";
+    } else if (isEbook) {
+        allFilesLabel = "For all &ebooks";
+    }
+
     BgColorResult result;
-    if (!Dialog_ChangeBackgroundColor(win->hwndFrame, curColor, isCheckered, result)) {
+    if (!Dialog_ChangeBackgroundColor(win->hwndFrame, curColor, isCheckered, allFilesLabel, result)) {
         return;
     }
 
@@ -4417,23 +4428,18 @@ static void OnMenuChangeBackgroundColor(MainWindow* win) {
     COLORREF newColor = result.isCheckered ? kColorUnset : result.color;
 
     if (result.applyToAllFiles) {
-        auto* engine = tab->GetEngine();
-        bool isImage = engine && engine->IsImageCollection();
-        bool isCbx = engine && engine->kind == kindEngineComicBooks;
-        bool isEbook = engine && engine->kind == kindEngineMupdf && !str::EqI(engine->defaultExt, ".pdf");
-
         if (isCbx) {
-            str::ReplaceWithCopy(&gGlobalPrefs->comicBookUI.backgroundColor, colorStr);
-            gGlobalPrefs->comicBookUI.backgroundColorParsed.wasParsed = false;
+            str::ReplaceWithCopy(&gGlobalPrefs->comicBookUI.windowBgCol, colorStr);
+            gGlobalPrefs->comicBookUI.windowBgColParsed.wasParsed = false;
         } else if (isImage) {
-            str::ReplaceWithCopy(&gGlobalPrefs->imageUI.backgroundColor, colorStr);
-            gGlobalPrefs->imageUI.backgroundColorParsed.wasParsed = false;
+            str::ReplaceWithCopy(&gGlobalPrefs->imageUI.windowBgCol, colorStr);
+            gGlobalPrefs->imageUI.windowBgColParsed.wasParsed = false;
         } else if (isEbook) {
-            str::ReplaceWithCopy(&gGlobalPrefs->eBookUI.backgroundColor, colorStr);
-            gGlobalPrefs->eBookUI.backgroundColorParsed.wasParsed = false;
+            str::ReplaceWithCopy(&gGlobalPrefs->eBookUI.windowBgCol, colorStr);
+            gGlobalPrefs->eBookUI.windowBgColParsed.wasParsed = false;
         } else {
-            str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.backgroundColor, colorStr);
-            gGlobalPrefs->fixedPageUI.backgroundColorParsed.wasParsed = false;
+            str::ReplaceWithCopy(&gGlobalPrefs->fixedPageUI.windowBgCol, colorStr);
+            gGlobalPrefs->fixedPageUI.windowBgColParsed.wasParsed = false;
         }
         // clear per-file override so it inherits the global setting
         FileState* fs = gFileHistory.FindByPath(tab->filePath);

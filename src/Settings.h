@@ -67,6 +67,9 @@ struct FixedPageUI {
     // if true, TextColor and BackgroundColor of the document will be
     // swapped
     bool invertColors;
+    // if given, sets the canvas background color for PDF files
+    char* windowBgCol;
+    ParsedColor windowBgColParsed;
 };
 
 // customization options for eBookUI
@@ -81,10 +84,10 @@ struct EBookUI {
     bool ignoreDocumentCSS;
     // custom CSS. Might need to set IgnoreDocumentCSS = true
     char* customCSS;
-    // if given, overrides FixedPageUI.BackgroundColor for ebook documents
+    // if given, sets the canvas background color for ebook documents
     // (epub, mobi etc.)
-    char* backgroundColor;
-    ParsedColor backgroundColorParsed;
+    char* windowBgCol;
+    ParsedColor windowBgColParsed;
 };
 
 // customization options for Comic Book UI
@@ -98,18 +101,16 @@ struct ComicBookUI {
     // if true, default to displaying Comic Book files in manga mode (from
     // right to left if showing 2 pages at a time)
     bool cbxMangaMode;
-    // if given, overrides the default black background color for comic
-    // book files
-    char* backgroundColor;
-    ParsedColor backgroundColorParsed;
+    // if given, sets the canvas background color for comic book files
+    char* windowBgCol;
+    ParsedColor windowBgColParsed;
 };
 
 // customization options for image files UI
 struct ImageUI {
-    // if given, overrides the default black background color for image
-    // files
-    char* backgroundColor;
-    ParsedColor backgroundColorParsed;
+    // if given, sets the canvas background color for image files
+    char* windowBgCol;
+    ParsedColor windowBgColParsed;
     // default zoom for image files. valid values: fit page, fit width, fit
     // content, shrink to fit or percent like 100%
     char* defaultZoom;
@@ -620,10 +621,11 @@ static const FieldInfo gFixedPageUIFields[] = {
     {offsetof(FixedPageUI, pageSpacing), SettingType::Compact, (intptr_t)&gSizeInfo},
     {offsetof(FixedPageUI, gradientColors), SettingType::ColorArray, 0},
     {offsetof(FixedPageUI, invertColors), SettingType::Bool, false},
+    {offsetof(FixedPageUI, windowBgCol), SettingType::Color, (intptr_t)""},
 };
 static const StructInfo gFixedPageUIInfo = {
-    sizeof(FixedPageUI), 7, gFixedPageUIFields,
-    "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0GradientColors\0InvertColors"};
+    sizeof(FixedPageUI), 8, gFixedPageUIFields,
+    "TextColor\0BackgroundColor\0SelectionColor\0WindowMargin\0PageSpacing\0GradientColors\0InvertColors\0WindowBgCol"};
 
 static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, fontSize), SettingType::Float, (intptr_t)"0"},
@@ -631,10 +633,10 @@ static const FieldInfo gEBookUIFields[] = {
     {offsetof(EBookUI, layoutDy), SettingType::Float, (intptr_t)"0"},
     {offsetof(EBookUI, ignoreDocumentCSS), SettingType::Bool, false},
     {offsetof(EBookUI, customCSS), SettingType::String, 0},
-    {offsetof(EBookUI, backgroundColor), SettingType::Color, (intptr_t)""},
+    {offsetof(EBookUI, windowBgCol), SettingType::Color, (intptr_t)""},
 };
 static const StructInfo gEBookUIInfo = {sizeof(EBookUI), 6, gEBookUIFields,
-                                        "FontSize\0LayoutDx\0LayoutDy\0IgnoreDocumentCSS\0CustomCSS\0BackgroundColor"};
+                                        "FontSize\0LayoutDx\0LayoutDy\0IgnoreDocumentCSS\0CustomCSS\0WindowBgCol"};
 
 static const FieldInfo gWindowMargin_1_Fields[] = {
     {offsetof(WindowMargin, top), SettingType::Int, 0},
@@ -655,16 +657,16 @@ static const FieldInfo gComicBookUIFields[] = {
     {offsetof(ComicBookUI, windowMargin), SettingType::Compact, (intptr_t)&gWindowMargin_1_Info},
     {offsetof(ComicBookUI, pageSpacing), SettingType::Compact, (intptr_t)&gSize_1_Info},
     {offsetof(ComicBookUI, cbxMangaMode), SettingType::Bool, false},
-    {offsetof(ComicBookUI, backgroundColor), SettingType::Color, (intptr_t)""},
+    {offsetof(ComicBookUI, windowBgCol), SettingType::Color, (intptr_t)""},
 };
 static const StructInfo gComicBookUIInfo = {sizeof(ComicBookUI), 4, gComicBookUIFields,
-                                            "WindowMargin\0PageSpacing\0CbxMangaMode\0BackgroundColor"};
+                                            "WindowMargin\0PageSpacing\0CbxMangaMode\0WindowBgCol"};
 
 static const FieldInfo gImageUIFields[] = {
-    {offsetof(ImageUI, backgroundColor), SettingType::Color, (intptr_t)""},
+    {offsetof(ImageUI, windowBgCol), SettingType::Color, (intptr_t)""},
     {offsetof(ImageUI, defaultZoom), SettingType::String, (intptr_t)"shrink to fit"},
 };
-static const StructInfo gImageUIInfo = {sizeof(ImageUI), 2, gImageUIFields, "BackgroundColor\0DefaultZoom"};
+static const StructInfo gImageUIInfo = {sizeof(ImageUI), 2, gImageUIFields, "WindowBgCol\0DefaultZoom"};
 
 static const FieldInfo gChmUIFields[] = {
     {offsetof(ChmUI, useFixedPageUI), SettingType::Bool, false},

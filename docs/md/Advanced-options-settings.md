@@ -226,6 +226,10 @@ FixedPageUI [
 
     ; if true, TextColor and BackgroundColor of the document will be swapped
     InvertColors = false
+
+    ; if given, sets the canvas background color for PDF files (introduced in
+    ; version 3.7)
+    WindowBgCol = 
 ]
 
 ; customization options for eBookUI
@@ -245,9 +249,9 @@ EBookUI [
     ; custom CSS. Might need to set IgnoreDocumentCSS = true
     CustomCSS =
 
-    ; if given, overrides FixedPageUI.BackgroundColor for ebook documents (epub,
-    ; mobi etc.) (introduced in version 3.7)
-    BackgroundColor = 
+    ; if given, sets the canvas background color for ebook documents (epub, mobi
+    ; etc.) (introduced in version 3.7)
+    WindowBgCol = 
 ]
 
 ; customization options for Comic Book UI
@@ -264,16 +268,16 @@ ComicBookUI [
     ; to left if showing 2 pages at a time)
     CbxMangaMode = false
 
-    ; if given, overrides the default black background color for comic book
-    ; files (introduced in version 3.7)
-    BackgroundColor = 
+    ; if given, sets the canvas background color for comic book files
+    ; (introduced in version 3.7)
+    WindowBgCol = 
 ]
 
 ; customization options for image files UI
 ImageUI [
-    ; if given, overrides the default black background color for image files
-    ; (introduced in version 3.7)
-    BackgroundColor = 
+    ; if given, sets the canvas background color for image files (introduced in
+    ; version 3.7)
+    WindowBgCol = 
 
     ; default zoom for image files. valid values: fit page, fit width, fit
     ; content, shrink to fit or percent like 100% (introduced in version 3.7)
