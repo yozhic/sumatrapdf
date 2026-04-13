@@ -204,6 +204,7 @@ void SetThemeByIndex(int themeIdx) {
     if (themeIdx >= gThemeCount) {
         themeIdx = 0;
     }
+    bool themeChanged = (gCurrThemeIndex != themeIdx);
     gCurrThemeIndex = themeIdx;
     gCurrSetThemeCmdId = gFirstSetThemeCmdId + themeIdx;
     gCurrentTheme = gThemes->At(gCurrThemeIndex);
@@ -236,11 +237,15 @@ void SetThemeByIndex(int themeIdx) {
         DarkMode::setViewBackgroundColor(ThemeWindowControlBackgroundColor());
         DarkMode::calculateTreeViewStyle();
 
-        UpdateAfterThemeChange();
+        if (themeChanged) {
+            UpdateAfterThemeChange();
+        }
 
         DarkMode::setPrevTreeViewStyle();
     } else {
-        UpdateAfterThemeChange();
+        if (themeChanged) {
+            UpdateAfterThemeChange();
+        }
     }
 };
 
