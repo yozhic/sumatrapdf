@@ -711,7 +711,8 @@ static bool KnownNonImageRec(const ByteSlice& d) {
 }
 
 static bool KnownImageFormat(const ByteSlice& d) {
-    return nullptr != GuessFileTypeFromContent(d);
+    Kind kind = GuessFileTypeFromContent(d);
+    return kind != nullptr;
 }
 
 // return false if we should stop loading images (because we
@@ -720,7 +721,7 @@ bool MobiDoc::LoadImage(size_t imageNo) {
     size_t imageRec = imageFirstRec + imageNo;
 
     auto rec = pdbReader->GetRecord(imageRec);
-    if (rec.empty()) {
+    if (rec.Size() < 4) {
         return false;
     }
     if (IsEofRecord(rec)) {
@@ -730,7 +731,8 @@ bool MobiDoc::LoadImage(size_t imageNo) {
         return true;
     }
     if (!KnownImageFormat(rec)) {
-        logf("MobiDoc::LoadImage: unknown image format\n");
+        u32 sig = UInt32BE(rec.data());
+        logf("MobiDoc::LoadImage: unknown record type 0x%08X\n", sig);
         return true;
     }
     images[imageNo] = rec;
