@@ -6888,6 +6888,16 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             break;
         }
 
+        case CmdShowErrors: {
+            EngineBase* engine = dm ? dm->GetEngine() : nullptr;
+            if (engine && engine->errors.Size() > 0) {
+                char* text = Join(&engine->errors, "");
+                ShowTextInWindow("Errors", text);
+                str::Free(text);
+            }
+            break;
+        }
+
         case CmdDocumentShowOutline: {
             if (tab && tab->ctrl && tab->ctrl->HasToc()) {
                 if (tab->hwndPDFOutline && IsWindow(tab->hwndPDFOutline)) {

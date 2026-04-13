@@ -2172,14 +2172,6 @@ void OnWindowContextMenu(MainWindow* win, int x, int y) {
             DelFavorite(filePath, pageNoUnderCursor);
             return;
         }
-        case CmdShowErrors: {
-            if (engine && engine->errors.Size() > 0) {
-                char* text = Join(&engine->errors, "");
-                ShowTextInWindow("Errors", text);
-                str::Free(text);
-            }
-            return;
-        }
     }
     // everything else we forward to FrameOnCommand() in SumatraPDF.cpp
     HwndSendCommand(win->hwndFrame, cmdId);
