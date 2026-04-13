@@ -175,7 +175,7 @@ static struct {
     {"Kaiti TC", "KaiTi"},
 };
 
-static win_fonts g_win_fonts;
+static win_fonts g_win_fonts = {0};
 
 static int did_init = 0;
 static CRITICAL_SECTION cs_fonts;
@@ -591,7 +591,7 @@ static void extend_system_font_list(fz_context* ctx, const WCHAR* path) {
         if (!(FileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
             char szPathUtf8[MAX_PATH], *fileExt;
             int res;
-            lstrcpyn(lpFileName, FileData.cFileName, szPath + MAX_PATH - lpFileName);
+            lstrcpynW(lpFileName, FileData.cFileName, szPath + MAX_PATH - lpFileName);
             res = WideCharToMultiByte(CP_UTF8, 0, szPath, -1, szPathUtf8, sizeof(szPathUtf8), NULL, NULL);
             if (!res) {
                 fz_warn(ctx, "WideCharToMultiByte failed");
@@ -731,7 +731,7 @@ static int str_ends_with(const char* str, const char* end) {
 static fz_font* load_windows_font_by_name(fz_context* ctx, const char* orig_name) {
     win_font_info* found = NULL;
     char *comma, *fontname;
-    fz_font* font;
+    fz_font* font = NULL;
     fz_buffer* buffer;
 
     if (is_font_failed(orig_name)) {
