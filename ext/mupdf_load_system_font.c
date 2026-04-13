@@ -143,6 +143,13 @@ static struct {
     {"DINPro", "SegoeUI"},
     {"ACaslonPro-Regular", "Georgia"},
     {"ACaslonPro-Italic", "Georgia-Italic"},
+    // Liberation Sans (Linux metrically compatible with Arial) fallbacks
+    {"LiberationSans", "ArialMT"},
+    {"LiberationSans-Bold", "Arial-BoldMT"},
+    {"LiberationSans-Italic", "Arial-ItalicMT"},
+    {"LiberationSans-BoldItalic", "Arial-BoldItalicMT"},
+    // Safari placeholder font
+    {"SafariFakeFont", "ArialMT"},
     // PingFang SC (macOS/iOS Simplified Chinese) fallbacks
     {"PingFangSC-Regular", "Microsoft YaHei"},
     {"PingFangSC-Medium", "Microsoft YaHei"},
