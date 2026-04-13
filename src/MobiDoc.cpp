@@ -203,7 +203,7 @@ class HuffDicDecompressor {
 
     u32 codeLength = 0;
 
-    Vec<u32> recursionGuard;
+    int recursionDepth = 0;
 
   public:
     HuffDicDecompressor();
@@ -237,15 +237,16 @@ bool HuffDicDecompressor::DecodeOne(u32 code, str::Str& dst) {
     }
 
     if (!(symLen & 0x8000)) {
-        if (recursionGuard.Contains(code)) {
+        if (recursionDepth > 20) {
             logf("infinite recursion\n");
             return false;
         }
-        recursionGuard.Append(code);
+        recursionDepth++;
         if (!Decompress(p, symLen, dst)) {
+            recursionDepth--;
             return false;
         }
-        recursionGuard.Pop();
+        recursionDepth--;
     } else {
         symLen &= 0x7fff;
         if (symLen > 127) {
