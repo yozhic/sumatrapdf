@@ -207,7 +207,10 @@ void SetWindowRoundedCorners(HWND hwnd, bool rounded) {
 }; // namespace dwm
 
 static const char* dllsToPreload =
-    "gdiplus.dll\0msimg32.dll\0shlwapi.dll\0urlmon.dll\0version.dll\0windowscodecs.dll\0wininet.dll\0";
+    "comctl32.dll\0gdiplus.dll\0msimg32.dll\0shlwapi.dll\0urlmon.dll\0"
+    "version.dll\0windowscodecs.dll\0wininet.dll\0"
+    "uiautomationcore.dll\0uxtheme.dll\0wintrust.dll\0crypt32.dll\0"
+    "dwrite.dll\0";
 
 // try to mitigate dll hijacking by pre-loading all the dlls that we delay load or might
 // be loaded indirectly
