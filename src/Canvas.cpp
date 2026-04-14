@@ -2295,6 +2295,87 @@ static LRESULT OnGesture(MainWindow* win, UINT msg, WPARAM wp, LPARAM lp) {
     return 0;
 }
 
+// WM_POINTER message support for pen/stylus input
+#ifndef WM_POINTERDOWN
+#define WM_POINTERDOWN 0x0246
+#define WM_POINTERUP 0x0247
+#define WM_POINTERUPDATE 0x0245
+#endif
+
+// POINTER_INPUT_TYPE values
+#define SUMATRA_PT_PEN 3
+
+// pointer message flags (in HIWORD of wParam)
+#define SUMATRA_POINTER_MESSAGE_FLAG_INCONTACT 0x0004
+#define SUMATRA_POINTER_MESSAGE_FLAG_FIRSTBUTTON 0x0010
+
+// dynamically loaded pointer API (Windows 8+)
+typedef BOOL(WINAPI* Sig_GetPointerType)(UINT32 pointerId, DWORD* pointerType);
+static Sig_GetPointerType DynGetPointerType = nullptr;
+static bool triedLoadPointerApi = false;
+
+static void EnsurePointerApiLoaded() {
+    if (triedLoadPointerApi) {
+        return;
+    }
+    triedLoadPointerApi = true;
+    HMODULE h = GetModuleHandleW(L"user32.dll");
+    if (h) {
+        DynGetPointerType = (Sig_GetPointerType)GetProcAddress(h, "GetPointerType");
+    }
+}
+
+// handle WM_POINTER* messages for pen input by translating to mouse handlers
+// pen input on Windows 8+ generates WM_POINTER* instead of WM_LBUTTON*
+// and gesture configuration can prevent automatic promotion to mouse messages
+static bool OnPointerMessage(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
+    EnsurePointerApiLoaded();
+    if (!DynGetPointerType) {
+        return false;
+    }
+
+    UINT32 pointerId = LOWORD(wp);
+    DWORD pointerType = 0;
+    if (!DynGetPointerType(pointerId, &pointerType)) {
+        return false;
+    }
+    // only handle pen input; let mouse and touch go through normal paths
+    if (pointerType != SUMATRA_PT_PEN) {
+        return false;
+    }
+
+    // WM_POINTER* lp contains screen coordinates
+    POINT pt;
+    pt.x = GET_X_LPARAM(lp);
+    pt.y = GET_Y_LPARAM(lp);
+    ScreenToClient(hwnd, &pt);
+    int x = pt.x;
+    int y = pt.y;
+
+    // pointer message flags are in HIWORD(wParam)
+    WORD flags = HIWORD(wp);
+    WPARAM mouseWp = 0;
+
+    if (msg == WM_POINTERDOWN) {
+        mouseWp = MK_LBUTTON;
+        OnMouseLeftButtonDown(win, x, y, mouseWp);
+        return true;
+    }
+    if (msg == WM_POINTERUPDATE) {
+        bool inContact = (flags & SUMATRA_POINTER_MESSAGE_FLAG_INCONTACT) != 0;
+        if (inContact) {
+            mouseWp = MK_LBUTTON;
+        }
+        OnMouseMove(win, x, y, mouseWp);
+        return true;
+    }
+    if (msg == WM_POINTERUP) {
+        OnMouseLeftButtonUp(win, x, y, mouseWp);
+        return true;
+    }
+    return false;
+}
+
 static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     // DbgLogMsg("canvas:", hwnd, msg, wp, lp);
 
@@ -2396,6 +2477,14 @@ static LRESULT WndProcCanvasFixedPageUI(MainWindow* win, HWND hwnd, UINT msg, WP
 
         case WM_GESTURE:
             return OnGesture(win, msg, wp, lp);
+
+        case WM_POINTERDOWN:
+        case WM_POINTERUPDATE:
+        case WM_POINTERUP:
+            if (OnPointerMessage(win, hwnd, msg, wp, lp)) {
+                return 0;
+            }
+            return DefWindowProc(hwnd, msg, wp, lp);
 
         case WM_NCPAINT: {
             if (ScrollbarsAreHidden() || ScrollbarsUseOverlay()) {
