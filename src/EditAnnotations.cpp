@@ -1658,7 +1658,9 @@ void ShowEditAnnotationsWindow(WindowTab* tab, Annotation* annot, EditAnnotFocus
     } else {
         int dx = lastPos.dx;
         LayoutAndSizeToContent(ew->mainLayout, dx, minDy, ew->hwnd);
-        Rect r = ShiftRectToWorkArea(lastPos, ew->hwnd, true);
+        // pass nullptr for hwnd so ShiftRectToWorkArea uses the saved rect
+        // to find the correct monitor (not the monitor the hwnd is currently on)
+        Rect r = ShiftRectToWorkArea(lastPos, nullptr, true);
         SetWindowPos(ew->hwnd, nullptr, r.x, r.y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
     }
     if (!annot) annot = ew->tab->selectedAnnotation;
