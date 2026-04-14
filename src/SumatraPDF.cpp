@@ -7204,6 +7204,11 @@ static LRESULT FrameOnCommand(MainWindow* win, HWND hwnd, UINT msg, WPARAM wp, L
             SaveSettings();
             break;
 
+        case CmdToggleReuseInstance:
+            gGlobalPrefs->reuseInstance = !gGlobalPrefs->reuseInstance;
+            SaveSettings();
+            break;
+
         case CmdToggleTips: {
             gGlobalPrefs->showTips = !gGlobalPrefs->showTips;
             SaveSettings();

@@ -225,6 +225,7 @@ export const commands = [
     "CmdDocumentExtractText", "Extract Text From Document",
     "CmdDocumentShowOutline", "Show Document Bookmarks",
     "CmdSetScreenshotHotkey", "Set Screenshot Hotkey",
+    "CmdToggleReuseInstance", "Toggle Reuse Instance",
     "CmdNone", "Do nothing",
 ];
 

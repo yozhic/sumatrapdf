@@ -235,6 +235,7 @@ static SeqStrings gCommandNames =
     "CmdDocumentExtractText\0"
     "CmdDocumentShowOutline\0"
     "CmdSetScreenshotHotkey\0"
+    "CmdToggleReuseInstance\0"
     "CmdNone\0"
     "\0";
 
@@ -460,6 +461,7 @@ static i32 gCommandIds[] = {
     CmdDocumentExtractText,
     CmdDocumentShowOutline,
     CmdSetScreenshotHotkey,
+    CmdToggleReuseInstance,
     CmdNone,
 };
 
@@ -685,6 +687,7 @@ SeqStrings gCommandDescriptions =
     "Extract Text From Document\0"
     "Show Document Bookmarks\0"
     "Set Screenshot Hotkey\0"
+    "Toggle Reuse Instance\0"
     "Do nothing\0"
     "\0";
 // clang-format on

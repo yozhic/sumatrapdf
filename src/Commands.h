@@ -230,7 +230,8 @@ enum {
     CmdDocumentExtractText = 419,
     CmdDocumentShowOutline = 420,
     CmdSetScreenshotHotkey = 421,
-    CmdNone = 422,
+    CmdToggleReuseInstance = 422,
+    CmdNone = 423,
 
     /* range for file history */
     CmdFileHistoryFirst,
