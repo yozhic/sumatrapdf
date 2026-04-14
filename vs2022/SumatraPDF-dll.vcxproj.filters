@@ -878,12 +878,6 @@
     <None Include="..\cmd\gen-settings.ts">
       <Filter>cmd</Filter>
     </None>
-    <None Include="..\cmd\logview-build.ts">
-      <Filter>cmd</Filter>
-    </None>
-    <None Include="..\cmd\logview.ts">
-      <Filter>cmd</Filter>
-    </None>
     <None Include="..\cmd\markdown-it.min.js">
       <Filter>cmd</Filter>
     </None>
@@ -900,6 +894,9 @@
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\show-preview-reg.ts">
+      <Filter>cmd</Filter>
+    </None>
+    <None Include="..\cmd\sync-bug-files.ts">
       <Filter>cmd</Filter>
     </None>
     <None Include="..\cmd\test-plugin.ts">
