@@ -2873,7 +2873,7 @@ bool SaveAnnotationsToExistingFile(WindowTab* tab) {
     bool hadEditAnnotations = CloseAndDeleteEditAnnotationsWindow(tab);
     ReloadDocument(tab->win, false);
     if (hadEditAnnotations) {
-        // TODO: improve by remembering which annotation was selected and restoring it after reload
+        // TODO: improve by remembering which annotation was selected and restoring it after  we reload
         ShowEditAnnotationsWindow(tab, nullptr);
     }
 
