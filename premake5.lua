@@ -207,19 +207,6 @@ function uses_zlib()
   zlib_defines()
 end
 
--- this is to prevent dll hijacking
-function dll_link_delayed()
-    local delayed = {
-      "comctl32", "gdiplus", "msimg32", "shlwapi", "urlmon",
-      "version", "windowscodecs", "wininet", "uiautomationcore", "uxtheme", "wintrust", "crypt32"
-    }
-    links(delayed)
-    links { "delayimp" }
-    for _, lib in ipairs(delayed) do
-      linkoptions { "/DELAYLOAD:" .. lib .. ".dll" }
-    end
-end
-
 workspace "SumatraPDF"
   configurations { "Debug", "DebugFull", "Release", "ReleaseAnalyze", }
   platforms { "x86", "x64", "arm64", "x64_asan" }
@@ -932,7 +919,14 @@ workspace "SumatraPDF"
     links {
       "libdjvu", "libwebp", "dav1d", "libheif", "mupdf", "libarchive", "utils", "unrar", "chm"
     }
-    dll_link_delayed()
+    links {
+      "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
+      "version", "windowscodecs", "wininet", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
+    }
+    -- this is to prevent dll hijacking
+    linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
+    linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
+    linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
     filter "platforms:x64_asan"
     linkoptions { "/INFERASANLIBS" }
     filter {}
@@ -995,7 +989,15 @@ workspace "SumatraPDF"
     links {
       "libmupdf", "unrar", "libarchive", "utils", "chm"
     }
-    dll_link_delayed()
+    links {
+      "comctl32", "delayimp", "gdiplus", "msimg32", "shlwapi", "urlmon",
+      "version", "wininet", "d2d1.lib", "uiautomationcore.lib", "uxtheme", "wintrust", "crypt32"
+    }
+    -- this is to prevent dll hijacking
+    linkoptions { "/DELAYLOAD:libmupdf.dll" }
+    linkoptions { "/DELAYLOAD:gdiplus.dll /DELAYLOAD:msimg32.dll /DELAYLOAD:shlwapi.dll" }
+    linkoptions { "/DELAYLOAD:urlmon.dll /DELAYLOAD:wininet.dll" }
+    linkoptions { "/DELAYLOAD:uiautomationcore.dll" }
     dependson { "PdfFilter", "PdfPreview", "test_util" }
     prebuildcommands { "..\\bin\\MakeLZSA.exe ..\\translations\\translations.txt.lzsa ..\\translations\\translations-good.txt:translations-good.txt" }
     prebuildcommands { "cd %{cfg.targetdir} & ..\\..\\bin\\MakeLZSA.exe InstallerData.dat libmupdf.dll:libmupdf.dll PdfFilter.dll:PdfFilter.dll PdfPreview.dll:PdfPreview.dll" }
