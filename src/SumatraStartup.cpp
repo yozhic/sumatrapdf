@@ -1512,7 +1512,7 @@ int APIENTRY WinMain(_In_ HINSTANCE /*hInstance*/, _In_opt_ HINSTANCE, _In_ LPST
         // TODO: pass print request through to previous instance?
     } else if (flags.reuseDdeInstance || flags.dde) {
         existingHwnd = FindWindowW(FRAME_CLASS_NAME, nullptr);
-    } else if (gGlobalPrefs->reuseInstance || SettingsUseTabs()) {
+    } else if (gGlobalPrefs->reuseInstance) {
         existingHwnd = existingInstanceHwnd;
     }
 
