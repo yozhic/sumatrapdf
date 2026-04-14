@@ -730,68 +730,95 @@ static bool GetImagePropertyLong(Bitmap* bmp, PROPID id, ULONG& val) {
 }
 
 static TempStr GetImagePropertyTemp(Bitmap* bmp, PROPID id, PROPID altId = 0) {
-    char* value = nullptr;
+    TempStr value = nullptr;
     uint size = bmp->GetPropertyItemSize(id);
+    if (size == 0) {
+        return altId == 0 ? nullptr : GetImagePropertyTemp(bmp, altId);
+    }
     PropertyItem* item = (PropertyItem*)malloc(size);
-    Status ok = item ? bmp->GetPropertyItem(id, size, item) : OutOfMemory;
+    if (!item) return nullptr;
+    AutoFree freeItem((const char*)item);
+    Status ok = bmp->GetPropertyItem(id, size, item);
     if (Ok != ok) {
         /* property didn't exist */;
+        return altId == 0 ? nullptr : GetImagePropertyTemp(bmp, altId);
     } else if (PropertyTagTypeASCII == item->type) {
-        value = strconv::AnsiToUtf8((char*)item->value);
+        value = strconv::AnsiToUtf8Temp((char*)item->value, (size_t)size);
     } else if (PropertyTagTypeByte == item->type && item->length > 0 && 0 == (item->length % 2) &&
                !((WCHAR*)item->value)[item->length / 2 - 1]) {
         value = ToUtf8Temp((WCHAR*)item->value);
-        if (value) {
-            return value;
-        }
     }
-    free(item);
-    if (!value && altId) {
-        return GetImagePropertyTemp(bmp, altId);
+    if (str::IsEmptyOrWhiteSpace(value)) {
+        return altId == 0 ? nullptr : GetImagePropertyTemp(bmp, altId);
     }
-    TempStr res = str::DupTemp(value);
-    str::Free(value);
-    return res;
+    return value;
+}
+
+// load bitmap using GDI+ Bitmap::FromStream which preserves EXIF metadata
+// BitmapFromData() uses WIC which decodes to raw pixels, losing EXIF
+static Bitmap* BitmapWithExifFromData(const ByteSlice& data) {
+    if (data.empty()) {
+        return nullptr;
+    }
+    IStream* strm = CreateStreamFromData(data);
+    if (!strm) {
+        return nullptr;
+    }
+    Bitmap* bmp = Gdiplus::Bitmap::FromStream(strm);
+    strm->Release();
+    if (bmp && bmp->GetLastStatus() != Ok) {
+        delete bmp;
+        return nullptr;
+    }
+    return bmp;
+}
+
+static Bitmap* BitmapWithExifFromFile(const char* path) {
+    if (!path) {
+        return nullptr;
+    }
+    ByteSlice data = file::ReadFile(path);
+    Bitmap* bmp = BitmapWithExifFromData(data);
+    data.Free();
+    return bmp;
 }
 
 TempStr EngineImage::GetPropertyTemp(const char* name) {
-    if (str::Eq(name, kPropTitle)) {
-        return GetImagePropertyTemp(image, PropertyTagImageDescription, PropertyTagXPTitle);
+    Bitmap* bmp = BitmapWithExifFromFile(FilePath());
+    TempStr res = nullptr;
+    if (bmp) {
+        if (str::Eq(name, kPropTitle)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagImageDescription, PropertyTagXPTitle);
+        } else if (str::Eq(name, kPropSubject)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagXPSubject);
+        } else if (str::Eq(name, kPropAuthor)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagArtist, PropertyTagXPAuthor);
+        } else if (str::Eq(name, kPropCopyright)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagCopyright);
+        } else if (str::Eq(name, kPropCreationDate)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagDateTime, PropertyTagExifDTDigitized);
+        } else if (str::Eq(name, kPropCreatorApp)) {
+            res = GetImagePropertyTemp(bmp, PropertyTagSoftwareUsed);
+        }
+        delete bmp;
     }
-    if (str::Eq(name, kPropSubject)) {
-        return GetImagePropertyTemp(image, PropertyTagXPSubject);
-    }
-    if (str::Eq(name, kPropAuthor)) {
-        return GetImagePropertyTemp(image, PropertyTagArtist, PropertyTagXPAuthor);
-    }
-    if (str::Eq(name, kPropCopyright)) {
-        return GetImagePropertyTemp(image, PropertyTagCopyright);
-    }
-    if (str::Eq(name, kPropCreationDate)) {
-        return GetImagePropertyTemp(image, PropertyTagDateTime, PropertyTagExifDTDigitized);
-    }
-    if (str::Eq(name, kPropCreatorApp)) {
-        return GetImagePropertyTemp(image, PropertyTagSoftwareUsed);
-    }
-    return nullptr;
+    return res;
 }
 
-void EngineImage::GetProperties(StrVec& keyValOut) {
-    EngineBase::GetProperties(keyValOut);
-
+static void GetBitmapExifProperties(Bitmap* bmp, StrVec& keyValOut) {
     TempStr val;
 
     // image dimensions
-    uint w = image->GetWidth();
-    uint h = image->GetHeight();
+    uint w = bmp->GetWidth();
+    uint h = bmp->GetHeight();
     if (w > 0 && h > 0) {
         val = str::FormatTemp("%u x %u", w, h);
         AddProp(keyValOut, kPropImageSize, val);
     }
 
     // DPI
-    float dpiX = image->GetHorizontalResolution();
-    float dpiY = image->GetVerticalResolution();
+    float dpiX = bmp->GetHorizontalResolution();
+    float dpiY = bmp->GetVerticalResolution();
     if (dpiX > 0 && dpiY > 0) {
         if (dpiX == dpiY) {
             val = str::FormatTemp("%.0f", dpiX);
@@ -802,36 +829,36 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
     }
 
     // keywords
-    val = GetImagePropertyTemp(image, PropertyTagXPKeywords);
+    val = GetImagePropertyTemp(bmp, PropertyTagXPKeywords);
     if (val) {
         AddProp(keyValOut, kPropKeywords, val);
     }
 
     // comment
-    val = GetImagePropertyTemp(image, PropertyTagXPComment);
+    val = GetImagePropertyTemp(bmp, PropertyTagXPComment);
     if (val) {
         AddProp(keyValOut, kPropComment, val);
     }
 
     // camera make and model
-    val = GetImagePropertyTemp(image, PropertyTagEquipMake);
+    val = GetImagePropertyTemp(bmp, PropertyTagEquipMake);
     if (val) {
         AddProp(keyValOut, kPropCameraMake, val);
     }
-    val = GetImagePropertyTemp(image, PropertyTagEquipModel);
+    val = GetImagePropertyTemp(bmp, PropertyTagEquipModel);
     if (val) {
         AddProp(keyValOut, kPropCameraModel, val);
     }
 
     // date original
-    val = GetImagePropertyTemp(image, PropertyTagExifDTOrig);
+    val = GetImagePropertyTemp(bmp, PropertyTagExifDTOrig);
     if (val) {
         AddProp(keyValOut, kPropDateOriginal, val);
     }
 
     // exposure time
     ULONG num, den;
-    if (GetImagePropertyRational(image, PropertyTagExifExposureTime, num, den)) {
+    if (GetImagePropertyRational(bmp, PropertyTagExifExposureTime, num, den)) {
         if (den > 0 && num > 0) {
             if (num == 1) {
                 val = str::FormatTemp("1/%u s", den);
@@ -843,7 +870,7 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
     }
 
     // f-number
-    if (GetImagePropertyRational(image, PropertyTagExifFNumber, num, den)) {
+    if (GetImagePropertyRational(bmp, PropertyTagExifFNumber, num, den)) {
         if (den > 0) {
             float fNum = (float)num / (float)den;
             val = str::FormatTemp("f/%.1f", fNum);
@@ -853,13 +880,13 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 
     // ISO speed
     ULONG isoVal;
-    if (GetImagePropertyLong(image, PropertyTagExifISOSpeed, isoVal)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifISOSpeed, isoVal)) {
         val = str::FormatTemp("ISO %u", isoVal);
         AddProp(keyValOut, kPropIsoSpeed, val);
     }
 
     // focal length
-    if (GetImagePropertyRational(image, PropertyTagExifFocalLength, num, den)) {
+    if (GetImagePropertyRational(bmp, PropertyTagExifFocalLength, num, den)) {
         if (den > 0) {
             float fl = (float)num / (float)den;
             val = str::FormatTemp("%.1f mm", fl);
@@ -869,28 +896,28 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 
     // focal length in 35mm equivalent
     ULONG fl35;
-    if (GetImagePropertyLong(image, PropertyTagExifFocalLengthIn35mmFilm, fl35)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifFocalLengthIn35mmFilm, fl35)) {
         val = str::FormatTemp("%u mm", fl35);
         AddProp(keyValOut, kPropFocalLength35mm, val);
     }
 
     // flash
     ULONG flashVal;
-    if (GetImagePropertyLong(image, PropertyTagExifFlash, flashVal)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifFlash, flashVal)) {
         const char* flashStr = (flashVal & 1) ? "Yes" : "No";
         AddProp(keyValOut, kPropFlash, flashStr);
     }
 
     // orientation
     ULONG orient;
-    if (GetImagePropertyLong(image, PropertyTagOrientation, orient)) {
+    if (GetImagePropertyLong(bmp, PropertyTagOrientation, orient)) {
         val = str::FormatTemp("%u", orient);
         AddProp(keyValOut, kPropOrientation, val);
     }
 
     // exposure program
     ULONG expProg;
-    if (GetImagePropertyLong(image, PropertyTagExifExposureProg, expProg)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifExposureProg, expProg)) {
         // clang-format off
         static const char* exposurePrograms[] = {
             "Not defined", "Manual", "Normal program", "Aperture priority",
@@ -905,7 +932,7 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 
     // metering mode
     ULONG metering;
-    if (GetImagePropertyLong(image, PropertyTagExifMeteringMode, metering)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifMeteringMode, metering)) {
         // clang-format off
         static const char* meteringModes[] = {
             "Unknown", "Average", "Center Weighted Average", "Spot",
@@ -919,12 +946,12 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 
     // white balance
     ULONG wb;
-    if (GetImagePropertyLong(image, PropertyTagExifWhiteBalance, wb)) {
+    if (GetImagePropertyLong(bmp, PropertyTagExifWhiteBalance, wb)) {
         AddProp(keyValOut, kPropWhiteBalance, wb == 0 ? "Auto" : "Manual");
     }
 
     // exposure bias
-    if (GetImagePropertyRational(image, PropertyTagExifExposureBias, num, den)) {
+    if (GetImagePropertyRational(bmp, PropertyTagExifExposureBias, num, den)) {
         if (den > 0) {
             float bias = (float)(LONG)num / (float)(LONG)den;
             val = str::FormatTemp("%+.1f EV", bias);
@@ -934,9 +961,232 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 
     // bits per sample
     ULONG bps;
-    if (GetImagePropertyLong(image, PropertyTagBitsPerSample, bps)) {
+    if (GetImagePropertyLong(bmp, PropertyTagBitsPerSample, bps)) {
         val = str::FormatTemp("%u", bps);
         AddProp(keyValOut, kPropBitsPerSample, val);
+    }
+
+    // resolution unit
+    ULONG resUnit;
+    if (GetImagePropertyLong(bmp, PropertyTagResolutionUnit, resUnit)) {
+        // clang-format off
+        const char* unitStr = nullptr;
+        if (resUnit == 2) { unitStr = "inches"; }
+        else if (resUnit == 3) { unitStr = "centimeters"; }
+        else { unitStr = "unknown"; }
+        // clang-format on
+        AddProp(keyValOut, kPropResolutionUnit, unitStr);
+    }
+
+    // software
+    val = GetImagePropertyTemp(bmp, PropertyTagSoftwareUsed);
+    if (val) {
+        AddProp(keyValOut, kPropSoftware, val);
+    }
+
+    // date/time
+    val = GetImagePropertyTemp(bmp, PropertyTagDateTime);
+    if (val) {
+        AddProp(keyValOut, kPropDateTime, val);
+    }
+
+    // YCbCr positioning
+    ULONG ycbcrPos;
+    if (GetImagePropertyLong(bmp, PropertyTagYCbCrPositioning, ycbcrPos)) {
+        const char* posStr = (ycbcrPos == 1) ? "centered" : "co-sited";
+        AddProp(keyValOut, kPropYCbCrPositioning, posStr);
+    }
+
+    // exif version
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifVer, &item)) {
+            if (item->length >= 4) {
+                val = str::FormatTemp("%.*s", (int)item->length, (char*)item->value);
+                AddProp(keyValOut, kPropExifVersion, val);
+            }
+            free(item);
+        }
+    }
+
+    // date/time digitized
+    val = GetImagePropertyTemp(bmp, PropertyTagExifDTDigitized);
+    if (val) {
+        AddProp(keyValOut, kPropDateTimeDigitized, val);
+    }
+
+    // components configuration
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifCompConfig, &item)) {
+            // each byte: 0=does not exist, 1=Y, 2=Cb, 3=Cr, 4=R, 5=G, 6=B
+            static const char* compNames[] = {"", "Y", "Cb", "Cr", "R", "G", "B"};
+            str::Str s;
+            u8* data = (u8*)item->value;
+            for (ULONG i = 0; i < item->length; i++) {
+                u8 c = data[i];
+                if (c == 0) {
+                    break;
+                }
+                if (s.size() > 0) {
+                    s.Append(", ");
+                }
+                if (c < dimof(compNames)) {
+                    s.Append(compNames[c]);
+                }
+            }
+            if (s.size() > 0) {
+                AddProp(keyValOut, kPropComponentsConfig, s.CStr());
+            }
+            free(item);
+        }
+    }
+
+    // compressed bits per pixel
+    if (GetImagePropertyRational(bmp, PropertyTagExifCompBPP, num, den)) {
+        if (den > 0) {
+            float cbpp = (float)num / (float)den;
+            if (den == 1) {
+                val = str::FormatTemp("%u", num);
+            } else {
+                val = str::FormatTemp("%.2f", cbpp);
+            }
+            AddProp(keyValOut, kPropCompressedBpp, val);
+        }
+    }
+
+    // max aperture value
+    if (GetImagePropertyRational(bmp, PropertyTagExifAperture, num, den)) {
+        if (den > 0) {
+            float aperture = (float)num / (float)den;
+            val = str::FormatTemp("%.2f", aperture);
+            AddProp(keyValOut, kPropMaxAperture, val);
+        }
+    }
+
+    // light source
+    ULONG lightSrc;
+    if (GetImagePropertyLong(bmp, PropertyTagExifLightSource, lightSrc)) {
+        // clang-format off
+        const char* lightStr = nullptr;
+        switch (lightSrc) {
+            case 0:  lightStr = "Unknown"; break;
+            case 1:  lightStr = "Daylight"; break;
+            case 2:  lightStr = "Fluorescent"; break;
+            case 3:  lightStr = "Tungsten"; break;
+            case 4:  lightStr = "Flash"; break;
+            case 9:  lightStr = "Fine weather"; break;
+            case 10: lightStr = "Cloudy weather"; break;
+            case 11: lightStr = "Shade"; break;
+            case 17: lightStr = "Standard light A"; break;
+            case 18: lightStr = "Standard light B"; break;
+            case 19: lightStr = "Standard light C"; break;
+            case 255: lightStr = "Other"; break;
+            default: lightStr = "Unknown"; break;
+        }
+        // clang-format on
+        AddProp(keyValOut, kPropLightSource, lightStr);
+    }
+
+    // user comment
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifUserComment, &item)) {
+            // first 8 bytes are character code identifier
+            if (item->length > 8) {
+                char* commentData = (char*)item->value + 8;
+                ULONG commentLen = item->length - 8;
+                // check if it's ASCII
+                if (memcmp(item->value, "ASCII\0\0\0", 8) == 0) {
+                    val = str::DupTemp(commentData, commentLen);
+                    if (val && !str::IsEmpty(val)) {
+                        AddProp(keyValOut, kPropUserComment, val);
+                    }
+                }
+                // Unicode
+                else if (memcmp(item->value, "UNICODE\0", 8) == 0) {
+                    val = ToUtf8Temp((WCHAR*)commentData, commentLen / 2);
+                    if (val && !str::IsEmpty(val)) {
+                        AddProp(keyValOut, kPropUserComment, val);
+                    }
+                }
+            }
+            free(item);
+        }
+    }
+
+    // flashpix version
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifFPXVer, &item)) {
+            if (item->length >= 4) {
+                val = str::FormatTemp("%.*s", (int)item->length, (char*)item->value);
+                AddProp(keyValOut, kPropFlashpixVersion, val);
+            }
+            free(item);
+        }
+    }
+
+    // color space
+    ULONG cs;
+    if (GetImagePropertyLong(bmp, PropertyTagExifColorSpace, cs)) {
+        const char* csStr = (cs == 1) ? "sRGB" : (cs == 0xFFFF) ? "Uncalibrated" : "Unknown";
+        AddProp(keyValOut, kPropColorSpace, csStr);
+    }
+
+    // pixel X dimension
+    ULONG pixX;
+    if (GetImagePropertyLong(bmp, PropertyTagExifPixXDim, pixX)) {
+        val = str::FormatTemp("%u", pixX);
+        AddProp(keyValOut, kPropPixelXDimension, val);
+    }
+
+    // pixel Y dimension
+    ULONG pixY;
+    if (GetImagePropertyLong(bmp, PropertyTagExifPixYDim, pixY)) {
+        val = str::FormatTemp("%u", pixY);
+        AddProp(keyValOut, kPropPixelYDimension, val);
+    }
+
+    // file source
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifFileSource, &item)) {
+            if (item->length >= 1) {
+                u8 src = *(u8*)item->value;
+                if (src == 3) {
+                    AddProp(keyValOut, kPropFileSource, "DSC");
+                }
+            }
+            free(item);
+        }
+    }
+
+    // scene type
+    {
+        PropertyItem* item = nullptr;
+        if (GetImagePropertyItem(bmp, PropertyTagExifSceneType, &item)) {
+            if (item->length >= 1) {
+                u8 scene = *(u8*)item->value;
+                if (scene == 1) {
+                    AddProp(keyValOut, kPropSceneType, "A directly photographed image");
+                }
+            }
+            free(item);
+        }
+    }
+}
+
+void EngineImage::GetProperties(StrVec& keyValOut) {
+    EngineBase::GetProperties(keyValOut);
+    // load with GDI+ to preserve EXIF (BitmapFromData uses WIC which strips it)
+    Bitmap* bmp = BitmapWithExifFromFile(FilePath());
+    if (bmp) {
+        GetBitmapExifProperties(bmp, keyValOut);
+        delete bmp;
+    } else {
+        // fallback to the display bitmap (won't have EXIF but has dimensions/DPI)
+        GetBitmapExifProperties(image, keyValOut);
     }
 }
 
@@ -1614,6 +1864,16 @@ TempStr EngineCbx::GetPropertyTemp(const char* name) {
 
 void EngineCbx::GetProperties(StrVec& keyValOut) {
     EngineBase::GetProperties(keyValOut);
+
+    if (pageCount == 1) {
+        ByteSlice img = GetImageData(1);
+        Bitmap* bmp = BitmapWithExifFromData(img);
+        img.Free();
+        if (bmp) {
+            GetBitmapExifProperties(bmp, keyValOut);
+            delete bmp;
+        }
+    }
 
     str::Str filesStr;
     auto& fileInfos = cbxArchive->GetFileInfos();

@@ -118,7 +118,7 @@ bool MultiFormatArchive::Open(const char* path) {
             return true;
         }
     }
-    if (kind == kindFileTar){
+    if (kind == kindFileTar) {
         loadOnOpen = true;
     }
     bool ok = OpenArchive(path);

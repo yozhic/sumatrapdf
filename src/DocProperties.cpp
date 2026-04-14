@@ -38,6 +38,23 @@ const char* kPropMeteringMode = "meteringMode";
 const char* kPropWhiteBalance = "whiteBalance";
 const char* kPropExposureBias = "exposureBias";
 const char* kPropBitsPerSample = "bitsPerSample";
+const char* kPropResolutionUnit = "resolutionUnit";
+const char* kPropSoftware = "software";
+const char* kPropDateTime = "dateTime";
+const char* kPropYCbCrPositioning = "yCbCrPositioning";
+const char* kPropExifVersion = "exifVersion";
+const char* kPropDateTimeDigitized = "dateTimeDigitized";
+const char* kPropComponentsConfig = "componentsConfig";
+const char* kPropCompressedBpp = "compressedBpp";
+const char* kPropMaxAperture = "maxAperture";
+const char* kPropLightSource = "lightSource";
+const char* kPropUserComment = "userComment";
+const char* kPropFlashpixVersion = "flashpixVersion";
+const char* kPropColorSpace = "colorSpace";
+const char* kPropPixelXDimension = "pixelXDimension";
+const char* kPropPixelYDimension = "pixelYDimension";
+const char* kPropFileSource = "fileSource";
+const char* kPropSceneType = "sceneType";
 
 // clang-format off
 const char* gAllProps[] = {

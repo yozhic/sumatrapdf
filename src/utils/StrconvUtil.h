@@ -19,7 +19,7 @@ char* Utf8ToAnsi(const char*);
 
 TempWStr AnsiToWStrTemp(const char* src, size_t cbLen = (size_t)-1);
 char* AnsiToUtf8(const char* src, size_t cbLen = (size_t)-1);
-
+TempStr AnsiToUtf8Temp(const char* src, size_t cbLen);
 } // namespace strconv
 
 // shorter names

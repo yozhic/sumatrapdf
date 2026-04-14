@@ -34,6 +34,23 @@ extern const char* kPropMeteringMode;
 extern const char* kPropWhiteBalance;
 extern const char* kPropExposureBias;
 extern const char* kPropBitsPerSample;
+extern const char* kPropResolutionUnit;
+extern const char* kPropSoftware;
+extern const char* kPropDateTime;
+extern const char* kPropYCbCrPositioning;
+extern const char* kPropExifVersion;
+extern const char* kPropDateTimeDigitized;
+extern const char* kPropComponentsConfig;
+extern const char* kPropCompressedBpp;
+extern const char* kPropMaxAperture;
+extern const char* kPropLightSource;
+extern const char* kPropUserComment;
+extern const char* kPropFlashpixVersion;
+extern const char* kPropColorSpace;
+extern const char* kPropPixelXDimension;
+extern const char* kPropPixelYDimension;
+extern const char* kPropFileSource;
+extern const char* kPropSceneType;
 
 extern const char* gAllProps[];
 

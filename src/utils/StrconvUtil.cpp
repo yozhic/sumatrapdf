@@ -179,6 +179,12 @@ TempWStr AnsiToWStrTemp(const char* src, size_t cbLen) {
     return StrCPToWStrTemp(src, CP_ACP, (int)cbLen);
 }
 
+TempStr AnsiToUtf8Temp(const char* src, size_t cbLen) {
+    TempWStr ws = StrCPToWStrTemp(src, CP_ACP, (int)cbLen);
+    TempStr res = ToUtf8Temp(ws);
+    return res;
+}
+
 char* AnsiToUtf8(const char* src, size_t cbLen) {
     TempWStr ws = StrCPToWStrTemp(src, CP_ACP, (int)cbLen);
     char* res = ToUtf8(ws);

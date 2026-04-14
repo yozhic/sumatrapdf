@@ -303,6 +303,23 @@ static const char* propToName[] = {
     kPropWhiteBalance, _TRN("White Balance:"),
     kPropExposureBias, _TRN("Exposure Bias:"),
     kPropBitsPerSample, _TRN("Bits Per Sample:"),
+    kPropResolutionUnit, _TRN("Resolution Unit:"),
+    kPropSoftware, _TRN("Software:"),
+    kPropDateTime, _TRN("Date/Time:"),
+    kPropYCbCrPositioning, _TRN("YCbCr Positioning:"),
+    kPropExifVersion, _TRN("Exif Version:"),
+    kPropDateTimeDigitized, _TRN("Date/Time Digitized:"),
+    kPropComponentsConfig, _TRN("Components Configuration:"),
+    kPropCompressedBpp, _TRN("Compressed Bits/Pixel:"),
+    kPropMaxAperture, _TRN("Max Aperture:"),
+    kPropLightSource, _TRN("Light Source:"),
+    kPropUserComment, _TRN("User Comment:"),
+    kPropFlashpixVersion, _TRN("Flashpix Version:"),
+    kPropColorSpace, _TRN("Color Space:"),
+    kPropPixelXDimension, _TRN("Pixel X Dimension:"),
+    kPropPixelYDimension, _TRN("Pixel Y Dimension:"),
+    kPropFileSource, _TRN("File Source:"),
+    kPropSceneType, _TRN("Scene Type:"),
     nullptr,
 };
 // clang-format on
@@ -384,10 +401,7 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
     ReportIf(!ctrl);
 
     const char* path = gPluginMode ? gPluginURL : ctrl->GetFilePath();
-    if (!path) {
-        path = "unknown";
-    }
-    AppendProp(out, _TRA("File:"), path);
+    AppendProp(out, _TRA("File:"), path ? path : "(not available)");
 
     DisplayModel* dm = ctrl->AsFixed();
     i64 fileSize = file::GetSize(path); // can be gPluginURL
