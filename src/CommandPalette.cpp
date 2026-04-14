@@ -1509,7 +1509,7 @@ bool CommandPaletteWnd::Create(MainWindow* win, const char* prefix, int smartTab
         {
             auto c = CreateStatic(hwnd, font, _TRA(": Everything"));
             c->SetColors(colTxt, colBg);
-            c->onClick = MkMethod0<CommandPaletteWnd, &CommandPaletteWnd::SwitchToTabs>(this);
+            c->onClick = MkMethod0<CommandPaletteWnd, &CommandPaletteWnd::SwitchToEverything>(this);
             auto p = new Padding(c, pad);
             hbox->AddChild(p);
         }
