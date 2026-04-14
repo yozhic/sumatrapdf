@@ -1287,7 +1287,6 @@ void ReCreateToolbar(MainWindow* win) {
         HwndDestroyWindowSafe(&win->hwndReBar);
     }
     CreateToolbar(win);
-    RelayoutWindow(win);
 }
 
 // --- Menu bar as rebar control (used when tabs are in titlebar) ---

@@ -298,11 +298,13 @@ bool LoadSettings() {
     FreeAcceleratorTables();
     CreateSumatraAcceleratorTable();
 
+    SetCurrentThemeFromSettings();
     for (MainWindow* win : gWindows) {
         ReCreateToolbar(win);
+        RelayoutWindow(win);
+        win->RedrawAll(true);
     }
 
-    SetCurrentThemeFromSettings();
     if (!file::Exists(settingsPath)) {
         SaveSettings();
     }
