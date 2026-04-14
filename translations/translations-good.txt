@@ -13870,6 +13870,152 @@ tw:Ctrl+Tab 進行導覽
 uk:Ctrl+Tab для навігації
 uz:Navigatsiya qilish uchun Ctrl+Tab
 vn:Ctrl+Tab để điều hướng
+:Current Image (%d):
+af:Huidige Beeld (%d):
+am:የአሁኑ ምስል (%d):
+ar:الصورة الحالية (%d):
+az:Cari Şəkil (%d):
+bg:Текущо изображение (%d):
+bn:বর্তমান ছবি (%d):
+br:Skeudenn vremanel (%d):
+bs:Trenutna slika (%d):
+by:Бягучае выява (%d):
+ca:Imatge actual (%d):
+ca-xv:Imatge actual (%d):
+cn:当前图片 (%d)：
+co:Imagine Attuale (%d):
+cy:Delwedd Gyfredol (%d):
+cz:Aktuální obrázek (%d):
+de:Aktuelles Bild (%d):
+dk:Nuværende billede (%d):
+el:Τρέχουσα Εικόνα (%d):
+es:Imagen actual (%d):
+et:Praegune pilt (%d):
+eu:Uneko irudia (%d):
+fa:تصویر فعلی (%d):
+fi:Nykyinen kuva (%d):
+fo:Núverandi mynd (%d):
+fr:Image actuelle (%d) :
+fy-nl:Aktuele ôfbylding (%d):
+ga:Íomhá Reatha (%d):
+gl:Imaxe actual (%d):
+he:תמונה נוכחית (%d):
+hi:वर्तमान छवि (%d):
+hr:Trenutna slika (%d):
+hu:Jelenlegi kép (%d):
+id:Gambar Saat Ini (%d):
+it:Immagine corrente (%d):
+ja:現在の画像 (%d):
+jv:Gambar Saiki (%d):
+ka:მიმდინარე სურათი (%d):
+kr:현재 이미지 (%d):
+ku:Wêneyê Niha (%d):
+kw:Skeusen a-lemmyn (%d):
+lt:Dabartinis vaizdas (%d):
+lv:Pašreizējais attēls (%d):
+mk:Тековна слика (%d):
+ml:നിലവിലെ ചിത്രം (%d):
+mm:လက်ရှိပုံ (%d):
+my:လက်ရှိပုံ (%d):
+ne:हालको छवि (%d):
+nl:Huidige afbeelding (%d):
+nn:Gjeldande bilete (%d):
+no:Gjeldende bilde (%d):
+pa:ਮੌਜੂਦਾ ਚਿੱਤਰ (%d):
+pl:Bieżący obraz (%d):
+pt:Imagem Atual (%d):
+ro:Imaginea curentă (%d):
+ru:Текущее изображение (%d):
+sat:ᱱᱤᱛᱚᱜᱟᱜ ᱪᱤᱛᱟᱹᱨ (%d):
+si:වත්මන් රූපය (%d):
+sk:Aktuálny obrázok (%d):
+sl:Trenutna slika (%d):
+sn:Mufananidzo Wazvino (%d):
+sp-rs:Trenutna slika (%d):
+sq:Imazhi Aktual (%d):
+sr-rs:Trenutna slika (%d):
+sv:Aktuell bild (%d):
+ta:தற்போதைய படம் (%d):
+th:รูปภาพปัจจุบัน (%d):
+tl:Kasalukuyang Larawan (%d):
+tr:Geçerli Görüntü (%d):
+tw:目前影像 (%d)：
+uk:Поточне зображення (%d):
+uz:Joriy rasm (%d):
+vn:Hình ảnh hiện tại (%d):
+:Current Page (%d) Size:
+af:Huidige Bladsy (%d) Grootte:
+am:የአሁኑ ገጽ (%d) መጠን:
+ar:حجم الصفحة الحالية (%d):
+az:Cari Səhifə (%d) Ölçüsü:
+bg:Размер на текущата страница (%d):
+bn:বর্তমান পৃষ্ঠা (%d) আকার:
+br:Ment ar bajenn vremanel (%d):
+bs:Veličina trenutne stranice (%d):
+by:Памер бягучай старонкі (%d):
+ca:Mida de la pàgina actual (%d):
+ca-xv:Mida de la pàgina actual (%d):
+cn:当前页面 (%d) 大小：
+co:Dimensione di a Pagina Attuale (%d):
+cy:Maint Tudalen Gyfredol (%d):
+cz:Velikost aktuální stránky (%d):
+de:Aktuelle Seite (%d) Größe:
+dk:Nuværende side (%d) størrelse:
+el:Μέγεθος Τρέχουσας Σελίδας (%d):
+es:Tamaño de la página actual (%d):
+et:Praeguse lehekülje (%d) suurus:
+eu:Uneko orriaren (%d) tamaina:
+fa:اندازه صفحه فعلی (%d):
+fi:Nykyisen sivun (%d) koko:
+fo:Núverandi síða (%d) stødd:
+fr:Taille de la page actuelle (%d) :
+fy-nl:Aktuele side (%d) grutte:
+ga:Méid an Leathanaigh Reatha (%d):
+gl:Tamaño da páxina actual (%d):
+he:גודל עמוד נוכחי (%d):
+hi:वर्तमान पृष्ठ (%d) आकार:
+hr:Veličina trenutne stranice (%d):
+hu:Jelenlegi oldal (%d) mérete:
+id:Ukuran Halaman Saat Ini (%d):
+it:Dimensione pagina corrente (%d):
+ja:現在のページ (%d) サイズ:
+jv:Ukuran Kaca Saiki (%d):
+ka:მიმდინარე გვერდის (%d) ზომა:
+kr:현재 페이지 (%d) 크기:
+ku:Mezinahiya Rûpela Niha (%d):
+kw:Myns an Folen a-lemmyn (%d):
+lt:Dabartinio puslapio (%d) dydis:
+lv:Pašreizējās lapas (%d) izmērs:
+mk:Големина на тековна страница (%d):
+ml:നിലവിലെ പേജ് (%d) വലുപ്പം:
+mm:လက်ရှိစာမျက်နှာ (%d) အရွယ်အစား:
+my:လက်ရှိစာမျက်နှာ (%d) အရွယ်အစား:
+ne:हालको पृष्ठ (%d) आकार:
+nl:Huidige pagina (%d) grootte:
+nn:Gjeldande side (%d) storleik:
+no:Gjeldende side (%d) størrelse:
+pa:ਮੌਜੂਦਾ ਸਫ਼ਾ (%d) ਆਕਾਰ:
+pl:Rozmiar bieżącej strony (%d):
+pt:Tamanho da Página Atual (%d):
+ro:Dimensiunea paginii curente (%d):
+ru:Размер текущей страницы (%d):
+sat:ᱱᱤᱛᱚᱜᱟᱜ ᱥᱟᱦᱴᱟ (%d) ᱢᱟᱯ:
+si:වත්මන් පිටුවේ (%d) ප්‍රමාණය:
+sk:Veľkosť aktuálnej stránky (%d):
+sl:Velikost trenutne strani (%d):
+sn:Saizi yePeji Yazvino (%d):
+sp-rs:Veličina trenutne stranice (%d):
+sq:Madhësia e Faqes Aktuale (%d):
+sr-rs:Veličina trenutne stranice (%d):
+sv:Aktuell sida (%d) storlek:
+ta:தற்போதைய பக்கம் (%d) அளவு:
+th:ขนาดหน้าปัจจุบัน (%d):
+tl:Laki ng Kasalukuyang Pahina (%d):
+tr:Geçerli Sayfa (%d) Boyutu:
+tw:目前頁面 (%d) 大小：
+uk:Розмір поточної сторінки (%d):
+uz:Joriy sahifa (%d) hajmi:
+vn:Kích thước trang hiện tại (%d):
 :Current file
 af:Huidige lêer
 am:Ընթացիկ ֆայլը
@@ -22922,6 +23068,79 @@ tw:圖示:
 uk:Значок:
 uz:Ikonka:
 vn:Biểu Tượng:
+:Image File Size:
+af:Beeldlêer Grootte:
+am:የምስል ፋይል መጠን:
+ar:حجم ملف الصورة:
+az:Şəkil Faylının Ölçüsü:
+bg:Размер на файла с изображението:
+bn:ছবি ফাইলের আকার:
+br:Ment ar restr skeudenn:
+bs:Veličina datoteke slike:
+by:Памер файла выявы:
+ca:Mida del fitxer d'imatge:
+ca-xv:Mida del fitxer d'imatge:
+cn:图片文件大小：
+co:Dimensione di u Schedariu Imagine:
+cy:Maint Ffeil Delwedd:
+cz:Velikost souboru obrázku:
+de:Bilddateigröße:
+dk:Billedfilstørrelse:
+el:Μέγεθος Αρχείου Εικόνας:
+es:Tamaño del archivo de imagen:
+et:Pildifaili suurus:
+eu:Irudi fitxategiaren tamaina:
+fa:اندازه فایل تصویر:
+fi:Kuvatiedoston koko:
+fo:Myndafílu stødd:
+fr:Taille du fichier image :
+fy-nl:Ofbyldingsbestânsgrutte:
+ga:Méid an Chomhaid Íomhá:
+gl:Tamaño do ficheiro de imaxe:
+he:גודל קובץ תמונה:
+hi:छवि फ़ाइल आकार:
+hr:Veličina datoteke slike:
+hu:Képfájl mérete:
+id:Ukuran File Gambar:
+it:Dimensione file immagine:
+ja:画像ファイルサイズ:
+jv:Ukuran File Gambar:
+ka:სურათის ფაილის ზომა:
+kr:이미지 파일 크기:
+ku:Mezinahiya Pelê Wêneyê:
+kw:Myns an Restren Skeusen:
+lt:Vaizdo failo dydis:
+lv:Attēla faila izmērs:
+mk:Големина на сликата:
+ml:ചിത്ര ഫയൽ വലുപ്പം:
+mm:ပုံဖိုင်အရွယ်အစား:
+my:ပုံဖိုင်အရွယ်အစား:
+ne:छवि फाइल आकार:
+nl:Afbeeldingsbestandsgrootte:
+nn:Biletfilstorleik:
+no:Bildfilstørrelse:
+pa:ਚਿੱਤਰ ਫ਼ਾਈਲ ਆਕਾਰ:
+pl:Rozmiar pliku obrazu:
+pt:Tamanho do Arquivo de Imagem:
+ro:Dimensiunea fișierului imagine:
+ru:Размер файла изображения:
+sat:ᱪᱤᱛᱟᱹᱨ ᱨᱮᱫᱽ ᱢᱟᱯ:
+si:රූප ගොනු ප්‍රමාණය:
+sk:Veľkosť súboru obrázka:
+sl:Velikost datoteke slike:
+sn:Saizi yeFaira reMufananidzo:
+sp-rs:Veličina datoteke slike:
+sq:Madhësia e Skedarit të Imazhit:
+sr-rs:Veličina fajla slike:
+sv:Bildens filstorlek:
+ta:படக் கோப்பு அளவு:
+th:ขนาดไฟล์รูปภาพ:
+tl:Laki ng File ng Larawan:
+tr:Görüntü Dosya Boyutu:
+tw:影像檔案大小：
+uk:Розмір файлу зображення:
+uz:Rasm fayl hajmi:
+vn:Kích thước tệp hình ảnh:
 :Image Size:
 af:Beeldgrootte:
 am:የምስል መጠን:
@@ -26499,6 +26718,79 @@ tw:沒有同步資料於此位置
 uk:Немає Інформації про синхронізацію на цій позиції
 uz:Bu joyda sinxronlanish ma'lumoti yo'q
 vn:Không có thông tin đồng bộ ở chỗ này
+:Number of Images:
+af:Aantal Beelde:
+am:የምስሎች ብዛት፡
+ar:عدد الصور:
+az:Şəkillərin sayı:
+bg:Брой изображения:
+bn:ছবির সংখ্যা:
+br:Niver a skeudennoù:
+bs:Broj slika:
+by:Колькасць выяў:
+ca:Nombre d'imatges:
+ca-xv:Nombre d'imatges:
+cn:图片数量：
+co:Numeru d'Imagine:
+cy:Nifer y Delweddau:
+cz:Počet obrázků:
+de:Anzahl der Bilder:
+dk:Antal billeder:
+el:Αριθμός Εικόνων:
+es:Número de imágenes:
+et:Piltide arv:
+eu:Irudi kopurua:
+fa:تعداد تصاویر:
+fi:Kuvien määrä:
+fo:Tal av myndum:
+fr:Nombre d'images :
+fy-nl:Oantal ôfbyldings:
+ga:Líon na nÍomhánna:
+gl:Número de imaxes:
+he:מספר תמונות:
+hi:छवियों की संख्या:
+hr:Broj slika:
+hu:Képek száma:
+id:Jumlah Gambar:
+it:Numero di immagini:
+ja:画像の数:
+jv:Jumlah Gambar:
+ka:სურათების რაოდენობა:
+kr:이미지 수:
+ku:Hejmara Wêneyan:
+kw:Niver a Skeusennyow:
+lt:Paveikslėlių skaičius:
+lv:Attēlu skaits:
+mk:Број на слики:
+ml:ചിത്രങ്ങളുടെ എണ്ണം:
+mm:ပုံအရေအတွက်:
+my:ပုံအရေအတွက်:
+ne:तस्बिरहरूको संख्या:
+nl:Aantal afbeeldingen:
+nn:Tal på bilete:
+no:Antall bilder:
+pa:ਤਸਵੀਰਾਂ ਦੀ ਗਿਣਤੀ:
+pl:Liczba obrazów:
+pt:Número de Imagens:
+ro:Număr de imagini:
+ru:Количество изображений:
+sat:ᱪᱤᱛᱟᱹᱨ ᱠᱚᱣᱟᱜ ᱮᱞᱮᱞ:
+si:රූප ගණන:
+sk:Počet obrázkov:
+sl:Število slik:
+sn:Nhamba yeMifananidzo:
+sp-rs:Broj slika:
+sq:Numri i Imazheve:
+sr-rs:Број слика:
+sv:Antal bilder:
+ta:படங்களின் எண்ணிக்கை:
+th:จำนวนภาพ:
+tl:Bilang ng mga Larawan:
+tr:Görsel Sayısı:
+tw:圖片數量：
+uk:Кількість зображень:
+uz:Rasmlar soni:
+vn:Số lượng hình ảnh:
 :Number of Pages:
 af:Aantal Bladsye:
 am:Էջերի քանակը՝
@@ -30003,79 +30295,6 @@ tw:第 %s 頁
 uk:Сторінка %s
 uz:Bet %s
 vn:Trang %s
-:Page Size:
-af:Bladsygrootte:
-am:Էջի չափը՝
-ar:حجم الصفحة:
-az:Səhifə ölçüsü:
-bg:Размери на страницата:
-bn:পৃষ্ঠার আকার
-br:Tamanho da Página:
-bs:Veličina stranice:
-by:Памер старонкі:
-ca:Mida de la pàgina:
-ca-xv:Mida de pàgina:
-cn:页面大小:
-co:Dimensioni di a pagina :
-cy:Maint Tudalen:
-cz:Velikost stránky:
-de:Seitengröße:
-dk:Sidestørrelse:
-el:Μέγεθος σελίδας:
-es:Tamaño de página:
-et:Lehekülje suurus:
-eu:Orrialde Neurria:
-fa:ابعاد صفحه:
-fi:Sivun koko:
-fo:Síðu Stødd:
-fr:Dimensions de la page :
-fy-nl:Sidegrutte:
-ga:Méid an leathanaigh:
-gl:Tamaño de páxina:
-he:גודל עמוד:
-hi:पृष्ठ आकर
-hr:Veličina stranice:
-hu:Oldalméret
-id:Ukuran Halaman:
-it:Formato pagina:
-ja:ページサイズ:
-jv:Ukuran Kaca:
-ka:გვერდის ფორმატი:
-kr:페이지 크기:
-ku:قەبارەی پەڕە:
-kw:Braster Folen:
-lt:Puslapio dydis:
-lv:Lappuses lielums:
-mk:Големина на страница:
-ml:താള്‍ വലുപ്പം
-mm:စာမျက်နှာအရွယ်အစား:
-my:Saiz mukasurat
-ne:पृष्ठ साइज:
-nl:Paginagrootte:
-nn:Sidestorleik:
-no:Sidestørrelse:
-pa:ਸਫ਼ੇ ਦਾ ਆਕਾਰ:
-pl:Rozmiar strony:
-pt:Tamanho da página:
-ro:Mărime pagină:
-ru:Формат страницы:
-sat:ᱥᱟᱦᱴᱟ ᱢᱟᱯ :
-si:පිටුවේ ප්‍රමාණය:
-sk:Veľkosť strany:
-sl:Velikost strani:
-sn:Ukuru hwePeji:
-sp-rs:Dimenzije stranice:
-sq:Përmasat:
-sr-rs:Димензије странице:
-sv:Sidstorlek:
-ta:பக்க அளவு
-th:ขนาดหน้า:
-tl:Laki ng Page
-tr:Sayfa Boyutu:
-tw:頁面大小:
-uk:Розмір сторінки:
-uz:Bet o'lchami:
-vn:Kích thước trang:
 :Page number %u inexistant
 af:Bladsynommer %u bestaan nie
 am:%u էջը գոյություն չունի

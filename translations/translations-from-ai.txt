@@ -52874,3 +52874,579 @@ vn:Phần mềm:
 vn:Nhận xét người dùng:
 :YCbCr Positioning:
 vn:Vị trí YCbCr:
+:Current Image (%d):
+am:የአሁኑ ምስል (%d):
+:Current Page (%d) Size:
+am:የአሁኑ ገጽ (%d) መጠን:
+:Image File Size:
+am:የምስል ፋይል መጠን:
+:Current Image (%d):
+ar:الصورة الحالية (%d):
+:Current Page (%d) Size:
+ar:حجم الصفحة الحالية (%d):
+:Image File Size:
+ar:حجم ملف الصورة:
+:Current Image (%d):
+br:Skeudenn vremanel (%d):
+:Current Page (%d) Size:
+br:Ment ar bajenn vremanel (%d):
+:Image File Size:
+br:Ment ar restr skeudenn:
+:Current Image (%d):
+cn:当前图片 (%d)：
+:Current Page (%d) Size:
+cn:当前页面 (%d) 大小：
+:Image File Size:
+cn:图片文件大小：
+:Current Image (%d):
+co:Imagine Attuale (%d):
+:Current Page (%d) Size:
+co:Dimensione di a Pagina Attuale (%d):
+:Image File Size:
+co:Dimensione di u Schedariu Imagine:
+:Current Image (%d):
+de:Aktuelles Bild (%d):
+:Current Page (%d) Size:
+de:Aktuelle Seite (%d) Größe:
+:Image File Size:
+de:Bilddateigröße:
+:Current Image (%d):
+el:Τρέχουσα Εικόνα (%d):
+:Current Page (%d) Size:
+el:Μέγεθος Τρέχουσας Σελίδας (%d):
+:Image File Size:
+el:Μέγεθος Αρχείου Εικόνας:
+:Current Image (%d):
+hi:वर्तमान छवि (%d):
+:Current Page (%d) Size:
+hi:वर्तमान पृष्ठ (%d) आकार:
+:Image File Size:
+hi:छवि फ़ाइल आकार:
+:Current Image (%d):
+it:Immagine corrente (%d):
+:Current Page (%d) Size:
+it:Dimensione pagina corrente (%d):
+:Image File Size:
+it:Dimensione file immagine:
+:Current Image (%d):
+ja:現在の画像 (%d):
+:Current Page (%d) Size:
+ja:現在のページ (%d) サイズ:
+:Image File Size:
+ja:画像ファイルサイズ:
+:Current Image (%d):
+ml:നിലവിലെ ചിത്രം (%d):
+:Current Page (%d) Size:
+ml:നിലവിലെ പേജ് (%d) വലുപ്പം:
+:Image File Size:
+ml:ചിത്ര ഫയൽ വലുപ്പം:
+:Current Image (%d):
+nl:Huidige afbeelding (%d):
+:Current Page (%d) Size:
+nl:Huidige pagina (%d) grootte:
+:Image File Size:
+nl:Afbeeldingsbestandsgrootte:
+:Current Image (%d):
+pl:Bieżący obraz (%d):
+:Current Page (%d) Size:
+pl:Rozmiar bieżącej strony (%d):
+:Image File Size:
+pl:Rozmiar pliku obrazu:
+:Current Image (%d):
+ru:Текущее изображение (%d):
+:Current Page (%d) Size:
+ru:Размер текущей страницы (%d):
+:Image File Size:
+ru:Размер файла изображения:
+:Current Image (%d):
+sat:ᱱᱤᱛᱚᱜᱟᱜ ᱪᱤᱛᱟᱹᱨ (%d):
+:Current Page (%d) Size:
+sat:ᱱᱤᱛᱚᱜᱟᱜ ᱥᱟᱦᱴᱟ (%d) ᱢᱟᱯ:
+:Image File Size:
+sat:ᱪᱤᱛᱟᱹᱨ ᱨᱮᱫᱽ ᱢᱟᱯ:
+:Current Image (%d):
+sk:Aktuálny obrázok (%d):
+:Current Page (%d) Size:
+sk:Veľkosť aktuálnej stránky (%d):
+:Image File Size:
+sk:Veľkosť súboru obrázka:
+:Current Image (%d):
+sr-rs:Trenutna slika (%d):
+:Current Page (%d) Size:
+sr-rs:Veličina trenutne stranice (%d):
+:Image File Size:
+sr-rs:Veličina fajla slike:
+:Current Image (%d):
+tw:目前影像 (%d)：
+:Current Page (%d) Size:
+tw:目前頁面 (%d) 大小：
+:Image File Size:
+tw:影像檔案大小：
+:Current Image (%d):
+az:Cari Şəkil (%d):
+:Current Page (%d) Size:
+az:Cari Səhifə (%d) Ölçüsü:
+:Image File Size:
+az:Şəkil Faylının Ölçüsü:
+:Current Image (%d):
+by:Бягучае выява (%d):
+:Current Page (%d) Size:
+by:Памер бягучай старонкі (%d):
+:Image File Size:
+by:Памер файла выявы:
+:Current Image (%d):
+ca:Imatge actual (%d):
+:Current Page (%d) Size:
+ca:Mida de la pàgina actual (%d):
+:Image File Size:
+ca:Mida del fitxer d'imatge:
+:Current Image (%d):
+cy:Delwedd Gyfredol (%d):
+:Current Page (%d) Size:
+cy:Maint Tudalen Gyfredol (%d):
+:Image File Size:
+cy:Maint Ffeil Delwedd:
+:Current Image (%d):
+cz:Aktuální obrázek (%d):
+:Current Page (%d) Size:
+cz:Velikost aktuální stránky (%d):
+:Image File Size:
+cz:Velikost souboru obrázku:
+:Current Image (%d):
+es:Imagen actual (%d):
+:Current Page (%d) Size:
+es:Tamaño de la página actual (%d):
+:Image File Size:
+es:Tamaño del archivo de imagen:
+:Current Image (%d):
+fa:تصویر فعلی (%d):
+:Current Page (%d) Size:
+fa:اندازه صفحه فعلی (%d):
+:Image File Size:
+fa:اندازه فایل تصویر:
+:Current Image (%d):
+fi:Nykyinen kuva (%d):
+:Current Page (%d) Size:
+fi:Nykyisen sivun (%d) koko:
+:Image File Size:
+fi:Kuvatiedoston koko:
+:Current Image (%d):
+fo:Núverandi mynd (%d):
+:Current Page (%d) Size:
+fo:Núverandi síða (%d) stødd:
+:Image File Size:
+fo:Myndafílu stødd:
+:Current Image (%d):
+fr:Image actuelle (%d) :
+:Current Page (%d) Size:
+fr:Taille de la page actuelle (%d) :
+:Image File Size:
+fr:Taille du fichier image :
+:Current Image (%d):
+ga:Íomhá Reatha (%d):
+:Current Page (%d) Size:
+ga:Méid an Leathanaigh Reatha (%d):
+:Image File Size:
+ga:Méid an Chomhaid Íomhá:
+:Current Image (%d):
+gl:Imaxe actual (%d):
+:Current Page (%d) Size:
+gl:Tamaño da páxina actual (%d):
+:Image File Size:
+gl:Tamaño do ficheiro de imaxe:
+:Current Image (%d):
+he:תמונה נוכחית (%d):
+:Current Page (%d) Size:
+he:גודל עמוד נוכחי (%d):
+:Image File Size:
+he:גודל קובץ תמונה:
+:Current Image (%d):
+hu:Jelenlegi kép (%d):
+:Current Page (%d) Size:
+hu:Jelenlegi oldal (%d) mérete:
+:Image File Size:
+hu:Képfájl mérete:
+:Current Image (%d):
+id:Gambar Saat Ini (%d):
+:Current Page (%d) Size:
+id:Ukuran Halaman Saat Ini (%d):
+:Image File Size:
+id:Ukuran File Gambar:
+:Current Image (%d):
+kr:현재 이미지 (%d):
+:Current Page (%d) Size:
+kr:현재 페이지 (%d) 크기:
+:Image File Size:
+kr:이미지 파일 크기:
+:Current Image (%d):
+lv:Pašreizējais attēls (%d):
+:Current Page (%d) Size:
+lv:Pašreizējās lapas (%d) izmērs:
+:Image File Size:
+lv:Attēla faila izmērs:
+:Current Image (%d):
+my:လက်ရှိပုံ (%d):
+:Current Page (%d) Size:
+my:လက်ရှိစာမျက်နှာ (%d) အရွယ်အစား:
+:Image File Size:
+my:ပုံဖိုင်အရွယ်အစား:
+:Current Image (%d):
+pt:Imagem Atual (%d):
+:Current Page (%d) Size:
+pt:Tamanho da Página Atual (%d):
+:Image File Size:
+pt:Tamanho do Arquivo de Imagem:
+:Current Image (%d):
+ro:Imaginea curentă (%d):
+:Current Page (%d) Size:
+ro:Dimensiunea paginii curente (%d):
+:Image File Size:
+ro:Dimensiunea fișierului imagine:
+:Current Image (%d):
+sl:Trenutna slika (%d):
+:Current Page (%d) Size:
+sl:Velikost trenutne strani (%d):
+:Image File Size:
+sl:Velikost datoteke slike:
+:Current Image (%d):
+sv:Aktuell bild (%d):
+:Current Page (%d) Size:
+sv:Aktuell sida (%d) storlek:
+:Image File Size:
+sv:Bildens filstorlek:
+:Current Image (%d):
+ta:தற்போதைய படம் (%d):
+:Current Page (%d) Size:
+ta:தற்போதைய பக்கம் (%d) அளவு:
+:Image File Size:
+ta:படக் கோப்பு அளவு:
+:Current Image (%d):
+tr:Geçerli Görüntü (%d):
+:Current Page (%d) Size:
+tr:Geçerli Sayfa (%d) Boyutu:
+:Image File Size:
+tr:Görüntü Dosya Boyutu:
+:Current Image (%d):
+uz:Joriy rasm (%d):
+:Current Page (%d) Size:
+uz:Joriy sahifa (%d) hajmi:
+:Image File Size:
+uz:Rasm fayl hajmi:
+:Current Image (%d):
+af:Huidige Beeld (%d):
+:Current Page (%d) Size:
+af:Huidige Bladsy (%d) Grootte:
+:Image File Size:
+af:Beeldlêer Grootte:
+:Current Image (%d):
+bg:Текущо изображение (%d):
+:Current Page (%d) Size:
+bg:Размер на текущата страница (%d):
+:Image File Size:
+bg:Размер на файла с изображението:
+:Current Image (%d):
+bn:বর্তমান ছবি (%d):
+:Current Page (%d) Size:
+bn:বর্তমান পৃষ্ঠা (%d) আকার:
+:Image File Size:
+bn:ছবি ফাইলের আকার:
+:Current Image (%d):
+bs:Trenutna slika (%d):
+:Current Page (%d) Size:
+bs:Veličina trenutne stranice (%d):
+:Image File Size:
+bs:Veličina datoteke slike:
+:Current Image (%d):
+ca-xv:Imatge actual (%d):
+:Current Page (%d) Size:
+ca-xv:Mida de la pàgina actual (%d):
+:Image File Size:
+ca-xv:Mida del fitxer d'imatge:
+:Current Image (%d):
+dk:Nuværende billede (%d):
+:Current Page (%d) Size:
+dk:Nuværende side (%d) størrelse:
+:Image File Size:
+dk:Billedfilstørrelse:
+:Current Image (%d):
+et:Praegune pilt (%d):
+:Current Page (%d) Size:
+et:Praeguse lehekülje (%d) suurus:
+:Image File Size:
+et:Pildifaili suurus:
+:Current Image (%d):
+eu:Uneko irudia (%d):
+:Current Page (%d) Size:
+eu:Uneko orriaren (%d) tamaina:
+:Image File Size:
+eu:Irudi fitxategiaren tamaina:
+:Current Image (%d):
+fy-nl:Aktuele ôfbylding (%d):
+:Current Page (%d) Size:
+fy-nl:Aktuele side (%d) grutte:
+:Image File Size:
+fy-nl:Ofbyldingsbestânsgrutte:
+:Current Image (%d):
+hr:Trenutna slika (%d):
+:Current Page (%d) Size:
+hr:Veličina trenutne stranice (%d):
+:Image File Size:
+hr:Veličina datoteke slike:
+:Current Image (%d):
+jv:Gambar Saiki (%d):
+:Current Page (%d) Size:
+jv:Ukuran Kaca Saiki (%d):
+:Image File Size:
+jv:Ukuran File Gambar:
+:Current Image (%d):
+ka:მიმდინარე სურათი (%d):
+:Current Page (%d) Size:
+ka:მიმდინარე გვერდის (%d) ზომა:
+:Image File Size:
+ka:სურათის ფაილის ზომა:
+:Current Image (%d):
+ku:Wêneyê Niha (%d):
+:Current Page (%d) Size:
+ku:Mezinahiya Rûpela Niha (%d):
+:Image File Size:
+ku:Mezinahiya Pelê Wêneyê:
+:Current Image (%d):
+kw:Skeusen a-lemmyn (%d):
+:Current Page (%d) Size:
+kw:Myns an Folen a-lemmyn (%d):
+:Image File Size:
+kw:Myns an Restren Skeusen:
+:Current Image (%d):
+lt:Dabartinis vaizdas (%d):
+:Current Page (%d) Size:
+lt:Dabartinio puslapio (%d) dydis:
+:Image File Size:
+lt:Vaizdo failo dydis:
+:Current Image (%d):
+mk:Тековна слика (%d):
+:Current Page (%d) Size:
+mk:Големина на тековна страница (%d):
+:Image File Size:
+mk:Големина на сликата:
+:Current Image (%d):
+mm:လက်ရှိပုံ (%d):
+:Current Page (%d) Size:
+mm:လက်ရှိစာမျက်နှာ (%d) အရွယ်အစား:
+:Image File Size:
+mm:ပုံဖိုင်အရွယ်အစား:
+:Current Image (%d):
+ne:हालको छवि (%d):
+:Current Page (%d) Size:
+ne:हालको पृष्ठ (%d) आकार:
+:Image File Size:
+ne:छवि फाइल आकार:
+:Current Image (%d):
+nn:Gjeldande bilete (%d):
+:Current Page (%d) Size:
+nn:Gjeldande side (%d) storleik:
+:Image File Size:
+nn:Biletfilstorleik:
+:Current Image (%d):
+no:Gjeldende bilde (%d):
+:Current Page (%d) Size:
+no:Gjeldende side (%d) størrelse:
+:Image File Size:
+no:Bildfilstørrelse:
+:Current Image (%d):
+pa:ਮੌਜੂਦਾ ਚਿੱਤਰ (%d):
+:Current Page (%d) Size:
+pa:ਮੌਜੂਦਾ ਸਫ਼ਾ (%d) ਆਕਾਰ:
+:Image File Size:
+pa:ਚਿੱਤਰ ਫ਼ਾਈਲ ਆਕਾਰ:
+:Current Image (%d):
+si:වත්මන් රූපය (%d):
+:Current Page (%d) Size:
+si:වත්මන් පිටුවේ (%d) ප්‍රමාණය:
+:Image File Size:
+si:රූප ගොනු ප්‍රමාණය:
+:Current Image (%d):
+sn:Mufananidzo Wazvino (%d):
+:Current Page (%d) Size:
+sn:Saizi yePeji Yazvino (%d):
+:Image File Size:
+sn:Saizi yeFaira reMufananidzo:
+:Current Image (%d):
+sp-rs:Trenutna slika (%d):
+:Current Page (%d) Size:
+sp-rs:Veličina trenutne stranice (%d):
+:Image File Size:
+sp-rs:Veličina datoteke slike:
+:Current Image (%d):
+sq:Imazhi Aktual (%d):
+:Current Page (%d) Size:
+sq:Madhësia e Faqes Aktuale (%d):
+:Image File Size:
+sq:Madhësia e Skedarit të Imazhit:
+:Current Image (%d):
+th:รูปภาพปัจจุบัน (%d):
+:Current Page (%d) Size:
+th:ขนาดหน้าปัจจุบัน (%d):
+:Image File Size:
+th:ขนาดไฟล์รูปภาพ:
+:Current Image (%d):
+tl:Kasalukuyang Larawan (%d):
+:Current Page (%d) Size:
+tl:Laki ng Kasalukuyang Pahina (%d):
+:Image File Size:
+tl:Laki ng File ng Larawan:
+:Current Image (%d):
+uk:Поточне зображення (%d):
+:Current Page (%d) Size:
+uk:Розмір поточної сторінки (%d):
+:Image File Size:
+uk:Розмір файлу зображення:
+:Current Image (%d):
+vn:Hình ảnh hiện tại (%d):
+:Current Page (%d) Size:
+vn:Kích thước trang hiện tại (%d):
+:Image File Size:
+vn:Kích thước tệp hình ảnh:
+:Number of Images:
+am:የምስሎች ብዛት፡
+:Number of Images:
+ar:عدد الصور:
+:Number of Images:
+br:Niver a skeudennoù:
+:Number of Images:
+cn:图片数量：
+:Number of Images:
+co:Numeru d'Imagine:
+:Number of Images:
+de:Anzahl der Bilder:
+:Number of Images:
+el:Αριθμός Εικόνων:
+:Number of Images:
+hi:छवियों की संख्या:
+:Number of Images:
+it:Numero di immagini:
+:Number of Images:
+ja:画像の数:
+:Number of Images:
+ml:ചിത്രങ്ങളുടെ എണ്ണം:
+:Number of Images:
+nl:Aantal afbeeldingen:
+:Number of Images:
+pl:Liczba obrazów:
+:Number of Images:
+ru:Количество изображений:
+:Number of Images:
+sat:ᱪᱤᱛᱟᱹᱨ ᱠᱚᱣᱟᱜ ᱮᱞᱮᱞ:
+:Number of Images:
+sk:Počet obrázkov:
+:Number of Images:
+sr-rs:Број слика:
+:Number of Images:
+tw:圖片數量：
+:Number of Images:
+az:Şəkillərin sayı:
+:Number of Images:
+by:Колькасць выяў:
+:Number of Images:
+ca:Nombre d'imatges:
+:Number of Images:
+cy:Nifer y Delweddau:
+:Number of Images:
+cz:Počet obrázků:
+:Number of Images:
+es:Número de imágenes:
+:Number of Images:
+fa:تعداد تصاویر:
+:Number of Images:
+fi:Kuvien määrä:
+:Number of Images:
+fo:Tal av myndum:
+:Number of Images:
+fr:Nombre d'images :
+:Number of Images:
+ga:Líon na nÍomhánna:
+:Number of Images:
+gl:Número de imaxes:
+:Number of Images:
+he:מספר תמונות:
+:Number of Images:
+hu:Képek száma:
+:Number of Images:
+id:Jumlah Gambar:
+:Number of Images:
+kr:이미지 수:
+:Number of Images:
+lv:Attēlu skaits:
+:Number of Images:
+my:ပုံအရေအတွက်:
+:Number of Images:
+pt:Número de Imagens:
+:Number of Images:
+ro:Număr de imagini:
+:Number of Images:
+sl:Število slik:
+:Number of Images:
+sv:Antal bilder:
+:Number of Images:
+ta:படங்களின் எண்ணிக்கை:
+:Number of Images:
+tr:Görsel Sayısı:
+:Number of Images:
+uz:Rasmlar soni:
+:Number of Images:
+af:Aantal Beelde:
+:Number of Images:
+bg:Брой изображения:
+:Number of Images:
+bn:ছবির সংখ্যা:
+:Number of Images:
+bs:Broj slika:
+:Number of Images:
+ca-xv:Nombre d'imatges:
+:Number of Images:
+dk:Antal billeder:
+:Number of Images:
+et:Piltide arv:
+:Number of Images:
+eu:Irudi kopurua:
+:Number of Images:
+fy-nl:Oantal ôfbyldings:
+:Number of Images:
+hr:Broj slika:
+:Number of Images:
+jv:Jumlah Gambar:
+:Number of Images:
+ka:სურათების რაოდენობა:
+:Number of Images:
+ku:Hejmara Wêneyan:
+:Number of Images:
+kw:Niver a Skeusennyow:
+:Number of Images:
+lt:Paveikslėlių skaičius:
+:Number of Images:
+mk:Број на слики:
+:Number of Images:
+mm:ပုံအရေအတွက်:
+:Number of Images:
+ne:तस्बिरहरूको संख्या:
+:Number of Images:
+nn:Tal på bilete:
+:Number of Images:
+no:Antall bilder:
+:Number of Images:
+pa:ਤਸਵੀਰਾਂ ਦੀ ਗਿਣਤੀ:
+:Number of Images:
+si:රූප ගණන:
+:Number of Images:
+sn:Nhamba yeMifananidzo:
+:Number of Images:
+sp-rs:Broj slika:
+:Number of Images:
+sq:Numri i Imazheve:
+:Number of Images:
+th:จำนวนภาพ:
+:Number of Images:
+tl:Bilang ng mga Larawan:
+:Number of Images:
+uk:Кількість зображень:
+:Number of Images:
+vn:Số lượng hình ảnh:

@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-655b768c71442b72634df553ef2495f421066559
+4b5b199572e0865dfc8ecd559fa97824a391d652
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -8961,6 +8961,8 @@ it:Ctrl+Tab per navigare
 nl:Druk Ctrl+Tab voor navigeren
 pl:Ctrl+Tab, aby nawigować
 sk:Použite Ctrl+Tab – prechádzať
+:Current Image (%d):
+:Current Page (%d) Size:
 :Current file
 am:Ընթացիկ ֆայլը
 ar:الملف الحالي
@@ -13681,6 +13683,7 @@ tw:圖示:
 uk:Значок:
 uz:Ikonka:
 vn:Biểu Tượng:
+:Image File Size:
 :Image Size:
 br:Tamanho da Imagem:
 cn:图像尺寸
@@ -15816,6 +15819,7 @@ tw:沒有同步資料於此位置
 uk:Немає Інформації про синхронізацію на цій позиції
 uz:Bu joyda sinxronlanish ma'lumoti yo'q
 vn:Không có thông tin đồng bộ ở chỗ này
+:Number of Images:
 :Number of Pages:
 am:Էջերի քանակը՝
 ar:عدد الصفحات:
@@ -17765,74 +17769,6 @@ tw:第 %s 頁
 uk:Сторінка %s
 uz:Bet %s
 vn:Trang %s
-:Page Size:
-am:Էջի չափը՝
-ar:حجم الصفحة:
-az:Səhifə ölçüsü:
-bg:Размери на страницата:
-bn:পৃষ্ঠার আকার
-br:Tamanho da Página:
-bs:Veličina stranice:
-by:Памер старонкі:
-ca-xv:Mida de pàgina:
-ca:Mida de la pàgina:
-cn:页面大小:
-co:Dimensioni di a pagina :
-cy:Maint Tudalen:
-cz:Velikost stránky:
-de:Seitengröße:
-dk:Sidestørrelse:
-el:Μέγεθος σελίδας:
-es:Tamaño de página:
-et:Lehekülje suurus:
-eu:Orrialde Neurria:
-fa:ابعاد صفحه:
-fi:Sivun koko:
-fo:Síðu Stødd:
-fr:Dimensions de la page :
-fy-nl:Sidegrutte:
-ga:Méid an leathanaigh:
-gl:Tamaño de páxina:
-he:גודל עמוד:
-hi:पृष्ठ आकर
-hr:Veličina stranice:
-hu:Oldalméret
-id:Ukuran Halaman:
-it:Formato pagina:
-ja:ページサイズ:
-ka:გვერდის ფორმატი:
-kr:페이지 크기:
-ku:قەبارەی پەڕە:
-kw:Braster Folen:
-lt:Puslapio dydis:
-lv:Lappuses lielums:
-mk:Големина на страница:
-ml:താള്‍ വലുപ്പം
-my:Saiz mukasurat
-ne:पृष्ठ साइज:
-nl:Paginagrootte:
-nn:Sidestorleik:
-no:Sidestørrelse:
-pl:Rozmiar strony:
-pt:Tamanho da página:
-ro:Mărime pagină:
-ru:Формат страницы:
-sat:ᱥᱟᱦᱴᱟ ᱢᱟᱯ :
-si:පිටුවේ ප්‍රමාණය:
-sk:Veľkosť strany:
-sl:Velikost strani:
-sp-rs:Dimenzije stranice:
-sq:Përmasat:
-sr-rs:Димензије странице:
-sv:Sidstorlek:
-ta:பக்க அளவு
-th:ขนาดหน้า:
-tl:Laki ng Page
-tr:Sayfa Boyutu:
-tw:頁面大小:
-uk:Розмір сторінки:
-uz:Bet o'lchami:
-vn:Kích thước trang:
 :Page number %u inexistant
 am:%u էջը գոյություն չունի
 ar:غير موجود %u رقم الصفحة
