@@ -13,6 +13,11 @@
 
 char *fz_optarg; /* Global argument pointer. */
 int fz_optind = 0; /* Global argv index. */
+
+void fz_set_optind(int val)
+{
+	fz_optind = val;
+}
 const fz_getopt_long_options *fz_optlong = NULL;
 int fz_optitem = 0; /* Which item in a long opt list is selected? */
 

@@ -85,6 +85,12 @@ extern int fz_getopt(int nargc, char * const *nargv, const char *ostr);
 FZ_DATA extern int fz_optind;
 
 /**
+	Reset fz_optind to allow re-calling tool main functions.
+	Needed because fz_optind is a global that persists across calls.
+*/
+void fz_set_optind(int val);
+
+/**
 	fz_optarg is a pointer to the argument data for the most recently
 	read option.
 */

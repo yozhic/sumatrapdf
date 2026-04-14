@@ -3,6 +3,7 @@
 LIBRARY libmupdf
 EXPORTS
 	ddjvu_page_get_initial_rotation
+	fz_set_optind
 	fz_open_document
 	fz_write_byte
 	fz_drop_output
