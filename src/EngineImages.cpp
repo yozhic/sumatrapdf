@@ -119,7 +119,7 @@ class EngineImages : public EngineBase {
     void DropPage(ImagePage* page, bool forceRemove);
 
     RectF PageContentBox(int pageNo, RenderTarget) override;
-    void GetImageProperties(int pageNo, StrVec& keyValOut) override;
+    void GetImageProperties(int pageNo, StrVec& keyValOut);
 };
 
 EngineImages::EngineImages() {
@@ -529,7 +529,7 @@ class EngineImage : public EngineImages {
 
     TempStr GetPropertyTemp(const char* name) override;
     void GetProperties(StrVec& keyValOut) override;
-    void GetImageProperties(int pageNo, StrVec& keyValOut) override;
+    void GetImageProperties(int pageNo, StrVec& keyValOut);
 
     static EngineBase* CreateFromFile(const char* fileName);
     static EngineBase* CreateFromStream(IStream* stream);
@@ -2083,4 +2083,19 @@ EngineBase* CreateEngineCbxFromFile(const char* path, PasswordUI* pwdUI) {
 
 EngineBase* CreateEngineCbxFromStream(IStream* stream) {
     return EngineCbx::CreateFromStream(stream);
+}
+
+bool IsEngineImages(EngineBase* engine) {
+    if (!engine) {
+        return false;
+    }
+    return IsOfKind(engine, kindEngineImage) || IsOfKind(engine, kindEngineImageDir) ||
+           IsOfKind(engine, kindEngineComicBooks);
+}
+
+void EngineImagesGetImageProperties(EngineBase* engine, int pageNo, StrVec& keyValOut) {
+    if (!IsEngineImages(engine)) {
+        return;
+    }
+    ((EngineImages*)engine)->GetImageProperties(pageNo, keyValOut);
 }

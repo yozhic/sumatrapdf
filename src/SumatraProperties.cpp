@@ -327,6 +327,11 @@ static const char* propToName[] = {
 
 static void AppendPropTranslated(str::Str& out, const char* propName, const char* val) {
     if (!propName || !val) return;
+    if (str::Eq(propName, kPropImageFileSize)) {
+        TempStr valFormatted = FormatFileSizeTransTemp(ParseInt64(val));
+        AppendProp(out, _TRA("File Size:"), valFormatted);
+        return;
+    }
     const char* s = GetMatchingString(propToName, propName);
     if (!s) {
         TempStr label = str::FormatTemp("%s:", propName);
@@ -404,9 +409,9 @@ void AppendDateProp(str::Str& out, const char* key, const char* val, bool isPdfD
 
 static void AddImageProperties(EngineBase* engine, int pageNo, str::Str& out) {
     // for image engines, show EXIF properties for the current image
-    ReportIf(!engine->IsImageEngine());
+    ReportIf(!IsEngineImages(engine));
     Props imageProps;
-    engine->GetImageProperties(pageNo, imageProps);
+    EngineImagesGetImageProperties(engine, pageNo, imageProps);
     int nImageProps = PropsCount(imageProps);
     if (nImageProps == 0) return;
     out.AppendChar('\n');
@@ -468,7 +473,7 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
     bool isImages = false;
     if (dm) {
         EngineBase* engine = dm->GetEngine();
-        isImages = engine && engine->IsImageEngine();
+        isImages = IsEngineImages(engine);
     }
 
     strTemp = str::FormatTemp("%d", ctrl->PageCount());

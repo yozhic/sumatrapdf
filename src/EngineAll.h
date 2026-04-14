@@ -41,6 +41,9 @@ bool IsEngineCbxSupportedFileType(Kind kind);
 EngineBase* CreateEngineCbxFromFile(const char* path, PasswordUI* pwdUI = nullptr);
 EngineBase* CreateEngineCbxFromStream(IStream* stream);
 
+bool IsEngineImages(EngineBase*);
+void EngineImagesGetImageProperties(EngineBase*, int pageNo, StrVec& keyValOut);
+
 /* EngineMupdf.cpp */
 
 using ShowErrorCb = Func1<const char*>;
