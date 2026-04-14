@@ -3,6 +3,7 @@
 
 #include "utils/BaseUtil.h"
 #include "utils/ScopedWin.h"
+#include "utils/Dpi.h"
 #include "utils/FileUtil.h"
 #include "utils/WinUtil.h"
 #include "utils/Log.h"
@@ -36,7 +37,37 @@ extern "C" int muconvert_main(int argc, char** argv);
 // accounts for WS_EX_CLIENTEDGE border (2px) + edit internal left margin (~2px)
 constexpr int kEditTextXOffset = 4;
 
-static int CalcDlgWidth(HFONT font, const char* path, int minW, int padding) {
+// DPI-scaled dialog layout metrics
+struct DlgMetrics {
+    int padding;
+    int rowH;    // row height for edit controls and labels
+    int rowGap;  // vertical gap between rows
+    int btnW;    // button width
+    int btnH;    // button height
+    int btnGap;  // gap between buttons
+    int browseW; // width of "..." browse button
+    int editXOff;
+};
+
+static DlgMetrics GetDlgMetrics(HWND hwnd, HFONT hFont) {
+    DlgMetrics m;
+    m.padding = DpiScale(hwnd, 10);
+    m.rowGap = DpiScale(hwnd, 6);
+    m.editXOff = DpiScale(hwnd, kEditTextXOffset);
+
+    // measure row height from the font
+    Size textSize = HwndMeasureText(hwnd, "Xg", hFont);
+    m.rowH = textSize.dy + DpiScale(hwnd, 8); // text height + border/padding
+
+    // measure button size from a representative label
+    m.btnW = DpiScale(hwnd, 75);
+    m.btnH = m.rowH;
+    m.btnGap = DpiScale(hwnd, 4);
+    m.browseW = DpiScale(hwnd, 30);
+    return m;
+}
+
+static int CalcDlgWidth(HWND hwndParent, HFONT font, const char* path, int minW, int padding) {
     HDC hdc = GetDC(nullptr);
     HFONT oldFont = (HFONT)SelectObject(hdc, font);
     TempWStr pathW = ToWStrTemp(path);
@@ -44,11 +75,17 @@ static int CalcDlgWidth(HFONT font, const char* path, int minW, int padding) {
     GetTextExtentPoint32W(hdc, pathW, str::Leni(pathW), &sz);
     SelectObject(hdc, oldFont);
     ReleaseDC(nullptr, hdc);
-    int dlgW = sz.cx + 2 * padding + 32;
+    int dlgW = sz.cx + 2 * padding + DpiScale(hwndParent, 32);
     dlgW = std::max(dlgW, minW);
     int screenW = GetSystemMetrics(SM_CXSCREEN);
     dlgW = std::min(dlgW, screenW * 80 / 100);
     return dlgW;
+}
+
+// calculate dialog height from number of rows
+// extra 32 accounts for non-client area (title bar etc.)
+static int CalcDlgHeight(HWND hwnd, const DlgMetrics& m, int nRows) {
+    return 2 * m.padding + nRows * m.rowH + (nRows - 1) * m.rowGap + DpiScale(hwnd, 32);
 }
 
 struct PdfBakeDialog {
@@ -62,12 +99,6 @@ struct PdfBakeDialog {
     char* srcPath = nullptr;
     MainWindow* win = nullptr;
 };
-
-constexpr int kBakeDlgW = 500;
-constexpr int kBakeDlgH = 140;
-constexpr int kBakeDlgPadding = 10;
-constexpr int kBakeDlgRowH = 22;
-constexpr int kBakeDlgRowGap = 6;
 
 static void PdfBakeOnBrowse(PdfBakeDialog* dlg) {
     WCHAR dstFileName[MAX_PATH + 1]{};
@@ -190,52 +221,52 @@ void ShowPdfBakeDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kBakeDlgW, kBakeDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 3);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfBakeWinClassName, _TRW("Bake PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kBakeDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    int x = kBakeDlgPadding;
-    int y = kBakeDlgPadding;
-    int w = dlgW - 2 * kBakeDlgPadding - 16; // account for non-client area
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kBakeDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kBakeDlgRowH + kBakeDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kBakeDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kBakeDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kBakeDlgRowH + kBakeDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: Bake + Cancel buttons (right-aligned)
-    int btnW = 75;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndBakeBtn = CreateWindowExW(0, L"BUTTON", _TRW("Bake PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
-                                       btnW, btnH, hwnd, nullptr, h, nullptr);
+                                       m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBakeBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -261,12 +292,6 @@ struct PdfExtractTextDialog {
     char* srcPath = nullptr;
     MainWindow* win = nullptr;
 };
-
-constexpr int kExtractDlgW = 500;
-constexpr int kExtractDlgH = 168;
-constexpr int kExtractDlgPadding = 10;
-constexpr int kExtractDlgRowH = 22;
-constexpr int kExtractDlgRowGap = 6;
 
 static void PdfExtractTextOnBrowse(PdfExtractTextDialog* dlg) {
     WCHAR dstFileName[MAX_PATH + 1]{};
@@ -431,69 +456,71 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kExtractDlgW, kExtractDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 4);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfExtractTextWinClassName, _TRW("Extract Text"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kExtractDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    int x = kExtractDlgPadding;
-    int y = kExtractDlgPadding;
-    int w = dlgW - 2 * kExtractDlgPadding - 16; // account for non-client area
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kExtractDlgRowH + kExtractDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr noExt = path::GetPathNoExtTemp(tab->filePath);
     TempStr txtPath = str::JoinTemp(noExt, ".txt");
     TempStr destPath = MakeUniqueFilePathTemp(txtPath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kExtractDlgRowH + kExtractDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: "Pages:" label + pages edit
-    int labelW = 42;
-    dlg->hwndPagesLabel =
-        CreateWindowExW(0, L"STATIC", _TRW("Pages:"), WS_CHILD | WS_VISIBLE | SS_LEFT, x + kEditTextXOffset,
-                        y + kEditTextXOffset, labelW, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+    WCHAR* pagesLabelText = _TRW("Pages:");
+    Size labelSize = HwndMeasureText(hwnd, ToUtf8Temp(pagesLabelText), dlg->hFont);
+    int labelW = labelSize.dx + DpiScale(hwnd, 4);
+    dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", pagesLabelText, WS_CHILD | WS_VISIBLE | SS_LEFT, x + m.editXOff,
+                                          y + m.editXOff, labelW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     int pageCount = win->ctrl ? win->ctrl->PageCount() : 1;
     TempStr pagesStr = str::FormatTemp("1-%d", pageCount);
+    int editX = x + m.editXOff + labelW + DpiScale(hwnd, 4);
     dlg->hwndPagesEdit =
-        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(pagesStr), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
-                        x + labelW + 4, y, w - labelW - 4, kExtractDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(pagesStr), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, editX,
+                        y, x + w - editX, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kExtractDlgRowH + kExtractDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 4: Extract Text + Cancel buttons (right-aligned)
-    int btnW = 85;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndExtractBtn = CreateWindowExW(0, L"BUTTON", _TRW("Extract Text"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-                                          bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
+                                          bx, y, m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndExtractBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -503,12 +530,6 @@ void ShowPdfExtractTextDialog(MainWindow* win) {
     }
     ShowWindow(hwnd, SW_SHOW);
 }
-
-constexpr int kCompressDlgW = 500;
-constexpr int kCompressDlgH = 140;
-constexpr int kCompressDlgPadding = 10;
-constexpr int kCompressDlgRowH = 22;
-constexpr int kCompressDlgRowGap = 6;
 
 // --- Compress PDF dialog ---
 
@@ -647,52 +668,52 @@ void ShowPdfCompressDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 3);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfCompressWinClassName, _TRW("Compress PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    int x = kCompressDlgPadding;
-    int y = kCompressDlgPadding;
-    int w = dlgW - 2 * kCompressDlgPadding - 16;
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: Compress + Cancel buttons (right-aligned)
-    int btnW = 85;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndCompressBtn = CreateWindowExW(0, L"BUTTON", _TRW("Compress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-                                           bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
+                                           bx, y, m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -837,51 +858,51 @@ void ShowPdfDecompressDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 3);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDecompressWinClassName, _TRW("Decompress PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    int x = kCompressDlgPadding;
-    int y = kCompressDlgPadding;
-    int w = dlgW - 2 * kCompressDlgPadding - 16;
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
-    int btnW = 95;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndDecompressBtn =
-        CreateWindowExW(0, L"BUTTON", _TRW("Decompress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, btnW,
-                        btnH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"BUTTON", _TRW("Decompress PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y, m.btnW,
+                        m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDecompressBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
@@ -910,10 +931,6 @@ struct PdfDeletePageDialog {
     MainWindow* win = nullptr;
     int pageCount = 0;
 };
-
-constexpr int kDeletePageDlgPadding = 10;
-constexpr int kDeletePageDlgRowH = 22;
-constexpr int kDeletePageDlgRowGap = 6;
 
 // Parse delete page ranges like "1,3-8,13-N" where N means last page.
 // Returns a sorted list of unique 1-based page numbers to delete.
@@ -1227,8 +1244,10 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
     dlg->pageCount = pageCount;
     dlg->isExtract = isExtract;
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, 500, kDeletePageDlgPadding);
-    int dlgH = kDeletePageDlgPadding + (kDeletePageDlgRowH + kDeletePageDlgRowGap) * 4 + 24 + 8 + kDeletePageDlgPadding;
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 4);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     WCHAR* dlgTitle = isExtract ? _TRW("Extract Pages From PDF") : _TRW("Delete Pages From PDF");
@@ -1241,73 +1260,72 @@ static void ShowPdfPageRangeDialog(MainWindow* win, bool isExtract) {
         return;
     }
 
-    int x = kDeletePageDlgPadding;
-    int y = kDeletePageDlgPadding;
-    int w = dlgW - 2 * kDeletePageDlgPadding - 16;
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: pages label + pages edit + total pages label
     // offset static labels to align with text inside edit control (same as input path label)
-    int labelW = 100;
-    int labelX = x + kEditTextXOffset;
+    int labelX = x + m.editXOff;
     WCHAR* pagesLabelText = isExtract ? _TRW("Pages To Extract:") : _TRW("Pages To Delete:");
+    Size labelSize = HwndMeasureText(hwnd, ToUtf8Temp(pagesLabelText), dlg->hFont);
+    int labelW = labelSize.dx + DpiScale(hwnd, 4);
     dlg->hwndPagesLabel = CreateWindowExW(0, L"STATIC", pagesLabelText, WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
-                                          y + kEditTextXOffset, labelW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+                                          y + m.editXOff, labelW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     TempStr totalStr = str::FormatTemp("of %d", pageCount);
-    int totalW = 60;
-    int editX = labelX + labelW + 8;
-    int editW = x + w - editX - totalW - 4;
+    Size totalSize = HwndMeasureText(hwnd, totalStr, dlg->hFont);
+    int totalW = totalSize.dx + DpiScale(hwnd, 4);
+    int editX = labelX + labelW + DpiScale(hwnd, 8);
+    int editW = x + w - editX - totalW - m.btnGap;
     int currentPage = win->ctrl ? win->ctrl->CurrentPageNo() : 1;
     TempStr pagesStr = str::FormatTemp("%d", currentPage);
     dlg->hwndPagesEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(pagesStr), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, editX,
-                        y, editW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+                        y, editW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPagesEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     dlg->hwndTotalLabel =
-        CreateWindowExW(0, L"STATIC", ToWStrTemp(totalStr), WS_CHILD | WS_VISIBLE | SS_LEFT, editX + editW + 4,
-                        y + kEditTextXOffset, totalW, kDeletePageDlgRowH, hwnd, nullptr, h, nullptr);
+        CreateWindowExW(0, L"STATIC", ToWStrTemp(totalStr), WS_CHILD | WS_VISIBLE | SS_LEFT, editX + editW + m.btnGap,
+                        y + m.editXOff, totalW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndTotalLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kDeletePageDlgRowH + kDeletePageDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 4: syntax hint (left) + action + Cancel buttons (right)
-    int btnW = 85;
-    int btnH = 24;
 
     // syntax hint label, x-aligned with pages label and baseline-aligned with button text
     HWND hwndSyntax = CreateWindowExW(0, L"STATIC", L"Syntax: 2,5-7,13-", WS_CHILD | WS_VISIBLE | SS_LEFT, labelX,
-                                      y + kEditTextXOffset, w / 2, btnH, hwnd, nullptr, h, nullptr);
+                                      y + m.editXOff, w / 2, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(hwndSyntax, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     WCHAR* actionBtnText = isExtract ? _TRW("Extract Pages") : _TRW("Delete Pages");
     dlg->hwndDeleteBtn = CreateWindowExW(0, L"BUTTON", actionBtnText, WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDeleteBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     // validate initial state
@@ -1330,12 +1348,6 @@ void ShowPdfExtractPagesDialog(MainWindow* win) {
 }
 
 // --- Encrypt PDF dialog ---
-
-constexpr int kEncryptDlgW = 500;
-constexpr int kEncryptDlgH = 168;
-constexpr int kEncryptDlgPadding = 10;
-constexpr int kEncryptDlgRowH = 22;
-constexpr int kEncryptDlgRowGap = 6;
 
 struct PdfEncryptDialog {
     HWND hwnd = nullptr;
@@ -1495,72 +1507,66 @@ void ShowPdfEncryptDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kEncryptDlgW, kEncryptDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 4);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfEncryptWinClassName, _TRW("Encrypt PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kEncryptDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         delete dlg;
         return;
     }
 
-    int x = kEncryptDlgPadding;
-    int y = kEncryptDlgPadding;
-    int w = dlgW - 2 * kEncryptDlgPadding - 16;
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kEncryptDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kEncryptDlgRowH + kEncryptDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kEncryptDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kEncryptDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kEncryptDlgRowH + kEncryptDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: password label + password edit
-    HDC hdc = GetDC(hwnd);
-    HFONT oldFont = (HFONT)SelectObject(hdc, dlg->hFont);
-    SIZE sz{};
     const WCHAR* pwdLabel = _TRW("Password:");
-    GetTextExtentPoint32W(hdc, pwdLabel, str::Leni(pwdLabel), &sz);
-    SelectObject(hdc, oldFont);
-    ReleaseDC(hwnd, hdc);
-    int labelW = sz.cx + 8;
+    Size labelSize = HwndMeasureText(hwnd, ToUtf8Temp(pwdLabel), dlg->hFont);
+    int labelW = labelSize.dx + DpiScale(hwnd, 4);
 
-    dlg->hwndPasswordLabel =
-        CreateWindowExW(0, L"STATIC", pwdLabel, WS_CHILD | WS_VISIBLE | SS_LEFT, x + kEditTextXOffset,
-                        y + kEditTextXOffset, labelW, kEncryptDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndPasswordLabel = CreateWindowExW(0, L"STATIC", pwdLabel, WS_CHILD | WS_VISIBLE | SS_LEFT, x + m.editXOff,
+                                             y + m.editXOff, labelW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPasswordLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     dlg->hwndPasswordEdit = CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, L"", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
-                                            x + labelW, y, w - labelW, kEncryptDlgRowH, hwnd, nullptr, h, nullptr);
+                                            x + labelW, y, w - labelW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPasswordEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kEncryptDlgRowH + kEncryptDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 4: Encrypt PDF + Cancel buttons (right-aligned)
-    int btnW = 95;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndEncryptBtn = CreateWindowExW(0, L"BUTTON", _TRW("Encrypt PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-                                          bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
+                                          bx, y, m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndEncryptBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     // disable encrypt button until password is entered
@@ -1726,12 +1732,15 @@ void ShowPdfDecryptDialog(MainWindow* win) {
     dlg->win = win;
     dlg->hFont = GetDefaultGuiFont();
 
-    int dlgW = CalcDlgWidth(dlg->hFont, tab->filePath, kCompressDlgW, kCompressDlgPadding);
+    DlgMetrics m = GetDlgMetrics(win->hwndFrame, dlg->hFont);
+    int minW = DpiScale(win->hwndFrame, 500);
+    int dlgW = CalcDlgWidth(win->hwndFrame, dlg->hFont, tab->filePath, minW, m.padding);
+    int dlgH = CalcDlgHeight(win->hwndFrame, m, 3);
 
     HINSTANCE h = GetModuleHandleW(nullptr);
     HWND hwnd = CreateWindowExW(WS_EX_DLGMODALFRAME, kPdfDecryptWinClassName, _TRW("Decrypt PDF"),
                                 WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_CLIPCHILDREN, CW_USEDEFAULT, CW_USEDEFAULT,
-                                dlgW, kCompressDlgH, win->hwndFrame, nullptr, h, dlg);
+                                dlgW, dlgH, win->hwndFrame, nullptr, h, dlg);
     if (!hwnd) {
         str::Free(dlg->srcPath);
         str::Free(dlg->password);
@@ -1739,40 +1748,37 @@ void ShowPdfDecryptDialog(MainWindow* win) {
         return;
     }
 
-    int x = kCompressDlgPadding;
-    int y = kCompressDlgPadding;
-    int w = dlgW - 2 * kCompressDlgPadding - 16;
+    int x = m.padding;
+    int y = m.padding;
+    int w = dlgW - 2 * m.padding - DpiScale(hwnd, 16);
 
     // row 1: source path label (offset to align with text inside edit control)
     dlg->hwndPathLabel =
         CreateWindowExW(0, L"STATIC", ToWStrTemp(tab->filePath), WS_CHILD | WS_VISIBLE | SS_LEFT | SS_PATHELLIPSIS,
-                        x + kEditTextXOffset, y, w - kEditTextXOffset, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        x + m.editXOff, y, w - m.editXOff, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndPathLabel, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 2: dest edit + browse button
     TempStr destPath = MakeUniqueFilePathTemp(tab->filePath);
-    int browseW = 30;
     dlg->hwndDestEdit =
         CreateWindowExW(WS_EX_CLIENTEDGE, WC_EDITW, ToWStrTemp(destPath), WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, x, y,
-                        w - browseW - 4, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+                        w - m.browseW - m.btnGap, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDestEdit, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
-    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - browseW,
-                                         y, browseW, kCompressDlgRowH, hwnd, nullptr, h, nullptr);
+    dlg->hwndBrowseBtn = CreateWindowExW(0, L"BUTTON", L"...", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x + w - m.browseW,
+                                         y, m.browseW, m.rowH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndBrowseBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    y += kCompressDlgRowH + kCompressDlgRowGap;
+    y += m.rowH + m.rowGap;
 
     // row 3: Decrypt PDF + Cancel buttons (right-aligned)
-    int btnW = 95;
-    int btnH = 24;
-    int bx = x + w - btnW;
+    int bx = x + w - m.btnW;
     dlg->hwndCancelBtn = CreateWindowExW(0, L"BUTTON", _TRW("Cancel"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, bx, y,
-                                         btnW, btnH, hwnd, nullptr, h, nullptr);
+                                         m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndCancelBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
-    bx -= btnW + 4;
+    bx -= m.btnW + m.btnGap;
     dlg->hwndDecryptBtn = CreateWindowExW(0, L"BUTTON", _TRW("Decrypt PDF"), WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-                                          bx, y, btnW, btnH, hwnd, nullptr, h, nullptr);
+                                          bx, y, m.btnW, m.btnH, hwnd, nullptr, h, nullptr);
     SendMessageW(dlg->hwndDecryptBtn, WM_SETFONT, (WPARAM)dlg->hFont, TRUE);
 
     CenterDialog(hwnd, win->hwndFrame);
