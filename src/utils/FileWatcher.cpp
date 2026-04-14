@@ -121,11 +121,17 @@ static void GetFileState(const char* path, FileWatcherState* fs) {
     // but it's also updated when the file is being read from (e.g.
     // copy f.pdf f2.pdf will change lastAccessTime of f.pdf)
     // So I'm sticking with lastWriteTime
-    FILETIME lastMod{};
-    AutoCloseHandle h(file::OpenReadOnly(path));
-    if (h.IsValid()) {
-        GetFileTime(h, nullptr, nullptr, &fs->time);
-        fs->size = file::GetSize(h);
+    //
+    // Use GetFileAttributesExW instead of opening the file with CreateFileW.
+    // Opening a file (even read-only) on a network drive can trigger
+    // Windows Defender to re-scan it, which is slow and generates unwanted
+    // network traffic. GetFileAttributesExW queries filesystem metadata
+    // without opening the file content, avoiding the scan.
+    WCHAR* pathW = ToWStrTemp(path);
+    WIN32_FILE_ATTRIBUTE_DATA attrs{};
+    if (GetFileAttributesExW(pathW, GetFileExInfoStandard, &attrs)) {
+        fs->time = attrs.ftLastWriteTime;
+        fs->size = (i64)attrs.nFileSizeHigh << 32 | attrs.nFileSizeLow;
     }
 }
 
