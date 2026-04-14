@@ -114,6 +114,7 @@ class EngineImages : public EngineBase {
     virtual Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) = 0;
     virtual RectF LoadMediabox(int pageNo) = 0;
     virtual ByteSlice GetRawImageData(int pageNo) = 0;
+    virtual TempStr GetImagePathTemp(int pageNo) { return nullptr; }
 
     ImagePage* GetPage(int pageNo, bool tryOnly = false);
     void DropPage(ImagePage* page, bool forceRemove);
@@ -1200,6 +1201,10 @@ void EngineImage::GetProperties(StrVec& keyValOut) {
 }
 
 void EngineImages::GetImageProperties(int pageNo, StrVec& keyValOut) {
+    TempStr imgPath = GetImagePathTemp(pageNo);
+    if (imgPath) {
+        AddProp(keyValOut, kPropImagePath, imgPath);
+    }
     ByteSlice data = GetRawImageData(pageNo);
     GetExifPropertiesFromData(data, keyValOut);
     data.Free();
@@ -1357,6 +1362,7 @@ class EngineImageDir : public EngineImages {
     Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) override;
     RectF LoadMediabox(int pageNo) override;
     ByteSlice GetRawImageData(int pageNo) override;
+    TempStr GetImagePathTemp(int pageNo) override { return str::DupTemp(pageFileNames.At(pageNo - 1)); }
 
     StrVec pageFileNames;
     TocTree* tocTree = nullptr;
@@ -1643,6 +1649,7 @@ class EngineCbx : public EngineImages {
     Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) override;
     RectF LoadMediabox(int pageNo) override;
     ByteSlice GetRawImageData(int pageNo) override;
+    TempStr GetImagePathTemp(int pageNo) override { return str::DupTemp(files[pageNo - 1]->name); }
 
     bool LoadFromFile(const char* fileName);
     bool LoadFromStream(IStream* stream);
@@ -1907,6 +1914,9 @@ void EngineCbx::GetProperties(StrVec& keyValOut) {
     for (size_t i = 0; i < n; i++) {
         auto* fi = fileInfos[i];
         if (str::IsEmpty(fi->name)) {
+            continue;
+        }
+        if (fi->isDir) {
             continue;
         }
         filesStr.AppendChar('\n');

@@ -72,6 +72,7 @@ bool MultiFormatArchive::ParseEntries(struct archive* a) {
         i->filePos = (i64)fileId; // use fileId as position identifier
         i->fileTime = (i64)archive_entry_mtime(entry);
         i->name = str::Dup(&allocator_, name);
+        i->isDir = (archive_entry_filetype(entry) == AE_IFDIR);
         i->data = nullptr;
         fileInfos_.Append(i);
 
@@ -674,6 +675,7 @@ bool MultiFormatArchive::OpenUnrarFallback(const char* rarPath) {
         i->filePos = 0;
         i->fileTime = (i64)rarHeader.FileTime;
         i->name = str::Dup(&allocator_, name);
+        i->isDir = (rarHeader.Flags & RHDF_DIRECTORY) != 0;
         i->data = nullptr;
         if (loadOnOpen) {
             // +2 so that it's zero-terminated even when interprted as WCHAR*

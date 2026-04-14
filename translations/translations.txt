@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-4b5b199572e0865dfc8ecd559fa97824a391d652
+8cbc52b18ff3d88898ce80024d6f75ace6b78903
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -18079,6 +18079,7 @@ it:Incolla immagine dagli Appunti
 nl:Afbeelding van Klembord Plakken
 pl:Wklej obraz ze schowka
 sk:Vložiť obrázok zo schránky
+:Path:
 :Pin Selected Document
 am:Ամրացնել ընտրված փաստաթուղթը
 br:Fixar Documento Selecionado

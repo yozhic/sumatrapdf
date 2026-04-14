@@ -19,6 +19,7 @@ class MultiFormatArchive {
         const char* name = nullptr;
         i64 fileTime = 0; // this is typedef'ed as time64_t in unrar.h
         size_t fileSizeUncompressed = 0;
+        bool isDir = false;
 
         // internal use
         i64 filePos = 0;

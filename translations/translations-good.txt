@@ -30952,6 +30952,79 @@ tw:從剪貼簿貼上圖片
 uk:Вставити зображення з буфера обміну
 uz:Klipborddan rasmni joylashtirish
 vn:Dán ảnh từ bộ nhớ tạm
+:Path:
+af:Pad:
+am:መንገድ፡
+ar:المسار:
+az:Yol:
+bg:Път:
+bn:পথ:
+br:Hent:
+bs:Put:
+by:Шлях:
+ca:Camí:
+ca-xv:Camí:
+cn:路径：
+co:Parcorsu:
+cy:Llwybr:
+cz:Cesta:
+de:Pfad:
+dk:Sti:
+el:Διαδρομή:
+es:Ruta:
+et:Tee:
+eu:Bidea:
+fa:مسیر:
+fi:Polku:
+fo:Leið:
+fr:Chemin :
+fy-nl:Paad:
+ga:Cosán:
+gl:Ruta:
+he:נתיב:
+hi:पथ:
+hr:Put:
+hu:Útvonal:
+id:Jalur:
+it:Percorso:
+ja:パス:
+jv:Dalan:
+ka:გზა:
+kr:경로:
+ku:ڕێگە:
+kw:Hens:
+lt:Kelias:
+lv:Ceļš:
+mk:Патека:
+ml:പാത:
+mm:လမ်းကြောင်း:
+my:လမ်းကြောင်း:
+ne:बाटो:
+nl:Pad:
+nn:Sti:
+no:Sti:
+pa:ਮਾਰਗ:
+pl:Ścieżka:
+pt:Caminho:
+ro:Cale:
+ru:Путь:
+sat:ᱦᱚᱨ:
+si:මාර්ගය:
+sk:Cesta:
+sl:Pot:
+sn:Nzira:
+sp-rs:Putanja:
+sq:Shtegu:
+sr-rs:Путања:
+sv:Sökväg:
+ta:பாதை:
+th:เส้นทาง:
+tl:Landas:
+tr:Yol:
+tw:路徑：
+uk:Шлях:
+uz:Yo'l:
+vn:Đường dẫn:
 :Pin Selected Document
 af:Speld Geselekteerde Dokument Vas
 am:Ամրացնել ընտրված փաստաթուղթը

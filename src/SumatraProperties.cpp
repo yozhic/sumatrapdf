@@ -321,6 +321,7 @@ static const char* propToName[] = {
     kPropFileSource, _TRN("File Source:"),
     kPropSceneType, _TRN("Scene Type:"),
     kPropImageFileSize, _TRN("Image File Size:"),
+    kPropImagePath, _TRN("Path:"),
     nullptr,
 };
 // clang-format on
