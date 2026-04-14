@@ -3587,7 +3587,10 @@ static void DeleteCurrentFile(MainWindow* win) {
         DeleteFileState(fs);
     }
     SaveSettings();
-    win->RedrawAll(true);
+    // CloseCurrentTab may have destroyed the window if it had no more tabs
+    if (IsMainWindowValid(win)) {
+        win->RedrawAll(true);
+    }
 }
 
 static void RenameCurrentFile(MainWindow* win) {
