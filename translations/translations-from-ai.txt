@@ -49236,3 +49236,3641 @@ vn:Lưu tệp đính kèm
 vn:Đặt
 :Set Screenshot Hotkey
 vn:Đặt phím tắt chụp màn hình
+:Color Space:
+am:የቀለም ክልል:
+:Components Configuration:
+am:የክፍሎች ውቅር:
+:Compressed Bits/Pixel:
+am:የተጨመቁ ቢትስ/ፒክሰል:
+:Date/Time Digitized:
+am:ዲጂታል የተደረገበት ቀን/ሰዓት:
+:Date/Time:
+am:ቀን/ሰዓት:
+:Exif Version:
+am:Exif ስሪት:
+:File Source:
+am:የፋይል ምንጭ:
+:Flashpix Version:
+am:Flashpix ስሪት:
+:Light Source:
+am:የብርሃን ምንጭ:
+:Max Aperture:
+am:ከፍተኛ አፐርቸር:
+:Pixel X Dimension:
+am:ፒክሰል X መጠን:
+:Pixel Y Dimension:
+am:ፒክሰል Y መጠን:
+:Resolution Unit:
+am:የሪዞሊውሽን አሃድ:
+:Scene Type:
+am:የትእይንት አይነት:
+:Software:
+am:ሶፍትዌር:
+:User Comment:
+am:የተጠቃሚ አስተያየት:
+:YCbCr Positioning:
+am:YCbCr አቀማመጥ:
+:Color Space:
+ar:مساحة اللون:
+:Components Configuration:
+ar:تكوين المكونات:
+:Compressed Bits/Pixel:
+ar:البتات المضغوطة/بكسل:
+:Date/Time Digitized:
+ar:تاريخ/وقت الرقمنة:
+:Date/Time:
+ar:التاريخ/الوقت:
+:Exif Version:
+ar:إصدار Exif:
+:File Source:
+ar:مصدر الملف:
+:Flashpix Version:
+ar:إصدار Flashpix:
+:Light Source:
+ar:مصدر الضوء:
+:Max Aperture:
+ar:أقصى فتحة عدسة:
+:Pixel X Dimension:
+ar:البعد X للبكسل:
+:Pixel Y Dimension:
+ar:البعد Y للبكسل:
+:Resolution Unit:
+ar:وحدة الدقة:
+:Scene Type:
+ar:نوع المشهد:
+:Software:
+ar:البرنامج:
+:User Comment:
+ar:تعليق المستخدم:
+:YCbCr Positioning:
+ar:موضع YCbCr:
+:Color Space:
+br:Spas al livioù:
+:Components Configuration:
+br:Kefluniadur ar poelladoù:
+:Compressed Bits/Pixel:
+br:Bitoù gwasket/Piksel:
+:Date/Time Digitized:
+br:Deiziad/Eur niverelaat:
+:Date/Time:
+br:Deiziad/Eur:
+:Exif Version:
+br:Stumm Exif:
+:File Source:
+br:Mammenn ar restr:
+:Flashpix Version:
+br:Stumm Flashpix:
+:Light Source:
+br:Mammenn ar gouloù:
+:Max Aperture:
+br:Digor brasañ:
+:Pixel X Dimension:
+br:Ment ar pikseloù X:
+:Pixel Y Dimension:
+br:Ment ar pikseloù Y:
+:Resolution Unit:
+br:Unanenn ar spisterded:
+:Scene Type:
+br:Seurt ar gladenn:
+:Software:
+br:Meziant:
+:User Comment:
+br:Evezhiadenn an implijer:
+:YCbCr Positioning:
+br:Lec'hiadur YCbCr:
+:Color Space:
+cn:色彩空间：
+:Components Configuration:
+cn:组件配置：
+:Compressed Bits/Pixel:
+cn:压缩位/像素：
+:Date/Time Digitized:
+cn:数字化日期/时间：
+:Date/Time:
+cn:日期/时间：
+:Exif Version:
+cn:Exif 版本：
+:File Source:
+cn:文件源：
+:Flashpix Version:
+cn:Flashpix 版本：
+:Light Source:
+cn:光源：
+:Max Aperture:
+cn:最大光圈：
+:Pixel X Dimension:
+cn:像素 X 尺寸：
+:Pixel Y Dimension:
+cn:像素 Y 尺寸：
+:Resolution Unit:
+cn:分辨率单位：
+:Scene Type:
+cn:场景类型：
+:Software:
+cn:软件：
+:User Comment:
+cn:用户注释：
+:YCbCr Positioning:
+cn:YCbCr 定位：
+:Color Space:
+co:Spaziu di culore:
+:Components Configuration:
+co:Cunfigurazione di cumpunenti:
+:Compressed Bits/Pixel:
+co:Bits/Pixel cumpressi:
+:Date/Time Digitized:
+co:Data/Ora digitalizata:
+:Date/Time:
+co:Data/Ora:
+:Exif Version:
+co:Versione Exif:
+:File Source:
+co:Surgente di u schedariu:
+:Flashpix Version:
+co:Versione Flashpix:
+:Light Source:
+co:Surgente di luce:
+:Max Aperture:
+co:Apertura massima:
+:Pixel X Dimension:
+co:Dimensione X di u pixel:
+:Pixel Y Dimension:
+co:Dimensione Y di u pixel:
+:Resolution Unit:
+co:Unità di risuluzione:
+:Scene Type:
+co:Tipu di scena:
+:Software:
+co:Prugramma:
+:User Comment:
+co:Cummentu di l'utilizatore:
+:YCbCr Positioning:
+co:Pusiziunamentu YCbCr:
+:Color Space:
+de:Farbraum:
+:Components Configuration:
+de:Komponentenkonfiguration:
+:Compressed Bits/Pixel:
+de:Komprimierte Bits/Pixel:
+:Date/Time Digitized:
+de:Digitalisierungsdatum/-zeit:
+:Date/Time:
+de:Datum/Uhrzeit:
+:Exif Version:
+de:Exif-Version:
+:File Source:
+de:Dateiquelle:
+:Flashpix Version:
+de:Flashpix-Version:
+:Light Source:
+de:Lichtquelle:
+:Max Aperture:
+de:Maximale Blende:
+:Pixel X Dimension:
+de:Pixel X-Dimension:
+:Pixel Y Dimension:
+de:Pixel Y-Dimension:
+:Resolution Unit:
+de:Auflösungseinheit:
+:Scene Type:
+de:Szenentyp:
+:Software:
+de:Software:
+:User Comment:
+de:Benutzerkommentar:
+:YCbCr Positioning:
+de:YCbCr-Positionierung:
+:Color Space:
+el:Χώρος Χρωμάτων:
+:Components Configuration:
+el:Διαμόρφωση Στοιχείων:
+:Compressed Bits/Pixel:
+el:Συμπιεσμένα Bits/Pixel:
+:Date/Time Digitized:
+el:Ημερομηνία/Ώρα Ψηφιοποίησης:
+:Date/Time:
+el:Ημερομηνία/Ώρα:
+:Exif Version:
+el:Έκδοση Exif:
+:File Source:
+el:Πηγή Αρχείου:
+:Flashpix Version:
+el:Έκδοση Flashpix:
+:Light Source:
+el:Πηγή Φωτός:
+:Max Aperture:
+el:Μέγιστο Διάφραγμα:
+:Pixel X Dimension:
+el:Διάσταση Pixel X:
+:Pixel Y Dimension:
+el:Διάσταση Pixel Y:
+:Resolution Unit:
+el:Μονάδα Ανάλυσης:
+:Scene Type:
+el:Τύπος Σκηνής:
+:Software:
+el:Λογισμικό:
+:User Comment:
+el:Σχόλιο Χρήστη:
+:YCbCr Positioning:
+el:Τοποθέτηση YCbCr:
+:Color Space:
+hi:रंग स्थान:
+:Components Configuration:
+hi:घटक विन्यास:
+:Compressed Bits/Pixel:
+hi:संपीड़ित बिट्स/पिक्सेल:
+:Date/Time Digitized:
+hi:डिजिटलीकरण दिनांक/समय:
+:Date/Time:
+hi:दिनांक/समय:
+:Exif Version:
+hi:Exif संस्करण:
+:File Source:
+hi:फ़ाइल स्रोत:
+:Flashpix Version:
+hi:Flashpix संस्करण:
+:Light Source:
+hi:प्रकाश स्रोत:
+:Max Aperture:
+hi:अधिकतम एपर्चर:
+:Pixel X Dimension:
+hi:पिक्सेल X आयाम:
+:Pixel Y Dimension:
+hi:पिक्सेल Y आयाम:
+:Resolution Unit:
+hi:रिज़ॉल्यूशन इकाई:
+:Scene Type:
+hi:दृश्य प्रकार:
+:Software:
+hi:सॉफ़्टवेयर:
+:User Comment:
+hi:उपयोगकर्ता टिप्पणी:
+:YCbCr Positioning:
+hi:YCbCr स्थिति:
+:Color Space:
+it:Spazio colore:
+:Components Configuration:
+it:Configurazione componenti:
+:Compressed Bits/Pixel:
+it:Bit compressi/Pixel:
+:Date/Time Digitized:
+it:Data/Ora digitalizzazione:
+:Date/Time:
+it:Data/Ora:
+:Exif Version:
+it:Versione Exif:
+:File Source:
+it:Sorgente file:
+:Flashpix Version:
+it:Versione Flashpix:
+:Light Source:
+it:Sorgente luminosa:
+:Max Aperture:
+it:Apertura massima:
+:Pixel X Dimension:
+it:Dimensione X pixel:
+:Pixel Y Dimension:
+it:Dimensione Y pixel:
+:Resolution Unit:
+it:Unità di risoluzione:
+:Scene Type:
+it:Tipo di scena:
+:Software:
+it:Software:
+:User Comment:
+it:Commento utente:
+:YCbCr Positioning:
+it:Posizionamento YCbCr:
+:Color Space:
+ja:色空間:
+:Components Configuration:
+ja:コンポーネント構成:
+:Compressed Bits/Pixel:
+ja:圧縮ビット/ピクセル:
+:Date/Time Digitized:
+ja:デジタル化日時:
+:Date/Time:
+ja:日時:
+:Exif Version:
+ja:Exifバージョン:
+:File Source:
+ja:ファイルソース:
+:Flashpix Version:
+ja:Flashpixバージョン:
+:Light Source:
+ja:光源:
+:Max Aperture:
+ja:最大絞り:
+:Pixel X Dimension:
+ja:画像幅:
+:Pixel Y Dimension:
+ja:画像高さ:
+:Resolution Unit:
+ja:解像度単位:
+:Scene Type:
+ja:シーンタイプ:
+:Software:
+ja:ソフトウェア:
+:User Comment:
+ja:ユーザーコメント:
+:YCbCr Positioning:
+ja:YCbCr位置:
+:Color Space:
+ml:വർണ്ണ സ്പേസ്:
+:Components Configuration:
+ml:ഘടക ക്രമീകരണം:
+:Compressed Bits/Pixel:
+ml:കംപ്രസ്ഡ് ബിറ്റ്സ്/പിക്സൽ:
+:Date/Time Digitized:
+ml:ഡിജിറ്റൈസ് ചെയ്ത തീയതി/സമയം:
+:Date/Time:
+ml:തീയതി/സമയം:
+:Exif Version:
+ml:Exif പതിപ്പ്:
+:File Source:
+ml:ഫയൽ ഉറവിടം:
+:Flashpix Version:
+ml:Flashpix പതിപ്പ്:
+:Light Source:
+ml:പ്രകാശ ഉറവിടം:
+:Max Aperture:
+ml:പരമാവധി അപ്പർച്ചർ:
+:Pixel X Dimension:
+ml:പിക്സൽ X അളവ്:
+:Pixel Y Dimension:
+ml:പിക്സൽ Y അളവ്:
+:Resolution Unit:
+ml:റെസല്യൂഷൻ യൂണിറ്റ്:
+:Scene Type:
+ml:ദൃശ്യ തരം:
+:Software:
+ml:സോഫ്റ്റ്‌വെയർ:
+:User Comment:
+ml:ഉപയോക്തൃ അഭിപ്രായം:
+:YCbCr Positioning:
+ml:YCbCr സ്ഥാനനിർണ്ണയം:
+:Color Space:
+nl:Kleurruimte:
+:Components Configuration:
+nl:Componentenconfiguratie:
+:Compressed Bits/Pixel:
+nl:Gecomprimeerde bits/pixel:
+:Date/Time Digitized:
+nl:Datum/tijd gedigitaliseerd:
+:Date/Time:
+nl:Datum/tijd:
+:Exif Version:
+nl:Exif-versie:
+:File Source:
+nl:Bestandsbron:
+:Flashpix Version:
+nl:Flashpix-versie:
+:Light Source:
+nl:Lichtbron:
+:Max Aperture:
+nl:Max. diafragma:
+:Pixel X Dimension:
+nl:Pixel X-dimensie:
+:Pixel Y Dimension:
+nl:Pixel Y-dimensie:
+:Resolution Unit:
+nl:Resolutie-eenheid:
+:Scene Type:
+nl:Scènetype:
+:Software:
+nl:Software:
+:User Comment:
+nl:Gebruikersopmerking:
+:YCbCr Positioning:
+nl:YCbCr-positionering:
+:Color Space:
+pl:Przestrzeń barw:
+:Components Configuration:
+pl:Konfiguracja komponentów:
+:Compressed Bits/Pixel:
+pl:Skompresowane bity/piksel:
+:Date/Time Digitized:
+pl:Data/czas digitalizacji:
+:Date/Time:
+pl:Data/czas:
+:Exif Version:
+pl:Wersja Exif:
+:File Source:
+pl:Źródło pliku:
+:Flashpix Version:
+pl:Wersja Flashpix:
+:Light Source:
+pl:Źródło światła:
+:Max Aperture:
+pl:Maks. przysłona:
+:Pixel X Dimension:
+pl:Wymiar X w pikselach:
+:Pixel Y Dimension:
+pl:Wymiar Y w pikselach:
+:Resolution Unit:
+pl:Jednostka rozdzielczości:
+:Scene Type:
+pl:Typ sceny:
+:Software:
+pl:Oprogramowanie:
+:User Comment:
+pl:Komentarz użytkownika:
+:YCbCr Positioning:
+pl:Pozycjonowanie YCbCr:
+:Color Space:
+ru:Цветовое пространство:
+:Components Configuration:
+ru:Конфигурация компонентов:
+:Compressed Bits/Pixel:
+ru:Сжатых бит/пиксель:
+:Date/Time Digitized:
+ru:Дата/время оцифровки:
+:Date/Time:
+ru:Дата/время:
+:Exif Version:
+ru:Версия Exif:
+:File Source:
+ru:Источник файла:
+:Flashpix Version:
+ru:Версия Flashpix:
+:Light Source:
+ru:Источник света:
+:Max Aperture:
+ru:Макс. диафрагма:
+:Pixel X Dimension:
+ru:Размер X в пикселях:
+:Pixel Y Dimension:
+ru:Размер Y в пикселях:
+:Resolution Unit:
+ru:Единица разрешения:
+:Scene Type:
+ru:Тип сцены:
+:Software:
+ru:ПО:
+:User Comment:
+ru:Комментарий пользователя:
+:YCbCr Positioning:
+ru:Позиционирование YCbCr:
+:Color Space:
+sat:ᱨᱚᱝ ᱡᱟᱜᱟ:
+:Components Configuration:
+sat:ᱚᱝᱥᱚ ᱥᱮᱴᱤᱝ:
+:Compressed Bits/Pixel:
+sat:ᱠᱚᱢᱯᱨᱮᱥᱰ ᱵᱤᱴ/ᱯᱤᱠᱥᱮᱞ:
+:Date/Time Digitized:
+sat:ᱰᱤᱡᱤᱴᱟᱭᱤᱡᱰ ᱢᱟᱹᱦᱤᱛ/ᱚᱠᱛᱚ:
+:Date/Time:
+sat:ᱢᱟᱹᱦᱤᱛ/ᱚᱠᱛᱚ:
+:Exif Version:
+sat:Exif ᱵᱷᱟᱨᱥᱚᱱ:
+:File Source:
+sat:ᱨᱮᱫ ᱥᱨᱚᱛ:
+:Flashpix Version:
+sat:Flashpix ᱵᱷᱟᱨᱥᱚᱱ:
+:Light Source:
+sat:ᱢᱟᱨᱥᱟᱞ ᱥᱨᱚᱛ:
+:Max Aperture:
+sat:ᱢᱮᱠᱥ ᱮᱯᱟᱨᱪᱟᱨ:
+:Pixel X Dimension:
+sat:ᱯᱤᱠᱥᱮᱞ X ᱰᱟᱭᱢᱮᱱᱥᱚᱱ:
+:Pixel Y Dimension:
+sat:ᱯᱤᱠᱥᱮᱞ Y ᱰᱟᱭᱢᱮᱱᱥᱚᱱ:
+:Resolution Unit:
+sat:ᱨᱮᱡᱚᱞᱩᱥᱚᱱ ᱤᱭᱩᱱᱤᱴ:
+:Scene Type:
+sat:ᱫᱨᱤᱥ ᱞᱮᱠᱟᱱ:
+:Software:
+sat:ᱥᱚᱯᱷᱴᱣᱮᱨ:
+:User Comment:
+sat:ᱵᱮᱵᱷᱟᱨᱤᱭᱟᱹ ᱴᱤᱯᱱᱤ:
+:YCbCr Positioning:
+sat:YCbCr ᱡᱟᱜᱟᱭᱤᱡ:
+:Color Space:
+sk:Farebný priestor:
+:Components Configuration:
+sk:Konfigurácia komponentov:
+:Compressed Bits/Pixel:
+sk:Komprimované bity/pixel:
+:Date/Time Digitized:
+sk:Dátum/čas digitalizácie:
+:Date/Time:
+sk:Dátum/čas:
+:Exif Version:
+sk:Verzia Exif:
+:File Source:
+sk:Zdroj súboru:
+:Flashpix Version:
+sk:Verzia Flashpix:
+:Light Source:
+sk:Zdroj svetla:
+:Max Aperture:
+sk:Maximálna clona:
+:Pixel X Dimension:
+sk:Rozmer X v pixeloch:
+:Pixel Y Dimension:
+sk:Rozmer Y v pixeloch:
+:Resolution Unit:
+sk:Jednotka rozlíšenia:
+:Scene Type:
+sk:Typ scény:
+:Software:
+sk:Softvér:
+:User Comment:
+sk:Používateľský komentár:
+:YCbCr Positioning:
+sk:Umiestnenie YCbCr:
+:Color Space:
+sr-rs:Простор боја:
+:Components Configuration:
+sr-rs:Конфигурација компоненти:
+:Compressed Bits/Pixel:
+sr-rs:Компресовани битови/пиксел:
+:Date/Time Digitized:
+sr-rs:Датум/време дигитализације:
+:Date/Time:
+sr-rs:Датум/време:
+:Exif Version:
+sr-rs:Exif верзија:
+:File Source:
+sr-rs:Извор датотеке:
+:Flashpix Version:
+sr-rs:Flashpix верзија:
+:Light Source:
+sr-rs:Извор светлости:
+:Max Aperture:
+sr-rs:Максимална блeнда:
+:Pixel X Dimension:
+sr-rs:X димензија пиксела:
+:Pixel Y Dimension:
+sr-rs:Y димензија пиксела:
+:Resolution Unit:
+sr-rs:Јединица резолуције:
+:Scene Type:
+sr-rs:Тип сцене:
+:Software:
+sr-rs:Софтвер:
+:User Comment:
+sr-rs:Кориснички коментар:
+:YCbCr Positioning:
+sr-rs:YCbCr позиционирање:
+:Color Space:
+tw:色彩空間：
+:Components Configuration:
+tw:元件配置：
+:Compressed Bits/Pixel:
+tw:壓縮位元/像素：
+:Date/Time Digitized:
+tw:數位化日期/時間：
+:Date/Time:
+tw:日期/時間：
+:Exif Version:
+tw:Exif 版本：
+:File Source:
+tw:檔案來源：
+:Flashpix Version:
+tw:Flashpix 版本：
+:Light Source:
+tw:光源：
+:Max Aperture:
+tw:最大光圈：
+:Pixel X Dimension:
+tw:像素 X 尺寸：
+:Pixel Y Dimension:
+tw:像素 Y 尺寸：
+:Resolution Unit:
+tw:解析度單位：
+:Scene Type:
+tw:場景類型：
+:Software:
+tw:軟體：
+:User Comment:
+tw:使用者註解：
+:YCbCr Positioning:
+tw:YCbCr 定位：
+:Color Space:
+az:Rəng Məkanı:
+:Components Configuration:
+az:Komponentlərin Konfiqurasiyası:
+:Compressed Bits/Pixel:
+az:Sıxılmış Bit/Piksel:
+:Date/Time Digitized:
+az:Rəqəmsallaşdırma Tarixi/Vaxtı:
+:Date/Time:
+az:Tarix/Vaxt:
+:Exif Version:
+az:Exif Versiyası:
+:File Source:
+az:Fayl Mənbəyi:
+:Flashpix Version:
+az:Flashpix Versiyası:
+:Light Source:
+az:İşıq Mənbəyi:
+:Max Aperture:
+az:Maksimal Diafraqma:
+:Pixel X Dimension:
+az:Piksel X Ölçüsü:
+:Pixel Y Dimension:
+az:Piksel Y Ölçüsü:
+:Resolution Unit:
+az:Ayırdetmə Vahidi:
+:Scene Type:
+az:Səhnə Tipi:
+:Software:
+az:Proqram Təminatı:
+:User Comment:
+az:İstifadəçi Şərhi:
+:YCbCr Positioning:
+az:YCbCr Mövqeləşdirmə:
+:Color Space:
+by:Каляровая прастора:
+:Components Configuration:
+by:Канфігурацыя кампанентаў:
+:Compressed Bits/Pixel:
+by:Сціснутыя біты/піксель:
+:Date/Time Digitized:
+by:Дата/час лічбавання:
+:Date/Time:
+by:Дата/час:
+:Exif Version:
+by:Версія Exif:
+:File Source:
+by:Крыніца файла:
+:Flashpix Version:
+by:Версія Flashpix:
+:Light Source:
+by:Крыніца святла:
+:Max Aperture:
+by:Макс. дыяфрагма:
+:Pixel X Dimension:
+by:Памер X у пікселях:
+:Pixel Y Dimension:
+by:Памер Y у пікселях:
+:Resolution Unit:
+by:Адзінка разрознення:
+:Scene Type:
+by:Тып сцэны:
+:Software:
+by:Праграмнае забеспячэнне:
+:User Comment:
+by:Каментар карыстальніка:
+:YCbCr Positioning:
+by:Пазіцыянаванне YCbCr:
+:Color Space:
+ca:Espai de color:
+:Components Configuration:
+ca:Configuració de components:
+:Compressed Bits/Pixel:
+ca:Bits comprimits/píxel:
+:Date/Time Digitized:
+ca:Data/hora de digitalització:
+:Date/Time:
+ca:Data/hora:
+:Exif Version:
+ca:Versió Exif:
+:File Source:
+ca:Origen del fitxer:
+:Flashpix Version:
+ca:Versió Flashpix:
+:Light Source:
+ca:Font de llum:
+:Max Aperture:
+ca:Obertura màxima:
+:Pixel X Dimension:
+ca:Dimensió X en píxels:
+:Pixel Y Dimension:
+ca:Dimensió Y en píxels:
+:Resolution Unit:
+ca:Unitat de resolució:
+:Scene Type:
+ca:Tipus d'escena:
+:Software:
+ca:Programari:
+:User Comment:
+ca:Comentari d'usuari:
+:YCbCr Positioning:
+ca:Posicionament YCbCr:
+:Color Space:
+cy:Gofod Lliw:
+:Components Configuration:
+cy:Ffurfweddiad Cydrannau:
+:Compressed Bits/Pixel:
+cy:Didau/Picsel wedi'u Cywasgu:
+:Date/Time Digitized:
+cy:Dyddiad/Amser Digido:
+:Date/Time:
+cy:Dyddiad/Amser:
+:Exif Version:
+cy:Fersiwn Exif:
+:File Source:
+cy:Ffynhonnell Ffeil:
+:Flashpix Version:
+cy:Fersiwn Flashpix:
+:Light Source:
+cy:Ffynhonnell Golau:
+:Max Aperture:
+cy:Agorfa Uchaf:
+:Pixel X Dimension:
+cy:Dimensiwn Picsel X:
+:Pixel Y Dimension:
+cy:Dimensiwn Picsel Y:
+:Resolution Unit:
+cy:Uned Cydraniad:
+:Scene Type:
+cy:Math o Olygfa:
+:Software:
+cy:Meddalwedd:
+:User Comment:
+cy:Sylw Defnyddiwr:
+:YCbCr Positioning:
+cy:Safle YCbCr:
+:Color Space:
+cz:Barevný prostor:
+:Components Configuration:
+cz:Konfigurace komponent:
+:Compressed Bits/Pixel:
+cz:Komprimované bity/pixel:
+:Date/Time Digitized:
+cz:Datum/čas digitalizace:
+:Date/Time:
+cz:Datum/čas:
+:Exif Version:
+cz:Verze Exif:
+:File Source:
+cz:Zdroj souboru:
+:Flashpix Version:
+cz:Verze Flashpix:
+:Light Source:
+cz:Světelný zdroj:
+:Max Aperture:
+cz:Maximální clona:
+:Pixel X Dimension:
+cz:Rozměr X v pixelech:
+:Pixel Y Dimension:
+cz:Rozměr Y v pixelech:
+:Resolution Unit:
+cz:Jednotka rozlišení:
+:Scene Type:
+cz:Typ scény:
+:Software:
+cz:Software:
+:User Comment:
+cz:Komentář uživatele:
+:YCbCr Positioning:
+cz:Umístění YCbCr:
+:Color Space:
+es:Espacio de Color:
+:Components Configuration:
+es:Configuración de Componentes:
+:Compressed Bits/Pixel:
+es:Bits Comprimidos/Píxel:
+:Date/Time Digitized:
+es:Fecha/Hora de Digitalización:
+:Date/Time:
+es:Fecha/Hora:
+:Exif Version:
+es:Versión Exif:
+:File Source:
+es:Origen del Archivo:
+:Flashpix Version:
+es:Versión Flashpix:
+:Light Source:
+es:Fuente de Luz:
+:Max Aperture:
+es:Apertura Máxima:
+:Pixel X Dimension:
+es:Dimensión X en Píxeles:
+:Pixel Y Dimension:
+es:Dimensión Y en Píxeles:
+:Resolution Unit:
+es:Unidad de Resolución:
+:Scene Type:
+es:Tipo de Escena:
+:Software:
+es:Software:
+:User Comment:
+es:Comentario de Usuario:
+:YCbCr Positioning:
+es:Posicionamiento YCbCr:
+:Color Space:
+fa:فضای رنگ:
+:Components Configuration:
+fa:پیکربندی اجزا:
+:Compressed Bits/Pixel:
+fa:بیت فشرده/پیکسل:
+:Date/Time Digitized:
+fa:تاریخ/زمان دیجیتالی شده:
+:Date/Time:
+fa:تاریخ/زمان:
+:Exif Version:
+fa:نسخه Exif:
+:File Source:
+fa:منبع فایل:
+:Flashpix Version:
+fa:نسخه Flashpix:
+:Light Source:
+fa:منبع نور:
+:Max Aperture:
+fa:حداکثر دیافراگم:
+:Pixel X Dimension:
+fa:بعد X پیکسل:
+:Pixel Y Dimension:
+fa:بعد Y پیکسل:
+:Resolution Unit:
+fa:واحد وضوح:
+:Scene Type:
+fa:نوع صحنه:
+:Software:
+fa:نرم‌افزار:
+:User Comment:
+fa:نظر کاربر:
+:YCbCr Positioning:
+fa:موقعیت YCbCr:
+:Color Space:
+fi:Väriavaruus:
+:Components Configuration:
+fi:Komponenttien kokoonpano:
+:Compressed Bits/Pixel:
+fi:Pakatut bitit/pikseli:
+:Date/Time Digitized:
+fi:Digitointipäivä/-aika:
+:Date/Time:
+fi:Päivämäärä/aika:
+:Exif Version:
+fi:Exif-versio:
+:File Source:
+fi:Tiedostolähde:
+:Flashpix Version:
+fi:Flashpix-versio:
+:Light Source:
+fi:Valonlähde:
+:Max Aperture:
+fi:Suurin aukko:
+:Pixel X Dimension:
+fi:Pikselien X-ulottuvuus:
+:Pixel Y Dimension:
+fi:Pikselien Y-ulottuvuus:
+:Resolution Unit:
+fi:Tarkkuusyksikkö:
+:Scene Type:
+fi:Kohdetyyppi:
+:Software:
+fi:Ohjelmisto:
+:User Comment:
+fi:Käyttäjän kommentti:
+:YCbCr Positioning:
+fi:YCbCr-sijoittelu:
+:Color Space:
+fo:Litarúm:
+:Components Configuration:
+fo:Samansetingaruppseting:
+:Compressed Bits/Pixel:
+fo:Tvøttaðir Bits/Pixel:
+:Date/Time Digitized:
+fo:Dagfesting/Tíð Digitaliserað:
+:Date/Time:
+fo:Dagfesting/Tíð:
+:Exif Version:
+fo:Exif Útgáva:
+:File Source:
+fo:Fílukella:
+:Flashpix Version:
+fo:Flashpix Útgáva:
+:Light Source:
+fo:Ljóskella:
+:Max Aperture:
+fo:Hægsta Blenda:
+:Pixel X Dimension:
+fo:Pixel X Dimensjón:
+:Pixel Y Dimension:
+fo:Pixel Y Dimensjón:
+:Resolution Unit:
+fo:Upploysingareind:
+:Scene Type:
+fo:Senaríuslag:
+:Software:
+fo:Ritbúnaður:
+:User Comment:
+fo:Brúkaraviðmerking:
+:YCbCr Positioning:
+fo:YCbCr Plasering:
+:Color Space:
+fr:Espace colorimétrique :
+:Components Configuration:
+fr:Configuration des composants :
+:Compressed Bits/Pixel:
+fr:Bits compressés/pixel :
+:Date/Time Digitized:
+fr:Date/heure de numérisation :
+:Date/Time:
+fr:Date/heure :
+:Exif Version:
+fr:Version Exif :
+:File Source:
+fr:Source du fichier :
+:Flashpix Version:
+fr:Version Flashpix :
+:Light Source:
+fr:Source de lumière :
+:Max Aperture:
+fr:Ouverture maximale :
+:Pixel X Dimension:
+fr:Dimension X en pixels :
+:Pixel Y Dimension:
+fr:Dimension Y en pixels :
+:Resolution Unit:
+fr:Unité de résolution :
+:Scene Type:
+fr:Type de scène :
+:Software:
+fr:Logiciel :
+:User Comment:
+fr:Commentaire utilisateur :
+:YCbCr Positioning:
+fr:Positionnement YCbCr :
+:Color Space:
+ga:Spás Datha:
+:Components Configuration:
+ga:Cumraíocht Comhpháirteanna:
+:Compressed Bits/Pixel:
+ga:Giotáin Comhbhrúite/Picteilín:
+:Date/Time Digitized:
+ga:Dáta/Am Digitithe:
+:Date/Time:
+ga:Dáta/Am:
+:Exif Version:
+ga:Leagan Exif:
+:File Source:
+ga:Foinse Comhaid:
+:Flashpix Version:
+ga:Leagan Flashpix:
+:Light Source:
+ga:Foinse Solais:
+:Max Aperture:
+ga:Cró Uasta:
+:Pixel X Dimension:
+ga:Toise X Picteilín:
+:Pixel Y Dimension:
+ga:Toise Y Picteilín:
+:Resolution Unit:
+ga:Aonad Taifeach:
+:Scene Type:
+ga:Cineál Radhairc:
+:Software:
+ga:Bogearraí:
+:User Comment:
+ga:Nóta Úsáideora:
+:YCbCr Positioning:
+ga:Ionadú YCbCr:
+:Color Space:
+gl:Espazo de cor:
+:Components Configuration:
+gl:Configuración de compoñentes:
+:Compressed Bits/Pixel:
+gl:Bits comprimidos/píxel:
+:Date/Time Digitized:
+gl:Data/Hora de dixitalización:
+:Date/Time:
+gl:Data/Hora:
+:Exif Version:
+gl:Versión Exif:
+:File Source:
+gl:Orixe do ficheiro:
+:Flashpix Version:
+gl:Versión Flashpix:
+:Light Source:
+gl:Fonte de luz:
+:Max Aperture:
+gl:Apertura máxima:
+:Pixel X Dimension:
+gl:Dimensión X en píxeles:
+:Pixel Y Dimension:
+gl:Dimensión Y en píxeles:
+:Resolution Unit:
+gl:Unidade de resolución:
+:Scene Type:
+gl:Tipo de escena:
+:Software:
+gl:Software:
+:User Comment:
+gl:Comentario do usuario:
+:YCbCr Positioning:
+gl:Posicionamento YCbCr:
+:Color Space:
+he:מרחב צבע:
+:Components Configuration:
+he:תצורת רכיבים:
+:Compressed Bits/Pixel:
+he:ביטים דחוסים/פיקסל:
+:Date/Time Digitized:
+he:תאריך/שעה דיגיטציה:
+:Date/Time:
+he:תאריך/שעה:
+:Exif Version:
+he:גרסת Exif:
+:File Source:
+he:מקור קובץ:
+:Flashpix Version:
+he:גרסת Flashpix:
+:Light Source:
+he:מקור אור:
+:Max Aperture:
+he:צמצם מקסימלי:
+:Pixel X Dimension:
+he:מימד X פיקסלים:
+:Pixel Y Dimension:
+he:מימד Y פיקסלים:
+:Resolution Unit:
+he:יחידת רזולוציה:
+:Scene Type:
+he:סוג סצנה:
+:Software:
+he:תוכנה:
+:User Comment:
+he:הערת משתמש:
+:YCbCr Positioning:
+he:מיקום YCbCr:
+:Color Space:
+hu:Színtér:
+:Components Configuration:
+hu:Komponensek konfigurációja:
+:Compressed Bits/Pixel:
+hu:Tömörített bitek/pixel:
+:Date/Time Digitized:
+hu:Digitalizálás dátuma/ideje:
+:Date/Time:
+hu:Dátum/Idő:
+:Exif Version:
+hu:Exif verzió:
+:File Source:
+hu:Fájl forrása:
+:Flashpix Version:
+hu:Flashpix verzió:
+:Light Source:
+hu:Fényforrás:
+:Max Aperture:
+hu:Max. rekesznyílás:
+:Pixel X Dimension:
+hu:Pixel X méret:
+:Pixel Y Dimension:
+hu:Pixel Y méret:
+:Resolution Unit:
+hu:Felbontás mértékegysége:
+:Scene Type:
+hu:Jelenet típusa:
+:Software:
+hu:Szoftver:
+:User Comment:
+hu:Felhasználói megjegyzés:
+:YCbCr Positioning:
+hu:YCbCr pozicionálás:
+:Color Space:
+id:Ruang Warna:
+:Components Configuration:
+id:Konfigurasi Komponen:
+:Compressed Bits/Pixel:
+id:Bit Terkompresi/Piksel:
+:Date/Time Digitized:
+id:Tanggal/Waktu Digitalisasi:
+:Date/Time:
+id:Tanggal/Waktu:
+:Exif Version:
+id:Versi Exif:
+:File Source:
+id:Sumber File:
+:Flashpix Version:
+id:Versi Flashpix:
+:Light Source:
+id:Sumber Cahaya:
+:Max Aperture:
+id:Apertur Maksimal:
+:Pixel X Dimension:
+id:Dimensi Piksel X:
+:Pixel Y Dimension:
+id:Dimensi Piksel Y:
+:Resolution Unit:
+id:Unit Resolusi:
+:Scene Type:
+id:Jenis Adegan:
+:Software:
+id:Perangkat Lunak:
+:User Comment:
+id:Komentar Pengguna:
+:YCbCr Positioning:
+id:Posisi YCbCr:
+:Color Space:
+kr:색 공간:
+:Components Configuration:
+kr:구성 요소 설정:
+:Compressed Bits/Pixel:
+kr:압축 비트/픽셀:
+:Date/Time Digitized:
+kr:디지털화 날짜/시간:
+:Date/Time:
+kr:날짜/시간:
+:Exif Version:
+kr:Exif 버전:
+:File Source:
+kr:파일 소스:
+:Flashpix Version:
+kr:Flashpix 버전:
+:Light Source:
+kr:광원:
+:Max Aperture:
+kr:최대 조리개:
+:Pixel X Dimension:
+kr:픽셀 X 크기:
+:Pixel Y Dimension:
+kr:픽셀 Y 크기:
+:Resolution Unit:
+kr:해상도 단위:
+:Scene Type:
+kr:장면 유형:
+:Software:
+kr:소프트웨어:
+:User Comment:
+kr:사용자 코멘트:
+:YCbCr Positioning:
+kr:YCbCr 위치:
+:Color Space:
+lv:Krāsu telpa:
+:Components Configuration:
+lv:Komponentu konfigurācija:
+:Compressed Bits/Pixel:
+lv:Saspiesti biti/pikselis:
+:Date/Time Digitized:
+lv:Digitalizācijas datums/laiks:
+:Date/Time:
+lv:Datums/laiks:
+:Exif Version:
+lv:Exif versija:
+:File Source:
+lv:Faila avots:
+:Flashpix Version:
+lv:Flashpix versija:
+:Light Source:
+lv:Gaismas avots:
+:Max Aperture:
+lv:Maksimālā apertūra:
+:Pixel X Dimension:
+lv:Pikseļu X izmērs:
+:Pixel Y Dimension:
+lv:Pikseļu Y izmērs:
+:Resolution Unit:
+lv:Izšķirtspējas vienība:
+:Scene Type:
+lv:Sižeta tips:
+:Software:
+lv:Programmatūra:
+:User Comment:
+lv:Lietotāja komentārs:
+:YCbCr Positioning:
+lv:YCbCr pozicionēšana:
+:Color Space:
+my:အရောင်နေရာ:
+:Components Configuration:
+my:အစိတ်အပိုင်းများ ပုံစံချိန်ညှိမှု:
+:Compressed Bits/Pixel:
+my:ချုံ့ထားသော ဘစ်/ပික်ဆယ်:
+:Date/Time Digitized:
+my:ဒစ်ဂျစ်တယ်ပြောင်းသည့် ရက်စွဲ/အချိန်:
+:Date/Time:
+my:ရက်စွဲ/အချိန်:
+:Exif Version:
+my:Exif ဗားရှင်း:
+:File Source:
+my:ဖိုင်အရင်းအမြစ်:
+:Flashpix Version:
+my:Flashpix ဗားရှင်း:
+:Light Source:
+my:အလင်းအရင်းအမြစ်:
+:Max Aperture:
+my:အများဆုံး အပေါက်:
+:Pixel X Dimension:
+my:ပික်ဆယ် X အတိုင်းအတာ:
+:Pixel Y Dimension:
+my:ပික်ဆယ် Y အတိုင်းအတာ:
+:Resolution Unit:
+my:ကြည်လင်ပြတ်သားမှု ယူနစ်:
+:Scene Type:
+my:မြင်ကွင်းအမျိုးအစား:
+:Software:
+my:ဆော့ဖ်ဝဲ:
+:User Comment:
+my:အသုံးပြုသူမှတ်ချက်:
+:YCbCr Positioning:
+my:YCbCr နေရာချထားမှု:
+:Color Space:
+pt:Espaço de Cor:
+:Components Configuration:
+pt:Configuração de Componentes:
+:Compressed Bits/Pixel:
+pt:Bits Comprimidos/Pixel:
+:Date/Time Digitized:
+pt:Data/Hora de Digitalização:
+:Date/Time:
+pt:Data/Hora:
+:Exif Version:
+pt:Versão Exif:
+:File Source:
+pt:Origem do Arquivo:
+:Flashpix Version:
+pt:Versão Flashpix:
+:Light Source:
+pt:Fonte de Luz:
+:Max Aperture:
+pt:Abertura Máxima:
+:Pixel X Dimension:
+pt:Dimensão X em Pixels:
+:Pixel Y Dimension:
+pt:Dimensão Y em Pixels:
+:Resolution Unit:
+pt:Unidade de Resolução:
+:Scene Type:
+pt:Tipo de Cena:
+:Software:
+pt:Software:
+:User Comment:
+pt:Comentário do Usuário:
+:YCbCr Positioning:
+pt:Posicionamento YCbCr:
+:Color Space:
+ro:Spațiu de culoare:
+:Components Configuration:
+ro:Configurare componente:
+:Compressed Bits/Pixel:
+ro:Biți/Pixel comprimate:
+:Date/Time Digitized:
+ro:Dată/Oră digitalizare:
+:Date/Time:
+ro:Dată/Oră:
+:Exif Version:
+ro:Versiune Exif:
+:File Source:
+ro:Sursa fișier:
+:Flashpix Version:
+ro:Versiune Flashpix:
+:Light Source:
+ro:Sursa de lumină:
+:Max Aperture:
+ro:Apertură maximă:
+:Pixel X Dimension:
+ro:Dimensiune X pixel:
+:Pixel Y Dimension:
+ro:Dimensiune Y pixel:
+:Resolution Unit:
+ro:Unitate rezoluție:
+:Scene Type:
+ro:Tip scenă:
+:Software:
+ro:Software:
+:User Comment:
+ro:Comentariu utilizator:
+:YCbCr Positioning:
+ro:Poziționare YCbCr:
+:Color Space:
+ro:Spațiu de culoare:
+:Components Configuration:
+ro:Configurație componente:
+:Compressed Bits/Pixel:
+ro:Biți compresi/Pixel:
+:Date/Time Digitized:
+ro:Dată/Oră digitalizare:
+:Date/Time:
+ro:Dată/Oră:
+:Exif Version:
+ro:Versiune Exif:
+:File Source:
+ro:Sursă fișier:
+:Flashpix Version:
+ro:Versiune Flashpix:
+:Light Source:
+ro:Sursă de lumină:
+:Max Aperture:
+ro:Diafragmă maximă:
+:Pixel X Dimension:
+ro:Dimensiune X pixeli:
+:Pixel Y Dimension:
+ro:Dimensiune Y pixeli:
+:Resolution Unit:
+ro:Unitate rezoluție:
+:Scene Type:
+ro:Tip scenă:
+:Software:
+ro:Software:
+:User Comment:
+ro:Comentariu utilizator:
+:YCbCr Positioning:
+ro:Poziționare YCbCr:
+:Color Space:
+sl:Barvni prostor:
+:Components Configuration:
+sl:Konfiguracija komponent:
+:Compressed Bits/Pixel:
+sl:Stisnjeni biti/piksel:
+:Date/Time Digitized:
+sl:Datum/čas digitalizacije:
+:Date/Time:
+sl:Datum/čas:
+:Exif Version:
+sl:Različica Exif:
+:File Source:
+sl:Vir datoteke:
+:Flashpix Version:
+sl:Različica Flashpix:
+:Light Source:
+sl:Vir svetlobe:
+:Max Aperture:
+sl:Največja zaslonka:
+:Pixel X Dimension:
+sl:Dimenzija X v pikslih:
+:Pixel Y Dimension:
+sl:Dimenzija Y v pikslih:
+:Resolution Unit:
+sl:Enota ločljivosti:
+:Scene Type:
+sl:Vrsta scene:
+:Software:
+sl:Programska oprema:
+:User Comment:
+sl:Komentar uporabnika:
+:YCbCr Positioning:
+sl:Pozicioniranje YCbCr:
+:Color Space:
+sl:Barvni prostor:
+:Components Configuration:
+sl:Konfiguracija komponent:
+:Compressed Bits/Pixel:
+sl:Stisnjeni biti/piksel:
+:Date/Time Digitized:
+sl:Datum/čas digitalizacije:
+:Date/Time:
+sl:Datum/čas:
+:Exif Version:
+sl:Različica Exif:
+:File Source:
+sl:Vir datoteke:
+:Flashpix Version:
+sl:Različica Flashpix:
+:Light Source:
+sl:Vir svetlobe:
+:Max Aperture:
+sl:Največja zaslonka:
+:Pixel X Dimension:
+sl:Dimenzija X v pikslih:
+:Pixel Y Dimension:
+sl:Dimenzija Y v pikslih:
+:Resolution Unit:
+sl:Enota ločljivosti:
+:Scene Type:
+sl:Vrsta prizora:
+:Software:
+sl:Programska oprema:
+:User Comment:
+sl:Uporabniški komentar:
+:YCbCr Positioning:
+sl:Pozicioniranje YCbCr:
+:Color Space:
+sv:Färgrymd:
+:Components Configuration:
+sv:Komponentkonfiguration:
+:Compressed Bits/Pixel:
+sv:Komprimerade bitar/pixel:
+:Date/Time Digitized:
+sv:Digitaliseringsdatum/-tid:
+:Date/Time:
+sv:Datum/Tid:
+:Exif Version:
+sv:Exif-version:
+:File Source:
+sv:Filkälla:
+:Flashpix Version:
+sv:Flashpix-version:
+:Light Source:
+sv:Ljuskälla:
+:Max Aperture:
+sv:Max bländare:
+:Pixel X Dimension:
+sv:Pixel X-dimension:
+:Pixel Y Dimension:
+sv:Pixel Y-dimension:
+:Resolution Unit:
+sv:Upplösningsenhet:
+:Scene Type:
+sv:Scentyp:
+:Software:
+sv:Programvara:
+:User Comment:
+sv:Användarkommentar:
+:YCbCr Positioning:
+sv:YCbCr-positionering:
+:Color Space:
+sv:Färgrymd:
+:Components Configuration:
+sv:Komponentkonfiguration:
+:Compressed Bits/Pixel:
+sv:Komprimerade bitar/pixel:
+:Date/Time Digitized:
+sv:Datum/tid digitaliserad:
+:Date/Time:
+sv:Datum/tid:
+:Exif Version:
+sv:Exif-version:
+:File Source:
+sv:Filkälla:
+:Flashpix Version:
+sv:Flashpix-version:
+:Light Source:
+sv:Ljuskälla:
+:Max Aperture:
+sv:Max bländare:
+:Pixel X Dimension:
+sv:Pixel X-dimension:
+:Pixel Y Dimension:
+sv:Pixel Y-dimension:
+:Resolution Unit:
+sv:Upplösningsenhet:
+:Scene Type:
+sv:Scentyp:
+:Software:
+sv:Programvara:
+:User Comment:
+sv:Användarkommentar:
+:YCbCr Positioning:
+sv:YCbCr-positionering:
+:Color Space:
+ta:வண்ண இடம்:
+:Components Configuration:
+ta:கூறுகள் உள்ளமைவு:
+:Compressed Bits/Pixel:
+ta:சுருக்கப்பட்ட பிட்கள்/பிக்சல்:
+:Date/Time Digitized:
+ta:டிஜிட்டல்மயமாக்கப்பட்ட தேதி/நேரம்:
+:Date/Time:
+ta:தேதி/நேரம்:
+:Exif Version:
+ta:Exif பதிப்பு:
+:File Source:
+ta:கோப்பு மூலம்:
+:Flashpix Version:
+ta:Flashpix பதிப்பு:
+:Light Source:
+ta:ஒளி மூலம்:
+:Max Aperture:
+ta:அதிகபட்ச துளை:
+:Pixel X Dimension:
+ta:பிக்சல் X பரிமாணம்:
+:Pixel Y Dimension:
+ta:பிக்சல் Y பரிமாணம்:
+:Resolution Unit:
+ta:தெளிவுத்திறன் அலகு:
+:Scene Type:
+ta:காட்சி வகை:
+:Software:
+ta:மென்பொருள்:
+:User Comment:
+ta:பயனர் கருத்து:
+:YCbCr Positioning:
+ta:YCbCr இடப்பொருத்தம்:
+:Color Space:
+ta:வண்ண இடம்:
+:Components Configuration:
+ta:கூறுகள் அமைப்பு:
+:Compressed Bits/Pixel:
+ta:சுருக்கப்பட்ட பிட்கள்/பிக்செல்:
+:Date/Time Digitized:
+ta:டிஜிட்டல்மயமாக்கப்பட்ட தேதி/நேரம்:
+:Date/Time:
+ta:தேதி/நேரம்:
+:Exif Version:
+ta:Exif பதிப்பு:
+:File Source:
+ta:கோப்பு மூலம்:
+:Flashpix Version:
+ta:Flashpix பதிப்பு:
+:Light Source:
+ta:ஒளி மூலம்:
+:Max Aperture:
+ta:அதிகபட்ச துளை:
+:Pixel X Dimension:
+ta:பிக்செல் X பரிமாணம்:
+:Pixel Y Dimension:
+ta:பிக்செல் Y பரிமாணம்:
+:Resolution Unit:
+ta:தெளிவுத்திறன் அலகு:
+:Scene Type:
+ta:காட்சி வகை:
+:Software:
+ta:மென்பொருள்:
+:User Comment:
+ta:பயனர் கருத்து:
+:YCbCr Positioning:
+ta:YCbCr இடமாற்றம்:
+:Color Space:
+tr:Renk Uzayı:
+:Components Configuration:
+tr:Bileşen Yapılandırması:
+:Compressed Bits/Pixel:
+tr:Sıkıştırılmış Bit/Piksel:
+:Date/Time Digitized:
+tr:Dijitalleştirme Tarih/Saat:
+:Date/Time:
+tr:Tarih/Saat:
+:Exif Version:
+tr:Exif Sürümü:
+:File Source:
+tr:Dosya Kaynağı:
+:Flashpix Version:
+tr:Flashpix Sürümü:
+:Light Source:
+tr:Işık Kaynağı:
+:Max Aperture:
+tr:Maksimum Diyafram:
+:Pixel X Dimension:
+tr:Piksel X Boyutu:
+:Pixel Y Dimension:
+tr:Piksel Y Boyutu:
+:Resolution Unit:
+tr:Çözünürlük Birimi:
+:Scene Type:
+tr:Sahne Türü:
+:Software:
+tr:Yazılım:
+:User Comment:
+tr:Kullanıcı Yorumu:
+:YCbCr Positioning:
+tr:YCbCr Konumlandırma:
+:Color Space:
+tr:Renk Uzayı:
+:Components Configuration:
+tr:Bileşen Yapılandırması:
+:Compressed Bits/Pixel:
+tr:Sıkıştırılmış Bit/Piksel:
+:Date/Time Digitized:
+tr:Sayısallaştırma Tarihi/Saati:
+:Date/Time:
+tr:Tarih/Saat:
+:Exif Version:
+tr:Exif Sürümü:
+:File Source:
+tr:Dosya Kaynağı:
+:Flashpix Version:
+tr:Flashpix Sürümü:
+:Light Source:
+tr:Işık Kaynağı:
+:Max Aperture:
+tr:Maksimum Diyafram:
+:Pixel X Dimension:
+tr:Piksel X Boyutu:
+:Pixel Y Dimension:
+tr:Piksel Y Boyutu:
+:Resolution Unit:
+tr:Çözünürlük Birimi:
+:Scene Type:
+tr:Sahne Türü:
+:Software:
+tr:Yazılım:
+:User Comment:
+tr:Kullanıcı Yorumu:
+:YCbCr Positioning:
+tr:YCbCr Konumlandırma:
+:Color Space:
+uz:Rang maydoni:
+:Components Configuration:
+uz:Komponentlar konfiguratsiyasi:
+:Compressed Bits/Pixel:
+uz:Siqilgan bitlar/piksel:
+:Date/Time Digitized:
+uz:Raqamlashtirilgan sana/vaqt:
+:Date/Time:
+uz:Sana/Vaqt:
+:Exif Version:
+uz:Exif versiyasi:
+:File Source:
+uz:Fayl manbai:
+:Flashpix Version:
+uz:Flashpix versiyasi:
+:Light Source:
+uz:Yorug'lik manbai:
+:Max Aperture:
+uz:Maksimal diafragma:
+:Pixel X Dimension:
+uz:Piksel X o'lchami:
+:Pixel Y Dimension:
+uz:Piksel Y o'lchami:
+:Resolution Unit:
+uz:Ruxsat birligi:
+:Scene Type:
+uz:Sahna turi:
+:Software:
+uz:Dasturiy ta'minot:
+:User Comment:
+uz:Foydalanuvchi izohi:
+:YCbCr Positioning:
+uz:YCbCr joylashuvi:
+:Color Space:
+uz:Rang maydoni:
+:Components Configuration:
+uz:Komponentlar konfiguratsiyasi:
+:Compressed Bits/Pixel:
+uz:Siqilgan bitlar/piksel:
+:Date/Time Digitized:
+uz:Raqamlashtirish sanasi/vaqti:
+:Date/Time:
+uz:Sana/Vaqt:
+:Exif Version:
+uz:Exif versiyasi:
+:File Source:
+uz:Fayl manbai:
+:Flashpix Version:
+uz:Flashpix versiyasi:
+:Light Source:
+uz:Yorug'lik manbai:
+:Max Aperture:
+uz:Maksimal diafragma:
+:Pixel X Dimension:
+uz:Piksel X o'lchami:
+:Pixel Y Dimension:
+uz:Piksel Y o'lchami:
+:Resolution Unit:
+uz:Ruxsat birligi:
+:Scene Type:
+uz:Sahna turi:
+:Software:
+uz:Dasturiy ta'minot:
+:User Comment:
+uz:Foydalanuvchi izohi:
+:YCbCr Positioning:
+uz:YCbCr joylashuvi:
+:Color Space:
+af:Kleurruimte:
+:Components Configuration:
+af:Komponentkonfigurasie:
+:Compressed Bits/Pixel:
+af:Gekomprimeerde Bisse/Pixel:
+:Date/Time Digitized:
+af:Datum/Tyd Gedigitaliseer:
+:Date/Time:
+af:Datum/Tyd:
+:Exif Version:
+af:Exif Weergawe:
+:File Source:
+af:Lêerbron:
+:Flashpix Version:
+af:Flashpix Weergawe:
+:Light Source:
+af:Ligbron:
+:Max Aperture:
+af:Maks Opening:
+:Pixel X Dimension:
+af:Pixel X Dimensie:
+:Pixel Y Dimension:
+af:Pixel Y Dimensie:
+:Resolution Unit:
+af:Resolusie Eenheid:
+:Scene Type:
+af:Toneel Tipe:
+:Software:
+af:Sagteware:
+:User Comment:
+af:Gebruikerkommentaar:
+:YCbCr Positioning:
+af:YCbCr Posisionering:
+:Color Space:
+af:Kleurruimte:
+:Components Configuration:
+af:Komponentkonfigurasie:
+:Compressed Bits/Pixel:
+af:Saamgeperste Bisse/Pixel:
+:Date/Time Digitized:
+af:Datum/Tyd Gedigitaliseer:
+:Date/Time:
+af:Datum/Tyd:
+:Exif Version:
+af:Exif Weergawe:
+:File Source:
+af:Lêerbron:
+:Flashpix Version:
+af:Flashpix Weergawe:
+:Light Source:
+af:Ligbron:
+:Max Aperture:
+af:Maks Diafragma:
+:Pixel X Dimension:
+af:Pixel X Dimensie:
+:Pixel Y Dimension:
+af:Pixel Y Dimensie:
+:Resolution Unit:
+af:Resolusie Eenheid:
+:Scene Type:
+af:Toneeltipe:
+:Software:
+af:Sagteware:
+:User Comment:
+af:Gebruikerskommentaar:
+:YCbCr Positioning:
+af:YCbCr Posisionering:
+:Color Space:
+bg:Цветово пространство:
+:Components Configuration:
+bg:Конфигурация на компонентите:
+:Compressed Bits/Pixel:
+bg:Компресирани битове/пиксел:
+:Date/Time Digitized:
+bg:Дата/час на дигитализация:
+:Date/Time:
+bg:Дата/час:
+:Exif Version:
+bg:Exif версия:
+:File Source:
+bg:Източник на файла:
+:Flashpix Version:
+bg:Flashpix версия:
+:Light Source:
+bg:Светлинен източник:
+:Max Aperture:
+bg:Максимална бленда:
+:Pixel X Dimension:
+bg:X размер в пиксели:
+:Pixel Y Dimension:
+bg:Y размер в пиксели:
+:Resolution Unit:
+bg:Единица за разделителна способност:
+:Scene Type:
+bg:Тип на сцената:
+:Software:
+bg:Софтуер:
+:User Comment:
+bg:Потребителски коментар:
+:YCbCr Positioning:
+bg:YCbCr позициониране:
+:Color Space:
+bg:Цветово пространство:
+:Components Configuration:
+bg:Конфигурация на компонентите:
+:Compressed Bits/Pixel:
+bg:Компресирани битове/пиксел:
+:Date/Time Digitized:
+bg:Дата/час на дигитализация:
+:Date/Time:
+bg:Дата/час:
+:Exif Version:
+bg:Exif версия:
+:File Source:
+bg:Източник на файла:
+:Flashpix Version:
+bg:Flashpix версия:
+:Light Source:
+bg:Източник на светлина:
+:Max Aperture:
+bg:Максимална бленда:
+:Pixel X Dimension:
+bg:X измерение в пиксели:
+:Pixel Y Dimension:
+bg:Y измерение в пиксели:
+:Resolution Unit:
+bg:Единица за разделителна способност:
+:Scene Type:
+bg:Тип сцена:
+:Software:
+bg:Софтуер:
+:User Comment:
+bg:Потребителски коментар:
+:YCbCr Positioning:
+bg:YCbCr позициониране:
+:Color Space:
+bn:রঙের স্থান:
+:Components Configuration:
+bn:উপাদান কনফিগারেশন:
+:Compressed Bits/Pixel:
+bn:সংকুচিত বিট/পিক্সেল:
+:Date/Time Digitized:
+bn:ডিজিটাল করার তারিখ/সময়:
+:Date/Time:
+bn:তারিখ/সময়:
+:Exif Version:
+bn:Exif সংস্করণ:
+:File Source:
+bn:ফাইলের উৎস:
+:Flashpix Version:
+bn:Flashpix সংস্করণ:
+:Light Source:
+bn:আলোর উৎস:
+:Max Aperture:
+bn:সর্বোচ্চ অ্যাপারচার:
+:Pixel X Dimension:
+bn:পিক্সেল X মাত্রা:
+:Pixel Y Dimension:
+bn:পিক্সেল Y মাত্রা:
+:Resolution Unit:
+bn:রেজোলিউশন একক:
+:Scene Type:
+bn:দৃশ্যের ধরন:
+:Software:
+bn:সফটওয়্যার:
+:User Comment:
+bn:ব্যবহারকারীর মন্তব্য:
+:YCbCr Positioning:
+bn:YCbCr অবস্থান:
+:Color Space:
+bs:Prostor boja:
+:Components Configuration:
+bs:Konfiguracija komponenti:
+:Compressed Bits/Pixel:
+bs:Komprimirani bitovi/piksel:
+:Date/Time Digitized:
+bs:Datum/vrijeme digitalizacije:
+:Date/Time:
+bs:Datum/vrijeme:
+:Exif Version:
+bs:Exif verzija:
+:File Source:
+bs:Izvor datoteke:
+:Flashpix Version:
+bs:Flashpix verzija:
+:Light Source:
+bs:Izvor svjetlosti:
+:Max Aperture:
+bs:Maksimalni otvor blende:
+:Pixel X Dimension:
+bs:X dimenzija piksela:
+:Pixel Y Dimension:
+bs:Y dimenzija piksela:
+:Resolution Unit:
+bs:Jedinica rezolucije:
+:Scene Type:
+bs:Tip scene:
+:Software:
+bs:Softver:
+:User Comment:
+bs:Korisnički komentar:
+:YCbCr Positioning:
+bs:YCbCr pozicioniranje:
+:Color Space:
+bn:রঙের স্থান:
+:Components Configuration:
+bn:উপাদান কনফিগারেশন:
+:Compressed Bits/Pixel:
+bn:সংকুচিত বিট/পিক্সেল:
+:Date/Time Digitized:
+bn:ডিজিটাইজ করার তারিখ/সময়:
+:Date/Time:
+bn:তারিখ/সময়:
+:Exif Version:
+bn:Exif সংস্করণ:
+:File Source:
+bn:ফাইল উৎস:
+:Flashpix Version:
+bn:Flashpix সংস্করণ:
+:Light Source:
+bn:আলোর উৎস:
+:Max Aperture:
+bn:সর্বোচ্চ অ্যাপারচার:
+:Pixel X Dimension:
+bn:পিক্সেল X মাত্রা:
+:Pixel Y Dimension:
+bn:পিক্সেল Y মাত্রা:
+:Resolution Unit:
+bn:রেজোলিউশন একক:
+:Scene Type:
+bn:দৃশ্যের ধরন:
+:Software:
+bn:সফটওয়্যার:
+:User Comment:
+bn:ব্যবহারকারীর মন্তব্য:
+:YCbCr Positioning:
+bn:YCbCr অবস্থান:
+:Color Space:
+ca-xv:Espai de color:
+:Components Configuration:
+ca-xv:Configuració de components:
+:Compressed Bits/Pixel:
+ca-xv:Bits comprimits/píxel:
+:Date/Time Digitized:
+ca-xv:Data/Hora de digitalització:
+:Date/Time:
+ca-xv:Data/Hora:
+:Exif Version:
+ca-xv:Versió Exif:
+:File Source:
+ca-xv:Origen del fitxer:
+:Flashpix Version:
+ca-xv:Versió Flashpix:
+:Light Source:
+ca-xv:Font de llum:
+:Max Aperture:
+ca-xv:Obertura màxima:
+:Pixel X Dimension:
+ca-xv:Dimensió X en píxels:
+:Pixel Y Dimension:
+ca-xv:Dimensió Y en píxels:
+:Resolution Unit:
+ca-xv:Unitat de resolució:
+:Scene Type:
+ca-xv:Tipus d'escena:
+:Software:
+ca-xv:Programari:
+:User Comment:
+ca-xv:Comentari d'usuari:
+:YCbCr Positioning:
+ca-xv:Posicionament YCbCr:
+:Color Space:
+bs:Prostor boja:
+:Components Configuration:
+bs:Konfiguracija komponenti:
+:Compressed Bits/Pixel:
+bs:Kompresovani bitovi/piksel:
+:Date/Time Digitized:
+bs:Datum/vrijeme digitalizacije:
+:Date/Time:
+bs:Datum/vrijeme:
+:Exif Version:
+bs:Exif verzija:
+:File Source:
+bs:Izvor datoteke:
+:Flashpix Version:
+bs:Flashpix verzija:
+:Light Source:
+bs:Izvor svjetlosti:
+:Max Aperture:
+bs:Maksimalna blenda:
+:Pixel X Dimension:
+bs:X dimenzija piksela:
+:Pixel Y Dimension:
+bs:Y dimenzija piksela:
+:Resolution Unit:
+bs:Jedinica rezolucije:
+:Scene Type:
+bs:Tip scene:
+:Software:
+bs:Softver:
+:User Comment:
+bs:Korisnički komentar:
+:YCbCr Positioning:
+bs:YCbCr pozicioniranje:
+:Color Space:
+dk:Farverum:
+:Components Configuration:
+dk:Komponentkonfiguration:
+:Compressed Bits/Pixel:
+dk:Komprimerede bits/pixel:
+:Date/Time Digitized:
+dk:Dato/tid digitaliseret:
+:Date/Time:
+dk:Dato/tid:
+:Exif Version:
+dk:Exif-version:
+:File Source:
+dk:Filkilde:
+:Flashpix Version:
+dk:Flashpix-version:
+:Light Source:
+dk:Lyskilde:
+:Max Aperture:
+dk:Maks. blænde:
+:Pixel X Dimension:
+dk:Pixel X-dimension:
+:Pixel Y Dimension:
+dk:Pixel Y-dimension:
+:Resolution Unit:
+dk:Opløsningsenhed:
+:Scene Type:
+dk:Scenetype:
+:Software:
+dk:Software:
+:User Comment:
+dk:Brugerkommentar:
+:YCbCr Positioning:
+dk:YCbCr-positionering:
+:Color Space:
+ca-xv:Espai de color:
+:Components Configuration:
+ca-xv:Configuració de components:
+:Compressed Bits/Pixel:
+ca-xv:Bits comprimits/píxel:
+:Date/Time Digitized:
+ca-xv:Data/hora de digitalització:
+:Date/Time:
+ca-xv:Data/hora:
+:Exif Version:
+ca-xv:Versió Exif:
+:File Source:
+ca-xv:Origen del fitxer:
+:Flashpix Version:
+ca-xv:Versió Flashpix:
+:Light Source:
+ca-xv:Font de llum:
+:Max Aperture:
+ca-xv:Obertura màxima:
+:Pixel X Dimension:
+ca-xv:Dimensió X en píxels:
+:Pixel Y Dimension:
+ca-xv:Dimensió Y en píxels:
+:Resolution Unit:
+ca-xv:Unitat de resolució:
+:Scene Type:
+ca-xv:Tipus d'escena:
+:Software:
+ca-xv:Programari:
+:User Comment:
+ca-xv:Comentari d'usuari:
+:YCbCr Positioning:
+ca-xv:Posicionament YCbCr:
+:Color Space:
+et:Värviruum:
+:Components Configuration:
+et:Komponentide konfiguratsioon:
+:Compressed Bits/Pixel:
+et:Tihendatud bitti/piksel:
+:Date/Time Digitized:
+et:Digiteerimise kuupäev/kellaaeg:
+:Date/Time:
+et:Kuupäev/kellaaeg:
+:Exif Version:
+et:Exif versioon:
+:File Source:
+et:Faili allikas:
+:Flashpix Version:
+et:Flashpix versioon:
+:Light Source:
+et:Valgusallikas:
+:Max Aperture:
+et:Maksimaalne ava:
+:Pixel X Dimension:
+et:Pikslite X mõõde:
+:Pixel Y Dimension:
+et:Pikslite Y mõõde:
+:Resolution Unit:
+et:Eraldusvõime ühik:
+:Scene Type:
+et:Stseeni tüüp:
+:Software:
+et:Tarkvara:
+:User Comment:
+et:Kasutaja kommentaar:
+:YCbCr Positioning:
+et:YCbCr paigutus:
+:Color Space:
+dk:Farverum:
+:Components Configuration:
+dk:Komponentkonfiguration:
+:Compressed Bits/Pixel:
+dk:Komprimerede Bits/Pixel:
+:Date/Time Digitized:
+dk:Digitaliseringsdato/-tid:
+:Date/Time:
+dk:Dato/Tid:
+:Exif Version:
+dk:Exif-version:
+:File Source:
+dk:Filkilde:
+:Flashpix Version:
+dk:Flashpix-version:
+:Light Source:
+dk:Lyskilde:
+:Max Aperture:
+dk:Maks. blænde:
+:Pixel X Dimension:
+dk:Pixel X-dimension:
+:Pixel Y Dimension:
+dk:Pixel Y-dimension:
+:Resolution Unit:
+dk:Opløsningsenhed:
+:Scene Type:
+dk:Scenetype:
+:Software:
+dk:Software:
+:User Comment:
+dk:Brugerkommentar:
+:YCbCr Positioning:
+dk:YCbCr-positionering:
+:Color Space:
+et:Värviruum:
+:Components Configuration:
+et:Komponentide konfiguratsioon:
+:Compressed Bits/Pixel:
+et:Tihendatud bitti/piksel:
+:Date/Time Digitized:
+et:Digiteerimise kuupäev/kellaaeg:
+:Date/Time:
+et:Kuupäev/kellaaeg:
+:Exif Version:
+et:Exif versioon:
+:File Source:
+et:Faili allikas:
+:Flashpix Version:
+et:Flashpix versioon:
+:Light Source:
+et:Valgusallikas:
+:Max Aperture:
+et:Maksimaalne ava:
+:Pixel X Dimension:
+et:Piksel X mõõde:
+:Pixel Y Dimension:
+et:Piksel Y mõõde:
+:Resolution Unit:
+et:Eraldusvõime ühik:
+:Scene Type:
+et:Stseeni tüüp:
+:Software:
+et:Tarkvara:
+:User Comment:
+et:Kasutaja kommentaar:
+:YCbCr Positioning:
+et:YCbCr paigutus:
+:Color Space:
+eu:Kolore-espazioa:
+:Components Configuration:
+eu:Osagaien konfigurazioa:
+:Compressed Bits/Pixel:
+eu:Bit konprimatuak/Pixela:
+:Date/Time Digitized:
+eu:Digitalizazio data/ordua:
+:Date/Time:
+eu:Data/Ordua:
+:Exif Version:
+eu:Exif bertsioa:
+:File Source:
+eu:Fitxategiaren iturria:
+:Flashpix Version:
+eu:Flashpix bertsioa:
+:Light Source:
+eu:Argi-iturria:
+:Max Aperture:
+eu:Gehienezko irekidura:
+:Pixel X Dimension:
+eu:X pixelaren dimentsioa:
+:Pixel Y Dimension:
+eu:Y pixelaren dimentsioa:
+:Resolution Unit:
+eu:Bereizmen-unitatea:
+:Scene Type:
+eu:Eszena-mota:
+:Software:
+eu:Softwarea:
+:User Comment:
+eu:Erabiltzailearen iruzkina:
+:YCbCr Positioning:
+eu:YCbCr kokapena:
+:Color Space:
+fy-nl:Kleurromte:
+:Components Configuration:
+fy-nl:Komponinten konfiguraasje:
+:Compressed Bits/Pixel:
+fy-nl:Komprimeare Bits/Pixel:
+:Date/Time Digitized:
+fy-nl:Datum/Tiid Digitalisearre:
+:Date/Time:
+fy-nl:Datum/Tiid:
+:Exif Version:
+fy-nl:Exif Ferzje:
+:File Source:
+fy-nl:Bestânsboarne:
+:Flashpix Version:
+fy-nl:Flashpix Ferzje:
+:Light Source:
+fy-nl:Ljochtsboarne:
+:Max Aperture:
+fy-nl:Maks Aperture:
+:Pixel X Dimension:
+fy-nl:Pixel X Ofmjitting:
+:Pixel Y Dimension:
+fy-nl:Pixel Y Ofmjitting:
+:Resolution Unit:
+fy-nl:Resolúsje Ienheid:
+:Scene Type:
+fy-nl:Sêne Type:
+:Software:
+fy-nl:Software:
+:User Comment:
+fy-nl:Brûker Opmerking:
+:YCbCr Positioning:
+fy-nl:YCbCr Posysjonearring:
+:Color Space:
+eu:Kolore-espazioa:
+:Components Configuration:
+eu:Osagaien konfigurazioa:
+:Compressed Bits/Pixel:
+eu:Konprimitutako bit/pixel:
+:Date/Time Digitized:
+eu:Digitalizazio data/ordua:
+:Date/Time:
+eu:Data/ordua:
+:Exif Version:
+eu:Exif bertsioa:
+:File Source:
+eu:Fitxategi iturria:
+:Flashpix Version:
+eu:Flashpix bertsioa:
+:Light Source:
+eu:Argi iturria:
+:Max Aperture:
+eu:Gehienezko irekidura:
+:Pixel X Dimension:
+eu:Pixel X dimentsioa:
+:Pixel Y Dimension:
+eu:Pixel Y dimentsioa:
+:Resolution Unit:
+eu:Bereizmen unitatea:
+:Scene Type:
+eu:Eszena mota:
+:Software:
+eu:Softwarea:
+:User Comment:
+eu:Erabiltzaile iruzkina:
+:YCbCr Positioning:
+eu:YCbCr kokapena:
+:Color Space:
+hr:Prostor boja:
+:Components Configuration:
+hr:Konfiguracija komponenti:
+:Compressed Bits/Pixel:
+hr:Komprimirani biti/piksel:
+:Date/Time Digitized:
+hr:Datum/vrijeme digitalizacije:
+:Date/Time:
+hr:Datum/vrijeme:
+:Exif Version:
+hr:Exif verzija:
+:File Source:
+hr:Izvor datoteke:
+:Flashpix Version:
+hr:Flashpix verzija:
+:Light Source:
+hr:Izvor svjetla:
+:Max Aperture:
+hr:Maksimalni otvor blende:
+:Pixel X Dimension:
+hr:Dimenzija piksela X:
+:Pixel Y Dimension:
+hr:Dimenzija piksela Y:
+:Resolution Unit:
+hr:Jedinica rezolucije:
+:Scene Type:
+hr:Tip scene:
+:Software:
+hr:Softver:
+:User Comment:
+hr:Komentar korisnika:
+:YCbCr Positioning:
+hr:YCbCr pozicioniranje:
+:Color Space:
+fy-nl:Kleurromte:
+:Components Configuration:
+fy-nl:Komponintekonfiguraasje:
+:Compressed Bits/Pixel:
+fy-nl:Komprimeare Bits/Pixel:
+:Date/Time Digitized:
+fy-nl:Datum/Tiid Digitalisearre:
+:Date/Time:
+fy-nl:Datum/Tiid:
+:Exif Version:
+fy-nl:Exif-ferzje:
+:File Source:
+fy-nl:Bestânsboarne:
+:Flashpix Version:
+fy-nl:Flashpix-ferzje:
+:Light Source:
+fy-nl:Ljochboarne:
+:Max Aperture:
+fy-nl:Maks Iepening:
+:Pixel X Dimension:
+fy-nl:Pixel X-dimensje:
+:Pixel Y Dimension:
+fy-nl:Pixel Y-dimensje:
+:Resolution Unit:
+fy-nl:Resolúsje-ienheid:
+:Scene Type:
+fy-nl:Sênetype:
+:Software:
+fy-nl:Software:
+:User Comment:
+fy-nl:Brûkersopmerkingen:
+:YCbCr Positioning:
+fy-nl:YCbCr-posisjonearring:
+:Color Space:
+jv:Ruang Warna:
+:Components Configuration:
+jv:Konfigurasi Komponen:
+:Compressed Bits/Pixel:
+jv:Bit Terkompresi/Piksel:
+:Date/Time Digitized:
+jv:Tanggal/Wektu Didigitalake:
+:Date/Time:
+jv:Tanggal/Wektu:
+:Exif Version:
+jv:Versi Exif:
+:File Source:
+jv:Sumber Berkas:
+:Flashpix Version:
+jv:Versi Flashpix:
+:Light Source:
+jv:Sumber Cahya:
+:Max Aperture:
+jv:Aperture Maksimal:
+:Pixel X Dimension:
+jv:Dimensi Piksel X:
+:Pixel Y Dimension:
+jv:Dimensi Piksel Y:
+:Resolution Unit:
+jv:Unit Resolusi:
+:Scene Type:
+jv:Jinis Adegan:
+:Software:
+jv:Piranti Lunak:
+:User Comment:
+jv:Komentar Pangguna:
+:YCbCr Positioning:
+jv:Posisi YCbCr:
+:Color Space:
+hr:Prostor boja:
+:Components Configuration:
+hr:Konfiguracija komponenti:
+:Compressed Bits/Pixel:
+hr:Komprimirani bitovi/piksel:
+:Date/Time Digitized:
+hr:Datum/vrijeme digitalizacije:
+:Date/Time:
+hr:Datum/vrijeme:
+:Exif Version:
+hr:Exif verzija:
+:File Source:
+hr:Izvor datoteke:
+:Flashpix Version:
+hr:Flashpix verzija:
+:Light Source:
+hr:Izvor svjetla:
+:Max Aperture:
+hr:Maks. blenda:
+:Pixel X Dimension:
+hr:Dimenzija piksela X:
+:Pixel Y Dimension:
+hr:Dimenzija piksela Y:
+:Resolution Unit:
+hr:Jedinica razlučivosti:
+:Scene Type:
+hr:Vrsta scene:
+:Software:
+hr:Softver:
+:User Comment:
+hr:Komentar korisnika:
+:YCbCr Positioning:
+hr:YCbCr pozicioniranje:
+:Color Space:
+jv:Ruang Warna:
+:Components Configuration:
+jv:Konfigurasi Komponen:
+:Compressed Bits/Pixel:
+jv:Bits Terkompresi/Piksel:
+:Date/Time Digitized:
+jv:Tanggal/Wektu Didigitalake:
+:Date/Time:
+jv:Tanggal/Wektu:
+:Exif Version:
+jv:Versi Exif:
+:File Source:
+jv:Sumber Berkas:
+:Flashpix Version:
+jv:Versi Flashpix:
+:Light Source:
+jv:Sumber Cahya:
+:Max Aperture:
+jv:Aperture Maksimal:
+:Pixel X Dimension:
+jv:Dimensi X Piksel:
+:Pixel Y Dimension:
+jv:Dimensi Y Piksel:
+:Resolution Unit:
+jv:Unit Resolusi:
+:Scene Type:
+jv:Jinis Adegan:
+:Software:
+jv:Piranti Lunak:
+:User Comment:
+jv:Komentar Pangguna:
+:YCbCr Positioning:
+jv:Posisi YCbCr:
+:Color Space:
+ka:ფერთა სივრცე:
+:Components Configuration:
+ka:კომპონენტების კონფიგურაცია:
+:Compressed Bits/Pixel:
+ka:შეკუმშული ბიტი/პიქსელი:
+:Date/Time Digitized:
+ka:ციფრულად გადაქცევის თარიღი/დრო:
+:Date/Time:
+ka:თარიღი/დრო:
+:Exif Version:
+ka:Exif ვერსია:
+:File Source:
+ka:ფაილის წყარო:
+:Flashpix Version:
+ka:Flashpix ვერსია:
+:Light Source:
+ka:სინათლის წყარო:
+:Max Aperture:
+ka:მაქს. დიაფრაგმა:
+:Pixel X Dimension:
+ka:პიქსელის X განზომილება:
+:Pixel Y Dimension:
+ka:პიქსელის Y განზომილება:
+:Resolution Unit:
+ka:გარჩევადობის ერთეული:
+:Scene Type:
+ka:სცენის ტიპი:
+:Software:
+ka:პროგრამული უზრუნველყოფა:
+:User Comment:
+ka:მომხმარებლის კომენტარი:
+:YCbCr Positioning:
+ka:YCbCr პოზიციონირება:
+:Color Space:
+ka:ფერთა სივრცე:
+:Components Configuration:
+ka:კომპონენტების კონფიგურაცია:
+:Compressed Bits/Pixel:
+ka:შეკუმშული ბიტები/პიქსელი:
+:Date/Time Digitized:
+ka:ციფრულად გადაქცევის თარიღი/დრო:
+:Date/Time:
+ka:თარიღი/დრო:
+:Exif Version:
+ka:Exif ვერსია:
+:File Source:
+ka:ფაილის წყარო:
+:Flashpix Version:
+ka:Flashpix ვერსია:
+:Light Source:
+ka:სინათლის წყარო:
+:Max Aperture:
+ka:მაქსიმალური დიაფრაგმა:
+:Pixel X Dimension:
+ka:პიქსელის X განზომილება:
+:Pixel Y Dimension:
+ka:პიქსელის Y განზომილება:
+:Resolution Unit:
+ka:გარჩევადობის ერთეული:
+:Scene Type:
+ka:სცენის ტიპი:
+:Software:
+ka:პროგრამული უზრუნველყოფა:
+:User Comment:
+ka:მომხმარებლის კომენტარი:
+:YCbCr Positioning:
+ka:YCbCr პოზიციონირება:
+:Color Space:
+ku:Qadê Rengî:
+:Components Configuration:
+ku:Veavakirina Pêkhateyên:
+:Compressed Bits/Pixel:
+ku:Bits/Pixel ên Zeftkirî:
+:Date/Time Digitized:
+ku:Dîrok/Demê Dîjîtalkirî:
+:Date/Time:
+ku:Dîrok/Dem:
+:Exif Version:
+ku:Guhertoya Exif:
+:File Source:
+ku:Çavkaniya Pelê:
+:Flashpix Version:
+ku:Guhertoya Flashpix:
+:Light Source:
+ku:Çavkaniya Ronahiyê:
+:Max Aperture:
+ku:Vekirina Herî Zêde:
+:Pixel X Dimension:
+ku:Dimensiyona X a Pixel:
+:Pixel Y Dimension:
+ku:Dimensiyona Y a Pixel:
+:Resolution Unit:
+ku:Yekeya Çareseriyê:
+:Scene Type:
+ku:Cureyê Dîmenê:
+:Software:
+ku:Nermalava:
+:User Comment:
+ku:Şîroveya Bikarhêner:
+:YCbCr Positioning:
+ku:Bicîhkirina YCbCr:
+:Color Space:
+kw:Spas Liw:
+:Components Configuration:
+kw:Keflunyans Elvenow:
+:Compressed Bits/Pixel:
+kw:Bittys Kompryssys/Pixel:
+:Date/Time Digitized:
+kw:Dedhyans/Termyn Digitel:
+:Date/Time:
+kw:Dedhyans/Termyn:
+:Exif Version:
+kw:Versyon Exif:
+:File Source:
+kw:Pennfenten an Restren:
+:Flashpix Version:
+kw:Versyon Flashpix:
+:Light Source:
+kw:Pennfenten Golowder:
+:Max Aperture:
+kw:Dygoradow Moyha:
+:Pixel X Dimension:
+kw:Braster Pixel X:
+:Pixel Y Dimension:
+kw:Braster Pixel Y:
+:Resolution Unit:
+kw:Unyver Erthreusyon:
+:Scene Type:
+kw:Sort Skenva:
+:Software:
+kw:Medhelweyth:
+:User Comment:
+kw:Kampol an Devnydhyer:
+:YCbCr Positioning:
+kw:Posysyonans YCbCr:
+:Color Space:
+ku:Qada Rengî:
+:Components Configuration:
+ku:Veavakirina Pêkhateyî:
+:Compressed Bits/Pixel:
+ku:Bît/Pîksel yên Hevgirtî:
+:Date/Time Digitized:
+ku:Dîrok/Demjimêr a Dîjîtalîzekirî:
+:Date/Time:
+ku:Dîrok/Demjimêr:
+:Exif Version:
+ku:Guhertoya Exif:
+:File Source:
+ku:Çavkaniya Pelî:
+:Flashpix Version:
+ku:Guhertoya Flashpix:
+:Light Source:
+ku:Çavkaniya Ronahiyê:
+:Max Aperture:
+ku:Vekirina Herî Zêde:
+:Pixel X Dimension:
+ku:Dirêjahiya Pîkselê X:
+:Pixel Y Dimension:
+ku:Dirêjahiya Pîkselê Y:
+:Resolution Unit:
+ku:Yekeya Xuyakirinê:
+:Scene Type:
+ku:Cureya Dîmenê:
+:Software:
+ku:Nermalav:
+:User Comment:
+ku:Şîroveya Bikarhêner:
+:YCbCr Positioning:
+ku:Cîbicîkirina YCbCr:
+:Color Space:
+lt:Spalvų erdvė:
+:Components Configuration:
+lt:Komponentų konfigūracija:
+:Compressed Bits/Pixel:
+lt:Suglaudinti bitai/pikselis:
+:Date/Time Digitized:
+lt:Skaitmeninimo data/laikas:
+:Date/Time:
+lt:Data/laikas:
+:Exif Version:
+lt:Exif versija:
+:File Source:
+lt:Failo šaltinis:
+:Flashpix Version:
+lt:Flashpix versija:
+:Light Source:
+lt:Šviesos šaltinis:
+:Max Aperture:
+lt:Didžiausia apertūra:
+:Pixel X Dimension:
+lt:Pikselių X matmuo:
+:Pixel Y Dimension:
+lt:Pikselių Y matmuo:
+:Resolution Unit:
+lt:Raiškos vienetas:
+:Scene Type:
+lt:Scenos tipas:
+:Software:
+lt:Programinė įranga:
+:User Comment:
+lt:Naudotojo komentaras:
+:YCbCr Positioning:
+lt:YCbCr pozicionavimas:
+:Color Space:
+kw:Spas Liw:
+:Components Configuration:
+kw:Keflunyans Elvenow:
+:Compressed Bits/Pixel:
+kw:Bittys Kompryssys/Piksel:
+:Date/Time Digitized:
+kw:Dedh/Termyn Dijitys:
+:Date/Time:
+kw:Dedh/Termyn:
+:Exif Version:
+kw:Versyon Exif:
+:File Source:
+kw:Pennfenten Restren:
+:Flashpix Version:
+kw:Versyon Flashpix:
+:Light Source:
+kw:Pennfenten Golow:
+:Max Aperture:
+kw:Apertur Moyha:
+:Pixel X Dimension:
+kw:Dimensyon X Piksel:
+:Pixel Y Dimension:
+kw:Dimensyon Y Piksel:
+:Resolution Unit:
+kw:Unses Klerhe:
+:Scene Type:
+kw:Eghen Sen:
+:Software:
+kw:Medhelweyth:
+:User Comment:
+kw:Kampolla Devnydhyer:
+:YCbCr Positioning:
+kw:Leghva YCbCr:
+:Color Space:
+mk:Простор на бои:
+:Components Configuration:
+mk:Конфигурација на компоненти:
+:Compressed Bits/Pixel:
+mk:Компресирани битови/пиксел:
+:Date/Time Digitized:
+mk:Датум/Време дигитализирано:
+:Date/Time:
+mk:Датум/Време:
+:Exif Version:
+mk:Exif верзија:
+:File Source:
+mk:Извор на датотека:
+:Flashpix Version:
+mk:Flashpix верзија:
+:Light Source:
+mk:Извор на светлина:
+:Max Aperture:
+mk:Максимална бленда:
+:Pixel X Dimension:
+mk:X димензија на пиксел:
+:Pixel Y Dimension:
+mk:Y димензија на пиксел:
+:Resolution Unit:
+mk:Единица за резолуција:
+:Scene Type:
+mk:Тип на сцена:
+:Software:
+mk:Софтвер:
+:User Comment:
+mk:Кориснички коментар:
+:YCbCr Positioning:
+mk:YCbCr позиционирање:
+:Color Space:
+lt:Spalvų erdvė:
+:Components Configuration:
+lt:Komponentų konfigūracija:
+:Compressed Bits/Pixel:
+lt:Suglaudinti bitai/pikselis:
+:Date/Time Digitized:
+lt:Skaitmeninimo data/laikas:
+:Date/Time:
+lt:Data/laikas:
+:Exif Version:
+lt:Exif versija:
+:File Source:
+lt:Failo šaltinis:
+:Flashpix Version:
+lt:Flashpix versija:
+:Light Source:
+lt:Šviesos šaltinis:
+:Max Aperture:
+lt:Didžiausia diafragma:
+:Pixel X Dimension:
+lt:Pikselio X matmuo:
+:Pixel Y Dimension:
+lt:Pikselio Y matmuo:
+:Resolution Unit:
+lt:Skiriamosios gebos vienetas:
+:Scene Type:
+lt:Scenos tipas:
+:Software:
+lt:Programinė įranga:
+:User Comment:
+lt:Naudotojo komentaras:
+:YCbCr Positioning:
+lt:YCbCr pozicionavimas:
+:Color Space:
+mk:Простор на бои:
+:Components Configuration:
+mk:Конфигурација на компоненти:
+:Compressed Bits/Pixel:
+mk:Компресирани битови/пиксел:
+:Date/Time Digitized:
+mk:Датум/Време на дигитализација:
+:Date/Time:
+mk:Датум/Време:
+:Exif Version:
+mk:Exif верзија:
+:File Source:
+mk:Извор на датотека:
+:Flashpix Version:
+mk:Flashpix верзија:
+:Light Source:
+mk:Извор на светлина:
+:Max Aperture:
+mk:Макс. отвор:
+:Pixel X Dimension:
+mk:Димензија X во пиксели:
+:Pixel Y Dimension:
+mk:Димензија Y во пиксели:
+:Resolution Unit:
+mk:Единица за резолуција:
+:Scene Type:
+mk:Тип на сцена:
+:Software:
+mk:Софтвер:
+:User Comment:
+mk:Кориснички коментар:
+:YCbCr Positioning:
+mk:YCbCr позиционирање:
+:Color Space:
+mm:အရောင်နေရာ:
+:Components Configuration:
+mm:အစိတ်အပိုင်းများ ဖွဲ့စည်းပုံ:
+:Compressed Bits/Pixel:
+mm:ချုံ့ထားသော ဘစ်/ပစ်ဆယ်:
+:Date/Time Digitized:
+mm:ဒစ်ဂျစ်တယ်ပြောင်းသည့် ရက်စွဲ/အချိန်:
+:Date/Time:
+mm:ရက်စွဲ/အချိန်:
+:Exif Version:
+mm:Exif ဗားရှင်း:
+:File Source:
+mm:ဖိုင်အရင်းအမြစ်:
+:Flashpix Version:
+mm:Flashpix ဗားရှင်း:
+:Light Source:
+mm:အလင်းအရင်းအမြစ်:
+:Max Aperture:
+mm:အများဆုံး အပေါက်:
+:Pixel X Dimension:
+mm:ပစ်ဆယ် X အတိုင်းအတာ:
+:Pixel Y Dimension:
+mm:ပစ်ဆယ် Y အတိုင်းအတာ:
+:Resolution Unit:
+mm:ကြည်လင်ပြတ်သားမှု ယူနစ်:
+:Scene Type:
+mm:မြင်ကွင်းအမျိုးအစား:
+:Software:
+mm:ဆော့ဖ်ဝဲ:
+:User Comment:
+mm:အသုံးပြုသူ မှတ်ချက်:
+:YCbCr Positioning:
+mm:YCbCr နေရာချထားမှု:
+:Color Space:
+ne:रंग स्थान:
+:Components Configuration:
+ne:घटक कन्फिगरेसन:
+:Compressed Bits/Pixel:
+ne:संकुचित बिट्स/पिक्सेल:
+:Date/Time Digitized:
+ne:डिजिटलाइज मिति/समय:
+:Date/Time:
+ne:मिति/समय:
+:Exif Version:
+ne:Exif संस्करण:
+:File Source:
+ne:फाइल स्रोत:
+:Flashpix Version:
+ne:Flashpix संस्करण:
+:Light Source:
+ne:प्रकाश स्रोत:
+:Max Aperture:
+ne:अधिकतम एपर्चर:
+:Pixel X Dimension:
+ne:पिक्सेल X आयाम:
+:Pixel Y Dimension:
+ne:पिक्सेल Y आयाम:
+:Resolution Unit:
+ne:रिजोलुसन एकाइ:
+:Scene Type:
+ne:दृश्य प्रकार:
+:Software:
+ne:सफ्टवेयर:
+:User Comment:
+ne:प्रयोगकर्ता टिप्पणी:
+:YCbCr Positioning:
+ne:YCbCr स्थिति:
+:Color Space:
+mm:အရောင်နေရာ:
+:Components Configuration:
+mm:အစိတ်အပိုင်းများ ပြင်ဆင်မှု:
+:Compressed Bits/Pixel:
+mm:ချုံ့ထားသော ဘစ်/ပစ်ဆယ်:
+:Date/Time Digitized:
+mm:ဒစ်ဂျစ်တယ်ပြောင်းသည့် ရက်စွဲ/အချိန်:
+:Date/Time:
+mm:ရက်စွဲ/အချိန်:
+:Exif Version:
+mm:Exif ဗားရှင်း:
+:File Source:
+mm:ဖိုင်အရင်းအမြစ်:
+:Flashpix Version:
+mm:Flashpix ဗားရှင်း:
+:Light Source:
+mm:အလင်းအရင်းအမြစ်:
+:Max Aperture:
+mm:အများဆုံး အပေါက်:
+:Pixel X Dimension:
+mm:ပစ်ဆယ် X အတိုင်းအတာ:
+:Pixel Y Dimension:
+mm:ပစ်ဆယ် Y အတိုင်းအတာ:
+:Resolution Unit:
+mm:ကြည်လင်ပြတ်သားမှု ယူနစ်:
+:Scene Type:
+mm:မြင်ကွင်းအမျိုးအစား:
+:Software:
+mm:ဆော့ဖ်ဝဲ:
+:User Comment:
+mm:အသုံးပြုသူမှတ်ချက်:
+:YCbCr Positioning:
+mm:YCbCr နေရာချထားမှု:
+:Color Space:
+nn:Fargerom:
+:Components Configuration:
+nn:Komponentkonfigurasjon:
+:Compressed Bits/Pixel:
+nn:Komprimerte bitar/piksel:
+:Date/Time Digitized:
+nn:Dato/tid digitalisert:
+:Date/Time:
+nn:Dato/tid:
+:Exif Version:
+nn:Exif-versjon:
+:File Source:
+nn:Filkjelde:
+:Flashpix Version:
+nn:Flashpix-versjon:
+:Light Source:
+nn:Lyskjelde:
+:Max Aperture:
+nn:Maks blendaropning:
+:Pixel X Dimension:
+nn:Piksel X-dimensjon:
+:Pixel Y Dimension:
+nn:Piksel Y-dimensjon:
+:Resolution Unit:
+nn:Oppløysingseining:
+:Scene Type:
+nn:Scenetype:
+:Software:
+nn:Programvare:
+:User Comment:
+nn:Brukarkommentar:
+:YCbCr Positioning:
+nn:YCbCr-posisjonering:
+:Color Space:
+ne:रङ स्पेस:
+:Components Configuration:
+ne:कम्पोनेन्ट कन्फिगरेसन:
+:Compressed Bits/Pixel:
+ne:कम्प्रेस्ड बिट्स/पिक्सेल:
+:Date/Time Digitized:
+ne:डिजिटलाइज गरिएको मिति/समय:
+:Date/Time:
+ne:मिति/समय:
+:Exif Version:
+ne:Exif संस्करण:
+:File Source:
+ne:फाइल स्रोत:
+:Flashpix Version:
+ne:Flashpix संस्करण:
+:Light Source:
+ne:प्रकाश स्रोत:
+:Max Aperture:
+ne:अधिकतम एपर्चर:
+:Pixel X Dimension:
+ne:पिक्सेल X आयाम:
+:Pixel Y Dimension:
+ne:पिक्सेल Y आयाम:
+:Resolution Unit:
+ne:रिजोलुसन एकाइ:
+:Scene Type:
+ne:दृश्य प्रकार:
+:Software:
+ne:सफ्टवेयर:
+:User Comment:
+ne:प्रयोगकर्ता टिप्पणी:
+:YCbCr Positioning:
+ne:YCbCr स्थिति:
+:Color Space:
+no:Fargerom:
+:Components Configuration:
+no:Komponentkonfigurasjon:
+:Compressed Bits/Pixel:
+no:Komprimerte bits/piksel:
+:Date/Time Digitized:
+no:Dato/tid digitalisert:
+:Date/Time:
+no:Dato/tid:
+:Exif Version:
+no:Exif-versjon:
+:File Source:
+no:Filkilde:
+:Flashpix Version:
+no:Flashpix-versjon:
+:Light Source:
+no:Lyskilde:
+:Max Aperture:
+no:Maks blenderåpning:
+:Pixel X Dimension:
+no:Piksel X-dimensjon:
+:Pixel Y Dimension:
+no:Piksel Y-dimensjon:
+:Resolution Unit:
+no:Oppløsningsenhet:
+:Scene Type:
+no:Scenetype:
+:Software:
+no:Programvare:
+:User Comment:
+no:Brukerkommentar:
+:YCbCr Positioning:
+no:YCbCr-posisjonering:
+:Color Space:
+nn:Fargerom:
+:Components Configuration:
+nn:Komponentkonfigurasjon:
+:Compressed Bits/Pixel:
+nn:Komprimerte bitar/piksel:
+:Date/Time Digitized:
+nn:Dato/tid digitalisert:
+:Date/Time:
+nn:Dato/tid:
+:Exif Version:
+nn:Exif-versjon:
+:File Source:
+nn:Filkjelde:
+:Flashpix Version:
+nn:Flashpix-versjon:
+:Light Source:
+nn:Lyskjelde:
+:Max Aperture:
+nn:Maks blendaropning:
+:Pixel X Dimension:
+nn:Piksel X-dimensjon:
+:Pixel Y Dimension:
+nn:Piksel Y-dimensjon:
+:Resolution Unit:
+nn:Oppløysingseining:
+:Scene Type:
+nn:Scenetype:
+:Software:
+nn:Programvare:
+:User Comment:
+nn:Brukarkommentar:
+:YCbCr Positioning:
+nn:YCbCr-posisjonering:
+:Color Space:
+no:Fargerom:
+:Components Configuration:
+no:Komponentkonfigurasjon:
+:Compressed Bits/Pixel:
+no:Komprimerte bits/pixel:
+:Date/Time Digitized:
+no:Dato/tid digitalisert:
+:Date/Time:
+no:Dato/tid:
+:Exif Version:
+no:Exif-versjon:
+:File Source:
+no:Filkilde:
+:Flashpix Version:
+no:Flashpix-versjon:
+:Light Source:
+no:Lyskilde:
+:Max Aperture:
+no:Maks blenderåpning:
+:Pixel X Dimension:
+no:Pixel X-dimensjon:
+:Pixel Y Dimension:
+no:Pixel Y-dimensjon:
+:Resolution Unit:
+no:Oppløsningsenhet:
+:Scene Type:
+no:Scenetype:
+:Software:
+no:Programvare:
+:User Comment:
+no:Brukerkommentar:
+:YCbCr Positioning:
+no:YCbCr-posisjonering:
+:Color Space:
+pa:ਰੰਗ ਸਪੇਸ:
+:Components Configuration:
+pa:ਕੰਪੋਨੈਂਟ ਸੰਰਚਨਾ:
+:Compressed Bits/Pixel:
+pa:ਕੰਪਰੈੱਸਡ ਬਿਟ/ਪਿਕਸਲ:
+:Date/Time Digitized:
+pa:ਡਿਜੀਟਲ ਕਰਨ ਦੀ ਮਿਤੀ/ਸਮਾਂ:
+:Date/Time:
+pa:ਮਿਤੀ/ਸਮਾਂ:
+:Exif Version:
+pa:Exif ਵਰਜਨ:
+:File Source:
+pa:ਫਾਈਲ ਸਰੋਤ:
+:Flashpix Version:
+pa:Flashpix ਵਰਜਨ:
+:Light Source:
+pa:ਰੋਸ਼ਨੀ ਸਰੋਤ:
+:Max Aperture:
+pa:ਅਧਿਕਤਮ ਅਪਰਚਰ:
+:Pixel X Dimension:
+pa:ਪਿਕਸਲ X ਮਾਪ:
+:Pixel Y Dimension:
+pa:ਪਿਕਸਲ Y ਮਾਪ:
+:Resolution Unit:
+pa:ਰੈਜ਼ੋਲੂਸ਼ਨ ਇਕਾਈ:
+:Scene Type:
+pa:ਦ੍ਰਿਸ਼ ਕਿਸਮ:
+:Software:
+pa:ਸਾਫਟਵੇਅਰ:
+:User Comment:
+pa:ਯੂਜ਼ਰ ਟਿੱਪਣੀ:
+:YCbCr Positioning:
+pa:YCbCr ਸਥਿਤੀ:
+:Color Space:
+pa:ਰੰਗ ਸਪੇਸ:
+:Components Configuration:
+pa:ਭਾਗ ਸੰਰਚਨਾ:
+:Compressed Bits/Pixel:
+pa:ਕੰਪਰੈੱਸਡ ਬਿੱਟ/ਪਿਕਸਲ:
+:Date/Time Digitized:
+pa:ਤਾਰੀਖ/ਸਮਾਂ ਡਿਜੀਟਲ ਕੀਤਾ:
+:Date/Time:
+pa:ਤਾਰੀਖ/ਸਮਾਂ:
+:Exif Version:
+pa:Exif ਵਰਜ਼ਨ:
+:File Source:
+pa:ਫਾਇਲ ਸਰੋਤ:
+:Flashpix Version:
+pa:Flashpix ਵਰਜ਼ਨ:
+:Light Source:
+pa:ਰੌਸ਼ਨੀ ਸਰੋਤ:
+:Max Aperture:
+pa:ਵੱਧ ਤੋਂ ਵੱਧ ਅਪਰਚਰ:
+:Pixel X Dimension:
+pa:ਪਿਕਸਲ X ਮਾਪ:
+:Pixel Y Dimension:
+pa:ਪਿਕਸਲ Y ਮਾਪ:
+:Resolution Unit:
+pa:ਰੈਜ਼ੋਲੂਸ਼ਨ ਇਕਾਈ:
+:Scene Type:
+pa:ਦ੍ਰਿਸ਼ ਕਿਸਮ:
+:Software:
+pa:ਸਾਫਟਵੇਅਰ:
+:User Comment:
+pa:ਯੂਜ਼ਰ ਟਿੱਪਣੀ:
+:YCbCr Positioning:
+pa:YCbCr ਸਥਿਤੀ:
+:Color Space:
+si:වර්ණ අවකාශය:
+:Components Configuration:
+si:සංරචක වින්‍යාසය:
+:Compressed Bits/Pixel:
+si:සම්පීඩිත බිට්/පික්සලය:
+:Date/Time Digitized:
+si:ඩිජිටල්කරණ දිනය/වේලාව:
+:Date/Time:
+si:දිනය/වේලාව:
+:Exif Version:
+si:Exif අනුවාදය:
+:File Source:
+si:ගොනු මූලාශ්‍රය:
+:Flashpix Version:
+si:Flashpix අනුවාදය:
+:Light Source:
+si:ආලෝක මූලාශ්‍රය:
+:Max Aperture:
+si:උපරිම විවරය:
+:Pixel X Dimension:
+si:පික්සල X මානය:
+:Pixel Y Dimension:
+si:පික්සල Y මානය:
+:Resolution Unit:
+si:විභේදන ඒකකය:
+:Scene Type:
+si:දර්ශන වර්ගය:
+:Software:
+si:මෘදුකාංගය:
+:User Comment:
+si:පරිශීලක අදහස:
+:YCbCr Positioning:
+si:YCbCr ස්ථානගත කිරීම:
+:Color Space:
+si:වර්ණ අවකාශය:
+:Components Configuration:
+si:සංරචක වින්‍යාසය:
+:Compressed Bits/Pixel:
+si:සම්පීඩිත බිට්/පික්සල්:
+:Date/Time Digitized:
+si:ඩිජිටල්කරණ දිනය/වේලාව:
+:Date/Time:
+si:දිනය/වේලාව:
+:Exif Version:
+si:Exif අනුවාදය:
+:File Source:
+si:ගොනු ප්‍රභවය:
+:Flashpix Version:
+si:Flashpix අනුවාදය:
+:Light Source:
+si:ආලෝක ප්‍රභවය:
+:Max Aperture:
+si:උපරිම විවරය:
+:Pixel X Dimension:
+si:පික්සල් X මානය:
+:Pixel Y Dimension:
+si:පික්සල් Y මානය:
+:Resolution Unit:
+si:විභේදන ඒකකය:
+:Scene Type:
+si:දර්ශන වර්ගය:
+:Software:
+si:මෘදුකාංග:
+:User Comment:
+si:පරිශීලක අදහස:
+:YCbCr Positioning:
+si:YCbCr ස්ථානගතකිරීම:
+:Color Space:
+sn:Nzvimbo Yemavara:
+:Components Configuration:
+sn:Kugadzirwa Kwemapoka:
+:Compressed Bits/Pixel:
+sn:Mabhiti/Pixel Akadzvinywa:
+:Date/Time Digitized:
+sn:Zuva/Nguva Yakaitwa Digital:
+:Date/Time:
+sn:Zuva/Nguva:
+:Exif Version:
+sn:Shanduro yeExif:
+:File Source:
+sn:Kwakabva Faira:
+:Flashpix Version:
+sn:Shanduro yeFlashpix:
+:Light Source:
+sn:Kwakabva Chiedza:
+:Max Aperture:
+sn:Aperture Huru:
+:Pixel X Dimension:
+sn:Hurefu hwePixel X:
+:Pixel Y Dimension:
+sn:Hurefu hwePixel Y:
+:Resolution Unit:
+sn:Chikamu cheResolution:
+:Scene Type:
+sn:Rudzi rweChiitiko:
+:Software:
+sn:Software:
+:User Comment:
+sn:Chirevo cheMushandisi:
+:YCbCr Positioning:
+sn:Kuisa kweYCbCr:
+:Color Space:
+sp-rs:Простор боја:
+:Components Configuration:
+sp-rs:Конфигурација компоненти:
+:Compressed Bits/Pixel:
+sp-rs:Компресовани бити/пиксел:
+:Date/Time Digitized:
+sp-rs:Датум/време дигитализације:
+:Date/Time:
+sp-rs:Датум/време:
+:Exif Version:
+sp-rs:Exif верзија:
+:File Source:
+sp-rs:Извор датотеке:
+:Flashpix Version:
+sp-rs:Flashpix верзија:
+:Light Source:
+sp-rs:Извор светлости:
+:Max Aperture:
+sp-rs:Максимални отвор бленде:
+:Pixel X Dimension:
+sp-rs:X димензија пиксела:
+:Pixel Y Dimension:
+sp-rs:Y димензија пиксела:
+:Resolution Unit:
+sp-rs:Јединица резолуције:
+:Scene Type:
+sp-rs:Тип сцене:
+:Software:
+sp-rs:Софтвер:
+:User Comment:
+sp-rs:Кориснички коментар:
+:YCbCr Positioning:
+sp-rs:YCbCr позиционирање:
+:Color Space:
+sn:Nzvimbo yeRuvara:
+:Components Configuration:
+sn:Kumisikidzwa kweZvikamu:
+:Compressed Bits/Pixel:
+sn:Mapikiseli Akadzvinyirirwa:
+:Date/Time Digitized:
+sn:Zuva/Nguva Yakadhijitarwa:
+:Date/Time:
+sn:Zuva/Nguva:
+:Exif Version:
+sn:Shanduro yeExif:
+:File Source:
+sn:Kwakabva Faira:
+:Flashpix Version:
+sn:Shanduro yeFlashpix:
+:Light Source:
+sn:Kwakabva Chiedza:
+:Max Aperture:
+sn:Aperture Yakakwirira:
+:Pixel X Dimension:
+sn:Hurefu hwePixel X:
+:Pixel Y Dimension:
+sn:Hurefu hwePixel Y:
+:Resolution Unit:
+sn:Chikamu cheResolution:
+:Scene Type:
+sn:Rudzi rweManzwiro:
+:Software:
+sn:Software:
+:User Comment:
+sn:Chirevo cheMuridzi:
+:YCbCr Positioning:
+sn:Kuisa kweYCbCr:
+:Color Space:
+sq:Hapësira e Ngjyrave:
+:Components Configuration:
+sq:Konfigurimi i Komponentëve:
+:Compressed Bits/Pixel:
+sq:Bits/Pixel të Kompresuar:
+:Date/Time Digitized:
+sq:Data/Ora e Dixhitalizimit:
+:Date/Time:
+sq:Data/Ora:
+:Exif Version:
+sq:Versioni Exif:
+:File Source:
+sq:Burimi i Skedarit:
+:Flashpix Version:
+sq:Versioni Flashpix:
+:Light Source:
+sq:Burimi i Dritës:
+:Max Aperture:
+sq:Apertura Maksimale:
+:Pixel X Dimension:
+sq:Dimensioni X i Pikselit:
+:Pixel Y Dimension:
+sq:Dimensioni Y i Pikselit:
+:Resolution Unit:
+sq:Njësia e Rezolucionit:
+:Scene Type:
+sq:Lloji i Skenës:
+:Software:
+sq:Softueri:
+:User Comment:
+sq:Komenti i Përdoruesit:
+:YCbCr Positioning:
+sq:Pozicionimi YCbCr:
+:Color Space:
+sp-rs:Простор боја:
+:Components Configuration:
+sp-rs:Конфигурација компонената:
+:Compressed Bits/Pixel:
+sp-rs:Компресовани бита/пиксел:
+:Date/Time Digitized:
+sp-rs:Датум/време дигитализације:
+:Date/Time:
+sp-rs:Датум/време:
+:Exif Version:
+sp-rs:Exif верзија:
+:File Source:
+sp-rs:Извор датотеке:
+:Flashpix Version:
+sp-rs:Flashpix верзија:
+:Light Source:
+sp-rs:Извор светлости:
+:Max Aperture:
+sp-rs:Макс. отвор бленде:
+:Pixel X Dimension:
+sp-rs:X димензија пиксела:
+:Pixel Y Dimension:
+sp-rs:Y димензија пиксела:
+:Resolution Unit:
+sp-rs:Јединица резолуције:
+:Scene Type:
+sp-rs:Тип сцене:
+:Software:
+sp-rs:Софтвер:
+:User Comment:
+sp-rs:Кориснички коментар:
+:YCbCr Positioning:
+sp-rs:YCbCr позиционирање:
+:Color Space:
+sq:Hapësira e Ngjyrave:
+:Components Configuration:
+sq:Konfigurimi i Komponentëve:
+:Compressed Bits/Pixel:
+sq:Bits/Pixel të Kompresuar:
+:Date/Time Digitized:
+sq:Data/Ora e Dixhitalizimit:
+:Date/Time:
+sq:Data/Ora:
+:Exif Version:
+sq:Versioni Exif:
+:File Source:
+sq:Burimi i Skedarit:
+:Flashpix Version:
+sq:Versioni Flashpix:
+:Light Source:
+sq:Burimi i Dritës:
+:Max Aperture:
+sq:Hapja Maksimale:
+:Pixel X Dimension:
+sq:Dimensioni X i Pikselit:
+:Pixel Y Dimension:
+sq:Dimensioni Y i Pikselit:
+:Resolution Unit:
+sq:Njësia e Rezolucionit:
+:Scene Type:
+sq:Lloji i Skenës:
+:Software:
+sq:Softuer:
+:User Comment:
+sq:Komenti i Përdoruesit:
+:YCbCr Positioning:
+sq:Pozicionimi YCbCr:
+:Color Space:
+th:พื้นที่สี:
+:Components Configuration:
+th:การกำหนดค่าส่วนประกอบ:
+:Compressed Bits/Pixel:
+th:บิตบีบอัด/พิกเซล:
+:Date/Time Digitized:
+th:วันที่/เวลาที่แปลงเป็นดิจิทัล:
+:Date/Time:
+th:วันที่/เวลา:
+:Exif Version:
+th:เวอร์ชัน Exif:
+:File Source:
+th:แหล่งที่มาของไฟล์:
+:Flashpix Version:
+th:เวอร์ชัน Flashpix:
+:Light Source:
+th:แหล่งกำเนิดแสง:
+:Max Aperture:
+th:ค่ารูรับแสงสูงสุด:
+:Pixel X Dimension:
+th:มิติพิกเซล X:
+:Pixel Y Dimension:
+th:มิติพิกเซล Y:
+:Resolution Unit:
+th:หน่วยความละเอียด:
+:Scene Type:
+th:ประเภทฉาก:
+:Software:
+th:ซอฟต์แวร์:
+:User Comment:
+th:ความคิดเห็นของผู้ใช้:
+:YCbCr Positioning:
+th:ตำแหน่ง YCbCr:
+:Color Space:
+th:ระบบสี:
+:Components Configuration:
+th:การกำหนดค่าส่วนประกอบ:
+:Compressed Bits/Pixel:
+th:บิตต่อพิกเซลที่บีบอัด:
+:Date/Time Digitized:
+th:วันที่/เวลาที่แปลงเป็นดิจิทัล:
+:Date/Time:
+th:วันที่/เวลา:
+:Exif Version:
+th:เวอร์ชัน Exif:
+:File Source:
+th:แหล่งที่มาของไฟล์:
+:Flashpix Version:
+th:เวอร์ชัน Flashpix:
+:Light Source:
+th:แหล่งกำเนิดแสง:
+:Max Aperture:
+th:รูรับแสงสูงสุด:
+:Pixel X Dimension:
+th:มิติพิกเซล X:
+:Pixel Y Dimension:
+th:มิติพิกเซล Y:
+:Resolution Unit:
+th:หน่วยความละเอียด:
+:Scene Type:
+th:ประเภทฉาก:
+:Software:
+th:ซอฟต์แวร์:
+:User Comment:
+th:ความคิดเห็นผู้ใช้:
+:YCbCr Positioning:
+th:ตำแหน่ง YCbCr:
+:Color Space:
+tl:Espasyo ng Kulay:
+:Components Configuration:
+tl:Konpigurasyon ng mga Bahagi:
+:Compressed Bits/Pixel:
+tl:Naka-compress na Bits/Pixel:
+:Date/Time Digitized:
+tl:Petsa/Oras na Na-digitize:
+:Date/Time:
+tl:Petsa/Oras:
+:Exif Version:
+tl:Bersyon ng Exif:
+:File Source:
+tl:Pinagmulan ng File:
+:Flashpix Version:
+tl:Bersyon ng Flashpix:
+:Light Source:
+tl:Pinagmumulan ng Liwanag:
+:Max Aperture:
+tl:Pinakamataas na Aperture:
+:Pixel X Dimension:
+tl:Dimensyon ng Pixel X:
+:Pixel Y Dimension:
+tl:Dimensyon ng Pixel Y:
+:Resolution Unit:
+tl:Yunit ng Resolution:
+:Scene Type:
+tl:Uri ng Eksena:
+:Software:
+tl:Software:
+:User Comment:
+tl:Komento ng User:
+:YCbCr Positioning:
+tl:Pagpoposisyon ng YCbCr:
+:Color Space:
+tl:Espasyo ng Kulay:
+:Components Configuration:
+tl:Konpigurasyon ng mga Bahagi:
+:Compressed Bits/Pixel:
+tl:Naka-compress na Bits/Pixel:
+:Date/Time Digitized:
+tl:Petsa/Oras ng Digitalisasyon:
+:Date/Time:
+tl:Petsa/Oras:
+:Exif Version:
+tl:Bersyon ng Exif:
+:File Source:
+tl:Pinagmulan ng File:
+:Flashpix Version:
+tl:Bersyon ng Flashpix:
+:Light Source:
+tl:Pinagmumulan ng Liwanag:
+:Max Aperture:
+tl:Pinakamataas na Aperture:
+:Pixel X Dimension:
+tl:Dimensyon ng Pixel X:
+:Pixel Y Dimension:
+tl:Dimensyon ng Pixel Y:
+:Resolution Unit:
+tl:Yunit ng Resolusyon:
+:Scene Type:
+tl:Uri ng Eksena:
+:Software:
+tl:Software:
+:User Comment:
+tl:Komento ng Gumagamit:
+:YCbCr Positioning:
+tl:Posisyon ng YCbCr:
+:Color Space:
+uk:Колірний простір:
+:Components Configuration:
+uk:Конфігурація компонентів:
+:Compressed Bits/Pixel:
+uk:Стиснуті біти/піксель:
+:Date/Time Digitized:
+uk:Дата/час оцифрування:
+:Date/Time:
+uk:Дата/час:
+:Exif Version:
+uk:Версія Exif:
+:File Source:
+uk:Джерело файлу:
+:Flashpix Version:
+uk:Версія Flashpix:
+:Light Source:
+uk:Джерело світла:
+:Max Aperture:
+uk:Максимальна діафрагма:
+:Pixel X Dimension:
+uk:Розмір X у пікселях:
+:Pixel Y Dimension:
+uk:Розмір Y у пікселях:
+:Resolution Unit:
+uk:Одиниця роздільної здатності:
+:Scene Type:
+uk:Тип сцени:
+:Software:
+uk:Програмне забезпечення:
+:User Comment:
+uk:Коментар користувача:
+:YCbCr Positioning:
+uk:Позиціонування YCbCr:
+:Color Space:
+uk:Колірний простір:
+:Components Configuration:
+uk:Конфігурація компонентів:
+:Compressed Bits/Pixel:
+uk:Стиснені біти/піксель:
+:Date/Time Digitized:
+uk:Дата/час оцифрування:
+:Date/Time:
+uk:Дата/час:
+:Exif Version:
+uk:Версія Exif:
+:File Source:
+uk:Джерело файлу:
+:Flashpix Version:
+uk:Версія Flashpix:
+:Light Source:
+uk:Джерело світла:
+:Max Aperture:
+uk:Макс. діафрагма:
+:Pixel X Dimension:
+uk:Розмір X у пікселях:
+:Pixel Y Dimension:
+uk:Розмір Y у пікселях:
+:Resolution Unit:
+uk:Одиниця роздільності:
+:Scene Type:
+uk:Тип сцени:
+:Software:
+uk:Програмне забезпечення:
+:User Comment:
+uk:Коментар користувача:
+:YCbCr Positioning:
+uk:Позиціонування YCbCr:
+:Color Space:
+vn:Không gian màu:
+:Components Configuration:
+vn:Cấu hình thành phần:
+:Compressed Bits/Pixel:
+vn:Bit nén/Pixel:
+:Date/Time Digitized:
+vn:Ngày/Giờ số hóa:
+:Date/Time:
+vn:Ngày/Giờ:
+:Exif Version:
+vn:Phiên bản Exif:
+:File Source:
+vn:Nguồn tệp:
+:Flashpix Version:
+vn:Phiên bản Flashpix:
+:Light Source:
+vn:Nguồn sáng:
+:Max Aperture:
+vn:Khẩu độ tối đa:
+:Pixel X Dimension:
+vn:Kích thước X Pixel:
+:Pixel Y Dimension:
+vn:Kích thước Y Pixel:
+:Resolution Unit:
+vn:Đơn vị độ phân giải:
+:Scene Type:
+vn:Loại cảnh:
+:Software:
+vn:Phần mềm:
+:User Comment:
+vn:Nhận xét người dùng:
+:YCbCr Positioning:
+vn:Định vị YCbCr:
+:Color Space:
+vn:Không gian màu:
+:Components Configuration:
+vn:Cấu hình thành phần:
+:Compressed Bits/Pixel:
+vn:Bit nén/Pixel:
+:Date/Time Digitized:
+vn:Ngày/Giờ số hóa:
+:Date/Time:
+vn:Ngày/Giờ:
+:Exif Version:
+vn:Phiên bản Exif:
+:File Source:
+vn:Nguồn tập tin:
+:Flashpix Version:
+vn:Phiên bản Flashpix:
+:Light Source:
+vn:Nguồn sáng:
+:Max Aperture:
+vn:Khẩu độ tối đa:
+:Pixel X Dimension:
+vn:Kích thước Pixel X:
+:Pixel Y Dimension:
+vn:Kích thước Pixel Y:
+:Resolution Unit:
+vn:Đơn vị độ phân giải:
+:Scene Type:
+vn:Loại cảnh:
+:Software:
+vn:Phần mềm:
+:User Comment:
+vn:Nhận xét người dùng:
+:YCbCr Positioning:
+vn:Vị trí YCbCr:

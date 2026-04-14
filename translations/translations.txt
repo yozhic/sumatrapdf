@@ -1,5 +1,5 @@
 AppTranslator: SumatraPDF
-e38d44ddafa702e07297a862f7475ef597c0e08e
+655b768c71442b72634df553ef2495f421066559
 :# File History
 am:# Ֆայլի պատմություն
 ar:# سجل الملفات
@@ -6745,6 +6745,7 @@ it:Creazione elenco stampanti
 nl:Verzamel lijst van printers
 pl:Gromadzenie listy drukarek
 sk:Získava sa zoznam tlačiarní
+:Color Space:
 :Color:
 am:Գույն.
 ar:اللون:
@@ -7006,6 +7007,7 @@ tw:相容性
 uk:Сумісність
 uz:Mosligi
 vn:Tính tương thích
+:Components Configuration:
 :Compress PDF
 br:Comprimir PDF
 cn:压缩 PDF
@@ -7014,6 +7016,7 @@ de:PDF komprimieren
 it:Comprimi PDF
 pl:Kompresuj PDF
 sk:Komprimovať PDF
+:Compressed Bits/Pixel:
 :Contents:
 am:Բովանդակությունը՝
 ar:المحتويات:
@@ -9300,6 +9303,8 @@ it:Data/Ora originali:
 nl:Oorspronkelijke Datum:
 pl:Data oryginału:
 sk:Dátum vytvorenia:
+:Date/Time Digitized:
+:Date/Time:
 :Date:
 am:Ամսաթիվ՝
 ar:التاريخ:
@@ -10751,6 +10756,7 @@ pl:Uruchom program
 sk:Spustiť program
 sr-rs:Изврши програм
 tw:執行程式
+:Exif Version:
 :Exit Application
 am:Ելք ծրագրից
 br:Sair do Aplicativo
@@ -11878,6 +11884,7 @@ tw:檔案大小:
 uk:Розмір файла:
 uz:Fayl hajmi:
 vn:Kích thước:
+:File Source:
 :File path not available
 br:O caminho do arquivo não está disponível
 cn:文件路径不可用
@@ -12861,6 +12868,7 @@ it:Flash:
 nl:Flits
 pl:Lampa błyskowa:
 sk:Blesk:
+:Flashpix Version:
 :Focal Length (35mm):
 br:Tamanho do Foco (35 mm):
 cn:焦距 (35 mm)
@@ -14678,6 +14686,7 @@ tw:亮
 uk:Світла
 uz:Yorug‘
 vn:Sáng
+:Light Source:
 :Line
 am:Գիծ
 ar:سطر
@@ -15086,7 +15095,13 @@ sv:Manual på webbsida
 tr:Web Sitesinde Kullanım Klavuzu
 tw:線上說明
 uz:Veb-saytda qo‘llanma
+:Max Aperture:
 :Menu
+br:Menu
+cn:菜单
+co:Listinu
+pl:Menu
+sk:Ponuka
 :Metering Mode:
 br:Modo de Medição:
 cn:测光模式
@@ -18140,6 +18155,8 @@ nl:Pin Geselecteerd Document
 pl:Przypnij zaznaczony dokument
 sk:Pripnúť vybraný dokument
 tw:釘選所選取的文件
+:Pixel X Dimension:
+:Pixel Y Dimension:
 :Please close %s to proceed!
 am:Շարունակելուց առաջ փակեք %s-ը:
 ar: !المضي قدما %s الرجاء اغلاق
@@ -18629,6 +18646,11 @@ pl:Białe tło prezentacji
 sk:Biele pozadie prezentácie
 tw:簡報模式：白色背景
 :Press a key combination:
+br:Pressionar uma combinação de teclas:
+cn:按组合键
+co:Appughjà nant’à un associu di tasti :
+pl:Naciśnij kombinację klawiszy:
+sk:Stlačte kombináciu klávesov:
 :Previous Page
 af:Vorige Bladsy
 am:Նախորդ էջը
@@ -19546,6 +19568,11 @@ uk:Запам'ятати відкриті файли
 uz:&Ochilgan fayllarni eslab qolish
 vn:Nhớ các tập tin đã mở
 :Remove
+br:Remover
+cn:删除
+co:Caccià
+pl:Usuń
+sk:Odstrániť
 :Remove Selected Document From History
 am:Հեռացնել ընտրված փաստաթուղթը պատմությունից
 br:Remover Documento Selecionado do Histórico
@@ -19802,6 +19829,7 @@ it:Ridimensiona immagine
 nl:Wijzig Afbeelding Formaat
 pl:Zmień rozmiar obrazu
 sk:Zmeniť veľkosť obrázka
+:Resolution Unit:
 :Restore
 br:Restaurar
 cn:恢复
@@ -20190,6 +20218,11 @@ uk:Збереження приміток до наявного PDF-файлу
 uz:Izohlarni mavjud PDF-ga saqlash
 vn:Lưu Chú Thích và thoát PDF
 :Save Attachment
+br:Salvar Anexo
+cn:保存附件
+co:Arregistrà a pezza ghjunta
+pl:Zapisz załącznik
+sk:Uložiť prílohu
 :Save Attachment...
 am:Պահել կցորդը...
 ar:احفظ المرفق...
@@ -20724,6 +20757,7 @@ tw:儲存 '%s' 失敗，因為: '%s'
 uk:Не вдалося зберегти '%s' з допомогою: '%s'
 uz:'%s' ni saqlash muvaffaqiyatsiz tugadi: '%s'
 vn:Đang lưu '%s' lỗi với: '%s'
+:Scene Type:
 :Scroll Down
 am:Գլորել ներքև
 br:Rolar pra Baixo
@@ -21529,7 +21563,17 @@ uk:Надіслати через E-mail...
 uz:&Elektron pochta orqali yuborish...
 vn:Gửi qua &email...
 :Set
+br:Configurar
+cn:设置
+co:Definisce
+pl:Ustaw
+sk:Nastaviť
 :Set Screenshot Hotkey
+br:Definir a Tecla de Atalho das Screenshots
+cn:设置截屏快捷键
+co:Definisce un accurtatoghju di tastu per a cattura di screnu
+pl:Ustaw klawisz skrótu zrzutu ekranu
+sk:Nastaviť klávesovú skratku pre snímku obrazovky
 :Set Tab Color
 br:Definir a Cor da Aba
 cn:设置标签颜色
@@ -22455,6 +22499,7 @@ nl:Slim Volgende Tab
 pl:Następna karta inteligentnie
 sk:Inteligentné prepínanie kariet
 tw:智慧切換下一個分頁
+:Software:
 :Sorry, that shouldn't have happened!\n\nPlease press 'Cancel', if you want to help us fix the cause of this crash.
 am:Կներեք, սա չպետք է տեղի ունենար։\n\nՍեղմեք 'Չեղարկել'՝եթե ցանկանում եք օգնել մեզ վերացնելու այս սխալը։
 ar:الرجاء اضغط 'إلغاء الأمر'، إذا كنت ترغب في مساعدتنا على إصلاح هذا الحادث \n\n !آسف، أنه لا ينبغي أن يكون قد حدث
@@ -24839,6 +24884,7 @@ tw:使用分頁(&T)
 uk:Використовувати вкладки
 uz:&Ilovalarni qo'llash
 vn:Dùng &thẻ
+:User Comment:
 :View
 af:Vertoon
 am:Տեսք
@@ -25154,6 +25200,7 @@ tw:XPS 文件
 uk:Документи XPS
 uz:XPS hujjatlari
 vn:Tập tin XPS
+:YCbCr Positioning:
 :Yes
 am:Այո
 ar:نعم

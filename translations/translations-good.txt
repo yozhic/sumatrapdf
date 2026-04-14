@@ -9490,6 +9490,79 @@ tw:正在收集印表機清單
 uk:Збір списку принтерів
 uz:Printerlar ro'yxati yig'ilmoqda
 vn:Đang thu thập danh sách máy in
+:Color Space:
+af:Kleurruimte:
+am:የቀለም ክልል:
+ar:مساحة اللون:
+az:Rəng Məkanı:
+bg:Цветово пространство:
+bn:রঙের স্থান:
+br:Spas al livioù:
+bs:Prostor boja:
+by:Каляровая прастора:
+ca:Espai de color:
+ca-xv:Espai de color:
+cn:色彩空间：
+co:Spaziu di culore:
+cy:Gofod Lliw:
+cz:Barevný prostor:
+de:Farbraum:
+dk:Farverum:
+el:Χώρος Χρωμάτων:
+es:Espacio de Color:
+et:Värviruum:
+eu:Kolore-espazioa:
+fa:فضای رنگ:
+fi:Väriavaruus:
+fo:Litarúm:
+fr:Espace colorimétrique :
+fy-nl:Kleurromte:
+ga:Spás Datha:
+gl:Espazo de cor:
+he:מרחב צבע:
+hi:रंग स्थान:
+hr:Prostor boja:
+hu:Színtér:
+id:Ruang Warna:
+it:Spazio colore:
+ja:色空間:
+jv:Ruang Warna:
+ka:ფერთა სივრცე:
+kr:색 공간:
+ku:Qada Rengî:
+kw:Spas Liw:
+lt:Spalvų erdvė:
+lv:Krāsu telpa:
+mk:Простор на бои:
+ml:വർണ്ണ സ്പേസ്:
+mm:အရောင်နေရာ:
+my:အရောင်နေရာ:
+ne:रङ स्पेस:
+nl:Kleurruimte:
+nn:Fargerom:
+no:Fargerom:
+pa:ਰੰਗ ਸਪੇਸ:
+pl:Przestrzeń barw:
+pt:Espaço de Cor:
+ro:Spațiu de culoare:
+ru:Цветовое пространство:
+sat:ᱨᱚᱝ ᱡᱟᱜᱟ:
+si:වර්ණ අවකාශය:
+sk:Farebný priestor:
+sl:Barvni prostor:
+sn:Nzvimbo yeRuvara:
+sp-rs:Простор боја:
+sq:Hapësira e Ngjyrave:
+sr-rs:Простор боја:
+sv:Färgrymd:
+ta:வண்ண இடம்:
+th:ระบบสี:
+tl:Espasyo ng Kulay:
+tr:Renk Uzayı:
+tw:色彩空間：
+uk:Колірний простір:
+uz:Rang maydoni:
+vn:Không gian màu:
 :Color:
 af:Kleur:
 am:Գույն.
@@ -9855,6 +9928,79 @@ tw:相容性
 uk:Сумісність
 uz:Mosligi
 vn:Tính tương thích
+:Components Configuration:
+af:Komponentkonfigurasie:
+am:የክፍሎች ውቅር:
+ar:تكوين المكونات:
+az:Komponentlərin Konfiqurasiyası:
+bg:Конфигурация на компонентите:
+bn:উপাদান কনফিগারেশন:
+br:Kefluniadur ar poelladoù:
+bs:Konfiguracija komponenti:
+by:Канфігурацыя кампанентаў:
+ca:Configuració de components:
+ca-xv:Configuració de components:
+cn:组件配置：
+co:Cunfigurazione di cumpunenti:
+cy:Ffurfweddiad Cydrannau:
+cz:Konfigurace komponent:
+de:Komponentenkonfiguration:
+dk:Komponentkonfiguration:
+el:Διαμόρφωση Στοιχείων:
+es:Configuración de Componentes:
+et:Komponentide konfiguratsioon:
+eu:Osagaien konfigurazioa:
+fa:پیکربندی اجزا:
+fi:Komponenttien kokoonpano:
+fo:Samansetingaruppseting:
+fr:Configuration des composants :
+fy-nl:Komponintekonfiguraasje:
+ga:Cumraíocht Comhpháirteanna:
+gl:Configuración de compoñentes:
+he:תצורת רכיבים:
+hi:घटक विन्यास:
+hr:Konfiguracija komponenti:
+hu:Komponensek konfigurációja:
+id:Konfigurasi Komponen:
+it:Configurazione componenti:
+ja:コンポーネント構成:
+jv:Konfigurasi Komponen:
+ka:კომპონენტების კონფიგურაცია:
+kr:구성 요소 설정:
+ku:Veavakirina Pêkhateyî:
+kw:Keflunyans Elvenow:
+lt:Komponentų konfigūracija:
+lv:Komponentu konfigurācija:
+mk:Конфигурација на компоненти:
+ml:ഘടക ക്രമീകരണം:
+mm:အစိတ်အပိုင်းများ ပြင်ဆင်မှု:
+my:အစိတ်အပိုင်းများ ပုံစံချိန်ညှိမှု:
+ne:कम्पोनेन्ट कन्फिगरेसन:
+nl:Componentenconfiguratie:
+nn:Komponentkonfigurasjon:
+no:Komponentkonfigurasjon:
+pa:ਭਾਗ ਸੰਰਚਨਾ:
+pl:Konfiguracja komponentów:
+pt:Configuração de Componentes:
+ro:Configurație componente:
+ru:Конфигурация компонентов:
+sat:ᱚᱝᱥᱚ ᱥᱮᱴᱤᱝ:
+si:සංරචක වින්‍යාසය:
+sk:Konfigurácia komponentov:
+sl:Konfiguracija komponent:
+sn:Kumisikidzwa kweZvikamu:
+sp-rs:Конфигурација компонената:
+sq:Konfigurimi i Komponentëve:
+sr-rs:Конфигурација компоненти:
+sv:Komponentkonfiguration:
+ta:கூறுகள் அமைப்பு:
+th:การกำหนดค่าส่วนประกอบ:
+tl:Konpigurasyon ng mga Bahagi:
+tr:Bileşen Yapılandırması:
+tw:元件配置：
+uk:Конфігурація компонентів:
+uz:Komponentlar konfiguratsiyasi:
+vn:Cấu hình thành phần:
 :Compress PDF
 af:Komprimeer PDF
 am:ፒዲኤፍ አመቅ
@@ -9928,6 +10074,79 @@ tw:壓縮 PDF
 uk:Стиснути PDF
 uz:PDF ni siqish
 vn:Nén PDF
+:Compressed Bits/Pixel:
+af:Saamgeperste Bisse/Pixel:
+am:የተጨመቁ ቢትስ/ፒክሰል:
+ar:البتات المضغوطة/بكسل:
+az:Sıxılmış Bit/Piksel:
+bg:Компресирани битове/пиксел:
+bn:সংকুচিত বিট/পিক্সেল:
+br:Bitoù gwasket/Piksel:
+bs:Kompresovani bitovi/piksel:
+by:Сціснутыя біты/піксель:
+ca:Bits comprimits/píxel:
+ca-xv:Bits comprimits/píxel:
+cn:压缩位/像素：
+co:Bits/Pixel cumpressi:
+cy:Didau/Picsel wedi'u Cywasgu:
+cz:Komprimované bity/pixel:
+de:Komprimierte Bits/Pixel:
+dk:Komprimerede Bits/Pixel:
+el:Συμπιεσμένα Bits/Pixel:
+es:Bits Comprimidos/Píxel:
+et:Tihendatud bitti/piksel:
+eu:Konprimitutako bit/pixel:
+fa:بیت فشرده/پیکسل:
+fi:Pakatut bitit/pikseli:
+fo:Tvøttaðir Bits/Pixel:
+fr:Bits compressés/pixel :
+fy-nl:Komprimeare Bits/Pixel:
+ga:Giotáin Comhbhrúite/Picteilín:
+gl:Bits comprimidos/píxel:
+he:ביטים דחוסים/פיקסל:
+hi:संपीड़ित बिट्स/पिक्सेल:
+hr:Komprimirani bitovi/piksel:
+hu:Tömörített bitek/pixel:
+id:Bit Terkompresi/Piksel:
+it:Bit compressi/Pixel:
+ja:圧縮ビット/ピクセル:
+jv:Bits Terkompresi/Piksel:
+ka:შეკუმშული ბიტები/პიქსელი:
+kr:압축 비트/픽셀:
+ku:Bît/Pîksel yên Hevgirtî:
+kw:Bittys Kompryssys/Piksel:
+lt:Suglaudinti bitai/pikselis:
+lv:Saspiesti biti/pikselis:
+mk:Компресирани битови/пиксел:
+ml:കംപ്രസ്ഡ് ബിറ്റ്സ്/പിക്സൽ:
+mm:ချုံ့ထားသော ဘစ်/ပစ်ဆယ်:
+my:ချုံ့ထားသော ဘစ်/ပික်ဆယ်:
+ne:कम्प्रेस्ड बिट्स/पिक्सेल:
+nl:Gecomprimeerde bits/pixel:
+nn:Komprimerte bitar/piksel:
+no:Komprimerte bits/pixel:
+pa:ਕੰਪਰੈੱਸਡ ਬਿੱਟ/ਪਿਕਸਲ:
+pl:Skompresowane bity/piksel:
+pt:Bits Comprimidos/Pixel:
+ro:Biți compresi/Pixel:
+ru:Сжатых бит/пиксель:
+sat:ᱠᱚᱢᱯᱨᱮᱥᱰ ᱵᱤᱴ/ᱯᱤᱠᱥᱮᱞ:
+si:සම්පීඩිත බිට්/පික්සල්:
+sk:Komprimované bity/pixel:
+sl:Stisnjeni biti/piksel:
+sn:Mapikiseli Akadzvinyirirwa:
+sp-rs:Компресовани бита/пиксел:
+sq:Bits/Pixel të Kompresuar:
+sr-rs:Компресовани битови/пиксел:
+sv:Komprimerade bitar/pixel:
+ta:சுருக்கப்பட்ட பிட்கள்/பிக்செல்:
+th:บิตต่อพิกเซลที่บีบอัด:
+tl:Naka-compress na Bits/Pixel:
+tr:Sıkıştırılmış Bit/Piksel:
+tw:壓縮位元/像素：
+uk:Стиснені біти/піксель:
+uz:Siqilgan bitlar/piksel:
+vn:Bit nén/Pixel:
 :Contents:
 af:Inhoud:
 am:Բովանդակությունը՝
@@ -14162,6 +14381,152 @@ tw:原始日期：
 uk:Дата оригіналу:
 uz:Asl sana:
 vn:Ngày Gốc:
+:Date/Time Digitized:
+af:Datum/Tyd Gedigitaliseer:
+am:ዲጂታል የተደረገበት ቀን/ሰዓት:
+ar:تاريخ/وقت الرقمنة:
+az:Rəqəmsallaşdırma Tarixi/Vaxtı:
+bg:Дата/час на дигитализация:
+bn:ডিজিটাইজ করার তারিখ/সময়:
+br:Deiziad/Eur niverelaat:
+bs:Datum/vrijeme digitalizacije:
+by:Дата/час лічбавання:
+ca:Data/hora de digitalització:
+ca-xv:Data/hora de digitalització:
+cn:数字化日期/时间：
+co:Data/Ora digitalizata:
+cy:Dyddiad/Amser Digido:
+cz:Datum/čas digitalizace:
+de:Digitalisierungsdatum/-zeit:
+dk:Digitaliseringsdato/-tid:
+el:Ημερομηνία/Ώρα Ψηφιοποίησης:
+es:Fecha/Hora de Digitalización:
+et:Digiteerimise kuupäev/kellaaeg:
+eu:Digitalizazio data/ordua:
+fa:تاریخ/زمان دیجیتالی شده:
+fi:Digitointipäivä/-aika:
+fo:Dagfesting/Tíð Digitaliserað:
+fr:Date/heure de numérisation :
+fy-nl:Datum/Tiid Digitalisearre:
+ga:Dáta/Am Digitithe:
+gl:Data/Hora de dixitalización:
+he:תאריך/שעה דיגיטציה:
+hi:डिजिटलीकरण दिनांक/समय:
+hr:Datum/vrijeme digitalizacije:
+hu:Digitalizálás dátuma/ideje:
+id:Tanggal/Waktu Digitalisasi:
+it:Data/Ora digitalizzazione:
+ja:デジタル化日時:
+jv:Tanggal/Wektu Didigitalake:
+ka:ციფრულად გადაქცევის თარიღი/დრო:
+kr:디지털화 날짜/시간:
+ku:Dîrok/Demjimêr a Dîjîtalîzekirî:
+kw:Dedh/Termyn Dijitys:
+lt:Skaitmeninimo data/laikas:
+lv:Digitalizācijas datums/laiks:
+mk:Датум/Време на дигитализација:
+ml:ഡിജിറ്റൈസ് ചെയ്ത തീയതി/സമയം:
+mm:ဒစ်ဂျစ်တယ်ပြောင်းသည့် ရက်စွဲ/အချိန်:
+my:ဒစ်ဂျစ်တယ်ပြောင်းသည့် ရက်စွဲ/အချိန်:
+ne:डिजिटलाइज गरिएको मिति/समय:
+nl:Datum/tijd gedigitaliseerd:
+nn:Dato/tid digitalisert:
+no:Dato/tid digitalisert:
+pa:ਤਾਰੀਖ/ਸਮਾਂ ਡਿਜੀਟਲ ਕੀਤਾ:
+pl:Data/czas digitalizacji:
+pt:Data/Hora de Digitalização:
+ro:Dată/Oră digitalizare:
+ru:Дата/время оцифровки:
+sat:ᱰᱤᱡᱤᱴᱟᱭᱤᱡᱰ ᱢᱟᱹᱦᱤᱛ/ᱚᱠᱛᱚ:
+si:ඩිජිටල්කරණ දිනය/වේලාව:
+sk:Dátum/čas digitalizácie:
+sl:Datum/čas digitalizacije:
+sn:Zuva/Nguva Yakadhijitarwa:
+sp-rs:Датум/време дигитализације:
+sq:Data/Ora e Dixhitalizimit:
+sr-rs:Датум/време дигитализације:
+sv:Datum/tid digitaliserad:
+ta:டிஜிட்டல்மயமாக்கப்பட்ட தேதி/நேரம்:
+th:วันที่/เวลาที่แปลงเป็นดิจิทัล:
+tl:Petsa/Oras ng Digitalisasyon:
+tr:Sayısallaştırma Tarihi/Saati:
+tw:數位化日期/時間：
+uk:Дата/час оцифрування:
+uz:Raqamlashtirish sanasi/vaqti:
+vn:Ngày/Giờ số hóa:
+:Date/Time:
+af:Datum/Tyd:
+am:ቀን/ሰዓት:
+ar:التاريخ/الوقت:
+az:Tarix/Vaxt:
+bg:Дата/час:
+bn:তারিখ/সময়:
+br:Deiziad/Eur:
+bs:Datum/vrijeme:
+by:Дата/час:
+ca:Data/hora:
+ca-xv:Data/hora:
+cn:日期/时间：
+co:Data/Ora:
+cy:Dyddiad/Amser:
+cz:Datum/čas:
+de:Datum/Uhrzeit:
+dk:Dato/Tid:
+el:Ημερομηνία/Ώρα:
+es:Fecha/Hora:
+et:Kuupäev/kellaaeg:
+eu:Data/ordua:
+fa:تاریخ/زمان:
+fi:Päivämäärä/aika:
+fo:Dagfesting/Tíð:
+fr:Date/heure :
+fy-nl:Datum/Tiid:
+ga:Dáta/Am:
+gl:Data/Hora:
+he:תאריך/שעה:
+hi:दिनांक/समय:
+hr:Datum/vrijeme:
+hu:Dátum/Idő:
+id:Tanggal/Waktu:
+it:Data/Ora:
+ja:日時:
+jv:Tanggal/Wektu:
+ka:თარიღი/დრო:
+kr:날짜/시간:
+ku:Dîrok/Demjimêr:
+kw:Dedh/Termyn:
+lt:Data/laikas:
+lv:Datums/laiks:
+mk:Датум/Време:
+ml:തീയതി/സമയം:
+mm:ရက်စွဲ/အချိန်:
+my:ရက်စွဲ/အချိန်:
+ne:मिति/समय:
+nl:Datum/tijd:
+nn:Dato/tid:
+no:Dato/tid:
+pa:ਤਾਰੀਖ/ਸਮਾਂ:
+pl:Data/czas:
+pt:Data/Hora:
+ro:Dată/Oră:
+ru:Дата/время:
+sat:ᱢᱟᱹᱦᱤᱛ/ᱚᱠᱛᱚ:
+si:දිනය/වේලාව:
+sk:Dátum/čas:
+sl:Datum/čas:
+sn:Zuva/Nguva:
+sp-rs:Датум/време:
+sq:Data/Ora:
+sr-rs:Датум/време:
+sv:Datum/tid:
+ta:தேதி/நேரம்:
+th:วันที่/เวลา:
+tl:Petsa/Oras:
+tr:Tarih/Saat:
+tw:日期/時間：
+uk:Дата/час:
+uz:Sana/Vaqt:
+vn:Ngày/Giờ:
 :Date:
 af:Datum:
 am:Ամսաթիվ՝
@@ -17301,6 +17666,79 @@ tw:執行程式
 uk:Виконати програму
 uz:Dasturni ishga tushirish
 vn:Thực thi một chương trình
+:Exif Version:
+af:Exif Weergawe:
+am:Exif ስሪት:
+ar:إصدار Exif:
+az:Exif Versiyası:
+bg:Exif версия:
+bn:Exif সংস্করণ:
+br:Stumm Exif:
+bs:Exif verzija:
+by:Версія Exif:
+ca:Versió Exif:
+ca-xv:Versió Exif:
+cn:Exif 版本：
+co:Versione Exif:
+cy:Fersiwn Exif:
+cz:Verze Exif:
+de:Exif-Version:
+dk:Exif-version:
+el:Έκδοση Exif:
+es:Versión Exif:
+et:Exif versioon:
+eu:Exif bertsioa:
+fa:نسخه Exif:
+fi:Exif-versio:
+fo:Exif Útgáva:
+fr:Version Exif :
+fy-nl:Exif-ferzje:
+ga:Leagan Exif:
+gl:Versión Exif:
+he:גרסת Exif:
+hi:Exif संस्करण:
+hr:Exif verzija:
+hu:Exif verzió:
+id:Versi Exif:
+it:Versione Exif:
+ja:Exifバージョン:
+jv:Versi Exif:
+ka:Exif ვერსია:
+kr:Exif 버전:
+ku:Guhertoya Exif:
+kw:Versyon Exif:
+lt:Exif versija:
+lv:Exif versija:
+mk:Exif верзија:
+ml:Exif പതിപ്പ്:
+mm:Exif ဗားရှင်း:
+my:Exif ဗားရှင်း:
+ne:Exif संस्करण:
+nl:Exif-versie:
+nn:Exif-versjon:
+no:Exif-versjon:
+pa:Exif ਵਰਜ਼ਨ:
+pl:Wersja Exif:
+pt:Versão Exif:
+ro:Versiune Exif:
+ru:Версия Exif:
+sat:Exif ᱵᱷᱟᱨᱥᱚᱱ:
+si:Exif අනුවාදය:
+sk:Verzia Exif:
+sl:Različica Exif:
+sn:Shanduro yeExif:
+sp-rs:Exif верзија:
+sq:Versioni Exif:
+sr-rs:Exif верзија:
+sv:Exif-version:
+ta:Exif பதிப்பு:
+th:เวอร์ชัน Exif:
+tl:Bersyon ng Exif:
+tr:Exif Sürümü:
+tw:Exif 版本：
+uk:Версія Exif:
+uz:Exif versiyasi:
+vn:Phiên bản Exif:
 :Exit Application
 af:Sluit Toepassing Af
 am:Ելք ծրագրից
@@ -19199,6 +19637,79 @@ tw:檔案大小:
 uk:Розмір файла:
 uz:Fayl hajmi:
 vn:Kích thước:
+:File Source:
+af:Lêerbron:
+am:የፋይል ምንጭ:
+ar:مصدر الملف:
+az:Fayl Mənbəyi:
+bg:Източник на файла:
+bn:ফাইল উৎস:
+br:Mammenn ar restr:
+bs:Izvor datoteke:
+by:Крыніца файла:
+ca:Origen del fitxer:
+ca-xv:Origen del fitxer:
+cn:文件源：
+co:Surgente di u schedariu:
+cy:Ffynhonnell Ffeil:
+cz:Zdroj souboru:
+de:Dateiquelle:
+dk:Filkilde:
+el:Πηγή Αρχείου:
+es:Origen del Archivo:
+et:Faili allikas:
+eu:Fitxategi iturria:
+fa:منبع فایل:
+fi:Tiedostolähde:
+fo:Fílukella:
+fr:Source du fichier :
+fy-nl:Bestânsboarne:
+ga:Foinse Comhaid:
+gl:Orixe do ficheiro:
+he:מקור קובץ:
+hi:फ़ाइल स्रोत:
+hr:Izvor datoteke:
+hu:Fájl forrása:
+id:Sumber File:
+it:Sorgente file:
+ja:ファイルソース:
+jv:Sumber Berkas:
+ka:ფაილის წყარო:
+kr:파일 소스:
+ku:Çavkaniya Pelî:
+kw:Pennfenten Restren:
+lt:Failo šaltinis:
+lv:Faila avots:
+mk:Извор на датотека:
+ml:ഫയൽ ഉറവിടം:
+mm:ဖိုင်အရင်းအမြစ်:
+my:ဖိုင်အရင်းအမြစ်:
+ne:फाइल स्रोत:
+nl:Bestandsbron:
+nn:Filkjelde:
+no:Filkilde:
+pa:ਫਾਇਲ ਸਰੋਤ:
+pl:Źródło pliku:
+pt:Origem do Arquivo:
+ro:Sursă fișier:
+ru:Источник файла:
+sat:ᱨᱮᱫ ᱥᱨᱚᱛ:
+si:ගොනු ප්‍රභවය:
+sk:Zdroj súboru:
+sl:Vir datoteke:
+sn:Kwakabva Faira:
+sp-rs:Извор датотеке:
+sq:Burimi i Skedarit:
+sr-rs:Извор датотеке:
+sv:Filkälla:
+ta:கோப்பு மூலம்:
+th:แหล่งที่มาของไฟล์:
+tl:Pinagmulan ng File:
+tr:Dosya Kaynağı:
+tw:檔案來源：
+uk:Джерело файлу:
+uz:Fayl manbai:
+vn:Nguồn tập tin:
 :File path not available
 af:Lêerpad nie beskikbaar nie
 am:የፋይል መንገድ አይገኝም
@@ -20732,6 +21243,79 @@ tw:閃光燈：
 uk:Спалах:
 uz:Flesh:
 vn:Đèn Flash:
+:Flashpix Version:
+af:Flashpix Weergawe:
+am:Flashpix ስሪት:
+ar:إصدار Flashpix:
+az:Flashpix Versiyası:
+bg:Flashpix версия:
+bn:Flashpix সংস্করণ:
+br:Stumm Flashpix:
+bs:Flashpix verzija:
+by:Версія Flashpix:
+ca:Versió Flashpix:
+ca-xv:Versió Flashpix:
+cn:Flashpix 版本：
+co:Versione Flashpix:
+cy:Fersiwn Flashpix:
+cz:Verze Flashpix:
+de:Flashpix-Version:
+dk:Flashpix-version:
+el:Έκδοση Flashpix:
+es:Versión Flashpix:
+et:Flashpix versioon:
+eu:Flashpix bertsioa:
+fa:نسخه Flashpix:
+fi:Flashpix-versio:
+fo:Flashpix Útgáva:
+fr:Version Flashpix :
+fy-nl:Flashpix-ferzje:
+ga:Leagan Flashpix:
+gl:Versión Flashpix:
+he:גרסת Flashpix:
+hi:Flashpix संस्करण:
+hr:Flashpix verzija:
+hu:Flashpix verzió:
+id:Versi Flashpix:
+it:Versione Flashpix:
+ja:Flashpixバージョン:
+jv:Versi Flashpix:
+ka:Flashpix ვერსია:
+kr:Flashpix 버전:
+ku:Guhertoya Flashpix:
+kw:Versyon Flashpix:
+lt:Flashpix versija:
+lv:Flashpix versija:
+mk:Flashpix верзија:
+ml:Flashpix പതിപ്പ്:
+mm:Flashpix ဗားရှင်း:
+my:Flashpix ဗားရှင်း:
+ne:Flashpix संस्करण:
+nl:Flashpix-versie:
+nn:Flashpix-versjon:
+no:Flashpix-versjon:
+pa:Flashpix ਵਰਜ਼ਨ:
+pl:Wersja Flashpix:
+pt:Versão Flashpix:
+ro:Versiune Flashpix:
+ru:Версия Flashpix:
+sat:Flashpix ᱵᱷᱟᱨᱥᱚᱱ:
+si:Flashpix අනුවාදය:
+sk:Verzia Flashpix:
+sl:Različica Flashpix:
+sn:Shanduro yeFlashpix:
+sp-rs:Flashpix верзија:
+sq:Versioni Flashpix:
+sr-rs:Flashpix верзија:
+sv:Flashpix-version:
+ta:Flashpix பதிப்பு:
+th:เวอร์ชัน Flashpix:
+tl:Bersyon ng Flashpix:
+tr:Flashpix Sürümü:
+tw:Flashpix 版本：
+uk:Версія Flashpix:
+uz:Flashpix versiyasi:
+vn:Phiên bản Flashpix:
 :Focal Length (35mm):
 af:Brandpuntafstand (35mm):
 am:የትኩረት ርዝመት (35ሚሜ):
@@ -23871,6 +24455,79 @@ tw:亮
 uk:Світла
 uz:Yorug‘
 vn:Sáng
+:Light Source:
+af:Ligbron:
+am:የብርሃን ምንጭ:
+ar:مصدر الضوء:
+az:İşıq Mənbəyi:
+bg:Източник на светлина:
+bn:আলোর উৎস:
+br:Mammenn ar gouloù:
+bs:Izvor svjetlosti:
+by:Крыніца святла:
+ca:Font de llum:
+ca-xv:Font de llum:
+cn:光源：
+co:Surgente di luce:
+cy:Ffynhonnell Golau:
+cz:Světelný zdroj:
+de:Lichtquelle:
+dk:Lyskilde:
+el:Πηγή Φωτός:
+es:Fuente de Luz:
+et:Valgusallikas:
+eu:Argi iturria:
+fa:منبع نور:
+fi:Valonlähde:
+fo:Ljóskella:
+fr:Source de lumière :
+fy-nl:Ljochboarne:
+ga:Foinse Solais:
+gl:Fonte de luz:
+he:מקור אור:
+hi:प्रकाश स्रोत:
+hr:Izvor svjetla:
+hu:Fényforrás:
+id:Sumber Cahaya:
+it:Sorgente luminosa:
+ja:光源:
+jv:Sumber Cahya:
+ka:სინათლის წყარო:
+kr:광원:
+ku:Çavkaniya Ronahiyê:
+kw:Pennfenten Golow:
+lt:Šviesos šaltinis:
+lv:Gaismas avots:
+mk:Извор на светлина:
+ml:പ്രകാശ ഉറവിടം:
+mm:အလင်းအရင်းအမြစ်:
+my:အလင်းအရင်းအမြစ်:
+ne:प्रकाश स्रोत:
+nl:Lichtbron:
+nn:Lyskjelde:
+no:Lyskilde:
+pa:ਰੌਸ਼ਨੀ ਸਰੋਤ:
+pl:Źródło światła:
+pt:Fonte de Luz:
+ro:Sursă de lumină:
+ru:Источник света:
+sat:ᱢᱟᱨᱥᱟᱞ ᱥᱨᱚᱛ:
+si:ආලෝක ප්‍රභවය:
+sk:Zdroj svetla:
+sl:Vir svetlobe:
+sn:Kwakabva Chiedza:
+sp-rs:Извор светлости:
+sq:Burimi i Dritës:
+sr-rs:Извор светлости:
+sv:Ljuskälla:
+ta:ஒளி மூலம்:
+th:แหล่งกำเนิดแสง:
+tl:Pinagmumulan ng Liwanag:
+tr:Işık Kaynağı:
+tw:光源：
+uk:Джерело світла:
+uz:Yorug'lik manbai:
+vn:Nguồn sáng:
 :Line
 af:Lyn
 am:Գիծ
@@ -24455,6 +25112,79 @@ tw:線上說明
 uk:Посібник на веб-сайті
 uz:Veb-saytda qo‘llanma
 vn:Hướng dẫn sử dụng trên trang web
+:Max Aperture:
+af:Maks Diafragma:
+am:ከፍተኛ አፐርቸር:
+ar:أقصى فتحة عدسة:
+az:Maksimal Diafraqma:
+bg:Максимална бленда:
+bn:সর্বোচ্চ অ্যাপারচার:
+br:Digor brasañ:
+bs:Maksimalna blenda:
+by:Макс. дыяфрагма:
+ca:Obertura màxima:
+ca-xv:Obertura màxima:
+cn:最大光圈：
+co:Apertura massima:
+cy:Agorfa Uchaf:
+cz:Maximální clona:
+de:Maximale Blende:
+dk:Maks. blænde:
+el:Μέγιστο Διάφραγμα:
+es:Apertura Máxima:
+et:Maksimaalne ava:
+eu:Gehienezko irekidura:
+fa:حداکثر دیافراگم:
+fi:Suurin aukko:
+fo:Hægsta Blenda:
+fr:Ouverture maximale :
+fy-nl:Maks Iepening:
+ga:Cró Uasta:
+gl:Apertura máxima:
+he:צמצם מקסימלי:
+hi:अधिकतम एपर्चर:
+hr:Maks. blenda:
+hu:Max. rekesznyílás:
+id:Apertur Maksimal:
+it:Apertura massima:
+ja:最大絞り:
+jv:Aperture Maksimal:
+ka:მაქსიმალური დიაფრაგმა:
+kr:최대 조리개:
+ku:Vekirina Herî Zêde:
+kw:Apertur Moyha:
+lt:Didžiausia diafragma:
+lv:Maksimālā apertūra:
+mk:Макс. отвор:
+ml:പരമാവധി അപ്പർച്ചർ:
+mm:အများဆုံး အပေါက်:
+my:အများဆုံး အပေါက်:
+ne:अधिकतम एपर्चर:
+nl:Max. diafragma:
+nn:Maks blendaropning:
+no:Maks blenderåpning:
+pa:ਵੱਧ ਤੋਂ ਵੱਧ ਅਪਰਚਰ:
+pl:Maks. przysłona:
+pt:Abertura Máxima:
+ro:Diafragmă maximă:
+ru:Макс. диафрагма:
+sat:ᱢᱮᱠᱥ ᱮᱯᱟᱨᱪᱟᱨ:
+si:උපරිම විවරය:
+sk:Maximálna clona:
+sl:Največja zaslonka:
+sn:Aperture Yakakwirira:
+sp-rs:Макс. отвор бленде:
+sq:Hapja Maksimale:
+sr-rs:Максимална блeнда:
+sv:Max bländare:
+ta:அதிகபட்ச துளை:
+th:รูรับแสงสูงสุด:
+tl:Pinakamataas na Aperture:
+tr:Maksimum Diyafram:
+tw:最大光圈：
+uk:Макс. діафрагма:
+uz:Maksimal diafragma:
+vn:Khẩu độ tối đa:
 :Menu
 af:Kieslys
 am:ምናሌ
@@ -24462,13 +25192,13 @@ ar:القائمة
 az:Menyu
 bg:Меню
 bn:মেনু
-br:Lañser
+br:Menu
 bs:Meni
 by:Меню
 ca:Menú
 ca-xv:Menú
 cn:菜单
-co:Menu
+co:Listinu
 cy:Dewislen
 cz:Nabídka
 de:Menü
@@ -30076,6 +30806,152 @@ tw:釘選所選取的文件
 uk:Закріпити виділений документ
 uz:Tanlangan hujjatni mahkamlash
 vn:Ghim tài liệu đã chọn
+:Pixel X Dimension:
+af:Pixel X Dimensie:
+am:ፒክሰል X መጠን:
+ar:البعد X للبكسل:
+az:Piksel X Ölçüsü:
+bg:X измерение в пиксели:
+bn:পিক্সেল X মাত্রা:
+br:Ment ar pikseloù X:
+bs:X dimenzija piksela:
+by:Памер X у пікселях:
+ca:Dimensió X en píxels:
+ca-xv:Dimensió X en píxels:
+cn:像素 X 尺寸：
+co:Dimensione X di u pixel:
+cy:Dimensiwn Picsel X:
+cz:Rozměr X v pixelech:
+de:Pixel X-Dimension:
+dk:Pixel X-dimension:
+el:Διάσταση Pixel X:
+es:Dimensión X en Píxeles:
+et:Piksel X mõõde:
+eu:Pixel X dimentsioa:
+fa:بعد X پیکسل:
+fi:Pikselien X-ulottuvuus:
+fo:Pixel X Dimensjón:
+fr:Dimension X en pixels :
+fy-nl:Pixel X-dimensje:
+ga:Toise X Picteilín:
+gl:Dimensión X en píxeles:
+he:מימד X פיקסלים:
+hi:पिक्सेल X आयाम:
+hr:Dimenzija piksela X:
+hu:Pixel X méret:
+id:Dimensi Piksel X:
+it:Dimensione X pixel:
+ja:画像幅:
+jv:Dimensi X Piksel:
+ka:პიქსელის X განზომილება:
+kr:픽셀 X 크기:
+ku:Dirêjahiya Pîkselê X:
+kw:Dimensyon X Piksel:
+lt:Pikselio X matmuo:
+lv:Pikseļu X izmērs:
+mk:Димензија X во пиксели:
+ml:പിക്സൽ X അളവ്:
+mm:ပစ်ဆယ် X အတိုင်းအတာ:
+my:ပික်ဆယ် X အတိုင်းအတာ:
+ne:पिक्सेल X आयाम:
+nl:Pixel X-dimensie:
+nn:Piksel X-dimensjon:
+no:Pixel X-dimensjon:
+pa:ਪਿਕਸਲ X ਮਾਪ:
+pl:Wymiar X w pikselach:
+pt:Dimensão X em Pixels:
+ro:Dimensiune X pixeli:
+ru:Размер X в пикселях:
+sat:ᱯᱤᱠᱥᱮᱞ X ᱰᱟᱭᱢᱮᱱᱥᱚᱱ:
+si:පික්සල් X මානය:
+sk:Rozmer X v pixeloch:
+sl:Dimenzija X v pikslih:
+sn:Hurefu hwePixel X:
+sp-rs:X димензија пиксела:
+sq:Dimensioni X i Pikselit:
+sr-rs:X димензија пиксела:
+sv:Pixel X-dimension:
+ta:பிக்செல் X பரிமாணம்:
+th:มิติพิกเซล X:
+tl:Dimensyon ng Pixel X:
+tr:Piksel X Boyutu:
+tw:像素 X 尺寸：
+uk:Розмір X у пікселях:
+uz:Piksel X o'lchami:
+vn:Kích thước Pixel X:
+:Pixel Y Dimension:
+af:Pixel Y Dimensie:
+am:ፒክሰል Y መጠን:
+ar:البعد Y للبكسل:
+az:Piksel Y Ölçüsü:
+bg:Y измерение в пиксели:
+bn:পিক্সেল Y মাত্রা:
+br:Ment ar pikseloù Y:
+bs:Y dimenzija piksela:
+by:Памер Y у пікселях:
+ca:Dimensió Y en píxels:
+ca-xv:Dimensió Y en píxels:
+cn:像素 Y 尺寸：
+co:Dimensione Y di u pixel:
+cy:Dimensiwn Picsel Y:
+cz:Rozměr Y v pixelech:
+de:Pixel Y-Dimension:
+dk:Pixel Y-dimension:
+el:Διάσταση Pixel Y:
+es:Dimensión Y en Píxeles:
+et:Piksel Y mõõde:
+eu:Pixel Y dimentsioa:
+fa:بعد Y پیکسل:
+fi:Pikselien Y-ulottuvuus:
+fo:Pixel Y Dimensjón:
+fr:Dimension Y en pixels :
+fy-nl:Pixel Y-dimensje:
+ga:Toise Y Picteilín:
+gl:Dimensión Y en píxeles:
+he:מימד Y פיקסלים:
+hi:पिक्सेल Y आयाम:
+hr:Dimenzija piksela Y:
+hu:Pixel Y méret:
+id:Dimensi Piksel Y:
+it:Dimensione Y pixel:
+ja:画像高さ:
+jv:Dimensi Y Piksel:
+ka:პიქსელის Y განზომილება:
+kr:픽셀 Y 크기:
+ku:Dirêjahiya Pîkselê Y:
+kw:Dimensyon Y Piksel:
+lt:Pikselio Y matmuo:
+lv:Pikseļu Y izmērs:
+mk:Димензија Y во пиксели:
+ml:പിക്സൽ Y അളവ്:
+mm:ပစ်ဆယ် Y အတိုင်းအတာ:
+my:ပික်ဆယ် Y အတိုင်းအတာ:
+ne:पिक्सेल Y आयाम:
+nl:Pixel Y-dimensie:
+nn:Piksel Y-dimensjon:
+no:Pixel Y-dimensjon:
+pa:ਪਿਕਸਲ Y ਮਾਪ:
+pl:Wymiar Y w pikselach:
+pt:Dimensão Y em Pixels:
+ro:Dimensiune Y pixeli:
+ru:Размер Y в пикселях:
+sat:ᱯᱤᱠᱥᱮᱞ Y ᱰᱟᱭᱢᱮᱱᱥᱚᱱ:
+si:පික්සල් Y මානය:
+sk:Rozmer Y v pixeloch:
+sl:Dimenzija Y v pikslih:
+sn:Hurefu hwePixel Y:
+sp-rs:Y димензија пиксела:
+sq:Dimensioni Y i Pikselit:
+sr-rs:Y димензија пиксела:
+sv:Pixel Y-dimension:
+ta:பிக்செல் Y பரிமாணம்:
+th:มิติพิกเซล Y:
+tl:Dimensyon ng Pixel Y:
+tr:Piksel Y Boyutu:
+tw:像素 Y 尺寸：
+uk:Розмір Y у пікселях:
+uz:Piksel Y o'lchami:
+vn:Kích thước Pixel Y:
 :Please close %s to proceed!
 af:Sluit asseblief %s om voort te gaan!
 am:Շարունակելուց առաջ փակեք %s-ը:
@@ -30813,13 +31689,13 @@ ar:اضغط على مجموعة مفاتيح:
 az:Klaviş kombinasiyasını basın:
 bg:Натиснете комбинация от клавиши:
 bn:একটি কী সমন্বয় চাপুন:
-br:Pouezit war ur c'hevrenad stokelloù:
+br:Pressionar uma combinação de teclas:
 bs:Pritisnite kombinaciju tipki:
 by:Націсніце камбінацыю клавіш:
 ca:Premeu una combinació de tecles:
 ca-xv:Prem una combinació de tecles:
-cn:请按下组合键：
-co:Appughjate una cumminazione di tasti:
+cn:按组合键
+co:Appughjà nant’à un associu di tasti :
 cy:Pwyswch gyfuniad o allweddi:
 cz:Stiskněte kombinaci kláves:
 de:Drücken Sie eine Tastenkombination:
@@ -32492,12 +33368,12 @@ ar:إزالة
 az:Sil
 bg:Премахни
 bn:সরান
-br:Dilemel
+br:Remover
 bs:Ukloni
 by:Выдаліць
 ca:Elimina
 ca-xv:Elimina
-cn:移除
+cn:删除
 co:Caccià
 cy:Tynnu
 cz:Odebrat
@@ -33142,6 +34018,79 @@ tw:調整圖片大小
 uk:Змінити розмір зображення
 uz:Rasmni o'lchamini o'zgartirish
 vn:Thay đổi kích thước hình ảnh
+:Resolution Unit:
+af:Resolusie Eenheid:
+am:የሪዞሊውሽን አሃድ:
+ar:وحدة الدقة:
+az:Ayırdetmə Vahidi:
+bg:Единица за разделителна способност:
+bn:রেজোলিউশন একক:
+br:Unanenn ar spisterded:
+bs:Jedinica rezolucije:
+by:Адзінка разрознення:
+ca:Unitat de resolució:
+ca-xv:Unitat de resolució:
+cn:分辨率单位：
+co:Unità di risuluzione:
+cy:Uned Cydraniad:
+cz:Jednotka rozlišení:
+de:Auflösungseinheit:
+dk:Opløsningsenhed:
+el:Μονάδα Ανάλυσης:
+es:Unidad de Resolución:
+et:Eraldusvõime ühik:
+eu:Bereizmen unitatea:
+fa:واحد وضوح:
+fi:Tarkkuusyksikkö:
+fo:Upploysingareind:
+fr:Unité de résolution :
+fy-nl:Resolúsje-ienheid:
+ga:Aonad Taifeach:
+gl:Unidade de resolución:
+he:יחידת רזולוציה:
+hi:रिज़ॉल्यूशन इकाई:
+hr:Jedinica razlučivosti:
+hu:Felbontás mértékegysége:
+id:Unit Resolusi:
+it:Unità di risoluzione:
+ja:解像度単位:
+jv:Unit Resolusi:
+ka:გარჩევადობის ერთეული:
+kr:해상도 단위:
+ku:Yekeya Xuyakirinê:
+kw:Unses Klerhe:
+lt:Skiriamosios gebos vienetas:
+lv:Izšķirtspējas vienība:
+mk:Единица за резолуција:
+ml:റെസല്യൂഷൻ യൂണിറ്റ്:
+mm:ကြည်လင်ပြတ်သားမှု ယူနစ်:
+my:ကြည်လင်ပြတ်သားမှု ယူနစ်:
+ne:रिजोलुसन एकाइ:
+nl:Resolutie-eenheid:
+nn:Oppløysingseining:
+no:Oppløsningsenhet:
+pa:ਰੈਜ਼ੋਲੂਸ਼ਨ ਇਕਾਈ:
+pl:Jednostka rozdzielczości:
+pt:Unidade de Resolução:
+ro:Unitate rezoluție:
+ru:Единица разрешения:
+sat:ᱨᱮᱡᱚᱞᱩᱥᱚᱱ ᱤᱭᱩᱱᱤᱴ:
+si:විභේදන ඒකකය:
+sk:Jednotka rozlíšenia:
+sl:Enota ločljivosti:
+sn:Chikamu cheResolution:
+sp-rs:Јединица резолуције:
+sq:Njësia e Rezolucionit:
+sr-rs:Јединица резолуције:
+sv:Upplösningsenhet:
+ta:தெளிவுத்திறன் அலகு:
+th:หน่วยความละเอียด:
+tl:Yunit ng Resolusyon:
+tr:Çözünürlük Birimi:
+tw:解析度單位：
+uk:Одиниця роздільності:
+uz:Ruxsat birligi:
+vn:Đơn vị độ phân giải:
 :Restore
 af:Herstel
 am:ወደነበረበት መልስ
@@ -34025,13 +34974,13 @@ ar:حفظ المرفق
 az:Əlavəni Saxla
 bg:Запази прикачен файл
 bn:সংযুক্তি সংরক্ষণ করুন
-br:Enrollañ ar c'henstagadur
+br:Salvar Anexo
 bs:Sačuvaj prilog
 by:Захаваць укладанне
 ca:Desa l'adjunt
 ca-xv:Desa l'adjunt
 cn:保存附件
-co:Salvà l'Allegatu
+co:Arregistrà a pezza ghjunta
 cy:Cadw Atodiad
 cz:Uložit přílohu
 de:Anhang speichern
@@ -35040,6 +35989,79 @@ tw:儲存 '%s' 失敗，因為: '%s'
 uk:Не вдалося зберегти '%s' з допомогою: '%s'
 uz:'%s' ni saqlash muvaffaqiyatsiz tugadi: '%s'
 vn:Đang lưu '%s' lỗi với: '%s'
+:Scene Type:
+af:Toneeltipe:
+am:የትእይንት አይነት:
+ar:نوع المشهد:
+az:Səhnə Tipi:
+bg:Тип сцена:
+bn:দৃশ্যের ধরন:
+br:Seurt ar gladenn:
+bs:Tip scene:
+by:Тып сцэны:
+ca:Tipus d'escena:
+ca-xv:Tipus d'escena:
+cn:场景类型：
+co:Tipu di scena:
+cy:Math o Olygfa:
+cz:Typ scény:
+de:Szenentyp:
+dk:Scenetype:
+el:Τύπος Σκηνής:
+es:Tipo de Escena:
+et:Stseeni tüüp:
+eu:Eszena mota:
+fa:نوع صحنه:
+fi:Kohdetyyppi:
+fo:Senaríuslag:
+fr:Type de scène :
+fy-nl:Sênetype:
+ga:Cineál Radhairc:
+gl:Tipo de escena:
+he:סוג סצנה:
+hi:दृश्य प्रकार:
+hr:Vrsta scene:
+hu:Jelenet típusa:
+id:Jenis Adegan:
+it:Tipo di scena:
+ja:シーンタイプ:
+jv:Jinis Adegan:
+ka:სცენის ტიპი:
+kr:장면 유형:
+ku:Cureya Dîmenê:
+kw:Eghen Sen:
+lt:Scenos tipas:
+lv:Sižeta tips:
+mk:Тип на сцена:
+ml:ദൃശ്യ തരം:
+mm:မြင်ကွင်းအမျိုးအစား:
+my:မြင်ကွင်းအမျိုးအစား:
+ne:दृश्य प्रकार:
+nl:Scènetype:
+nn:Scenetype:
+no:Scenetype:
+pa:ਦ੍ਰਿਸ਼ ਕਿਸਮ:
+pl:Typ sceny:
+pt:Tipo de Cena:
+ro:Tip scenă:
+ru:Тип сцены:
+sat:ᱫᱨᱤᱥ ᱞᱮᱠᱟᱱ:
+si:දර්ශන වර්ගය:
+sk:Typ scény:
+sl:Vrsta prizora:
+sn:Rudzi rweManzwiro:
+sp-rs:Тип сцене:
+sq:Lloji i Skenës:
+sr-rs:Тип сцене:
+sv:Scentyp:
+ta:காட்சி வகை:
+th:ประเภทฉาก:
+tl:Uri ng Eksena:
+tr:Sahne Türü:
+tw:場景類型：
+uk:Тип сцени:
+uz:Sahna turi:
+vn:Loại cảnh:
 :Scroll Down
 af:Rol Af
 am:Գլորել ներքև
@@ -37091,7 +38113,7 @@ ar:تعيين
 az:Təyin et
 bg:Задай
 bn:সেট করুন
-br:Arventañ
+br:Configurar
 bs:Postavi
 by:Усталяваць
 ca:Estableix
@@ -37164,13 +38186,13 @@ ar:تعيين اختصار لقطة الشاشة
 az:Ekran Görüntüsü Qısa Yolunu Təyin Et
 bg:Задай клавишна комбинация за екранна снимка
 bn:স্ক্রিনশট হটকি সেট করুন
-br:Arventañ stokell herrek an tapadenn-skramm
+br:Definir a Tecla de Atalho das Screenshots
 bs:Postavi prečicu za snimak ekrana
 by:Усталяваць гарачую клавішу здымка экрана
 ca:Estableix la drecera de captura de pantalla
 ca-xv:Estableix la drecera de captura de pantalla
-cn:设置截图快捷键
-co:Definisce a Scorciatoia di Cattura di Schermu
+cn:设置截屏快捷键
+co:Definisce un accurtatoghju di tastu per a cattura di screnu
 cy:Gosod Bysell Brys Sgrinlun
 cz:Nastavit klávesovou zkratku pro snímek obrazovky
 de:Screenshot-Hotkey festlegen
@@ -37209,7 +38231,7 @@ nl:Sneltoets voor schermafbeelding instellen
 nn:Angi snøggtast for skjermbilete
 no:Angi hurtigtast for skjermbilde
 pa:ਸਕਰੀਨਸ਼ਾਟ ਹੌਟਕੀ ਸੈੱਟ ਕਰੋ
-pl:Ustaw skrót klawiszowy zrzutu ekranu
+pl:Ustaw klawisz skrótu zrzutu ekranu
 pt:Definir Atalho de Captura de Ecrã
 ro:Setează tasta rapidă pentru captură de ecran
 ru:Установить горячую клавишу для скриншота
@@ -39201,6 +40223,79 @@ tw:智慧切換下一個分頁
 uk:Розумна наступна вкладка
 uz:Aqlli keyingi yorliq
 vn:Tab tiếp theo thông minh
+:Software:
+af:Sagteware:
+am:ሶፍትዌር:
+ar:البرنامج:
+az:Proqram Təminatı:
+bg:Софтуер:
+bn:সফটওয়্যার:
+br:Meziant:
+bs:Softver:
+by:Праграмнае забеспячэнне:
+ca:Programari:
+ca-xv:Programari:
+cn:软件：
+co:Prugramma:
+cy:Meddalwedd:
+cz:Software:
+de:Software:
+dk:Software:
+el:Λογισμικό:
+es:Software:
+et:Tarkvara:
+eu:Softwarea:
+fa:نرم‌افزار:
+fi:Ohjelmisto:
+fo:Ritbúnaður:
+fr:Logiciel :
+fy-nl:Software:
+ga:Bogearraí:
+gl:Software:
+he:תוכנה:
+hi:सॉफ़्टवेयर:
+hr:Softver:
+hu:Szoftver:
+id:Perangkat Lunak:
+it:Software:
+ja:ソフトウェア:
+jv:Piranti Lunak:
+ka:პროგრამული უზრუნველყოფა:
+kr:소프트웨어:
+ku:Nermalav:
+kw:Medhelweyth:
+lt:Programinė įranga:
+lv:Programmatūra:
+mk:Софтвер:
+ml:സോഫ്റ്റ്‌വെയർ:
+mm:ဆော့ဖ်ဝဲ:
+my:ဆော့ဖ်ဝဲ:
+ne:सफ्टवेयर:
+nl:Software:
+nn:Programvare:
+no:Programvare:
+pa:ਸਾਫਟਵੇਅਰ:
+pl:Oprogramowanie:
+pt:Software:
+ro:Software:
+ru:ПО:
+sat:ᱥᱚᱯᱷᱴᱣᱮᱨ:
+si:මෘදුකාංග:
+sk:Softvér:
+sl:Programska oprema:
+sn:Software:
+sp-rs:Софтвер:
+sq:Softuer:
+sr-rs:Софтвер:
+sv:Programvara:
+ta:மென்பொருள்:
+th:ซอฟต์แวร์:
+tl:Software:
+tr:Yazılım:
+tw:軟體：
+uk:Програмне забезпечення:
+uz:Dasturiy ta'minot:
+vn:Phần mềm:
 :Sorry, that shouldn't have happened!\n\nPlease press 'Cancel', if you want to help us fix the cause of this crash.
 af:Jammer, dit moes nie gebeur het nie!\n\nDruk asseblief 'Kanselleer', as jy ons wil help om die oorsaak van hierdie fout reg te maak.
 am:Կներեք, սա չպետք է տեղի ունենար։\n\nՍեղմեք 'Չեղարկել'՝եթե ցանկանում եք օգնել մեզ վերացնելու այս սխալը։
@@ -43873,6 +44968,79 @@ tw:使用分頁(&T)
 uk:Використовувати вкладки
 uz:&Ilovalarni qo'llash
 vn:Dùng &thẻ
+:User Comment:
+af:Gebruikerskommentaar:
+am:የተጠቃሚ አስተያየት:
+ar:تعليق المستخدم:
+az:İstifadəçi Şərhi:
+bg:Потребителски коментар:
+bn:ব্যবহারকারীর মন্তব্য:
+br:Evezhiadenn an implijer:
+bs:Korisnički komentar:
+by:Каментар карыстальніка:
+ca:Comentari d'usuari:
+ca-xv:Comentari d'usuari:
+cn:用户注释：
+co:Cummentu di l'utilizatore:
+cy:Sylw Defnyddiwr:
+cz:Komentář uživatele:
+de:Benutzerkommentar:
+dk:Brugerkommentar:
+el:Σχόλιο Χρήστη:
+es:Comentario de Usuario:
+et:Kasutaja kommentaar:
+eu:Erabiltzaile iruzkina:
+fa:نظر کاربر:
+fi:Käyttäjän kommentti:
+fo:Brúkaraviðmerking:
+fr:Commentaire utilisateur :
+fy-nl:Brûkersopmerkingen:
+ga:Nóta Úsáideora:
+gl:Comentario do usuario:
+he:הערת משתמש:
+hi:उपयोगकर्ता टिप्पणी:
+hr:Komentar korisnika:
+hu:Felhasználói megjegyzés:
+id:Komentar Pengguna:
+it:Commento utente:
+ja:ユーザーコメント:
+jv:Komentar Pangguna:
+ka:მომხმარებლის კომენტარი:
+kr:사용자 코멘트:
+ku:Şîroveya Bikarhêner:
+kw:Kampolla Devnydhyer:
+lt:Naudotojo komentaras:
+lv:Lietotāja komentārs:
+mk:Кориснички коментар:
+ml:ഉപയോക്തൃ അഭിപ്രായം:
+mm:အသုံးပြုသူမှတ်ချက်:
+my:အသုံးပြုသူမှတ်ချက်:
+ne:प्रयोगकर्ता टिप्पणी:
+nl:Gebruikersopmerking:
+nn:Brukarkommentar:
+no:Brukerkommentar:
+pa:ਯੂਜ਼ਰ ਟਿੱਪਣੀ:
+pl:Komentarz użytkownika:
+pt:Comentário do Usuário:
+ro:Comentariu utilizator:
+ru:Комментарий пользователя:
+sat:ᱵᱮᱵᱷᱟᱨᱤᱭᱟᱹ ᱴᱤᱯᱱᱤ:
+si:පරිශීලක අදහස:
+sk:Používateľský komentár:
+sl:Uporabniški komentar:
+sn:Chirevo cheMuridzi:
+sp-rs:Кориснички коментар:
+sq:Komenti i Përdoruesit:
+sr-rs:Кориснички коментар:
+sv:Användarkommentar:
+ta:பயனர் கருத்து:
+th:ความคิดเห็นผู้ใช้:
+tl:Komento ng Gumagamit:
+tr:Kullanıcı Yorumu:
+tw:使用者註解：
+uk:Коментар користувача:
+uz:Foydalanuvchi izohi:
+vn:Nhận xét người dùng:
 :View
 af:Vertoon
 am:Տեսք
@@ -44384,6 +45552,79 @@ tw:XPS 文件
 uk:Документи XPS
 uz:XPS hujjatlari
 vn:Tập tin XPS
+:YCbCr Positioning:
+af:YCbCr Posisionering:
+am:YCbCr አቀማመጥ:
+ar:موضع YCbCr:
+az:YCbCr Mövqeləşdirmə:
+bg:YCbCr позициониране:
+bn:YCbCr অবস্থান:
+br:Lec'hiadur YCbCr:
+bs:YCbCr pozicioniranje:
+by:Пазіцыянаванне YCbCr:
+ca:Posicionament YCbCr:
+ca-xv:Posicionament YCbCr:
+cn:YCbCr 定位：
+co:Pusiziunamentu YCbCr:
+cy:Safle YCbCr:
+cz:Umístění YCbCr:
+de:YCbCr-Positionierung:
+dk:YCbCr-positionering:
+el:Τοποθέτηση YCbCr:
+es:Posicionamiento YCbCr:
+et:YCbCr paigutus:
+eu:YCbCr kokapena:
+fa:موقعیت YCbCr:
+fi:YCbCr-sijoittelu:
+fo:YCbCr Plasering:
+fr:Positionnement YCbCr :
+fy-nl:YCbCr-posisjonearring:
+ga:Ionadú YCbCr:
+gl:Posicionamento YCbCr:
+he:מיקום YCbCr:
+hi:YCbCr स्थिति:
+hr:YCbCr pozicioniranje:
+hu:YCbCr pozicionálás:
+id:Posisi YCbCr:
+it:Posizionamento YCbCr:
+ja:YCbCr位置:
+jv:Posisi YCbCr:
+ka:YCbCr პოზიციონირება:
+kr:YCbCr 위치:
+ku:Cîbicîkirina YCbCr:
+kw:Leghva YCbCr:
+lt:YCbCr pozicionavimas:
+lv:YCbCr pozicionēšana:
+mk:YCbCr позиционирање:
+ml:YCbCr സ്ഥാനനിർണ്ണയം:
+mm:YCbCr နေရာချထားမှု:
+my:YCbCr နေရာချထားမှု:
+ne:YCbCr स्थिति:
+nl:YCbCr-positionering:
+nn:YCbCr-posisjonering:
+no:YCbCr-posisjonering:
+pa:YCbCr ਸਥਿਤੀ:
+pl:Pozycjonowanie YCbCr:
+pt:Posicionamento YCbCr:
+ro:Poziționare YCbCr:
+ru:Позиционирование YCbCr:
+sat:YCbCr ᱡᱟᱜᱟᱭᱤᱡ:
+si:YCbCr ස්ථානගතකිරීම:
+sk:Umiestnenie YCbCr:
+sl:Pozicioniranje YCbCr:
+sn:Kuisa kweYCbCr:
+sp-rs:YCbCr позиционирање:
+sq:Pozicionimi YCbCr:
+sr-rs:YCbCr позиционирање:
+sv:YCbCr-positionering:
+ta:YCbCr இடமாற்றம்:
+th:ตำแหน่ง YCbCr:
+tl:Posisyon ng YCbCr:
+tr:YCbCr Konumlandırma:
+tw:YCbCr 定位：
+uk:Позиціонування YCbCr:
+uz:YCbCr joylashuvi:
+vn:Vị trí YCbCr:
 :Yes
 af:Ja
 am:Այո
