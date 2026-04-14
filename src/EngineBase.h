@@ -440,6 +440,8 @@ class EngineBase {
     // proerties in this order and potentially add more
     // if keys are empty, we put them in order we want
     virtual void GetProperties(StrVec& keyValOut);
+    virtual void GetImageProperties(int pageNo, StrVec& keyValOut);
+    bool IsImageEngine() const;
 
     // TODO: needs a more general interface
     // whether it is allowed to print the current document

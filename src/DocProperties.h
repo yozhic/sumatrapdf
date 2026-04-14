@@ -51,6 +51,7 @@ extern const char* kPropPixelXDimension;
 extern const char* kPropPixelYDimension;
 extern const char* kPropFileSource;
 extern const char* kPropSceneType;
+extern const char* kPropImageFileSize;
 
 extern const char* gAllProps[];
 

@@ -113,11 +113,13 @@ class EngineImages : public EngineBase {
 
     virtual Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) = 0;
     virtual RectF LoadMediabox(int pageNo) = 0;
+    virtual ByteSlice GetRawImageData(int pageNo) = 0;
 
     ImagePage* GetPage(int pageNo, bool tryOnly = false);
     void DropPage(ImagePage* page, bool forceRemove);
 
     RectF PageContentBox(int pageNo, RenderTarget) override;
+    void GetImageProperties(int pageNo, StrVec& keyValOut) override;
 };
 
 EngineImages::EngineImages() {
@@ -527,6 +529,7 @@ class EngineImage : public EngineImages {
 
     TempStr GetPropertyTemp(const char* name) override;
     void GetProperties(StrVec& keyValOut) override;
+    void GetImageProperties(int pageNo, StrVec& keyValOut) override;
 
     static EngineBase* CreateFromFile(const char* fileName);
     static EngineBase* CreateFromStream(IStream* stream);
@@ -540,6 +543,7 @@ class EngineImage : public EngineImages {
 
     Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) override;
     RectF LoadMediabox(int pageNo) override;
+    ByteSlice GetRawImageData(int pageNo) override;
 };
 
 EngineImage::EngineImage() {
@@ -1177,17 +1181,34 @@ static void GetBitmapExifProperties(Bitmap* bmp, StrVec& keyValOut) {
     }
 }
 
-void EngineImage::GetProperties(StrVec& keyValOut) {
-    EngineBase::GetProperties(keyValOut);
-    // load with GDI+ to preserve EXIF (BitmapFromData uses WIC which strips it)
-    Bitmap* bmp = BitmapWithExifFromFile(FilePath());
+// decode image data with GDI+ (preserving EXIF), extract properties, add file size
+static void GetExifPropertiesFromData(const ByteSlice& data, StrVec& keyValOut) {
+    if (data.empty()) {
+        return;
+    }
+    TempStr sizeStr = str::FormatTemp("%d", (int)data.size());
+    AddProp(keyValOut, kPropImageFileSize, sizeStr);
+    Bitmap* bmp = BitmapWithExifFromData(data);
     if (bmp) {
         GetBitmapExifProperties(bmp, keyValOut);
         delete bmp;
-    } else {
-        // fallback to the display bitmap (won't have EXIF but has dimensions/DPI)
-        GetBitmapExifProperties(image, keyValOut);
     }
+}
+
+void EngineImage::GetProperties(StrVec& keyValOut) {
+    EngineBase::GetProperties(keyValOut);
+}
+
+void EngineImages::GetImageProperties(int pageNo, StrVec& keyValOut) {
+    ByteSlice data = GetRawImageData(pageNo);
+    GetExifPropertiesFromData(data, keyValOut);
+    data.Free();
+}
+
+void EngineImage::GetImageProperties(int pageNo, StrVec& keyValOut) {
+    ByteSlice data = file::ReadFile(FilePath());
+    GetExifPropertiesFromData(data, keyValOut);
+    data.Free();
 }
 
 Bitmap* EngineImage::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
@@ -1215,6 +1236,10 @@ Bitmap* EngineImage::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
     }
     deleteAfterUse = true;
     return frame;
+}
+
+ByteSlice EngineImage::GetRawImageData(int) {
+    return file::ReadFile(FilePath());
 }
 
 RectF EngineImage::LoadMediabox(int pageNo) {
@@ -1331,6 +1356,7 @@ class EngineImageDir : public EngineImages {
 
     Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) override;
     RectF LoadMediabox(int pageNo) override;
+    ByteSlice GetRawImageData(int pageNo) override;
 
     StrVec pageFileNames;
     TocTree* tocTree = nullptr;
@@ -1454,6 +1480,11 @@ Bitmap* EngineImageDir::LoadBitmapForPage(int pageNo, bool& deleteAfterUse) {
     Bitmap* res = BitmapFromData(bmpData);
     bmpData.Free();
     return res;
+}
+
+ByteSlice EngineImageDir::GetRawImageData(int pageNo) {
+    char* path = pageFileNames.At(pageNo - 1);
+    return file::ReadFile(path);
 }
 
 RectF EngineImageDir::LoadMediabox(int pageNo) {
@@ -1611,6 +1642,7 @@ class EngineCbx : public EngineImages {
   protected:
     Bitmap* LoadBitmapForPage(int pageNo, bool& deleteAfterUse) override;
     RectF LoadMediabox(int pageNo) override;
+    ByteSlice GetRawImageData(int pageNo) override;
 
     bool LoadFromFile(const char* fileName);
     bool LoadFromStream(IStream* stream);
@@ -1826,6 +1858,10 @@ TocTree* EngineCbx::GetToc() {
     return tocTree;
 }
 
+ByteSlice EngineCbx::GetRawImageData(int pageNo) {
+    return GetImageData(pageNo);
+}
+
 ByteSlice EngineCbx::GetImageData(int pageNo) {
     ReportIf((pageNo < 1) || (pageNo > PageCount()));
     size_t fileId = files[pageNo - 1]->fileId;
@@ -1864,16 +1900,6 @@ TempStr EngineCbx::GetPropertyTemp(const char* name) {
 
 void EngineCbx::GetProperties(StrVec& keyValOut) {
     EngineBase::GetProperties(keyValOut);
-
-    if (pageCount == 1) {
-        ByteSlice img = GetImageData(1);
-        Bitmap* bmp = BitmapWithExifFromData(img);
-        img.Free();
-        if (bmp) {
-            GetBitmapExifProperties(bmp, keyValOut);
-            delete bmp;
-        }
-    }
 
     str::Str filesStr;
     auto& fileInfos = cbxArchive->GetFileInfos();

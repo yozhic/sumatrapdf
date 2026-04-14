@@ -379,6 +379,14 @@ void EngineBase::GetProperties(StrVec& keyValueOut) {
     }
 }
 
+void EngineBase::GetImageProperties(int, StrVec&) {
+    // default: no image properties
+}
+
+bool EngineBase::IsImageEngine() const {
+    return kind == kindEngineImage || kind == kindEngineImageDir || kind == kindEngineComicBooks;
+}
+
 bool EngineBase::HasPageLabels() const {
     return hasPageLabels;
 }

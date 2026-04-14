@@ -55,6 +55,7 @@ const char* kPropPixelXDimension = "pixelXDimension";
 const char* kPropPixelYDimension = "pixelYDimension";
 const char* kPropFileSource = "fileSource";
 const char* kPropSceneType = "sceneType";
+const char* kPropImageFileSize = "imageFileSize";
 
 // clang-format off
 const char* gAllProps[] = {

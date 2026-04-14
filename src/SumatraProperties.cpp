@@ -320,14 +320,19 @@ static const char* propToName[] = {
     kPropPixelYDimension, _TRN("Pixel Y Dimension:"),
     kPropFileSource, _TRN("File Source:"),
     kPropSceneType, _TRN("Scene Type:"),
+    kPropImageFileSize, _TRN("Image File Size:"),
     nullptr,
 };
 // clang-format on
 
 static void AppendPropTranslated(str::Str& out, const char* propName, const char* val) {
-    if (!val) return;
+    if (!propName || !val) return;
     const char* s = GetMatchingString(propToName, propName);
-    ReportIf(!s);
+    if (!s) {
+        TempStr label = str::FormatTemp("%s:", propName);
+        AppendProp(out, label, val);
+        return;
+    }
     const char* trans = trans::GetTranslation(s);
     AppendProp(out, trans, val);
 }
@@ -397,6 +402,24 @@ void AppendDateProp(str::Str& out, const char* key, const char* val, bool isPdfD
     AppendProp(out, key, dateStr);
 }
 
+static void AddImageProperties(EngineBase* engine, int pageNo, str::Str& out) {
+    // for image engines, show EXIF properties for the current image
+    ReportIf(!engine->IsImageEngine());
+    Props imageProps;
+    engine->GetImageProperties(pageNo, imageProps);
+    int nImageProps = PropsCount(imageProps);
+    if (nImageProps == 0) return;
+    out.AppendChar('\n');
+    TempStr header = str::FormatTemp(_TRA("Current Image (%d):"), pageNo);
+    out.Append(header);
+    out.AppendChar('\n');
+    for (int i = 0; i < nImageProps; i++) {
+        char* propName = imageProps.At(i * 2);
+        char* propVal = imageProps.At(i * 2 + 1);
+        AppendPropTranslated(out, propName, propVal);
+    }
+}
+
 static void GetPropsText(DocController* ctrl, str::Str& out) {
     ReportIf(!ctrl);
 
@@ -441,14 +464,26 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
 
     AppendPdfFileStructure(out, GetPropValueTemp(props, kPropPdfFileStructure), ctrl->GetFilePath());
 
-    strTemp = str::FormatTemp("%d", ctrl->PageCount());
-    AppendProp(out, _TRA("Number of Pages:"), strTemp);
-
+    int pageNo = ctrl->CurrentPageNo();
+    bool isImages = false;
     if (dm) {
-        strTemp = FormatPageSizeTemp(dm->GetEngine(), ctrl->CurrentPageNo(), dm->GetRotation());
-        AppendProp(out, _TRA("Page Size:"), strTemp);
+        EngineBase* engine = dm->GetEngine();
+        isImages = engine && engine->IsImageEngine();
     }
-    AppendPropTranslated(out, kPropFiles, GetPropValueTemp(props, kPropFiles));
+
+    strTemp = str::FormatTemp("%d", ctrl->PageCount());
+    if (isImages) {
+        AppendProp(out, _TRA("Number of Images:"), strTemp);
+    } else {
+        AppendProp(out, _TRA("Number of Pages:"), strTemp);
+    }
+
+    if (dm && !isImages) { // we show image size below
+        strTemp = FormatPageSizeTemp(dm->GetEngine(), pageNo, dm->GetRotation());
+        auto s = fmt::FormatTemp(_TRA("Current Page (%d) Size:"), pageNo);
+        AppendProp(out, s, strTemp);
+    }
+    if (isImages) AddImageProperties(dm->GetEngine(), pageNo, out);
 
     // clang-format off
     // properties already shown above, skip when appending remaining
@@ -480,15 +515,11 @@ static void GetPropsText(DocController* ctrl, str::Str& out) {
         if (handled) {
             continue;
         }
-        const char* s = GetMatchingString(propToName, propName);
-        if (s) {
-            const char* trans = trans::GetTranslation(s);
-            AppendProp(out, trans, propVal);
-        } else {
-            TempStr label = str::FormatTemp("%s:", propName);
-            AppendProp(out, label, propVal);
-        }
+        AppendPropTranslated(out, propName, propVal);
     }
+
+    out.AppendChar('\n');
+    AppendPropTranslated(out, kPropFiles, GetPropValueTemp(props, kPropFiles));
 }
 
 static void SetEditText(HWND hwndEdit, const char* text) {
