@@ -214,64 +214,50 @@ static void StartTextDragDrop(MainWindow* win) {
     dataObj->Release();
 }
 
-// save HBITMAP to a temp PNG file, return the path (caller must free)
-// returns nullptr on failure
-static char* SaveBitmapToTempPng(HBITMAP hbmp) {
-    TempStr tmpPath = GetTempFilePathTemp("sumatra-img");
-    if (!tmpPath) {
-        return nullptr;
-    }
-    char* pngPath = str::Join(tmpPath, ".png");
-
-    // create GDI+ Bitmap from HBITMAP and save as PNG
+// encode HBITMAP to PNG in memory using GDI+ IStream
+static HGLOBAL EncodeBitmapToPngGlobal(HBITMAP hbmp) {
     Gdiplus::Bitmap gdipBmp(hbmp, nullptr);
     if (gdipBmp.GetLastStatus() != Gdiplus::Ok) {
-        str::Free(pngPath);
         return nullptr;
     }
     CLSID pngClsid = GetGdiPlusEncoderClsid(L"image/png");
-    WCHAR* pathW = ToWStrTemp(pngPath);
-    Gdiplus::Status status = gdipBmp.Save(pathW, &pngClsid, nullptr);
-    if (status != Gdiplus::Ok) {
-        str::Free(pngPath);
+    IStream* stream = nullptr;
+    HRESULT hr = CreateStreamOnHGlobal(nullptr, FALSE, &stream);
+    if (FAILED(hr) || !stream) {
         return nullptr;
     }
-    return pngPath;
+    Gdiplus::Status status = gdipBmp.Save(stream, &pngClsid, nullptr);
+    HGLOBAL hMem = nullptr;
+    if (status == Gdiplus::Ok) {
+        GetHGlobalFromStream(stream, &hMem);
+    }
+    stream->Release();
+    if (status != Gdiplus::Ok) {
+        return nullptr;
+    }
+    return hMem;
 }
 
-// IDataObject that provides an image as CF_HDROP (temp PNG file)
-// so that browsers, web apps, and file-based drop targets can accept it
+// IDataObject that provides an image as a virtual file (CFSTR_FILEDESCRIPTOR + CFSTR_FILECONTENTS)
+// and CF_DIB, without creating any temporary files on disk.
+// Browsers and web apps accept virtual file drops just like real file drops.
 class ImageDataObject : public IDataObject {
     LONG refCount = 1;
-    HGLOBAL hDrop = nullptr;
-    char* tempFilePath = nullptr;
+    HGLOBAL hPngData = nullptr; // PNG-encoded image data
+    size_t pngSize = 0;
+    UINT cfFileDescriptor = 0;
+    UINT cfFileContents = 0;
 
   public:
-    explicit ImageDataObject(char* pngPath) {
-        tempFilePath = pngPath;
-        // build DROPFILES structure
-        WCHAR* pathW = ToWStrTemp(pngPath);
-        size_t pathLen = str::Len(pathW);
-        size_t cbPath = (pathLen + 2) * sizeof(WCHAR); // double null terminated
-        size_t cbTotal = sizeof(DROPFILES) + cbPath;
-        hDrop = GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, cbTotal);
-        if (hDrop) {
-            u8* p = (u8*)GlobalLock(hDrop);
-            auto* df = (DROPFILES*)p;
-            df->pFiles = sizeof(DROPFILES);
-            df->fWide = TRUE;
-            memcpy(p + sizeof(DROPFILES), pathW, (pathLen + 1) * sizeof(WCHAR));
-            // second null terminator is already zero from GMEM_ZEROINIT
-            GlobalUnlock(hDrop);
-        }
+    explicit ImageDataObject(HGLOBAL hPng) {
+        hPngData = hPng;
+        pngSize = GlobalSize(hPng);
+        cfFileDescriptor = RegisterClipboardFormatW(CFSTR_FILEDESCRIPTORW);
+        cfFileContents = RegisterClipboardFormatW(CFSTR_FILECONTENTS);
     }
     ~ImageDataObject() {
-        if (hDrop) {
-            GlobalFree(hDrop);
-        }
-        if (tempFilePath) {
-            file::Delete(tempFilePath);
-            str::Free(tempFilePath);
+        if (hPngData) {
+            GlobalFree(hPngData);
         }
     }
 
@@ -294,30 +280,58 @@ class ImageDataObject : public IDataObject {
     }
 
     STDMETHODIMP GetData(FORMATETC* pFE, STGMEDIUM* pMedium) override {
-        if (!hDrop) {
+        if (!hPngData) {
             return E_UNEXPECTED;
         }
-        if (pFE->cfFormat != CF_HDROP || !(pFE->tymed & TYMED_HGLOBAL)) {
-            return DV_E_FORMATETC;
+
+        // CFSTR_FILEDESCRIPTORW: describe one virtual file "image.png"
+        if (pFE->cfFormat == cfFileDescriptor && (pFE->tymed & TYMED_HGLOBAL)) {
+            size_t cb = sizeof(FILEGROUPDESCRIPTORW);
+            HGLOBAL h = GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, cb);
+            if (!h) {
+                return E_OUTOFMEMORY;
+            }
+            auto* fgd = (FILEGROUPDESCRIPTORW*)GlobalLock(h);
+            fgd->cItems = 1;
+            fgd->fgd[0].dwFlags = FD_FILESIZE;
+            fgd->fgd[0].nFileSizeLow = (DWORD)pngSize;
+            fgd->fgd[0].nFileSizeHigh = 0;
+            wcscpy_s(fgd->fgd[0].cFileName, MAX_PATH, L"image.png");
+            GlobalUnlock(h);
+            pMedium->tymed = TYMED_HGLOBAL;
+            pMedium->hGlobal = h;
+            pMedium->pUnkForRelease = nullptr;
+            return S_OK;
         }
-        size_t cb = GlobalSize(hDrop);
-        HGLOBAL hCopy = GlobalAlloc(GMEM_MOVEABLE, cb);
-        if (!hCopy) {
-            return E_OUTOFMEMORY;
+
+        // CFSTR_FILECONTENTS: provide the PNG data as an IStream
+        if (pFE->cfFormat == cfFileContents && (pFE->tymed & TYMED_ISTREAM) && pFE->lindex == 0) {
+            IStream* stream = nullptr;
+            HRESULT hr = CreateStreamOnHGlobal(nullptr, TRUE, &stream);
+            if (FAILED(hr) || !stream) {
+                return E_OUTOFMEMORY;
+            }
+            void* src = GlobalLock(hPngData);
+            ULONG written = 0;
+            stream->Write(src, (ULONG)pngSize, &written);
+            GlobalUnlock(hPngData);
+            // reset stream position to beginning
+            LARGE_INTEGER zero{};
+            stream->Seek(zero, STREAM_SEEK_SET, nullptr);
+            pMedium->tymed = TYMED_ISTREAM;
+            pMedium->pstm = stream;
+            pMedium->pUnkForRelease = nullptr;
+            return S_OK;
         }
-        void* src = GlobalLock(hDrop);
-        void* dst = GlobalLock(hCopy);
-        memcpy(dst, src, cb);
-        GlobalUnlock(hCopy);
-        GlobalUnlock(hDrop);
-        pMedium->tymed = TYMED_HGLOBAL;
-        pMedium->hGlobal = hCopy;
-        pMedium->pUnkForRelease = nullptr;
-        return S_OK;
+
+        return DV_E_FORMATETC;
     }
     STDMETHODIMP GetDataHere(__unused FORMATETC*, __unused STGMEDIUM*) override { return E_NOTIMPL; }
     STDMETHODIMP QueryGetData(FORMATETC* pFE) override {
-        if (pFE->cfFormat == CF_HDROP && (pFE->tymed & TYMED_HGLOBAL)) {
+        if (pFE->cfFormat == cfFileDescriptor && (pFE->tymed & TYMED_HGLOBAL)) {
+            return S_OK;
+        }
+        if (pFE->cfFormat == cfFileContents && (pFE->tymed & TYMED_ISTREAM) && pFE->lindex == 0) {
             return S_OK;
         }
         return DV_E_FORMATETC;
@@ -348,13 +362,12 @@ static void StartImageDragDrop(MainWindow* win) {
     if (!bmp) {
         return;
     }
-    char* pngPath = SaveBitmapToTempPng(bmp->GetBitmap());
+    HGLOBAL hPng = EncodeBitmapToPngGlobal(bmp->GetBitmap());
     delete bmp;
-    if (!pngPath) {
+    if (!hPng) {
         return;
     }
-    // pngPath ownership transfers to ImageDataObject (deleted on Release)
-    ImageDataObject* dataObj = new ImageDataObject(pngPath);
+    ImageDataObject* dataObj = new ImageDataObject(hPng);
     TextDropSource* dropSrc = new TextDropSource();
     DWORD dwEffect = 0;
     DoDragDrop(dataObj, dropSrc, DROPEFFECT_COPY, &dwEffect);
