@@ -115,7 +115,11 @@ void ChmModel::GoToPage(int pageNo, bool) {
 }
 
 bool ChmModel::SetParentHwnd(HWND hwnd) {
-    ReportIf(htmlWindow || htmlWindowCb);
+    // can be already set if tab was restored at startup and then switched away
+    // without going through the normal CloseDocumentInCurrentTab path
+    if (htmlWindow || htmlWindowCb) {
+        RemoveParentHwnd();
+    }
     htmlWindowCb = new HtmlWindowHandler(this);
     htmlWindow = HtmlWindow::Create(hwnd, htmlWindowCb);
     if (!htmlWindow) {
