@@ -32,6 +32,7 @@
 extern "C" int pdfbake_main(int argc, char** argv);
 extern "C" int pdfclean_main(int argc, char** argv);
 extern "C" int muconvert_main(int argc, char** argv);
+extern "C" int fz_optind;
 
 // offset to align static label text with text inside an edit control
 // accounts for WS_EX_CLIENTEDGE border (2px) + edit internal left margin (~2px)
@@ -131,6 +132,7 @@ static void PdfBakeDoIt(PdfBakeDialog* dlg) {
     char* argv[] = {(char*)"bake", dlg->srcPath, destPath};
     int argc = 3;
 
+    fz_optind = 0;
     int res = pdfbake_main(argc, argv);
     if (res == 0) {
         logf("PdfBakeDoIt: baked successfully\n");
@@ -368,6 +370,7 @@ static void PdfExtractTextDoIt(PdfExtractTextDialog* dlg) {
         // use muconvert for PDF
         char* argv[] = {(char*)"convert", (char*)"-o", destPath, dlg->srcPath, pages};
         int argc = 5;
+        fz_optind = 0;
         ok = muconvert_main(argc, argv) == 0;
     } else {
         // use engine text extraction for other formats (DjVu, etc.)
@@ -579,6 +582,7 @@ static void PdfCompressDoIt(PdfCompressDialog* dlg) {
     };
     int argc = 10;
 
+    fz_optind = 0;
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
         logf("PdfCompressDoIt: compressed successfully\n");
@@ -769,6 +773,7 @@ static void PdfDecompressDoIt(PdfDecompressDialog* dlg) {
     char* argv[] = {(char*)"clean", (char*)"-d", dlg->srcPath, destPath};
     int argc = 4;
 
+    fz_optind = 0;
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
         logf("PdfDecompressDoIt: decompressed successfully\n");
@@ -1140,6 +1145,7 @@ static void PdfDeletePageDoIt(PdfDeletePageDialog* dlg) {
     char* argv[] = {(char*)"clean", dlg->srcPath, destPath, pageRange};
     int argc = 4;
 
+    fz_optind = 0;
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
         logf("PdfDeletePageDoIt: %s pages successfully\n", op);
@@ -1409,6 +1415,7 @@ static void PdfEncryptDoIt(PdfEncryptDialog* dlg) {
     };
     int argc = 9;
 
+    fz_optind = 0;
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
         logf("PdfEncryptDoIt: encrypted successfully\n");
@@ -1631,6 +1638,7 @@ static void PdfDecryptDoIt(PdfDecryptDialog* dlg) {
     };
     int argc = 6;
 
+    fz_optind = 0;
     int res = pdfclean_main(argc, argv);
     if (res == 0) {
         logf("PdfDecryptDoIt: decrypted successfully\n");
