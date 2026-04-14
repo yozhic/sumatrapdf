@@ -12,6 +12,7 @@
 #include "utils/ScopedWin.h"
 #include "utils/ThreadUtil.h"
 #include "utils/HttpUtil.h"
+#include "utils/GdiPlusUtil.h"
 #include "utils/GuessFileType.h"
 #include <algorithm>
 #include <shlobj.h>
@@ -206,6 +207,154 @@ static void StartTextDragDrop(MainWindow* win) {
     }
     WCHAR* wtext = ToWStrTemp(text);
     TextDataObject* dataObj = new TextDataObject(wtext);
+    TextDropSource* dropSrc = new TextDropSource();
+    DWORD dwEffect = 0;
+    DoDragDrop(dataObj, dropSrc, DROPEFFECT_COPY, &dwEffect);
+    dropSrc->Release();
+    dataObj->Release();
+}
+
+// save HBITMAP to a temp PNG file, return the path (caller must free)
+// returns nullptr on failure
+static char* SaveBitmapToTempPng(HBITMAP hbmp) {
+    TempStr tmpPath = GetTempFilePathTemp("sumatra-img");
+    if (!tmpPath) {
+        return nullptr;
+    }
+    char* pngPath = str::Join(tmpPath, ".png");
+
+    // create GDI+ Bitmap from HBITMAP and save as PNG
+    Gdiplus::Bitmap gdipBmp(hbmp, nullptr);
+    if (gdipBmp.GetLastStatus() != Gdiplus::Ok) {
+        str::Free(pngPath);
+        return nullptr;
+    }
+    CLSID pngClsid = GetGdiPlusEncoderClsid(L"image/png");
+    WCHAR* pathW = ToWStrTemp(pngPath);
+    Gdiplus::Status status = gdipBmp.Save(pathW, &pngClsid, nullptr);
+    if (status != Gdiplus::Ok) {
+        str::Free(pngPath);
+        return nullptr;
+    }
+    return pngPath;
+}
+
+// IDataObject that provides an image as CF_HDROP (temp PNG file)
+// so that browsers, web apps, and file-based drop targets can accept it
+class ImageDataObject : public IDataObject {
+    LONG refCount = 1;
+    HGLOBAL hDrop = nullptr;
+    char* tempFilePath = nullptr;
+
+  public:
+    explicit ImageDataObject(char* pngPath) {
+        tempFilePath = pngPath;
+        // build DROPFILES structure
+        WCHAR* pathW = ToWStrTemp(pngPath);
+        size_t pathLen = str::Len(pathW);
+        size_t cbPath = (pathLen + 2) * sizeof(WCHAR); // double null terminated
+        size_t cbTotal = sizeof(DROPFILES) + cbPath;
+        hDrop = GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, cbTotal);
+        if (hDrop) {
+            u8* p = (u8*)GlobalLock(hDrop);
+            auto* df = (DROPFILES*)p;
+            df->pFiles = sizeof(DROPFILES);
+            df->fWide = TRUE;
+            memcpy(p + sizeof(DROPFILES), pathW, (pathLen + 1) * sizeof(WCHAR));
+            // second null terminator is already zero from GMEM_ZEROINIT
+            GlobalUnlock(hDrop);
+        }
+    }
+    ~ImageDataObject() {
+        if (hDrop) {
+            GlobalFree(hDrop);
+        }
+        if (tempFilePath) {
+            file::Delete(tempFilePath);
+            str::Free(tempFilePath);
+        }
+    }
+
+    STDMETHODIMP QueryInterface(REFIID riid, void** ppv) override {
+        if (riid == IID_IUnknown || riid == IID_IDataObject) {
+            *ppv = this;
+            AddRef();
+            return S_OK;
+        }
+        *ppv = nullptr;
+        return E_NOINTERFACE;
+    }
+    ULONG STDMETHODCALLTYPE AddRef() override { return InterlockedIncrement(&refCount); }
+    ULONG STDMETHODCALLTYPE Release() override {
+        LONG r = InterlockedDecrement(&refCount);
+        if (r == 0) {
+            delete this;
+        }
+        return r;
+    }
+
+    STDMETHODIMP GetData(FORMATETC* pFE, STGMEDIUM* pMedium) override {
+        if (!hDrop) {
+            return E_UNEXPECTED;
+        }
+        if (pFE->cfFormat != CF_HDROP || !(pFE->tymed & TYMED_HGLOBAL)) {
+            return DV_E_FORMATETC;
+        }
+        size_t cb = GlobalSize(hDrop);
+        HGLOBAL hCopy = GlobalAlloc(GMEM_MOVEABLE, cb);
+        if (!hCopy) {
+            return E_OUTOFMEMORY;
+        }
+        void* src = GlobalLock(hDrop);
+        void* dst = GlobalLock(hCopy);
+        memcpy(dst, src, cb);
+        GlobalUnlock(hCopy);
+        GlobalUnlock(hDrop);
+        pMedium->tymed = TYMED_HGLOBAL;
+        pMedium->hGlobal = hCopy;
+        pMedium->pUnkForRelease = nullptr;
+        return S_OK;
+    }
+    STDMETHODIMP GetDataHere(__unused FORMATETC*, __unused STGMEDIUM*) override { return E_NOTIMPL; }
+    STDMETHODIMP QueryGetData(FORMATETC* pFE) override {
+        if (pFE->cfFormat == CF_HDROP && (pFE->tymed & TYMED_HGLOBAL)) {
+            return S_OK;
+        }
+        return DV_E_FORMATETC;
+    }
+    STDMETHODIMP GetCanonicalFormatEtc(__unused FORMATETC*, FORMATETC* pOut) override {
+        pOut->ptd = nullptr;
+        return E_NOTIMPL;
+    }
+    STDMETHODIMP SetData(__unused FORMATETC*, __unused STGMEDIUM*, __unused BOOL) override { return E_NOTIMPL; }
+    STDMETHODIMP EnumFormatEtc(__unused DWORD, __unused IEnumFORMATETC**) override { return E_NOTIMPL; }
+    STDMETHODIMP DAdvise(__unused FORMATETC*, __unused DWORD, __unused IAdviseSink*, __unused DWORD*) override {
+        return E_NOTIMPL;
+    }
+    STDMETHODIMP DUnadvise(__unused DWORD) override { return E_NOTIMPL; }
+    STDMETHODIMP EnumDAdvise(__unused IEnumSTATDATA**) override { return E_NOTIMPL; }
+};
+
+static void StartImageDragDrop(MainWindow* win) {
+    DisplayModel* dm = win->AsFixed();
+    if (!dm) {
+        return;
+    }
+    IPageElement* el = win->imageDragElement;
+    if (!el) {
+        return;
+    }
+    RenderedBitmap* bmp = dm->GetEngine()->GetImageForPageElement(el);
+    if (!bmp) {
+        return;
+    }
+    char* pngPath = SaveBitmapToTempPng(bmp->GetBitmap());
+    delete bmp;
+    if (!pngPath) {
+        return;
+    }
+    // pngPath ownership transfers to ImageDataObject (deleted on Release)
+    ImageDataObject* dataObj = new ImageDataObject(pngPath);
     TextDropSource* dropSrc = new TextDropSource();
     DWORD dwEffect = 0;
     DoDragDrop(dataObj, dropSrc, DROPEFFECT_COPY, &dwEffect);
@@ -685,6 +834,20 @@ static void OnMouseMove(MainWindow* win, int x, int y, WPARAM) {
         return;
     }
 
+    if (win->imageDragPending) {
+        if (!IsDragDistance(x, win->dragStart.x, y, win->dragStart.y)) {
+            return;
+        }
+        win->imageDragPending = false;
+        win->dragStartPending = false;
+        if (GetCapture() == win->hwndCanvas) {
+            ReleaseCapture();
+        }
+        StartImageDragDrop(win);
+        win->imageDragElement = nullptr;
+        return;
+    }
+
     if (win->dragStartPending) {
         if (!IsDragDistance(x, win->dragStart.x, y, win->dragStart.y)) {
             return;
@@ -979,6 +1142,18 @@ static void OnMouseLeftButtonDown(MainWindow* win, int x, int y, WPARAM key) {
         return;
     }
 
+    // if clicking on an image, prepare for image drag-out
+    if (canCopy && !isShift && !isCtrl && !isOverText) {
+        IPageElement* pageEl = dm->GetElementAtPos(pt, nullptr);
+        if (pageEl && pageEl->Is(kindPageElementImage)) {
+            win->imageDragPending = true;
+            win->imageDragElement = pageEl;
+            win->linkOnLastButtonDown = nullptr;
+            SetCapture(win->hwndCanvas);
+            return;
+        }
+    }
+
     if (resizeHandle != ResizeHandle::None || isMoveableAnnot || !canCopy || (isShift || !isOverText) && !isCtrl) {
         StartMouseDrag(win, x, y);
     } else {
@@ -998,6 +1173,17 @@ static void OnMouseLeftButtonUp(MainWindow* win, int x, int y, WPARAM key) {
             ReleaseCapture();
         }
         DeleteOldSelectionInfo(win, true);
+        return;
+    }
+
+    // click on image without dragging: just cancel
+    if (win->imageDragPending) {
+        win->imageDragPending = false;
+        win->imageDragElement = nullptr;
+        win->dragStartPending = false;
+        if (GetCapture() == win->hwndCanvas) {
+            ReleaseCapture();
+        }
         return;
     }
 

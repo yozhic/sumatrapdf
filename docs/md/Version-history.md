@@ -51,9 +51,13 @@ Available in [pre-release](https://www.sumatrapdfreader.org/prerelease) builds.
 - add `CmdZoomShrinkToFit` (`Shrink To Fit`) zoom mode: shows at 100% if page is smaller than view area, otherwise fits page
 - add `CmdToggleScrollbarInSinglePage` (`Toggle Scrollbar In Single Page`) command to toggle `ScrollbarInSinglePage` advanced setting
 - add `TabsMru` advanced setting and `CmdToggleTabsMru` (`Toggle Tabs MRU`) command to toggle it. It changes order of navigating tabs when usint `Ctrl + Tab` (`CmdNextTabSmart`)
-- improve document properties for comic book files (CBZ, CBR, CB7, CBT). We now show list of image files.
+- improve document properties for comic book files (CBZ, CBR, CB7, CBT). We now show list of image files and per-image EXIF metadata
 - improve document properties for image files: size, dimensions, DPI, exif metadata
 - support encrypted .cbz, .cbr files
+- you can drag&drop images from PDF documents to other applications (web apps, image editors, file explorer etc.)
+- pen/stylus input now works for text selection on Windows tablets
+- fix Edit Annotations window not restoring to the correct monitor in multi-monitor setups
+- use `GetFileAttributesEx` instead of opening files for change detection on network drives, avoiding Windows Defender re-scans
 
 ## 3.6.1 (2026-04-06)
 

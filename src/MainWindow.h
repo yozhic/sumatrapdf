@@ -179,7 +179,9 @@ struct MainWindow {
     MouseAction mouseAction = MouseAction::None;
     bool dragRightClick = false; // if true, drag was initiated with right mouse click
     bool dragStartPending = false;
-    bool textDragPending = false; // true when mouse down on selected text, waiting for drag
+    bool textDragPending = false;  // true when mouse down on selected text, waiting for drag
+    bool imageDragPending = false; // true when mouse down on image, waiting for drag
+    IPageElement* imageDragElement = nullptr;
 
     /* when dragging the document around, this is previous position of the
        cursor. A delta between previous and current is by how much we
